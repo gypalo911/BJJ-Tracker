@@ -9,13 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-
+    
     var body: some View {
-        NavigationView {
-            Text("Hello world")
-        }
+        Dashboard()
     }
-
 }
 
 private let itemFormatter: DateFormatter = {

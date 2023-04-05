@@ -20,6 +20,10 @@
 		D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */; };
 		D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
+		D0E824B029DE03D80023E6C0 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* Dashboard.swift */; };
+		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
+		D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
+		D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B529DE14060023E6C0 /* ActivityPanelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesManager.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
+		D0E824AF29DE03D80023E6C0 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
+		D0E824B329DE0F490023E6C0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
+		D0E824B529DE14060023E6C0 /* ActivityPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPanelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +186,9 @@
 		D060BAB029DDAE4D00E10562 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				D0E824AF29DE03D80023E6C0 /* Dashboard.swift */,
+				D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */,
+				D0E824B529DE14060023E6C0 /* ActivityPanelView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -207,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
+				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -344,9 +356,13 @@
 			files = (
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
+				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
+				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */,
 				D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */,
+				D0E824B029DE03D80023E6C0 /* Dashboard.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
+				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,
 				D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,

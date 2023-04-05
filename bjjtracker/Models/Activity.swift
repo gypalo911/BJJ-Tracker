@@ -59,12 +59,12 @@ struct Activity {
     
     var status: ActivityStatus {
         let now = Date()
-        if startDate < now {
-            return .upcoming
-        } else if startDate > now && now < startDate + TimeInterval(duration) {
+        if now >= startDate && now < (startDate + TimeInterval(duration)) {
             return .ongoing
-        } else {
+        } else if now > (startDate + TimeInterval(duration)) {
             return .finished
+        } else {
+            return .upcoming
         }
     }
 }
