@@ -48,7 +48,7 @@ enum ActivityStatus: String {
     
 }
 
-struct Activity: Identifiable {
+struct Activity: Identifiable, Equatable {
     var id = UUID()
     var type: ActivityType
     var style: GraplingStyle

@@ -9,9 +9,25 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @State private var selectedTab: Tab = .dashboard
     
     var body: some View {
-        Dashboard()
+        ZStack {
+            VStack {
+                TabView(selection: $selectedTab) {
+                    Dashboard()
+                        .tag(Tab.dashboard)
+                    Text("Calendar")
+                        .tag(Tab.calendar)
+                    Text("Profile")
+                        .tag(Tab.profile)
+                }
+            }
+            VStack {
+                Spacer()
+                CustomTabBarView(selectedTab: $selectedTab)
+            }
+        }.ignoresSafeArea()
     }
 }
 

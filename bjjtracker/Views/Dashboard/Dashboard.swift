@@ -22,6 +22,9 @@ struct Dashboard: View {
     }
     
     @State private var selectedDay = Date()
+    @State private var currentWeek = Calendar.current.currentWeek
+    
+    @State var headerHeight: CGFloat = 550
     
     var body: some View {
         NavigationView {
@@ -31,7 +34,7 @@ struct Dashboard: View {
                         .foregroundColor(Color(UIColor(named: "Blue") ?? .blue))
                         .edgesIgnoringSafeArea(.all)
                         .cornerRadius(30)
-                        .frame(height: 550)//geometry.size.height/2)
+                        .frame(height: headerHeight)//geometry.size.height/2)
                         .position(CGPoint(x: geometry.size.width/2, y: 0))
                     VStack {
                         HStack {
@@ -56,16 +59,27 @@ struct Dashboard: View {
                             }
                         }.padding(.all, 20)
                         
-                        WeekCalendarView(selectedDay: $selectedDay, activities: activities)
-                        
-                        ScrollView {
-                            VStack(spacing: 16) {
-                                ForEach(filteredActivities) { activity in
-                                    ActivityPanelView(activity: activity)
+                        WeekCalendarView(selectedDay: $selectedDay, currentWeek: $currentWeek, activities: activities)
+                        if filteredActivities.isEmpty {
+                            Spacer()
+                            Text("No sessions for this day")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("Gray"))
+                            Spacer()
+                        } else {
+                            ScrollView(showsIndicators: false) {
+                                VStack(spacing: 16) {
+                                    ForEach(filteredActivities) { activity in
+                                        ActivityPanelView(activity: activity)
+                                    }
                                 }
                             }
                         }
                     }
+                }
+            }.onChange(of: filteredActivities) { items in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.headerHeight = items.isEmpty ? 500 : 550
                 }
             }
             .navigationTitle("Dashboard")
@@ -87,45 +101,5 @@ struct Dashboard: View {
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
         Dashboard()
-    }
-}
-
-struct SelectedDayWithActivity: View {
-    let weekday: String
-    let day: Int
-    let selectedDay: Int
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .frame(height: 70)
-                .foregroundColor(Color(UIColor(named: "Seminar")!))
-                .cornerRadius(10)
-            VStack(spacing: 15) {
-                Text(weekday)
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color(UIColor(named: "LightGray")!))
-                    .frame(maxWidth: .infinity)
-                if day == selectedDay {
-                    ZStack {
-                        Circle()
-                            .frame(height: 30)
-                            .foregroundColor(.white)
-                        Text("\(day)")
-                            .font(.callout)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.blue)
-                            .frame(maxWidth: .infinity)
-                    }
-                } else {
-                    Text("\(day)")
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                }
-            }
-        }
     }
 }

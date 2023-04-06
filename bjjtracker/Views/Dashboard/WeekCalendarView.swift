@@ -10,12 +10,17 @@ import SwiftUI
 struct WeekCalendarView: View {
     @Binding var selectedDay: Date
     
-    var currentWeek = Calendar.current.currentWeek
+    @Binding var currentWeek: [Calendar.WeekDay]
     
-    init(selectedDay: Binding<Date>, activities: [Activity]) {
+    init(
+        selectedDay: Binding<Date>,
+        currentWeek: Binding<[Calendar.WeekDay]>,
+        activities: [Activity]
+    ) {
         _selectedDay = selectedDay
+        _currentWeek = currentWeek
         activities.forEach { activity in
-            currentWeek.first(where: {
+            self.currentWeek.first(where: {
                 Calendar.current.isDate($0.date, inSameDayAs: activity.startDate)
             })?.activityType = activity.type
         }
@@ -35,10 +40,6 @@ struct WeekCalendarView: View {
                     let status = Calendar.current.isDate(weekDay.date, inSameDayAs: selectedDay)
                     let isToday = Calendar.current.isDateInToday(weekDay.date)
                     ZStack {
-//                        Rectangle()
-//                            .frame(height: 70)
-//                            .foregroundColor(weekDay.activityType != nil ? Color(weekDay.activityType!.color) : .clear)
-//                            .cornerRadius(10)
                         VStack(spacing: 5) {
                             Text(weekDay.string.prefix(3))
                                 .font(.callout)
@@ -88,6 +89,7 @@ struct WeekCalendarView_Previews: PreviewProvider {
 
     static var previews: some View {
         @State var selectedDay = Date()
+        @State var currentWeek = Calendar.current.currentWeek
 
         let activities: [Activity] = [
             Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
@@ -95,6 +97,6 @@ struct WeekCalendarView_Previews: PreviewProvider {
             Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(3000 * 60), location: "Lutsk", notes: "Other notes"),
         ]
         
-        WeekCalendarView(selectedDay: $selectedDay, activities: activities).padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
+        WeekCalendarView(selectedDay: $selectedDay, currentWeek: $currentWeek, activities: activities).padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
     }
 }
