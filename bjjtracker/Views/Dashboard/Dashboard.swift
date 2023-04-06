@@ -26,6 +26,12 @@ struct Dashboard: View {
     
     @State var headerHeight: CGFloat = 550
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "Blue")
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -37,27 +43,7 @@ struct Dashboard: View {
                         .frame(height: headerHeight)//geometry.size.height/2)
                         .position(CGPoint(x: geometry.size.width/2, y: 0))
                     VStack {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("284")
-                                    .font(.system(size: 22))
-                                    .fontWeight(.bold)
-                                Text("Total count of sessions")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                            }
-                            Spacer()
-                            VStack(alignment: .leading) {
-                                Text("568 hours")
-                                    .font(.system(size: 22))
-                                    .fontWeight(.bold)
-                                Text("Total time")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                            }
-                        }.padding(.all, 20)
+                        StatsView()
                         
                         WeekCalendarView(selectedDay: $selectedDay, currentWeek: $currentWeek, activities: activities)
                         if filteredActivities.isEmpty {
@@ -72,7 +58,7 @@ struct Dashboard: View {
                                     ForEach(filteredActivities) { activity in
                                         ActivityPanelView(activity: activity)
                                     }
-                                }
+                                }.padding(.bottom, 50)
                             }
                         }
                     }
@@ -94,12 +80,38 @@ struct Dashboard: View {
                     }
                 }
             }
-        }
+        }.background(Color.white)
     }
 }
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
         Dashboard()
+    }
+}
+
+struct StatsView: View {
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("284")
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                Text("Total count of sessions")
+                    .font(.system(size: 18))
+                    .foregroundColor(.white)
+                    .fontWeight(.semibold)
+            }
+            Spacer()
+            VStack(alignment: .leading) {
+                Text("568 hours")
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                Text("Total time")
+                    .font(.system(size: 18))
+                    .foregroundColor(.white)
+                    .fontWeight(.semibold)
+            }
+        }.padding(.all, 20)
     }
 }
