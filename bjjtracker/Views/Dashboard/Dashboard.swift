@@ -9,6 +9,20 @@ import SwiftUI
 
 struct Dashboard: View {
     
+    var activities: [Activity] = [
+        Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
+        Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
+        Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(3000 * 60), location: "Lutsk", notes: "Some notes"),
+    ]
+    
+    var filteredActivities: [Activity] {
+        activities.filter {
+            Calendar.current.isDate($0.startDate, inSameDayAs: selectedDay)
+        }
+    }
+    
+    @State private var selectedDay = Date()
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -42,23 +56,14 @@ struct Dashboard: View {
                             }
                         }.padding(.all, 20)
                         
-                        WeekCalendarView()
+                        WeekCalendarView(selectedDay: $selectedDay, activities: activities)
                         
-                        VStack(spacing: 16) {
-                            
-                            ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(30 * 60), location: "Lutsk", notes: "Other notes"))
-                            
-                            ActivityPanelView(activity: Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"))
-                            
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("Upcoming trainings")
-                                    .font(.system(size: 14))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.gray)
-                                    .padding(.horizontal, 20)
-                                ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(60 * 60), location: "Lutsk", notes: "Other notes"))
+                        ScrollView {
+                            VStack(spacing: 16) {
+                                ForEach(filteredActivities) { activity in
+                                    ActivityPanelView(activity: activity)
+                                }
                             }
-                            .padding(.vertical, 12)
                         }
                     }
                 }

@@ -11,6 +11,14 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    func hAlign(_ alignment: Alignment) -> some View {
+        self.frame(maxWidth: .infinity, alignment: alignment)
+    }
+    
+    func vAlign(_ alignment: Alignment) -> some View {
+        self.frame(maxHeight: .infinity, alignment: alignment)
+    }
 }
 
 struct RoundedCorner: Shape {

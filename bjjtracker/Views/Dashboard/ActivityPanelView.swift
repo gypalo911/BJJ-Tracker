@@ -17,32 +17,30 @@ struct ActivityPanelView: View {
                     .foregroundColor(.white)
                     .cornerRadius(20)
                     .shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
-                Group {
+                HStack(alignment: .center) {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(Color(activity.status.color))
+                            .foregroundColor(Color(activity.type.color))
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
                             .frame(width: 67)
                         VStack(alignment: .center, spacing: 6) {
-                            Text("\(itemFormatter.string(from: activity.startDate))")
+                            Text("\(activity.startDate.toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
-                            Text("\(itemFormatter.string(from:activity.startDate + TimeInterval(activity.duration)))")
+                            Text("\((activity.startDate + TimeInterval(activity.duration)).toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white.opacity(0.6))
                                 .fontWeight(.regular)
                         }
                     }
-                }.frame(maxWidth: .infinity, alignment: .leading)
-                Group {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("\(activity.style.rawValue)")
+                        Text("\(activity.type.rawValue)")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
-                        Text("\(activity.location ?? "")")
+                        Text("\(activity.style.rawValue) • \(activity.location ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)
@@ -50,8 +48,10 @@ struct ActivityPanelView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)
-                    }
-                }.offset(x: -60)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(2)
+                    }.padding(.horizontal, 10)
+                }.hAlign(.leading)
                 Group {
                     ZStack {
                         Rectangle()
@@ -69,16 +69,10 @@ struct ActivityPanelView: View {
         }.frame(height: 103)
             .padding(.horizontal, 20)
     }
-    
-    private let itemFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter
-    }()
 }
 
 struct ActivityPanelView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60 * 60, startDate: Date()))
+        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60 * 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
     }
 }

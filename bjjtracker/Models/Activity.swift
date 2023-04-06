@@ -12,6 +12,17 @@ enum ActivityType: String {
     case session = "Class"
     case competition = "Competition"
     case seminar = "Seminar"
+    
+    var color: UIColor {
+        switch self {
+        case .session:
+            return UIColor(named: "Green") ?? .green
+        case .competition:
+            return UIColor(named: "Competition") ?? .systemOrange
+        case .seminar:
+            return UIColor(named: "Seminar") ?? .purple
+        }
+    }
 }
 
 enum GraplingStyle: String {
@@ -37,7 +48,7 @@ enum ActivityStatus: String {
     
 }
 
-struct Activity {
+struct Activity: Identifiable {
     var id = UUID()
     var type: ActivityType
     var style: GraplingStyle
@@ -45,17 +56,6 @@ struct Activity {
     var startDate: Date
     var location: String?
     var notes: String = ""
-    
-    var mainColor: UIColor {
-        switch type {
-        case .session:
-            return UIColor(named: "Green") ?? .green
-        case .competition:
-            return UIColor(named: "Competition") ?? .orange
-        case .seminar:
-            return UIColor(named: "Seminar") ?? .purple
-        }
-    }
     
     var status: ActivityStatus {
         let now = Date()
