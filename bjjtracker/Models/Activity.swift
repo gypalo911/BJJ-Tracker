@@ -6,21 +6,21 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 enum ActivityType: String {
     case session = "Class"
     case competition = "Competition"
     case seminar = "Seminar"
     
-    var color: UIColor {
+    var color: Color {
         switch self {
         case .session:
-            return UIColor(named: "Green") ?? .green
+            return Color("Green")
         case .competition:
-            return UIColor(named: "Competition") ?? .systemOrange
+            return Color("Competition")
         case .seminar:
-            return UIColor(named: "Seminar") ?? .purple
+            return Color("Seminar")
         }
     }
 }
@@ -35,14 +35,14 @@ enum ActivityStatus: String {
     case ongoing = "ONGOING"
     case finished = "FINISHED"
     
-    var color: UIColor {
+    var color: Color {
         switch self {
         case .upcoming:
-            return UIColor(named: "Purple") ?? .purple
+            return Color("Purple")
         case .ongoing:
-            return UIColor(named: "Blue") ?? .blue
+            return Color("Blue")
         case .finished:
-            return UIColor(named: "Green") ?? .green
+            return Color("Green")
         }
     }
     

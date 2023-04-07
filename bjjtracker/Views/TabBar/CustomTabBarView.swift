@@ -40,6 +40,7 @@ struct CustomTabBarView: View {
                             tab.image
                                 .resizable()
                                 .frame(width: 20, height: 20)
+                                .foregroundColor(Color("Purple"))
                             Text(tab.rawValue)
                                 .foregroundColor(Color("Purple"))
                                 .font(.system(size: 16))
@@ -56,6 +57,7 @@ struct CustomTabBarView: View {
                         tab.image
                             .resizable()
                             .frame(width: 20, height: 20)
+                            .foregroundColor(Color("Purple"))
                             .padding(.all, 20)
                     }
                 })

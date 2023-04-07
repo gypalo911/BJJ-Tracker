@@ -16,13 +16,13 @@ struct ActivityPanelView: View {
                 Rectangle()
                     .foregroundColor(.white)
                     .cornerRadius(20)
-                    .shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
+                    .defaultShadow()
                 HStack(alignment: .center) {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(Color(activity.type.color))
+                            .foregroundColor(activity.type.color)
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
-                            .shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
+                            .defaultShadow()
                             .frame(width: 67)
                         VStack(alignment: .center, spacing: 6) {
                             Text("\(activity.startDate.toString("HH:mm"))")
@@ -55,9 +55,9 @@ struct ActivityPanelView: View {
                 Group {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(Color(activity.status.color))
+                            .foregroundColor(activity.status.color)
                             .cornerRadius(5)
-                            .shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
+                            .defaultShadow()
                             .frame(width: 76, height: 23)
                         Text("\(activity.status.rawValue)".uppercased())
                             .font(.system(size: 10))

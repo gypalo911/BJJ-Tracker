@@ -15,7 +15,7 @@ extension Calendar {
         var week: [WeekDay] = []
         for index in 0..<7 {
             if let day = self.date(byAdding: .day, value: index, to: firstWeekDay) {
-                let weekDaySymbol = day.toString("EEEE")
+                let weekDaySymbol = day.toString("EEE")
                 let isToday = self.isDateInToday(day)
                 week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))
             }
@@ -28,25 +28,11 @@ extension Calendar {
         var string: String
         var date: Date
         var isToday: Bool = false
-        var activityType: ActivityType?
         
-        init(string: String, date: Date, isToday: Bool, activityType: ActivityType? = nil) {
+        init(string: String, date: Date, isToday: Bool) {
             self.string = string
             self.date = date
             self.isToday = isToday
-            self.activityType = activityType
         }
-        
-        func updateActivityType(type: ActivityType) {
-            self.activityType = type
-        }
-    }
-}
-
-extension Date {
-    func toString(_ format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
     }
 }

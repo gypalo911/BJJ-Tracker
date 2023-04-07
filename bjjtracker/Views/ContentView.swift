@@ -15,9 +15,9 @@ struct ContentView: View {
         ZStack {
             VStack {
                 TabView(selection: $selectedTab) {
-                    Dashboard()
+                    DashboardView()
                         .tag(Tab.dashboard)
-                    Text("Calendar")
+                    TimetableView()
                         .tag(Tab.calendar)
                     Text("Profile")
                         .tag(Tab.profile)

@@ -19,6 +19,10 @@ extension View {
     func vAlign(_ alignment: Alignment) -> some View {
         self.frame(maxHeight: .infinity, alignment: alignment)
     }
+    
+    func defaultShadow() -> some View {
+        self.shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
+    }
 }
 
 struct RoundedCorner: Shape {
