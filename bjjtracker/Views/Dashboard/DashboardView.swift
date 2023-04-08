@@ -26,11 +26,7 @@ struct DashboardView: View {
     
     @State var headerHeight: CGFloat = 650
     
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "Blue")
-        UINavigationBar.appearance().standardAppearance = appearance
-    }
+    @State var isCreateSheetPresented: Bool = false
     
     var body: some View {
         NavigationView {
@@ -52,7 +48,7 @@ struct DashboardView: View {
                             .hAlign(.leading)
                         HStack(spacing: 10) {
                             StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
-                            StatsView(text: "Total time", value: "2568h", tendecyGrows: false, tendecyValue: "1h 20m")
+                            StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 20m")
                         }
                             .padding(.all, 20)
                         
@@ -83,7 +79,7 @@ struct DashboardView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        print("Edit button was tapped")
+                        isCreateSheetPresented = true
                     } label: {
                         Image("createButton")
                             .resizable()
@@ -91,6 +87,9 @@ struct DashboardView: View {
                             .foregroundColor(.white)
                     }
                 }
+            }
+            .sheet(isPresented: $isCreateSheetPresented) {
+                NewSessionView()
             }
         }.background(Color.white)
     }

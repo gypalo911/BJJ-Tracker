@@ -75,7 +75,7 @@ struct TimetableView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            print("Edit button was tapped")
+                            
                         } label: {
                             Image("createButton")
                                 .resizable()

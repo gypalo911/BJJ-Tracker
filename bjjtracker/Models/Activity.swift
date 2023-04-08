@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum ActivityType: String {
+enum ActivityType: String, CaseIterable, Hashable {
     case session = "Class"
     case competition = "Competition"
     case seminar = "Seminar"
@@ -25,7 +25,7 @@ enum ActivityType: String {
     }
 }
 
-enum GraplingStyle: String {
+enum GraplingStyle: String, CaseIterable, Hashable {
     case gi = "Gi"
     case noGi = "No-gi"
 }
@@ -48,14 +48,15 @@ enum ActivityStatus: String {
     
 }
 
-struct Activity: Identifiable, Equatable {
+class Activity: Identifiable, Equatable, ObservableObject {
+    
     var id = UUID()
-    var type: ActivityType
-    var style: GraplingStyle
-    var duration: Int
-    var startDate: Date
-    var location: String?
-    var notes: String = ""
+    @Published var type: ActivityType
+    @Published var style: GraplingStyle
+    @Published var duration: Int
+    @Published var startDate: Date
+    @Published var location: String = ""
+    @Published var notes: String = ""
     
     var status: ActivityStatus {
         let now = Date()
@@ -66,6 +67,16 @@ struct Activity: Identifiable, Equatable {
         } else {
             return .upcoming
         }
+    }
+    
+    init(id: UUID = UUID(), type: ActivityType, style: GraplingStyle, duration: Int, startDate: Date, location: String, notes: String) {
+        self.id = id
+        self.type = type
+        self.style = style
+        self.duration = duration
+        self.startDate = startDate
+        self.location = location
+        self.notes = notes
     }
 }
 
@@ -84,8 +95,12 @@ extension Activity {
             style: GraplingStyle(rawValue: style)!,
             duration: duration as! Int,
             startDate: startDate,
-            location: session.location,
+            location: session.location ?? "",
             notes: notes
         )
+    }
+    
+    static func == (lhs: Activity, rhs: Activity) -> Bool {
+        lhs.id == rhs.id
     }
 }

@@ -35,3 +35,9 @@ struct DateValue: Identifiable {
     var day: Int
     var date: Date
 }
+
+extension Int {
+    func formatMinutes() -> (String, String) {
+        return ("\(Int(self / 60))", "\(Int(self % 60))")
+    }
+}

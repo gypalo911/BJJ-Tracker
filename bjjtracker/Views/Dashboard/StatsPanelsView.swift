@@ -73,7 +73,7 @@ struct StatsViewProvider_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 10) {
             StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
-            StatsView(text: "Total time", value: "2568h", tendecyGrows: false, tendecyValue: "4h 20m")
+            StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "4h 20m")
         }.padding(20).background(Rectangle().fill(.blue))
     }
 }

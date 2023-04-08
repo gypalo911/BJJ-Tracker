@@ -17,6 +17,8 @@
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
 		D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */; };
 		D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */; };
+		D098BBE729E0D1DE00A9A068 /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE629E0D1DE00A9A068 /* NewSessionView.swift */; };
+		D098BBEA29E1A15C00A9A068 /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE929E1A15C00A9A068 /* DurationPicker.swift */; };
 		D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
 		D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* Profile.swift */; };
 		D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */; };
@@ -64,6 +66,8 @@
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
+		D098BBE629E0D1DE00A9A068 /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
+		D098BBE929E1A15C00A9A068 /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		D0A00ECD29DDC9B100DCD5BB /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		D0A00ECF29DDCE7300DCD5BB /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 		D060BAB229DDAE5F00E10562 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				D098BBE629E0D1DE00A9A068 /* NewSessionView.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -246,9 +251,18 @@
 			path = Activities;
 			sourceTree = "<group>";
 		};
+		D098BBE829E1A15000A9A068 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				D098BBE929E1A15C00A9A068 /* DurationPicker.swift */,
+			);
+			path = Pickers;
+			sourceTree = "<group>";
+		};
 		D0A00ED729DDE3B100DCD5BB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D098BBE829E1A15000A9A068 /* Pickers */,
 				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
@@ -403,7 +417,9 @@
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */,
 				D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */,
+				D098BBEA29E1A15C00A9A068 /* DurationPicker.swift in Sources */,
 				D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */,
+				D098BBE729E0D1DE00A9A068 /* NewSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
