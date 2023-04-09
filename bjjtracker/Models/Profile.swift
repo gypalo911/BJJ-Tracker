@@ -7,15 +7,7 @@
 
 import Foundation
 
-enum Belt {
-    case white
-    case blue
-    case purple
-    case brown
-    case black
-}
-
 struct Profile {
-    var belt: Belt
+    var belt: any Belt
     var stripes: Int?
 }

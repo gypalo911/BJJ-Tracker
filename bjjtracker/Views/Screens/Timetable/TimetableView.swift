@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct TimetableView: View {
-    @State var selectedDay: Date = Date()
     
-    @State var activities: [Activity] = [
+    
+    @State private var activities: [Activity] = [
         Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
         Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
         Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(3000 * 60), location: "Lutsk", notes: "Some notes"),
     ]
     
-    var filteredActivities: [Activity] {
+    @State private var selectedDay: Date = Date()
+    @State private var showingActionSheet: Bool = false
+    @State private var selectedSheet: ModalsSheets?
+    
+    private var filteredActivities: [Activity] {
         activities.filter {
             Calendar.current.isDate($0.startDate, inSameDayAs: selectedDay)
         }
     }
-    
-    @State var selectedDate: Date = Date()
     
     var body: some View {
         NavigationView {
@@ -64,9 +66,6 @@ struct TimetableView: View {
                                     }.padding(.bottom, 50)
                                 }
                             }
-                            
-//                            DatePicker("Select Date", selection: $selectedDay, displayedComponents: [.date])
-//                                              .padding(.horizontal)
                         }
                     }
                 }
@@ -75,13 +74,32 @@ struct TimetableView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            
+                            showingActionSheet = true
                         } label: {
                             Image("createButton")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(Color("Blue"))
                         }
+                    }
+                }
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Select Action"), buttons: [
+                        .default(Text("Add Promotion"), action: {
+                            selectedSheet = .promotion
+                        }),
+                        .default(Text("Add Session"), action: {
+                            selectedSheet = .session
+                        }),
+                        .cancel()
+                    ])
+                }
+                .sheet(item: $selectedSheet) { selectedSheet in
+                    switch selectedSheet {
+                    case .promotion:
+                        AddPromotionView()
+                    case .session:
+                        NewSessionView()
                     }
                 }
         }

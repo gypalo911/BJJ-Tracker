@@ -7,26 +7,32 @@
 
 import SwiftUI
 
+enum ModalsSheets: Int, Identifiable {
+    var id: Int { self.rawValue }
+    
+    case session
+    case promotion
+}
+
 struct DashboardView: View {
     
-    var activities: [Activity] = [
+    @State private var selectedDay = Date()
+    @State private var headerHeight: CGFloat = 650
+    @State private var showingActionSheet: Bool = false
+    @State private var selectedSheet: ModalsSheets?
+    
+    private var activities: [Activity] = [
         Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
         Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
         Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
     ]
     
-    var filteredActivities: [Activity] {
+    private var filteredActivities: [Activity] {
         activities.filter {
             Calendar.current.isDate($0.startDate, inSameDayAs: selectedDay)
         }
     }
-    
-    @State private var selectedDay = Date()
-    var currentWeek = Calendar.current.currentWeek
-    
-    @State var headerHeight: CGFloat = 650
-    
-    @State var isCreateSheetPresented: Bool = false
+    private var currentWeek = Calendar.current.currentWeek
     
     var body: some View {
         NavigationView {
@@ -79,7 +85,7 @@ struct DashboardView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isCreateSheetPresented = true
+                        showingActionSheet = true
                     } label: {
                         Image("createButton")
                             .resizable()
@@ -88,8 +94,24 @@ struct DashboardView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isCreateSheetPresented) {
-                NewSessionView()
+            .actionSheet(isPresented: $showingActionSheet) {
+                ActionSheet(title: Text("Select Action"), buttons: [
+                    .default(Text("Add Promotion"), action: {
+                        selectedSheet = .promotion
+                    }),
+                    .default(Text("Add Session"), action: {
+                        selectedSheet = .session
+                    }),
+                    .cancel()
+                ])
+            }
+            .sheet(item: $selectedSheet) { selectedSheet in
+                switch selectedSheet {
+                case .promotion:
+                    AddPromotionView()
+                case .session:
+                    NewSessionView()
+                }
             }
         }.background(Color.white)
     }
