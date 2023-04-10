@@ -7,69 +7,38 @@
 
 import SwiftUI
 
-struct TodayView: View {
-    let weekDay: Calendar.WeekDay
-    let isToday: Bool
-    var activityColor: Color? = .clear
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            Text(weekDay.string)
-                .font(.callout)
-                .fontWeight(.heavy)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-            ZStack {
-                Circle()
-                    .frame(height: 30)
-                    .foregroundColor(.white)
-                if isToday {
-                    Circle()
-                        .stroke(Color.white, lineWidth: 1)
-                        .frame(height: 30)
-                        .foregroundColor(.white)
-                }
-                Text("\(weekDay.date.toString("dd"))")
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
-                    .frame(maxWidth: .infinity)
-            }
-            Circle()
-                .frame(height: 10)
-                .foregroundColor(activityColor ?? .clear)
-                .cornerRadius(10)
-        }
-    }
+struct CalendarDayColors {
+    let textColor: Color
+    let strokeColor: Color
+    let selectedTextColor: Color
+    let selectedBGColor: Color
 }
 
-struct RegularDayView: View {
-    let weekDay: Calendar.WeekDay
+struct CalendarDayView: View {
+    let date: Date
+
     let isToday: Bool
-    var activityColor: Color? = .clear
+    let isSelected: Bool
+
+    let activityColor: Color?
+    let colors: CalendarDayColors
     
     var body: some View {
         VStack(spacing: 5) {
-            Text(weekDay.string)
-                .font(.callout)
-                .fontWeight(.regular)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .offset(y: 0)
             ZStack {
                 Circle()
                     .frame(height: 30)
-                    .foregroundColor(.clear)
+                    .foregroundColor(isSelected ? colors.selectedBGColor : .clear)
                 if isToday {
                     Circle()
-                        .stroke(Color.white, lineWidth: 1)
+                        .stroke(isSelected ? .white : colors.strokeColor, lineWidth: 1)
                         .frame(height: 30)
-                        .foregroundColor(.clear)
+                        .foregroundColor(isSelected ? colors.selectedBGColor : .clear)
                 }
-                Text("\(weekDay.date.toString("dd"))")
+                Text("\(date.toString("d"))")
                     .font(.callout)
                     .fontWeight(.semibold)
-                    .foregroundColor(.white)
+                    .foregroundColor(isSelected ? colors.selectedTextColor : colors.textColor)
                     .frame(maxWidth: .infinity)
             }
             Circle()

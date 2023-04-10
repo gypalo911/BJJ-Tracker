@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TimetableView: View {
     
-    
     @State private var activities: [Activity] = [
         Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
         Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
@@ -26,6 +25,14 @@ struct TimetableView: View {
         }
     }
     
+    @State var maxHeight: CGFloat = 400
+    
+    @State var sliderProgress: CGFloat = 0
+    @State var sliderHeight: CGFloat = 0
+    @State var lastDragValue: CGFloat = 0
+    
+    @State private var showWeekView: Bool = true
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -38,19 +45,97 @@ struct TimetableView: View {
                         .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
                     
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            MonthCalendarView(activities: $activities, selectedDay: $selectedDay)
-                                .background(
-                                    Rectangle()
-                                        .foregroundColor(.white)
-                                        .edgesIgnoringSafeArea(.all)
-                                        .cornerRadius(30)
-                                        .frame(height: 950)
-                                        .position(CGPoint(x: geometry.size.width/2, y: 0))
-                                        .defaultShadow()
-                                )
+                    VStack(spacing: 0) {
+                        VStack(spacing: 10) {
+                            HStack {
+                                Text("\(selectedDay.toString("MMMM YYYY"))")
+                                    .font(.system(size: 22))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                                    .hAlign(.leading)
+                                Button(action: {
+                                    print("Calendar tapped")
+                                }, label: {
+                                    Image("calendar")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(Color("Blue"))
+                                })
+                            }.padding(20)
+                            Group {
+                                if !showWeekView {
+                                    MonthCalendarView(selectedDay: $selectedDay, activities: $activities, viewHeight: $sliderHeight, maxHeight: maxHeight)
+                                        .frame(height: sliderHeight)
+                                        .padding(.top, -30)
+                                        .padding(.bottom, -40)
+                                } else {
+                                    let currentWeek = Calendar.current.week(for: selectedDay)
+                                    WeekCalendarView(
+                                        selectedDay: $selectedDay,
+                                        currentWeek: currentWeek,
+                                        activities: activities,
+                                        colors: .init(
+                                            textColor: .black,
+                                            strokeColor: .blue,
+                                            selectedTextColor: .white,
+                                            selectedBGColor: Color("Blue")
+                                        )
+                                    ).padding(.top, -20)
+                                }
+                            }
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("LightGray"))
+                                .frame(width: 50, height: 6)
+                                .padding(.bottom, 20)
+                        }
+                        .background(
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .cornerRadius(30, corners: [.bottomLeft, .bottomRight])
+                                .frame(maxHeight: .infinity)
+                                .defaultShadow()
+                        )
+                        .gesture(DragGesture(minimumDistance: 0).onChanged({ value in
+                            let downDirection = (value.location.y - value.startLocation.y) > 0
+                            let translation = value.translation
+                            sliderHeight = translation.height + lastDragValue
+                            sliderHeight = sliderHeight > maxHeight ? maxHeight : sliderHeight
                             
+                            if sliderHeight <= 310 && !downDirection {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    self.showWeekView = true
+                                }
+                            }
+                            if sliderHeight > 100 && downDirection {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    self.showWeekView = false
+                                }
+                            }
+                            sliderHeight = sliderHeight >= 100 ? sliderHeight : 100
+                        }).onEnded({ value in
+                            sliderHeight = sliderHeight > maxHeight ? maxHeight : sliderHeight
+                            
+                            sliderHeight = sliderHeight >= 100 ? sliderHeight : 100
+                            
+                            let downDirection = (value.location.y - value.startLocation.y) > 0
+                            
+                            if sliderHeight > 100 && downDirection {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    self.showWeekView = false
+                                    self.sliderHeight = maxHeight
+                                }
+                            }
+                            
+                            if sliderHeight < maxHeight - 20 && !downDirection {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    self.showWeekView = true
+                                    self.sliderHeight = 200
+                                }
+                            }
+                            
+                            lastDragValue = sliderHeight
+                        }))
+                        ScrollView(showsIndicators: false) {
                             if filteredActivities.isEmpty {
                                 Spacer()
                                 Text("No sessions for this day")
@@ -66,10 +151,9 @@ struct TimetableView: View {
                                     }.padding(.bottom, 50)
                                 }
                             }
-                        }
+                        }.padding(.top, 20)
                     }
                 }
-                
             }.background(Color("generalBG").ignoresSafeArea())
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -106,127 +190,6 @@ struct TimetableView: View {
         
     }
 }
-
-struct MonthCalendarView: View {
-    let days: [String] = Calendar.current.shortWeekdaySymbols
-    
-    @State var currentMonth: Int = 0
-    @State var currentDate: Date = Date()
-    
-    @Binding var selectedDay: Date
-    
-    @Binding var activities: [Activity]
-    
-    init(activities: Binding<[Activity]>, selectedDay: Binding<Date>) {
-        _activities = activities
-        _selectedDay = selectedDay
-    }
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Text("\(selectedDay.toString("MMMM YYYY"))")
-                    .font(.system(size: 22))
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .hAlign(.leading)
-                Button(action: {
-                    print("Calendar tapped")
-                }, label: {
-                    Image("calendar")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color("Blue"))
-                })
-            }
-            
-            HStack(spacing: 0) {
-                ForEach(days, id: \.self) { day in
-                    Text(day)
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                }
-            }.padding(.vertical, 20)
-            
-            let columns = Array(repeating: GridItem(.flexible()), count: 7)
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(extractDate()) { value in
-                    CardView(with: value)
-                }
-            }
-        }
-        .padding(.all, 20)
-        .onChange(of: currentMonth) { newValue in
-            selectedDay = getCurrentMonth()
-        }
-    }
-    
-    @ViewBuilder
-    func CardView(with value: DateValue) -> some View {
-        let status = Calendar.current.isDate(value.date, inSameDayAs: selectedDay)
-        let isToday = Calendar.current.isDateInToday(value.date)
-        
-        let activity = activities.first(where: { activity in
-            return Calendar.current.isDate(activity.startDate, inSameDayAs: value.date)
-        })
-        
-        VStack(spacing: 5) {
-            if value.day != -1 {
-                ZStack {
-                    Circle()
-                        .frame(height: 35)
-                        .foregroundColor(status ? Color("Blue") : .clear)
-                    if isToday {
-                        Circle()
-                            .stroke(Color("Blue"), lineWidth: 1)
-                            .frame(height: 35)
-                            .foregroundColor(status ? Color("Blue") : .clear)
-                    }
-                    Text("\(value.date.toString("d"))")
-                        .font(.title3.bold())
-                        .foregroundColor(status ? .white : .black)
-                }
-                Circle()
-                    .frame(height: 10)
-                    .foregroundColor(activity != nil ? activity!.type.color : .clear)
-            }
-        }.onTapGesture {
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedDay = value.date
-            }
-        }
-    }
-    
-    func getCurrentMonth() -> Date {
-        let calendar = Calendar.current
-        
-        guard let currentMonth = calendar.date(byAdding: .month, value: currentMonth, to: Date()) else {
-            return Date()
-        }
-        
-        return currentMonth
-    }
-    
-    func extractDate() -> [DateValue] {
-        let calendar = Calendar.current
-        let currentMonth = getCurrentMonth()
-        
-        var days = currentMonth.allDatesInMonth().compactMap { date -> DateValue in
-            let day = calendar.component(.day, from: date)
-            
-            return DateValue(day: day, date: date)
-        }
-        
-        let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
-        for _ in 0..<firstWeekDay - 1 {
-            days.insert(DateValue(day: -1, date: Date()), at: 0)
-        }
-        
-        return days
-    }
-}
-
 
 struct Timetable_Previews: PreviewProvider {
     static var previews: some View {

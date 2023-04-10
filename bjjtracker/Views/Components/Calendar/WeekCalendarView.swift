@@ -12,16 +12,21 @@ struct WeekCalendarView: View {
     var currentWeek: [Calendar.WeekDay]
     
     let activities: [Activity]
+
+    let colors: CalendarDayColors
     
     var body: some View {
-        VStack(alignment: .trailing, spacing: 20) {
-            Text("\(Date().toString("MMMM yyyy"))")
-                .font(.system(size: 22))
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            
-            
+        VStack(alignment: .center, spacing: 10) {
+            HStack(spacing: 0) {
+                ForEach(currentWeek, id: \.self) { day in
+                    Text("\(day.string)")
+                        .font(.callout)
+                        .fontWeight(.regular)
+                        .foregroundColor(colors.textColor)
+                        .frame(maxWidth: .infinity)
+                        .offset(y: 0)
+                }
+            }
             HStack {
                 ForEach(currentWeek, id: \.self.id) { weekDay in
                     
@@ -33,11 +38,13 @@ struct WeekCalendarView: View {
                     let isToday = Calendar.current.isDateInToday(weekDay.date)
                     
                     ZStack {
-                        if isSelected {
-                            TodayView(weekDay: weekDay, isToday: isToday, activityColor: activity?.type.color)
-                        } else {
-                            RegularDayView(weekDay: weekDay, isToday: isToday, activityColor: activity?.type.color)
-                        }
+                        CalendarDayView(
+                            date: weekDay.date,
+                            isToday: isToday,
+                            isSelected: isSelected,
+                            activityColor: activity?.type.color,
+                            colors: colors
+                        )
                     }.onTapGesture {
                         selectDay(weekDay.date)
                     }.onLongPressGesture {
@@ -45,8 +52,9 @@ struct WeekCalendarView: View {
                     }
                 }
             }
-        }.padding(.horizontal, 20)
-            .padding(.vertical, 10)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
     }
     
     private func selectDay(_ day: Date) {
@@ -68,7 +76,18 @@ struct WeekCalendarView_Previews: PreviewProvider {
         ]
         
         var body: some View {
-            WeekCalendarView(selectedDay: $selectedDay, currentWeek: currentWeek, activities: activities).padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
+            WeekCalendarView(
+                selectedDay: $selectedDay,
+                currentWeek: currentWeek,
+                activities: activities,
+                colors: .init(
+                    textColor: .white,
+                    strokeColor: .white,
+                    selectedTextColor: Color("Blue"),
+                    selectedBGColor: .white
+                )
+            )
+            .padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
         }
     }
     

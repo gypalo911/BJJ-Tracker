@@ -10,7 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -30,6 +30,7 @@ struct ContentView: View {
         }.ignoresSafeArea()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

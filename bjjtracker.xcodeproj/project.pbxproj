@@ -28,6 +28,10 @@
 		D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */; };
 		D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
+		D0B01F2229E40C6200E10979 /* temp_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2129E40C6200E10979 /* temp_test.swift */; };
+		D0B01F2429E4102200E10979 /* temp_test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2329E4102200E10979 /* temp_test2.swift */; };
+		D0B01F2829E43E4E00E10979 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2729E43E4E00E10979 /* Color.swift */; };
+		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
 		D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* DashboardView.swift */; };
 		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
 		D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
@@ -81,6 +85,10 @@
 		D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesManager.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
+		D0B01F2129E40C6200E10979 /* temp_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp_test.swift; sourceTree = "<group>"; };
+		D0B01F2329E4102200E10979 /* temp_test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp_test2.swift; sourceTree = "<group>"; };
+		D0B01F2729E43E4E00E10979 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
 		D0E824B329DE0F490023E6C0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
@@ -193,6 +201,8 @@
 				D098BBEC29E2C0DA00A9A068 /* Components */,
 				D098BBEB29E2C09D00A9A068 /* Screens */,
 				D060BA7F29DDAD9A00E10562 /* ContentView.swift */,
+				D0B01F2129E40C6200E10979 /* temp_test.swift */,
+				D0B01F2329E4102200E10979 /* temp_test2.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */,
+				D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */,
 				D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */,
 			);
 			path = Calendar;
@@ -299,12 +310,29 @@
 			isa = PBXGroup;
 			children = (
 				D098BBE829E1A15000A9A068 /* Pickers */,
+				D0B01F2629E43DBE00E10979 /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D0B01F2529E43DAF00E10979 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				D0B01F2729E43E4E00E10979 /* Color.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		D0B01F2629E43DBE00E10979 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0B01F2529E43DAF00E10979 /* Color */,
 				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
 				D0E824BE29DF006A0023E6C0 /* Date+extension.swift */,
 			);
-			path = Helpers;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D0E824B929DECFF40023E6C0 /* TabBar */ = {
@@ -446,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
@@ -462,13 +491,16 @@
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
 				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,
 				D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */,
+				D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */,
 				D098BBF129E2C1AF00A9A068 /* SelectionPanelView.swift in Sources */,
+				D0B01F2229E40C6200E10979 /* temp_test.swift in Sources */,
 				D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
+				D0B01F2429E4102200E10979 /* temp_test2.swift in Sources */,
 				D098BBF529E2EB3000A9A068 /* BeltsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ enum ModalsSheets: Int, Identifiable {
 struct DashboardView: View {
     
     @State private var selectedDay = Date()
-    @State private var headerHeight: CGFloat = 650
+    @State private var headerHeight: CGFloat = 550
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
     
@@ -58,7 +58,17 @@ struct DashboardView: View {
                         }
                             .padding(.all, 20)
                         
-                        WeekCalendarView(selectedDay: $selectedDay, currentWeek: currentWeek, activities: activities)
+                        WeekCalendarView(
+                            selectedDay: $selectedDay,
+                            currentWeek: currentWeek,
+                            activities: activities,
+                            colors: .init(
+                                textColor: .white,
+                                strokeColor: .white,
+                                selectedTextColor: Color("Blue"),
+                                selectedBGColor: .white
+                            )
+                        )
                         if filteredActivities.isEmpty {
                             Spacer()
                             Text("No sessions for this day")
@@ -79,7 +89,7 @@ struct DashboardView: View {
             }.background(Color("generalBG").ignoresSafeArea())
             .onChange(of: filteredActivities) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    self.headerHeight = items.isEmpty ? 600 : 650
+                    self.headerHeight = items.isEmpty ? 500 : 550
                 }
             }
             .toolbar {
