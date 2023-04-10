@@ -42,7 +42,7 @@ struct CalendarDayView: View {
                     .frame(maxWidth: .infinity)
             }
             Circle()
-                .frame(width: .infinity, height: 10)
+                .frame(height: 10)
                 .foregroundColor(activityColor ?? .clear)
                 .cornerRadius(10)
         }

@@ -131,7 +131,7 @@ struct NumberPickerView: View {
     
     var body: some View {
         Picker(selection: $selectedNumber, label: Text("Select a number")) {
-            ForEach(0..<numbers.count) { index in
+            ForEach(0..<numbers.count, id: \.self) { index in
                 Text("\(numbers[index])")
             }
         }

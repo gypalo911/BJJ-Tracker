@@ -65,7 +65,7 @@ struct ContentView1: View {
                             }.hAlign(.center)
                         }.frame(height: UIScreen.main.bounds.height / 2.2)
                     VStack {
-                        ForEach(items.indices) { index in
+                        ForEach(0..<items.count, id: \.self) { index in
                             VStack {
                                 Text(items[index])
                                     .font(.largeTitle)
