@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct MonthCalendarView: View {
-    let days: [String] = Calendar.current.shortWeekdaySymbols
+    private var weekDays: [String] {
+        Calendar.current.week(for: selectedDate).map { $0.dayOfWeek }
+    }
     
-    @State var currentMonth: Int = 0
+    @State var currentMonthDay: Int = 0
     @State var currentDate: Date = Date()
     
-    @Binding var selectedDay: Date
+    @Binding var selectedDate: Date
     @Binding var activities: [Activity]
     @Binding var viewHeight: CGFloat
     
@@ -26,10 +28,15 @@ struct MonthCalendarView: View {
         selectedBGColor: Color("Blue")
     )
     
+    var extractedMonthDates: [DateValue] {
+        return extractMonthDates()
+    }
+    
     var body: some View {
+        
         VStack {
             HStack(spacing: 0) {
-                ForEach(days, id: \.self) { day in
+                ForEach(weekDays, id: \.self) { day in
                     Text(day)
                         .font(.callout)
                         .fontWeight(.regular)
@@ -41,7 +48,7 @@ struct MonthCalendarView: View {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 7)
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(extractMonthDates) { value in
+                ForEach(extractedMonthDates) { value in
                     CardView(with: value)
                         .frame(height: (45 * viewHeight) / maxHeight)
                 }
@@ -49,20 +56,20 @@ struct MonthCalendarView: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
-        .onChange(of: currentMonth) { newValue in
-            selectedDay = getCurrentMonth()
+        .onChange(of: currentMonthDay) { newValue in
+            selectedDate = getCurrentMonth()
         }
     }
     
     @ViewBuilder
     func CardView(with value: DateValue) -> some View {
-        let status = Calendar.current.isDate(value.date, inSameDayAs: selectedDay)
+        let status = Calendar.current.isDate(value.date, inSameDayAs: selectedDate)
         let isToday = Calendar.current.isDateInToday(value.date)
         
         let activity = activities.first(where: { activity in
             return Calendar.current.isDate(activity.startDate, inSameDayAs: value.date)
         })
-        VStack(spacing: 0) {
+        ZStack() {
             if value.day != -1 {
                 CalendarDayView(
                     date: value.date,
@@ -72,9 +79,9 @@ struct MonthCalendarView: View {
                     colors: colors
                 )
                 .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        selectedDay = value.date
-                    }
+                    //                    withAnimation(.easeInOut(duration: 0.25)) {
+                    selectedDate = value.date
+                    //                    }
                 }
             }
         }
@@ -83,25 +90,25 @@ struct MonthCalendarView: View {
     func getCurrentMonth() -> Date {
         let calendar = Calendar.current
         
-        guard let currentMonth = calendar.date(byAdding: .month, value: currentMonth, to: Date()) else {
+        guard let currentMonthDay = calendar.date(byAdding: .month, value: currentMonthDay, to: selectedDate) else {
             return Date()
         }
         
-        return currentMonth
+        return currentMonthDay
     }
     
-    var extractMonthDates: [DateValue] {
+    func extractMonthDates() -> [DateValue] {
         let calendar = Calendar.current
-        let currentMonth = getCurrentMonth()
+        let currentMonthDay = getCurrentMonth()
         
-        var days = currentMonth.allDatesInMonth().compactMap { date -> DateValue in
+        var days = currentMonthDay.allDatesInMonth().compactMap { date -> DateValue in
             let day = calendar.component(.day, from: date)
             
             return DateValue(day: day, date: date)
         }
         
         let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
-        for _ in 0..<firstWeekDay - 1 {
+        for _ in 1..<firstWeekDay - 1 {
             days.insert(DateValue(day: -1, date: Date()), at: 0)
         }
         
@@ -124,7 +131,7 @@ struct MonthCalendarView_Previews: PreviewProvider {
         
         var body: some View {
             MonthCalendarView(
-                selectedDay: $selectedDay,
+                selectedDate: $selectedDay,
                 activities: $activities,
                 viewHeight: $viewHeight,
                 maxHeight: maxHeight

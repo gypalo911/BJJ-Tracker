@@ -17,7 +17,7 @@ extension Calendar {
             if let day = self.date(byAdding: .day, value: index, to: firstWeekDay) {
                 let weekDaySymbol = day.toString("EEE")
                 let isToday = self.isDateInToday(day)
-                week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))
+                week.append(.init(dayOfWeek: weekDaySymbol, date: day, isToday: isToday))
             }
         }
         return week
@@ -32,7 +32,7 @@ extension Calendar {
             if let day = self.date(byAdding: .day, value: index, to: firstWeekDay) {
                 let weekDaySymbol = day.toString("EEE")
                 let isToday = self.isDateInToday(day)
-                week.append(.init(string: weekDaySymbol, date: day, isToday: isToday))
+                week.append(.init(dayOfWeek: weekDaySymbol, date: day, isToday: isToday))
             }
         }
         return week
@@ -40,12 +40,12 @@ extension Calendar {
     
     class WeekDay: Identifiable, Hashable {
         var id: UUID = .init()
-        var string: String
+        var dayOfWeek: String
         var date: Date
         var isToday: Bool = false
         
-        init(string: String, date: Date, isToday: Bool) {
-            self.string = string
+        init(dayOfWeek: String, date: Date, isToday: Bool) {
+            self.dayOfWeek = dayOfWeek
             self.date = date
             self.isToday = isToday
         }
