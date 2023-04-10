@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct NewSessionView: View {
-    @StateObject var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+    @Binding var activity: Activity
     
     @State private var isPickerPresented = false
     
-    @Environment(\.presentationMode) var presentationMode
+    var isEditing: Bool
     
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        UINavigationBar.appearance().standardAppearance = appearance
-    }
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
@@ -91,7 +87,7 @@ struct NewSessionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Create Session")
+                    .navigationTitle(isEditing ? "Edit Session" : "Create Session")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
@@ -105,7 +101,6 @@ struct NewSessionView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
-                                print(activity)
                             } label: {
                                 Text("Save")
                                     .fixedSize()
@@ -123,9 +118,10 @@ struct NewSessionView: View {
 
 struct NewSessionView_Previews: PreviewProvider {
     struct Container: View {
+        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
         
         var body: some View {
-            NewSessionView()
+            NewSessionView(activity: $activity, isEditing: true)
         }
     }
     

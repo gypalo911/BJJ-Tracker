@@ -66,8 +66,9 @@ struct ActivityPanelView: View {
                     }.padding(.all, 10)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
-        }.frame(height: 103)
-            .padding(.horizontal, 20)
+        }
+        .frame(height: 103)
+        .padding(.horizontal, 20)
     }
 }
 

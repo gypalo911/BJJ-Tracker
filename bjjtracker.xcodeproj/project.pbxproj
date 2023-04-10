@@ -32,6 +32,7 @@
 		D0B01F2429E4102200E10979 /* temp_test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2329E4102200E10979 /* temp_test2.swift */; };
 		D0B01F2829E43E4E00E10979 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2729E43E4E00E10979 /* Color.swift */; };
 		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
+		D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */; };
 		D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* DashboardView.swift */; };
 		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
 		D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
@@ -89,6 +90,7 @@
 		D0B01F2329E4102200E10979 /* temp_test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp_test2.swift; sourceTree = "<group>"; };
 		D0B01F2729E43E4E00E10979 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
+		D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsView.swift; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
 		D0E824B329DE0F490023E6C0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				D098BBEF29E2C1A200A9A068 /* Components */,
 				D098BBE629E0D1DE00A9A068 /* NewSessionView.swift */,
+				D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
 			);
 			path = Sessions;
@@ -495,6 +498,7 @@
 				D098BBF129E2C1AF00A9A068 /* SelectionPanelView.swift in Sources */,
 				D0B01F2229E40C6200E10979 /* temp_test.swift in Sources */,
 				D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */,
+				D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,

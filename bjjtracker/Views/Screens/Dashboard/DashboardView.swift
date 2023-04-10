@@ -20,11 +20,14 @@ struct DashboardView: View {
     @State private var headerHeight: CGFloat = 550
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
+    @State private var selectedActivity: Activity?
+    
+    @State private var newActivity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
     
     private var activities: [Activity] = [
-        Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
-        Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
-        Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
+        Activity(type: .seminar, style: .noGi, duration: 120, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
+        Activity(type: .session, style: .gi, duration: 90, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
+        Activity(type: .competition, style: .noGi, duration: 90, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
     ]
     
     private var filteredActivities: [Activity] {
@@ -80,6 +83,9 @@ struct DashboardView: View {
                                 VStack(spacing: 16) {
                                     ForEach(filteredActivities) { activity in
                                         ActivityPanelView(activity: activity)
+                                            .onTapGesture {
+                                                self.selectedActivity = activity
+                                            }
                                     }
                                 }.padding(.bottom, 50)
                             }
@@ -120,8 +126,11 @@ struct DashboardView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView()
+                    NewSessionView(activity: $newActivity, isEditing: false)
                 }
+            }
+            .sheet(item: $selectedActivity) { selectedActivity in
+                SessionDetailsView(activity: selectedActivity)
             }
         }.background(Color.white)
     }
