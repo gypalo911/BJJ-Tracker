@@ -9,8 +9,11 @@ import SwiftUI
 
 struct StatisticsView: View {
     
+    @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var selectedSegment = 0
+    
     private var segments = ["Week", "Month", "Year"]
     
     var body: some View {
@@ -21,8 +24,36 @@ struct StatisticsView: View {
                 
             }
         }
+        .vAlign(.top)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
+        .customToolBar(
+            dismissAction: {
+                settings.isTabBarHidden = false
+                presentationMode.wrappedValue.dismiss()
+            },
+            mainAction: {
+                
+            })
+        .onAppear {
+            settings.isTabBarHidden = true
+        }
+    }
+}
+
+struct StatisticsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            StatisticsView()
+        }
+    }
+}
+
+private extension View {
+    func customToolBar(
+        dismissAction: @escaping (() -> ()),
+        mainAction: @escaping (() -> ())
+    ) -> some View {
+        return self.toolbar {
             ToolbarItem(placement: .principal) {
                 Text("7-14 September 2023")
                     .font(.system(size: 20))
@@ -30,7 +61,7 @@ struct StatisticsView: View {
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    presentationMode.wrappedValue.dismiss()
+                    dismissAction()
                 } label: {
                     Image(systemName: "chevron.backward")
                         .resizable()
@@ -41,7 +72,7 @@ struct StatisticsView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    
+                    mainAction()
                 } label: {
                     Image("calendar")
                         .resizable()
@@ -49,15 +80,6 @@ struct StatisticsView: View {
                         .foregroundColor(Color("Blue"))
                 }
             }
-        }
-        .vAlign(.top)
-    }
-}
-
-struct StatisticsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            StatisticsView()
         }
     }
 }

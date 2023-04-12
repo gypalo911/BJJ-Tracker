@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct bjjtrackerApp: App {
+    
+    let settings = AppSettings()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settings)
         }
     }
 }

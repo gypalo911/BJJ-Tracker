@@ -156,7 +156,13 @@ struct DashboardView: View {
 }
 
 struct Dashboard_Previews: PreviewProvider {
+    struct Container: View {
+        var body: some View {
+            DashboardView()
+        }
+    }
+    
     static var previews: some View {
-        DashboardView()
+        Container()
     }
 }

@@ -10,6 +10,8 @@ import CoreData
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
+    
+    @EnvironmentObject var settings: AppSettings
 
     var body: some View {
         ZStack {
@@ -25,12 +27,17 @@ struct ContentView: View {
             }
             VStack {
                 Spacer()
-                CustomTabBarView(selectedTab: $selectedTab)
+                if !settings.isTabBarHidden {
+                    CustomTabBarView(selectedTab: $selectedTab)
+                }
             }
         }.ignoresSafeArea()
     }
 }
 
+class AppSettings: ObservableObject {
+    @Published var isTabBarHidden: Bool = false
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
