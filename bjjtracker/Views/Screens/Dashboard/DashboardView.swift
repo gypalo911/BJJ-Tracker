@@ -17,7 +17,7 @@ enum ModalsSheets: Int, Identifiable {
 struct DashboardView: View {
     
     @State private var selectedDay = Date()
-    @State private var headerHeight: CGFloat = 550
+    @State private var headerHeight: CGFloat = 640
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
     @State private var selectedActivity: Activity?
@@ -59,8 +59,27 @@ struct DashboardView: View {
                             StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
                             StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 20m")
                         }
-                            .padding(.all, 20)
-                        
+                        .padding(.all, 20)
+
+                        HStack {
+                            Text("\(selectedDay.toString("MMMM YYYY"))")
+                                .font(.system(size: 22))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .hAlign(.leading)
+                            
+                            NavigationLink(destination: {
+                                StatisticsView()
+                            }) {
+                                Image("stats")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.top, 10)
+
                         WeekCalendarView(
                             selectedDay: $selectedDay,
                             currentWeek: currentWeek,
@@ -95,7 +114,7 @@ struct DashboardView: View {
             }.background(Color("generalBG").ignoresSafeArea())
             .onChange(of: filteredActivities) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    self.headerHeight = items.isEmpty ? 500 : 550
+                    self.headerHeight = items.isEmpty ? 590 : 640
                 }
             }
             .toolbar {

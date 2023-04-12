@@ -60,27 +60,26 @@ struct TimetableView: View {
                         activities: $activities,
                         selectedDay: $selectedDay
                     )
-                    ScrollView(showsIndicators: false) {
-                        if filteredActivities.isEmpty {
-                            Spacer()
-                            Text("No sessions for this day")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color("Gray"))
-                            Spacer()
-                        } else {
-                            ScrollView(showsIndicators: false) {
-                                VStack(spacing: 16) {
-                                    ForEach(filteredActivities) { activity in
-                                        ActivityPanelView(activity: activity)
-                                            .onTapGesture {
-                                                selectedActivity = activity
-                                            }
-                                    }
-                                }.padding(.bottom, 50)
+                    if filteredActivities.isEmpty {
+                        Spacer()
+                        Text("No sessions for this day")
+                            .font(.system(size: 18))
+                            .foregroundColor(Color("Gray"))
+                        Spacer()
+                    } else {
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 16) {
+                                ForEach(filteredActivities) { activity in
+                                    ActivityPanelView(activity: activity)
+                                        .onTapGesture {
+                                            selectedActivity = activity
+                                        }
+                                }
                             }
+                            .padding(.bottom, 50)
+                            .padding(.top, 20)
                         }
                     }
-                    .padding(.top, 20)
                 }.padding(.top, -10)
             }.background(Color("generalBG").ignoresSafeArea())
                 .toolbar {
@@ -152,14 +151,25 @@ struct DraggableCalendarView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .hAlign(.leading)
-                Button(action: {
-                    print("Calendar tapped")
-                }, label: {
-                    Image("calendar")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color("Blue"))
-                })
+                
+                HStack(spacing: 20) {
+                    Button(action: {
+                        print("Stats tapped")
+                    }, label: {
+                        Image("stats")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(Color("Blue"))
+                    })
+                    Button(action: {
+                        print("Calendar tapped")
+                    }, label: {
+                        Image("calendar")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(Color("Blue"))
+                    })
+                }
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
