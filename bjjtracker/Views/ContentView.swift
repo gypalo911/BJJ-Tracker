@@ -23,7 +23,7 @@ struct ContentView: View {
                         .tag(Tab.calendar)
                     Text("Profile")
                         .tag(Tab.profile)
-                }
+                }.edgesIgnoringSafeArea(.bottom)
             }
             VStack {
                 Spacer()
@@ -39,8 +39,11 @@ class AppSettings: ObservableObject {
     @Published var isTabBarHidden: Bool = false
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        let settings: AppSettings = AppSettings()
         ContentView()
+            .environmentObject(settings)
     }
 }
