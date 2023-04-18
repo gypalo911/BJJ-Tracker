@@ -19,7 +19,7 @@ enum Tab: String, CaseIterable {
         case .profile:
             return Image("profile")
         case .calendar:
-            return Image("tabCalendar")
+            return Image("filledCalendar")
         }
     }
 }

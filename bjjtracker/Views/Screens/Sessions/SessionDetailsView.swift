@@ -15,14 +15,25 @@ struct SessionDetailsView: View {
     
     var navTitle = ""
     
+    let linearGradient: LinearGradient
+    
     init(activity: Activity) {
         _activity = State(initialValue: activity)
+        linearGradient = LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: activity.type.color.opacity(0.8), location: 0.4),
+                .init(color: activity.type.color.opacity(0.35), location: 0.8),
+                .init(color: activity.type.color.opacity(0.28), location: 1)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
 
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
         UINavigationBar.appearance().standardAppearance = appearance
         
-        navTitle = "\(activity.startDate.toString("dd MMMM YYYY"))\n\(activity.startDate.toString("hh:mm")) \(activity.type.rawValue)"
+        navTitle = "\(activity.style.rawValue) \(activity.type.rawValue)"
     }
     
     var body: some View {
@@ -45,72 +56,64 @@ struct SessionDetailsView: View {
                         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         VStack(alignment: .leading, spacing: 20) {
                             Text(navTitle)
-                                .font(.title.bold())
+                                .font(.system(size: 28).bold())
+                                .foregroundColor(.white)
                                 .padding(.top, 10)
                             VStack(alignment: .leading, spacing: 20) {
-                                HStack {
-                                    Text(activity.type.rawValue)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.black)
-                                        .padding(.horizontal, 15)
-                                        .padding(.vertical, 6)
-                                        .background(
-                                            ZStack(alignment: .center) {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color("Blue"), lineWidth: 2)
-                                                    .foregroundColor(.white)
-                                            }
-                                        )
-                                    Text(activity.style.rawValue)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.black)
-                                        .padding(.horizontal, 15)
-                                        .padding(.vertical, 6)
-                                        .background(
-                                            ZStack(alignment: .center) {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color("Blue"), lineWidth: 2)
-                                                    .foregroundColor(.white)
-                                            }
-                                        )
+                                HStack(spacing: 10) {
+                                    Image("calendar")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.white)
+                                    Text("\(activity.startDate.toString("dd MMMM YYYY"))")
+                                        .font(.system(size: 20))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
                                 }
-                                HStack {
-                                    TitleTextView(text: "Duration:")
-                                    let hours = activity.duration.formatMinutes().0
-                                    if hours != "0" {
-                                        HStack(alignment: .bottom, spacing: 2) {
-                                            Text("\(hours)")
-                                                .font(.system(size: 20))
-                                                .fontWeight(.regular)
-                                                .foregroundColor(.black)
-                                            Text("h")
-                                                .fontWeight(.regular)
-                                                .foregroundColor(.black)
-                                        }
-                                    }
-                                    let minutes = activity.duration.formatMinutes().1
-                                    HStack(alignment: .bottom, spacing: 2) {
-                                        Text("\(minutes)")
+                                HStack(spacing: 10) {
+                                    Image("watch")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.white)
+                                    HStack {
+                                        Text("\(activity.startDate.toString("hh:mm"))")
                                             .font(.system(size: 20))
-                                            .fontWeight(.regular)
-                                            .foregroundColor(.black)
-                                        Text("min")
-                                            .fontWeight(.regular)
-                                            .foregroundColor(.black)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.white)
+                                        let duration = activity.duration.minutesToDuration()
+                                        if activity.duration != 0 {
+                                            Text("(\(duration))")
+                                                .font(.system(size: 18))
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(.white)
+                                        }
                                     }
                                 }
                                 if activity.location != "" {
-                                    HStack {
-                                        TitleTextView(text: "Location:")
+                                    HStack(spacing: 10) {
+                                        Image("location")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.white)
                                         Text("\(activity.location)")
+                                            .font(.system(size: 20))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.white)
                                     }
                                 }
-                                Text(activity.notes)
-                                    .font(.title2)
-                                    .multilineTextAlignment(.leading)
                             }.padding(10)
                             
-                            
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Notes")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color("Gray"))
+                                Text(activity.notes)
+                                    .font(.system(size: 18))
+                                    .multilineTextAlignment(.leading)
+                            }
+                            .padding(.vertical, 20)
+                            .padding(.horizontal, 10)
                         }
                         .hAlign(.leading)
                         .vAlign(.top)
@@ -120,23 +123,33 @@ struct SessionDetailsView: View {
                                 Button {
                                     presentationMode.wrappedValue.dismiss()
                                 } label: {
-                                    Text("Cancel")
-                                        .fixedSize()
-                                        .foregroundColor(Color("Blue"))
+                                    Image("back")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.white)
                                 }
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Button {
                                     isPresentedEditing = true
-//                                    presentationMode.wrappedValue.dismiss()
                                 } label: {
                                     Text("Edit")
                                         .fixedSize()
-                                        .foregroundColor(Color("Blue"))
+                                        .foregroundColor(.white)
                                 }
                             }
                         }
-                    }.sheet(isPresented: $isPresentedEditing) {
+                    }
+                    .background {
+                        Rectangle()
+                            .fill(linearGradient)
+                            .ignoresSafeArea()
+                            .cornerRadius(30, corners: [.bottomLeft])
+                            .frame(height: 480)
+                            .position(CGPoint(x: geometry.size.width/2, y: 0))
+                            .defaultShadow()
+                    }
+                    .sheet(isPresented: $isPresentedEditing) {
                         NewSessionView(activity: $activity, isEditing: true)
                     }
                 }

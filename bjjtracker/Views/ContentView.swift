@@ -21,7 +21,7 @@ struct ContentView: View {
                         .tag(Tab.dashboard)
                     TimetableView()
                         .tag(Tab.calendar)
-                    Text("Profile")
+                    ProfileView()
                         .tag(Tab.profile)
                 }.edgesIgnoringSafeArea(.bottom)
             }

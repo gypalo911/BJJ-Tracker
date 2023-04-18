@@ -12,12 +12,6 @@ struct AddPromotionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        UINavigationBar.appearance().standardAppearance = appearance
-    }
-    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -64,7 +58,7 @@ struct AddPromotionView: View {
                                     .padding(20)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("BlueWithOpacity"))
+                                            .fill(Color("LightBlue"))
                                     ).padding(.leading, 5)
                             }
                             
@@ -75,8 +69,9 @@ struct AddPromotionView: View {
                                     .padding(20)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("BlueWithOpacity"))
-                                    ).padding(.leading, 5)
+                                            .fill(Color("LightBlue"))
+                                    )
+                                    .padding(.leading, 5)
                             }
                         }
                     }
@@ -88,15 +83,15 @@ struct AddPromotionView: View {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Text("Cancel")
-                                    .fixedSize()
+                                Image("back")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                                     .foregroundColor(Color("Blue"))
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
-                                print(promotion)
                             } label: {
                                 Text("Save")
                                     .fixedSize()
@@ -106,6 +101,10 @@ struct AddPromotionView: View {
                     }
                     .vAlign(.top)
                 }
+            }.onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.backgroundColor = .white
+                UINavigationBar.appearance().standardAppearance = appearance
             }
         }
     }

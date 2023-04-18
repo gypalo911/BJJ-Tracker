@@ -37,7 +37,14 @@ struct DateValue: Identifiable {
 }
 
 extension Int {
-    func formatMinutes() -> (String, String) {
-        return ("\(Int(self / 60))", "\(Int(self % 60))")
+    func minutesToDuration() -> String {
+        var str = ""
+        let hours = Int(self / 60)
+        let minutes = Int(self % 60)
+        if hours != 0 {
+            str += "\(hours)h "
+        }
+        str += "\(minutes)min"
+        return str
     }
 }

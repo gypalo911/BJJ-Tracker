@@ -35,7 +35,7 @@ enum AdultBelts: String, CaseIterable, Identifiable {
         case .brown:
             return (Color(UIColor.brown), nil)
         case .black:
-            return (Color.black, nil)
+            return (Color.black, .red)
         case .none:
             return (.clear, nil)
         }

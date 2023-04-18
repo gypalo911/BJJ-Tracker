@@ -12,6 +12,9 @@
 		D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDC29E726E600BED6CD /* InfographicsView.swift */; };
 		D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDE29E7276700BED6CD /* PieSliceView.swift */; };
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
+		D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */; };
+		D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE729EEBD9300BED6CD /* ProfileView.swift */; };
+		D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
 		D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7F29DDAD9A00E10562 /* ContentView.swift */; };
 		D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Assets.xcassets */; };
@@ -78,6 +81,9 @@
 		D02F3DDC29E726E600BED6CD /* InfographicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfographicsView.swift; sourceTree = "<group>"; };
 		D02F3DDE29E7276700BED6CD /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableCalendarView.swift; sourceTree = "<group>"; };
+		D02F3DE729EEBD9300BED6CD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerApp.swift; sourceTree = "<group>"; };
 		D060BA7F29DDAD9A00E10562 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -161,7 +167,6 @@
 				DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */,
 				04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -172,6 +177,14 @@
 				D02F3DDE29E7276700BED6CD /* PieSliceView.swift */,
 			);
 			path = PieChart;
+			sourceTree = "<group>";
+		};
+		D02F3DE929EEE7F200BED6CD /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		D060BA7129DDAD9A00E10562 = {
@@ -281,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */,
+				D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -299,6 +313,7 @@
 		D060BAB329DDAE6C00E10562 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D02F3DE729EEBD9300BED6CD /* ProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -332,6 +347,7 @@
 		D098BBEB29E2C09D00A9A068 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D02F3DE929EEE7F200BED6CD /* Archive */,
 				D0B01F2D29E5844B00E10979 /* Statistics */,
 				D060BAB229DDAE5F00E10562 /* Sessions */,
 				D060BAB329DDAE6C00E10562 /* Profile */,
@@ -660,6 +676,7 @@
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
+				D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
@@ -671,6 +688,7 @@
 				D098BBEE29E2C16600A9A068 /* AddPromotionView.swift in Sources */,
 				D098BBEA29E1A15C00A9A068 /* DurationPicker.swift in Sources */,
 				D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */,
+				D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */,
 				D098BBE729E0D1DE00A9A068 /* NewSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
@@ -684,6 +702,7 @@
 				D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
+				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
@@ -777,7 +796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -831,7 +850,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -859,7 +878,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -894,7 +913,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -91,38 +91,19 @@ struct DurationSelectorView: View {
                 isPickerPresented.toggle()
             }
         }, label: {
-            HStack {
-                let hours = duration.formatMinutes().0
-                if hours != "0"{
-                    HStack(alignment: .bottom, spacing: 2) {
-                        Text("\(hours)")
-                            .font(.system(size: 20))
-                            .fontWeight(.regular)
-                            .foregroundColor(.black)
-                        Text("h")
-                            .fontWeight(.regular)
-                            .foregroundColor(.black)
+            let duration = duration.minutesToDuration()
+            Text("\(duration)")
+                .font(.system(size: 18))
+                .fontWeight(.regular)
+                .foregroundColor(.black)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 6)
+                .background(
+                    ZStack(alignment: .center) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("LightGray").opacity(0.5))
                     }
-                }
-                let minutes = duration.formatMinutes().1
-                HStack(alignment: .bottom, spacing: 2) {
-                    Text("\(minutes)")
-                        .font(.system(size: 20))
-                        .fontWeight(.regular)
-                        .foregroundColor(.black)
-                    Text("min")
-                        .fontWeight(.regular)
-                        .foregroundColor(.black)
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 6)
-            .background(
-                ZStack(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("LightGray").opacity(0.5))
-                }
-            )
+                )
         })
         .padding(.leading, 5)
     }

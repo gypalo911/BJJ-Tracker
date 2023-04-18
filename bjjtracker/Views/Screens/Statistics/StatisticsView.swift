@@ -53,10 +53,11 @@ struct StatisticsView: View {
                             .frame(height: 1)
                         
                         PieChartView(values: [12, 6], colors: [Color("Blue"), Color("LightBlue")], textColors: [.white, .black], names: ["Gi sessions", "No Gi sessions"], backgroundColor: bgColor, innerRadiusFraction: 0.4)
-                            .padding(40)
+                            .padding(.vertical, 20)
+                            .padding(.horizontal, 40)
                     }
                     .padding(.all, 20)
-                    .padding(.bottom, 200)
+                    .padding(.bottom, 220)
                 }
         }
         .vAlign(.top)
@@ -111,7 +112,7 @@ private extension View {
                 Button {
                     dismissAction()
                 } label: {
-                    Image(systemName: "chevron.backward")
+                    Image("back")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25, height: 25)

@@ -67,10 +67,11 @@ struct NewSessionView: View {
                                 TextField("Location...", text: $activity.location)
                                     .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
-                                    .background(
+                                    .background {
                                         RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("BlueWithOpacity"))
-                                    ).padding(.leading, 5)
+                                            .fill(Color("LightBlue"))
+                                    }
+                                    .padding(.leading, 5)
                             }
                             
                             VStack(alignment: .leading) {
@@ -80,7 +81,7 @@ struct NewSessionView: View {
                                     .padding(20)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("BlueWithOpacity"))
+                                            .fill(Color("LightBlue"))
                                     ).padding(.leading, 5)
                             }
                         }
@@ -93,8 +94,9 @@ struct NewSessionView: View {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Text("Cancel")
-                                    .fixedSize()
+                                Image("back")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
                                     .foregroundColor(Color("Blue"))
                             }
                         }
@@ -110,6 +112,11 @@ struct NewSessionView: View {
                     }
                     .vAlign(.top)
                 }
+            }
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.backgroundColor = .white
+                UINavigationBar.appearance().standardAppearance = appearance
             }
         }
     }

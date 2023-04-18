@@ -38,8 +38,6 @@ struct ContentView2: View {
                 
                 let progress = sliderHeight / maxHeight
                 sliderProgress = progress <= 1 ? progress : 1
-                
-                print(sliderProgress)
             }).onEnded({ value in
                 sliderHeight = sliderHeight > maxHeight ? maxHeight : sliderHeight
                 

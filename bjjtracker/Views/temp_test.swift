@@ -39,11 +39,9 @@ struct ContentView1: View {
                                     
                                     globalY = y
                                     
-//                                    print(y)
                                     let padd = Int(((UIScreen.main.bounds.height / 2.2) / -globalY))
                                     if padd < 10 && padd > -10 {
                                         globalPadding = padd
-                                        print(padd)
                                     }
                                     
                                     if -y > (UIScreen.main.bounds.height / 2.2) - 100 {

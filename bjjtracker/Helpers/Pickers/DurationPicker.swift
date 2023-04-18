@@ -30,7 +30,8 @@ struct DurationPicker: View {
                             .fontWeight(.semibold)
                     }
                 }
-            }.onChange(of: hours) { _ in
+            }
+            .onChange(of: hours) { _ in
                 duration = totalDurationInMinutes
             }
             .pickerStyle(WheelPickerStyle())
@@ -48,7 +49,6 @@ struct DurationPicker: View {
                 }
             }.onChange(of: minutes) { _ in
                 duration = totalDurationInMinutes
-                print(duration)
             }
             .pickerStyle(WheelPickerStyle())
             .frame(width: 100)

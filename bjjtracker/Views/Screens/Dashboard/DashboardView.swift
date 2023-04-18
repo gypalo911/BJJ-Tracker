@@ -45,7 +45,7 @@ struct DashboardView: View {
                         .foregroundColor(Color("Blue"))
                         .edgesIgnoringSafeArea(.all)
                         .cornerRadius(30)
-                        .frame(height: headerHeight)//geometry.size.height/2)
+                        .frame(height: headerHeight)
                         .position(CGPoint(x: geometry.size.width/2, y: 0))
                         .defaultShadow()
                     VStack(spacing: 0) {
@@ -96,6 +96,22 @@ struct DashboardView: View {
                             Text("No sessions for this day")
                                 .font(.system(size: 18))
                                 .foregroundColor(Color("Gray"))
+                            
+                            NavigationLink(destination: {
+                                ArchiveView(activities: activities)
+                                    .navigationBarTitle("")
+                                    .navigationBarHidden(true)
+                            }) {
+                                HStack {
+                                    Text("View History")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(.blue)
+                                    Image("archive")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
+                            .padding(.top, 20)
                             Spacer()
                         } else {
                             ScrollView(showsIndicators: false) {
@@ -106,12 +122,29 @@ struct DashboardView: View {
                                                 self.selectedActivity = activity
                                             }
                                     }
+                                    
+                                    NavigationLink(destination: {
+                                        ArchiveView(activities: activities)
+                                            .navigationBarTitle("")
+                                            .navigationBarHidden(true)
+                                    }) {
+                                        HStack {
+                                            Text("View History")
+                                                .font(.system(size: 16))
+                                                .foregroundColor(.blue)
+                                            Image("archive")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                        }
+                                    }
+                                    .padding(.top, 20)
                                 }.padding(.bottom, 50)
                             }
                         }
                     }
                 }
-            }.background(Color("generalBG").ignoresSafeArea())
+            }
+            .background(Color("generalBG").ignoresSafeArea())
             .onChange(of: filteredActivities) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
                     self.headerHeight = items.isEmpty ? 590 : 640
