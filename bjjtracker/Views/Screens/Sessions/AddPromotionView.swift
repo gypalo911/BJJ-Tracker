@@ -101,10 +101,6 @@ struct AddPromotionView: View {
                     }
                     .vAlign(.top)
                 }
-            }.onAppear {
-                let appearance = UINavigationBarAppearance()
-                appearance.backgroundColor = .white
-                UINavigationBar.appearance().standardAppearance = appearance
             }
         }
     }

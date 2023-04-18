@@ -118,6 +118,11 @@ struct SessionDetailsView: View {
                         .hAlign(.leading)
                         .vAlign(.top)
                         .padding(20)
+                        .onDisappear {
+                            let appearance = UINavigationBarAppearance()
+                            appearance.backgroundColor = .clear
+                            UINavigationBar.appearance().standardAppearance = appearance
+                        }
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button {
