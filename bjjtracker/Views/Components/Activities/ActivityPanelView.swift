@@ -29,7 +29,7 @@ struct ActivityPanelView: View {
                                 .font(.system(size: 14))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
-                            Text("\((activity.startDate + TimeInterval(activity.duration)).toString("HH:mm"))")
+                            Text("\((activity.startDate + TimeInterval(activity.duration * 60)).toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white.opacity(0.6))
                                 .fontWeight(.regular)
@@ -74,6 +74,6 @@ struct ActivityPanelView: View {
 
 struct ActivityPanelView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60 * 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
+        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
     }
 }

@@ -137,6 +137,9 @@ struct SessionDetailsView: View {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Button {
                                     isPresentedEditing = true
+                                    let appearance = UINavigationBarAppearance()
+                                    appearance.backgroundColor = .clear
+                                    UINavigationBar.appearance().standardAppearance = appearance
                                 } label: {
                                     Text("Edit")
                                         .fixedSize()
@@ -154,7 +157,11 @@ struct SessionDetailsView: View {
                             .position(CGPoint(x: geometry.size.width/2, y: 0))
                             .defaultShadow()
                     }
-                    .sheet(isPresented: $isPresentedEditing) {
+                    .sheet(isPresented: $isPresentedEditing, onDismiss: {
+                        let appearance = UINavigationBarAppearance()
+                        appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
+                        UINavigationBar.appearance().standardAppearance = appearance
+                    }) {
                         NewSessionView(activity: $activity, isEditing: true)
                     }
                 }

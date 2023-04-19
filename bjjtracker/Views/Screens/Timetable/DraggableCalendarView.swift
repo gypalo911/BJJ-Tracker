@@ -10,6 +10,7 @@ import SwiftUI
 struct DraggableCalendarView: View {
     @Binding var activities: [Activity]
     @Binding var selectedDay: Date
+    @Binding var isBottomSheetOpen: Bool
     
     private var currentWeek: [Calendar.WeekDay] {
         Calendar.current.week(for: selectedDay)
@@ -43,7 +44,9 @@ struct DraggableCalendarView: View {
                             .foregroundColor(Color("Blue"))
                     }
                     Button(action: {
-                        
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            isBottomSheetOpen = true
+                        }
                     }, label: {
                         Image("calendar")
                             .resizable()

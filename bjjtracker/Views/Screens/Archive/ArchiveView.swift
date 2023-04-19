@@ -26,16 +26,18 @@ struct ArchiveView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(groupedItems.keys.sorted(), id: \.self) { key in
-                    Text("\(key.toString("dd MMMM YYYY"))")
-                        .hAlign(.leading)
-                        .padding([.horizontal, .top], 20)
-                        .padding(.bottom, 10)
-                    ForEach(groupedItems[key]!) { activity in
-                        ActivityPanelView(activity: activity)
-                            .onTapGesture {
-                                self.selectedActivity = activity
-                            }
+                LazyVStack {
+                    ForEach(groupedItems.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
+                        Text("\(key.toString("dd MMMM YYYY"))")
+                            .hAlign(.leading)
+                            .padding([.horizontal, .top], 20)
+                            .padding(.bottom, 10)
+                        ForEach(groupedItems[key]!) { activity in
+                            ActivityPanelView(activity: activity)
+                                .onTapGesture {
+                                    self.selectedActivity = activity
+                                }
+                        }
                     }
                 }
             }
@@ -71,16 +73,16 @@ struct ArchiveView: View {
                             .foregroundColor(Color("Blue"))
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        
-                    } label: {
-                        Image("calendar")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Blue"))
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button {
+//
+//                    } label: {
+//                        Image("calendar")
+//                            .resizable()
+//                            .frame(width: 25, height: 25)
+//                            .foregroundColor(Color("Blue"))
+//                    }
+//                }
             }
         }
     }

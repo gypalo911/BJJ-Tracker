@@ -19,10 +19,14 @@ struct StatisticsView: View {
     
     let bgColor: Color = Color("generalBG")
     
+    var isConcreteDates: Bool = true
+    
     var body: some View {
         VStack {
-            SegmentedPicker(items: segments, selection: $selectedSegment)
-                .padding()
+            if !isConcreteDates {
+                SegmentedPicker(items: segments, selection: $selectedSegment)
+                    .padding()
+            }
             ScrollView(showsIndicators: false) {
                     VStack {
                         HStack(spacing: 10) {
@@ -63,6 +67,7 @@ struct StatisticsView: View {
         .vAlign(.top)
         .background(bgColor.ignoresSafeArea())
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
@@ -119,16 +124,16 @@ private extension View {
                         .foregroundColor(Color("Blue"))
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    mainAction()
-                } label: {
-                    Image("calendar")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color("Blue"))
-                }
-            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button {
+//                    mainAction()
+//                } label: {
+//                    Image("calendar")
+//                        .resizable()
+//                        .frame(width: 25, height: 25)
+//                        .foregroundColor(Color("Blue"))
+//                }
+//            }
         }
     }
 }

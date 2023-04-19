@@ -44,6 +44,8 @@ struct TimetableView: View {
     @State private var showWeekView: Bool = true
     @State private var blurCalendar: Bool = false
     
+    @State private var isBottomSheetOpen: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -58,7 +60,8 @@ struct TimetableView: View {
                 VStack(spacing: 0) {
                     DraggableCalendarView(
                         activities: $activities,
-                        selectedDay: $selectedDay
+                        selectedDay: $selectedDay,
+                        isBottomSheetOpen: $isBottomSheetOpen
                     )
                     if filteredActivities.isEmpty {
                         Spacer()
@@ -80,6 +83,7 @@ struct TimetableView: View {
                             }
                         }
                         .padding(.top, 20)
+                        Spacer()
                         Spacer()
                     } else {
                         ScrollView(showsIndicators: false) {
@@ -143,6 +147,12 @@ struct TimetableView: View {
                 case .session:
                     NewSessionView(activity: $newActivity, isEditing: false)
                 }
+            }
+            .fullScreenCover(isPresented: $isBottomSheetOpen) {
+                MonthYearBottomSheetView(
+                    selectedDate: $selectedDay,
+                    isBottomSheetOpen: $isBottomSheetOpen
+                )
             }
             .sheet(item: $selectedActivity) { selectedActivity in
                 SessionDetailsView(activity: selectedActivity)
