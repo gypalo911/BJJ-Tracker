@@ -10,13 +10,16 @@ import CoreData
 protocol ActivitiesStoraging {
     func save(_ activity: Activity) throws
     func update(_ activity: Activity) throws
-    func fetchAllActivities() throws -> [Activity]
-    func fetchActivities(from dateInterval: DateInterval) throws -> [Activity]
-    func fetchActivity(by id: UUID) throws -> Activity?
     func deleteActivity(with id: UUID) throws
 }
 
-class CoreDataService: ObservableObject, ActivitiesStoraging {
+protocol ActivitiesReading {
+    func fetchAllActivities() throws -> [Activity]
+    func fetchActivities(from dateInterval: DateInterval) throws -> [Activity]
+    func fetchActivity(by id: UUID) throws -> Activity?
+}
+
+class CoreDataService: ObservableObject, ActivitiesStoraging, ActivitiesReading {
     
     let container = NSPersistentContainer(name: "Session")
     

@@ -10,20 +10,23 @@ import Introspect
 
 struct StatisticsView: View {
     
-    @EnvironmentObject var settings: AppSettings
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var selectedSegment = 0
-    
-    private var segments = ["Week", "Month", "Year"]
-    
     let bgColor: Color = Color("generalBG")
     
-    var isConcreteDates: Bool = true
+    @State private var selectedSegment = 0
+    private var segments = ["Week", "Month", "Year"]
+    
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var settings: AppSettings
+    
+    private var presenter: StatisticsViewPresenter
+    
+    init(presenter: StatisticsViewPresenter) {
+        self.presenter = presenter
+    }
     
     var body: some View {
         VStack {
-            if !isConcreteDates {
+            if !presenter.isConcreteDates {
                 SegmentedPicker(items: segments, selection: $selectedSegment)
                     .padding()
             }
@@ -71,51 +74,16 @@ struct StatisticsView: View {
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
-        .customToolBar(
-            dismissAction: {
-                settings.isTabBarHidden = false
-                presentationMode.wrappedValue.dismiss()
-            },
-            mainAction: {
-                
-            })
-        .onAppear {
-            settings.isTabBarHidden = true
-        }
-    }
-}
-
-struct StatisticsView_Previews: PreviewProvider {
-    struct Container: View {
-        let settings = AppSettings()
-        
-        var body: some View {
-            NavigationView {
-                StatisticsView()
-                    .environmentObject(settings)
-            }
-        }
-    }
-    
-    static var previews: some View {
-        Container()
-    }
-}
-
-private extension View {
-    func customToolBar(
-        dismissAction: @escaping (() -> ()),
-        mainAction: @escaping (() -> ())
-    ) -> some View {
-        return self.toolbar {
+        .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("7-14 September 2023")
+                Text(presenter.title)
                     .font(.system(size: 20))
                     .fontWeight(.medium)
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    dismissAction()
+                    hideTabbar(false)
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image("back")
                         .resizable()
@@ -124,16 +92,33 @@ private extension View {
                         .foregroundColor(Color("Blue"))
                 }
             }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button {
-//                    mainAction()
-//                } label: {
-//                    Image("calendar")
-//                        .resizable()
-//                        .frame(width: 25, height: 25)
-//                        .foregroundColor(Color("Blue"))
-//                }
-//            }
         }
+        .onAppear {
+            hideTabbar(true)
+        }
+    }
+    
+    func hideTabbar(_ isHidden: Bool) {
+        settings.isTabBarHidden = isHidden
+    }
+}
+
+struct StatisticsView_Previews: PreviewProvider {
+    struct Container: View {
+        let settings = AppSettings()
+        let interval = DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
+        
+        var body: some View {
+            NavigationView {
+                StatisticsView(
+                    presenter: StatisticsViewPresenter(dateInterval: interval)
+                )
+                .environmentObject(settings)
+            }
+        }
+    }
+    
+    static var previews: some View {
+        Container()
     }
 }

@@ -145,7 +145,7 @@ struct TimetableView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView(activity: $newActivity, isEditing: false)
+                    NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
                 }
             }
             .fullScreenCover(isPresented: $isBottomSheetOpen) {

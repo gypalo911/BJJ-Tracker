@@ -162,7 +162,7 @@ struct SessionDetailsView: View {
                         appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
                         UINavigationBar.appearance().standardAppearance = appearance
                     }) {
-                        NewSessionView(activity: $activity, isEditing: true)
+                        NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
                     }
                 }
             }

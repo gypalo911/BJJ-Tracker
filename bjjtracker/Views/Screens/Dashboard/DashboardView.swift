@@ -69,7 +69,9 @@ struct DashboardView: View {
                                 .hAlign(.leading)
                             
                             NavigationLink(destination: {
-                                StatisticsView()
+                                StatisticsView(
+                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date()))
+                                )
                             }) {
                                 Image("stats")
                                     .resizable()
@@ -178,7 +180,7 @@ struct DashboardView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView(activity: $newActivity, isEditing: false)
+                    NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
                 }
             }
             .sheet(item: $selectedActivity) { selectedActivity in

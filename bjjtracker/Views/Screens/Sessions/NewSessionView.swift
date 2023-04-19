@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct NewSessionView: View {
-    @Binding var activity: Activity
     
     @State private var isPickerPresented = false
     
-    var isEditing: Bool
-    
     @Environment(\.presentationMode) var presentationMode
+    
+    let presenter: NewSessionPresenter
     
     var body: some View {
         NavigationView {
@@ -28,8 +27,8 @@ struct NewSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
-                                    selectedType: $activity.type,
-                                    selectedTypeValue: activity.type.rawValue
+                                    selectedType: presenter.$activity.type,
+                                    selectedTypeValue: presenter.activity.type.rawValue
                                 )
                             }.padding(.top, 10)
                             
@@ -38,13 +37,13 @@ struct NewSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
-                                    selectedType: $activity.style,
-                                    selectedTypeValue: activity.style.rawValue
+                                    selectedType: presenter.$activity.style,
+                                    selectedTypeValue: presenter.activity.style.rawValue
                                 )
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "3. Select date and time:")
-                                DatePicker("", selection: $activity.startDate)
+                                DatePicker("", selection: presenter.activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
@@ -52,9 +51,9 @@ struct NewSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "4. Duration:")
                                 
-                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
+                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: presenter.$activity.duration)
                                 if isPickerPresented {
-                                    DurationPicker(duration: $activity.duration)
+                                    DurationPicker(duration: presenter.activity.duration)
                                         .frame(height: 150)
                                         .frame(maxWidth: .infinity)
                                 }
@@ -64,7 +63,7 @@ struct NewSessionView: View {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
-                                TextField("Location...", text: $activity.location)
+                                TextField("Location...", text: presenter.$activity.location)
                                     .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
@@ -76,7 +75,7 @@ struct NewSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $activity.notes)
+                                TextField("Add some details...", text: presenter.$activity.notes)
                                     .frame(minHeight: 150, alignment: .top)
                                     .padding(20)
                                     .background(
@@ -88,7 +87,7 @@ struct NewSessionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle(isEditing ? "Edit Session" : "Create Session")
+                    .navigationTitle(presenter.isEditing ? "Edit Session" : "Create Session")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
@@ -123,7 +122,7 @@ struct NewSessionView_Previews: PreviewProvider {
         @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
         
         var body: some View {
-            NewSessionView(activity: $activity, isEditing: true)
+            NewSessionView(presenter: NewSessionPresenter(activity: activity, isEditing: true))
         }
     }
     

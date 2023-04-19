@@ -63,9 +63,7 @@ struct MonthYearPicker: View {
             
             Button(action: {
                 let newDate = dateFormatter.date(from: "\(selectedMonth) \(selectedYear)") ?? Date()
-                let newMonth = Calendar.current.dateComponents([.month, .year], from: newDate)
-                let currentMonth = Calendar.current.dateComponents([.month, .year], from: selectedDate)
-                if newMonth != currentMonth {
+                if !selectedDate.isSame(as: newDate, by: [.month, .year]) {
                     selectedDate = newDate
                 }
                 isBottomSheetOpen = false

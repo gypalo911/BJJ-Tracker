@@ -36,7 +36,9 @@ struct DraggableCalendarView: View {
                 
                 HStack(spacing: 20) {
                     NavigationLink(destination: {
-                        StatisticsView()
+                        StatisticsView(
+                            presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date()))
+                        )
                     }) {
                         Image("stats")
                             .resizable()

@@ -18,7 +18,7 @@ protocol ActivitiesFetching {
 }
 
 struct ActivitiesManager: StatsCalculation, ActivitiesFetching {
-    private var storageService: ActivitiesStoraging
+    private var storageService: ActivitiesStoraging & ActivitiesReading
     
     func totalTime() -> Int {
         do {

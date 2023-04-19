@@ -28,6 +28,21 @@ extension Date {
             )!
         }
     }
+    
+    func isSame(as date: Date, by components: Set<Calendar.Component>) -> Bool {
+        let date1 = Calendar.current.dateComponents(components, from: self)
+        let date2 = Calendar.current.dateComponents(components, from: date)
+        
+        return date1 == date2
+    }
+    
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
 }
 
 struct DateValue: Identifiable {
