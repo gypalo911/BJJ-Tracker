@@ -13,7 +13,7 @@ struct NewSessionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    let presenter: NewSessionPresenter
+    @StateObject var presenter: NewSessionPresenter
     
     var body: some View {
         NavigationView {
@@ -23,11 +23,11 @@ struct NewSessionView: View {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "1. Select type:")
-                                
+
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
-                                    selectedType: presenter.$activity.type,
+                                    selectedType: $presenter.activity.type,
                                     selectedTypeValue: presenter.activity.type.rawValue
                                 )
                             }.padding(.top, 10)
@@ -37,23 +37,23 @@ struct NewSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
-                                    selectedType: presenter.$activity.style,
+                                    selectedType: $presenter.activity.style,
                                     selectedTypeValue: presenter.activity.style.rawValue
                                 )
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "3. Select date and time:")
-                                DatePicker("", selection: presenter.activity.startDate)
+                                DatePicker("", selection: $presenter.activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "4. Duration:")
-                                
-                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: presenter.$activity.duration)
+
+                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $presenter.activity.duration)
                                 if isPickerPresented {
-                                    DurationPicker(duration: presenter.activity.duration)
+                                    DurationPicker(duration: $presenter.activity.duration)
                                         .frame(height: 150)
                                         .frame(maxWidth: .infinity)
                                 }
@@ -63,7 +63,7 @@ struct NewSessionView: View {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
-                                TextField("Location...", text: presenter.$activity.location)
+                                TextField("Location...", text: $presenter.activity.location)
                                     .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
@@ -75,7 +75,7 @@ struct NewSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: presenter.$activity.notes)
+                                TextField("Add some details...", text: $presenter.activity.notes)
                                     .frame(minHeight: 150, alignment: .top)
                                     .padding(20)
                                     .background(
@@ -101,6 +101,7 @@ struct NewSessionView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
+                                presenter.isEditing ? presenter.update() : presenter.save()
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Text("Save")

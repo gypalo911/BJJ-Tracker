@@ -19,6 +19,7 @@
 		D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */; };
 		D02F3DF129F0543000BED6CD /* StatisticsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewPresenter.swift */; };
 		D02F3DF329F05D4D00BED6CD /* NewSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF229F05D4D00BED6CD /* NewSessionPresenter.swift */; };
+		D02F3DF529F0876000BED6CD /* ArchivePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
 		D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7F29DDAD9A00E10562 /* ContentView.swift */; };
 		D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Assets.xcassets */; };
@@ -92,6 +93,7 @@
 		D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearBottomSheetView.swift; sourceTree = "<group>"; };
 		D02F3DF029F0543000BED6CD /* StatisticsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewPresenter.swift; sourceTree = "<group>"; };
 		D02F3DF229F05D4D00BED6CD /* NewSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionPresenter.swift; sourceTree = "<group>"; };
+		D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePresenter.swift; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerApp.swift; sourceTree = "<group>"; };
 		D060BA7F29DDAD9A00E10562 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */,
+				D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
+				D02F3DF529F0876000BED6CD /* ArchivePresenter.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,

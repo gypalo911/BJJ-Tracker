@@ -40,7 +40,7 @@ struct ActivityPanelView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
-                        Text("\(activity.style.rawValue) • \(activity.location )")
+                        Text("\(activity.style.rawValue) • \(activity.location)")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)

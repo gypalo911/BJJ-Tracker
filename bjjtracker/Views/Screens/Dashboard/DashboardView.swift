@@ -70,7 +70,7 @@ struct DashboardView: View {
                             
                             NavigationLink(destination: {
                                 StatisticsView(
-                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date()))
+                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: currentWeek.first!.date, end: currentWeek.last!.date))
                                 )
                             }) {
                                 Image("stats")
@@ -100,7 +100,7 @@ struct DashboardView: View {
                                 .foregroundColor(Color("Gray"))
                             
                             NavigationLink(destination: {
-                                ArchiveView(activities: activities)
+                                ArchiveView()
                                     .navigationBarTitle("")
                                     .navigationBarHidden(true)
                             }) {
@@ -126,7 +126,7 @@ struct DashboardView: View {
                                     }
                                     
                                     NavigationLink(destination: {
-                                        ArchiveView(activities: activities)
+                                        ArchiveView()
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
                                     }) {
@@ -180,7 +180,7 @@ struct DashboardView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
+                    NewSessionView(presenter: NewSessionPresenter(isEditing: true))
                 }
             }
             .sheet(item: $selectedActivity) { selectedActivity in

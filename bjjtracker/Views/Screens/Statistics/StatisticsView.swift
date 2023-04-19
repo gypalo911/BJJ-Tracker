@@ -25,6 +25,9 @@ struct StatisticsView: View {
     }
     
     var body: some View {
+        
+        let totalSessions = presenter.sessionsForInterval().count
+        let totalTime = presenter.totalTime()
         VStack {
             if !presenter.isConcreteDates {
                 SegmentedPicker(items: segments, selection: $selectedSegment)
@@ -33,8 +36,8 @@ struct StatisticsView: View {
             ScrollView(showsIndicators: false) {
                     VStack {
                         HStack(spacing: 10) {
-                            StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
-                            StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 20m")
+                            StatsView(text: "Sessions", value: "\(totalSessions)", tendecyGrows: nil, tendecyValue: nil)
+                            StatsView(text: "Total time", value: totalTime, tendecyGrows: nil, tendecyValue: nil)
                         }
                         
                         VStack(alignment: .leading, spacing: 10) {
@@ -51,7 +54,11 @@ struct StatisticsView: View {
                         
                         InfographicsView(
                             strokeColor: bgColor,
-                            statsInfo: [.session: 12, .competition: 5, .seminar: 3]
+                            statsInfo: [
+                                .session: presenter.sessions(by: .session).count,
+                                .competition: presenter.sessions(by: .competition).count,
+                                .seminar: presenter.sessions(by: .seminar).count
+                            ]
                         ).padding(.bottom, 70)
                         
                         Rectangle()
@@ -59,7 +66,16 @@ struct StatisticsView: View {
                             .padding(.horizontal, 20)
                             .frame(height: 1)
                         
-                        PieChartView(values: [12, 6], colors: [Color("Blue"), Color("LightBlue")], textColors: [.white, .black], names: ["Gi sessions", "No Gi sessions"], backgroundColor: bgColor, innerRadiusFraction: 0.4)
+                        PieChartView(
+                            values: [
+                                Double(presenter.sessions(by: .gi).count),
+                                Double(presenter.sessions(by: .noGi).count)
+                            ],
+                            colors: [Color("Blue"), Color("LightBlue")],
+                            textColors: [.white, .black],
+                            names: ["Gi sessions", "No Gi sessions"],
+                            backgroundColor: bgColor, innerRadiusFraction: 0.4
+                        )
                             .padding(.vertical, 20)
                             .padding(.horizontal, 40)
                     }

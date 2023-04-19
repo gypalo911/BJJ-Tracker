@@ -8,41 +8,46 @@
 import Foundation
 
 protocol StatsCalculation {
-    func totalTime() -> Int
-    func totalSessions() -> Int
+    func totalTime(dateInterval: DateInterval) -> String
 }
 
 protocol ActivitiesFetching {
     func activity(by id: UUID) -> Activity?
-    func activities(from dateInterval: DateInterval) -> [Activity]
+    func allActivities() -> [Activity]
+    func activities(for dateInterval: DateInterval) -> [Activity]
+    func activities(by type: ActivityType, dateInterval: DateInterval) -> [Activity]
+    func activities(by style: GraplingStyle, dateInterval: DateInterval) -> [Activity]
 }
 
-struct ActivitiesManager: StatsCalculation, ActivitiesFetching {
-    private var storageService: ActivitiesStoraging & ActivitiesReading
+protocol ActivitiesEditing {
+    func update(_ activity: Activity)
+    func deleteActivity(with id: UUID)
+}
+
+struct ActivitiesManager: ActivitiesFetching {
     
-    func totalTime() -> Int {
+    typealias Service = ActivitiesStoraging & ActivitiesReading
+    
+    private var storageService: Service
+    
+    init(storageService: Service) {
+        self.storageService = storageService
+    }
+    
+    func allActivities() -> [Activity] {
         do {
-            return try storageService.fetchAllActivities().map({ $0.duration }).reduce(0, +)
+            return try storageService.fetchAllActivities()
         } catch let error {
-            print(error)
-            return 0
+            print("allActivities error: \(error)")
+            return []
         }
     }
     
-    func totalSessions() -> Int {
-        do {
-            return try storageService.fetchAllActivities().count
-        } catch let error {
-            print(error)
-            return 0
-        }
-    }
-    
-    func activities(from dateInterval: DateInterval) -> [Activity] {
+    func activities(for dateInterval: DateInterval) -> [Activity] {
         do {
             return try storageService.fetchActivities(from: dateInterval)
         } catch let error {
-            print(error)
+            print("activities(for dateInterval error: \(error)")
             return []
         }
     }
@@ -56,11 +61,35 @@ struct ActivitiesManager: StatsCalculation, ActivitiesFetching {
         }
     }
     
+    func activities(by type: ActivityType, dateInterval: DateInterval) -> [Activity] {
+        return activities(for: dateInterval).filter({ $0.type == type })
+    }
+    
+    func activities(by style: GraplingStyle, dateInterval: DateInterval) -> [Activity] {
+        return activities(for: dateInterval).filter({ $0.style == style })
+    }
+}
+
+extension ActivitiesManager: ActivitiesEditing {
     func deleteActivity(with id: UUID) {
         do {
             try storageService.deleteActivity(with: id)
         } catch let error {
             print(error)
         }
+    }
+    
+    func update(_ activity: Activity) {
+        do {
+            try storageService.update(activity)
+        } catch let error {
+            print(error)
+        }
+    }
+}
+
+extension ActivitiesManager: StatsCalculation {
+    func totalTime(dateInterval: DateInterval) -> String {
+        return activities(for: dateInterval).map { $0.duration }.reduce(0, +).minutesToDuration()
     }
 }

@@ -15,24 +15,19 @@ struct ArchiveView: View {
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
     
-    var activities: [Activity]
-    
-    private var groupedItems: Dictionary<Date, [Activity]> {
-        return Dictionary(grouping: activities, by: {
-            Calendar.current.startOfDay(for: $0.startDate)
-        })
-    }
+    @ObservedObject var presenter: ArchivePresenter = ArchivePresenter()
     
     var body: some View {
+
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach(groupedItems.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
+                    ForEach(presenter.groupedItems.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
                         Text("\(key.toString("dd MMMM YYYY"))")
                             .hAlign(.leading)
                             .padding([.horizontal, .top], 20)
                             .padding(.bottom, 10)
-                        ForEach(groupedItems[key]!) { activity in
+                        ForEach(presenter.groupedItems[key]!) { activity in
                             ActivityPanelView(activity: activity)
                                 .onTapGesture {
                                     self.selectedActivity = activity
@@ -43,6 +38,9 @@ struct ArchiveView: View {
             }
             .sheet(item: $selectedActivity) { selectedActivity in
                 SessionDetailsView(activity: selectedActivity)
+                    .onDisappear {
+                        presenter.fetchItems()
+                    }
             }
             .introspectTabBarController { (UITabBarController) in
                 UITabBarController.tabBar.isHidden = true
@@ -64,15 +62,18 @@ struct ArchiveView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: {
-                        StatisticsView(
-                            presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date()))
-                        )
-                    }) {
-                        Image("stats")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Blue"))
+                    if let start = presenter.groupedItems.keys.min()?.startOfDay,
+                       let end = presenter.groupedItems.keys.max()?.endOfDay {
+                        NavigationLink(destination: {
+                            StatisticsView(
+                                presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: start, end: end))
+                            )
+                        }) {
+                            Image("stats")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(Color("Blue"))
+                        }
                     }
                 }
 //                ToolbarItem(placement: .navigationBarTrailing) {
@@ -97,6 +98,6 @@ struct ArchiveView_Previews: PreviewProvider {
             Activity(type: .session, style: .gi, duration: 90, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
             Activity(type: .competition, style: .noGi, duration: 90, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
         ]
-        ArchiveView(activities: activ)
+        ArchiveView()
     }
 }

@@ -69,7 +69,7 @@ struct TimetableView: View {
                             .font(.system(size: 18))
                             .foregroundColor(Color("Gray"))
                         NavigationLink(destination: {
-                            ArchiveView(activities: activities)
+                            ArchiveView()
                                 .navigationBarTitle("")
                                 .navigationBarHidden(true)
                         }) {
@@ -95,7 +95,7 @@ struct TimetableView: View {
                                         }
                                 }
                                 NavigationLink(destination: {
-                                    ArchiveView(activities: activities)
+                                    ArchiveView()
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
                                 }) {
@@ -145,7 +145,7 @@ struct TimetableView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
+                    NewSessionView(presenter: NewSessionPresenter(activity: selectedActivity!, isEditing: true))
                 }
             }
             .fullScreenCover(isPresented: $isBottomSheetOpen) {

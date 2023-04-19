@@ -31,7 +31,7 @@ struct StatisticsViewPresenter {
     }
     
     func totalTime() -> String {
-        return "\(sessionsForInterval().count)"
+        return sessionsForInterval().map { $0.duration }.reduce(0, +).minutesToDuration()
     }
     
     func sessions(by type: ActivityType) -> [Activity] {
@@ -45,7 +45,9 @@ struct StatisticsViewPresenter {
 
 private extension StatisticsViewPresenter {
     func intervalToString(from: Date, to: Date) -> String {
-        if dateInterval.start.isSame(as: dateInterval.end, by: [.month, .year]) {
+        if dateInterval.start.isSame(as: dateInterval.end, by: [.day, .month, .year]) {
+            return "\(dateInterval.end.toString("dd MMMM yyyy"))"
+        } else if dateInterval.start.isSame(as: dateInterval.end, by: [.month, .year]) {
             return "\(dateInterval.start.toString("dd"))-\(dateInterval.end.toString("dd MMMM yyyy"))"
         } else if dateInterval.start.isSame(as: dateInterval.end, by: [.year]) {
             return "\(dateInterval.start.toString("dd MMMM"))-\(dateInterval.end.toString("dd MMMM yyyy"))"

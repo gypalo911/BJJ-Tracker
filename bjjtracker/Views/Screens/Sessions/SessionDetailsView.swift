@@ -89,17 +89,15 @@ struct SessionDetailsView: View {
                                         }
                                     }
                                 }
-                                if activity.location != "" {
-                                    HStack(spacing: 10) {
-                                        Image("location")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.white)
-                                        Text("\(activity.location)")
-                                            .font(.system(size: 20))
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.white)
-                                    }
+                                HStack(spacing: 10) {
+                                    Image("location")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.white)
+                                    Text("\(activity.location == "" ? "--" : activity.location)")
+                                        .font(.system(size: 20))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
                                 }
                             }.padding(10)
                             
@@ -162,7 +160,7 @@ struct SessionDetailsView: View {
                         appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
                         UINavigationBar.appearance().standardAppearance = appearance
                     }) {
-                        NewSessionView(presenter: NewSessionPresenter(activity: $activity, isEditing: true))
+                        NewSessionView(presenter: NewSessionPresenter(activity: activity, isEditing: true))
                     }
                 }
             }

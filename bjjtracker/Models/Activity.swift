@@ -82,7 +82,8 @@ class Activity: Identifiable, Equatable, ObservableObject {
 
 extension Activity {
     static func from(session: Session) -> Activity? {
-        guard let type = session.type,
+        guard let id = session.id,
+              let type = session.type,
               let style = session.style,
               let duration = session.duration,
               let startDate = session.startDate,
@@ -91,6 +92,7 @@ extension Activity {
             return nil
         }
         return Activity(
+            id: id,
             type: ActivityType(rawValue: type)!,
             style: GraplingStyle(rawValue: style)!,
             duration: duration as! Int,
