@@ -20,18 +20,25 @@ protocol ActivitiesFetching {
 }
 
 protocol ActivitiesEditing {
+    func save(_ activity: Activity)
     func update(_ activity: Activity)
     func deleteActivity(with id: UUID)
 }
 
-struct ActivitiesManager: ActivitiesFetching {
+class ActivitiesManager: ObservableObject, ActivitiesFetching {
     
     typealias Service = ActivitiesStoraging & ActivitiesReading
     
     private var storageService: Service
     
+    @Published var groupedActivities: Dictionary<Date, [Activity]> = [:]
+    
     init(storageService: Service) {
         self.storageService = storageService
+        
+        self.groupedActivities = Dictionary(grouping: allActivities(), by: {
+            Calendar.current.startOfDay(for: $0.startDate)
+        })
     }
     
     func allActivities() -> [Activity] {
@@ -71,6 +78,14 @@ struct ActivitiesManager: ActivitiesFetching {
 }
 
 extension ActivitiesManager: ActivitiesEditing {
+    func save(_ activity: Activity) {
+        do {
+            try storageService.save(activity)
+        } catch let error {
+            print(error)
+        }
+    }
+    
     func deleteActivity(with id: UUID) {
         do {
             try storageService.deleteActivity(with: id)

@@ -14,29 +14,31 @@ struct SessionDetailsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var navTitle = ""
+    var dismissCallback: (() -> Void)?
     
-    let linearGradient: LinearGradient
-    
-    init(activity: Activity) {
+    init(activity: Activity, dismissCallback: (() -> Void)? = nil) {
         _activity = State(initialValue: activity)
-        linearGradient = LinearGradient(
+        self.dismissCallback = dismissCallback
+
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(self.activity.type.color.opacity(0.8))
+        UINavigationBar.appearance().standardAppearance = appearance
+        
+        navTitle = "\(self.activity.style.rawValue) \(self.activity.type.rawValue)"
+    }
+    
+    var body: some View {
+        
+        let linearGradient = LinearGradient(
             gradient: Gradient(stops: [
-                .init(color: activity.type.color.opacity(0.8), location: 0.4),
-                .init(color: activity.type.color.opacity(0.35), location: 0.8),
-                .init(color: activity.type.color.opacity(0.28), location: 1)
+                .init(color: self.activity.type.color.opacity(0.8), location: 0.4),
+                .init(color: self.activity.type.color.opacity(0.35), location: 0.8),
+                .init(color: self.activity.type.color.opacity(0.28), location: 1)
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
 
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
-        UINavigationBar.appearance().standardAppearance = appearance
-        
-        navTitle = "\(activity.style.rawValue) \(activity.type.rawValue)"
-    }
-    
-    var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ScrollView {
@@ -124,6 +126,7 @@ struct SessionDetailsView: View {
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button {
+                                    dismissCallback?()
                                     presentationMode.wrappedValue.dismiss()
                                 } label: {
                                     Image("back")
@@ -160,7 +163,9 @@ struct SessionDetailsView: View {
                         appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
                         UINavigationBar.appearance().standardAppearance = appearance
                     }) {
-                        NewSessionView(presenter: NewSessionPresenter(activity: activity, isEditing: true))
+                        EditSessionView(presenter: EditSessionPresenter(activity: activity), onDismiss: { editedActivity in
+                            activity = editedActivity
+                        })
                     }
                 }
             }
@@ -170,7 +175,7 @@ struct SessionDetailsView: View {
 
 struct SessionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
+        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
         
         SessionDetailsView(activity: activity)
     }

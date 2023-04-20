@@ -10,37 +10,43 @@ import Introspect
 
 struct ArchiveView: View {
     
-    @State private var selectedActivity: Activity?
-    
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var activitiesManager: ActivitiesManager
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var presenter: ArchivePresenter = ArchivePresenter()
+    
+    @State var selectedActivity: Activity?
+    
+    @State var showDetailsView: Bool = false
     
     var body: some View {
 
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach(presenter.groupedItems.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
+                    ForEach(activitiesManager.groupedActivities.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
                         Text("\(key.toString("dd MMMM YYYY"))")
                             .hAlign(.leading)
                             .padding([.horizontal, .top], 20)
                             .padding(.bottom, 10)
-                        ForEach(presenter.groupedItems[key]!) { activity in
+                        ForEach(activitiesManager.groupedActivities[key]!) { activity in
                             ActivityPanelView(activity: activity)
                                 .onTapGesture {
-                                    self.selectedActivity = activity
+                                    showDetailsView = true
+                                    selectedActivity = activity
                                 }
                         }
                     }
-                }
+                }.id(UUID())
             }
-            .sheet(item: $selectedActivity) { selectedActivity in
-                SessionDetailsView(activity: selectedActivity)
-                    .onDisappear {
-                        presenter.fetchItems()
-                    }
+            .sheet(isPresented: $showDetailsView) {
+                if let selectedActivity = selectedActivity {
+                    SessionDetailsView(activity: selectedActivity, dismissCallback: {
+//                        presenter.groupedItems = [:]
+//                        presenter.fetchItems()
+                    })
+                }
             }
             .introspectTabBarController { (UITabBarController) in
                 UITabBarController.tabBar.isHidden = true
@@ -62,8 +68,8 @@ struct ArchiveView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if let start = presenter.groupedItems.keys.min()?.startOfDay,
-                       let end = presenter.groupedItems.keys.max()?.endOfDay {
+                    if let start = activitiesManager.groupedActivities.keys.min()?.startOfDay,
+                       let end = activitiesManager.groupedActivities.keys.max()?.endOfDay {
                         NavigationLink(destination: {
                             StatisticsView(
                                 presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: start, end: end))
@@ -93,11 +99,6 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        let activ = [
-            Activity(type: .seminar, style: .noGi, duration: 120, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
-            Activity(type: .session, style: .gi, duration: 90, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
-            Activity(type: .competition, style: .noGi, duration: 90, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
-        ]
         ArchiveView()
     }
 }

@@ -48,15 +48,15 @@ enum ActivityStatus: String {
     
 }
 
-class Activity: Identifiable, Equatable, ObservableObject {
+struct Activity: Identifiable, Equatable {
     
     var id = UUID()
-    @Published var type: ActivityType
-    @Published var style: GraplingStyle
-    @Published var duration: Int
-    @Published var startDate: Date
-    @Published var location: String = ""
-    @Published var notes: String = ""
+    var type: ActivityType
+    var style: GraplingStyle
+    var duration: Int
+    var startDate: Date
+    var location: String = ""
+    var notes: String = ""
     
     var status: ActivityStatus {
         let now = Date()

@@ -180,12 +180,12 @@ struct DashboardView: View {
                 case .promotion:
                     AddPromotionView()
                 case .session:
-                    NewSessionView(presenter: NewSessionPresenter(isEditing: true))
+                    NewSessionView()
                 }
             }
-            .sheet(item: $selectedActivity) { selectedActivity in
-                SessionDetailsView(activity: selectedActivity)
-            }
+//            .sheet(item: $selectedActivity) { selectedActivity in
+//                SessionDetailsView(activity: selectedActivity)
+//            }
         }.background(Color.white)
     }
 }

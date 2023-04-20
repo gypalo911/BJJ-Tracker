@@ -1,21 +1,21 @@
 //
-//  NewSessionView.swift
+//  EditSessionView.swift
 //  bjjtracker
 //
-//  Created by Petro Hupalo on 20.04.2023.
+//  Created by Petro Hupalo on 08.04.2023.
 //
 
 import SwiftUI
 
-struct NewSessionView: View {
+struct EditSessionView: View {
     
     @State private var isPickerPresented = false
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+    @StateObject var presenter: EditSessionPresenter
     
-    @EnvironmentObject var activitiesManager: ActivitiesManager
+    var onDismiss: ((Activity) -> Void)?
     
     var body: some View {
         NavigationView {
@@ -29,8 +29,8 @@ struct NewSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
-                                    selectedType: $activity.type,
-                                    selectedTypeValue: activity.type.rawValue
+                                    selectedType: $presenter.activity.type,
+                                    selectedTypeValue: presenter.activity.type.rawValue
                                 )
                             }.padding(.top, 10)
                             
@@ -39,13 +39,13 @@ struct NewSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
-                                    selectedType: $activity.style,
-                                    selectedTypeValue: activity.style.rawValue
+                                    selectedType: $presenter.activity.style,
+                                    selectedTypeValue: presenter.activity.style.rawValue
                                 )
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "3. Select date and time:")
-                                DatePicker("", selection: $activity.startDate)
+                                DatePicker("", selection: $presenter.activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
@@ -53,9 +53,9 @@ struct NewSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "4. Duration:")
 
-                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
+                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $presenter.activity.duration)
                                 if isPickerPresented {
-                                    DurationPicker(duration: $activity.duration)
+                                    DurationPicker(duration: $presenter.activity.duration)
                                         .frame(height: 150)
                                         .frame(maxWidth: .infinity)
                                 }
@@ -65,7 +65,7 @@ struct NewSessionView: View {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
-                                TextField("Location...", text: $activity.location)
+                                TextField("Location...", text: $presenter.activity.location)
                                     .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
@@ -77,7 +77,7 @@ struct NewSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $activity.notes)
+                                TextField("Add some details...", text: $presenter.activity.notes)
                                     .frame(minHeight: 150, alignment: .top)
                                     .padding(20)
                                     .background(
@@ -86,10 +86,19 @@ struct NewSessionView: View {
                                     ).padding(.leading, 5)
                             }
                         }
+                        
+                        Button(action: {
+                            
+                        }, label: {
+                            Text("Delete")
+                                .foregroundColor(.red)
+                        })
+                        .padding(.vertical, 20)
+                        .hAlign(.center)
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Create Session")
+                    .navigationTitle("Edit Session")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
@@ -103,7 +112,8 @@ struct NewSessionView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
-                                save()
+                                presenter.update()
+                                onDismiss?(presenter.activity)
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Text("Save")
@@ -117,17 +127,15 @@ struct NewSessionView: View {
             }
         }
     }
-    
-    func save() {
-        activitiesManager.save(activity)
-    }
 }
 
 
-struct NewSessionView_Previews: PreviewProvider {
+struct EditSessionView_Previews: PreviewProvider {
     struct Container: View {
+        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+        
         var body: some View {
-            NewSessionView()
+            EditSessionView(presenter: EditSessionPresenter(activity: activity))
         }
     }
     
