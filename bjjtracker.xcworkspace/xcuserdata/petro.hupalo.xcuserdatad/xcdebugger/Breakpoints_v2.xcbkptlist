@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B174DBF6-F915-4853-B036-962E08C91A58"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bjjtracker/Views/Screens/Statistics/StatisticsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "B174DBF6-F915-4853-B036-962E08C91A58 - 95049a6637bcca11"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "bjjtracker.StatisticsView.body.getter : some"
-                  moduleName = "bjjtracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Views/Screens/Statistics/StatisticsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "892">
-               </Location>
-               <Location
-                  uuid = "B174DBF6-F915-4853-B036-962E08C91A58 - ec1349591cdfc514"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in bjjtracker.StatisticsView.body.getter : some"
-                  moduleName = "bjjtracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Views/Screens/Statistics/StatisticsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "300">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "AC7013E3-82A4-4E80-A983-F9D3E0041F32"
             shouldBeEnabled = "No"
             ignoreCount = "0"

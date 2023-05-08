@@ -16,7 +16,7 @@ struct StatisticsView: View {
     private var segments = ["Week", "Month", "Year"]
     
     @Environment(\.presentationMode) var presentationMode
-    @FetchRequest var sessionsList: FetchedResults<Session>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
 //    @FetchRequest(
 //        sortDescriptors: [SortDescriptor(\.startDate)],
 //        predicate: NSPredicate(
@@ -28,42 +28,85 @@ struct StatisticsView: View {
 
     @EnvironmentObject var settings: AppSettings
     
+    @State var title: String = ""
+    @State var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
+    
     private var presenter: StatisticsViewPresenter
+    
+    private var filteredSession: [Session] {
+        return sessionsList.filter {
+            (dateInterval.start...dateInterval.end).contains($0.startDate ?? Date())
+        }
+    }
     
     init(presenter: StatisticsViewPresenter) {
         self.presenter = presenter
-        _sessionsList = FetchRequest(
-            sortDescriptors: [SortDescriptor(\.startDate)],
-            predicate: NSPredicate(
-                format: "startDate BETWEEN {%@, %@}",
-                presenter.dateInterval.start as NSDate, presenter.dateInterval.end as NSDate
-            ),
-            animation: .easeInOut
-        )
+        let interval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
+        
+        self.dateInterval = interval
     }
     
     func totalTime() -> String {
-        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
+        return filteredSession.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
     }
     
     func sessions(by type: ActivityType) -> [Session] {
-        return sessionsList.filter({ $0.activityType == type })
+        return filteredSession.filter({ $0.activityType == type })
     }
     
     func sessions(by style: GraplingStyle) -> [Session] {
-        return sessionsList.filter({ $0.activityStyle == style })
+        return filteredSession.filter({ $0.activityStyle == style })
+    }
+    
+    func plusWeek() {
+        if !dateInterval.end.isSame(as: Date(), by: [.year, .month, .day]) {
+            dateInterval = DateInterval(start: dateInterval.end, end: Calendar.current.date(byAdding: .day, value: 7, to: dateInterval.end)!)
+            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
+        }
+    }
+    
+    func minusWeek() {
+        let newInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!, end: dateInterval.start)
+        dateInterval = newInterval
+        title = presenter.intervalToString(from: newInterval.start, to: newInterval.end)
     }
     
     var body: some View {
         
-        let totalSessions = sessionsList.count
+        let totalSessions = filteredSession.count
         let totalTime = totalTime()
         
         VStack {
-//            if !presenter.isConcreteDates {
+            if !presenter.isConcreteDates {
                 SegmentedPicker(items: segments, selection: $selectedSegment)
                     .padding()
-//            }
+                    .padding(.top, 10)
+            }
+            HStack(spacing: 30) {
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, blendDuration: 6)) {
+                        minusWeek()
+                    }
+                }, label: {
+                    Image.init(systemName: "chevron.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 20)
+                        .foregroundColor(Color("Blue"))
+                })
+                Text(title)
+                       Button(action: {
+                           withAnimation(.spring(response: 0.3, blendDuration: 6)) {
+                               plusWeek()
+                           }
+                }, label: {
+                    Image.init(systemName: "chevron.right")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 20)
+                        .foregroundColor(Color("Blue"))
+                })
+            }
             ScrollView(showsIndicators: false) {
                     VStack {
                         HStack(spacing: 10) {
@@ -76,9 +119,9 @@ struct StatisticsView: View {
                                 .font(.system(size: 16))
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
-                            Text("During this period you were great and have finished 133 trainings sessions ")
-                                .font(.system(size: 12))
-                                .foregroundColor(Color("Gray"))
+//                            Text("During this period you were great and have finished 133 trainings sessions ")
+//                                .font(.system(size: 12))
+//                                .foregroundColor(Color("Gray"))
                         }
                         .hAlign(.leading)
                         .padding(.vertical, 20)
@@ -97,18 +140,20 @@ struct StatisticsView: View {
                             .padding(.horizontal, 20)
                             .frame(height: 1)
                         
-                        PieChartView(
-                            values: [
-                                Double(sessions(by: .gi).count),
-                                Double(sessions(by: .noGi).count)
-                            ],
-                            colors: [Color("Blue"), Color("LightBlue")],
-                            textColors: [.white, .black],
-                            names: ["Gi sessions", "No Gi sessions"],
-                            backgroundColor: bgColor, innerRadiusFraction: 0.4
-                        )
+                        if sessions(by: .gi).count > 0 && sessions(by: .noGi).count > 0 {
+                            PieChartView(
+                                values: [
+                                    Double(sessions(by: .gi).count),
+                                    Double(sessions(by: .noGi).count)
+                                ],
+                                colors: [Color("Blue"), Color("LightBlue")],
+                                textColors: [.white, .black],
+                                names: ["Gi sessions", "No Gi sessions"],
+                                backgroundColor: bgColor, innerRadiusFraction: 0.4
+                            )
                             .padding(.vertical, 20)
                             .padding(.horizontal, 40)
+                        }
                     }
                     .padding(.all, 20)
                     .padding(.bottom, 300)
@@ -123,7 +168,7 @@ struct StatisticsView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(presenter.title)
+                Text(title)
                     .font(.system(size: 20))
                     .fontWeight(.medium)
             }
@@ -142,6 +187,7 @@ struct StatisticsView: View {
         }
         .onAppear {
             hideTabbar(false)
+            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
         }
     }
     
@@ -156,12 +202,10 @@ struct StatisticsView_Previews: PreviewProvider {
         let interval = DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
         
         var body: some View {
-            NavigationView {
-                StatisticsView(
-                    presenter: StatisticsViewPresenter(dateInterval: interval)
-                )
+//            NavigationView {
+                StatisticsView(presenter: StatisticsViewPresenter(dateInterval: interval))
                 .environmentObject(settings)
-            }
+//            }
         }
     }
     

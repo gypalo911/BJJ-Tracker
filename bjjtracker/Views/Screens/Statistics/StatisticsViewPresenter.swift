@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct StatisticsViewPresenter {
-    let dateInterval: DateInterval
     let persistanceManager: ActivitiesReading = CoreDataService()
     
     var title: String = ""
-    var isConcreteDates: Bool = true
+    var isConcreteDates: Bool = false
     var previousPeriod: DateInterval
     
+    @State var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
+    
     init(dateInterval: DateInterval) {
-        self.dateInterval = dateInterval
+//        self.dateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
         self.previousPeriod = DateInterval(start: dateInterval.start - dateInterval.duration, end: dateInterval.start)
+        self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
+    }
+    
+    mutating func update(dateInterval: DateInterval) {
+        self.dateInterval = dateInterval
         self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
     }
     
@@ -43,18 +49,18 @@ struct StatisticsViewPresenter {
 //    }
 }
 
-private extension StatisticsViewPresenter {
+extension StatisticsViewPresenter {
     func intervalToString(from: Date, to: Date) -> String {
-        if dateInterval.start.isSame(as: dateInterval.end, by: [.day, .month, .year]) {
-            return "\(dateInterval.end.toString("dd MMMM yyyy"))"
-        } else if dateInterval.start.isSame(as: dateInterval.end, by: [.month, .year]) {
-            return "\(dateInterval.start.toString("dd"))-\(dateInterval.end.toString("dd MMMM yyyy"))"
-        } else if dateInterval.start.isSame(as: dateInterval.end, by: [.year]) {
-            return "\(dateInterval.start.toString("dd MMMM"))-\(dateInterval.end.toString("dd MMMM yyyy"))"
-        } else if Calendar.current.isDate(dateInterval.start, inSameDayAs: dateInterval.start.startOfMonth()) && Calendar.current.isDate(dateInterval.start, inSameDayAs: dateInterval.start.endOfMonth()) {
-            return "\(dateInterval.end.toString("MMMM yyyy"))"
+        if from.isSame(as: to, by: [.day, .month, .year]) {
+            return "\(to.toString("dd MMMM yyyy"))"
+        } else if from.isSame(as: to, by: [.month, .year]) {
+            return "\(from.toString("dd"))-\(to.toString("dd MMMM yyyy"))"
+        } else if from.isSame(as: to, by: [.year]) {
+            return "\(from.toString("dd MMMM"))-\(to.toString("dd MMMM yyyy"))"
+        } else if Calendar.current.isDate(from, inSameDayAs: from.startOfMonth()) && Calendar.current.isDate(from, inSameDayAs: from.endOfMonth()) {
+            return "\(to.toString("MMMM yyyy"))"
         } else {
-            return "\(dateInterval.start.toString("dd MMMM yyyy"))-\(dateInterval.end.toString("dd MMMM yyyy"))"
+            return "\(from.toString("dd MMMM yyyy"))-\(to.toString("dd MMMM yyyy"))"
         }
     }
 }
