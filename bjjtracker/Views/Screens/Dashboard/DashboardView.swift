@@ -10,32 +10,36 @@ import SwiftUI
 enum ModalsSheets: Int, Identifiable {
     var id: Int { self.rawValue }
     
-    case session
+    case activity
     case promotion
 }
 
 struct DashboardView: View {
     
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+    
+    @State var selectedSession: Session?
+    
     @State private var selectedDay = Date()
     @State private var headerHeight: CGFloat = 640
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
-    @State private var selectedActivity: Activity?
     
-    @State private var newActivity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
-    
-    private var activities: [Activity] = [
-        Activity(type: .seminar, style: .noGi, duration: 120, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
-        Activity(type: .session, style: .gi, duration: 90, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
-        Activity(type: .competition, style: .noGi, duration: 90, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Some notes"),
-    ]
-    
-    private var filteredActivities: [Activity] {
-        activities.filter {
-            Calendar.current.isDate($0.startDate, inSameDayAs: selectedDay)
+    private var filteredSessions: [Session] {
+        sessionsList.filter {
+            Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
     }
     private var currentWeek = Calendar.current.currentWeek
+    
+//    private func calcTotalSessions() {
+//        let toDate = Date()
+//        let datesRange = (Calendar.current.date(byAdding: .init(weekOfYear: -2), to: toDate)!...toDate)
+//        let thisWeek = sessionsList.filter {
+//            datesRange.contains($0.startDate ?? Date())
+//        }
+//        print(thisWeek)
+//    }
     
     var body: some View {
         NavigationView {
@@ -60,7 +64,7 @@ struct DashboardView: View {
                             StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 20m")
                         }
                         .padding(.all, 20)
-
+                        
                         HStack {
                             Text("\(selectedDay.toString("MMMM YYYY"))")
                                 .font(.system(size: 22))
@@ -68,24 +72,24 @@ struct DashboardView: View {
                                 .foregroundColor(.white)
                                 .hAlign(.leading)
                             
-                            NavigationLink(destination: {
-                                StatisticsView(
-                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: currentWeek.first!.date, end: currentWeek.last!.date))
-                                )
-                            }) {
-                                Image("stats")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.white)
-                            }
+//                            NavigationLink(destination: {
+//                                StatisticsView(
+//                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: currentWeek.first!.date, end: currentWeek.last!.date))
+//                                )
+//                            }) {
+//                                Image("stats")
+//                                    .resizable()
+//                                    .frame(width: 25, height: 25)
+//                                    .foregroundColor(.white)
+//                            }
                         }
                         .padding(.horizontal, 30)
                         .padding(.top, 10)
-
+                        
                         WeekCalendarView(
                             selectedDay: $selectedDay,
                             currentWeek: currentWeek,
-                            activities: activities,
+                            sessions: sessionsList,
                             colors: .init(
                                 textColor: .white,
                                 strokeColor: .white,
@@ -93,7 +97,7 @@ struct DashboardView: View {
                                 selectedBGColor: .white
                             )
                         )
-                        if filteredActivities.isEmpty {
+                        if filteredSessions.isEmpty {
                             Spacer()
                             Text("No sessions for this day")
                                 .font(.system(size: 18))
@@ -118,10 +122,10 @@ struct DashboardView: View {
                         } else {
                             ScrollView(showsIndicators: false) {
                                 VStack(spacing: 16) {
-                                    ForEach(filteredActivities) { activity in
-                                        ActivityPanelView(activity: activity)
+                                    ForEach(filteredSessions) { session in
+                                        ActivityPanelView(session: session)
                                             .onTapGesture {
-                                                self.selectedActivity = activity
+                                                self.selectedSession = session
                                             }
                                     }
                                     
@@ -147,7 +151,10 @@ struct DashboardView: View {
                 }
             }
             .background(Color("generalBG").ignoresSafeArea())
-            .onChange(of: filteredActivities) { items in
+            .onAppear {
+//                calcTotalSessions()
+            }
+            .onChange(of: filteredSessions) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
                     self.headerHeight = items.isEmpty ? 590 : 640
                 }
@@ -170,7 +177,7 @@ struct DashboardView: View {
                         selectedSheet = .promotion
                     }),
                     .default(Text("Add Session"), action: {
-                        selectedSheet = .session
+                        selectedSheet = .activity
                     }),
                     .cancel()
                 ])
@@ -179,13 +186,13 @@ struct DashboardView: View {
                 switch selectedSheet {
                 case .promotion:
                     AddPromotionView()
-                case .session:
+                case .activity:
                     NewSessionView()
                 }
             }
-//            .sheet(item: $selectedActivity) { selectedActivity in
-//                SessionDetailsView(activity: selectedActivity)
-//            }
+            .sheet(item: $selectedSession) { selectedSession in
+                SessionDetailsView(session: selectedSession)
+            }
         }.background(Color.white)
     }
 }

@@ -16,8 +16,9 @@ struct MonthCalendarView: View {
     @State var currentDate: Date = Date()
     
     @Binding var selectedDate: Date
-    @Binding var activities: [Activity]
     @Binding var viewHeight: CGFloat
+    
+    var sessions: FetchedResults<Session>
     
     var maxHeight: CGFloat
     
@@ -66,8 +67,8 @@ struct MonthCalendarView: View {
         let status = Calendar.current.isDate(value.date, inSameDayAs: selectedDate)
         let isToday = Calendar.current.isDateInToday(value.date)
         
-        let activity = activities.first(where: { activity in
-            return Calendar.current.isDate(activity.startDate, inSameDayAs: value.date)
+        let session = sessions.first(where: { session in
+            return Calendar.current.isDate(session.startDate ?? Date(), inSameDayAs: value.date)
         })
         ZStack() {
             if value.day != -1 {
@@ -75,7 +76,7 @@ struct MonthCalendarView: View {
                     date: value.date,
                     isToday: isToday,
                     isSelected: status,
-                    activityColor: activity?.type.color,
+                    activityColor: session?.activityType.color,
                     colors: colors
                 )
                 .onTapGesture {
@@ -116,30 +117,30 @@ struct MonthCalendarView: View {
     }
 }
 
-struct MonthCalendarView_Previews: PreviewProvider {
-    struct Container: View {
-        @State var selectedDay = Date()
-        @State var viewHeight: CGFloat = 400
-        
-        @State var activities: [Activity] = [
-            Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Other notes"),
-            Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"),
-            Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
-        ]
-        
-        var maxHeight: CGFloat = 400
-        
-        var body: some View {
-            MonthCalendarView(
-                selectedDate: $selectedDay,
-                activities: $activities,
-                viewHeight: $viewHeight,
-                maxHeight: maxHeight
-            )
-        }
-    }
-    
-    static var previews: some View {
-        Container()
-    }
-}
+//struct MonthCalendarView_Previews: PreviewProvider {
+//    struct Container: View {
+//        @State var selectedDay = Date()
+//        @State var viewHeight: CGFloat = 400
+//
+//        @State var activities: [Activity] = [
+//            Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Other notes"),
+//            Activity(type: .training, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"),
+//            Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
+//        ]
+//
+//        var maxHeight: CGFloat = 400
+//
+//        var body: some View {
+//            MonthCalendarView(
+//                selectedDate: $selectedDay,
+//                activities: $activities,
+//                viewHeight: $viewHeight,
+//                maxHeight: maxHeight
+//            )
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Container()
+//    }
+//}

@@ -10,19 +10,19 @@ import SwiftUI
 class ArchivePresenter: ObservableObject {
     @Published var selectedActivity: Activity?
     
-    @ObservedObject private var manager: ActivitiesManager = ActivitiesManager(storageService: CoreDataService())
+//    @ObservedObject private var manager: ActivitiesManager = ActivitiesManager(storageService: CoreDataService())
 
     @Published var groupedItems: Dictionary<Date, [Activity]> = [:]
     
-    init() {
-        self.groupedItems = Dictionary(grouping: manager.allActivities(), by: {
-            Calendar.current.startOfDay(for: $0.startDate)
-        })
-    }
-    
-    func fetchItems() {
-        self.groupedItems = Dictionary(grouping: self.manager.allActivities(), by: {
-            Calendar.current.startOfDay(for: $0.startDate)
-        })
-    }
+//    init() {
+//        self.groupedItems = Dictionary(grouping: manager.allActivities(), by: {
+//            Calendar.current.startOfDay(for: $0.startDate)
+//        })
+//    }
+//    
+//    func fetchItems() {
+//        self.groupedItems = Dictionary(grouping: self.manager.allActivities(), by: {
+//            Calendar.current.startOfDay(for: $0.startDate)
+//        })
+//    }
 }

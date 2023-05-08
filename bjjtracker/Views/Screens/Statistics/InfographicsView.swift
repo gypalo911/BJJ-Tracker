@@ -18,7 +18,7 @@ struct InfographicsView: View {
                     .fill(Color("Green"))
                     .frame(width: 130)
                 VStack {
-                    Text("\(statsInfo[.session] ?? 0)")
+                    Text("\(statsInfo[.training] ?? 0)")
                         .font(.system(size: 24))
                         .fontWeight(.bold)
                     Text("classes")
@@ -77,7 +77,7 @@ struct InfographicsView_Previews: PreviewProvider {
     static var previews: some View {
         InfographicsView(
             strokeColor: Color("generalBG"),
-            statsInfo: [.session: 12, .competition: 5, .seminar: 3]
+            statsInfo: [.training: 12, .competition: 5, .seminar: 3]
         ).padding(.bottom, 70)
     }
 }

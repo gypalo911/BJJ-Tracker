@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
-        <attribute name="duration" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="location" optional="YES" attributeType="String"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="style" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="location" attributeType="String" defaultValueString=""/>
+        <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="startDate" attributeType="Date" defaultDateTimeInterval="704122200" usesScalarValueType="NO"/>
+        <attribute name="style" attributeType="String" defaultValueString="gi"/>
+        <attribute name="type" attributeType="String" defaultValueString="session"/>
     </entity>
 </model>

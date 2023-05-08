@@ -23,7 +23,7 @@ struct SegmentedPickerStyle {
     static let segmentYPadding: CGFloat = 8
     static let pickerPadding: CGFloat = 4
     
-    static let animationDuration: Double = 0.25
+    static let animationDuration: Double = 0.2
 }
 
 struct SegmentedPicker: View {

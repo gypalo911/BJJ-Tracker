@@ -7,6 +7,46 @@
 
 import SwiftUI
 
+struct SelectionPanelStringView: View {
+    let g: GeometryProxy
+    let valuesList: [String]
+    
+//    @Binding var selectedType: T
+    @State var selectedType: String
+
+    var body: some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+
+        ZStack(alignment: .topLeading) {
+            ForEach(valuesList, id: \.self) { type in
+                RectangleOption(type: type, selectedType: $selectedType)
+                    .alignmentGuide(.leading, computeValue: { d in
+                        if (abs(width - d.width) > g.size.width)
+                        {
+                            width = 0
+                            height -= d.height
+                        }
+                        let result = width
+                        if type == valuesList.last! {
+                            width = 0 //last item
+                        } else {
+                            width -= d.width
+                        }
+                        return result
+                    })
+                    .alignmentGuide(.top, computeValue: { d in
+                        let result = height
+                        if type == valuesList.last! {
+                            height = 0 // last item
+                        }
+                        return result
+                    })
+            }
+        }
+    }
+}
+
 struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawValue == String {
     let g: GeometryProxy
     let valuesList: [String]

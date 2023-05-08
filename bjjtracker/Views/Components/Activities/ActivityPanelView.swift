@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityPanelView: View {
-    let activity: Activity
+    @ObservedObject var session: Session
     
     var body: some View {
         Group {
@@ -20,31 +20,31 @@ struct ActivityPanelView: View {
                 HStack(alignment: .center) {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(activity.type.color)
+                            .foregroundColor(session.activityType.color)
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .defaultShadow()
                             .frame(width: 67)
                         VStack(alignment: .center, spacing: 6) {
-                            Text("\(activity.startDate.toString("HH:mm"))")
+                            Text("\(session.startDate!.toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
-                            Text("\((activity.startDate + TimeInterval(activity.duration * 60)).toString("HH:mm"))")
+                            Text("\((session.startDate! + TimeInterval(session.duration * 60)).toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white.opacity(0.6))
                                 .fontWeight(.regular)
                         }
                     }
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("\(activity.type.rawValue)")
+                        Text("\(session.activityType.rawValue)")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
-                        Text("\(activity.style.rawValue) • \(activity.location)")
+                        Text("\(session.activityStyle.rawValue) • \(session.location ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)
-                        Text("\(activity.notes)")
+                        Text("\(session.notes ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)
@@ -55,11 +55,11 @@ struct ActivityPanelView: View {
                 Group {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(activity.status.color)
+                            .foregroundColor(session.status.color)
                             .cornerRadius(5)
                             .defaultShadow()
                             .frame(width: 76, height: 23)
-                        Text("\(activity.status.rawValue)".uppercased())
+                        Text("\(session.status.rawValue)".uppercased())
                             .font(.system(size: 10))
                             .foregroundColor(.white)
                             .fontWeight(.bold)
@@ -72,8 +72,8 @@ struct ActivityPanelView: View {
     }
 }
 
-struct ActivityPanelView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
-    }
-}
+//struct ActivityPanelView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
+//    }
+//}

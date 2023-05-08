@@ -16,23 +16,54 @@ struct StatisticsView: View {
     private var segments = ["Week", "Month", "Year"]
     
     @Environment(\.presentationMode) var presentationMode
+    @FetchRequest var sessionsList: FetchedResults<Session>
+//    @FetchRequest(
+//        sortDescriptors: [SortDescriptor(\.startDate)],
+//        predicate: NSPredicate(
+//            format: "startDate BETWEEN {%@, %@}",
+//            presenter.dateInterval.start as CVarArg, presenter.dateInterval.end as CVarArg
+//        ),
+//        animation: .easeInOut
+//    ) var sessionsList: FetchedResults<Session>
+
     @EnvironmentObject var settings: AppSettings
     
     private var presenter: StatisticsViewPresenter
     
     init(presenter: StatisticsViewPresenter) {
         self.presenter = presenter
+        _sessionsList = FetchRequest(
+            sortDescriptors: [SortDescriptor(\.startDate)],
+            predicate: NSPredicate(
+                format: "startDate BETWEEN {%@, %@}",
+                presenter.dateInterval.start as NSDate, presenter.dateInterval.end as NSDate
+            ),
+            animation: .easeInOut
+        )
+    }
+    
+    func totalTime() -> String {
+        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
+    }
+    
+    func sessions(by type: ActivityType) -> [Session] {
+        return sessionsList.filter({ $0.activityType == type })
+    }
+    
+    func sessions(by style: GraplingStyle) -> [Session] {
+        return sessionsList.filter({ $0.activityStyle == style })
     }
     
     var body: some View {
         
-        let totalSessions = presenter.sessionsForInterval().count
-        let totalTime = presenter.totalTime()
+        let totalSessions = sessionsList.count
+        let totalTime = totalTime()
+        
         VStack {
-            if !presenter.isConcreteDates {
+//            if !presenter.isConcreteDates {
                 SegmentedPicker(items: segments, selection: $selectedSegment)
                     .padding()
-            }
+//            }
             ScrollView(showsIndicators: false) {
                     VStack {
                         HStack(spacing: 10) {
@@ -55,9 +86,9 @@ struct StatisticsView: View {
                         InfographicsView(
                             strokeColor: bgColor,
                             statsInfo: [
-                                .session: presenter.sessions(by: .session).count,
-                                .competition: presenter.sessions(by: .competition).count,
-                                .seminar: presenter.sessions(by: .seminar).count
+                                .training: sessions(by: .training).count,
+                                .competition: sessions(by: .competition).count,
+                                .seminar: sessions(by: .seminar).count
                             ]
                         ).padding(.bottom, 70)
                         
@@ -68,8 +99,8 @@ struct StatisticsView: View {
                         
                         PieChartView(
                             values: [
-                                Double(presenter.sessions(by: .gi).count),
-                                Double(presenter.sessions(by: .noGi).count)
+                                Double(sessions(by: .gi).count),
+                                Double(sessions(by: .noGi).count)
                             ],
                             colors: [Color("Blue"), Color("LightBlue")],
                             textColors: [.white, .black],
@@ -80,7 +111,7 @@ struct StatisticsView: View {
                             .padding(.horizontal, 40)
                     }
                     .padding(.all, 20)
-                    .padding(.bottom, 220)
+                    .padding(.bottom, 300)
                 }
         }
         .vAlign(.top)
@@ -110,7 +141,7 @@ struct StatisticsView: View {
             }
         }
         .onAppear {
-            hideTabbar(true)
+            hideTabbar(false)
         }
     }
     

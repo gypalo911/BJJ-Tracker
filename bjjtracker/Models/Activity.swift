@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 enum ActivityType: String, CaseIterable, Hashable {
-    case session = "Class"
+    case training = "Class"
     case competition = "Competition"
     case seminar = "Seminar"
     
     var color: Color {
         switch self {
-        case .session:
+        case .training:
             return Color("Green")
         case .competition:
             return Color("Competition")
@@ -48,15 +48,15 @@ enum ActivityStatus: String {
     
 }
 
-struct Activity: Identifiable, Equatable {
+class Activity: ObservableObject, Identifiable, Equatable {
     
-    var id = UUID()
-    var type: ActivityType
-    var style: GraplingStyle
-    var duration: Int
-    var startDate: Date
-    var location: String = ""
-    var notes: String = ""
+    @Published var id = UUID()
+    @Published var type: ActivityType
+    @Published var style: GraplingStyle
+    @Published var duration: Int
+    @Published var startDate: Date
+    @Published var location: String = ""
+    @Published var notes: String = ""
     
     var status: ActivityStatus {
         let now = Date()
@@ -85,7 +85,6 @@ extension Activity {
         guard let id = session.id,
               let type = session.type,
               let style = session.style,
-              let duration = session.duration,
               let startDate = session.startDate,
               let notes = session.notes
         else {
@@ -95,14 +94,39 @@ extension Activity {
             id: id,
             type: ActivityType(rawValue: type)!,
             style: GraplingStyle(rawValue: style)!,
-            duration: duration as! Int,
+            duration: Int(session.duration),
             startDate: startDate,
             location: session.location ?? "",
             notes: notes
         )
     }
-    
+
     static func == (lhs: Activity, rhs: Activity) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension Session {
+    var status: ActivityStatus {
+        let now = Date()
+        if now >= startDate! && now < (startDate! + TimeInterval(duration * 60)) {
+            return .ongoing
+        } else if now > (startDate! + TimeInterval(duration * 60)) {
+            return .finished
+        } else {
+            return .upcoming
+        }
+    }
+    
+    var activityType: ActivityType {
+        ActivityType(rawValue: type!)!
+    }
+
+    var activityStyle: GraplingStyle {
+        GraplingStyle(rawValue: style!)!
+    }
+    
+    static func == (lhs: Session, rhs: Session) -> Bool {
         lhs.id == rhs.id
     }
 }

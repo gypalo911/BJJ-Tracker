@@ -9,25 +9,17 @@ import SwiftUI
 
 struct TimetableView: View {
     
-    @State private var activities: [Activity] = [
-        Activity(type: .seminar, style: .noGi, duration: 120, startDate: Calendar.current.date(from: DateComponents(year: 2023, month: 3, day: 26))!, location: "Lutsk", notes: "26 of March\nSome notes"),
-        Activity(type: .seminar, style: .noGi, duration: 120, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Some notes"),
-        Activity(type: .session, style: .gi, duration: 120, startDate: Date() - 60 * 60, location: "Lutsk", notes: "Some notes"),
-        Activity(type: .competition, style: .noGi, duration: 90, startDate: Date() + TimeInterval(3000 * 60), location: "Lutsk", notes: "Some notes"),
-        Activity(type: .seminar, style: .noGi, duration: 90, startDate: Date() + TimeInterval(3010 * 60), location: "Lutsk", notes: "Some notes"),
-    ]
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
     
     @State private var selectedDay: Date = Date()
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
     
-    @State private var selectedActivity: Activity?
+    @State var selectedSession: Session?
     
-    @State private var newActivity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
-    
-    private var filteredActivities: [Activity] {
-        activities.filter {
-            Calendar.current.isDate($0.startDate, inSameDayAs: selectedDay)
+    private var filteredSessions: [Session] {
+        sessionsList.filter {
+            Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
     }
     
@@ -59,11 +51,11 @@ struct TimetableView: View {
                 
                 VStack(spacing: 0) {
                     DraggableCalendarView(
-                        activities: $activities,
                         selectedDay: $selectedDay,
-                        isBottomSheetOpen: $isBottomSheetOpen
+                        isBottomSheetOpen: $isBottomSheetOpen,
+                        sessions: sessionsList
                     )
-                    if filteredActivities.isEmpty {
+                    if filteredSessions.isEmpty {
                         Spacer()
                         Text("No sessions for this day")
                             .font(.system(size: 18))
@@ -88,10 +80,10 @@ struct TimetableView: View {
                     } else {
                         ScrollView(showsIndicators: false) {
                             VStack(spacing: 16) {
-                                ForEach(filteredActivities) { activity in
-                                    ActivityPanelView(activity: activity)
+                                ForEach(filteredSessions) { session in
+                                    ActivityPanelView(session: session)
                                         .onTapGesture {
-                                            selectedActivity = activity
+                                            selectedSession = session
                                         }
                                 }
                                 NavigationLink(destination: {
@@ -135,7 +127,7 @@ struct TimetableView: View {
                         selectedSheet = .promotion
                     }),
                     .default(Text("Add Session"), action: {
-                        selectedSheet = .session
+                        selectedSheet = .activity
                     }),
                     .cancel()
                 ])
@@ -144,7 +136,7 @@ struct TimetableView: View {
                 switch selectedSheet {
                 case .promotion:
                     AddPromotionView()
-                case .session:
+                case .activity:
                     NewSessionView()
                 }
             }
@@ -154,9 +146,9 @@ struct TimetableView: View {
                     isBottomSheetOpen: $isBottomSheetOpen
                 )
             }
-//            .sheet(item: $selectedActivity) { selectedActivity in
-//                SessionDetailsView(activity: selectedActivity)
-//            }
+            .sheet(item: $selectedSession) { selectedSession in
+                SessionDetailsView(session: selectedSession)
+            }
         }
     }
 }

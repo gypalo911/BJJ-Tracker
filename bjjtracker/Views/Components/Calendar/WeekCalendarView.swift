@@ -11,7 +11,8 @@ struct WeekCalendarView: View {
     @Binding var selectedDay: Date
     var currentWeek: [Calendar.WeekDay]
     
-    let activities: [Activity]
+//    let activities: [Activity]
+    var sessions: FetchedResults<Session>
 
     let colors: CalendarDayColors
     
@@ -30,8 +31,8 @@ struct WeekCalendarView: View {
             HStack {
                 ForEach(currentWeek, id: \.self.id) { weekDay in
                     
-                    let activity = activities.first(where: { activity in
-                        return Calendar.current.isDate(activity.startDate, inSameDayAs: weekDay.date)
+                    let session = sessions.first(where: { session in
+                        return Calendar.current.isDate(session.startDate ?? Date(), inSameDayAs: weekDay.date)
                     })
                     
                     let isSelected = Calendar.current.isDate(weekDay.date, inSameDayAs: selectedDay)
@@ -42,7 +43,7 @@ struct WeekCalendarView: View {
                             date: weekDay.date,
                             isToday: isToday,
                             isSelected: isSelected,
-                            activityColor: activity?.type.color,
+                            activityColor: session?.activityType.color,
                             colors: colors
                         )
                     }.onTapGesture {
@@ -64,34 +65,34 @@ struct WeekCalendarView: View {
     }
 }
 
-struct WeekCalendarView_Previews: PreviewProvider {
-    struct Container: View {
-        @State var selectedDay = Date()
-        var currentWeek = Calendar.current.currentWeek
-        
-        let activities: [Activity] = [
-            Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Other notes"),
-            Activity(type: .session, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"),
-            Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
-        ]
-        
-        var body: some View {
-            WeekCalendarView(
-                selectedDay: $selectedDay,
-                currentWeek: currentWeek,
-                activities: activities,
-                colors: .init(
-                    textColor: .white,
-                    strokeColor: .white,
-                    selectedTextColor: Color("Blue"),
-                    selectedBGColor: .white
-                )
-            )
-            .padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
-        }
-    }
-    
-    static var previews: some View {
-        Container()
-    }
-}
+//struct WeekCalendarView_Previews: PreviewProvider {
+//    struct Container: View {
+//        @State var selectedDay = Date()
+//        var currentWeek = Calendar.current.currentWeek
+//
+//        let activities: [Activity] = [
+//            Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Other notes"),
+//            Activity(type: .training, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"),
+//            Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
+//        ]
+//
+//        var body: some View {
+//            WeekCalendarView(
+//                selectedDay: $selectedDay,
+//                currentWeek: currentWeek,
+//                activities: activities,
+//                colors: .init(
+//                    textColor: .white,
+//                    strokeColor: .white,
+//                    selectedTextColor: Color("Blue"),
+//                    selectedBGColor: .white
+//                )
+//            )
+//            .padding(.vertical, 100).background(Rectangle().foregroundColor(.blue))
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Container()
+//    }
+//}

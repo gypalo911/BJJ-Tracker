@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DraggableCalendarView: View {
-    @Binding var activities: [Activity]
     @Binding var selectedDay: Date
     @Binding var isBottomSheetOpen: Bool
     
     private var currentWeek: [Calendar.WeekDay] {
         Calendar.current.week(for: selectedDay)
     }
+    
+    var sessions: FetchedResults<Session>
     
     @State private var maxHeight: CGFloat = 400
     
@@ -35,16 +36,19 @@ struct DraggableCalendarView: View {
                     .hAlign(.leading)
                 
                 HStack(spacing: 20) {
-                    NavigationLink(destination: {
-                        StatisticsView(
-                            presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date()))
-                        )
-                    }) {
-                        Image("stats")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Blue"))
-                    }
+//                    NavigationLink(destination: {
+//                        let presenter = StatisticsViewPresenter(
+//                            dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
+//                        )
+//                        StatisticsView(
+//                            presenter: presenter
+//                        )
+//                    }) {
+//                        Image("stats")
+//                            .resizable()
+//                            .frame(width: 25, height: 25)
+//                            .foregroundColor(Color("Blue"))
+//                    }
                     Button(action: {
                         withAnimation(.easeOut(duration: 0.3)) {
                             isBottomSheetOpen = true
@@ -63,8 +67,8 @@ struct DraggableCalendarView: View {
                 if !showWeekView {
                     MonthCalendarView(
                         selectedDate: $selectedDay,
-                        activities: $activities,
                         viewHeight: $sliderHeight,
+                        sessions: sessions,
                         maxHeight: maxHeight
                     )
                     .blur(radius: !blurCalendar ? 5 : 0, opaque: false)
@@ -75,7 +79,7 @@ struct DraggableCalendarView: View {
                     WeekCalendarView(
                         selectedDay: $selectedDay,
                         currentWeek: currentWeek,
-                        activities: activities,
+                        sessions: sessions,
                         colors: .init(
                             textColor: .black,
                             strokeColor: .blue,

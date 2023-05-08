@@ -8,32 +8,25 @@
 import SwiftUI
 
 struct SessionDetailsView: View {
-    @State var activity: Activity
+    @ObservedObject var session: Session
     @State var isPresentedEditing: Bool = false
     
     @Environment(\.presentationMode) var presentationMode
     
-    var navTitle = ""
     var dismissCallback: (() -> Void)?
     
-    init(activity: Activity, dismissCallback: (() -> Void)? = nil) {
-        _activity = State(initialValue: activity)
+    init(session: Session, dismissCallback: (() -> Void)? = nil) {
+        self.session = session
         self.dismissCallback = dismissCallback
-
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(self.activity.type.color.opacity(0.8))
-        UINavigationBar.appearance().standardAppearance = appearance
-        
-        navTitle = "\(self.activity.style.rawValue) \(self.activity.type.rawValue)"
     }
     
     var body: some View {
-        
+        let navTitle = "\(self.session.activityStyle.rawValue) \(self.session.activityType.rawValue)"
         let linearGradient = LinearGradient(
             gradient: Gradient(stops: [
-                .init(color: self.activity.type.color.opacity(0.8), location: 0.4),
-                .init(color: self.activity.type.color.opacity(0.35), location: 0.8),
-                .init(color: self.activity.type.color.opacity(0.28), location: 1)
+                .init(color: self.session.activityType.color.opacity(0.8), location: 0.4),
+                .init(color: self.session.activityType.color.opacity(0.35), location: 0.8),
+                .init(color: self.session.activityType.color.opacity(0.28), location: 1)
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -46,11 +39,11 @@ struct SessionDetailsView: View {
                         Group {
                             ZStack {
                                 Rectangle()
-                                    .foregroundColor(activity.status.color)
+                                    .foregroundColor(session.status.color)
                                     .cornerRadius(5)
                                     .defaultShadow()
                                     .frame(width: 76, height: 23)
-                                Text("\(activity.status.rawValue)".uppercased())
+                                Text("\(session.status.rawValue)".uppercased())
                                     .font(.system(size: 10))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
@@ -67,7 +60,7 @@ struct SessionDetailsView: View {
                                         .resizable()
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
-                                    Text("\(activity.startDate.toString("dd MMMM YYYY"))")
+                                    Text("\(session.startDate!.toString("dd MMMM YYYY"))")
                                         .font(.system(size: 20))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
@@ -78,12 +71,12 @@ struct SessionDetailsView: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
                                     HStack {
-                                        Text("\(activity.startDate.toString("hh:mm"))")
+                                        Text("\(session.startDate!.toString("hh:mm"))")
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)
-                                        let duration = activity.duration.minutesToDuration()
-                                        if activity.duration != 0 {
+                                        let duration = Int(session.duration).minutesToDuration()
+                                        if session.duration != 0 {
                                             Text("(\(duration))")
                                                 .font(.system(size: 18))
                                                 .fontWeight(.semibold)
@@ -96,7 +89,7 @@ struct SessionDetailsView: View {
                                         .resizable()
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
-                                    Text("\(activity.location == "" ? "--" : activity.location)")
+                                    Text("\(session.location ?? "--")")
                                         .font(.system(size: 20))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
@@ -108,7 +101,7 @@ struct SessionDetailsView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                                     .foregroundColor(Color("Gray"))
-                                Text(activity.notes)
+                                Text(session.notes ?? "")
                                     .font(.system(size: 18))
                                     .multilineTextAlignment(.leading)
                             }
@@ -160,23 +153,36 @@ struct SessionDetailsView: View {
                     }
                     .sheet(isPresented: $isPresentedEditing, onDismiss: {
                         let appearance = UINavigationBarAppearance()
-                        appearance.backgroundColor = UIColor(activity.type.color.opacity(0.8))
+                        appearance.backgroundColor = UIColor(session.activityType.color.opacity(0.8))
                         UINavigationBar.appearance().standardAppearance = appearance
                     }) {
-                        EditSessionView(presenter: EditSessionPresenter(activity: activity), onDismiss: { editedActivity in
-                            activity = editedActivity
-                        })
+                        EditSessionView(
+                            session: session,
+                            activity: Activity.from(session: session)!,
+                            onDismiss: { editedActivity in
+//                                session = editedActivity
+                            }
+                        )
                     }
+                }
+                .onAppear {
+                    changeNavBar()
                 }
             }
         }
     }
-}
-
-struct SessionDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
-        
-        SessionDetailsView(activity: activity)
+    
+    func changeNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(self.session.activityType.color.opacity(0.8))
+        UINavigationBar.appearance().standardAppearance = appearance
     }
 }
+
+//struct SessionDetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
+//
+//        SessionDetailsView(activity: activity)
+//    }
+//}

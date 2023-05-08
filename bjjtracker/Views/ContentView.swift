@@ -21,6 +21,9 @@ struct ContentView: View {
                         .tag(Tab.dashboard)
                     TimetableView()
                         .tag(Tab.calendar)
+                    StatisticsView(
+                        presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date(), end: Date()))
+                    ).tag(Tab.statistics)
                     ProfileView()
                         .tag(Tab.profile)
                 }.edgesIgnoringSafeArea(.bottom)

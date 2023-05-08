@@ -12,8 +12,9 @@ struct NewSessionView: View {
     @State private var isPickerPresented = false
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.managedObjectContext) var managedObjContext
     
-    @State private var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+    @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
     
     @EnvironmentObject var activitiesManager: ActivitiesManager
     
@@ -119,7 +120,7 @@ struct NewSessionView: View {
     }
     
     func save() {
-        activitiesManager.save(activity)
+        PersistanceManager.shared.createSession(from: activity, context: managedObjContext)
     }
 }
 

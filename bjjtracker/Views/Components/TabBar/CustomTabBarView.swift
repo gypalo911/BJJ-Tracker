@@ -10,6 +10,7 @@ import SwiftUI
 enum Tab: String, CaseIterable {
     case dashboard = "Dashboard"
     case calendar = "Calendar"
+    case statistics = "Statistics"
     case profile = "Profile"
     
     var image: Image {
@@ -18,8 +19,10 @@ enum Tab: String, CaseIterable {
             return Image("dashboard")
         case .profile:
             return Image("profile")
+        case .statistics:
+            return Image("stats")
         case .calendar:
-            return Image("filledCalendar")
+            return Image("calendar")
         }
     }
 }
@@ -28,7 +31,7 @@ struct CustomTabBarView: View {
     @Binding var selectedTab: Tab
     
     var body: some View {
-        HStack(spacing: 40) {
+        HStack(spacing: 20) {
             ForEach(Tab.allCases, id: \.rawValue) { tab in
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {

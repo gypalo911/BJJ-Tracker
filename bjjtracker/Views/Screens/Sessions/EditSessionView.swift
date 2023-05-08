@@ -6,16 +6,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditSessionView: View {
     
     @State private var isPickerPresented = false
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.managedObjectContext) var managedObjContext
     
-    @StateObject var presenter: EditSessionPresenter
+    var session: Session
     
-    var onDismiss: ((Activity) -> Void)?
+    @StateObject var activity: Activity
+    
+    var onDismiss: ((Session) -> Void)?
+    
+    func update(_ session: Session) {
+        PersistanceManager.shared.edit(
+            session: session,
+            activity: activity,
+            context: managedObjContext
+        )
+    }
     
     var body: some View {
         NavigationView {
@@ -29,8 +41,8 @@ struct EditSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
-                                    selectedType: $presenter.activity.type,
-                                    selectedTypeValue: presenter.activity.type.rawValue
+                                    selectedType: $activity.type,
+                                    selectedTypeValue: activity.type.rawValue
                                 )
                             }.padding(.top, 10)
                             
@@ -39,13 +51,13 @@ struct EditSessionView: View {
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
-                                    selectedType: $presenter.activity.style,
-                                    selectedTypeValue: presenter.activity.style.rawValue
+                                    selectedType: $activity.style,
+                                    selectedTypeValue: activity.style.rawValue
                                 )
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "3. Select date and time:")
-                                DatePicker("", selection: $presenter.activity.startDate)
+                                DatePicker("", selection: $activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
@@ -53,9 +65,9 @@ struct EditSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "4. Duration:")
 
-                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $presenter.activity.duration)
+                                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
                                 if isPickerPresented {
-                                    DurationPicker(duration: $presenter.activity.duration)
+                                    DurationPicker(duration: $activity.duration)
                                         .frame(height: 150)
                                         .frame(maxWidth: .infinity)
                                 }
@@ -65,7 +77,7 @@ struct EditSessionView: View {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
-                                TextField("Location...", text: $presenter.activity.location)
+                                TextField("Location...", text: $activity.location)
                                     .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
@@ -77,7 +89,7 @@ struct EditSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $presenter.activity.notes)
+                                TextField("Add some details...", text: $activity.notes)
                                     .frame(minHeight: 150, alignment: .top)
                                     .padding(20)
                                     .background(
@@ -112,8 +124,7 @@ struct EditSessionView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
-                                presenter.update()
-                                onDismiss?(presenter.activity)
+                                update(session)
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Text("Save")
@@ -124,22 +135,25 @@ struct EditSessionView: View {
                     }
                     .vAlign(.top)
                 }
+            }.onAppear {
+//                if let filledActivity = Activity.from(session: session) {
+//                    activity = filledActivity
+//                }
             }
         }
     }
 }
 
-
-struct EditSessionView_Previews: PreviewProvider {
-    struct Container: View {
-        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
-        
-        var body: some View {
-            EditSessionView(presenter: EditSessionPresenter(activity: activity))
-        }
-    }
-    
-    static var previews: some View {
-        Container()
-    }
-}
+//struct EditSessionView_Previews: PreviewProvider {
+//    struct Container: View {
+//        @State var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+//
+//        var body: some View {
+//            EditSessionView(presenter: EditSessionPresenter(activity: activity))
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Container()
+//    }
+//}

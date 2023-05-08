@@ -11,13 +11,13 @@ import SwiftUI
 struct bjjtrackerApp: App {
     
     let settings = AppSettings()
-    let activitiesManager = ActivitiesManager(storageService: CoreDataService())
+    let persistanceManager = PersistanceManager.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(settings)
-                .environmentObject(activitiesManager)
+                .environment(\.managedObjectContext, persistanceManager.container.viewContext)
         }
     }
 }

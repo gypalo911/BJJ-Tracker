@@ -21,26 +21,26 @@ struct StatisticsViewPresenter {
         self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
     }
     
-    func sessionsForInterval() -> [Activity] {
-        do {
-            return try persistanceManager.fetchActivities(from: dateInterval)
-        } catch let error {
-            print("sessionsForInterval error: \(error)")
-            return []
-        }
-    }
+//    func sessionsForInterval() -> [Activity] {
+//        do {
+//            return try persistanceManager.fetchActivities(from: dateInterval)
+//        } catch let error {
+//            print("sessionsForInterval error: \(error)")
+//            return []
+//        }
+//    }
     
-    func totalTime() -> String {
-        return sessionsForInterval().map { $0.duration }.reduce(0, +).minutesToDuration()
-    }
-    
-    func sessions(by type: ActivityType) -> [Activity] {
-        return sessionsForInterval().filter({ $0.type == type })
-    }
-    
-    func sessions(by style: GraplingStyle) -> [Activity] {
-        return sessionsForInterval().filter({ $0.style == style })
-    }
+//    func totalTime() -> String {
+//        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
+//    }
+//    
+//    func sessions(by type: ActivityType) -> [Session] {
+//        return sessionsList.filter({ $0.activityType == type })
+//    }
+//    
+//    func sessions(by style: GraplingStyle) -> [Session] {
+//        return sessionsList.filter({ $0.activityStyle == style })
+//    }
 }
 
 private extension StatisticsViewPresenter {

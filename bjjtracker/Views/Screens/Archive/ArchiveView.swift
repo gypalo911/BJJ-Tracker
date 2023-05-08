@@ -11,48 +11,49 @@ import Introspect
 struct ArchiveView: View {
     
     @EnvironmentObject var settings: AppSettings
-    @EnvironmentObject var activitiesManager: ActivitiesManager
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var presenter: ArchivePresenter = ArchivePresenter()
+    @Environment(\.managedObjectContext) private var viewContext
+    @SectionedFetchRequest<String, Session>(sectionIdentifier: \.startDateString, sortDescriptors: [SortDescriptor(\.startDate, order: .reverse)], animation: .easeInOut) var sessions: SectionedFetchResults<String, Session>
     
-    @State var selectedActivity: Activity?
+    @State var selectedSession: Session?
     
     @State var showDetailsView: Bool = false
     
+    func group(_ result: FetchedResults<Session>) -> Dictionary<Date, [Session]> {
+        Dictionary(grouping: result, by: {
+            Calendar.current.startOfDay(for: $0.startDate!)
+        })
+    }
+    
     var body: some View {
-
+        
         NavigationView {
             ScrollView {
-                LazyVStack {
-                    ForEach(activitiesManager.groupedActivities.keys.sorted(by: { $0 > $1 }), id: \.self) { key in
-                        Text("\(key.toString("dd MMMM YYYY"))")
-                            .hAlign(.leading)
-                            .padding([.horizontal, .top], 20)
-                            .padding(.bottom, 10)
-                        ForEach(activitiesManager.groupedActivities[key]!) { activity in
-                            ActivityPanelView(activity: activity)
-                                .onTapGesture {
-                                    showDetailsView = true
-                                    selectedActivity = activity
-                                }
-                        }
+                ForEach(sessions, id: \.id) { section in
+                    Text("\(section.id)")
+                        .hAlign(.leading)
+                        .padding([.horizontal, .top], 20)
+                        .padding(.bottom, 10)
+                    ForEach(section) { session in
+                        ActivityPanelView(session: session)
+                            .onTapGesture {
+                                selectedSession = session
+                                showDetailsView = true
+                            }
                     }
-                }.id(UUID())
+                }
+            }
+            .onAppear {
+                settings.isTabBarHidden = true
             }
             .sheet(isPresented: $showDetailsView) {
-                if let selectedActivity = selectedActivity {
-                    SessionDetailsView(activity: selectedActivity, dismissCallback: {
-//                        presenter.groupedItems = [:]
-//                        presenter.fetchItems()
-                    })
+                if let selectedSession = selectedSession {
+                    SessionDetailsView(session: selectedSession, dismissCallback: {})
                 }
             }
             .introspectTabBarController { (UITabBarController) in
                 UITabBarController.tabBar.isHidden = true
-            }
-            .onAppear {
-                settings.isTabBarHidden = true
             }
             .navigationTitle("Archive")
             .toolbar {
@@ -68,30 +69,30 @@ struct ArchiveView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if let start = activitiesManager.groupedActivities.keys.min()?.startOfDay,
-                       let end = activitiesManager.groupedActivities.keys.max()?.endOfDay {
-                        NavigationLink(destination: {
-                            StatisticsView(
-                                presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: start, end: end))
-                            )
-                        }) {
-                            Image("stats")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(Color("Blue"))
-                        }
-                    }
+                    //                    if let start = activities.keys.min()?.startOfDay,
+                    //                       let end = activities.keys.max()?.endOfDay {
+                    //                        NavigationLink(destination: {
+                    //                            StatisticsView(
+                    //                                presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: start, end: end))
+                    //                            )
+                    //                        }) {
+                    //                            Image("stats")
+                    //                                .resizable()
+                    //                                .frame(width: 25, height: 25)
+                    //                                .foregroundColor(Color("Blue"))
+                    //                        }
+                    //                    }
                 }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button {
-//
-//                    } label: {
-//                        Image("calendar")
-//                            .resizable()
-//                            .frame(width: 25, height: 25)
-//                            .foregroundColor(Color("Blue"))
-//                    }
-//                }
+                //                ToolbarItem(placement: .navigationBarTrailing) {
+                //                    Button {
+                //
+                //                    } label: {
+                //                        Image("calendar")
+                //                            .resizable()
+                //                            .frame(width: 25, height: 25)
+                //                            .foregroundColor(Color("Blue"))
+                //                    }
+                //                }
             }
         }
     }
