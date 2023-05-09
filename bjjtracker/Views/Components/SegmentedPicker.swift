@@ -28,7 +28,6 @@ struct SegmentedPickerStyle {
 
 struct SegmentedPicker: View {
     
-    
     /// Stores the size of a segment, used to create the active segment rect
     @State private var segmentSize: CGSize = .zero
     /// Rounded rectangle to denote active segment
@@ -50,9 +49,12 @@ struct SegmentedPicker: View {
     @Binding private var selection: Int
     private let items: [String]
     
-    init(items: [String], selection: Binding<Int>) {
+    var onChanged: ((_ segment: Int) -> Void)?
+    
+    init(items: [String], selection: Binding<Int>, onChanged: ((_ segment: Int) -> Void)?) {
         self._selection = selection
         self.items = items
+        self.onChanged = onChanged
     }
     
     var body: some View {
@@ -103,6 +105,7 @@ struct SegmentedPicker: View {
             return
         }
         self.selection = index
+        self.onChanged?(index)
     }
 }
 

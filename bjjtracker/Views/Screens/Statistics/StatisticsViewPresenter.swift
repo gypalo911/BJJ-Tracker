@@ -19,12 +19,12 @@ struct StatisticsViewPresenter {
     init(dateInterval: DateInterval) {
 //        self.dateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
         self.previousPeriod = DateInterval(start: dateInterval.start - dateInterval.duration, end: dateInterval.start)
-        self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
+//        self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
     }
     
     mutating func update(dateInterval: DateInterval) {
         self.dateInterval = dateInterval
-        self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
+//        self.title = intervalToString(from: dateInterval.start, to: dateInterval.end)
     }
     
 //    func sessionsForInterval() -> [Activity] {
@@ -50,17 +50,21 @@ struct StatisticsViewPresenter {
 }
 
 extension StatisticsViewPresenter {
-    func intervalToString(from: Date, to: Date) -> String {
-        if from.isSame(as: to, by: [.day, .month, .year]) {
-            return "\(to.toString("dd MMMM yyyy"))"
-        } else if from.isSame(as: to, by: [.month, .year]) {
-            return "\(from.toString("dd"))-\(to.toString("dd MMMM yyyy"))"
-        } else if from.isSame(as: to, by: [.year]) {
-            return "\(from.toString("dd MMMM"))-\(to.toString("dd MMMM yyyy"))"
-        } else if Calendar.current.isDate(from, inSameDayAs: from.startOfMonth()) && Calendar.current.isDate(from, inSameDayAs: from.endOfMonth()) {
-            return "\(to.toString("MMMM yyyy"))"
+    func intervalToString(from: Date, to: Date, segment: Int) -> String {
+        if segment == 0 {
+            if from.isSame(as: to, by: [.day, .month, .year]) {
+                return "\(to.toString("dd MMMM yyyy"))"
+            } else if from.isSame(as: to, by: [.year]) {
+                return "\(from.toString("dd MMMM"))-\(to.toString("dd MMMM yyyy"))"
+            } else if Calendar.current.isDate(from, inSameDayAs: from.startOfMonth()) && Calendar.current.isDate(from, inSameDayAs: from.endOfMonth()) {
+                return "\(to.toString("MMMM yyyy"))"
+            } else {
+                return "\(from.toString("dd MMMM yyyy"))-\(to.toString("dd MMMM yyyy"))"
+            }
+        } else if segment == 1 {
+            return to.toString("MMMM yyyy")
         } else {
-            return "\(from.toString("dd MMMM yyyy"))-\(to.toString("dd MMMM yyyy"))"
+            return to.toString("yyyy")
         }
     }
 }

@@ -23,17 +23,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5102C672-3096-447C-8F8E-FCEB97F20D61"
+            uuid = "DBC22F95-9C23-43DC-B737-F45083216CAE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bjjtracker/Views/Screens/Timetable/TimetableView.swift"
+            filePath = "bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "intervalToString(from:to:segment:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DBC22F95-9C23-43DC-B737-F45083216CAE - 10c0ac898f68f2df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.StatisticsViewPresenter.intervalToString(from: Foundation.Date, to: Foundation.Date, segment: Swift.Int) -&gt; Swift.String"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "1232">
+               </Location>
+               <Location
+                  uuid = "DBC22F95-9C23-43DC-B737-F45083216CAE - 10c0ac898f68f2df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.StatisticsViewPresenter.intervalToString(from: Foundation.Date, to: Foundation.Date, segment: Swift.Int) -&gt; Swift.String"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "732">
+               </Location>
+               <Location
+                  uuid = "DBC22F95-9C23-43DC-B737-F45083216CAE - 10c0ac898f68f2df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.StatisticsViewPresenter.intervalToString(from: Foundation.Date, to: Foundation.Date, segment: Swift.Int) -&gt; Swift.String"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "716">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "379282D4-89B5-4ECF-85FC-CE9715EDF6F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "intervalToString(from:to:segment:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "800F7F63-E661-4C47-A624-CC2E881BC010"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Views/Screens/Statistics/StatisticsViewPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "intervalToString(from:to:segment:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

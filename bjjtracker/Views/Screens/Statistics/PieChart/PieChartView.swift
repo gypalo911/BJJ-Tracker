@@ -31,7 +31,7 @@ struct PieChartView: View {
                 PieSliceData(
                     startAngle: Angle(degrees: endDeg),
                     endAngle: Angle(degrees: endDeg + degrees),
-                    text: String(format: "%.0f%%", value * 100 / sum),
+                    text: value > 0 ? String(format: "%.0f%%", value * 100 / sum) : "",
                     color: self.colors[i],
                     textColor: self.textColors[i]
                 )

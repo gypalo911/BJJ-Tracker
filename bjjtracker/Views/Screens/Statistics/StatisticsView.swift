@@ -8,11 +8,17 @@
 import SwiftUI
 import Introspect
 
+enum CalendarSegment: Int {
+    case week
+    case month
+    case year
+}
+
 struct StatisticsView: View {
     
     let bgColor: Color = Color("generalBG")
     
-    @State private var selectedSegment = 0
+    @State private var selectedSegment: Int = CalendarSegment.week.rawValue
     private var segments = ["Week", "Month", "Year"]
     
     @Environment(\.presentationMode) var presentationMode
@@ -58,22 +64,62 @@ struct StatisticsView: View {
         return filteredSession.filter({ $0.activityStyle == style })
     }
     
-    func plusWeek() {
-        if !dateInterval.end.isSame(as: Date(), by: [.year, .month, .day]) {
-            dateInterval = DateInterval(start: dateInterval.end, end: Calendar.current.date(byAdding: .day, value: 7, to: dateInterval.end)!)
-            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
+    func initDates() {
+        if selectedSegment == 0 {
+            let start = Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!
+            let end = Date().startOfDay
+            dateInterval = DateInterval(start: start, end: end)
+        } else if selectedSegment == 1 {
+            let start = Date().startOfMonth()
+            let end = Date().endOfMonth()
+            dateInterval = DateInterval(start: start, end: end)
+        } else if selectedSegment == 2 {
+            let currentYearStart = Calendar.current.date(from: Calendar.current.dateComponents([.year], from: Calendar.current.startOfDay(for: dateInterval.start)))!
+            var currentYearEnd = Calendar.current.date(byAdding: .year, value: 1, to: currentYearStart)!
+            currentYearEnd = Calendar.current.date(byAdding: .minute, value: -1, to: currentYearEnd)!
+            dateInterval = DateInterval(start: currentYearStart, end: currentYearEnd)
         }
+    }
+    
+    func plusWeek() {
+        if selectedSegment == 0 {
+            let start = dateInterval.end
+            let end = Calendar.current.date(byAdding: .day, value: 7, to: dateInterval.end)!
+            dateInterval = DateInterval(start: start, end: end)
+        } else if selectedSegment == 1 {
+            let start = Calendar.current.date(byAdding: .month, value: 1, to: dateInterval.end.startOfMonth())!
+            let end = Calendar.current.date(byAdding: .month, value: 1, to: dateInterval.end.endOfMonth())!
+            dateInterval = DateInterval(start: start, end: end)
+        } else if selectedSegment == 2 {
+            initDates()
+            let start = Calendar.current.date(byAdding: .year, value: 1, to: dateInterval.start)!
+            let end = Calendar.current.date(byAdding: .year, value: 1, to: dateInterval.end)!
+            dateInterval = DateInterval(start: start, end: end)
+        }
+        setupTitle()
     }
     
     func minusWeek() {
         if selectedSegment == 0 {
-            dateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!, end: dateInterval.start)
+            let start = Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!
+            let end = dateInterval.start
+            dateInterval = DateInterval(start: start, end: end)
         } else if selectedSegment == 1 {
-            dateInterval = DateInterval(start: dateInterval.start.startOfMonth(), end: dateInterval.start.endOfMonth())
+            let startOfMonth = dateInterval.start.startOfMonth()
+            let start = Calendar.current.date(byAdding: .month, value: -1, to: startOfMonth)!
+            let end = start.endOfMonth()
+            dateInterval = DateInterval(start: start, end: end)
         } else if selectedSegment == 2 {
-            let year = Calendar.current.component(.year, from: Date())
+            initDates()
+            let start = Calendar.current.date(byAdding: .year, value: -1, to: dateInterval.start)!
+            let end = Calendar.current.date(byAdding: .minute, value: -1, to: dateInterval.start)!
+            dateInterval = DateInterval(start: start, end: end)
         }
-        title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
+        setupTitle()
+    }
+    
+    func setupTitle() {
+        title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end, segment: selectedSegment)
     }
     
     var body: some View {
@@ -83,7 +129,15 @@ struct StatisticsView: View {
         
         VStack {
             if !presenter.isConcreteDates {
-                SegmentedPicker(items: segments, selection: $selectedSegment)
+                SegmentedPicker(
+                    items: segments,
+                    selection: $selectedSegment,
+                    onChanged: { index in
+                        selectedSegment = index
+                        initDates()
+                        setupTitle()
+                    }
+                )
                     .padding()
                     .padding(.top, 10)
             }
@@ -145,7 +199,7 @@ struct StatisticsView: View {
                             .padding(.horizontal, 20)
                             .frame(height: 1)
                         
-                        if sessions(by: .gi).count > 0 && sessions(by: .noGi).count > 0 {
+                        if sessions(by: .gi).count > 0 || sessions(by: .noGi).count > 0 {
                             PieChartView(
                                 values: [
                                     Double(sessions(by: .gi).count),
@@ -192,7 +246,7 @@ struct StatisticsView: View {
         }
         .onAppear {
             hideTabbar(false)
-            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
+            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end, segment: selectedSegment)
         }
     }
     
