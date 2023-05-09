@@ -15,14 +15,15 @@ struct StatsView: View {
     
     var body: some View {
         ZStack {
-            HStack(alignment: .bottom) {
+            HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(text)
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                     Text(value)
-                        .font(.system(size: 24))
+                        .font(.system(size: 17))
                         .fontWeight(.semibold)
+                    Spacer()
                 }
                 Spacer()
             }

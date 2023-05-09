@@ -30,16 +30,26 @@ struct DashboardView: View {
             Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
     }
+    private var currentWeekSessions: [Session] {
+        let start = currentWeek.first?.date ?? Date()
+        let end = currentWeek.last?.date ?? Date()
+        return sessionsList.filter {
+            (start...end).contains($0.startDate ?? Date())
+        }
+    }
+    private var lastWeekSessions: [Session] {
+        let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
+        let start = lastWeekDate.first?.date ?? Date()
+        let end = lastWeekDate.last?.date ?? Date()
+        return sessionsList.filter {
+            (start...end).contains($0.startDate ?? Date())
+        }
+    }
     private var currentWeek = Calendar.current.currentWeek
     
-//    private func calcTotalSessions() {
-//        let toDate = Date()
-//        let datesRange = (Calendar.current.date(byAdding: .init(weekOfYear: -2), to: toDate)!...toDate)
-//        let thisWeek = sessionsList.filter {
-//            datesRange.contains($0.startDate ?? Date())
-//        }
-//        print(thisWeek)
-//    }
+    func totalTime(_ sessions: [Session]) -> Int {
+        return sessions.map { Int($0.duration) }.reduce(0, +)
+    }
     
     var body: some View {
         NavigationView {
@@ -60,8 +70,12 @@ struct DashboardView: View {
                             .padding(.leading, 20)
                             .hAlign(.leading)
                         HStack(spacing: 10) {
-                            StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
-                            StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 20m")
+                            StatsView(text: "Sessions", value: "\(currentWeekSessions.count)", tendecyGrows: currentWeekSessions.count > lastWeekSessions.count, tendecyValue: "\(abs(currentWeekSessions.count - lastWeekSessions.count))")
+                            StatsView(
+                                text: "Total time",
+                                value: totalTime(currentWeekSessions).minutesToDuration(), tendecyGrows: totalTime(currentWeekSessions) > totalTime(lastWeekSessions),
+                                tendecyValue: "\(abs(totalTime(currentWeekSessions) - totalTime(lastWeekSessions)).minutesToDuration())"
+                            )
                         }
                         .padding(.all, 20)
                         
