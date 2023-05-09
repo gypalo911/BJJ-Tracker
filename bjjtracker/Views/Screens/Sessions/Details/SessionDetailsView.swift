@@ -60,7 +60,7 @@ struct SessionDetailsView: View {
                                         .resizable()
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
-                                    Text("\(session.startDate!.toString("dd MMMM YYYY"))")
+                                    Text("\((session.startDate ?? Date()).toString("dd MMMM YYYY"))")
                                         .font(.system(size: 20))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
@@ -71,7 +71,7 @@ struct SessionDetailsView: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
                                     HStack {
-                                        Text("\(session.startDate!.toString("hh:mm"))")
+                                        Text("\((session.startDate ?? Date()).toString("hh:mm"))")
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)
@@ -101,8 +101,9 @@ struct SessionDetailsView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                                     .foregroundColor(Color("Gray"))
-                                Text(session.notes ?? "")
+                                Text(LocalizedStringKey(session.notes ?? ""))
                                     .font(.system(size: 18))
+                                    .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             }
                             .padding(.vertical, 20)
@@ -160,7 +161,12 @@ struct SessionDetailsView: View {
                             session: session,
                             activity: Activity.from(session: session)!,
                             onDismiss: { editedActivity in
-//                                session = editedActivity
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
+//                                    guard let editedActivity = editedActivity else {
+                                        presentationMode.wrappedValue.dismiss()
+//                                        return
+//                                    }
+//                                }
                             }
                         )
                     }

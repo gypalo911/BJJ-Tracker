@@ -53,7 +53,7 @@ struct MonthYearBottomSheetView: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 withAnimation(.easeInOut(duration: 0.25)) {
-                    bgOpacity = 0.2
+                    bgOpacity = 0.4
                 }
             }
         }

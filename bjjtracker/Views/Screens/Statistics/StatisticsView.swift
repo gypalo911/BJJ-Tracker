@@ -66,9 +66,14 @@ struct StatisticsView: View {
     }
     
     func minusWeek() {
-        let newInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!, end: dateInterval.start)
-        dateInterval = newInterval
-        title = presenter.intervalToString(from: newInterval.start, to: newInterval.end)
+        if selectedSegment == 0 {
+            dateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!, end: dateInterval.start)
+        } else if selectedSegment == 1 {
+            dateInterval = DateInterval(start: dateInterval.start.startOfMonth(), end: dateInterval.start.endOfMonth())
+        } else if selectedSegment == 2 {
+            let year = Calendar.current.component(.year, from: Date())
+        }
+        title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end)
     }
     
     var body: some View {

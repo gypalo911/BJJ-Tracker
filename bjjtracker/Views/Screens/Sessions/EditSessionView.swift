@@ -19,7 +19,7 @@ struct EditSessionView: View {
     
     @StateObject var activity: Activity
     
-    var onDismiss: ((Session) -> Void)?
+    var onDismiss: ((Session?) -> Void)?
     
     func update(_ session: Session) {
         PersistanceManager.shared.edit(
@@ -78,7 +78,6 @@ struct EditSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
                                 TextField("Location...", text: $activity.location)
-                                    .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
                                         RoundedRectangle(cornerRadius: 10)
@@ -89,18 +88,14 @@ struct EditSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $activity.notes)
-                                    .frame(minHeight: 150, alignment: .top)
-                                    .padding(20)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("LightBlue"))
-                                    ).padding(.leading, 5)
+                                CustomTextEditor(text: $activity.notes)
                             }
                         }
                         
                         Button(action: {
-                            
+                            PersistanceManager.shared.delete(session: session, context: managedObjContext)
+                            presentationMode.wrappedValue.dismiss()
+                            onDismiss?(nil)
                         }, label: {
                             Text("Delete")
                                 .foregroundColor(.red)

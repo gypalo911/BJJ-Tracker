@@ -18,6 +18,10 @@ struct NewSessionView: View {
     
     @EnvironmentObject var activitiesManager: ActivitiesManager
     
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -67,7 +71,6 @@ struct NewSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Location:")
                                 TextField("Location...", text: $activity.location)
-                                    .frame(maxHeight: 50, alignment: .top)
                                     .padding(20)
                                     .background {
                                         RoundedRectangle(cornerRadius: 10)
@@ -78,13 +81,7 @@ struct NewSessionView: View {
                             
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $activity.notes)
-                                    .frame(minHeight: 150, alignment: .top)
-                                    .padding(20)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("LightBlue"))
-                                    ).padding(.leading, 5)
+                                CustomTextEditor(text: $activity.notes)
                             }
                         }
                     }
@@ -123,7 +120,6 @@ struct NewSessionView: View {
         PersistanceManager.shared.createSession(from: activity, context: managedObjContext)
     }
 }
-
 
 struct NewSessionView_Previews: PreviewProvider {
     struct Container: View {

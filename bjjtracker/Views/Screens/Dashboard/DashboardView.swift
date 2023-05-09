@@ -123,10 +123,12 @@ struct DashboardView: View {
                             ScrollView(showsIndicators: false) {
                                 VStack(spacing: 16) {
                                     ForEach(filteredSessions) { session in
-                                        ActivityPanelView(session: session)
-                                            .onTapGesture {
-                                                self.selectedSession = session
-                                            }
+                                        if session.id != nil {
+                                            ActivityPanelView(session: session)
+                                                .onTapGesture {
+                                                    self.selectedSession = session
+                                                }
+                                        }
                                     }
                                     
                                     NavigationLink(destination: {

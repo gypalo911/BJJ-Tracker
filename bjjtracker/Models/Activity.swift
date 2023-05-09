@@ -109,9 +109,10 @@ extension Activity {
 extension Session {
     var status: ActivityStatus {
         let now = Date()
-        if now >= startDate! && now < (startDate! + TimeInterval(duration * 60)) {
+        let startDate = startDate ?? Date()
+        if now >= startDate && now < (startDate + TimeInterval(duration * 60)) {
             return .ongoing
-        } else if now > (startDate! + TimeInterval(duration * 60)) {
+        } else if now > (startDate + TimeInterval(duration * 60)) {
             return .finished
         } else {
             return .upcoming
@@ -119,11 +120,11 @@ extension Session {
     }
     
     var activityType: ActivityType {
-        ActivityType(rawValue: type!)!
+        ActivityType(rawValue: type ?? "Class")!
     }
 
     var activityStyle: GraplingStyle {
-        GraplingStyle(rawValue: style!)!
+        GraplingStyle(rawValue: style ?? "Gi")!
     }
     
     static func == (lhs: Session, rhs: Session) -> Bool {

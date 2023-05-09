@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */; };
 		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
+		D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */; };
 		D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDC29E726E600BED6CD /* InfographicsView.swift */; };
 		D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDE29E7276700BED6CD /* PieSliceView.swift */; };
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
@@ -85,6 +86,7 @@
 		9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker_bjjtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D02F3DDC29E726E600BED6CD /* InfographicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfographicsView.swift; sourceTree = "<group>"; };
 		D02F3DDE29E7276700BED6CD /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				D098BBF029E2C1AF00A9A068 /* SelectionPanelView.swift */,
 				D098BBF429E2EB3000A9A068 /* BeltsListView.swift */,
+				D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
+				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
 				D0B01F2429E4102200E10979 /* temp_test2.swift in Sources */,

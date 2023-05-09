@@ -70,4 +70,10 @@ struct PersistanceManager {
         
         save(context: context)
     }
+    
+    func delete(session: Session, context: NSManagedObjectContext) {
+        context.delete(session)
+        
+        save(context: context)
+    }
 }
