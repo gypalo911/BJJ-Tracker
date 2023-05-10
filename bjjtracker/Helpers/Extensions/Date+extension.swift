@@ -73,6 +73,11 @@ extension Int {
         if minutes != 0 {
             str += "\(minutes)min"
         }
+         
+        if hours == 0 && minutes == 0 {
+            str = "0min"
+        }
+        
         return str
     }
 }
