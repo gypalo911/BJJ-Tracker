@@ -43,13 +43,6 @@ struct ProfileView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                                 Spacer()
-                                Button(action: {
-                                    showAddPromotionSheet = true
-                                }, label: {
-                                    Text("Add Promotion")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.blue)
-                                })
                             }
                             .padding([.leading, .top, .trailing], 15)
                             
@@ -128,13 +121,11 @@ struct BeltProgressCell: View {
                         Text("\(belt.rawValue) belt")
                     }
                     Spacer()
-                    if sessionsCount > 0 {
-                        VStack(alignment: .trailing) {
-                            Text("\(sessionsCount)")
-                                .font(.system(size: 16))
-                            Text("sessions")
-                                .font(.system(size: 12))
-                        }
+                    if !promotions.isEmpty && sessionsCount > 0 {
+                        Image("info")
+                            .resizable()
+                            .foregroundColor(.gray)
+                            .frame(width: 30, height: 30)
                     }
                 }
                 .padding(10)
