@@ -186,6 +186,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D00109AC2A0BABD4008433CC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D02F3DE029E7291800BED6CD /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +347,7 @@
 		D060BAB329DDAE6C00E10562 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D00109AC2A0BABD4008433CC /* Components */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
 				D02F3DE729EEBD9300BED6CD /* ProfileView.swift */,
 			);

@@ -29,7 +29,7 @@ enum AdultBelts: String, CaseIterable, Identifiable {
         case .white:
             return (Color.white, nil)
         case .blue:
-            return (Color.blue, nil)
+            return (Color("Blue"), nil)
         case .purple:
             return (Color.purple, nil)
         case .brown:

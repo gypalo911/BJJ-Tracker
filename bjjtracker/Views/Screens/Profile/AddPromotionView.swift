@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddPromotionView: View {
-    @StateObject var promotion: Promotion = .init(gradingSystem: .adult, stripes: 0, date: Date(), location: "", notes: "")
+    @StateObject var promotion: Promotion = .init(gradingSystem: .adult, adultBelt: .white, stripes: 0, date: Date(), location: "", notes: "")
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -50,30 +50,30 @@ struct AddPromotionView: View {
                             }
                         }
                         
-                        Group {
-                            VStack(alignment: .leading) {
-                                TitleTextView(text: "Location:")
-                                TextField("Location...", text: $promotion.location)
-                                    .frame(maxHeight: 50, alignment: .top)
-                                    .padding(20)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("LightBlue"))
-                                    ).padding(.leading, 5)
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                TitleTextView(text: "Notes")
-                                TextField("Add some details...", text: $promotion.notes)
-                                    .frame(minHeight: 150, alignment: .top)
-                                    .padding(20)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("LightBlue"))
-                                    )
-                                    .padding(.leading, 5)
-                            }
-                        }
+//                        Group {
+//                            VStack(alignment: .leading) {
+//                                TitleTextView(text: "Location:")
+//                                TextField("Location...", text: $promotion.location)
+//                                    .frame(maxHeight: 50, alignment: .top)
+//                                    .padding(20)
+//                                    .background(
+//                                        RoundedRectangle(cornerRadius: 10)
+//                                            .fill(Color("LightBlue"))
+//                                    ).padding(.leading, 5)
+//                            }
+//                            
+//                            VStack(alignment: .leading) {
+//                                TitleTextView(text: "Notes")
+//                                TextField("Add some details...", text: $promotion.notes)
+//                                    .frame(minHeight: 150, alignment: .top)
+//                                    .padding(20)
+//                                    .background(
+//                                        RoundedRectangle(cornerRadius: 10)
+//                                            .fill(Color("LightBlue"))
+//                                    )
+//                                    .padding(.leading, 5)
+//                            }
+//                        }
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)

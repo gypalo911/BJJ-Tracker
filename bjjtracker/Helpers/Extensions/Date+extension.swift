@@ -71,7 +71,7 @@ extension Int {
             str += "\(hours)h "
         }
         if minutes != 0 {
-            str += "\(minutes)min"
+            str += "\(minutes)m"
         }
          
         if hours == 0 && minutes == 0 {

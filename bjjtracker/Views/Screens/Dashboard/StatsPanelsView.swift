@@ -21,9 +21,8 @@ struct StatsView: View {
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                     Text(value)
-                        .font(.system(size: 17))
+                        .font(.system(size: 22))
                         .fontWeight(.semibold)
-                    Spacer()
                 }
                 Spacer()
             }
@@ -50,13 +49,13 @@ struct StatsView: View {
                         }
                     }
                     .padding(.all, 5)
-                    .frame(maxWidth: 76)
+//                    .frame(maxWidth: 76)
                     .background(
                         Rectangle()
                             .fill(tendecyGrows != nil ? (tendecyGrows! ? Color("lightGreen") : Color("lightRed")) : Color("lightGreen"))
                             .cornerRadius(10)
                     )
-                    .vAlign(.bottomTrailing)
+                    .vAlign(.topTrailing)
                 }
             }
         }
@@ -75,8 +74,8 @@ struct StatsView: View {
 struct StatsViewProvider_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 10) {
-            StatsView(text: "Sessions", value: "3", tendecyGrows: true, tendecyValue: "2")
-            StatsView(text: "Total time", value: "25h", tendecyGrows: false, tendecyValue: "1h 30m")
+            StatsView(text: "Sessions", value: "3333", tendecyGrows: true, tendecyValue: "2")
+            StatsView(text: "Total time", value: "25h 25m", tendecyGrows: false, tendecyValue: "1h 30m")
         }.padding(20)
     }
 }
