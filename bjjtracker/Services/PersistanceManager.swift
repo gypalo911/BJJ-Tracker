@@ -7,6 +7,18 @@
 
 import CoreData
 
+protocol SessionsStorageManager {
+    func createSession(from activity: Activity, context: NSManagedObjectContext)
+    func edit(session: Session, activity: Activity, context: NSManagedObjectContext)
+    func delete(session: Session, context: NSManagedObjectContext)
+}
+
+protocol PromotionsStorageManager {
+    func createPromotion(from promotion: Promotion, context: NSManagedObjectContext)
+    func edit(model: PromotionModel, promotion: Promotion, context: NSManagedObjectContext)
+    func delete(model: PromotionModel, context: NSManagedObjectContext)
+}
+
 struct PersistanceManager {
     static let shared = PersistanceManager()
     
@@ -57,6 +69,9 @@ struct PersistanceManager {
             print("Couldn't save")
         }
     }
+}
+
+extension PersistanceManager: SessionsStorageManager {
     
     func createSession(from activity: Activity, context: NSManagedObjectContext) {
         var session = Session(context: context)
@@ -73,6 +88,27 @@ struct PersistanceManager {
     
     func delete(session: Session, context: NSManagedObjectContext) {
         context.delete(session)
+        
+        save(context: context)
+    }
+}
+
+extension PersistanceManager: PromotionsStorageManager {
+    func createPromotion(from promotion: Promotion, context: NSManagedObjectContext) {
+        var model = PromotionModel(context: context)
+        model.update(with: promotion)
+        
+        save(context: context)
+    }
+    
+    func edit(model: PromotionModel, promotion: Promotion, context: NSManagedObjectContext) {
+        model.update(with: promotion)
+        
+        save(context: context)
+    }
+    
+    func delete(model: PromotionModel, context: NSManagedObjectContext) {
+        context.delete(model)
         
         save(context: context)
     }

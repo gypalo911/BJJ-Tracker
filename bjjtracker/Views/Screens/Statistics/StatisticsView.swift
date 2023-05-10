@@ -120,7 +120,7 @@ struct StatisticsView: View {
         let totalTime = totalTime()
         
         VStack {
-            Text("Timetable")
+            Text("Statistics")
                 .font(.system(size: 28))
                 .fontWeight(.bold)
                 .foregroundColor(.black)

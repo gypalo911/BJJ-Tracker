@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var showAddPromotionSheet: Bool = false
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
+    
+    @State private var showingActionSheet: Bool = false
+    @State private var selectedSheet: ModalsSheets?
     
     var body: some View {
         NavigationView {
@@ -47,12 +51,9 @@ struct ProfileView: View {
                             .padding([.leading, .top, .trailing], 15)
                             
                             VStack {
-                                BeltProgressCell(belt: .white, sessionsCount: 100, stripesCount: 4)
-                                
-                                BeltProgressCell(belt: .blue, sessionsCount: 20, stripesCount: 0)
-                                BeltProgressCell(belt: .purple, sessionsCount: 0, stripesCount: 0)
-                                BeltProgressCell(belt: .brown, sessionsCount: 0, stripesCount: 0)
-                                BeltProgressCell(belt: .black, sessionsCount: 0, stripesCount: 0)
+                                ForEach(AdultBelts.allCases.filter { $0 != .none }, id: \.self) { belt in
+                                    BeltProgressCell(belt: belt, promotionModels: promotionModels)
+                                }
                             }
                             .padding(.horizontal, 5)
                             .padding(.bottom, 15)
@@ -67,8 +68,36 @@ struct ProfileView: View {
                     }.padding(20)
                 }
             }
-            .sheet(isPresented: $showAddPromotionSheet) {
-                AddPromotionView()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingActionSheet = true
+                    } label: {
+                        Image("createButton")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color("Blue"))
+                    }
+                }
+            }
+            .actionSheet(isPresented: $showingActionSheet) {
+                ActionSheet(title: Text("Select Action"), buttons: [
+                    .default(Text("Add Promotion"), action: {
+                        selectedSheet = .promotion
+                    }),
+                    .default(Text("Add Session"), action: {
+                        selectedSheet = .activity
+                    }),
+                    .cancel()
+                ])
+            }
+            .sheet(item: $selectedSheet) { selectedSheet in
+                switch selectedSheet {
+                case .promotion:
+                    AddPromotionView()
+                case .activity:
+                    NewSessionView()
+                }
             }
         }
     }
@@ -81,19 +110,29 @@ struct ProfileView_Previews: PreviewProvider {
 }
 
 struct BeltProgressCell: View {
-    var belt: AdultBelts
-    var sessionsCount: Int
-    var stripesCount: Int
+    @State private var showPromotionsList: Bool = false
     
-    @State var showPromotionsList: Bool = false
-    @State var promotions: [Promotion] = [
-        .init(gradingSystem: .adult, adultBelt: .white, stripes: 0, date: Date(), location: "", notes: ""),
-        .init(gradingSystem: .adult, adultBelt: .white, stripes: 1, date: Date(), location: "", notes: ""),
-        .init(gradingSystem: .adult, adultBelt: .white, stripes: 2, date: Date(), location: "", notes: "")
-    ]
+    private var belt: AdultBelts
+//    private var sessionsCount: Int
+//    private var stripesCount: Int
     
-    var showListBG: Bool {
-        showPromotionsList && !promotions.isEmpty
+    private var showListBG: Bool {
+        showPromotionsList && !promotionModels.isEmpty
+    }
+    var promotionModels: [FetchedResults<PromotionModel>.Element]
+    
+    private let isLocked: Bool
+    
+    init(belt: AdultBelts, promotionModels: FetchedResults<PromotionModel>) {
+        self.belt = belt
+        let currentBeltIndex = belt.index
+        let maxBeltIndex = promotionModels.map {
+            $0.index
+        }.max() ?? 0
+        self.isLocked = currentBeltIndex > maxBeltIndex
+        self.promotionModels = promotionModels.filter {
+            $0.adultBelt == belt.rawValue
+        }
     }
     
     var body: some View {
@@ -106,7 +145,7 @@ struct BeltProgressCell: View {
                                 primaryColor: belt.color.0,
                                 secondaryColor: belt.color.1
                             )
-                            if sessionsCount == 0 {
+                            if isLocked {
                                 Circle()
                                     .fill(.gray.opacity(0.3))
                                     .frame(width: 36)
@@ -117,11 +156,10 @@ struct BeltProgressCell: View {
                             }
                         }
                         
-                        
                         Text("\(belt.rawValue) belt")
                     }
                     Spacer()
-                    if !promotions.isEmpty && sessionsCount > 0 {
+                    if !promotionModels.isEmpty {
                         Image("info")
                             .resizable()
                             .foregroundColor(.gray)
@@ -132,7 +170,7 @@ struct BeltProgressCell: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        if sessionsCount > 0 && !promotions.isEmpty {
+                        if !promotionModels.isEmpty {
                             showPromotionsList.toggle()
                         }
                     }
@@ -143,8 +181,8 @@ struct BeltProgressCell: View {
                         .frame(height: 1)
                         .padding(.horizontal, 10)
                 }
-                if sessionsCount > 0 && showPromotionsList {
-                    BeltPromotionsList(promotions: $promotions)
+                if showPromotionsList {
+                    BeltPromotionsList(promotionModels: promotionModels)
                 }
             }
         }
@@ -152,6 +190,9 @@ struct BeltProgressCell: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(showListBG ? Color("listBG") : Color.white)
         )
+        .onAppear {
+            print(isLocked)
+        }
     }
 }
 
@@ -242,16 +283,24 @@ struct CircularBeltView: View {
 }
 
 struct BeltPromotionsList: View {
-    @Binding var promotions: [Promotion]
+    var promotionModels: [FetchedResults<PromotionModel>.Element]
+    
+    @State var promotions: [Promotion] = []
+    
+    @Environment (\.managedObjectContext) var managedObjContext
     
     var body: some View {
         List {
-            ForEach(promotions, id: \.id) { promotion in
+            ForEach(promotions.prefix(5), id: \.id) { promotion in
                 BeltPromotionsListCell(stripes: promotion.stripes, date: promotion.date)
                     .padding(5)
-            }.onDelete { offset in
+            }.onDelete { offsets in
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    promotions.remove(atOffsets: offset)
+                    promotions.remove(atOffsets: offsets)
+                    for index in offsets {
+                        let model = promotionModels[index]
+                        PersistanceManager.shared.delete(model: model, context: managedObjContext)
+                    }
                 }
             }
             .background(Color("listBG"))
@@ -259,7 +308,16 @@ struct BeltPromotionsList: View {
             .listRowInsets(EdgeInsets(.zero))
         }
         .listStyle(.plain)
-        .frame(minHeight: 50 * CGFloat(promotions.count))
+        .frame(minHeight: 50 * CGFloat(promotions.prefix(5).count))
+        .task {
+            setupPromotions()
+        }
+    }
+    
+    func setupPromotions() {
+        promotions = promotionModels.map {
+            Promotion.from($0)
+        }
     }
 }
 

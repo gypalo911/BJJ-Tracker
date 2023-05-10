@@ -10,6 +10,7 @@
 		28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */; };
 		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
 		D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */; };
+		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDC29E726E600BED6CD /* InfographicsView.swift */; };
 		D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDE29E7276700BED6CD /* PieSliceView.swift */; };
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
@@ -87,6 +88,7 @@
 		AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker_bjjtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
+		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
 		D02F3DDC29E726E600BED6CD /* InfographicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfographicsView.swift; sourceTree = "<group>"; };
 		D02F3DDE29E7276700BED6CD /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			children = (
 				D0B01F2529E43DAF00E10979 /* Color */,
 				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
+				D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */,
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
 				D0E824BE29DF006A0023E6C0 /* Date+extension.swift */,
@@ -714,6 +717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
+				D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
 				D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */,

@@ -11,6 +11,7 @@ struct AddPromotionView: View {
     @StateObject var promotion: Promotion = .init(gradingSystem: .adult, adultBelt: .white, stripes: 0, date: Date(), location: "", notes: "")
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.managedObjectContext) var managedObjContext
     
     var body: some View {
         NavigationView {
@@ -91,6 +92,7 @@ struct AddPromotionView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
+                                save()
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Text("Save")
@@ -104,19 +106,9 @@ struct AddPromotionView: View {
             }
         }
     }
-}
-
-
-struct AddPromotionView_Previews: PreviewProvider {
-    struct Container: View {
-        
-        var body: some View {
-            AddPromotionView()
-        }
-    }
     
-    static var previews: some View {
-        Container()
+    func save() {
+        PersistanceManager.shared.createPromotion(from: promotion, context: managedObjContext)
     }
 }
 
@@ -131,5 +123,18 @@ struct NumberPickerView: View {
             }
         }
         .pickerStyle(.segmented)
+    }
+}
+
+struct AddPromotionView_Previews: PreviewProvider {
+    struct Container: View {
+        
+        var body: some View {
+            AddPromotionView()
+        }
+    }
+    
+    static var previews: some View {
+        Container()
     }
 }

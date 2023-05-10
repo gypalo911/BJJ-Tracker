@@ -24,6 +24,10 @@ enum AdultBelts: String, CaseIterable, Identifiable {
     
     var id: String { self.rawValue }
     
+    var index: Int {
+        AdultBelts.allCases.filter { $0 != .none }.firstIndex(of: self) ?? 0
+    }
+    
     var color: (Color, Color?) {
         switch self {
         case .white:
@@ -58,6 +62,10 @@ enum JuniorBelts: String, CaseIterable, Identifiable {
     case none
     
     var id: String { self.rawValue }
+    
+    var index: Int {
+        JuniorBelts.allCases.filter { $0 != .none }.firstIndex(of: self) ?? 0
+    }
     
     var color: (Color, Color?) {
         switch self {
@@ -134,5 +142,18 @@ class Promotion: Identifiable, ObservableObject {
 extension Promotion: Equatable {
     static func == (lhs: Promotion, rhs: Promotion) -> Bool {
         lhs.id == rhs.id
+    }
+}
+
+extension Promotion {
+    static func from(_ model: PromotionModel) -> Promotion {
+        Promotion(
+            id: model.id ?? UUID(),
+            gradingSystem: GradingSystem(rawValue: model.gradingSystem ?? "adult") ?? .adult,
+            stripes: Int(model.stripes),
+            date: model.date ?? Date(),
+            location: model.location ?? "",
+            notes: model.notes ?? ""
+        )
     }
 }
