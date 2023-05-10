@@ -67,16 +67,18 @@ struct MonthCalendarView: View {
         let status = Calendar.current.isDate(value.date, inSameDayAs: selectedDate)
         let isToday = Calendar.current.isDateInToday(value.date)
         
-        let session = sessions.first(where: { session in
+        let sessionsColors = sessions.filter { session in
             return Calendar.current.isDate(session.startDate ?? Date(), inSameDayAs: value.date)
-        })
+        }.map {
+            $0.activityType.color
+        }
         ZStack() {
             if value.day != -1 {
                 CalendarDayView(
                     date: value.date,
                     isToday: isToday,
                     isSelected: status,
-                    activityColor: session?.activityType.color,
+                    activitiesColors: sessionsColors,
                     colors: colors
                 )
                 .onTapGesture {

@@ -31,9 +31,11 @@ struct WeekCalendarView: View {
             HStack {
                 ForEach(currentWeek, id: \.self.id) { weekDay in
                     
-                    let session = sessions.first(where: { session in
+                    let sessionsColors = sessions.filter { session in
                         return Calendar.current.isDate(session.startDate ?? Date(), inSameDayAs: weekDay.date)
-                    })
+                    }.map {
+                        $0.activityType.color
+                    }
                     
                     let isSelected = Calendar.current.isDate(weekDay.date, inSameDayAs: selectedDay)
                     let isToday = Calendar.current.isDateInToday(weekDay.date)
@@ -43,7 +45,7 @@ struct WeekCalendarView: View {
                             date: weekDay.date,
                             isToday: isToday,
                             isSelected: isSelected,
-                            activityColor: session?.activityType.color,
+                            activitiesColors: sessionsColors,
                             colors: colors
                         )
                     }.onTapGesture {

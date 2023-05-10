@@ -20,7 +20,7 @@ struct CalendarDayView: View {
     let isToday: Bool
     let isSelected: Bool
 
-    let activityColor: Color?
+    let activitiesColors: [Color]
     let colors: CalendarDayColors
     
     var body: some View {
@@ -41,10 +41,21 @@ struct CalendarDayView: View {
                     .foregroundColor(isSelected ? colors.selectedTextColor : colors.textColor)
                     .frame(maxWidth: .infinity)
             }
-            Circle()
-                .frame(height: 10)
-                .foregroundColor(activityColor ?? .clear)
-                .cornerRadius(10)
+            if activitiesColors.isEmpty {
+                Circle()
+                    .frame(height: 10)
+                    .foregroundColor(.clear)
+                    .cornerRadius(10)
+            } else {
+                HStack(spacing: 1) {
+                    ForEach(activitiesColors.prefix(3), id: \.self) { activityColor in
+                        Circle()
+                            .frame(height: 10)
+                            .foregroundColor(activityColor)
+                            .cornerRadius(10)
+                    }
+                }
+            }
         }
     }
 }
