@@ -93,7 +93,7 @@ struct ProfileView: View {
                 HStack(spacing: 10) {
                     StatsView(text: "Sessions", value: "\(sessionsList.count)")
                     StatsView(text: "Total time", value: totalTime())
-                }.padding(20)
+                }.padding(.horizontal, 20)
                 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
@@ -106,27 +106,32 @@ struct ProfileView: View {
                                         .font(.system(size: 16))
                                         .fontWeight(.medium)
                                 }
-                                .hAlign(.leading)
+                                .hAlign(.bottomLeading)
                             }
-                            Button(action: {
-                                showingActionSheet = true
-                                actionSheetState = .gradingSystem
-                            }, label: {
-                                HStack(spacing: 10) {
-                                    Text(gradingSystem.rawValue.capitalized)
-                                    Image(systemName: "chevron.down")
-                                        .scaledToFit()
-                                        .frame(width: 15)
-                                }
-                                .padding(.vertical, 5)
-                                .padding(.horizontal, 15)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(lineWidth: 1)
-                                        .fill(Color("LightGray"))
-                                )
-                            })
-                            .hAlign(.topTrailing)
+                            VStack {
+                                Button(action: {
+                                    showingActionSheet = true
+                                    actionSheetState = .gradingSystem
+                                }, label: {
+                                    HStack(spacing: 10) {
+                                        Text(gradingSystem.rawValue.capitalized)
+                                            .foregroundColor(Color.black)
+                                        Image(systemName: "chevron.down")
+                                            .scaledToFit()
+                                            .frame(width: 15)
+                                            .foregroundColor(Color.black)
+                                    }
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 15)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(lineWidth: 1)
+                                            .fill(Color("LightGray"))
+                                    )
+                                })
+                                .hAlign(.topTrailing)
+                                Spacer()
+                            }
                         }
                         
                         VStack {
