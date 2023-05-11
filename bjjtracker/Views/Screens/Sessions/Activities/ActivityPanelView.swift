@@ -36,11 +36,11 @@ struct ActivityPanelView: View {
                         }
                     }
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("\(session.activityType.rawValue)")
+                        Text("\(session.activityType.rawValue.localizedString)")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
-                        Text("\(session.activityStyle.rawValue) • \(session.location ?? "")")
+                        Text("\(session.activityStyle.rawValue.localizedString) • \(session.location ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
                             .fontWeight(.regular)
@@ -60,7 +60,7 @@ struct ActivityPanelView: View {
                             .cornerRadius(5)
                             .defaultShadow()
                             .frame(width: 76, height: 23)
-                        Text("\(session.status.rawValue)".uppercased())
+                        Text("\(session.status.rawValue.localizedString)".uppercased())
                             .font(.system(size: 10))
                             .foregroundColor(.white)
                             .fontWeight(.bold)

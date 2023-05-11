@@ -91,8 +91,8 @@ struct ProfileView: View {
                 .padding(.top, 10)
                 
                 HStack(spacing: 10) {
-                    StatsView(text: "Sessions", value: "\(sessionsList.count)")
-                    StatsView(text: "Total time", value: totalTime())
+                    StatsView(text: "Sessions".localizedString, value: "\(sessionsList.count)")
+                    StatsView(text: "Total time".localizedString, value: totalTime())
                 }.padding(.horizontal, 20)
                 
                 ScrollView(showsIndicators: false) {
@@ -101,7 +101,7 @@ struct ProfileView: View {
                             if let lastPromotion = lastPromotion {
                                 VStack(spacing: 10) {
                                     BeltView(beltColor: lastPromotion.belt.color, stripesCount: Int(lastPromotion.stripes))
-                                    Text(beltDescription)
+                                    Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
                                         .foregroundColor(.gray)
                                         .font(.system(size: 16))
                                         .fontWeight(.medium)
@@ -114,7 +114,8 @@ struct ProfileView: View {
                                     actionSheetState = .gradingSystem
                                 }, label: {
                                     HStack(spacing: 10) {
-                                        Text(gradingSystem.rawValue.capitalized)
+                                        Text(gradingSystem.rawValue.localizedString.capitalized)
+                                            .font(.system(size: 16))
                                             .foregroundColor(Color.black)
                                         Image(systemName: "chevron.down")
                                             .scaledToFit()
@@ -171,7 +172,7 @@ struct ProfileView: View {
                 if actionSheetState == .gradingSystem {
                     let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
                     return ActionSheet(title: Text("Select Grading System"), buttons: [
-                        .default(Text(newSystem.rawValue.capitalized), action: {
+                        .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
                             gradingSystem = gradingSystem == .adult ? .junior : .adult
                         }),
                         .cancel()
@@ -247,7 +248,7 @@ struct BeltProgressCell: View {
                             }
                         }
                         
-                        Text("\(belt.title) belt")
+                        Text("%@ belt".localized(with: ["\(belt.title)"]))
                     }
                     Spacer()
                     if !promotionModels.isEmpty {
@@ -419,11 +420,11 @@ struct BeltPromotionsListCell: View {
                 Circle()
                     .foregroundColor(.black)
                     .frame(width: 10)
-                Text("Stripes: \(stripes)")
+                Text("Stripes: %@".localized(with: ["\(stripes)"]))
                     .font(.system(size: 14))
                     .fontWeight(.bold)
             }
-            Text(date.toString("dd MMM yyyy"))
+            Text(date.toString("dd MMMM yyyy"))
                 .font(.system(size: 14))
                 .fontWeight(.semibold)
                 .foregroundColor(Color.gray)

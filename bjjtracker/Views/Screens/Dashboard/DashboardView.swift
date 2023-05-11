@@ -85,9 +85,9 @@ struct DashboardView: View {
                         .padding(.top, 10)
                         
                         HStack(spacing: 10) {
-                            StatsView(text: "Sessions", value: "\(currentWeekSessions.count)", tendecyGrows: currentWeekSessions.count > lastWeekSessions.count, tendecyValue: "\(abs(currentWeekSessions.count - lastWeekSessions.count))")
+                            StatsView(text: "Sessions".localizedString, value: "\(currentWeekSessions.count)", tendecyGrows: currentWeekSessions.count > lastWeekSessions.count, tendecyValue: "\(abs(currentWeekSessions.count - lastWeekSessions.count))")
                             StatsView(
-                                text: "Total time",
+                                text: "Total time".localizedString,
                                 value: totalTime(currentWeekSessions).minutesToDuration(), tendecyGrows: totalTime(currentWeekSessions) > totalTime(lastWeekSessions),
                                 tendecyValue: "\(abs(totalTime(currentWeekSessions) - totalTime(lastWeekSessions)).minutesToDuration())"
                             )
@@ -95,7 +95,7 @@ struct DashboardView: View {
                         .padding(.all, 20)
                         
                         HStack {
-                            Text("\(selectedDay.toString("MMMM yyyy"))")
+                            Text("\(selectedDay.toString("MMMM yyyy").capitalized)")
                                 .font(.system(size: 22))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)

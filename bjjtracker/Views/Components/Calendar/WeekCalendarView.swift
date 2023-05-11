@@ -19,7 +19,7 @@ struct WeekCalendarView: View {
         VStack(alignment: .center, spacing: 10) {
             HStack(spacing: 0) {
                 ForEach(currentWeek, id: \.self) { day in
-                    Text("\(day.dayOfWeek)")
+                    Text("\(day.dayOfWeek.capitalized)")
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colors.textColor)

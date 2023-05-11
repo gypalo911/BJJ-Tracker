@@ -44,7 +44,7 @@ struct CustomTabBarView: View {
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(Color("Purple"))
-                            Text(tab.rawValue)
+                            Text(tab.rawValue.localizedString)
                                 .foregroundColor(Color("Purple"))
                                 .font(.system(size: 16))
                                 .fontWeight(.semibold)

@@ -29,7 +29,7 @@ struct DraggableCalendarView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 15) {
-                Text("\(selectedDay.toString("MMMM yyyy"))")
+                Text("\(selectedDay.toString("MMMM yyyy").capitalized)")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                     .foregroundColor(.black)

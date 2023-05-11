@@ -77,26 +77,29 @@ enum Belt: Int, CaseIterable {
     }
     
     var title: String {
-        switch self {
-        case .white: return "White"
-        case .blue: return "Blue"
-        case .purple: return "Purple"
-        case .brown: return "Brown"
-        case .black: return "Black"
-        case .GreyWhite: return "Grey/White"
-        case .Grey: return "Grey"
-        case .GreyBlack: return "Grey/Black"
-        case .YellowWhite: return "Yellow/White"
-        case .Yellow: return "Yellow"
-        case .YellowBlack: return "Yellow/Black"
-        case .OrangeWhite: return "Orange/White"
-        case .Orange: return "Orange"
-        case .OrangeBlack: return "Orange/Black"
-        case .GreenWhite: return "Green/White"
-        case .Green: return "Green"
-        case .GreenBlack: return "Green/Black"
-        case .none: return ""
-        }
+        let result: String = {
+            switch self {
+            case .white: return "White"
+            case .blue: return "Blue"
+            case .purple: return "Purple"
+            case .brown: return "Brown"
+            case .black: return "Black"
+            case .GreyWhite: return "Grey/White"
+            case .Grey: return "Grey"
+            case .GreyBlack: return "Grey/Black"
+            case .YellowWhite: return "Yellow/White"
+            case .Yellow: return "Yellow"
+            case .YellowBlack: return "Yellow/Black"
+            case .OrangeWhite: return "Orange/White"
+            case .Orange: return "Orange"
+            case .OrangeBlack: return "Orange/Black"
+            case .GreenWhite: return "Green/White"
+            case .Green: return "Green"
+            case .GreenBlack: return "Green/Black"
+            case .none: return ""
+            }
+        }()
+        return result.localizedString
     }
     
     static func belts(for system: GradingSystem) -> [Belt] {

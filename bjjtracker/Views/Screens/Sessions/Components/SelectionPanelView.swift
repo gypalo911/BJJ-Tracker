@@ -105,7 +105,7 @@ struct RectangleOption: View {
                 selectedType = type
             }
         }, label: {
-            Text(type)
+            Text(type.localizedString)
                 .fontWeight(.regular)
                 .foregroundColor(.black)
                 .padding(.horizontal, 15)

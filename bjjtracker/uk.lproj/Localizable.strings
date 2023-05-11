@@ -1,0 +1,109 @@
+//
+//  Localizable.strings
+//  bjjtracker
+//
+//  Created by Petro Hupalo on 11.05.2023.
+//
+
+// Dashboard
+"Dashboard" = "Головна";
+"Calendar" = "Календар";
+"Sessions" = "Сесії";
+"Total time" = "Час";
+"View History" = "Переглянути сховок";
+
+"Select Action" = "Обери дію";
+"Add Promotion" = "Додати досягнення";
+"Add Session" = "Додати тренування";
+"Create Session" = "Створити Заняття";
+
+"1. Grading system:" = "1. Система поясів:";
+"2. Belt: %@" = "2. Пояс: %@";
+"3. Number of stripes:" = "3. Кількість полосок:";
+"4. Select date:" = "4. Обери дату:";
+
+"1. Select type:" = "1. Обери тип:";
+"2. Select grappling style:" = "2. Обери стиль греплінгу:";
+"3. Select date and time:" = "3. Обери дату та час:";
+"4. Duration:" = "4. Тривалість:";
+"Location:" = "Місце:";
+"Location..." = "Місце...";
+"Add some details..." = "Занотуй щось...";
+"Save" = "Зберегти";
+"Delete" = "Видалити";
+
+"Edit Session" = "Редагувати Заняття";
+
+// Sessions
+"UPCOMING" = "СКОРО";
+"FINISHED" = "Завершено";
+"ONGOING" = "Триває";
+
+"Gi" = "Гі";
+"No-gi" = "Ноу-Гі";
+
+"Class" = "Тренування";
+"Classes" = "Тренування";
+"Competition" = "Змагання";
+"Competitions" = "Змагання";
+"Seminar" = "Семінар";
+"Seminars" = "Семінари";
+
+"Location" = "Місце";
+"Notes" = "Нотатки";
+
+// Timetable
+"Timetable" = "Календар";
+
+// Archive
+"Archive" = "Сховок";
+
+// Statistics
+"Statistics" = "Статистика";
+
+"Week" = "Тиждень";
+"Month" = "Місяць";
+"Year" = "Рік";
+
+"Types of sessions"= "Типи занять";
+"Sessions by grapling style"= "Типи занять за стилем греплінгу";
+"Gi sessions" = "Гі заняття";
+"No Gi sessions" = "Ноу Гі заняття";
+
+// Profile
+"Profile" = "Профіль";
+
+"Progress" = "Прогрес";
+"Stripe" = "Полоска";
+"Stripes" = "Полоски";
+"Select Grading System" = "Обери Систему Поясів";
+
+"%@ belt %@ stripes" = "%@ пояс %@ полоски";
+"Stripes: %@" = "Полоски: %@";
+"%@ belt" = "%@ пояс";
+
+// Belt
+"Belt" = "Пояс";
+"belt" = "пояс";
+"Adult" = "Дорослий";
+"Junior" = "Юніор";
+"adult" = "Дорослий";
+"junior" = "Юніор";
+
+"White" = "Білий";
+"Blue" = "Синій";
+"Purple" = "Фіолетовий";
+"Brown" = "Коричневий";
+"Black" = "Чорний";
+"Grey/White" = "Сіро/Білий";
+"Grey" = "Сірий";
+"Grey/Black" = "Сіро/Чорний";
+"Yellow/White" = "Жовто/Білий";
+"Yellow" = "Жовтий";
+"Yellow/Black" = "Жовто/Чорний";
+"Orange/White" = "Оранжево/Білий";
+"Orange" = "Оранжевий";
+"Orange/Black" = "Оранжево/Чорний";
+"Green/White" = "Зелено/Білий";
+"Green" = "Зелений";
+"Green/Black" = "Зелено/Чорний";

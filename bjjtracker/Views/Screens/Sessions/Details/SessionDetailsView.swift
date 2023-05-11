@@ -21,7 +21,8 @@ struct SessionDetailsView: View {
     }
     
     var body: some View {
-        let navTitle = "\(self.session.activityStyle.rawValue) \(self.session.activityType.rawValue)"
+        let navTitle = "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
+
         let linearGradient = LinearGradient(
             gradient: Gradient(stops: [
                 .init(color: self.session.activityType.color.opacity(0.8), location: 0.4),
@@ -43,7 +44,7 @@ struct SessionDetailsView: View {
                                     .cornerRadius(5)
                                     .defaultShadow()
                                     .frame(width: 76, height: 23)
-                                Text("\(session.status.rawValue)".uppercased())
+                                Text("\(session.status.rawValue.localizedString)".uppercased())
                                     .font(.system(size: 10))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)

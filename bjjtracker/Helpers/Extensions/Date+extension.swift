@@ -68,9 +68,12 @@ extension Int {
         let hours = Int(self / 60)
         let minutes = Int(self % 60)
         if hours != 0 {
-            str += "\(hours)h "
+            str += "\(hours)h"
         }
         if minutes != 0 {
+            if hours != 0 {
+                str += " "
+            }
             str += "\(minutes)m"
         }
          

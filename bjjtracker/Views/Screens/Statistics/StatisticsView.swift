@@ -19,7 +19,11 @@ struct StatisticsView: View {
     let bgColor: Color = Color("generalBG")
     
     @State private var selectedSegment: Int = CalendarSegment.week.rawValue
-    private var segments = ["Week", "Month", "Year"]
+    private var segments = [
+        "Week".localizedString,
+        "Month".localizedString,
+        "Year".localizedString
+    ]
     
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
@@ -170,8 +174,8 @@ struct StatisticsView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     HStack(spacing: 10) {
-                        StatsView(text: "Sessions", value: "\(totalSessions)", tendecyGrows: nil, tendecyValue: nil)
-                        StatsView(text: "Total time", value: totalTime, tendecyGrows: nil, tendecyValue: nil)
+                        StatsView(text: "Sessions".localizedString, value: "\(totalSessions)", tendecyGrows: nil, tendecyValue: nil)
+                        StatsView(text: "Total time".localizedString, value: totalTime, tendecyGrows: nil, tendecyValue: nil)
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
@@ -214,7 +218,7 @@ struct StatisticsView: View {
                             ],
                             colors: [Color("Blue"), Color("LightBlue")],
                             textColors: [.white, .black],
-                            names: ["Gi sessions", "No Gi sessions"],
+                            names: ["Gi sessions".localizedString, "No Gi sessions".localizedString],
                             backgroundColor: bgColor, innerRadiusFraction: 0.4
                         )
                         .padding(.vertical, 20)

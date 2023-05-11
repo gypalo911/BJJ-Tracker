@@ -35,18 +35,18 @@ struct EditSessionView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "1. Select type:")
+                                TitleTextView(text: "1. Select type:".localizedString)
 
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
                                     selectedType: $activity.type,
-                                    selectedTypeValue: activity.type.rawValue
+                                    selectedTypeValue: activity.type.rawValue.localizedString
                                 )
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "2. Select grappling style:")
+                                TitleTextView(text: "2. Select grappling style:".localizedString)
                                 SelectionPanelView(
                                     g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
@@ -55,14 +55,14 @@ struct EditSessionView: View {
                                 )
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "3. Select date and time:")
+                                TitleTextView(text: "3. Select date and time:".localizedString)
                                 DatePicker("", selection: $activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "4. Duration:")
+                                TitleTextView(text: "4. Duration:".localizedString)
 
                                 DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
                                 if isPickerPresented {
@@ -75,8 +75,8 @@ struct EditSessionView: View {
                         
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Location:")
-                                TextField("Location...", text: $activity.location)
+                                TitleTextView(text: "Location:".localizedString)
+                                TextField("Location...".localizedString, text: $activity.location)
                                     .padding(20)
                                     .background {
                                         RoundedRectangle(cornerRadius: 10)
@@ -86,7 +86,7 @@ struct EditSessionView: View {
                             }
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Notes")
+                                TitleTextView(text: "Notes".localizedString)
                                 CustomTextEditor(text: $activity.notes)
                             }
                         }
@@ -104,7 +104,7 @@ struct EditSessionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Edit Session")
+                    .navigationTitle("Edit Session".localizedString)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {

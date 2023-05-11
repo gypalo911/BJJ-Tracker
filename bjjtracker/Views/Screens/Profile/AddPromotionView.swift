@@ -20,7 +20,7 @@ struct AddPromotionView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "1. Grading system:")
+                                TitleTextView(text: "1. Grading system:".localizedString)
                                 
                                 SelectionPanelView<GradingSystem>(
                                     g: geometry,
@@ -31,16 +31,16 @@ struct AddPromotionView: View {
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "2. Belt: \(promotion.belt.title)")
+                                TitleTextView(text: "2. Belt: \(promotion.belt.title)".localizedString)
                                 
                                 BeltsListView(promotion: promotion)
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "3. Number of stripes:")
+                                TitleTextView(text: "3. Number of stripes:".localizedString)
                                 NumberPickerView(selectedNumber: $promotion.stripes)
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "4. Select date:")
+                                TitleTextView(text: "4. Select date:".localizedString)
                                 
                                 DatePicker("", selection: $promotion.date)
                                     .datePickerStyle(.compact)
@@ -76,7 +76,7 @@ struct AddPromotionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Add Promotion")
+                    .navigationTitle("Add Promotion".localizedString)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {

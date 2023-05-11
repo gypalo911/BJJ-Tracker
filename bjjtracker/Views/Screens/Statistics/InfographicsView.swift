@@ -21,7 +21,7 @@ struct InfographicsView: View {
                     Text("\(statsInfo[.training] ?? 0)")
                         .font(.system(size: 24))
                         .fontWeight(.bold)
-                    Text("classes")
+                    Text("Classes")
                         .font(.system(size: 14))
                         .fontWeight(.medium)
                 }

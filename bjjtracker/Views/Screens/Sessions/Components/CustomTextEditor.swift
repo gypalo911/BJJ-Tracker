@@ -23,7 +23,7 @@ struct CustomTextEditor: View {
                 .padding(.leading, 5)
             if text.isEmpty {
                 VStack {
-                    Text("Add some details...")
+                    Text("Add some details...".localizedString)
                         .font(.custom("Helvetica", size: 18))
                         .foregroundColor(Color("GrayTextColor"))
                         .padding(30)
