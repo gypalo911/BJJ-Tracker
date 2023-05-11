@@ -158,23 +158,23 @@ struct TitleTextView: View {
     }
 }
 
-struct SelectionPanelView_Previews: PreviewProvider {
-    struct Container: View {
-        @StateObject var promotion: Promotion = .init(gradingSystem: .adult, adultBelt: .white, stripes: 1, date: Date(), location: "", notes: "")
-        
-        var body: some View {
-            GeometryReader {geometry in
-                SelectionPanelView(
-                    g: geometry,
-                    valuesList: AdultBelts.allCases.filter { $0 != .none }.map { $0.rawValue },
-                    selectedType: $promotion.adultBelt,
-                    selectedTypeValue: AdultBelts.white.rawValue
-                )
-            }
-        }
-    }
-    
-    static var previews: some View {
-        Container()
-    }
-}
+//struct SelectionPanelView_Previews: PreviewProvider {
+//    struct Container: View {
+//        @StateObject var promotion: Promotion = .init(belt: .blue, stripes: 2, date: Date(), location: "", notes: "")
+//
+//        var body: some View {
+//            GeometryReader {geometry in
+//                SelectionPanelView(
+//                    g: geometry,
+//                    valuesList: Belt.belts(for: .adult).map { $0.rawValue },
+//                    selectedType: $promotion.belt,
+//                    selectedTypeValue: Belt.white.rawValue
+//                )
+//            }
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Container()
+//    }
+//}

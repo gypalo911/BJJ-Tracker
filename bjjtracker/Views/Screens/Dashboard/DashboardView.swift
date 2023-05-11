@@ -63,12 +63,27 @@ struct DashboardView: View {
                         .position(CGPoint(x: geometry.size.width/2, y: 0))
                         .defaultShadow()
                     VStack(spacing: 0) {
-                        Text("Dashboard")
-                            .font(.system(size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding(.leading, 20)
-                            .hAlign(.leading)
+                        HStack {
+                            Text("Dashboard")
+                                .font(.system(size: 28))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .hAlign(.leading)
+                            
+                            Button {
+                                showingActionSheet = true
+                            } label: {
+                                Image("createButton")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                            }
+                            .hAlign(.trailing)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                        .padding(.top, 10)
+                        
                         HStack(spacing: 10) {
                             StatsView(text: "Sessions", value: "\(currentWeekSessions.count)", tendecyGrows: currentWeekSessions.count > lastWeekSessions.count, tendecyValue: "\(abs(currentWeekSessions.count - lastWeekSessions.count))")
                             StatsView(
@@ -80,22 +95,11 @@ struct DashboardView: View {
                         .padding(.all, 20)
                         
                         HStack {
-                            Text("\(selectedDay.toString("MMMM YYYY"))")
+                            Text("\(selectedDay.toString("MMMM yyyy"))")
                                 .font(.system(size: 22))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                                 .hAlign(.leading)
-                            
-//                            NavigationLink(destination: {
-//                                StatisticsView(
-//                                    presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: currentWeek.first!.date, end: currentWeek.last!.date))
-//                                )
-//                            }) {
-//                                Image("stats")
-//                                    .resizable()
-//                                    .frame(width: 25, height: 25)
-//                                    .foregroundColor(.white)
-//                            }
                         }
                         .padding(.horizontal, 30)
                         .padding(.top, 10)
@@ -167,24 +171,9 @@ struct DashboardView: View {
                 }
             }
             .background(Color("generalBG").ignoresSafeArea())
-            .onAppear {
-//                calcTotalSessions()
-            }
             .onChange(of: filteredSessions) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
                     self.headerHeight = items.isEmpty ? 590 : 640
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingActionSheet = true
-                    } label: {
-                        Image("createButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                    }
                 }
             }
             .actionSheet(isPresented: $showingActionSheet) {

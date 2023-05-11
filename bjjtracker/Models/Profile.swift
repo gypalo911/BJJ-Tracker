@@ -8,6 +8,6 @@
 import Foundation
 
 struct Profile {
-    var belt: any Belt
+    var belt: Belt
     var stripes: Int?
 }

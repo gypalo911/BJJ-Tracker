@@ -8,25 +8,32 @@
 import SwiftUI
 
 enum GradingSystem: String, CaseIterable {
-    case junior = "Junior"
-    case adult = "Adult"
+    case junior = "junior"
+    case adult = "adult"
 }
 
-protocol Belt: CaseIterable, Hashable {}
-
-enum AdultBelts: String, CaseIterable, Identifiable {
-    case white = "White"
-    case blue = "Blue"
-    case purple = "Purple"
-    case brown = "Brown"
-    case black = "Black"
+enum Belt: Int, CaseIterable {
+    case white
+    case blue
+    case purple
+    case brown
+    case black
+    case GreyWhite
+    case Grey
+    case GreyBlack
+    case YellowWhite
+    case Yellow
+    case YellowBlack
+    case OrangeWhite
+    case Orange
+    case OrangeBlack
+    case GreenWhite
+    case Green
+    case GreenBlack
     case none
     
-    var id: String { self.rawValue }
-    
-    var index: Int {
-        AdultBelts.allCases.filter { $0 != .none }.firstIndex(of: self) ?? 0
-    }
+    static let juniorBelts: [Belt] = [.GreyWhite, .Grey, .GreyBlack, .YellowWhite, .Yellow, .YellowBlack, .OrangeWhite, .Orange, .OrangeBlack, .GreenWhite, .Green, .GreenBlack]
+    static let adultBelts: [Belt] = [.white, .blue, .purple, .brown, .black]
     
     var color: (Color, Color?) {
         switch self {
@@ -40,35 +47,6 @@ enum AdultBelts: String, CaseIterable, Identifiable {
             return (Color(UIColor.brown), nil)
         case .black:
             return (Color.black, .red)
-        case .none:
-            return (.clear, nil)
-        }
-    }
-}
-
-enum JuniorBelts: String, CaseIterable, Identifiable {
-    case GreyWhite = "Grey/White"
-    case Grey = "Grey"
-    case GreyBlack = "Grey/Black"
-    case YellowWhite = "Yellow/White"
-    case Yellow = "Yellow"
-    case YellowBlack = "Yellow/Black"
-    case OrangeWhite = "Orange/White"
-    case Orange = "Orange"
-    case OrangeBlack = "Orange/Black"
-    case GreenWhite = "Green/White"
-    case Green = "Green"
-    case GreenBlack = "Green/Black"
-    case none
-    
-    var id: String { self.rawValue }
-    
-    var index: Int {
-        JuniorBelts.allCases.filter { $0 != .none }.firstIndex(of: self) ?? 0
-    }
-    
-    var color: (Color, Color?) {
-        switch self {
         case .GreyWhite:
             return (Color.gray, Color.white)
         case .Grey:
@@ -94,43 +72,65 @@ enum JuniorBelts: String, CaseIterable, Identifiable {
         case .GreenBlack:
             return (Color.green, Color.black)
         case .none:
-            return (.clear, nil)
+            return (Color.clear, nil)
         }
+    }
+    
+    var title: String {
+        switch self {
+        case .white: return "White"
+        case .blue: return "Blue"
+        case .purple: return "Purple"
+        case .brown: return "Brown"
+        case .black: return "Black"
+        case .GreyWhite: return "Grey/White"
+        case .Grey: return "Grey"
+        case .GreyBlack: return "Grey/Black"
+        case .YellowWhite: return "Yellow/White"
+        case .Yellow: return "Yellow"
+        case .YellowBlack: return "Yellow/Black"
+        case .OrangeWhite: return "Orange/White"
+        case .Orange: return "Orange"
+        case .OrangeBlack: return "Orange/Black"
+        case .GreenWhite: return "Green/White"
+        case .Green: return "Green"
+        case .GreenBlack: return "Green/Black"
+        case .none: return ""
+        }
+    }
+    
+    static func belts(for system: GradingSystem) -> [Belt] {
+        system == .junior ? Belt.juniorBelts : Belt.adultBelts
     }
 }
 
 class Promotion: Identifiable, ObservableObject {
     var id = UUID()
-    @Published var gradingSystem: GradingSystem {
+    @Published var gradingSystem: GradingSystem = .adult {
         willSet {
-            if gradingSystem == .adult {
-                adultBelt = .none
-            } else {
-                juniorBelt = .none
-            }
+            belt = .none
         }
     }
-    @Published var adultBelt: AdultBelts
-    @Published var juniorBelt: JuniorBelts
+    @Published var belt: Belt
     @Published var stripes: Int
     @Published var date: Date
     @Published var location: String = ""
     @Published var notes: String = ""
     
+    var beltType: GradingSystem {
+        Belt.juniorBelts.contains(belt) ? .junior : .adult
+    }
+    
     init(
         id: UUID = UUID(),
-        gradingSystem: GradingSystem,
-        adultBelt: AdultBelts = .none,
-        juniorBelt: JuniorBelts = .none,
+        belt: Belt,
         stripes: Int,
         date: Date,
         location: String,
         notes: String
     ) {
         self.id = id
-        self.gradingSystem = gradingSystem
-        self.adultBelt = adultBelt
-        self.juniorBelt = juniorBelt
+        self.belt = belt
         self.stripes = stripes
         self.date = date
         self.location = location
@@ -149,7 +149,7 @@ extension Promotion {
     static func from(_ model: PromotionModel) -> Promotion {
         Promotion(
             id: model.id ?? UUID(),
-            gradingSystem: GradingSystem(rawValue: model.gradingSystem ?? "adult") ?? .adult,
+            belt: Belt(rawValue: Int(model.belt)) ?? .white,
             stripes: Int(model.stripes),
             date: model.date ?? Date(),
             location: model.location ?? "",

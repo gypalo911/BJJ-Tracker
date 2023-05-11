@@ -17,7 +17,7 @@ struct DraggableCalendarView: View {
     
     var sessions: FetchedResults<Session>
     
-    @State private var maxHeight: CGFloat = 400
+    @State private var maxHeight: CGFloat = 420
     
     @State private var sliderProgress: CGFloat = 0
     @State private var sliderHeight: CGFloat = 0
@@ -28,41 +28,26 @@ struct DraggableCalendarView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            HStack {
-                Text("\(selectedDay.toString("MMMM YYYY"))")
+            HStack(spacing: 15) {
+                Text("\(selectedDay.toString("MMMM yyyy"))")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
-                    .hAlign(.leading)
                 
-                HStack(spacing: 20) {
-//                    NavigationLink(destination: {
-//                        let presenter = StatisticsViewPresenter(
-//                            dateInterval: DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
-//                        )
-//                        StatisticsView(
-//                            presenter: presenter
-//                        )
-//                    }) {
-//                        Image("stats")
-//                            .resizable()
-//                            .frame(width: 25, height: 25)
-//                            .foregroundColor(Color("Blue"))
-//                    }
-                    Button(action: {
-                        withAnimation(.easeOut(duration: 0.3)) {
-                            isBottomSheetOpen = true
-                        }
-                    }, label: {
-                        Image("calendar")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Blue"))
-                    })
-                }
+                Button(action: {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        isBottomSheetOpen = true
+                    }
+                }, label: {
+                    Image("calendar")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color("Blue"))
+                })
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
+            .hAlign(.leading)
             Group {
                 if !showWeekView {
                     MonthCalendarView(

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddPromotionView: View {
-    @StateObject var promotion: Promotion = .init(gradingSystem: .adult, adultBelt: .white, stripes: 0, date: Date(), location: "", notes: "")
+    @StateObject var promotion: Promotion = .init(belt: .white, stripes: 0, date: Date(), location: "", notes: "")
     
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
@@ -31,9 +31,7 @@ struct AddPromotionView: View {
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                let belt = promotion.gradingSystem == .adult ? promotion.adultBelt.rawValue : promotion.juniorBelt.rawValue
-                                let newBelt = (belt == "none") ? "" : belt
-                                TitleTextView(text: "2. Belt: \(newBelt)")
+                                TitleTextView(text: "2. Belt: \(promotion.belt.title)")
                                 
                                 BeltsListView(promotion: promotion)
                             }

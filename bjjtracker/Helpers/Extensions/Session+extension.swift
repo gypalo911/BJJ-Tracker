@@ -10,7 +10,7 @@ import CoreData
 extension Session {
     @objc
     var startDateString: String {
-        return Calendar.current.startOfDay(for: startDate ?? Date()).toString("dd MMMM YYYY")
+        return Calendar.current.startOfDay(for: startDate ?? Date()).toString("dd MMMM yyyy")
     }
     
     func update(with activity: Activity) {

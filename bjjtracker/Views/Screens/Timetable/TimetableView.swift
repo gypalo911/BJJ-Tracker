@@ -41,13 +41,26 @@ struct TimetableView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Text("Timetable")
-                    .font(.system(size: 28))
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding([.leading, .bottom], 20)
-                    .hAlign(.leading)
-                    .background(Color.white.ignoresSafeArea())
+                HStack {
+                    Text("Timetable")
+                        .font(.system(size: 28))
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .hAlign(.leading)
+                    Button {
+                        showingActionSheet = true
+                    } label: {
+                        Image("createButton")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color("Blue"))
+                    }
+                    .hAlign(.trailing)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 10)
+                .padding(.top, 10)
+                .background(Color.white.ignoresSafeArea())
                 
                 VStack(spacing: 0) {
                     DraggableCalendarView(
@@ -109,18 +122,6 @@ struct TimetableView: View {
                 }.padding(.top, -10)
             }
             .background(Color("generalBG").ignoresSafeArea())
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingActionSheet = true
-                    } label: {
-                        Image("createButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color("Blue"))
-                    }
-                }
-            }
             .actionSheet(isPresented: $showingActionSheet) {
                 ActionSheet(title: Text("Select Action"), buttons: [
                     .default(Text("Add Promotion"), action: {

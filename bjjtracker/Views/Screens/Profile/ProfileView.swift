@@ -8,37 +8,125 @@
 import SwiftUI
 
 struct ProfileView: View {
+    enum ActionSheetState {
+        case none
+        case gradingSystem
+        case modalSheets
+    }
+    
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
+    @State var actionSheetState = ActionSheetState.none {
+        willSet {
+            showingActionSheet = newValue != .none
+        }
+    }
+    @State private var gradingSystem: GradingSystem = .adult
+    
+    func totalTime() -> String {
+        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
+    }
+    
+    var promotions: [Promotion] {
+        promotionModels.map {
+            Promotion.from($0)
+        }
+    }
+    
+    var lastPromotion: Promotion? {
+        let belts = Belt.belts(for: gradingSystem)
+        return promotions
+            .filter {
+                belts.contains($0.belt)
+            }
+            .sorted(by: {
+                ($0.belt.rawValue < $1.belt.rawValue) || ($0.stripes < $1.stripes)
+            }).last
+    }
+    
+    var beltDescription: String {
+        guard let lastPromotion = lastPromotion else {
+            return ""
+        }
+        var result = lastPromotion.belt.title
+        result += " belt "
+        result += "\(lastPromotion.stripes) stripes"
+        return result
+    }
+    
+    func isLocked(belt: Belt, lastPromotion: Promotion?) -> Bool {
+        guard let lastPromotion = lastPromotion else {
+            return true
+        }
+        return lastPromotion.belt.rawValue < belt.rawValue
+    }
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Profile")
-                    .font(.system(size: 28))
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding([.leading, .bottom], 20)
-                    .hAlign(.leading)
-                    .background(Color.white.ignoresSafeArea())
-                
-                VStack(spacing: 10) {
-                    BeltView(belt: .white, stripesCount: 1)
-                    Text("White belt 1 stripe")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16))
-                        .fontWeight(.medium)
+                HStack {
+                    Text("Profile")
+                        .font(.system(size: 28))
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .hAlign(.leading)
+                        .background(Color.white.ignoresSafeArea())
+                    
+                    Button {
+                        showingActionSheet = true
+                        actionSheetState = .modalSheets
+                    } label: {
+                        Image("createButton")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color("Blue"))
+                    }
+                    .hAlign(.trailing)
                 }
-                .hAlign(.center)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 30)
+                .padding(.top, 10)
+                
+                HStack(spacing: 10) {
+                    StatsView(text: "Sessions", value: "\(sessionsList.count)")
+                    StatsView(text: "Total time", value: totalTime())
+                }.padding(20)
                 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
-                        HStack(spacing: 10) {
-                            StatsView(text: "Sessions", value: "100")
-                            StatsView(text: "Total time", value: "200h")
+                        HStack {
+                            if let lastPromotion = lastPromotion {
+                                VStack(spacing: 10) {
+                                    BeltView(beltColor: lastPromotion.belt.color, stripesCount: Int(lastPromotion.stripes))
+                                    Text(beltDescription)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 16))
+                                        .fontWeight(.medium)
+                                }
+                                .hAlign(.leading)
+                            }
+                            Button(action: {
+                                showingActionSheet = true
+                                actionSheetState = .gradingSystem
+                            }, label: {
+                                HStack(spacing: 10) {
+                                    Text(gradingSystem.rawValue.capitalized)
+                                    Image(systemName: "chevron.down")
+                                        .scaledToFit()
+                                        .frame(width: 15)
+                                }
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 15)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(lineWidth: 1)
+                                        .fill(Color("LightGray"))
+                                )
+                            })
+                            .hAlign(.topTrailing)
                         }
                         
                         VStack {
@@ -51,8 +139,12 @@ struct ProfileView: View {
                             .padding([.leading, .top, .trailing], 15)
                             
                             VStack {
-                                ForEach(AdultBelts.allCases.filter { $0 != .none }, id: \.self) { belt in
-                                    BeltProgressCell(belt: belt, promotionModels: promotionModels)
+                                ForEach(Belt.belts(for: gradingSystem).filter { $0 != .none }, id: \.self) { belt in
+                                    BeltProgressCell(
+                                        belt: belt,
+                                        isLocked: isLocked(belt: belt, lastPromotion: lastPromotion),
+                                        promotionModels: promotionModels
+                                    )
                                 }
                             }
                             .padding(.horizontal, 5)
@@ -65,31 +157,31 @@ struct ProfileView: View {
                                 .cornerRadius(10)
                                 .defaultShadow()
                         )
-                    }.padding(20)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingActionSheet = true
-                    } label: {
-                        Image("createButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color("Blue"))
                     }
+                    .padding([.leading, .trailing, .top], 20)
+                    .padding(.bottom, 40)
                 }
             }
             .actionSheet(isPresented: $showingActionSheet) {
-                ActionSheet(title: Text("Select Action"), buttons: [
-                    .default(Text("Add Promotion"), action: {
-                        selectedSheet = .promotion
-                    }),
-                    .default(Text("Add Session"), action: {
-                        selectedSheet = .activity
-                    }),
-                    .cancel()
-                ])
+                if actionSheetState == .gradingSystem {
+                    let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
+                    return ActionSheet(title: Text("Select Grading System"), buttons: [
+                        .default(Text(newSystem.rawValue.capitalized), action: {
+                            gradingSystem = gradingSystem == .adult ? .junior : .adult
+                        }),
+                        .cancel()
+                    ])
+                } else {
+                    return ActionSheet(title: Text("Select Action"), buttons: [
+                        .default(Text("Add Promotion"), action: {
+                            selectedSheet = .promotion
+                        }),
+                        .default(Text("Add Session"), action: {
+                            selectedSheet = .activity
+                        }),
+                        .cancel()
+                    ])
+                }
             }
             .sheet(item: $selectedSheet) { selectedSheet in
                 switch selectedSheet {
@@ -112,9 +204,7 @@ struct ProfileView_Previews: PreviewProvider {
 struct BeltProgressCell: View {
     @State private var showPromotionsList: Bool = false
     
-    private var belt: AdultBelts
-//    private var sessionsCount: Int
-//    private var stripesCount: Int
+    private var belt: Belt
     
     private var showListBG: Bool {
         showPromotionsList && !promotionModels.isEmpty
@@ -123,15 +213,11 @@ struct BeltProgressCell: View {
     
     private let isLocked: Bool
     
-    init(belt: AdultBelts, promotionModels: FetchedResults<PromotionModel>) {
+    init(belt: Belt, isLocked: Bool, promotionModels: FetchedResults<PromotionModel>) {
         self.belt = belt
-        let currentBeltIndex = belt.index
-        let maxBeltIndex = promotionModels.map {
-            $0.index
-        }.max() ?? 0
-        self.isLocked = currentBeltIndex > maxBeltIndex
+        self.isLocked = isLocked
         self.promotionModels = promotionModels.filter {
-            $0.adultBelt == belt.rawValue
+            $0.belt == belt.rawValue
         }
     }
     
@@ -156,7 +242,7 @@ struct BeltProgressCell: View {
                             }
                         }
                         
-                        Text("\(belt.rawValue) belt")
+                        Text("\(belt.title) belt")
                     }
                     Spacer()
                     if !promotionModels.isEmpty {
@@ -190,21 +276,18 @@ struct BeltProgressCell: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(showListBG ? Color("listBG") : Color.white)
         )
-        .onAppear {
-            print(isLocked)
-        }
     }
 }
 
 struct BeltView: View {
     var beltWidth: CGFloat = 210
-    var belt: AdultBelts
+    var beltColor: (Color, Color?)
     var stripesCount: Int
     
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 10)
-                .fill(belt.color.0)
+                .fill(beltColor.0)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("Gray"), lineWidth: 1)
@@ -212,7 +295,7 @@ struct BeltView: View {
                 .frame(width: beltWidth, height: 36)
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .fill(belt.color.1 ?? .black)
+                    .fill(beltColor.1 ?? .black)
                     .frame(width: 65, height: 36)
                 HStack(spacing: 5) {
                     ForEach(0..<stripesCount, id: \.self) { stripe in

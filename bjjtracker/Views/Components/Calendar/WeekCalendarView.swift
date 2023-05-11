@@ -11,7 +11,6 @@ struct WeekCalendarView: View {
     @Binding var selectedDay: Date
     var currentWeek: [Calendar.WeekDay]
     
-//    let activities: [Activity]
     var sessions: FetchedResults<Session>
 
     let colors: CalendarDayColors

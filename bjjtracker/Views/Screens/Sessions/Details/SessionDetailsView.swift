@@ -60,7 +60,7 @@ struct SessionDetailsView: View {
                                         .resizable()
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
-                                    Text("\((session.startDate ?? Date()).toString("dd MMMM YYYY"))")
+                                    Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
                                         .font(.system(size: 20))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)

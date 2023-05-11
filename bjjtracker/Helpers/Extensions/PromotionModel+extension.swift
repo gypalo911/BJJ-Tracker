@@ -10,25 +10,16 @@ import CoreData
 extension PromotionModel {
     @objc
     var dateString: String {
-        return Calendar.current.startOfDay(for: date ?? Date()).toString("dd MMMM YYYY")
+        return Calendar.current.startOfDay(for: date ?? Date()).toString("dd MMMM yyyy")
     }
     
     func update(with promotion: Promotion) {
         id = promotion.id
-        adultBelt = promotion.adultBelt.rawValue
-        juniorBelt = promotion.juniorBelt.rawValue
+        belt = Int16(promotion.belt.rawValue)
         stripes = Int16(promotion.stripes)
         date = promotion.date
         location = promotion.location
         notes = promotion.notes
-    }
-    
-    var index: Int {
-        guard let adultBelt = adultBelt,
-              let juniorBelt = juniorBelt else {
-            return 0
-        }
-        return adultBelt != "none" ? AdultBelts(rawValue: adultBelt)!.index : JuniorBelts(rawValue: juniorBelt)!.index
     }
 }
 

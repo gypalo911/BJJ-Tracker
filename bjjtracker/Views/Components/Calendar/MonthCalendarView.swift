@@ -82,9 +82,7 @@ struct MonthCalendarView: View {
                     colors: colors
                 )
                 .onTapGesture {
-                    //                    withAnimation(.easeInOut(duration: 0.25)) {
                     selectedDate = value.date
-                    //                    }
                 }
             }
         }
@@ -110,7 +108,10 @@ struct MonthCalendarView: View {
             return DateValue(day: day, date: date)
         }
         
-        let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
+        var firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
+        if firstWeekDay == 1 {
+            firstWeekDay += 7
+        }
         for _ in 1..<firstWeekDay - 1 {
             days.insert(DateValue(day: -1, date: Date()), at: 0)
         }
