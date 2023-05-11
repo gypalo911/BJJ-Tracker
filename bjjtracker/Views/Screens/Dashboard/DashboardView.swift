@@ -21,7 +21,7 @@ struct DashboardView: View {
     @State var selectedSession: Session?
     
     @State private var selectedDay = Date()
-    @State private var headerHeight: CGFloat = 640
+    @State private var headerHeight: CGFloat = 660
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
     
@@ -173,7 +173,7 @@ struct DashboardView: View {
             .background(Color("generalBG").ignoresSafeArea())
             .onChange(of: filteredSessions) { items in
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    self.headerHeight = items.isEmpty ? 590 : 640
+                    self.headerHeight = items.isEmpty ? 620 : 660
                 }
             }
             .actionSheet(isPresented: $showingActionSheet) {
