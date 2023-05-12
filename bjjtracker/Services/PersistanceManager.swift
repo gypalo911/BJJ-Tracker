@@ -74,7 +74,7 @@ struct PersistanceManager {
 extension PersistanceManager: SessionsStorageManager {
     
     func createSession(from activity: Activity, context: NSManagedObjectContext) {
-        var session = Session(context: context)
+        let session = Session(context: context)
         session.update(with: activity)
         
         save(context: context)
@@ -95,7 +95,7 @@ extension PersistanceManager: SessionsStorageManager {
 
 extension PersistanceManager: PromotionsStorageManager {
     func createPromotion(from promotion: Promotion, context: NSManagedObjectContext) {
-        var model = PromotionModel(context: context)
+        let model = PromotionModel(context: context)
         model.update(with: promotion)
         
         save(context: context)
