@@ -10,7 +10,8 @@
 "Calendar" = "Календар";
 "Sessions" = "Сесії";
 "Total time" = "Час";
-"View History" = "Переглянути сховок";
+"View History" = "Переглянути усі записи";
+"No sessions for this day" = "Немає записів за поточний день";
 
 "Select Action" = "Обери дію";
 "Add Promotion" = "Додати Досягнення";
@@ -37,6 +38,8 @@
 "%@h" = "%@год";
 "%@h %@m" = "%@год %@хв";
 "%@min" = "%@хв";
+"hours" = "год";
+"min" = "хв";
 
 // Sessions
 "UPCOMING" = "СКОРО";
@@ -60,7 +63,7 @@
 "Timetable" = "Календар";
 
 // Archive
-"Archive" = "Сховок";
+"Archive" = "Архів";
 
 // Statistics
 "Statistics" = "Статистика";

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomTextEditor: View {
     @Binding var text: String
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -21,6 +22,7 @@ struct CustomTextEditor: View {
                         .fill(Color("LightBlue"))
                 )
                 .padding(.leading, 5)
+                .focused($isFocused)
             if text.isEmpty {
                 VStack {
                     Text("Add some details...".localizedString)
@@ -28,6 +30,9 @@ struct CustomTextEditor: View {
                         .foregroundColor(Color("GrayTextColor"))
                         .padding(30)
                     Spacer()
+                }
+                .onTapGesture {
+                    isFocused = true
                 }
             }
         }
