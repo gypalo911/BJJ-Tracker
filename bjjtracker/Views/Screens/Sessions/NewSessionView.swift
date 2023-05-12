@@ -35,7 +35,7 @@ struct NewSessionView: View {
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
                                     selectedType: $activity.type,
-                                    selectedTypeValue: activity.type.rawValue.localizedString
+                                    selectedTypeValue: activity.type.rawValue
                                 )
                             }.padding(.top, 10)
                             

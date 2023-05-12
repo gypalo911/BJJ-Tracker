@@ -49,7 +49,6 @@ struct StatsView: View {
                         }
                     }
                     .padding(.all, 5)
-//                    .frame(maxWidth: 76)
                     .background(
                         Rectangle()
                             .fill(tendecyGrows != nil ? (tendecyGrows! ? Color("lightGreen") : Color("lightRed")) : Color("lightGreen"))

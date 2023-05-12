@@ -44,8 +44,8 @@ class AppSettings: ObservableObject {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let settings: AppSettings = AppSettings()
         ContentView()
-            .environmentObject(settings)
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

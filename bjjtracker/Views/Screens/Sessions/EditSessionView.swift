@@ -41,7 +41,7 @@ struct EditSessionView: View {
                                     g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
                                     selectedType: $activity.type,
-                                    selectedTypeValue: activity.type.rawValue.localizedString
+                                    selectedTypeValue: activity.type.rawValue
                                 )
                             }.padding(.top, 10)
                             
@@ -129,25 +129,27 @@ struct EditSessionView: View {
                     }
                     .vAlign(.top)
                 }
-            }.onAppear {
-//                if let filledActivity = Activity.from(session: session) {
-//                    activity = filledActivity
-//                }
             }
         }
     }
 }
 
-//struct EditSessionView_Previews: PreviewProvider {
-//    struct Container: View {
-//        @State var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
-//
-//        var body: some View {
-//            EditSessionView(presenter: EditSessionPresenter(activity: activity))
-//        }
-//    }
-//
-//    static var previews: some View {
-//        Container()
-//    }
-//}
+struct EditSessionView_Previews: PreviewProvider {
+    struct Container: View {
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+
+        var body: some View {
+            let session: Session = sessionsList.map { $0 }.first!
+            EditSessionView(
+                session: session,
+                activity: Activity.from(session: session)!,
+                onDismiss: { _ in }
+            )
+        }
+    }
+
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

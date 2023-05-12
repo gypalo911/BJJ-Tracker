@@ -47,16 +47,6 @@ struct ProfileView: View {
             }).last
     }
     
-    var beltDescription: String {
-        guard let lastPromotion = lastPromotion else {
-            return ""
-        }
-        var result = lastPromotion.belt.title
-        result += " belt "
-        result += "\(lastPromotion.stripes) stripes"
-        return result
-    }
-    
     func isLocked(belt: Belt, lastPromotion: Promotion?) -> Bool {
         guard let lastPromotion = lastPromotion else {
             return true
@@ -115,7 +105,7 @@ struct ProfileView: View {
                                 }, label: {
                                     HStack(spacing: 10) {
                                         Text(gradingSystem.rawValue.localizedString.capitalized)
-                                            .font(.system(size: 16))
+                                            .font(.system(size: 14))
                                             .foregroundColor(Color.black)
                                         Image(systemName: "chevron.down")
                                             .scaledToFit()
@@ -165,7 +155,7 @@ struct ProfileView: View {
                         )
                     }
                     .padding([.leading, .trailing, .top], 20)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 60)
                 }
             }
             .actionSheet(isPresented: $showingActionSheet) {
@@ -204,233 +194,6 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
-    }
-}
-
-struct BeltProgressCell: View {
-    @State private var showPromotionsList: Bool = false
-    
-    private var belt: Belt
-    
-    private var showListBG: Bool {
-        showPromotionsList && !promotionModels.isEmpty
-    }
-    var promotionModels: [FetchedResults<PromotionModel>.Element]
-    
-    private let isLocked: Bool
-    
-    init(belt: Belt, isLocked: Bool, promotionModels: FetchedResults<PromotionModel>) {
-        self.belt = belt
-        self.isLocked = isLocked
-        self.promotionModels = promotionModels.filter {
-            $0.belt == belt.rawValue
-        }
-    }
-    
-    var body: some View {
-        ZStack {
-            VStack {
-                HStack {
-                    HStack(spacing: 10) {
-                        ZStack {
-                            CircularBeltView(
-                                primaryColor: belt.color.0,
-                                secondaryColor: belt.color.1
-                            )
-                            if isLocked {
-                                Circle()
-                                    .fill(.gray.opacity(0.3))
-                                    .frame(width: 36)
-                                Image("lock")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(Color.black.opacity(0.6))
-                            }
-                        }
-                        
-                        Text("%@ belt".localized(with: ["\(belt.title)"]))
-                    }
-                    Spacer()
-                    if !promotionModels.isEmpty {
-                        Image("info")
-                            .resizable()
-                            .foregroundColor(.gray)
-                            .frame(width: 30, height: 30)
-                    }
-                }
-                .padding(10)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        if !promotionModels.isEmpty {
-                            showPromotionsList.toggle()
-                        }
-                    }
-                }
-                if belt != .black {
-                    Rectangle()
-                        .fill(.gray)
-                        .frame(height: 1)
-                        .padding(.horizontal, 10)
-                }
-                if showPromotionsList {
-                    BeltPromotionsList(promotionModels: promotionModels)
-                }
-            }
-        }
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(showListBG ? Color("listBG") : Color.white)
-        )
-    }
-}
-
-struct BeltView: View {
-    var beltWidth: CGFloat = 210
-    var beltColor: (Color, Color?)
-    var stripesCount: Int
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(beltColor.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Gray"), lineWidth: 1)
-                )
-                .frame(width: beltWidth, height: 36)
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .fill(beltColor.1 ?? .black)
-                    .frame(width: 65, height: 36)
-                HStack(spacing: 5) {
-                    ForEach(0..<stripesCount, id: \.self) { stripe in
-                        Rectangle()
-                            .fill(.white)
-                            .frame(width: 6)
-                    }
-                }
-                .hAlign(.leading)
-                .frame(width: 65, height: 34)
-                .offset(x: 10, y: 0)
-            }.offset(x: 20)
-        }
-    }
-}
-
-struct CircularBeltView: View {
-    let primaryColor: Color
-    let secondaryColor: Color?
-    var isSelected: Bool = true
-    var height: CGFloat = 36
-    
-    var strokeColor: Color {
-        return isSelected ? Color.black : Color.gray
-    }
-    
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(Color.white)
-                .overlay(
-                    Circle()
-                        .stroke(strokeColor, lineWidth: 2)
-                )
-                .frame(width: height, height: height)
-            ZStack {
-                Circle()
-                    .trim(from: 0, to: 0.5)
-                    .fill(primaryColor)
-                    .overlay(
-                        Circle()
-                            .trim(from: 0, to: 0.5)
-                            .stroke(strokeColor, lineWidth: 2)
-                    )
-                    .frame(width: height - 8, height: height - 8)
-            }
-            .rotationEffect(.degrees(-90))
-            
-            if let secondaryColor = secondaryColor {
-                ZStack {
-                    Circle()
-                        .trim(from: 0, to: 0.5)
-                        .fill(secondaryColor)
-                        .overlay(
-                            Circle()
-                                .trim(from: 0, to: 0.5)
-                                .stroke(strokeColor, lineWidth: 2)
-                        )
-                        .frame(width: height - 8, height: height - 8)
-                }
-                .rotationEffect(.degrees(90))
-            }
-            Rectangle()
-                .fill(strokeColor)
-                .frame(width: 2, height: height - 6)
-        }
-    }
-}
-
-struct BeltPromotionsList: View {
-    var promotionModels: [FetchedResults<PromotionModel>.Element]
-    
-    @State var promotions: [Promotion] = []
-    
-    @Environment (\.managedObjectContext) var managedObjContext
-    
-    var body: some View {
-        List {
-            ForEach(promotions.prefix(5), id: \.id) { promotion in
-                BeltPromotionsListCell(stripes: promotion.stripes, date: promotion.date)
-                    .padding(5)
-            }.onDelete { offsets in
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    promotions.remove(atOffsets: offsets)
-                    for index in offsets {
-                        let model = promotionModels[index]
-                        PersistanceManager.shared.delete(model: model, context: managedObjContext)
-                    }
-                }
-            }
-            .background(Color("listBG"))
-            .listRowSeparator(.hidden)
-            .listRowInsets(EdgeInsets(.zero))
-        }
-        .listStyle(.plain)
-        .frame(minHeight: 50 * CGFloat(promotions.prefix(5).count))
-        .task {
-            setupPromotions()
-        }
-    }
-    
-    func setupPromotions() {
-        promotions = promotionModels.map {
-            Promotion.from($0)
-        }
-    }
-}
-
-struct BeltPromotionsListCell: View {
-    let stripes: Int
-    let date: Date
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            HStack {
-                Circle()
-                    .foregroundColor(.black)
-                    .frame(width: 10)
-                Text("Stripes: %@".localized(with: ["\(stripes)"]))
-                    .font(.system(size: 14))
-                    .fontWeight(.bold)
-            }
-            Text(date.toString("dd MMMM yyyy"))
-                .font(.system(size: 14))
-                .fontWeight(.semibold)
-                .foregroundColor(Color.gray)
-                .padding(.leading, 20)
-        }
-        .padding(.horizontal, 20)
-        .hAlign(.leading)
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

@@ -29,7 +29,7 @@ struct DraggableCalendarView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 15) {
-                Text("\(selectedDay.toString("MMMM yyyy").capitalized)")
+                Text("\(selectedDay.toString("LLLL yyyy").capitalized)")
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -131,5 +131,27 @@ struct DraggableCalendarView: View {
             
             lastDragValue = sliderHeight
         }))
+    }
+}
+
+struct DraggableCalendarView_Previews: PreviewProvider {
+    struct Container: View {
+        @State var selectedDay = Date()
+        @State var isBottomSheetOpen = false
+        var currentWeek = Calendar.current.currentWeek
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+
+        var body: some View {
+            DraggableCalendarView(
+                selectedDay: $selectedDay,
+                isBottomSheetOpen: $isBottomSheetOpen,
+                sessions: sessionsList
+            )
+        }
+    }
+
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

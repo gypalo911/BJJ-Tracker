@@ -67,18 +67,13 @@ extension Int {
         var str = ""
         let hours = Int(self / 60)
         let minutes = Int(self % 60)
-        if hours != 0 {
-            str += "\(hours)h"
-        }
-        if minutes != 0 {
-            if hours != 0 {
-                str += " "
-            }
-            str += "\(minutes)m"
-        }
-         
-        if hours == 0 && minutes == 0 {
-            str = "0min"
+        
+        if hours != 0 && minutes != 0 {
+            str = "%@h %@m".localized(with: ["\(hours)", "\(minutes)"])
+        } else if hours != 0 && minutes == 0 {
+            str = "%@h".localized(with: ["\(hours)"])
+        } else {
+            str = "%@min".localized(with: ["\(minutes)"])
         }
         
         return str

@@ -73,8 +73,18 @@ struct ActivityPanelView: View {
     }
 }
 
-//struct ActivityPanelView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ActivityPanelView(activity: Activity(type: .session, style: .noGi, duration: 60, startDate: Date(), location: "Lustsk", notes: "On this training I learned something new"))
-//    }
-//}
+struct ActivityPanelView_Previews: PreviewProvider {
+    struct Container: View {
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+
+        var body: some View {
+            let session: Session = sessionsList.map { $0 }.first!
+            ActivityPanelView(session: session)
+        }
+    }
+
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

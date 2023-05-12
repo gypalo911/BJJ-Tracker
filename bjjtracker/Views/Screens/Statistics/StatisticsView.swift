@@ -128,7 +128,9 @@ struct StatisticsView: View {
                 .font(.system(size: 28))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
-                .padding([.leading, .top], 20)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 10)
+                .padding(.top, 10)
                 .hAlign(.leading)
                 .background(Color.clear.ignoresSafeArea())
             if !presenter.isConcreteDates {
@@ -268,18 +270,16 @@ struct StatisticsView: View {
 
 struct StatisticsView_Previews: PreviewProvider {
     struct Container: View {
-        let settings = AppSettings()
         let interval = DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
         
         var body: some View {
-            //            NavigationView {
             StatisticsView(presenter: StatisticsViewPresenter(dateInterval: interval))
-                .environmentObject(settings)
-            //            }
         }
     }
     
     static var previews: some View {
         Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .environmentObject(AppSettings())
     }
 }

@@ -157,5 +157,6 @@ struct TimetableView: View {
 struct Timetable_Previews: PreviewProvider {
     static var previews: some View {
         TimetableView()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

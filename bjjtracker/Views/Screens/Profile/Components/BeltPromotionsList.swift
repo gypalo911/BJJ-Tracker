@@ -1,0 +1,62 @@
+//
+//  BeltPromotionsList.swift
+//  bjjtracker
+//
+//  Created by Petro Hupalo on 12.05.2023.
+//
+
+import SwiftUI
+
+struct BeltPromotionsList: View {
+    var promotionModels: [FetchedResults<PromotionModel>.Element]
+    
+    @State var promotions: [Promotion] = []
+    
+    @Environment (\.managedObjectContext) var managedObjContext
+    
+    var body: some View {
+        List {
+            ForEach(promotions.prefix(5), id: \.id) { promotion in
+                BeltPromotionsListCell(stripes: promotion.stripes, date: promotion.date)
+                    .padding(5)
+            }.onDelete { offsets in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    promotions.remove(atOffsets: offsets)
+                    for index in offsets {
+                        let model = promotionModels[index]
+                        PersistanceManager.shared.delete(model: model, context: managedObjContext)
+                    }
+                }
+            }
+            .background(Color("listBG"))
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(.zero))
+        }
+        .listStyle(.plain)
+        .frame(minHeight: 50 * CGFloat(promotions.prefix(5).count))
+        .task {
+            setupPromotions()
+        }
+    }
+    
+    func setupPromotions() {
+        promotions = promotionModels.map {
+            Promotion.from($0)
+        }
+    }
+}
+
+struct BeltPromotionsList_Previews: PreviewProvider {
+    struct Container: View {
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
+        
+        var body: some View {
+            BeltPromotionsList(promotionModels: promotionModels.map { $0 })
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

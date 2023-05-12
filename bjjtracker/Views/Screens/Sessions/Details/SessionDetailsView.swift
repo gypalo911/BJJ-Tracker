@@ -76,9 +76,9 @@ struct SessionDetailsView: View {
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)
-                                        let duration = Int(session.duration).minutesToDuration()
+                                        let duration = Int(session.duration)
                                         if session.duration != 0 {
-                                            Text("(\(duration))")
+                                            Text(duration.minutesToDuration())
                                                 .font(.system(size: 18))
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(.white)
@@ -162,12 +162,7 @@ struct SessionDetailsView: View {
                             session: session,
                             activity: Activity.from(session: session)!,
                             onDismiss: { editedActivity in
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
-//                                    guard let editedActivity = editedActivity else {
-                                        presentationMode.wrappedValue.dismiss()
-//                                        return
-//                                    }
-//                                }
+                                presentationMode.wrappedValue.dismiss()
                             }
                         )
                     }
@@ -186,10 +181,18 @@ struct SessionDetailsView: View {
     }
 }
 
-//struct SessionDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        @State var activity: Activity = .init(type: .session, style: .gi, duration: 0, startDate: Date(), location: "asdsad", notes: "asdasdas")
-//
-//        SessionDetailsView(activity: activity)
-//    }
-//}
+struct SessionDetailsView_Previews: PreviewProvider {
+    struct Container: View {
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+
+        var body: some View {
+            let session: Session = sessionsList.map { $0 }.first!
+            SessionDetailsView(session: session)
+        }
+    }
+
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

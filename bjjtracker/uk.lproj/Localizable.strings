@@ -13,13 +13,13 @@
 "View History" = "Переглянути сховок";
 
 "Select Action" = "Обери дію";
-"Add Promotion" = "Додати досягнення";
-"Add Session" = "Додати тренування";
+"Add Promotion" = "Додати Досягнення";
+"Add Session" = "Додати Заняття";
 "Create Session" = "Створити Заняття";
 
 "1. Grading system:" = "1. Система поясів:";
 "2. Belt: %@" = "2. Пояс: %@";
-"3. Number of stripes:" = "3. Кількість полосок:";
+"3. Number of stripes:" = "3. Кількість смужок:";
 "4. Select date:" = "4. Обери дату:";
 
 "1. Select type:" = "1. Обери тип:";
@@ -33,6 +33,10 @@
 "Delete" = "Видалити";
 
 "Edit Session" = "Редагувати Заняття";
+
+"%@h" = "%@год";
+"%@h %@m" = "%@год %@хв";
+"%@min" = "%@хв";
 
 // Sessions
 "UPCOMING" = "СКОРО";
@@ -74,8 +78,8 @@
 "Profile" = "Профіль";
 
 "Progress" = "Прогрес";
-"Stripe" = "Полоска";
-"Stripes" = "Полоски";
+"Stripe" = "Смужка";
+"Stripes" = "Смужки";
 "Select Grading System" = "Обери Систему Поясів";
 
 "%@ belt %@ stripes" = "%@ пояс %@ полоски";

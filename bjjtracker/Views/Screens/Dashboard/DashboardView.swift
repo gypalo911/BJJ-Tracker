@@ -95,7 +95,7 @@ struct DashboardView: View {
                         .padding(.all, 20)
                         
                         HStack {
-                            Text("\(selectedDay.toString("MMMM yyyy").capitalized)")
+                            Text("\(selectedDay.toString("LLLL yyyy").capitalized)")
                                 .font(.system(size: 22))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -211,5 +211,6 @@ struct Dashboard_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

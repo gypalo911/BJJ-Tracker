@@ -120,30 +120,27 @@ struct MonthCalendarView: View {
     }
 }
 
-//struct MonthCalendarView_Previews: PreviewProvider {
-//    struct Container: View {
-//        @State var selectedDay = Date()
-//        @State var viewHeight: CGFloat = 400
-//
-//        @State var activities: [Activity] = [
-//            Activity(type: .seminar, style: .noGi, duration: 120 * 60, startDate: Date() - TimeInterval(2000 * 60), location: "Lutsk", notes: "Other notes"),
-//            Activity(type: .training, style: .gi, duration: 90 * 60, startDate: Date() - 500 * 60, location: "Lutsk", notes: "Other notes"),
-//            Activity(type: .competition, style: .noGi, duration: 90 * 60, startDate: Date() + TimeInterval(1000 * 60), location: "Lutsk", notes: "Other notes"),
-//        ]
-//
-//        var maxHeight: CGFloat = 400
-//
-//        var body: some View {
-//            MonthCalendarView(
-//                selectedDate: $selectedDay,
-//                activities: $activities,
-//                viewHeight: $viewHeight,
-//                maxHeight: maxHeight
-//            )
-//        }
-//    }
-//
-//    static var previews: some View {
-//        Container()
-//    }
-//}
+struct MonthCalendarView_Previews: PreviewProvider {
+    struct Container: View {
+        @State var selectedDay = Date()
+        @State var viewHeight: CGFloat = 400
+        
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        
+        var maxHeight: CGFloat = 400
+
+        var body: some View {
+            MonthCalendarView(
+                selectedDate: $selectedDay,
+                viewHeight: $viewHeight,
+                sessions: sessionsList,
+                maxHeight: maxHeight
+            )
+        }
+    }
+
+    static var previews: some View {
+        Container()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

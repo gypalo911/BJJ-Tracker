@@ -29,12 +29,20 @@ struct PersistanceManager {
         for i in 0..<10 {
             let session = Session(context: viewContext)
             session.id = UUID()
-            session.startDate = Date()
+            session.startDate = Calendar.current.date(byAdding: .hour, value: i * 8, to: Date())
             session.duration = Int16(120 - i)
-            session.type = ActivityType.seminar.rawValue
+            session.type = ActivityType.allCases.randomElement()?.rawValue
             session.style = GraplingStyle.gi.rawValue
             session.location = "Some Location"
             session.notes = "Some notes"
+        }
+        
+        for i in 0..<10 {
+            let model = PromotionModel(context: viewContext)
+            model.id = UUID()
+            model.belt = Int16(i)
+            model.date = Calendar.current.date(byAdding: .hour, value: i * 8, to: Date())
+            model.stripes = Int16.random(in: 0..<4)
         }
         
         do {

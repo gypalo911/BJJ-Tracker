@@ -13,7 +13,7 @@ struct ArchiveView: View {
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
     
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment (\.managedObjectContext) private var viewContext
     @SectionedFetchRequest<String, Session>(sectionIdentifier: \.startDateString, sortDescriptors: [SortDescriptor(\.startDate, order: .reverse)], animation: .easeInOut) var sessions: SectionedFetchResults<String, Session>
     
     @State var selectedSession: Session?
@@ -68,31 +68,6 @@ struct ArchiveView: View {
                             .foregroundColor(Color("Blue"))
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    //                    if let start = activities.keys.min()?.startOfDay,
-                    //                       let end = activities.keys.max()?.endOfDay {
-                    //                        NavigationLink(destination: {
-                    //                            StatisticsView(
-                    //                                presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: start, end: end))
-                    //                            )
-                    //                        }) {
-                    //                            Image("stats")
-                    //                                .resizable()
-                    //                                .frame(width: 25, height: 25)
-                    //                                .foregroundColor(Color("Blue"))
-                    //                        }
-                    //                    }
-                }
-                //                ToolbarItem(placement: .navigationBarTrailing) {
-                //                    Button {
-                //
-                //                    } label: {
-                //                        Image("calendar")
-                //                            .resizable()
-                //                            .frame(width: 25, height: 25)
-                //                            .foregroundColor(Color("Blue"))
-                //                    }
-                //                }
             }
         }
     }
@@ -101,5 +76,7 @@ struct ArchiveView: View {
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
         ArchiveView()
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .environmentObject(AppSettings())
     }
 }
