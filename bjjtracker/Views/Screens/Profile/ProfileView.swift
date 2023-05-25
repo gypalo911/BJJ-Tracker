@@ -14,21 +14,19 @@ struct ProfileView: View {
         case modalSheets
     }
     
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
+    var sessionsList: FetchedResults<Session>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
+    var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
-    @State var actionSheetState = ActionSheetState.none {
+    @State var actionSheetState: ActionSheetState = .none {
         willSet {
             showingActionSheet = newValue != .none
         }
     }
     @State private var gradingSystem: GradingSystem = .adult
-    
-    func totalTime() -> String {
-        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
-    }
     
     var promotions: [Promotion] {
         promotionModels.map {
@@ -43,8 +41,13 @@ struct ProfileView: View {
                 belts.contains($0.belt)
             }
             .sorted(by: {
-                ($0.belt.rawValue < $1.belt.rawValue) || ($0.stripes < $1.stripes)
+                $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
+                ($0.belt.rawValue < $1.belt.rawValue)
             }).last
+    }
+    
+    func totalTime() -> String {
+        return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
     }
     
     func isLocked(belt: Belt, lastPromotion: Promotion?) -> Bool {

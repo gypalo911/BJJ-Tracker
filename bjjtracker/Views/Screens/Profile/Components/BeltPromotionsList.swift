@@ -10,7 +10,13 @@ import SwiftUI
 struct BeltPromotionsList: View {
     var promotionModels: [FetchedResults<PromotionModel>.Element]
     
-    @State var promotions: [Promotion] = []
+    var promotions: [Promotion] {
+        promotionModels.map {
+            Promotion.from($0)
+        }.sorted(by: {
+            $0.stripes < $1.stripes
+        })
+    }
     
     @Environment (\.managedObjectContext) var managedObjContext
     
@@ -21,7 +27,6 @@ struct BeltPromotionsList: View {
                     .padding(5)
             }.onDelete { offsets in
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    promotions.remove(atOffsets: offsets)
                     for index in offsets {
                         let model = promotionModels[index]
                         PersistanceManager.shared.delete(model: model, context: managedObjContext)
@@ -34,15 +39,6 @@ struct BeltPromotionsList: View {
         }
         .listStyle(.plain)
         .frame(minHeight: 50 * CGFloat(promotions.prefix(5).count))
-        .task {
-            setupPromotions()
-        }
-    }
-    
-    func setupPromotions() {
-        promotions = promotionModels.map {
-            Promotion.from($0)
-        }
     }
 }
 

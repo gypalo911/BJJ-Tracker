@@ -7,48 +7,30 @@
 
 import SwiftUI
 
-enum ModalsSheets: Int, Identifiable {
-    var id: Int { self.rawValue }
-    
-    case activity
-    case promotion
-}
-
 struct DashboardView: View {
     
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+    @FetchRequest var sessionsList: FetchedResults<Session>
     
-    @State var selectedSession: Session?
+    @ObservedObject private var viewModel: DashboardViewModel
     
-    @State private var selectedDay = Date()
     @State private var headerHeight: CGFloat = 660
-    @State private var showingActionSheet: Bool = false
-    @State private var selectedSheet: ModalsSheets?
     
     private var filteredSessions: [Session] {
         sessionsList.filter {
-            Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
+            viewModel.isDateSelected($0.startDate ?? Date())
         }
     }
-    private var currentWeekSessions: [Session] {
-        let start = currentWeek.first?.date ?? Date()
-        let end = currentWeek.last?.date ?? Date()
-        return sessionsList.filter {
-            (start...end).contains($0.startDate ?? Date())
-        }
-    }
-    private var lastWeekSessions: [Session] {
-        let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
-        let start = lastWeekDate.first?.date ?? Date()
-        let end = lastWeekDate.last?.date ?? Date()
-        return sessionsList.filter {
-            (start...end).contains($0.startDate ?? Date())
-        }
-    }
-    private var currentWeek = Calendar.current.currentWeek
     
-    func totalTime(_ sessions: [Session]) -> Int {
-        return sessions.map { Int($0.duration) }.reduce(0, +)
+    init(viewModel: DashboardViewModel) {
+        self.viewModel = viewModel
+        _sessionsList = FetchRequest<Session>(
+            sortDescriptors: [],
+            predicate: NSPredicate(
+                format: "startDate >= %@ AND startDate < %@",
+                viewModel.requestDateRange.start as CVarArg,
+                viewModel.requestDateRange.end as CVarArg
+            )
+        )
     }
     
     var body: some View {
@@ -71,7 +53,7 @@ struct DashboardView: View {
                                 .hAlign(.leading)
                             
                             Button {
-                                showingActionSheet = true
+                                viewModel.showingActionSheet = true
                             } label: {
                                 Image("createButton")
                                     .resizable()
@@ -85,17 +67,24 @@ struct DashboardView: View {
                         .padding(.top, 10)
                         
                         HStack(spacing: 10) {
-                            StatsView(text: "Sessions".localizedString, value: "\(currentWeekSessions.count)", tendecyGrows: currentWeekSessions.count > lastWeekSessions.count, tendecyValue: "\(abs(currentWeekSessions.count - lastWeekSessions.count))")
+                            let (week1, week2) = viewModel.lastTwoWeeksSessions(sessionsList.map { $0 })
+                            StatsView(
+                                text: "Sessions".localizedString,
+                                value: "\(week1.count)",
+                                tendecyGrows: week1.count > week2.count,
+                                tendecyValue: "\(abs(week1.count - week2.count))"
+                            )
                             StatsView(
                                 text: "Total time".localizedString,
-                                value: totalTime(currentWeekSessions).minutesToDuration(), tendecyGrows: totalTime(currentWeekSessions) > totalTime(lastWeekSessions),
-                                tendecyValue: "\(abs(totalTime(currentWeekSessions) - totalTime(lastWeekSessions)).minutesToDuration())"
+                                value: viewModel.totalTime(week1).minutesToDuration(),
+                                tendecyGrows: viewModel.totalTime(week1) > viewModel.totalTime(week2),
+                                tendecyValue: "\(abs(viewModel.totalTime(week1) - viewModel.totalTime(week2)).minutesToDuration())"
                             )
                         }
                         .padding(.all, 20)
                         
                         HStack {
-                            Text("\(selectedDay.toString("LLLL yyyy").capitalized)")
+                            Text("\(viewModel.selectedDay.toString("LLLL yyyy").capitalized)")
                                 .font(.system(size: 22))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -105,8 +94,8 @@ struct DashboardView: View {
                         .padding(.top, 10)
                         
                         WeekCalendarView(
-                            selectedDay: $selectedDay,
-                            currentWeek: currentWeek,
+                            selectedDay: $viewModel.selectedDay,
+                            currentWeek: viewModel.currentWeek,
                             sessions: sessionsList,
                             colors: .init(
                                 textColor: .white,
@@ -144,7 +133,7 @@ struct DashboardView: View {
                                         if session.id != nil {
                                             ActivityPanelView(session: session)
                                                 .onTapGesture {
-                                                    self.selectedSession = session
+                                                    viewModel.select(session: session)
                                                 }
                                         }
                                     }
@@ -176,18 +165,18 @@ struct DashboardView: View {
                     self.headerHeight = items.isEmpty ? 620 : 660
                 }
             }
-            .actionSheet(isPresented: $showingActionSheet) {
+            .actionSheet(isPresented: $viewModel.showingActionSheet) {
                 ActionSheet(title: Text("Select Action"), buttons: [
                     .default(Text("Add Promotion"), action: {
-                        selectedSheet = .promotion
+                        viewModel.selectModal(sheet: .promotion)
                     }),
                     .default(Text("Add Session"), action: {
-                        selectedSheet = .activity
+                        viewModel.selectModal(sheet: .activity)
                     }),
                     .cancel()
                 ])
             }
-            .sheet(item: $selectedSheet) { selectedSheet in
+            .sheet(item: $viewModel.selectedSheet) { selectedSheet in
                 switch selectedSheet {
                 case .promotion:
                     AddPromotionView()
@@ -195,7 +184,7 @@ struct DashboardView: View {
                     NewSessionView()
                 }
             }
-            .sheet(item: $selectedSession) { selectedSession in
+            .sheet(item: $viewModel.selectedSession) { selectedSession in
                 SessionDetailsView(session: selectedSession)
             }
         }.background(Color.white)
@@ -205,7 +194,7 @@ struct DashboardView: View {
 struct Dashboard_Previews: PreviewProvider {
     struct Container: View {
         var body: some View {
-            DashboardView()
+            DashboardView(viewModel: DashboardViewModel())
         }
     }
     

@@ -16,8 +16,6 @@ struct NewSessionView: View {
     
     @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
     
-    @EnvironmentObject var activitiesManager: ActivitiesManager
-    
     init() {
         UITextView.appearance().backgroundColor = .clear
     }

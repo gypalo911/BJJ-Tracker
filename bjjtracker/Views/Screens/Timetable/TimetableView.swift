@@ -9,11 +9,13 @@ import SwiftUI
 
 struct TimetableView: View {
     
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
+    var sessionsList: FetchedResults<Session>
     
     @State private var selectedDay: Date = Date()
     @State private var showingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
+    @State private var isBottomSheetOpen: Bool = false
     
     @State var selectedSession: Session?
     
@@ -22,21 +24,6 @@ struct TimetableView: View {
             Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
     }
-    
-    private var currentWeek: [Calendar.WeekDay] {
-        Calendar.current.week(for: selectedDay)
-    }
-    
-    @State var maxHeight: CGFloat = 400
-    
-    @State var sliderProgress: CGFloat = 0
-    @State var sliderHeight: CGFloat = 0
-    @State var lastDragValue: CGFloat = 0
-    
-    @State private var showWeekView: Bool = true
-    @State private var blurCalendar: Bool = false
-    
-    @State private var isBottomSheetOpen: Bool = false
     
     var body: some View {
         NavigationView {

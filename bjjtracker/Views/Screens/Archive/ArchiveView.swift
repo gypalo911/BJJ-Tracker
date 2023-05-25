@@ -18,14 +18,6 @@ struct ArchiveView: View {
     
     @State var selectedSession: Session?
     
-    @State var showDetailsView: Bool = false
-    
-    func group(_ result: FetchedResults<Session>) -> Dictionary<Date, [Session]> {
-        Dictionary(grouping: result, by: {
-            Calendar.current.startOfDay(for: $0.startDate!)
-        })
-    }
-    
     var body: some View {
         
         NavigationView {
@@ -39,7 +31,6 @@ struct ArchiveView: View {
                         ActivityPanelView(session: session)
                             .onTapGesture {
                                 selectedSession = session
-                                showDetailsView = true
                             }
                     }
                 }
@@ -47,10 +38,8 @@ struct ArchiveView: View {
             .onAppear {
                 settings.isTabBarHidden = true
             }
-            .sheet(isPresented: $showDetailsView) {
-                if let selectedSession = selectedSession {
-                    SessionDetailsView(session: selectedSession, dismissCallback: {})
-                }
+            .sheet(item: $selectedSession) { selectedSession in
+                SessionDetailsView(session: selectedSession, dismissCallback: {})
             }
             .introspectTabBarController { (UITabBarController) in
                 UITabBarController.tabBar.isHidden = true

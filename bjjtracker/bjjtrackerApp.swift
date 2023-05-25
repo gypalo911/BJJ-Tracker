@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+class AppSettings: ObservableObject {
+    @Published var isTabBarHidden: Bool = false
+}
+
 @main
 struct bjjtrackerApp: App {
     

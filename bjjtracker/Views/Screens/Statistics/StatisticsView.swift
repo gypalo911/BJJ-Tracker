@@ -18,7 +18,6 @@ struct StatisticsView: View {
     
     let bgColor: Color = Color("generalBG")
     
-    @State private var selectedSegment: Int = CalendarSegment.week.rawValue
     private var segments = [
         "Week".localizedString,
         "Month".localizedString,
@@ -30,99 +29,19 @@ struct StatisticsView: View {
     
     @EnvironmentObject var settings: AppSettings
     
-    @State var title: String = ""
-    @State var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
+    @ObservedObject var viewModel: StatisticsViewViewModel
     
-    private var presenter: StatisticsViewPresenter
-    
-    private var filteredSession: [Session] {
+    private var filteredSessions: [Session] {
         return sessionsList.filter {
-            (dateInterval.start...dateInterval.end).contains($0.startDate ?? Date())
+            ($0.startDate ?? Date()).isInInterval(dateInterval: viewModel.dateInterval)
         }
     }
     
-    init(presenter: StatisticsViewPresenter) {
-        self.presenter = presenter
-        let interval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
-        
-        self.dateInterval = interval
-    }
-    
-    func totalTime() -> String {
-        return filteredSession.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
-    }
-    
-    func sessions(by type: ActivityType) -> [Session] {
-        return filteredSession.filter({ $0.activityType == type })
-    }
-    
-    func sessions(by style: GraplingStyle) -> [Session] {
-        return filteredSession.filter({ $0.activityStyle == style })
-    }
-    
-    func initDates() {
-        if selectedSegment == 0 {
-            let start = Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!
-            let end = Date().startOfDay
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 1 {
-            let start = Date().startOfMonth()
-            let end = Date().endOfMonth()
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 2 {
-            let currentYearStart = Calendar.current.date(from: Calendar.current.dateComponents([.year], from: Calendar.current.startOfDay(for: dateInterval.start)))!
-            var currentYearEnd = Calendar.current.date(byAdding: .year, value: 1, to: currentYearStart)!
-            currentYearEnd = Calendar.current.date(byAdding: .minute, value: -1, to: currentYearEnd)!
-            dateInterval = DateInterval(start: currentYearStart, end: currentYearEnd)
-        }
-    }
-    
-    func plusWeek() {
-        if selectedSegment == 0 {
-            let start = dateInterval.end
-            let end = Calendar.current.date(byAdding: .day, value: 7, to: dateInterval.end)!
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 1 {
-            let start = Calendar.current.date(byAdding: .month, value: 1, to: dateInterval.end.startOfMonth())!
-            let end = Calendar.current.date(byAdding: .month, value: 1, to: dateInterval.end.endOfMonth())!
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 2 {
-            initDates()
-            let start = Calendar.current.date(byAdding: .year, value: 1, to: dateInterval.start)!
-            let end = Calendar.current.date(byAdding: .year, value: 1, to: dateInterval.end)!
-            dateInterval = DateInterval(start: start, end: end)
-        }
-        setupTitle()
-    }
-    
-    func minusWeek() {
-        if selectedSegment == 0 {
-            let start = Calendar.current.date(byAdding: .day, value: -7, to: dateInterval.start)!
-            let end = dateInterval.start
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 1 {
-            let startOfMonth = dateInterval.start.startOfMonth()
-            let start = Calendar.current.date(byAdding: .month, value: -1, to: startOfMonth)!
-            let end = start.endOfMonth()
-            dateInterval = DateInterval(start: start, end: end)
-        } else if selectedSegment == 2 {
-            initDates()
-            let start = Calendar.current.date(byAdding: .year, value: -1, to: dateInterval.start)!
-            let end = Calendar.current.date(byAdding: .minute, value: -1, to: dateInterval.start)!
-            dateInterval = DateInterval(start: start, end: end)
-        }
-        setupTitle()
-    }
-    
-    func setupTitle() {
-        title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end, segment: selectedSegment)
+    init(viewModel: StatisticsViewViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
-        
-        let totalSessions = filteredSession.count
-        let totalTime = totalTime()
-        
         VStack {
             Text("Statistics")
                 .font(.system(size: 28))
@@ -133,14 +52,12 @@ struct StatisticsView: View {
                 .padding(.top, 10)
                 .hAlign(.leading)
                 .background(Color.clear.ignoresSafeArea())
-            if !presenter.isConcreteDates {
+            if !viewModel.isConcreteDates {
                 SegmentedPicker(
                     items: segments,
-                    selection: $selectedSegment,
+                    selection: $viewModel.selectedSegment,
                     onChanged: { index in
-                        selectedSegment = index
-                        initDates()
-                        setupTitle()
+                        viewModel.selectSegment(segment: index)
                     }
                 )
                 .padding([.leading, .trailing, .bottom], 20)
@@ -148,7 +65,7 @@ struct StatisticsView: View {
             HStack(spacing: 30) {
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {
-                        minusWeek()
+                        viewModel.minusInterval()
                     }
                 }, label: {
                     Image.init(systemName: "chevron.left")
@@ -157,13 +74,13 @@ struct StatisticsView: View {
                         .frame(height: 15)
                         .foregroundColor(Color("Blue"))
                 })
-                Text(title)
+                Text(viewModel.title)
                     .font(.system(size: 16))
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("Gray"))
+                    .fontWeight(.regular)
+                    .foregroundColor(Color.black)
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {
-                        plusWeek()
+                        viewModel.plusInterval()
                     }
                 }, label: {
                     Image.init(systemName: "chevron.right")
@@ -176,8 +93,8 @@ struct StatisticsView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     HStack(spacing: 10) {
-                        StatsView(text: "Sessions".localizedString, value: "\(totalSessions)", tendecyGrows: nil, tendecyValue: nil)
-                        StatsView(text: "Total time".localizedString, value: totalTime, tendecyGrows: nil, tendecyValue: nil)
+                        StatsView(text: "Sessions".localizedString, value: "\(filteredSessions.count)")
+                        StatsView(text: "Total time".localizedString, value: viewModel.totalTime(filteredSessions))
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
@@ -192,9 +109,9 @@ struct StatisticsView: View {
                     InfographicsView(
                         strokeColor: bgColor,
                         statsInfo: [
-                            .training: sessions(by: .training).count,
-                            .competition: sessions(by: .competition).count,
-                            .seminar: sessions(by: .seminar).count
+                            .training: viewModel.sessions(by: .training, filteredSessions).count,
+                            .competition: viewModel.sessions(by: .competition, filteredSessions).count,
+                            .seminar: viewModel.sessions(by: .seminar, filteredSessions).count
                         ]
                     ).padding(.bottom, 70)
                     
@@ -203,7 +120,9 @@ struct StatisticsView: View {
                         .padding(.horizontal, 20)
                         .frame(height: 1)
                     
-                    if sessions(by: .gi).count > 0 || sessions(by: .noGi).count > 0 {
+                    if viewModel.sessions(by: .gi, filteredSessions).count > 0 ||
+                        viewModel.sessions(by: .noGi, filteredSessions).count > 0
+                    {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Sessions by grapling style")
                                 .font(.system(size: 16))
@@ -215,8 +134,8 @@ struct StatisticsView: View {
                         
                         PieChartView(
                             values: [
-                                Double(sessions(by: .gi).count),
-                                Double(sessions(by: .noGi).count)
+                                Double(viewModel.sessions(by: .gi, filteredSessions).count),
+                                Double(viewModel.sessions(by: .noGi, filteredSessions).count)
                             ],
                             colors: [Color("Blue"), Color("LightBlue")],
                             textColors: [.white, .black],
@@ -240,7 +159,7 @@ struct StatisticsView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(title)
+                Text(viewModel.title)
                     .font(.system(size: 20))
                     .fontWeight(.medium)
             }
@@ -259,7 +178,7 @@ struct StatisticsView: View {
         }
         .onAppear {
             hideTabbar(false)
-            self.title = presenter.intervalToString(from: dateInterval.start, to: dateInterval.end, segment: selectedSegment)
+            viewModel.setupTitle()
         }
     }
     
@@ -273,7 +192,7 @@ struct StatisticsView_Previews: PreviewProvider {
         let interval = DateInterval(start: Date() - TimeInterval(5000 * 60), end: Date())
         
         var body: some View {
-            StatisticsView(presenter: StatisticsViewPresenter(dateInterval: interval))
+            StatisticsView(viewModel: StatisticsViewViewModel(dateInterval: interval))
         }
     }
     

@@ -13,6 +13,12 @@ struct StatsView: View {
     var tendecyGrows: Bool? = nil
     var tendecyValue: String? = nil
     
+    var showTendencies: Bool {
+        return tendecyValue != nil &&
+            tendecyValue != "0" &&
+            tendecyValue != "0min"
+    }
+    
     var body: some View {
         ZStack {
             HStack(alignment: .top) {
@@ -26,7 +32,10 @@ struct StatsView: View {
                 }
                 Spacer()
             }
-            if let tendecyValue = tendecyValue {
+            if let tendecyValue = tendecyValue,
+                tendecyValue != "0",
+                tendecyValue != "0min"
+            {
                 HStack {
                     Spacer()
                     VStack(alignment: .trailing) {
@@ -73,8 +82,8 @@ struct StatsView: View {
 struct StatsViewProvider_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 10) {
-            StatsView(text: "Sessions", value: "3333", tendecyGrows: true, tendecyValue: "2")
-            StatsView(text: "Total time", value: "25h 25m", tendecyGrows: false, tendecyValue: "1h 30m")
+            StatsView(text: "Sessions", value: "3333", tendecyGrows: true, tendecyValue: "0")
+            StatsView(text: "Total time", value: "25h 25m", tendecyGrows: false, tendecyValue: "0min")
         }.padding(20)
     }
 }

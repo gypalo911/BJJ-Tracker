@@ -16,12 +16,12 @@ struct ContentView: View {
         ZStack {
             VStack {
                 TabView(selection: $selectedTab) {
-                    DashboardView()
+                    DashboardView(viewModel: DashboardViewModel())
                         .tag(Tab.dashboard)
                     TimetableView()
                         .tag(Tab.calendar)
                     StatisticsView(
-                        presenter: StatisticsViewPresenter(dateInterval: DateInterval(start: Date(), end: Date()))
+                        viewModel: StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
                     ).tag(Tab.statistics)
                     ProfileView()
                         .tag(Tab.profile)
@@ -36,11 +36,6 @@ struct ContentView: View {
         }.ignoresSafeArea()
     }
 }
-
-class AppSettings: ObservableObject {
-    @Published var isTabBarHidden: Bool = false
-}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -38,7 +38,7 @@ struct MonthCalendarView: View {
         VStack {
             HStack(spacing: 0) {
                 ForEach(weekDays, id: \.self) { day in
-                    Text(day)
+                    Text(day.capitalized)
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundColor(colors.textColor)

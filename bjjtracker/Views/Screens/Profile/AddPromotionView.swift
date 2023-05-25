@@ -31,7 +31,7 @@ struct AddPromotionView: View {
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "2. Belt: \(promotion.belt.title)".localizedString)
+                                TitleTextView(text: "2. Belt: %@".localized(with: ["\(promotion.belt.title)"]))
                                 
                                 BeltsListView(promotion: promotion)
                             }

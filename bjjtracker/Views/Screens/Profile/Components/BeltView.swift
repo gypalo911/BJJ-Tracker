@@ -28,7 +28,7 @@ struct BeltView: View {
                 HStack(spacing: 5) {
                     ForEach(0..<stripesCount, id: \.self) { stripe in
                         Rectangle()
-                            .fill(.white)
+                            .fill(beltColor.1 == Color.white ? .black : .white)
                             .frame(width: 6)
                     }
                 }

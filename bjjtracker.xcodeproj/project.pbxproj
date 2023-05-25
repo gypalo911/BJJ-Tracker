@@ -21,9 +21,7 @@
 		D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */; };
 		D02F3DED29EFFB3C00BED6CD /* MonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEC29EFFB3C00BED6CD /* MonthYearPicker.swift */; };
 		D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */; };
-		D02F3DF129F0543000BED6CD /* StatisticsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewPresenter.swift */; };
-		D02F3DF329F05D4D00BED6CD /* EditSessionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF229F05D4D00BED6CD /* EditSessionPresenter.swift */; };
-		D02F3DF529F0876000BED6CD /* ArchivePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */; };
+		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
@@ -34,6 +32,7 @@
 		D060BA9529DDAD9C00E10562 /* bjjtrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9429DDAD9C00E10562 /* bjjtrackerTests.swift */; };
 		D060BA9F29DDAD9C00E10562 /* bjjtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */; };
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
+		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
 		D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */; };
 		D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */; };
 		D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA32A0E313500E74E01 /* CircularBeltView.swift */; };
@@ -52,6 +51,7 @@
 		D0A00ED429DDD2ED00DCD5BB /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */; };
 		D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
+		D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */; };
 		D0B01F2829E43E4E00E10979 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2729E43E4E00E10979 /* Color.swift */; };
 		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
 		D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */; };
@@ -105,9 +105,7 @@
 		D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
 		D02F3DEC29EFFB3C00BED6CD /* MonthYearPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearPicker.swift; sourceTree = "<group>"; };
 		D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearBottomSheetView.swift; sourceTree = "<group>"; };
-		D02F3DF029F0543000BED6CD /* StatisticsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewPresenter.swift; sourceTree = "<group>"; };
-		D02F3DF229F05D4D00BED6CD /* EditSessionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionPresenter.swift; sourceTree = "<group>"; };
-		D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePresenter.swift; sourceTree = "<group>"; };
+		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +120,7 @@
 		D060BA9A29DDAD9C00E10562 /* bjjtrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bjjtrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITests.swift; sourceTree = "<group>"; };
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D06F86192A1F93C800270558 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
 		D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsList.swift; sourceTree = "<group>"; };
 		D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsListCell.swift; sourceTree = "<group>"; };
 		D076EFA32A0E313500E74E01 /* CircularBeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBeltView.swift; sourceTree = "<group>"; };
@@ -140,6 +139,7 @@
 		D0A00ED329DDD2ED00DCD5BB /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		D0A00ED529DDD7E400DCD5BB /* ActivitiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesManager.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
+		D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		D0B01F2729E43E4E00E10979 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
 		D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsView.swift; sourceTree = "<group>"; };
@@ -225,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */,
-				D02F3DF429F0876000BED6CD /* ArchivePresenter.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -337,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824AF29DE03D80023E6C0 /* DashboardView.swift */,
+				D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */,
 				D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */,
 			);
 			path = Dashboard;
@@ -358,7 +358,6 @@
 				D02F3DF829F14BCE00BED6CD /* Details */,
 				D098BBEF29E2C1A200A9A068 /* Components */,
 				D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */,
-				D02F3DF229F05D4D00BED6CD /* EditSessionPresenter.swift */,
 				D02F3DF629F149E900BED6CD /* NewSessionView.swift */,
 			);
 			path = Sessions;
@@ -461,6 +460,7 @@
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
 				D0E824BE29DF006A0023E6C0 /* Date+extension.swift */,
+				D06F86192A1F93C800270558 /* Int+extension.swift */,
 				D00109B52A0D3294008433CC /* String+extension.swift */,
 			);
 			path = Extensions;
@@ -472,7 +472,7 @@
 				D02F3DE029E7291800BED6CD /* PieChart */,
 				D02F3DDC29E726E600BED6CD /* InfographicsView.swift */,
 				D0B01F2E29E5850000E10979 /* StatisticsView.swift */,
-				D02F3DF029F0543000BED6CD /* StatisticsViewPresenter.swift */,
+				D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -747,7 +747,6 @@
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
-				D02F3DF529F0876000BED6CD /* ArchivePresenter.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
 				D0A00ED629DDD7E400DCD5BB /* ActivitiesManager.swift in Sources */,
@@ -773,16 +772,17 @@
 				D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
-				D02F3DF329F05D4D00BED6CD /* EditSessionPresenter.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
+				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
 				D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */,
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
-				D02F3DF129F0543000BED6CD /* StatisticsViewPresenter.swift in Sources */,
+				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
+				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D00109B62A0D3294008433CC /* String+extension.swift in Sources */,
 				D098BBF529E2EB3000A9A068 /* BeltsListView.swift in Sources */,
 			);

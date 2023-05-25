@@ -54,28 +54,14 @@ extension Date {
     func endOfMonth() -> Date {
         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
     }
+    
+    func isInInterval(dateInterval: DateInterval) -> Bool {
+        dateInterval.contains(self)
+    }
 }
 
 struct DateValue: Identifiable {
     var id: UUID = .init()
     var day: Int
     var date: Date
-}
-
-extension Int {
-    func minutesToDuration() -> String {
-        var str = ""
-        let hours = Int(self / 60)
-        let minutes = Int(self % 60)
-        
-        if hours != 0 && minutes != 0 {
-            str = "%@h %@m".localized(with: ["\(hours)", "\(minutes)"])
-        } else if hours != 0 && minutes == 0 {
-            str = "%@h".localized(with: ["\(hours)"])
-        } else {
-            str = "%@min".localized(with: ["\(minutes)"])
-        }
-        
-        return str
-    }
 }
