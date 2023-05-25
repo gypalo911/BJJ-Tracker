@@ -29,7 +29,7 @@ struct ActivityPanelView: View {
                                 .font(.system(size: 14))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
-                            Text("\((session.startDate ?? Date() + TimeInterval(session.duration * 60)).toString("HH:mm"))")
+                            Text("\(((session.startDate ?? Date()) + TimeInterval(session.duration * 60)).toString("HH:mm"))")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white.opacity(0.6))
                                 .fontWeight(.regular)
