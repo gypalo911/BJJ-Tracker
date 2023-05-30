@@ -9,7 +9,6 @@ import SwiftUI
 
 @MainActor
 class StatisticsViewViewModel: ObservableObject {
-    let persistanceManager: ActivitiesReading = CoreDataService()
     
     @Published var title: String = ""
     var isConcreteDates: Bool = false
