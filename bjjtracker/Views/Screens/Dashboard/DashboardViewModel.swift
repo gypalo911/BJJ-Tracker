@@ -27,7 +27,8 @@ class DashboardViewModel: ObservableObject {
     var requestDateRange: DateInterval {
         let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
         let rangeStart = lastWeekDate.first?.date ?? Date()
-        let rangeEnd = currentWeek.last?.date ?? Date()
+        let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
+        let rangeEnd = Calendar.current.date(byAdding: .day, value: 7, to: sunday) ?? Date()
         return DateInterval(start: rangeStart, end: rangeEnd)
     }
     

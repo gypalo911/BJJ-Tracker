@@ -26,7 +26,7 @@ struct DashboardView: View {
         _sessionsList = FetchRequest<Session>(
             sortDescriptors: [],
             predicate: NSPredicate(
-                format: "startDate >= %@ AND startDate < %@",
+                format: "startDate >= %@ AND startDate <= %@",
                 viewModel.requestDateRange.start as CVarArg,
                 viewModel.requestDateRange.end as CVarArg
             )

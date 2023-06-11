@@ -10,19 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
     
+    @StateObject var dashboardVM = DashboardViewModel()
+    @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
+    
     @EnvironmentObject var settings: AppSettings
 
     var body: some View {
         ZStack {
             VStack {
                 TabView(selection: $selectedTab) {
-                    DashboardView(viewModel: DashboardViewModel())
+                    DashboardView(viewModel: dashboardVM)
                         .tag(Tab.dashboard)
                     TimetableView()
                         .tag(Tab.calendar)
-                    StatisticsView(
-                        viewModel: StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
-                    ).tag(Tab.statistics)
+                    StatisticsView(viewModel: statsVM)
+                        .tag(Tab.statistics)
                     ProfileView()
                         .tag(Tab.profile)
                 }.edgesIgnoringSafeArea(.bottom)
