@@ -33,6 +33,8 @@
 		D060BA9F29DDAD9C00E10562 /* bjjtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */; };
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
 		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
+		D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */; };
+		D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */; };
 		D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */; };
 		D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */; };
 		D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA32A0E313500E74E01 /* CircularBeltView.swift */; };
@@ -120,6 +122,7 @@
 		D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITests.swift; sourceTree = "<group>"; };
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D06F86192A1F93C800270558 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
+		D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsList.swift; sourceTree = "<group>"; };
 		D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsListCell.swift; sourceTree = "<group>"; };
 		D076EFA32A0E313500E74E01 /* CircularBeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBeltView.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */,
 				E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */,
+				D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */,
 				D060BA8B29DDAD9C00E10562 /* Info.plist */,
 				D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */,
 				D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */,
@@ -510,6 +515,9 @@
 			dependencies = (
 			);
 			name = bjjtracker;
+			packageProductDependencies = (
+				D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */,
+			);
 			productName = bjjtracker;
 			productReference = D060BA7A29DDAD9A00E10562 /* bjjtracker.app */;
 			productType = "com.apple.product-type.application";
@@ -586,6 +594,9 @@
 				uk,
 			);
 			mainGroup = D060BA7129DDAD9A00E10562;
+			packageReferences = (
+				D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = D060BA7B29DDAD9A00E10562 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -604,6 +615,7 @@
 			files = (
 				D060BA8529DDAD9C00E10562 /* Preview Assets.xcassets in Resources */,
 				D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */,
+				D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */,
 				D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */,
 				D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */,
 			);
@@ -991,7 +1003,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
+				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bjjtracker/Info.plist;
@@ -1008,7 +1020,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.bjjtracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1152,6 +1164,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */ = {
