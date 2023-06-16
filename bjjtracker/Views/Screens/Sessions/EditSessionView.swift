@@ -93,6 +93,7 @@ struct EditSessionView: View {
                         
                         Button(action: {
                             PersistanceManager.shared.delete(session: session, context: managedObjContext)
+                            NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
                             presentationMode.wrappedValue.dismiss()
                             onDismiss?(nil)
                         }, label: {

@@ -41,6 +41,8 @@
 "hours" = "год";
 "min" = "хв";
 
+"Starts at %@" = "Розпочнеться о %@";
+
 // Sessions
 "UPCOMING" = "СКОРО";
 "FINISHED" = "Завершено";

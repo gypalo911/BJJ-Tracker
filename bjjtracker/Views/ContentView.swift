@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
     
+    @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel(
         analyticsEngine: FirebaseAnalyticsEngine()
     )
@@ -37,7 +38,21 @@ struct ContentView: View {
                     CustomTabBarView(selectedTab: $selectedTab)
                 }
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .onReceive(AppSettings.shared.$navigateToPage) { nav in
+            guard let nav = nav else {
+                return
+            }
+            let session = PersistanceManager.shared.session(by: nav as String, context: managedObjContext)
+            guard let session = session else {
+                return
+            }
+//            selectedTab = .dashboard
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                dashboardVM.selectedSession = session
+            }
+        }
     }
 }
 

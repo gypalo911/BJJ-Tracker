@@ -188,6 +188,7 @@ struct DashboardView: View {
                 SessionDetailsView(session: selectedSession)
             }
             .onAppear {
+                NotificationManager.shared.requestAuthorization { _ in }
                 viewModel.onDashboardAppear()
             }
         }.background(Color.white)

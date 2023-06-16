@@ -71,6 +71,8 @@
 		D0B8B72C2A3C9F3800A2418F /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
 		D0B8B72D2A3C9F4A00A2418F /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
 		D0B8B72E2A3C9F6100A2418F /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
+		D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */; };
+		D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */; };
 		D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */; };
 		D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* DashboardView.swift */; };
 		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
@@ -163,6 +165,8 @@
 		D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsView.swift; sourceTree = "<group>"; };
 		D0B01F2E29E5850000E10979 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtrackerRelease.entitlements; sourceTree = "<group>"; };
+		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 				D060BA8B29DDAD9C00E10562 /* Info.plist */,
 				D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */,
 				D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */,
+				D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */,
 				D060BA8129DDAD9C00E10562 /* Assets.xcassets */,
 				D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */,
 				D0A00ED729DDE3B100DCD5BB /* Helpers */,
@@ -360,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				D02F3DF929F8051700BED6CD /* PersistanceManager.swift */,
+				D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -801,6 +807,7 @@
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,
+				D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */,
 				D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */,
 				D098BBEE29E2C16600A9A068 /* AddPromotionView.swift in Sources */,
 				D098BBEA29E1A15C00A9A068 /* DurationPicker.swift in Sources */,
@@ -808,6 +815,7 @@
 				D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */,
 				D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
+				D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
 				D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,

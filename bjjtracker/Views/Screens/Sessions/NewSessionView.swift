@@ -100,6 +100,7 @@ struct NewSessionView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
                                 save()
+                                NotificationManager.shared.scheduleNotification(activity: activity)
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Text("Save")

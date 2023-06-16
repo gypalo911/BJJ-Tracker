@@ -72,7 +72,7 @@ struct SessionDetailsView: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.white)
                                     HStack {
-                                        Text("\((session.startDate ?? Date()).toString("hh:mm"))")
+                                        Text("\((session.startDate ?? Date()).toString("HH:mm"))")
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)

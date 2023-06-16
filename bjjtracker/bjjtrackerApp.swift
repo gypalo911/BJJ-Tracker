@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
-import FirebaseCore
 
 class AppSettings: ObservableObject {
+    static let shared = AppSettings()
+    
     @Published var isTabBarHidden: Bool = false
+    @Published var navigateToPage: String?
 }
 
 @main
@@ -17,7 +19,7 @@ struct bjjtrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    let settings = AppSettings()
+    let settings = AppSettings.shared
     let persistanceManager = PersistanceManager.shared
 
     var body: some Scene {
@@ -26,14 +28,5 @@ struct bjjtrackerApp: App {
                 .environmentObject(settings)
                 .environment(\.managedObjectContext, persistanceManager.container.viewContext)
         }
-    }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        
-        return true
     }
 }

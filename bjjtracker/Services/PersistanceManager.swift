@@ -8,6 +8,7 @@
 import CoreData
 
 protocol SessionsStorageManager {
+    func session(by id: String, context: NSManagedObjectContext) -> Session?
     func createSession(from activity: Activity, context: NSManagedObjectContext)
     func edit(session: Session, activity: Activity, context: NSManagedObjectContext)
     func delete(session: Session, context: NSManagedObjectContext)
@@ -54,10 +55,10 @@ struct PersistanceManager {
         return result
     }()
     
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
     
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "bjjtracker")
+        container = NSPersistentCloudKitContainer(name: "bjjtracker")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -67,19 +68,37 @@ struct PersistanceManager {
                 fatalError("Unresolved \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
     func save(context: NSManagedObjectContext) {
         do {
             try context.save()
-            print("Data saved!")
-        } catch {
-            print("Couldn't save")
-        }
+        } catch {}
     }
 }
 
 extension PersistanceManager: SessionsStorageManager {
+    
+    func session(by id: String, context: NSManagedObjectContext) -> Session? {
+        let requestSessions: NSFetchRequest<Session> = Session.fetchRequest()
+        
+        // Make a predicate asking only for sessions of a certain "projectId"
+        requestSessions.fetchLimit = 1
+        let query = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+        requestSessions.predicate = query
+        
+        // Perform the fetch with the predicate
+        do {
+            let foundEntities: [Session] = try context.fetch(requestSessions)
+            return foundEntities.first
+        } catch {
+            let fetchError = error as NSError
+            debugPrint(fetchError)
+        }
+        
+        return nil
+    }
     
     func createSession(from activity: Activity, context: NSManagedObjectContext) {
         let session = Session(context: context)
