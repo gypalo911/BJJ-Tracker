@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
     
-    @StateObject var dashboardVM = DashboardViewModel()
+    @StateObject var dashboardVM = DashboardViewModel(
+        analyticsEngine: FirebaseAnalyticsEngine()
+    )
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     
     @EnvironmentObject var settings: AppSettings

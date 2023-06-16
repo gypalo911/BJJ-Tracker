@@ -187,6 +187,9 @@ struct DashboardView: View {
             .sheet(item: $viewModel.selectedSession) { selectedSession in
                 SessionDetailsView(session: selectedSession)
             }
+            .onAppear {
+                viewModel.onDashboardAppear()
+            }
         }.background(Color.white)
     }
 }
@@ -194,7 +197,11 @@ struct DashboardView: View {
 struct Dashboard_Previews: PreviewProvider {
     struct Container: View {
         var body: some View {
-            DashboardView(viewModel: DashboardViewModel())
+            DashboardView(
+                viewModel: DashboardViewModel(
+                    analyticsEngine: FirebaseAnalyticsEngine()
+                )
+            )
         }
     }
     

@@ -7,6 +7,11 @@
 //
 import SwiftUI
 
+protocol DashboardViewAnalytics {
+    func onDashboardAppear()
+    func selectedModal(_ modalName: String)
+}
+
 enum ModalsSheets: Int, Identifiable {
     var id: Int { self.rawValue }
     
@@ -16,11 +21,13 @@ enum ModalsSheets: Int, Identifiable {
 
 @MainActor
 class DashboardViewModel: ObservableObject {
-    @Published var selectedSession: Session?
+    private let analyticsEngine: AnalyticsEngine
+    
+    @Published var selectedSession: Session? = nil
     
     @Published var selectedDay = Date()
     @Published var showingActionSheet: Bool = false
-    @Published var selectedSheet: ModalsSheets?
+    @Published var selectedSheet: ModalsSheets? = nil
     
     var currentWeek = Calendar.current.currentWeek
     
@@ -32,8 +39,18 @@ class DashboardViewModel: ObservableObject {
         return DateInterval(start: rangeStart, end: rangeEnd)
     }
     
+    init(analyticsEngine: AnalyticsEngine) {
+        self.analyticsEngine = analyticsEngine
+    }
+    
     func selectModal(sheet: ModalsSheets) {
         selectedSheet = sheet
+        switch sheet {
+        case .activity:
+            selectedModal("activity")
+        case .promotion:
+            selectedModal("promotion")
+        }
     }
     
     func select(session: Session) {
@@ -69,5 +86,15 @@ private extension DashboardViewModel {
         return sessions.filter {
             (start...end).contains($0.startDate ?? Date())
         }
+    }
+}
+
+extension DashboardViewModel: DashboardViewAnalytics {
+    func onDashboardAppear() {
+        analyticsEngine.log(AnalyticsEvent(name: "dashboard_screen_viewed", metadata: [:]))
+    }
+
+    func selectedModal(_ modalName: String) {
+        analyticsEngine.log(AnalyticsEvent(name: "\(modalName)_from_dashboard_selected", metadata: [:]))
     }
 }
