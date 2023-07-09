@@ -101,11 +101,21 @@ struct SessionDetailsView: View {
                                 Text("Notes")
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
-                                    .foregroundColor(Color("Gray"))
+                                    .foregroundColor(Color.black)
                                 Text(LocalizedStringKey(session.notes ?? ""))
                                     .font(.system(size: 18))
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
+                            }
+                            .padding(.vertical, 20)
+                            .padding(.horizontal, 10)
+                            
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Learned techniques")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.black)
+                                TechniquesListView()
                             }
                             .padding(.vertical, 20)
                             .padding(.horizontal, 10)

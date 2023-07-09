@@ -24,9 +24,15 @@ struct bjjtrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
+#if DEBUG
+            ContentView()
+                .environmentObject(settings)
+                .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+#else
             ContentView()
                 .environmentObject(settings)
                 .environment(\.managedObjectContext, persistanceManager.container.viewContext)
+#endif
         }
     }
 }

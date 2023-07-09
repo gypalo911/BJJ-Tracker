@@ -13,6 +13,13 @@
 		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
+		D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FEF2A5ADEB4006BB617 /* TagView.swift */; };
+		D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */; };
+		D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF42A5AE273006BB617 /* DesignSystem.swift */; };
+		D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */; };
+		D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */; };
+		D02D1FFB2A5AE2DC006BB617 /* DesignSystem+Spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FFA2A5AE2DC006BB617 /* DesignSystem+Spacer.swift */; };
+		D02D1FFD2A5AE5E6006BB617 /* TagViewWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */; };
 		D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDC29E726E600BED6CD /* InfographicsView.swift */; };
 		D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDE29E7276700BED6CD /* PieSliceView.swift */; };
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
@@ -51,6 +58,7 @@
 		D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
 		D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* Profile.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
+		D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */; };
 		D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */; };
 		D0B01F2829E43E4E00E10979 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2729E43E4E00E10979 /* Color.swift */; };
 		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
@@ -117,6 +125,13 @@
 		D00109B52A0D3294008433CC /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
+		D02D1FEF2A5ADEB4006BB617 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechniquesListView.swift; sourceTree = "<group>"; };
+		D02D1FF42A5AE273006BB617 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Color.swift"; sourceTree = "<group>"; };
+		D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Font.swift"; sourceTree = "<group>"; };
+		D02D1FFA2A5AE2DC006BB617 /* DesignSystem+Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Spacer.swift"; sourceTree = "<group>"; };
+		D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewWithTextField.swift; sourceTree = "<group>"; };
 		D02F3DDC29E726E600BED6CD /* InfographicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfographicsView.swift; sourceTree = "<group>"; };
 		D02F3DDE29E7276700BED6CD /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -159,6 +174,7 @@
 		D0A00ECD29DDC9B100DCD5BB /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		D0A00ECF29DDCE7300DCD5BB /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
+		D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreTagView.swift; sourceTree = "<group>"; };
 		D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		D0B01F2729E43E4E00E10979 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
@@ -245,6 +261,26 @@
 			path = DashboardTests;
 			sourceTree = "<group>";
 		};
+		D02D1FEE2A5ADEB4006BB617 /* Techniques */ = {
+			isa = PBXGroup;
+			children = (
+				D0AA702C2A5AFC20001FB3FA /* Components */,
+				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
+			);
+			path = Techniques;
+			sourceTree = "<group>";
+		};
+		D02D1FF32A5AE261006BB617 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				D02D1FF42A5AE273006BB617 /* DesignSystem.swift */,
+				D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */,
+				D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */,
+				D02D1FFA2A5AE2DC006BB617 /* DesignSystem+Spacer.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
 		D02F3DE029E7291800BED6CD /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +331,7 @@
 		D060BA7C29DDAD9A00E10562 /* bjjtracker */ = {
 			isa = PBXGroup;
 			children = (
+				D02D1FF32A5AE261006BB617 /* DesignSystem */,
 				D070C9512A3C592B00DCEED5 /* Analytics */,
 				D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */,
 				D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */,
@@ -449,6 +486,7 @@
 		D098BBEB29E2C09D00A9A068 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D02D1FEE2A5ADEB4006BB617 /* Techniques */,
 				D02F3DE929EEE7F200BED6CD /* Archive */,
 				D0B01F2D29E5844B00E10979 /* Statistics */,
 				D060BAB229DDAE5F00E10562 /* Sessions */,
@@ -487,6 +525,16 @@
 				D0B01F2629E43DBE00E10979 /* Extensions */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D0AA702C2A5AFC20001FB3FA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D02D1FEF2A5ADEB4006BB617 /* TagView.swift */,
+				D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */,
+				D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D0B01F2529E43DAF00E10979 /* Color */ = {
@@ -803,23 +851,29 @@
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
+				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,
+				D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */,
 				D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */,
+				D02D1FFB2A5AE2DC006BB617 /* DesignSystem+Spacer.swift in Sources */,
 				D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */,
 				D098BBEE29E2C16600A9A068 /* AddPromotionView.swift in Sources */,
 				D098BBEA29E1A15C00A9A068 /* DurationPicker.swift in Sources */,
+				D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */,
 				D070C9532A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift in Sources */,
 				D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */,
 				D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
+				D02D1FFD2A5AE5E6006BB617 /* TagViewWithTextField.swift in Sources */,
 				D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
+				D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */,
 				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,
 				D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */,
 				D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */,
@@ -839,8 +893,10 @@
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
+				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
+				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
 				D00109B62A0D3294008433CC /* String+extension.swift in Sources */,
 				D098BBF529E2EB3000A9A068 /* BeltsListView.swift in Sources */,
 			);
