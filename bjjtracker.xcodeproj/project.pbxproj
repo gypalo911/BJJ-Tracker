@@ -19,7 +19,6 @@
 		D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */; };
 		D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */; };
 		D02D1FFB2A5AE2DC006BB617 /* DesignSystem+Spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FFA2A5AE2DC006BB617 /* DesignSystem+Spacer.swift */; };
-		D02D1FFD2A5AE5E6006BB617 /* TagViewWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */; };
 		D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDC29E726E600BED6CD /* InfographicsView.swift */; };
 		D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DDE29E7276700BED6CD /* PieSliceView.swift */; };
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
@@ -47,6 +46,7 @@
 		D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA32A0E313500E74E01 /* CircularBeltView.swift */; };
 		D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA52A0E316D00E74E01 /* BeltView.swift */; };
 		D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA72A0E31AE00E74E01 /* BeltProgressCell.swift */; };
+		D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */; };
 		D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */; };
 		D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */; };
 		D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */; };
@@ -59,6 +59,7 @@
 		D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* Profile.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
 		D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */; };
+		D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */; };
 		D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */; };
 		D0B01F2829E43E4E00E10979 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2729E43E4E00E10979 /* Color.swift */; };
 		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
@@ -131,7 +132,6 @@
 		D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Color.swift"; sourceTree = "<group>"; };
 		D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Font.swift"; sourceTree = "<group>"; };
 		D02D1FFA2A5AE2DC006BB617 /* DesignSystem+Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem+Spacer.swift"; sourceTree = "<group>"; };
-		D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewWithTextField.swift; sourceTree = "<group>"; };
 		D02F3DDC29E726E600BED6CD /* InfographicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfographicsView.swift; sourceTree = "<group>"; };
 		D02F3DDE29E7276700BED6CD /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -163,6 +163,7 @@
 		D076EFA32A0E313500E74E01 /* CircularBeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBeltView.swift; sourceTree = "<group>"; };
 		D076EFA52A0E316D00E74E01 /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		D076EFA72A0E31AE00E74E01 /* BeltProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltProgressCell.swift; sourceTree = "<group>"; };
+		D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewWithTextField.swift; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
 		D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionView.swift; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 		D0A00ECF29DDCE7300DCD5BB /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
 		D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreTagView.swift; sourceTree = "<group>"; };
+		D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesListViewModel.swift; sourceTree = "<group>"; };
 		D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		D0B01F2729E43E4E00E10979 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			children = (
 				D0AA702C2A5AFC20001FB3FA /* Components */,
 				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
+				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
 			);
 			path = Techniques;
 			sourceTree = "<group>";
@@ -531,8 +534,8 @@
 			isa = PBXGroup;
 			children = (
 				D02D1FEF2A5ADEB4006BB617 /* TagView.swift */,
+				D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */,
 				D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */,
-				D02D1FFC2A5AE5E6006BB617 /* TagViewWithTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
+				D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
@@ -869,7 +873,6 @@
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
-				D02D1FFD2A5AE5E6006BB617 /* TagViewWithTextField.swift in Sources */,
 				D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
@@ -893,6 +896,7 @@
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
+				D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,

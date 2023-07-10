@@ -14,12 +14,12 @@ struct AddMoreTagView: View {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color("Blue"))
-            Text("Add more")
+            Text("Add technique")
                 .font(Font.custom("Rubik", size: 14))
                 .foregroundColor(Color("Blue"))
         }
         .padding(.vertical, 6)
-        .frame(width: 110)
+        .frame(width: 136)
         .background(
             Rectangle()
                 .foregroundColor(.white)

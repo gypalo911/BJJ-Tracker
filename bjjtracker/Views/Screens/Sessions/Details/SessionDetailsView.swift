@@ -116,6 +116,7 @@ struct SessionDetailsView: View {
                                     .fontWeight(.semibold)
                                     .foregroundColor(Color.black)
                                 TechniquesListView()
+                                    .padding(.vertical, 20)
                             }
                             .padding(.vertical, 20)
                             .padding(.horizontal, 10)

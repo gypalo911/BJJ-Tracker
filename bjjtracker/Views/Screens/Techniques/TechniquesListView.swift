@@ -9,87 +9,59 @@ import SwiftUI
 
 struct TechniquesListView: View {
     
-    @State private var tags: [Tag] = [
-        .init(text: "Delariva", size: 110),
-        .init(text: "Spyder Guard", size: 150),
-        .init(text: "Delariva", size: 110),
-        .init(text: "Spyder Guard", size: 150),
-        .init(text: "Delariva", size: 110),
-        .init(text: "Spyder Guard", size: 150)
-    ]
-    
-    private let tagsListSubviewSize: CGFloat = UIScreen.main.bounds.width - 60
+    @StateObject var viewModel = ContentViewModel()
     
     @State private var isEditing: Bool = false
+    @State private var isTyping: Bool = false
+    @State private var maxViewWidth: CGFloat = 0
     
     var body: some View {
-        let fetchedRows = getRows()
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 10) {
-                ForEach(fetchedRows, id: \.self) { rows in
+                ForEach(viewModel.rows, id: \.self) { rows in
                     HStack(spacing: 10) {
                         ForEach(rows) { row in
-                            TagView(tag: row)
+                            TagView(
+                                tag: row,
+                                onDelete: { tagId in
+                                    viewModel.removeTag(by: tagId)
+                                },
+                                isEditing: $isEditing,
+                                maxViewWidth: maxViewWidth
+                            ).onLongPressGesture {
+                                isEditing.toggle()
+                            }
                         }
                     }.hAlign(.leading)
                 }
                 
                 // move it to the rest of tag views
-                if isEditing {
-                    TagViewWithTextField(
-                        isEditing: $isEditing,
-                        onSubmit: { tag in
-                            if !tag.text.trimmingCharacters(in: .whitespaces).isEmpty {
-                                tags.append(tag)
+                VStack {
+                    if isTyping {
+                        TagViewWithTextField(
+                            isEditing: $isTyping,
+                            onSubmit: { tag in
+                                viewModel.add(tag: tag)
+                            },
+                            maxViewWidth: maxViewWidth
+                        )
+                        .padding(.horizontal, 10)
+                    } else {
+                        AddMoreTagView()
+                            .onTapGesture {
+                                isTyping = true
                             }
-                        })
-                    .padding(.leading, 18)
-                } else {
-                    AddMoreTagView()
-                        .padding(.leading, 1)
-                        .onTapGesture {
-                            isEditing = true
-                        }
+                    }
                 }
-            }
-            .frame(width: tagsListSubviewSize)
-            .padding(.vertical)
-        }
-        .frame(maxWidth: .infinity)
-    }
-    
-    private func getIndex(tag: Tag) -> Int {
-        let index = tags.firstIndex { currentTag in
-            return tag.id == currentTag.id
-        } ?? 0
-        return index
-    }
-    
-    private func getRows() -> [[Tag]] {
-        var rows: [[Tag]] = []
-        var currentRow: [Tag] = []
-        var totalWidth: CGFloat = 0
-        let screenWidth: CGFloat = tagsListSubviewSize + 10
-        tags.forEach { tag in
-            totalWidth += tag.size
-            
-            if totalWidth > screenWidth {
-                totalWidth = 0
-                
-                rows.append(currentRow)
-                currentRow.removeAll()
-                currentRow.append(tag)
-            } else {
-                currentRow.append(tag)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 10)
             }
         }
-        
-        if !currentRow.isEmpty {
-            rows.append(currentRow)
-            currentRow.removeAll()
+        .onAppear {
+            maxViewWidth = UIScreen.main.bounds.size.width - 60
+            viewModel.maxRowWidth = maxViewWidth
+            viewModel.getTags()
         }
-        
-        return rows
     }
 }
 

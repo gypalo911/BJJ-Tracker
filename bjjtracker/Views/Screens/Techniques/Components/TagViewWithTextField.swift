@@ -16,6 +16,8 @@ struct TagViewWithTextField: View {
     
     let onSubmit: ((Tag) -> Void)?
     
+    var maxViewWidth: CGFloat
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -33,13 +35,13 @@ struct TagViewWithTextField: View {
             .accentColor(.white)
             .font(Font.custom("Rubik", size: 14))
             .frame(width: viewWidth)
-            .padding (.horizontal)
+            .padding (.horizontal, 20)
             .onAppear {
                 focusedField = true
             }
             .onSubmit {
                 isEditing = false
-                tag.size = tag.text.textSize().width + 40
+                tag.size = tag.text.textSize().width + 25
                 onSubmit?(tag)
                 tag = .init(text: "")
             }
@@ -47,9 +49,13 @@ struct TagViewWithTextField: View {
                 let font = UIFont.systemFont(ofSize: 14)
                 let size = newValue.textSize(font)
                 
-                if size.width == 0 {
+                tag.text = String(newValue.prefix(40))
+                
+                if newValue.textSize().width + 20 > maxViewWidth {
+                    viewWidth = maxViewWidth
+                } else if size.width == 0 {
                     viewWidth = TagViewWithTextField.defaultViewWidth
-                } else if size.width <= 150 {
+                } else {
                     viewWidth = size.width
                 }
             }
@@ -62,7 +68,11 @@ struct TagViewWithTextField_Previews: PreviewProvider {
     struct Container: View {
         @State var isEditing = false
         var body: some View {
-            TagViewWithTextField(isEditing: $isEditing, onSubmit: { tag in })
+            TagViewWithTextField(
+                isEditing: $isEditing,
+                onSubmit: { tag in },
+                maxViewWidth: UIScreen.main.bounds.size.width - 60
+            )
         }
     }
     
