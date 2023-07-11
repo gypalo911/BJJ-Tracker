@@ -11,9 +11,9 @@ class ContentViewModel: ObservableObject{
     
     @Published var rows: [[Tag]] = []
     @Published var tags: [Tag] = [
-//        .init(text: "Delariva"),
-//        .init(text: "Spyder Guard"),
-//        .init(text: "Delariva")
+        .init(text: "Delariva"),
+        .init(text: "Spyder Guard"),
+        .init(text: "Delariva")
     ]
     @Published var tagText = ""
     
@@ -53,7 +53,7 @@ class ContentViewModel: ObservableObject{
                 totalWidth += (tag.size + tagSpacing)
                 
                 if totalWidth > self.maxRowWidth {
-                    totalWidth = !currentRow.isEmpty ? (tag.size + 40) : 0
+                    totalWidth = !currentRow.isEmpty || rows.isEmpty ? (tag.size + 40) : 0
                     
                     rows.append(currentRow)
                     currentRow.removeAll()

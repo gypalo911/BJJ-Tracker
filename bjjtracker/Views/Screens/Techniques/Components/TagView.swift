@@ -16,53 +16,44 @@ struct Tag: Identifiable, Hashable {
 struct TagView: View {
     let tag: Tag
     let onDelete: ((String) -> Void)?
-
-    @State var isSelected: Bool = false
-    @Binding var isEditing: Bool
     
+    @Namespace var animation
     var maxViewWidth: CGFloat
     
     var body: some View {
         Text(tag.text)
             .font(Font.custom("Rubik", size: 14))
-            .foregroundColor(isSelected ? .white : Color("Blue"))
+            .foregroundColor(Color("Blue"))
             .padding(.vertical, 8)
             .padding(.leading, 20)
-            .padding(.trailing, isEditing ? 30 : 20)
+            .padding(.trailing, 20)
             .lineLimit(1)
             .truncationMode(.tail)
             .background(
                 ZStack(alignment: .trailing) {
                     Capsule()
-                        .fill(isSelected ? Color("Blue") : Color("LightBlue1"))
-                    if isEditing {
-                        Button {
-                            onDelete?(tag.id)
-                        } label:{
-                            Image(systemName: "xmark")
-                                .frame(width: 15, height: 15)
-                                .padding(.trailing, 10)
-                                .foregroundColor(.red)
-                        }
-                    }
+                        .fill(Color("LightBlue1"))
                 }
             )
+            .contentShape(.contextMenuPreview, Capsule())
+            .contextMenu {
+                Button("Delete", action: {
+                    onDelete?(tag.id)
+                })
+            }
+            .matchedGeometryEffect(id: tag.id, in: animation)
     }
 }
 
 struct TagView_Previews: PreviewProvider {
     struct Container: View {
-        @State var isEditing = false
         
         var body: some View {
             TagView(
                 tag: .init(text: "Delariva"),
                 onDelete: { _ in },
-                isEditing: $isEditing,
                 maxViewWidth: UIScreen.main.bounds.size.width
-            ).onLongPressGesture {
-                isEditing.toggle()
-            }.padding(30)
+            ).padding(30)
         }
     }
     

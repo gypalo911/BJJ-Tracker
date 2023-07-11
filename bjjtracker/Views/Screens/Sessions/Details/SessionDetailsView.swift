@@ -97,6 +97,16 @@ struct SessionDetailsView: View {
                                 }
                             }.padding(10)
                             
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Learned techniques")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.black)
+                                    .padding(.horizontal, 10)
+                                TechniquesListView()
+                            }
+                            .padding(.top, 20)
+                            
                             VStack(alignment: .leading, spacing: 10) {
                                 Text("Notes")
                                     .font(.system(size: 18))
@@ -107,18 +117,6 @@ struct SessionDetailsView: View {
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             }
-                            .padding(.vertical, 20)
-                            .padding(.horizontal, 10)
-                            
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text("Learned techniques")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color.black)
-                                TechniquesListView()
-                                    .padding(.vertical, 20)
-                            }
-                            .padding(.vertical, 20)
                             .padding(.horizontal, 10)
                         }
                         .hAlign(.leading)

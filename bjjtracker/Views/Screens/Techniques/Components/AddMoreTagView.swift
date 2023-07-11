@@ -9,17 +9,18 @@ import SwiftUI
 
 struct AddMoreTagView: View {
     var body: some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(alignment: .center, spacing: 5) {
             Image("addIcon")
                 .resizable()
-                .frame(width: 20, height: 20)
+                .frame(width: 15, height: 15)
                 .foregroundColor(Color("Blue"))
             Text("Add technique")
                 .font(Font.custom("Rubik", size: 14))
                 .foregroundColor(Color("Blue"))
         }
-        .padding(.vertical, 6)
-        .frame(width: 136)
+        .padding(.vertical, 5)
+        .padding(.leading, 5)
+        .padding(.trailing, 10)
         .background(
             Rectangle()
                 .foregroundColor(.white)

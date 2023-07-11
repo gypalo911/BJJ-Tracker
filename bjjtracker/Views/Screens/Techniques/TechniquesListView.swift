@@ -26,16 +26,12 @@ struct TechniquesListView: View {
                                 onDelete: { tagId in
                                     viewModel.removeTag(by: tagId)
                                 },
-                                isEditing: $isEditing,
                                 maxViewWidth: maxViewWidth
-                            ).onLongPressGesture {
-                                isEditing.toggle()
-                            }
+                            )
                         }
                     }.hAlign(.leading)
                 }
                 
-                // move it to the rest of tag views
                 VStack {
                     if isTyping {
                         TagViewWithTextField(
@@ -45,20 +41,23 @@ struct TechniquesListView: View {
                             },
                             maxViewWidth: maxViewWidth
                         )
-                        .padding(.horizontal, 10)
+                        .padding (.horizontal, 15)
                     } else {
                         AddMoreTagView()
+                            .padding (.horizontal, 1)
+                            .padding (.bottom, 5)
                             .onTapGesture {
                                 isTyping = true
                             }
                     }
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 10)
             }
+            .padding([.leading, .top], 10)
+            .animation(.easeInOut(duration: 0.3), value: viewModel.rows)
         }
+        .padding(.vertical, 10)
         .onAppear {
-            maxViewWidth = UIScreen.main.bounds.size.width - 60
+            maxViewWidth = UIScreen.main.bounds.size.width - 80
             viewModel.maxRowWidth = maxViewWidth
             viewModel.getTags()
         }
@@ -70,6 +69,7 @@ struct TechniquesListView_Previews: PreviewProvider {
         
         var body: some View {
             TechniquesListView()
+                .padding(30)
         }
     }
     

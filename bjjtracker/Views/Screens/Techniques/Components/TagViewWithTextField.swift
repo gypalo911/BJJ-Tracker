@@ -31,11 +31,12 @@ struct TagViewWithTextField: View {
                     .foregroundColor(Color("LightGray"))
             )
             .focused($focusedField)
+            .disableAutocorrection(true)
             .foregroundColor(.white)
             .accentColor(.white)
             .font(Font.custom("Rubik", size: 14))
             .frame(width: viewWidth)
-            .padding (.horizontal, 20)
+            .padding (.horizontal, 15)
             .onAppear {
                 focusedField = true
             }
@@ -71,7 +72,7 @@ struct TagViewWithTextField_Previews: PreviewProvider {
             TagViewWithTextField(
                 isEditing: $isEditing,
                 onSubmit: { tag in },
-                maxViewWidth: UIScreen.main.bounds.size.width - 60
+                maxViewWidth: UIScreen.main.bounds.size.width - 80
             )
         }
     }
