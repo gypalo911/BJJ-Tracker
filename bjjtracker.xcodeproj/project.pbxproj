@@ -13,6 +13,7 @@
 		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
+		D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */; };
 		D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FEF2A5ADEB4006BB617 /* TagView.swift */; };
 		D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */; };
 		D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF42A5AE273006BB617 /* DesignSystem.swift */; };
@@ -47,6 +48,9 @@
 		D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA52A0E316D00E74E01 /* BeltView.swift */; };
 		D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA72A0E31AE00E74E01 /* BeltProgressCell.swift */; };
 		D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */; };
+		D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */; };
+		D0839D832A5D6D5B00D315C8 /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */; };
+		D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */; };
 		D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */; };
 		D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */; };
 		D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */; };
@@ -126,6 +130,7 @@
 		D00109B52A0D3294008433CC /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
+		D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTagView.swift; sourceTree = "<group>"; };
 		D02D1FEF2A5ADEB4006BB617 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechniquesListView.swift; sourceTree = "<group>"; };
 		D02D1FF42A5AE273006BB617 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
@@ -164,6 +169,9 @@
 		D076EFA52A0E316D00E74E01 /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		D076EFA72A0E31AE00E74E01 /* BeltProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltProgressCell.swift; sourceTree = "<group>"; };
 		D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewWithTextField.swift; sourceTree = "<group>"; };
+		D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+extension.swift"; sourceTree = "<group>"; };
+		D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
+		D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
 		D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionView.swift; sourceTree = "<group>"; };
@@ -526,6 +534,7 @@
 			children = (
 				D098BBE829E1A15000A9A068 /* Pickers */,
 				D0B01F2629E43DBE00E10979 /* Extensions */,
+				D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -536,6 +545,7 @@
 				D02D1FEF2A5ADEB4006BB617 /* TagView.swift */,
 				D0839D7C2A5C7D4300D315C8 /* TagViewWithTextField.swift */,
 				D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */,
+				D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -559,6 +569,8 @@
 				D0E824BE29DF006A0023E6C0 /* Date+extension.swift */,
 				D06F86192A1F93C800270558 /* Int+extension.swift */,
 				D00109B52A0D3294008433CC /* String+extension.swift */,
+				D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */,
+				D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -856,9 +868,11 @@
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
+				D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
+				D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,
 				D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */,
 				D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */,
@@ -873,6 +887,7 @@
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
+				D0839D832A5D6D5B00D315C8 /* Notification+extension.swift in Sources */,
 				D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
@@ -897,6 +912,7 @@
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
 				D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */,
+				D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,

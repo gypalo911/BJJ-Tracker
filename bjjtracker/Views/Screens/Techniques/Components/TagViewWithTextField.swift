@@ -31,7 +31,7 @@ struct TagViewWithTextField: View {
                     .foregroundColor(Color("LightGray"))
             )
             .focused($focusedField)
-            .disableAutocorrection(true)
+            .autocorrectionDisabled(true)
             .foregroundColor(.white)
             .accentColor(.white)
             .font(Font.custom("Rubik", size: 14))
@@ -41,7 +41,9 @@ struct TagViewWithTextField: View {
                 focusedField = true
             }
             .onSubmit {
-                isEditing = false
+                withAnimation(.easeInOut) {
+                    isEditing = false
+                }
                 tag.size = tag.text.textSize().width + 25
                 onSubmit?(tag)
                 tag = .init(text: "")

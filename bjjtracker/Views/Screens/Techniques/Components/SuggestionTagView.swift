@@ -1,27 +1,15 @@
 //
-//  TagView.swift
+//  SuggestionTagView.swift
 //  bjjtracker
 //
-//  Created by Petro Hupalo on 09.07.2023.
+//  Created by Petro Hupalo on 12.07.2023.
 //
 
 import SwiftUI
 
-struct Tag: Identifiable, Hashable {
-    enum TagType {
-        case regular
-        case suggestion
-    }
-    
-    var id = UUID().uuidString
-    var text: String
-    var size: CGFloat = 0
-    var type: TagType = .regular
-}
-
-struct TagView: View {
+struct SuggestionTagView: View {
     let tag: Tag
-    let onDelete: (() -> Void)?
+    let onTap: (() -> Void)?
     
     @Namespace var animation
     
@@ -35,28 +23,27 @@ struct TagView: View {
             .lineLimit(1)
             .truncationMode(.tail)
             .background(
-                ZStack(alignment: .trailing) {
+                ZStack {
                     Capsule()
-                        .fill(Color("LightBlue1"))
+                        .fill(Color.white)
+                    Capsule()
+                        .stroke(Color("Blue"), lineWidth: 1)
                 }
             )
-            .contentShape(.contextMenuPreview, Capsule())
-            .contextMenu {
-                Button("Delete", action: {
-                    onDelete?()
-                })
-            }
             .matchedGeometryEffect(id: tag.id, in: animation)
+            .onTapGesture {
+                onTap?()
+            }
     }
 }
 
-struct TagView_Previews: PreviewProvider {
+struct SuggestionTagView_Previews: PreviewProvider {
     struct Container: View {
         
         var body: some View {
-            TagView(
+            SuggestionTagView(
                 tag: .init(text: "Delariva"),
-                onDelete: {}
+                onTap: {}
             ).padding(30)
         }
     }

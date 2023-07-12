@@ -7,28 +7,43 @@
 
 import Foundation
 
-class ContentViewModel: ObservableObject{
+class TechniquesListViewModel: ObservableObject{
     
+    // MARK: @Published variables
     @Published var rows: [[Tag]] = []
     @Published var tags: [Tag] = [
         .init(text: "Delariva"),
         .init(text: "Spyder Guard"),
         .init(text: "Delariva")
     ]
+    @Published var suggestionTags: [Tag] = [
+        .init(text: "Delariva2", type: .suggestion),
+        .init(text: "Spyder Guard2", type: .suggestion),
+        .init(text: "Delariva3", type: .suggestion)
+    ]
     @Published var tagText = ""
     
+    // MARK: Regular variables
     var maxRowWidth: CGFloat = 0
     
+    // MARK: Functions
     func add(tag: Tag) {
         if !tag.text.trimmingCharacters(in: .whitespaces).isEmpty {
-            tags.append(tag)
-            getTags()
+            var newTag = tag
+            newTag.type = .regular
+            tags.append(newTag)
+            removeSuggestionTag(tag)
+            setupTagRows()
         }
     }
     
-    func removeTag(by id: String){
-        tags = tags.filter{ $0.id != id }
-        getTags()
+    func removeRegularTag(_ tag: Tag) {
+        tags = tags.filter{ $0.id != tag.id }
+        setupTagRows()
+    }
+    
+    func removeSuggestionTag(_ tag: Tag) {
+        suggestionTags = suggestionTags.filter{ $0.id != tag.id }
     }
     
     func getIndex(tag: Tag) -> Int {
@@ -38,7 +53,7 @@ class ContentViewModel: ObservableObject{
         return index
     }
     
-    func getTags() {
+    func setupTagRows() {
         var rows: [[Tag]] = []
         var currentRow: [Tag] = []
         var totalWidth: CGFloat = 0
@@ -75,4 +90,9 @@ class ContentViewModel: ObservableObject{
         
         
     }
+}
+
+// MARK: Private extension
+private extension TechniquesListViewModel {
+    
 }
