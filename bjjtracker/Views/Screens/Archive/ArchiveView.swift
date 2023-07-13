@@ -39,7 +39,7 @@ struct ArchiveView: View {
                 settings.isTabBarHidden = true
             }
             .sheet(item: $selectedSession) { selectedSession in
-                SessionDetailsView(session: selectedSession, dismissCallback: {})
+                SessionDetailsView(viewModel: SessionDetailsViewModel(session: selectedSession), dismissCallback: {})
             }
             .introspectTabBarController { (UITabBarController) in
                 UITabBarController.tabBar.isHidden = true

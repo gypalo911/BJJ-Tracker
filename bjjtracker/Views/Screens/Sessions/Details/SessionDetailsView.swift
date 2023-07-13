@@ -7,29 +7,33 @@
 
 import SwiftUI
 import Combine
+import LinkPresentation
 
 struct SessionDetailsView: View {
+    
+    @StateObject var viewModel: SessionDetailsViewModel
+    
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var session: Session
-    @Namespace var techniquesListViewId
     
     @State private var isPresentedEditing: Bool = false
     
-    var dismissCallback: (() -> Void)?
+    var dismissCallback: (() -> Void)? = nil
     
-    init(session: Session, dismissCallback: (() -> Void)? = nil) {
-        self.session = session
-        self.dismissCallback = dismissCallback
+    var activityType: ActivityType {
+        viewModel.session.activityType
+    }
+    
+    var sessionStatus: ActivityStatus {
+        viewModel.session.status
     }
     
     var body: some View {
-        let navTitle = "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
         
         let linearGradient = LinearGradient(
             gradient: Gradient(stops: [
-                .init(color: self.session.activityType.color.opacity(0.8), location: 0.4),
-                .init(color: self.session.activityType.color.opacity(0.35), location: 0.8),
-                .init(color: self.session.activityType.color.opacity(0.28), location: 1)
+                .init(color: activityType.color.opacity(0.8), location: 0.4),
+                .init(color: activityType.color.opacity(0.35), location: 0.8),
+                .init(color: activityType.color.opacity(0.28), location: 1)
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -43,18 +47,18 @@ struct SessionDetailsView: View {
                             Group {
                                 ZStack {
                                     Rectangle()
-                                        .foregroundColor(session.status.color)
+                                        .foregroundColor(sessionStatus.color)
                                         .cornerRadius(5)
                                         .defaultShadow()
                                         .frame(width: 76, height: 23)
-                                    Text("\(session.status.rawValue.localizedString)".uppercased())
+                                    Text("\(sessionStatus.rawValue.localizedString)".uppercased())
                                         .font(.system(size: 10))
                                         .foregroundColor(.white)
                                         .fontWeight(.bold)
                                 }.padding(.all, 30)
                             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             VStack(alignment: .leading, spacing: 20) {
-                                Text(navTitle)
+                                Text(viewModel.navTitle)
                                     .font(.system(size: 28).bold())
                                     .foregroundColor(.white)
                                     .padding(.top, 10)
@@ -64,7 +68,7 @@ struct SessionDetailsView: View {
                                             .resizable()
                                             .frame(width: 20, height: 20)
                                             .foregroundColor(.white)
-                                        Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
+                                        Text("\((viewModel.session.startDate ?? Date()).toString("dd MMMM yyyy"))")
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)
@@ -75,12 +79,12 @@ struct SessionDetailsView: View {
                                             .frame(width: 20, height: 20)
                                             .foregroundColor(.white)
                                         HStack {
-                                            Text("\((session.startDate ?? Date()).toString("HH:mm"))")
+                                            Text("\((viewModel.session.startDate ?? Date()).toString("HH:mm"))")
                                                 .font(.system(size: 20))
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(.white)
-                                            let duration = Int(session.duration)
-                                            if session.duration != 0 {
+                                            let duration = Int(viewModel.session.duration)
+                                            if viewModel.session.duration != 0 {
                                                 Text(duration.minutesToDuration())
                                                     .font(.system(size: 18))
                                                     .fontWeight(.semibold)
@@ -93,7 +97,7 @@ struct SessionDetailsView: View {
                                             .resizable()
                                             .frame(width: 20, height: 20)
                                             .foregroundColor(.white)
-                                        Text("\(session.location ?? "--")")
+                                        Text("\(viewModel.session.location ?? "--")")
                                             .font(.system(size: 20))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white)
@@ -102,7 +106,6 @@ struct SessionDetailsView: View {
                                 
                                 VStack(alignment: .leading, spacing: 0) {
                                     TechniquesListView()
-                                        .id(techniquesListViewId)
                                 }
                                 .padding(.top, 20)
                                 
@@ -111,12 +114,18 @@ struct SessionDetailsView: View {
                                         .font(.system(size: 18))
                                         .fontWeight(.semibold)
                                         .foregroundColor(Color.black)
-                                    Text(LocalizedStringKey(session.notes ?? ""))
+                                    Text(LocalizedStringKey(viewModel.session.notes ?? "Empty"))
                                         .font(.system(size: 18))
                                         .textSelection(.enabled)
                                         .multilineTextAlignment(.leading)
                                 }
                                 .padding(.horizontal, 10)
+                                
+                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                                    ForEach(viewModel.notesLinks, id: \.self) { urlString in
+                                        LinkPreview(viewModel: .init(urlString))
+                                    }
+                                }
                             }
                             .hAlign(.leading)
                             .vAlign(.top)
@@ -151,16 +160,6 @@ struct SessionDetailsView: View {
                                             .foregroundColor(.white)
                                     }
                                 }
-                                //                            ToolbarItemGroup(placement: .keyboard, content: {
-                                //                                TagView(
-                                //                                    tag: .init(text: "Test"),
-                                //                                    onDelete: { _ in }
-                                //                                )
-                                //                                TagView(
-                                //                                    tag: .init(text: "Test"),
-                                //                                    onDelete: { _ in }
-                                //                                )
-                                //                            })
                             }
                         }
                         .background {
@@ -174,26 +173,21 @@ struct SessionDetailsView: View {
                         }
                         .sheet(isPresented: $isPresentedEditing, onDismiss: {
                             let appearance = UINavigationBarAppearance()
-                            appearance.backgroundColor = UIColor(session.activityType.color.opacity(0.8))
+                            appearance.backgroundColor = UIColor(activityType.color.opacity(0.8))
                             UINavigationBar.appearance().standardAppearance = appearance
                         }) {
                             EditSessionView(
-                                session: session,
-                                activity: Activity.from(session: session)!,
+                                session: viewModel.session,
+                                activity: Activity.from(session: viewModel.session)!,
                                 onDismiss: { editedActivity in
                                     presentationMode.wrappedValue.dismiss()
                                 }
                             )
                         }
                     }
-//                    .onReceive(Publishers.keyboardHeight) { _ in
-//                        withAnimation {
-//                            reader.scrollTo(techniquesListViewId)
-//                        }
-//                    }
                 }
                 .onAppear {
-                    changeNavBar()
+                    setupView()
                 }
             }
         }
@@ -201,8 +195,14 @@ struct SessionDetailsView: View {
     
     func changeNavBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(self.session.activityType.color.opacity(0.8))
+        appearance.backgroundColor = UIColor(activityType.color.opacity(0.8))
         UINavigationBar.appearance().standardAppearance = appearance
+    }
+    
+    func setupView() {
+        changeNavBar()
+        viewModel.setupNavTitle()
+        viewModel.setupLinkPreviews()
     }
 }
 
@@ -212,7 +212,7 @@ struct SessionDetailsView_Previews: PreviewProvider {
         
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(session: session)
+            SessionDetailsView(viewModel: SessionDetailsViewModel(session: session))
         }
     }
     

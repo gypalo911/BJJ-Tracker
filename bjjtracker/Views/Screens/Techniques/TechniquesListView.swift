@@ -101,7 +101,7 @@ struct TechniquesListView_Previews: PreviewProvider {
         
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(session: session)
+            SessionDetailsView(viewModel: SessionDetailsViewModel(session: session))
         }
     }
     

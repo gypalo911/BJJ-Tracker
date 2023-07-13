@@ -135,7 +135,7 @@ struct TimetableView: View {
                 )
             }
             .sheet(item: $selectedSession) { selectedSession in
-                SessionDetailsView(session: selectedSession)
+                SessionDetailsView(viewModel: SessionDetailsViewModel(session: selectedSession))
             }
         }
     }

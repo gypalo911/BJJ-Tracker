@@ -7,7 +7,9 @@
 
 import Foundation
 
-class TechniquesListViewModel: ObservableObject{
+class TechniquesListViewModel: ObservableObject {
+    
+    private let analyticsEngine: AnalyticsEngine
     
     // MARK: @Published variables
     @Published var rows: [[Tag]] = []

@@ -185,7 +185,7 @@ struct DashboardView: View {
                 }
             }
             .sheet(item: $viewModel.selectedSession) { selectedSession in
-                SessionDetailsView(session: selectedSession)
+                SessionDetailsView(viewModel: SessionDetailsViewModel(session: selectedSession))
             }
             .onAppear {
                 NotificationManager.shared.requestAuthorization { _ in }
