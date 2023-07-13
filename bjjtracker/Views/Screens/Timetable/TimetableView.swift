@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TimetableView: View {
     
+    @ObservedObject var viewModel: TimetableViewViewModel
+    
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
     var sessionsList: FetchedResults<Session>
     
@@ -23,6 +25,10 @@ struct TimetableView: View {
         sessionsList.filter {
             Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
+    }
+    
+    init(viewModel: TimetableViewViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -137,13 +143,16 @@ struct TimetableView: View {
             .sheet(item: $selectedSession) { selectedSession in
                 SessionDetailsView(viewModel: SessionDetailsViewModel(session: selectedSession))
             }
+            .onAppear {
+                viewModel.onTimetableViewAppeared()
+            }
         }
     }
 }
 
 struct Timetable_Previews: PreviewProvider {
     static var previews: some View {
-        TimetableView()
+        TimetableView(viewModel: .init())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

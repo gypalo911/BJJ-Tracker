@@ -62,6 +62,8 @@
 		D09BCA3E2A604ADE004C749E /* LinkPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA3D2A604ADE004C749E /* LinkPreview.swift */; };
 		D09BCA402A606A24004C749E /* SessionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA3F2A606A24004C749E /* SessionDetailsViewModel.swift */; };
 		D09BCA432A606AFB004C749E /* LinkPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */; };
+		D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */; };
+		D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */; };
 		D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
 		D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* Profile.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
@@ -186,6 +188,8 @@
 		D09BCA3D2A604ADE004C749E /* LinkPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreview.swift; sourceTree = "<group>"; };
 		D09BCA3F2A606A24004C749E /* SessionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsViewModel.swift; sourceTree = "<group>"; };
 		D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewViewModel.swift; sourceTree = "<group>"; };
+		D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
+		D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewViewModel.swift; sourceTree = "<group>"; };
 		D0A00ECD29DDC9B100DCD5BB /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		D0A00ECF29DDCE7300DCD5BB /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */,
+				D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */,
 				D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */,
 			);
 			path = Timetable;
@@ -463,6 +468,7 @@
 				D00109AC2A0BABD4008433CC /* Components */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
 				D02F3DE729EEBD9300BED6CD /* ProfileView.swift */,
+				D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -874,6 +880,7 @@
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
 				D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */,
+				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
@@ -937,6 +944,7 @@
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
+				D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */,
 				D00109B62A0D3294008433CC /* String+extension.swift in Sources */,
 				D098BBF529E2EB3000A9A068 /* BeltsListView.swift in Sources */,
 			);

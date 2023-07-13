@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol DashboardViewAnalytics {
-    func onDashboardAppear()
+    func onDashboardAppeared()
     func selectedModal(_ modalName: String)
 }
 
@@ -90,7 +90,7 @@ private extension DashboardViewModel {
 }
 
 extension DashboardViewModel: DashboardViewAnalytics {
-    func onDashboardAppear() {
+    func onDashboardAppeared() {
         analyticsEngine.log(AnalyticsEvent(name: "dashboard_screen_viewed", metadata: [:]))
     }
 

@@ -25,7 +25,7 @@ final class DashboardViewModelTests: XCTestCase {
 
         XCTAssertNil(analyticsEngine.loggedEvent)
 
-        vm.onDashboardAppear()
+        vm.onDashboardAppeared()
         
         XCTAssertEqual(analyticsEngine.loggedEvent?.name, "dashboard_screen_viewed")
     }

@@ -189,7 +189,7 @@ struct DashboardView: View {
             }
             .onAppear {
                 NotificationManager.shared.requestAuthorization { _ in }
-                viewModel.onDashboardAppear()
+                viewModel.onDashboardAppeared()
             }
         }.background(Color.white)
     }

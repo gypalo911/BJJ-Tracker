@@ -14,14 +14,14 @@ class TechniquesListViewModel: ObservableObject {
     // MARK: @Published variables
     @Published var rows: [[Tag]] = []
     @Published var tags: [Tag] = [
-        .init(text: "Delariva"),
-        .init(text: "Spyder Guard"),
-        .init(text: "Delariva")
+//        .init(text: "Delariva"),
+//        .init(text: "Spyder Guard"),
+//        .init(text: "Delariva")
     ]
     @Published var suggestionTags: [Tag] = [
-        .init(text: "Delariva2", type: .suggestion),
-        .init(text: "Spyder Guard2", type: .suggestion),
-        .init(text: "Delariva3", type: .suggestion)
+//        .init(text: "Delariva2", type: .suggestion),
+//        .init(text: "Spyder Guard2", type: .suggestion),
+//        .init(text: "Delariva3", type: .suggestion)
     ]
     @Published var tagText = ""
     

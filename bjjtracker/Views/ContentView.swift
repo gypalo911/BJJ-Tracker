@@ -12,6 +12,8 @@ struct ContentView: View {
     
     @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
+    @StateObject var profileVM = ProfileViewViewModel()
+    @StateObject var timetableVM = TimetableViewViewModel()
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     
     @EnvironmentObject var settings: AppSettings
@@ -22,11 +24,11 @@ struct ContentView: View {
                 TabView(selection: $selectedTab) {
                     DashboardView(viewModel: dashboardVM)
                         .tag(Tab.dashboard)
-                    TimetableView()
+                    TimetableView(viewModel: timetableVM)
                         .tag(Tab.calendar)
                     StatisticsView(viewModel: statsVM)
                         .tag(Tab.statistics)
-                    ProfileView()
+                    ProfileView(viewModel: profileVM)
                         .tag(Tab.profile)
                 }.edgesIgnoringSafeArea(.bottom)
             }

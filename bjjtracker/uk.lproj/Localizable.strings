@@ -60,6 +60,7 @@
 
 "Location" = "Місце";
 "Notes" = "Нотатки";
+"Empty" = "Пусто";
 
 // Timetable
 "Timetable" = "Календар";

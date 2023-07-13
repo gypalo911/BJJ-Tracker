@@ -179,6 +179,7 @@ struct StatisticsView: View {
         .onAppear {
             hideTabbar(false)
             viewModel.setupTitle()
+            viewModel.onStatisticsViewAppeared()
         }
     }
     

@@ -7,18 +7,26 @@
 
 import SwiftUI
 
+protocol StatisticsViewViewAnalytics {
+    func onStatisticsViewAppeared()
+}
+
 @MainActor
 class StatisticsViewViewModel: ObservableObject {
     
+    private let analyticsEngine: AnalyticsEngine
+    
     @Published var title: String = ""
-    var isConcreteDates: Bool = false
-    var previousPeriod: DateInterval
     
     @Published var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
     @Published var selectedSegment: Int = CalendarSegment.week.rawValue
     
-    init(dateInterval: DateInterval) {
+    var isConcreteDates: Bool = false
+    var previousPeriod: DateInterval
+    
+    init(dateInterval: DateInterval, analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
         self.previousPeriod = DateInterval(start: dateInterval.start - dateInterval.duration, end: dateInterval.start)
+        self.analyticsEngine = analyticsEngine
         self.setupTitle()
     }
     
@@ -120,5 +128,11 @@ extension StatisticsViewViewModel {
         } else {
             return to.toString("yyyy")
         }
+    }
+}
+
+extension StatisticsViewViewModel: StatisticsViewViewAnalytics {
+    func onStatisticsViewAppeared() {
+        analyticsEngine.log(AnalyticsEvent(name: "statistics_screen_viewed", metadata: [:]))
     }
 }

@@ -14,6 +14,8 @@ struct ProfileView: View {
         case modalSheets
     }
     
+    @ObservedObject var viewModel: ProfileViewViewModel
+    
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
     var sessionsList: FetchedResults<Session>
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
@@ -190,13 +192,16 @@ struct ProfileView: View {
                     NewSessionView()
                 }
             }
+            .onAppear {
+                viewModel.onProfileViewAppeared()
+            }
         }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(viewModel: .init())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

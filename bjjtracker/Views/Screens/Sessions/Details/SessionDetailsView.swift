@@ -115,10 +115,18 @@ struct SessionDetailsView: View {
                                         .font(.system(size: 18))
                                         .fontWeight(.semibold)
                                         .foregroundColor(Color.black)
-                                    Text(LocalizedStringKey(viewModel.session.notes ?? "Empty"))
-                                        .font(.system(size: 18))
-                                        .textSelection(.enabled)
-                                        .multilineTextAlignment(.leading)
+                                    if let notes = viewModel.session.notes, !notes.isEmpty {
+                                        Text(LocalizedStringKey(notes))
+                                            .font(.system(size: 18))
+                                            .textSelection(.enabled)
+                                            .multilineTextAlignment(.leading)
+                                    } else {
+                                        Text(LocalizedStringKey("Empty"))
+                                            .foregroundColor(Color("LightGray"))
+                                            .font(.system(size: 18))
+                                            .textSelection(.enabled)
+                                            .multilineTextAlignment(.leading)
+                                    }
                                 }
                                 .padding(.horizontal, 10)
                                 
