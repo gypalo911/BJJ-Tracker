@@ -39,7 +39,7 @@ class DashboardViewModel: ObservableObject {
         return DateInterval(start: rangeStart, end: rangeEnd)
     }
     
-    init(analyticsEngine: AnalyticsEngine) {
+    init(analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
         self.analyticsEngine = analyticsEngine
     }
     

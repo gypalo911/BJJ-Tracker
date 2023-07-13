@@ -16,6 +16,7 @@ struct SessionDetailsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var isPresentedEditing: Bool = false
+    @State private var urlToPresent: String?
     
     var dismissCallback: (() -> Void)? = nil
     
@@ -123,7 +124,12 @@ struct SessionDetailsView: View {
                                 
                                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                                     ForEach(viewModel.notesLinks, id: \.self) { urlString in
-                                        LinkPreview(viewModel: .init(urlString))
+                                        LinkPreview(
+                                            viewModel: .init(urlString),
+                                            onTap: { link in
+                                                viewModel.linkOpened(link)
+                                            }
+                                        )
                                     }
                                 }
                             }

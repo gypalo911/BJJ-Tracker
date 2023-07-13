@@ -8,7 +8,6 @@
 import SwiftUI
 import UIKit
 import SafariServices
-import WebKit
 
 struct SafariView: UIViewControllerRepresentable {
     
@@ -28,6 +27,8 @@ struct LinkPreview: View {
     @ObservedObject var viewModel: LinkPreviewViewModel
     
     @State var isPresentedWebView: Bool = false
+    
+    var onTap: ((String) -> Void)?
     
     var body: some View {
         ZStack {
@@ -104,29 +105,18 @@ struct LinkPreview: View {
         }
         .onTapGesture {
             isPresentedWebView = true
+            if let stringURL = viewModel.previewURL?.absoluteString {
+                onTap?(stringURL)
+            }
         }
     }
 }
 
 struct FileLinkView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                LinkPreview(
-                    viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/")
-                )
-                LinkPreview(
-                    viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/")
-                )
-            }
-            HStack(spacing: 10) {
-                LinkPreview(
-                    viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/")
-                )
-                LinkPreview(
-                    viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/")
-                )
-            }
-        }
+        LinkPreview(
+            viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"),
+            onTap: { _ in }
+        )
     }
 }

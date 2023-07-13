@@ -7,14 +7,21 @@
 
 import Foundation
 
+protocol SessionDetailsViewAnalytics {
+    func linkOpened(_ link: String)
+}
+
 class SessionDetailsViewModel: ObservableObject {
     
     @Published var session: Session
     @Published var navTitle: String = ""
     @Published var notesLinks: [String] = []
     
-    init(session: Session) {
+    private let analyticsEngine: AnalyticsEngine
+    
+    init(session: Session, analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
         self.session = session
+        self.analyticsEngine = analyticsEngine
     }
     
     func setupNavTitle() {
@@ -41,5 +48,11 @@ class SessionDetailsViewModel: ObservableObject {
         }
         
         return []
+    }
+}
+
+extension SessionDetailsViewModel {
+    func linkOpened(_ link: String) {
+        analyticsEngine.log(AnalyticsEvent(name: "opened_link_from_session_details", metadata: ["link": link]))
     }
 }

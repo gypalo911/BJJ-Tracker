@@ -28,6 +28,10 @@ class TechniquesListViewModel: ObservableObject {
     // MARK: Regular variables
     var maxRowWidth: CGFloat = 0
     
+    init(analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
+        self.analyticsEngine = analyticsEngine
+    }
+    
     // MARK: Functions
     func add(tag: Tag) {
         if !tag.text.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -36,12 +40,29 @@ class TechniquesListViewModel: ObservableObject {
             tags.append(newTag)
             removeSuggestionTag(tag)
             setupTagRows()
+            
+            analyticsEngine.log(AnalyticsEvent(
+                name: "tag_added",
+                metadata: [
+                    "tag_text":"\(tag.text)",
+                    "tag_type":"\(tag.type.rawValue)"
+                ]
+            ))
         }
+        analyticsEngine.log(AnalyticsEvent(name: "Tag wasn't added because it was empty", metadata: [:]))
     }
     
     func removeRegularTag(_ tag: Tag) {
         tags = tags.filter{ $0.id != tag.id }
         setupTagRows()
+        
+        analyticsEngine.log(AnalyticsEvent(
+            name: "tag_removed",
+            metadata: [
+                "tag_text":"\(tag.text)",
+                "tag_type":"\(tag.type.rawValue)"
+            ]
+        ))
     }
     
     func removeSuggestionTag(_ tag: Tag) {

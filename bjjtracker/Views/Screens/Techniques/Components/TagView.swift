@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Tag: Identifiable, Hashable {
-    enum TagType {
+    enum TagType: String {
         case regular
         case suggestion
     }

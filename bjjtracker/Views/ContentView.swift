@@ -11,9 +11,7 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
     
     @Environment (\.managedObjectContext) var managedObjContext
-    @StateObject var dashboardVM = DashboardViewModel(
-        analyticsEngine: FirebaseAnalyticsEngine()
-    )
+    @StateObject var dashboardVM = DashboardViewModel()
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     
     @EnvironmentObject var settings: AppSettings
@@ -48,7 +46,6 @@ struct ContentView: View {
             guard let session = session else {
                 return
             }
-//            selectedTab = .dashboard
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 dashboardVM.selectedSession = session
             }
