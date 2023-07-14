@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TechniquesListView: View {
     
-    @StateObject var viewModel = TechniquesListViewModel()
+    @StateObject var viewModel: TechniquesListViewModel
     
     @State private var isEditing: Bool = false
     @State private var isTyping: Bool = false
@@ -78,7 +78,8 @@ struct TechniquesListView: View {
                                     }
                                 )
                             }
-                        }.animation(.easeInOut)
+                        }
+                        .animation(.easeInOut, value: viewModel.suggestionTags)
                         .padding(.vertical, 5)
                         .padding(.horizontal, 2)
                     }
@@ -90,7 +91,7 @@ struct TechniquesListView: View {
         .onAppear {
             maxViewWidth = UIScreen.main.bounds.size.width - 80
             viewModel.maxRowWidth = maxViewWidth
-            viewModel.setupTagRows()
+            viewModel.fetchTags()
         }
     }
 }

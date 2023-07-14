@@ -14,9 +14,9 @@
 "No sessions for this day" = "Немає записів за поточний день";
 
 "Select Action" = "Обери дію";
-"Add Promotion" = "Додати Досягнення";
-"Add Session" = "Додати Заняття";
-"Create Session" = "Створити Заняття";
+"Add Promotion" = "Додати досягнення";
+"Add Session" = "Додати заняття";
+"Create Session" = "Створити заняття";
 
 "1. Grading system:" = "1. Система поясів:";
 "2. Belt: %@" = "2. Пояс: %@";
@@ -34,6 +34,7 @@
 "Delete" = "Видалити";
 
 "Edit Session" = "Редагувати Заняття";
+"Edit" = "Редагувати";
 
 "%@h" = "%@год";
 "%@h %@m" = "%@год %@хв";
@@ -61,12 +62,20 @@
 "Location" = "Місце";
 "Notes" = "Нотатки";
 "Empty" = "Пусто";
+"Learned techniques" = "Вивчені техніки";
+"Technique" = "Техніка";
+"Add technique" = "Додати техніку";
+"Suggestions" = "Пропозиції";
 
 // Timetable
 "Timetable" = "Календар";
 
 // Archive
 "Archive" = "Архів";
+"Congratulations!" = "Юху!";
+"You’ve reached" = "Ви досягли";
+"Hey! Add trainig sessions to track your BJJ progress journey!" = "Хей! Додавай тренування, щоб спостерігати за своїм прогресом!";
+"Your records will always be at hand!" = "Твої записи завжди будуть під рукою!";
 
 // Statistics
 "Statistics" = "Статистика";
@@ -88,9 +97,11 @@
 "Stripes" = "Смужки";
 "Select Grading System" = "Обери Систему Поясів";
 
-"%@ belt %@ stripes" = "%@ пояс %@ полоски";
-"Stripes: %@" = "Полоски: %@";
+"%@ belt %@ stripes" = "%@ пояс %@ смужки";
+"%@ belt %@ stripes!" = "%@ пояс %@ смужки!";
+"Stripes: %@" = "Смужки: %@";
 "%@ belt" = "%@ пояс";
+"%@ belt!" = "%@ пояс!";
 
 // Belt
 "Belt" = "Пояс";

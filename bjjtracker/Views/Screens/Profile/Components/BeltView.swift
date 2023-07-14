@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BeltView: View {
     var beltWidth: CGFloat = 210
+    var beltHeight: CGFloat = 36
     var beltColor: (Color, Color?)
     var stripesCount: Int
     
@@ -20,11 +21,11 @@ struct BeltView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("Gray"), lineWidth: 1)
                 )
-                .frame(width: beltWidth, height: 36)
+                .frame(width: beltWidth, height: beltHeight)
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(beltColor.1 ?? .black)
-                    .frame(width: 65, height: 36)
+                    .frame(width: 65, height: beltHeight)
                 HStack(spacing: 5) {
                     ForEach(0..<stripesCount, id: \.self) { stripe in
                         Rectangle()
@@ -33,7 +34,7 @@ struct BeltView: View {
                     }
                 }
                 .hAlign(.leading)
-                .frame(width: 65, height: 34)
+                .frame(width: 65, height: beltHeight - 2)
                 .offset(x: 10, y: 0)
             }.offset(x: 20)
         }

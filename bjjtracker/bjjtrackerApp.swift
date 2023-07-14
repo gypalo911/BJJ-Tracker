@@ -12,6 +12,7 @@ class AppSettings: ObservableObject {
     
     @Published var isTabBarHidden: Bool = false
     @Published var navigateToPage: String?
+    @Published var notificationTime: Int = 3600  // 1 hour
 }
 
 @main
@@ -27,7 +28,7 @@ struct bjjtrackerApp: App {
 #if DEBUG
             ContentView()
                 .environmentObject(settings)
-                .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+                .environment(\.managedObjectContext, persistanceManager.container.viewContext)
 #else
             ContentView()
                 .environmentObject(settings)

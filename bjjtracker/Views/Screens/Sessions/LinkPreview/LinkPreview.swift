@@ -101,6 +101,7 @@ struct LinkPreview: View {
         .fullScreenCover(isPresented: $isPresentedWebView) {
             if let url = viewModel.previewURL {
                 SafariView(url: url)
+                    .ignoresSafeArea()
             }
         }
         .onTapGesture {

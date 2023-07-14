@@ -95,7 +95,7 @@ struct ProfileView: View {
                         HStack {
                             if let lastPromotion = lastPromotion {
                                 VStack(spacing: 10) {
-                                    BeltView(beltColor: lastPromotion.belt.color, stripesCount: Int(lastPromotion.stripes))
+                                    BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
                                     Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
                                         .foregroundColor(.gray)
                                         .font(.system(size: 16))

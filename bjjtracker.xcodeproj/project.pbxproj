@@ -14,6 +14,7 @@
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
 		D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */; };
+		D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02198872A61730B0080A074 /* PromotionPanelView.swift */; };
 		D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FEF2A5ADEB4006BB617 /* TagView.swift */; };
 		D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */; };
 		D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FF42A5AE273006BB617 /* DesignSystem.swift */; };
@@ -51,6 +52,7 @@
 		D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */; };
 		D0839D832A5D6D5B00D315C8 /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */; };
 		D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */; };
+		D084DE612A60A44F00B63DBF /* TechniqueModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */; };
 		D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */; };
 		D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */; };
 		D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */; };
@@ -136,6 +138,7 @@
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
 		D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTagView.swift; sourceTree = "<group>"; };
+		D02198872A61730B0080A074 /* PromotionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPanelView.swift; sourceTree = "<group>"; };
 		D02D1FEF2A5ADEB4006BB617 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TechniquesListView.swift; sourceTree = "<group>"; };
 		D02D1FF42A5AE273006BB617 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publishers+extension.swift"; sourceTree = "<group>"; };
 		D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
 		D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
+		D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TechniqueModel+extension.swift"; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
 		D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionView.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtrackerRelease.entitlements; sourceTree = "<group>"; };
 		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D0DAA8FF2A6186A200074EBE /* Techniques List.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Techniques List.md"; sourceTree = "<group>"; };
 		D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
@@ -287,6 +292,7 @@
 				D0AA702C2A5AFC20001FB3FA /* Components */,
 				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
 				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
+				D0DAA8FF2A6186A200074EBE /* Techniques List.md */,
 			);
 			path = Techniques;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824B529DE14060023E6C0 /* ActivityPanelView.swift */,
+				D02198872A61730B0080A074 /* PromotionPanelView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -587,6 +594,7 @@
 				D0B01F2529E43DAF00E10979 /* Color */,
 				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
 				D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */,
+				D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */,
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
 				D0E824BE29DF006A0023E6C0 /* Date+extension.swift */,
@@ -898,6 +906,7 @@
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
 				D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,
+				D084DE612A60A44F00B63DBF /* TechniqueModel+extension.swift in Sources */,
 				D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */,
 				D09BCA402A606A24004C749E /* SessionDetailsViewModel.swift in Sources */,
 				D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */,
@@ -929,6 +938,7 @@
 				D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
+				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,

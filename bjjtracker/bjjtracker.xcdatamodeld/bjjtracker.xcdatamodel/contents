@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="PromotionModel" representedClassName="PromotionModel" syncable="YES" codeGenerationType="class">
         <attribute name="belt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="704982720" usesScalarValueType="NO"/>
@@ -16,5 +16,13 @@
         <attribute name="startDate" attributeType="Date" defaultDateTimeInterval="704122200" usesScalarValueType="NO"/>
         <attribute name="style" attributeType="String" defaultValueString="gi"/>
         <attribute name="type" attributeType="String" defaultValueString="session"/>
+        <relationship name="techniques" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TechniqueModel" inverseName="sessions" inverseEntity="TechniqueModel"/>
+    </entity>
+    <entity name="TechniqueModel" representedClassName="TechniqueModel" syncable="YES" codeGenerationType="class">
+        <attribute name="details" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="type" optional="YES" attributeType="String" defaultValueString="regular"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="techniques" inverseEntity="Session"/>
     </entity>
 </model>

@@ -6,33 +6,51 @@
 //
 
 import Foundation
+import CoreData
 
 class TechniquesListViewModel: ObservableObject {
     
     private let analyticsEngine: AnalyticsEngine
+    private let persistanceManager: TechniquesStorageManager
+    private let session: Session
+    private let managedObjContext: NSManagedObjectContext
     
     // MARK: @Published variables
     @Published var rows: [[Tag]] = []
-    @Published var tags: [Tag] = [
-//        .init(text: "Delariva"),
-//        .init(text: "Spyder Guard"),
-//        .init(text: "Delariva")
-    ]
-    @Published var suggestionTags: [Tag] = [
-//        .init(text: "Delariva2", type: .suggestion),
-//        .init(text: "Spyder Guard2", type: .suggestion),
-//        .init(text: "Delariva3", type: .suggestion)
-    ]
+    @Published var tags: [Tag] = []
+    @Published var suggestionTags: [Tag] = []
     @Published var tagText = ""
     
     // MARK: Regular variables
     var maxRowWidth: CGFloat = 0
     
-    init(analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
+    init(
+        session: Session,
+        managedObjContext: NSManagedObjectContext,
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
+        persistanceManager: TechniquesStorageManager = PersistanceManager.shared
+    ) {
+        self.session = session
+        self.managedObjContext = managedObjContext
         self.analyticsEngine = analyticsEngine
+        self.persistanceManager = persistanceManager
     }
     
     // MARK: Functions
+    func fetchTags() {
+        let techniques = persistanceManager.fetchTechniques(for: session)
+        techniques.forEach {
+            tags.append(Tag(technique: $0, text: $0.text ?? ""))
+        }
+        let suggestions = persistanceManager.fetchTechniquesForSuggestion()
+        suggestions.forEach { suggestion in
+            if !techniques.map({ $0.text }).contains(suggestion.text) {
+                suggestionTags.append(Tag(technique: suggestion, text: suggestion.text ?? ""))
+            }
+        }
+        setupTagRows()
+    }
+    
     func add(tag: Tag) {
         if !tag.text.trimmingCharacters(in: .whitespaces).isEmpty {
             var newTag = tag
@@ -40,6 +58,8 @@ class TechniquesListViewModel: ObservableObject {
             tags.append(newTag)
             removeSuggestionTag(tag)
             setupTagRows()
+            
+            persistanceManager.createTechnique(for: session, text: tag.text, details: nil, context: managedObjContext)
             
             analyticsEngine.log(AnalyticsEvent(
                 name: "tag_added",
@@ -55,6 +75,10 @@ class TechniquesListViewModel: ObservableObject {
     func removeRegularTag(_ tag: Tag) {
         tags = tags.filter{ $0.id != tag.id }
         setupTagRows()
+        
+        if let technique = tag.technique {
+            persistanceManager.delete(model: technique, context: managedObjContext)
+        }
         
         analyticsEngine.log(AnalyticsEvent(
             name: "tag_removed",

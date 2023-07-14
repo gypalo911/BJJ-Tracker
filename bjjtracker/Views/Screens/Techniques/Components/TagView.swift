@@ -13,7 +13,9 @@ struct Tag: Identifiable, Hashable {
         case suggestion
     }
     
-    var id = UUID().uuidString
+    var technique: TechniqueModel? = nil
+    
+    var id: String =  UUID().uuidString
     var text: String
     var size: CGFloat = 0
     var type: TagType = .regular

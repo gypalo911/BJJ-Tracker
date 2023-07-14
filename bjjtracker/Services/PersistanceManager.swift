@@ -20,6 +20,18 @@ protocol PromotionsStorageManager {
     func delete(model: PromotionModel, context: NSManagedObjectContext)
 }
 
+protocol TechniquesStorageManager {
+    func fetchTechniques(for session: Session) -> [TechniqueModel]
+    func fetchTechniquesForSuggestion() -> [TechniqueModel]
+    func createTechnique(
+        for session: Session,
+        text: String,
+        details: String?,
+        context: NSManagedObjectContext
+    )
+    func delete(model: TechniqueModel, context: NSManagedObjectContext)
+}
+
 struct PersistanceManager {
     static let shared = PersistanceManager()
     
@@ -36,13 +48,18 @@ struct PersistanceManager {
             session.style = GraplingStyle.gi.rawValue
             session.location = "Some Location"
             session.notes = ((i % 2) != 0) ? "Some notes https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/, https://bjj-world.com/best-martial-arts-for-self-defense/, https://bjj-world.com/caio-terra-ankle-lock-de-la-riva/, https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/" : "https://blackbeltwiki.com/brazilian-jiu-jitsu here is another link. \n\n https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/\n \n https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"
+
+            let technique = TechniqueModel(context: viewContext)
+            technique.id = UUID()
+            technique.text = "\(i) technique"
+            technique.addToSessions(session)
         }
         
         for i in 0..<10 {
             let model = PromotionModel(context: viewContext)
             model.id = UUID()
             model.belt = Int16(i)
-            model.date = Calendar.current.date(byAdding: .hour, value: i * 8, to: Date())
+            model.date = Calendar.current.date(byAdding: .hour, value: i * 16, to: Date())
             model.stripes = Int16.random(in: 0..<4)
         }
         
@@ -73,8 +90,12 @@ struct PersistanceManager {
     
     func save(context: NSManagedObjectContext) {
         do {
-            try context.save()
-        } catch {}
+            if context.hasChanges {
+                try context.save()
+            }
+        } catch let error {
+            print("\(error) while saving")
+        }
     }
 }
 
@@ -135,6 +156,56 @@ extension PersistanceManager: PromotionsStorageManager {
     }
     
     func delete(model: PromotionModel, context: NSManagedObjectContext) {
+        context.delete(model)
+        
+        save(context: context)
+    }
+}
+
+extension PersistanceManager: TechniquesStorageManager {
+    func fetchTechniques(for session: Session) -> [TechniqueModel] {
+        let fetchRequest: NSFetchRequest<TechniqueModel> = TechniqueModel.fetchRequest()
+        
+        do {
+            let techniques = try container.viewContext.fetch(fetchRequest)
+                .filter { $0.sessionsArray.contains(session) }
+            
+            return techniques
+        } catch {
+            print("Unable to Fetch techniques, (\(error))")
+            return []
+        }
+    }
+    
+    func fetchTechniquesForSuggestion() -> [TechniqueModel] {
+        let fetchRequest: NSFetchRequest<TechniqueModel> = TechniqueModel.fetchRequest()
+        
+        do {
+            let techniques = try container.viewContext.fetch(fetchRequest)
+                .sorted { $0.sessionsArray.count > $1.sessionsArray.count }
+                .prefix(10)
+            
+            return Array(techniques)
+        } catch {
+            print("Unable to Fetch techniques, (\(error))")
+            return []
+        }
+    }
+    
+    func createTechnique(
+        for session: Session,
+        text: String,
+        details: String? = nil,
+        context: NSManagedObjectContext
+    ) {
+        let model = TechniqueModel(context: context)
+        model.update(with: text, details: details)
+        model.addToSessions(session)
+        
+        save(context: context)
+    }
+    
+    func delete(model: TechniqueModel, context: NSManagedObjectContext) {
         context.delete(model)
         
         save(context: context)

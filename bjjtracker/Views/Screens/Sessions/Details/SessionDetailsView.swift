@@ -14,6 +14,7 @@ struct SessionDetailsView: View {
     @StateObject var viewModel: SessionDetailsViewModel
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment (\.managedObjectContext) var managedObjContext
     
     @State private var isPresentedEditing: Bool = false
     @State private var urlToPresent: String?
@@ -106,7 +107,9 @@ struct SessionDetailsView: View {
                                 }.padding(10)
                                 
                                 VStack(alignment: .leading, spacing: 0) {
-                                    TechniquesListView()
+                                    TechniquesListView(
+                                        viewModel: .init(session: viewModel.session, managedObjContext: managedObjContext)
+                                    )
                                 }
                                 .padding(.top, 20)
                                 

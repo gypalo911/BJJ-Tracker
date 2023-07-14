@@ -26,7 +26,7 @@ struct NotificationManager {
         content.title = "\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)"
         content.body = "Starts at %@".localized(with: ["\((activity.startDate).toString("HH:mm"))"])
         
-        let notificationDate = activity.startDate.addingTimeInterval(TimeInterval(-3600)) // 1 hour before the activity
+        let notificationDate = activity.startDate.addingTimeInterval(TimeInterval(-AppSettings.shared.notificationTime))
         if notificationDate <= Date() {
             return
         }

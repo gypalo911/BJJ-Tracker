@@ -13,11 +13,7 @@ struct StatsView: View {
     var tendecyGrows: Bool? = nil
     var tendecyValue: String? = nil
     
-    var showTendencies: Bool {
-        return tendecyValue != nil &&
-            tendecyValue != "0" &&
-            tendecyValue != "0min"
-    }
+    let zeroTendencies: [String] = ["0", "0min", "0хв"]
     
     var body: some View {
         ZStack {
@@ -32,9 +28,7 @@ struct StatsView: View {
                 }
                 Spacer()
             }
-            if let tendecyValue = tendecyValue,
-                tendecyValue != "0",
-                tendecyValue != "0min"
+            if let tendecyValue = tendecyValue, !zeroTendencies.contains(tendecyValue)
             {
                 HStack {
                     Spacer()
