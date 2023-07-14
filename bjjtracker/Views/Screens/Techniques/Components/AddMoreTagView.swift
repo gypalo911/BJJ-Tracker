@@ -12,14 +12,14 @@ struct AddMoreTagView: View {
         HStack(alignment: .center, spacing: 5) {
             Image("addIcon")
                 .resizable()
-                .frame(width: 15, height: 15)
+                .frame(width: 20, height: 20)
                 .foregroundColor(Color("Blue"))
             Text("Add technique")
                 .font(Font.custom("Rubik", size: 14))
                 .foregroundColor(Color("Blue"))
         }
-        .padding(.vertical, 5)
-        .padding(.leading, 5)
+        .padding(.vertical, 6)
+        .padding(.leading, 8)
         .padding(.trailing, 10)
         .background(
             Rectangle()

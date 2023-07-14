@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TagViewWithTextField: View {
-    private static let defaultViewWidth: CGFloat = 70
+    @State private var defaultViewWidth: CGFloat = 70
     @State var tag: Tag = .init(text: "")
-    @State var viewWidth: CGFloat = defaultViewWidth
+    @State var viewWidth: CGFloat = 70
     @Binding var isEditing: Bool
     @FocusState private var focusedField: Bool
     
@@ -37,6 +37,7 @@ struct TagViewWithTextField: View {
             .font(Font.custom("Rubik", size: 14))
             .frame(width: viewWidth)
             .padding (.horizontal, 15)
+            .padding (.vertical, 8)
             .onAppear {
                 focusedField = true
             }
@@ -57,11 +58,15 @@ struct TagViewWithTextField: View {
                 if newValue.textSize().width + 20 > maxViewWidth {
                     viewWidth = maxViewWidth
                 } else if size.width == 0 {
-                    viewWidth = TagViewWithTextField.defaultViewWidth
+                    viewWidth = defaultViewWidth
                 } else {
                     viewWidth = size.width
                 }
             }
+        }
+        .onAppear {
+            defaultViewWidth = Locale.current.languageCode == "uk" ?  "Техніка".textSize().width : "Technique".textSize().width
+            viewWidth = defaultViewWidth
         }
         .frame(width: viewWidth, height: 30)
     }
@@ -81,6 +86,7 @@ struct TagViewWithTextField_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environment(\.locale, .init(identifier: "uk"))
     }
 }
 

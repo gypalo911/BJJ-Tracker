@@ -38,7 +38,11 @@ struct ArchiveView: View {
     }
     
     private var sections: [String] {
-        Set(Array(groupedSessions.keys) + Array(groupedPromotions.keys)).map { String($0) }
+        Set(Array(groupedSessions.keys) + Array(groupedPromotions.keys))
+            .map { String($0) }
+            .sorted(by: {
+                $0.toDate(format: "dd MMMM yyyy")! > $1.toDate(format: "dd MMMM yyyy")!
+            })
     }
     
     var body: some View {

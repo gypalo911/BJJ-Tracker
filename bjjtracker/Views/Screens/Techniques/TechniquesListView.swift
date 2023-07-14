@@ -47,6 +47,7 @@ struct TechniquesListView: View {
                                 maxViewWidth: maxViewWidth
                             )
                             .padding (.horizontal, 15)
+                            .padding (.bottom, 5)
                         } else {
                             AddMoreTagView()
                                 .padding (.horizontal, 1)

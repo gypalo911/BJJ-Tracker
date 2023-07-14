@@ -17,7 +17,7 @@ struct SuggestionTagView: View {
         Text(tag.text)
             .font(Font.custom("Rubik", size: 14))
             .foregroundColor(Color("Blue"))
-            .padding(.vertical, 5)
+            .padding(.vertical, 8)
             .padding(.leading, 20)
             .padding(.trailing, 20)
             .lineLimit(1)
