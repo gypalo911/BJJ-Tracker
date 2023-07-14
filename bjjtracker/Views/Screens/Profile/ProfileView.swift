@@ -187,9 +187,9 @@ struct ProfileView: View {
             .sheet(item: $selectedSheet) { selectedSheet in
                 switch selectedSheet {
                 case .promotion:
-                    AddPromotionView()
+                    AddPromotionView(viewModel: .init())
                 case .activity:
-                    NewSessionView()
+                    NewSessionView(viewModel: .init())
                 }
             }
             .onAppear {

@@ -12,11 +12,12 @@ struct ArchiveView: View {
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
+    @StateObject var viewModel: ArchiveViewViewModel
+    
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
     
     @Environment (\.managedObjectContext) private var viewContext
-//    @SectionedFetchRequest<String, Session>(sectionIdentifier: \.startDateString, sortDescriptors: [SortDescriptor(\.startDate, order: .reverse)], animation: .easeInOut) var sessions: SectionedFetchResults<String, Session>
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
     var sessions: FetchedResults<Session>
@@ -96,6 +97,7 @@ struct ArchiveView: View {
                             VStack(spacing: 22) {
                                 Button(action: {
                                     selectedSheet = .activity
+                                    viewModel.createSessionButtonTapped()
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10)
@@ -110,6 +112,7 @@ struct ArchiveView: View {
                                 })
                                 Button(action: {
                                     selectedSheet = .promotion
+                                    viewModel.addPromotionButtonTapped()
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10)
@@ -136,13 +139,14 @@ struct ArchiveView: View {
             .background(Color("generalBG").ignoresSafeArea())
             .onAppear {
                 settings.isTabBarHidden = true
+                viewModel.onArchiveViewAppeared()
             }
             .sheet(item: $selectedSheet) { selectedSheet in
                 switch selectedSheet {
                 case .promotion:
-                    AddPromotionView()
+                    AddPromotionView(viewModel: .init())
                 case .activity:
-                    NewSessionView()
+                    NewSessionView(viewModel: .init())
                 }
             }
             .sheet(item: $selectedSession) { selectedSession in
@@ -171,7 +175,7 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView()
+        ArchiveView(viewModel: .init())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
             .environmentObject(AppSettings())
     }

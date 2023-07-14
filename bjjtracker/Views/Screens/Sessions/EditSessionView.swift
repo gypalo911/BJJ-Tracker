@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditSessionView: View {
     
+    @StateObject var viewModel: EditSessionViewViewModel
+    
     @State private var isPickerPresented = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -92,6 +94,7 @@ struct EditSessionView: View {
                         }
                         
                         Button(action: {
+                            viewModel.sessionDeleted(activity)
                             PersistanceManager.shared.delete(session: session, context: managedObjContext)
                             NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
                             presentationMode.wrappedValue.dismiss()
@@ -106,9 +109,13 @@ struct EditSessionView: View {
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
                     .navigationTitle("Edit Session".localizedString)
+                    .onAppear {
+                        viewModel.onScreenAppeared()
+                    }
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
+                                viewModel.popupDismissed()
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Image("back")
@@ -119,6 +126,7 @@ struct EditSessionView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
+                                viewModel.sessionEdited(activity)
                                 update(session)
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
@@ -142,6 +150,7 @@ struct EditSessionView_Previews: PreviewProvider {
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
             EditSessionView(
+                viewModel: .init(),
                 session: session,
                 activity: Activity.from(session: session)!,
                 onDismiss: { _ in }

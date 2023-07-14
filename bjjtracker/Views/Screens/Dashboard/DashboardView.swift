@@ -111,7 +111,7 @@ struct DashboardView: View {
                                 .foregroundColor(Color("Gray"))
                             
                             NavigationLink(destination: {
-                                ArchiveView()
+                                ArchiveView(viewModel: .init())
                                     .navigationBarTitle("")
                                     .navigationBarHidden(true)
                             }) {
@@ -139,7 +139,7 @@ struct DashboardView: View {
                                     }
                                     
                                     NavigationLink(destination: {
-                                        ArchiveView()
+                                        ArchiveView(viewModel: .init())
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
                                     }) {
@@ -179,9 +179,9 @@ struct DashboardView: View {
             .sheet(item: $viewModel.selectedSheet) { selectedSheet in
                 switch selectedSheet {
                 case .promotion:
-                    AddPromotionView()
+                    AddPromotionView(viewModel: .init())
                 case .activity:
-                    NewSessionView()
+                    NewSessionView(viewModel: .init())
                 }
             }
             .sheet(item: $viewModel.selectedSession) { selectedSession in

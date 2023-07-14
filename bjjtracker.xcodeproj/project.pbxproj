@@ -93,6 +93,10 @@
 		D0B8B72E2A3C9F6100A2418F /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
 		D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */; };
 		D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */; };
+		D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */; };
+		D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */; };
+		D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */; };
+		D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */; };
 		D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */; };
 		D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* DashboardView.swift */; };
 		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
@@ -208,6 +212,10 @@
 		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0DAA8FF2A6186A200074EBE /* Techniques List.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Techniques List.md"; sourceTree = "<group>"; };
+		D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewViewModel.swift; sourceTree = "<group>"; };
+		D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewViewModel.swift; sourceTree = "<group>"; };
+		D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionViewViewModel.swift; sourceTree = "<group>"; };
+		D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionViewViewModel.swift; sourceTree = "<group>"; };
 		D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
@@ -321,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */,
+				D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -463,7 +472,9 @@
 				D02F3DF829F14BCE00BED6CD /* Details */,
 				D098BBEF29E2C1A200A9A068 /* Components */,
 				D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */,
+				D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */,
 				D02F3DF629F149E900BED6CD /* NewSessionView.swift */,
+				D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -473,6 +484,7 @@
 			children = (
 				D00109AC2A0BABD4008433CC /* Components */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
+				D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */,
 				D02F3DE729EEBD9300BED6CD /* ProfileView.swift */,
 				D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */,
 			);
@@ -888,10 +900,12 @@
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
 				D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */,
+				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
+				D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */,
 				D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */,
 				D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
@@ -941,6 +955,7 @@
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
+				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
@@ -954,6 +969,7 @@
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
+				D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */,
 				D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */,
 				D00109B62A0D3294008433CC /* String+extension.swift in Sources */,
 				D098BBF529E2EB3000A9A068 /* BeltsListView.swift in Sources */,

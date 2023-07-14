@@ -67,7 +67,7 @@ struct TimetableView: View {
                             .font(.system(size: 18))
                             .foregroundColor(Color("Gray"))
                         NavigationLink(destination: {
-                            ArchiveView()
+                            ArchiveView(viewModel: .init())
                                 .navigationBarTitle("")
                                 .navigationBarHidden(true)
                         }) {
@@ -93,7 +93,7 @@ struct TimetableView: View {
                                         }
                                 }
                                 NavigationLink(destination: {
-                                    ArchiveView()
+                                    ArchiveView(viewModel: .init())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
                                 }) {
@@ -129,9 +129,9 @@ struct TimetableView: View {
             .sheet(item: $selectedSheet) { selectedSheet in
                 switch selectedSheet {
                 case .promotion:
-                    AddPromotionView()
+                    AddPromotionView(viewModel: .init())
                 case .activity:
-                    NewSessionView()
+                    NewSessionView(viewModel: .init())
                 }
             }
             .fullScreenCover(isPresented: $isBottomSheetOpen) {

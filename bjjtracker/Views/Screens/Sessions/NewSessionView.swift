@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewSessionView: View {
     
+    @StateObject var viewModel: NewSessionViewViewModel
+    
     @State private var isPickerPresented = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -16,7 +18,8 @@ struct NewSessionView: View {
     
     @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
     
-    init() {
+    init(viewModel: NewSessionViewViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
         UITextView.appearance().backgroundColor = .clear
     }
     
@@ -90,6 +93,7 @@ struct NewSessionView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
+                                viewModel.popupDismissed()
                             } label: {
                                 Image("back")
                                     .resizable()
@@ -117,13 +121,14 @@ struct NewSessionView: View {
     
     func save() {
         PersistanceManager.shared.createSession(from: activity, context: managedObjContext)
+        viewModel.sessionCreated(from: activity)
     }
 }
 
 struct NewSessionView_Previews: PreviewProvider {
     struct Container: View {
         var body: some View {
-            NewSessionView()
+            NewSessionView(viewModel: .init())
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddPromotionView: View {
-    @StateObject var promotion: Promotion = .init(belt: .white, stripes: 0, date: Date(), location: "", notes: "")
+    @ObservedObject var viewModel: AddPromotionViewViewModel
     
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
@@ -25,54 +25,29 @@ struct AddPromotionView: View {
                                 SelectionPanelView<GradingSystem>(
                                     g: geometry,
                                     valuesList: GradingSystem.allCases.map { $0.rawValue },
-                                    selectedType: $promotion.gradingSystem,
-                                    selectedTypeValue: promotion.gradingSystem.rawValue
+                                    selectedType: $viewModel.promotion.gradingSystem,
+                                    selectedTypeValue: viewModel.promotion.gradingSystem.rawValue
                                 )
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "2. Belt: %@".localized(with: ["\(promotion.belt.title)"]))
+                                TitleTextView(text: "2. Belt: %@".localized(with: ["\(viewModel.promotion.belt.title)"]))
                                 
-                                BeltsListView(promotion: promotion)
+                                BeltsListView(promotion: viewModel.promotion)
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "3. Number of stripes:".localizedString)
-                                NumberPickerView(selectedNumber: $promotion.stripes)
+                                NumberPickerView(selectedNumber: $viewModel.promotion.stripes)
                             }
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "4. Select date:".localizedString)
                                 
-                                DatePicker("", selection: $promotion.date)
+                                DatePicker("", selection: $viewModel.promotion.date)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
                             }
                         }
-                        
-//                        Group {
-//                            VStack(alignment: .leading) {
-//                                TitleTextView(text: "Location:")
-//                                TextField("Location...", text: $promotion.location)
-//                                    .frame(maxHeight: 50, alignment: .top)
-//                                    .padding(20)
-//                                    .background(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .fill(Color("LightBlue"))
-//                                    ).padding(.leading, 5)
-//                            }
-//                            
-//                            VStack(alignment: .leading) {
-//                                TitleTextView(text: "Notes")
-//                                TextField("Add some details...", text: $promotion.notes)
-//                                    .frame(minHeight: 150, alignment: .top)
-//                                    .padding(20)
-//                                    .background(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .fill(Color("LightBlue"))
-//                                    )
-//                                    .padding(.leading, 5)
-//                            }
-//                        }
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
@@ -106,7 +81,7 @@ struct AddPromotionView: View {
     }
     
     func save() {
-        PersistanceManager.shared.createPromotion(from: promotion, context: managedObjContext)
+        PersistanceManager.shared.createPromotion(from: viewModel.promotion, context: managedObjContext)
     }
 }
 
@@ -128,7 +103,7 @@ struct AddPromotionView_Previews: PreviewProvider {
     struct Container: View {
         
         var body: some View {
-            AddPromotionView()
+            AddPromotionView(viewModel: .init())
         }
     }
     

@@ -194,6 +194,7 @@ struct SessionDetailsView: View {
                             UINavigationBar.appearance().standardAppearance = appearance
                         }) {
                             EditSessionView(
+                                viewModel: .init(),
                                 session: viewModel.session,
                                 activity: Activity.from(session: viewModel.session)!,
                                 onDismiss: { editedActivity in
