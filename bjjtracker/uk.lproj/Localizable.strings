@@ -61,7 +61,7 @@
 
 "Location" = "Місце";
 "Notes" = "Нотатки";
-"Empty" = "Пусто";
+"Empty" = "Порожньо";
 "Learned techniques" = "Вивчені техніки";
 "Technique" = "Техніка";
 "Add technique" = "Додати техніку";
@@ -74,8 +74,8 @@
 "Archive" = "Архів";
 "Congratulations!" = "Юху!";
 "You’ve reached" = "Ви досягли";
-"Hey! Add trainig sessions to track your BJJ progress journey!" = "Хей! Додавай тренування, щоб спостерігати за своїм прогресом!";
-"Your records will always be at hand!" = "Твої записи завжди будуть під рукою!";
+"Hey! Add trainig sessions to track your BJJ progress journey!" = "Хей! Додавай тренування, щоб спостерігати за власним прогресом!";
+"Your records will always be at hand!" = "Твої записи будуть завжди під рукою!";
 
 // Statistics
 "Statistics" = "Статистика";

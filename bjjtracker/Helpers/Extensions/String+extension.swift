@@ -13,6 +13,12 @@ extension String {
         String(format: NSLocalizedString(self, comment: ""))
     }
     
+    func toDate(format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
+    
     func localized(with arguments: [CVarArg]) -> String {
         return String(format: NSLocalizedString(self, comment: ""), locale: nil, arguments: arguments)
     }
