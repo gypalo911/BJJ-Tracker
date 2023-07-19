@@ -28,7 +28,7 @@ struct bjjtrackerApp: App {
 #if DEBUG
             ContentView()
                 .environmentObject(settings)
-                .environment(\.managedObjectContext, persistanceManager.container.viewContext)
+                .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
 #else
             ContentView()
                 .environmentObject(settings)

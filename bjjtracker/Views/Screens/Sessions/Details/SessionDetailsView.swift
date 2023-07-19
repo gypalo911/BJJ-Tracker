@@ -11,6 +11,8 @@ import LinkPresentation
 
 struct SessionDetailsView: View {
     
+    let namespace: Namespace.ID
+    
     @StateObject var viewModel: SessionDetailsViewModel
     
     @Environment(\.presentationMode) var presentationMode
@@ -27,6 +29,10 @@ struct SessionDetailsView: View {
     
     var sessionStatus: ActivityStatus {
         viewModel.session.status
+    }
+    
+    var sessionId: String {
+        viewModel.session.id?.uuidString ?? ""
     }
     
     var body: some View {
@@ -57,12 +63,15 @@ struct SessionDetailsView: View {
                                         .font(.system(size: 10))
                                         .foregroundColor(.white)
                                         .fontWeight(.bold)
-                                }.padding(.all, 30)
+                                }
+                                .matchedGeometryEffect(id: "status\(sessionId)", in: namespace)
+                                .padding(.all, 30)
                             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             VStack(alignment: .leading, spacing: 20) {
                                 Text(viewModel.navTitle)
                                     .font(.system(size: 28).bold())
                                     .foregroundColor(.white)
+                                    .matchedGeometryEffect(id: "title\(sessionId)", in: namespace, properties: .position, anchor: .center)
                                     .padding(.top, 10)
                                 VStack(alignment: .leading, spacing: 20) {
                                     HStack(spacing: 10) {
@@ -180,13 +189,20 @@ struct SessionDetailsView: View {
                             }
                         }
                         .background {
-                            Rectangle()
-                                .fill(linearGradient)
-                                .ignoresSafeArea()
-                                .cornerRadius(30, corners: [.bottomLeft])
-                                .frame(height: 480)
-                                .position(CGPoint(x: geometry.size.width/2, y: 0))
-                                .defaultShadow()
+                            ZStack {
+                                Rectangle()
+                                    .fill(.white)
+                                    .ignoresSafeArea()
+                                    .matchedGeometryEffect(id: "whiteBG\(sessionId)", in: namespace, properties: .position, anchor: .center)
+                                Rectangle()
+                                    .fill(linearGradient)
+                                    .ignoresSafeArea()
+                                    .cornerRadius(30, corners: [.bottomLeft])
+                                    .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .leading)
+                                    .frame(height: 480)
+                                    .position(CGPoint(x: geometry.size.width/2, y: 0))
+                                    .defaultShadow()
+                            }
                         }
                         .sheet(isPresented: $isPresentedEditing, onDismiss: {
                             let appearance = UINavigationBarAppearance()
@@ -228,9 +244,11 @@ struct SessionDetailsView_Previews: PreviewProvider {
     struct Container: View {
         @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
         
+        @Namespace var namespace
+        
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(viewModel: SessionDetailsViewModel(session: session))
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session))
         }
     }
     

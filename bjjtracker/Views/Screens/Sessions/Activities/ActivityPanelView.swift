@@ -10,6 +10,12 @@ import SwiftUI
 struct ActivityPanelView: View {
     @ObservedObject var session: Session
     
+    let namespace: Namespace.ID
+    
+    var sessionId: String {
+        session.id?.uuidString ?? ""
+    }
+    
     var body: some View {
         Group {
             ZStack {
@@ -17,12 +23,14 @@ struct ActivityPanelView: View {
                     .foregroundColor(.white)
                     .cornerRadius(20)
                     .defaultShadow()
+                    .matchedGeometryEffect(id: "whiteBG\(sessionId)", in: namespace, properties: .position, anchor: .top)
                 HStack(alignment: .center) {
                     ZStack {
                         Rectangle()
                             .foregroundColor(session.activityType.color)
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .defaultShadow()
+                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .leading)
                             .frame(width: 67)
                         VStack(alignment: .center, spacing: 6) {
                             Text("\((session.startDate ?? Date()).toString("HH:mm"))")
@@ -40,6 +48,7 @@ struct ActivityPanelView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
+                            .matchedGeometryEffect(id: "title\(session.id?.uuidString ?? "")", in: namespace, properties: .position, anchor: .bottomTrailing)
                         Text("\(session.activityStyle.rawValue.localizedString) • \(session.location ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))
@@ -64,7 +73,9 @@ struct ActivityPanelView: View {
                             .font(.system(size: 10))
                             .foregroundColor(.white)
                             .fontWeight(.bold)
-                    }.padding(.all, 10)
+                    }
+                    .matchedGeometryEffect(id: "status\(sessionId)", in: namespace, properties: .position, anchor: .bottomTrailing)
+                    .padding(.all, 10)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
         }
@@ -76,10 +87,12 @@ struct ActivityPanelView: View {
 struct ActivityPanelView_Previews: PreviewProvider {
     struct Container: View {
         @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        
+        @Namespace var namespace
 
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            ActivityPanelView(session: session)
+            ActivityPanelView(session: session, namespace: namespace)
         }
     }
 
