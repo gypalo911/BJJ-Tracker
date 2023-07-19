@@ -13,7 +13,6 @@ class TechniquesListViewModel: ObservableObject {
     private let analyticsEngine: AnalyticsEngine
     private let persistanceManager: TechniquesStorageManager
     private let session: Session
-    private let managedObjContext: NSManagedObjectContext
     
     // MARK: @Published variables
     @Published var rows: [[Tag]] = []
@@ -26,12 +25,10 @@ class TechniquesListViewModel: ObservableObject {
     
     init(
         session: Session,
-        managedObjContext: NSManagedObjectContext,
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
         persistanceManager: TechniquesStorageManager = PersistanceManager.shared
     ) {
         self.session = session
-        self.managedObjContext = managedObjContext
         self.analyticsEngine = analyticsEngine
         self.persistanceManager = persistanceManager
     }
@@ -59,7 +56,7 @@ class TechniquesListViewModel: ObservableObject {
             removeSuggestionTag(tag)
             setupTagRows()
             
-            persistanceManager.createTechnique(for: session, text: tag.text, details: nil, context: managedObjContext)
+            persistanceManager.createTechnique(for: session, text: tag.text, details: nil)
             
             analyticsEngine.log(AnalyticsEvent(
                 name: "tag_added",
@@ -77,7 +74,7 @@ class TechniquesListViewModel: ObservableObject {
         setupTagRows()
         
         if let technique = tag.technique {
-            persistanceManager.delete(model: technique, context: managedObjContext)
+            persistanceManager.delete(model: technique)
         }
         
         analyticsEngine.log(AnalyticsEvent(

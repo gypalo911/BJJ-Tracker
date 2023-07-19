@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+struct AppConstants {
+    static let mgeAnimation = Animation.spring(response: 0.3, dampingFraction: 0.9)
+}
+
 class AppSettings: ObservableObject {
     static let shared = AppSettings()
     

@@ -48,7 +48,6 @@ struct ActivityPanelView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                             .fontWeight(.bold)
-                            .matchedGeometryEffect(id: "title\(session.id?.uuidString ?? "")", in: namespace, properties: .position, anchor: .bottomTrailing)
                         Text("\(session.activityStyle.rawValue.localizedString) • \(session.location ?? "")")
                             .font(.system(size: 14))
                             .foregroundColor(.black.opacity(0.6))

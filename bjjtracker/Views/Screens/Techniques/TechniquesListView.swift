@@ -88,7 +88,6 @@ struct TechniquesListView: View {
                 .padding([.leading], 10)
             }
         }
-        .padding(.vertical, 10)
         .onAppear {
             maxViewWidth = UIScreen.main.bounds.size.width - 80
             viewModel.maxRowWidth = maxViewWidth
@@ -101,9 +100,11 @@ struct TechniquesListView_Previews: PreviewProvider {
     struct Container: View {
         @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
         
+        @Namespace var namespace
+        
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(viewModel: SessionDetailsViewModel(session: session))
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session))
         }
     }
     

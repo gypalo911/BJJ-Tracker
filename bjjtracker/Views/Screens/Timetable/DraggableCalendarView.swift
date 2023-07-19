@@ -19,7 +19,6 @@ struct DraggableCalendarView: View {
     
     @State private var maxHeight: CGFloat = 420
     
-    @State private var sliderProgress: CGFloat = 0
     @State private var sliderHeight: CGFloat = 0
     @State private var lastDragValue: CGFloat = 0
     

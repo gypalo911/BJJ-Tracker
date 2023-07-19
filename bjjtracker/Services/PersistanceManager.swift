@@ -26,10 +26,9 @@ protocol TechniquesStorageManager {
     func createTechnique(
         for session: Session,
         text: String,
-        details: String?,
-        context: NSManagedObjectContext
+        details: String?
     )
-    func delete(model: TechniqueModel, context: NSManagedObjectContext)
+    func delete(model: TechniqueModel)
 }
 
 struct PersistanceManager {
@@ -195,9 +194,9 @@ extension PersistanceManager: TechniquesStorageManager {
     func createTechnique(
         for session: Session,
         text: String,
-        details: String? = nil,
-        context: NSManagedObjectContext
+        details: String? = nil
     ) {
+        let context = self.container.viewContext
         let model = TechniqueModel(context: context)
         model.update(with: text, details: details)
         model.addToSessions(session)
@@ -205,7 +204,8 @@ extension PersistanceManager: TechniquesStorageManager {
         save(context: context)
     }
     
-    func delete(model: TechniqueModel, context: NSManagedObjectContext) {
+    func delete(model: TechniqueModel) {
+        let context = self.container.viewContext
         context.delete(model)
         
         save(context: context)

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DashboardView: View {
     
+    @EnvironmentObject var settings: AppSettings
+    
     @FetchRequest var sessionsList: FetchedResults<Session>
     
     @ObservedObject private var viewModel: DashboardViewModel
@@ -22,8 +24,6 @@ struct DashboardView: View {
             viewModel.isDateSelected($0.startDate ?? Date())
         }
     }
-    
-    let mgeAnimation = Animation.spring(response: 0.3, dampingFraction: 0.9)
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
@@ -41,7 +41,7 @@ struct DashboardView: View {
         ZStack {
             if let session = viewModel.selectedSession {
                 SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(mgeAnimation) {
+                    withAnimation(AppConstants.mgeAnimation) {
                         viewModel.selectedSession = nil
                     }
                 })
@@ -145,7 +145,7 @@ struct DashboardView: View {
                                                 if session.id != nil {
                                                     ActivityPanelView(session: session, namespace: namespace)
                                                         .onTapGesture {
-                                                            withAnimation(mgeAnimation) {
+                                                            withAnimation(AppConstants.mgeAnimation) {
                                                                 viewModel.select(session: session)
                                                             }
                                                         }
@@ -198,10 +198,8 @@ struct DashboardView: View {
                             NewSessionView(viewModel: .init())
                         }
                     }
-                    //                .sheet(item: $viewModel.selectedSession) { selectedSession in
-                    //                    SessionDetailsView(viewModel: SessionDetailsViewModel(session: selectedSession))
-                    //                }
                     .onAppear {
+                        settings.isTabBarHidden = false
                         NotificationManager.shared.requestAuthorization { _ in }
                         viewModel.onDashboardAppeared()
                     }
