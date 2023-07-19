@@ -85,6 +85,7 @@ struct PersistanceManager {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     func save(context: NSManagedObjectContext) {
