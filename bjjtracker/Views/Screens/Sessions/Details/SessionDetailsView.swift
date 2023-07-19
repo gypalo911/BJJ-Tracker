@@ -144,7 +144,7 @@ struct SessionDetailsView: View {
                     session: viewModel.session,
                     activity: Activity.from(session: viewModel.session)!,
                     onDismiss: { editedActivity in
-                        presentationMode.wrappedValue.dismiss()
+                        dismissCallback?()
                     }
                 )
             }
@@ -221,7 +221,8 @@ struct SessionDetailsHeaderView: View {
                         .fontWeight(.bold)
                 }
                 .matchedGeometryEffect(id: "status\(sessionId)", in: namespace)
-                .padding(.all, 30)
+                .padding(.trailing, 15)
+                .padding(.top, 35)
             }
             .hAlign(.trailing)
             .vAlign(.top)

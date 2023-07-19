@@ -43,7 +43,7 @@ class SessionDetailsViewModel: ObservableObject {
             let matches = detector.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count))
             
             return matches.compactMap({ $0.url?.absoluteString })
-        } catch let _ {
+        } catch {
 //            debugPrint(error.localizedDescription)
         }
         
