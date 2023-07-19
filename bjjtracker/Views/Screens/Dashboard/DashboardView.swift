@@ -167,7 +167,7 @@ struct DashboardView: View {
                                                 }
                                             }
                                             .padding(.top, 20)
-                                        }.padding(.bottom, 50)
+                                        }.padding(.bottom, settings.isTabBarHidden ? 50 : 100)
                                     }
                                 }
                             }
@@ -199,7 +199,7 @@ struct DashboardView: View {
                         }
                     }
                     .onAppear {
-                        settings.isTabBarHidden = false
+//                        settings.isTabBarHidden = false
                         NotificationManager.shared.requestAuthorization { _ in }
                         viewModel.onDashboardAppeared()
                     }
@@ -221,7 +221,8 @@ struct Dashboard_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        Container()
+        ContentView()
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

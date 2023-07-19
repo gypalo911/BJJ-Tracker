@@ -203,7 +203,7 @@ struct SessionDetailsHeaderView: View {
             Rectangle()
                 .fill(linearGradient)
                 .cornerRadius(30, corners: [.bottomLeft])
-                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .leading)
+                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .bottom)
                 .ignoresSafeArea()
                 .vAlign(.top)
                 .defaultShadow()
@@ -220,7 +220,7 @@ struct SessionDetailsHeaderView: View {
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
-                .matchedGeometryEffect(id: "status\(sessionId)", in: namespace)
+                .matchedGeometryEffect(id: "status\(sessionId)", in: namespace, properties: .position, anchor: .top)
                 .padding(.trailing, 15)
                 .padding(.top, 35)
             }
@@ -305,7 +305,8 @@ struct SessionDetailsView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        Container()
+        ContentView()
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

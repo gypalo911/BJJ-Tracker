@@ -30,7 +30,8 @@ struct ContentView: View {
                         .tag(Tab.statistics)
                     ProfileView(viewModel: profileVM)
                         .tag(Tab.profile)
-                }.edgesIgnoringSafeArea(.bottom)
+                }
+                .edgesIgnoringSafeArea(.bottom)
             }
             VStack {
                 Spacer()

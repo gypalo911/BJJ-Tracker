@@ -30,8 +30,10 @@ enum Tab: String, CaseIterable {
 struct CustomTabBarView: View {
     @Binding var selectedTab: Tab
     
+    @Namespace var namespace
+    
     var body: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 15) {
             ForEach(Tab.allCases, id: \.rawValue) { tab in
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {
@@ -48,6 +50,7 @@ struct CustomTabBarView: View {
                                 .foregroundColor(Color("Purple"))
                                 .font(.system(size: 16))
                                 .fontWeight(.semibold)
+                                .matchedGeometryEffect(id: "title", in: namespace)
                             
                         }
                         .padding(.all, 10)
@@ -55,6 +58,7 @@ struct CustomTabBarView: View {
                             Rectangle()
                                 .fill(Color("PurpleBG"))
                                 .cornerRadius(5)
+                                .matchedGeometryEffect(id: "bg", in: namespace)
                         )
                     } else {
                         tab.image
