@@ -50,6 +50,7 @@ struct BluredBottomSheet: View {
                             .foregroundColor(Color("Blue"))
                             .frame(maxWidth: .infinity)
                             .frame(height: 70)
+                            .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
                         HStack {
                             Image("kimono")
                                 .resizable()
@@ -75,6 +76,7 @@ struct BluredBottomSheet: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 70)
+                            .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
                         HStack {
                             Image("beltIcon")
                                 .resizable()
@@ -106,6 +108,7 @@ struct BluredBottomSheet: View {
                 }
             }
             .padding(.bottom, 50)
+            .frame(maxWidth: 400)
             .contentShape(Rectangle())
             .vAlign(.bottom)
             .hAlign(.center)

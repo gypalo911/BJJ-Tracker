@@ -31,13 +31,11 @@ struct ContentView: View {
                     ProfileView(viewModel: profileVM)
                         .tag(Tab.profile)
                 }
-                .edgesIgnoringSafeArea(.bottom)
             }
-            VStack {
-                Spacer()
-                if !settings.isTabBarHidden {
-                    CustomTabBarView(selectedTab: $selectedTab)
-                }
+            if !settings.isTabBarHidden {
+                CustomTabBarView(selectedTab: $selectedTab)
+                    .vAlign(.bottom)
+                    .disabled(settings.isTabBarHidden)
             }
         }
         .ignoresSafeArea()

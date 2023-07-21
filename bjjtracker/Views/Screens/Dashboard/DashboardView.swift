@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct DashboardView: View {
     
@@ -65,6 +66,7 @@ struct DashboardView: View {
                                         .hAlign(.leading)
                                     
                                     Button {
+                                        settings.isTabBarHidden = true
                                         settings.showingActionSheet = true
                                     } label: {
                                         Image("createButton")
@@ -174,6 +176,9 @@ struct DashboardView: View {
                         }
                     }
                     .background(Color("generalBG").ignoresSafeArea())
+                    .introspectTabBarController { (UITabBarController) in
+                        UITabBarController.tabBar.isHidden = true
+                    }
                     .sheet(item: $viewModel.selectedSheet) { selectedSheet in
                         switch selectedSheet {
                         case .promotion:
@@ -191,7 +196,7 @@ struct DashboardView: View {
                         if settings.showingActionSheet {
                             settings.isTabBarHidden = true
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                                 settings.isTabBarHidden = false
                             }
                         }
