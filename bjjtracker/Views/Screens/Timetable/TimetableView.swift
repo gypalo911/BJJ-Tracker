@@ -17,7 +17,6 @@ struct TimetableView: View {
     var sessionsList: FetchedResults<Session>
     
     @State var selectedDay: Date = Date()
-    @State var showingActionSheet: Bool = false
     @State var selectedSheet: ModalsSheets?
     @State var isBottomSheetOpen: Bool = false
     
@@ -53,7 +52,7 @@ struct TimetableView: View {
                                 .foregroundColor(.black)
                                 .hAlign(.leading)
                             Button {
-                                showingActionSheet = true
+                                settings.showingActionSheet = true
                             } label: {
                                 Image("createButton")
                                     .resizable()
@@ -129,17 +128,6 @@ struct TimetableView: View {
                         }.padding(.top, -10)
                     }
                     .background(Color("generalBG").ignoresSafeArea())
-                    .actionSheet(isPresented: $showingActionSheet) {
-                        ActionSheet(title: Text("Select Action"), buttons: [
-                            .default(Text("Add Promotion"), action: {
-                                selectedSheet = .promotion
-                            }),
-                            .default(Text("Add Session"), action: {
-                                selectedSheet = .activity
-                            }),
-                            .cancel()
-                        ])
-                    }
                     .sheet(item: $selectedSheet) { selectedSheet in
                         switch selectedSheet {
                         case .promotion:
@@ -160,6 +148,16 @@ struct TimetableView: View {
                         settings.isTabBarHidden = false
                     }
                 }
+                .popup(view: {
+                    BluredBottomSheet(
+                        isBottomSheetOpen: $settings.showingActionSheet,
+                        onSelect: { modal in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                selectedSheet = modal
+                            }
+                        }
+                    )
+                })
             }
         }
     }
@@ -174,6 +172,7 @@ struct TimetableView: View {
 struct Timetable_Previews: PreviewProvider {
     static var previews: some View {
         TimetableView(viewModel: .init())
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

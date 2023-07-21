@@ -14,6 +14,8 @@ struct ProfileView: View {
         case modalSheets
     }
     
+    @EnvironmentObject var settings: AppSettings
+    
     @ObservedObject var viewModel: ProfileViewViewModel
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
@@ -21,13 +23,8 @@ struct ProfileView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
     var promotionModels: FetchedResults<PromotionModel>
     
-    @State private var showingActionSheet: Bool = false
+    @State private var showingGradingActionSheet: Bool = false
     @State private var selectedSheet: ModalsSheets?
-    @State var actionSheetState: ActionSheetState = .none {
-        willSet {
-            showingActionSheet = newValue != .none
-        }
-    }
     @State private var gradingSystem: GradingSystem = .adult
     
     var promotions: [Promotion] {
@@ -71,8 +68,7 @@ struct ProfileView: View {
                         .background(Color.white.ignoresSafeArea())
                     
                     Button {
-                        showingActionSheet = true
-                        actionSheetState = .modalSheets
+                        settings.showingActionSheet = true
                     } label: {
                         Image("createButton")
                             .resizable()
@@ -105,8 +101,7 @@ struct ProfileView: View {
                             }
                             VStack {
                                 Button(action: {
-                                    showingActionSheet = true
-                                    actionSheetState = .gradingSystem
+                                    showingGradingActionSheet = true
                                 }, label: {
                                     HStack(spacing: 10) {
                                         Text(gradingSystem.rawValue.localizedString.capitalized)
@@ -163,26 +158,14 @@ struct ProfileView: View {
                     .padding(.bottom, 60)
                 }
             }
-            .actionSheet(isPresented: $showingActionSheet) {
-                if actionSheetState == .gradingSystem {
-                    let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
-                    return ActionSheet(title: Text("Select Grading System"), buttons: [
-                        .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
-                            gradingSystem = gradingSystem == .adult ? .junior : .adult
-                        }),
-                        .cancel()
-                    ])
-                } else {
-                    return ActionSheet(title: Text("Select Action"), buttons: [
-                        .default(Text("Add Promotion"), action: {
-                            selectedSheet = .promotion
-                        }),
-                        .default(Text("Add Session"), action: {
-                            selectedSheet = .activity
-                        }),
-                        .cancel()
-                    ])
-                }
+            .actionSheet(isPresented: $showingGradingActionSheet) {
+                let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
+                return ActionSheet(title: Text("Select Grading System"), buttons: [
+                    .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
+                        gradingSystem = gradingSystem == .adult ? .junior : .adult
+                    }),
+                    .cancel()
+                ])
             }
             .sheet(item: $selectedSheet) { selectedSheet in
                 switch selectedSheet {
@@ -196,6 +179,16 @@ struct ProfileView: View {
                 viewModel.onProfileViewAppeared()
             }
         }
+        .popup(view: {
+            BluredBottomSheet(
+                isBottomSheetOpen: $settings.showingActionSheet,
+                onSelect: { modal in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        selectedSheet = modal
+                    }
+                }
+            )
+        })
     }
 }
 

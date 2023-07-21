@@ -33,6 +33,8 @@
 		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
+		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
+		D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
 		D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7F29DDAD9A00E10562 /* ContentView.swift */; };
 		D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Assets.xcassets */; };
@@ -163,6 +165,8 @@
 		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
+		D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModifier.swift; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerApp.swift; sourceTree = "<group>"; };
 		D060BA7F29DDAD9A00E10562 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */,
+				D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -352,6 +357,14 @@
 				D09BCA3F2A606A24004C749E /* SessionDetailsViewModel.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		D05C9EFC2A6AB7BF007D5AF0 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		D060BA7129DDAD9A00E10562 = {
@@ -556,6 +569,7 @@
 		D098BBEC29E2C0DA00A9A068 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D05C9EFC2A6AB7BF007D5AF0 /* BottomSheet */,
 				D098BBE229E0CDFD00A9A068 /* Calendar */,
 				D0E824B929DECFF40023E6C0 /* TabBar */,
 				D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */,
@@ -913,6 +927,7 @@
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
 				D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */,
+				D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */,
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
@@ -968,6 +983,7 @@
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
+				D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
