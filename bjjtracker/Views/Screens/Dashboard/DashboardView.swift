@@ -65,7 +65,7 @@ struct DashboardView: View {
                                         .hAlign(.leading)
                                     
                                     Button {
-                                        viewModel.showingActionSheet = true
+                                        settings.showingActionSheet = true
                                     } label: {
                                         Image("createButton")
                                             .resizable()
@@ -174,22 +174,6 @@ struct DashboardView: View {
                         }
                     }
                     .background(Color("generalBG").ignoresSafeArea())
-                    .onChange(of: filteredSessions) { items in
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            self.headerHeight = items.isEmpty ? 620 : 660
-                        }
-                    }
-                    .actionSheet(isPresented: $viewModel.showingActionSheet) {
-                        ActionSheet(title: Text("Select Action"), buttons: [
-                            .default(Text("Add Promotion"), action: {
-                                viewModel.selectModal(sheet: .promotion)
-                            }),
-                            .default(Text("Add Session"), action: {
-                                viewModel.selectModal(sheet: .activity)
-                            }),
-                            .cancel()
-                        ])
-                    }
                     .sheet(item: $viewModel.selectedSheet) { selectedSheet in
                         switch selectedSheet {
                         case .promotion:
@@ -198,12 +182,36 @@ struct DashboardView: View {
                             NewSessionView(viewModel: .init())
                         }
                     }
+                    .onChange(of: filteredSessions) { items in
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            self.headerHeight = items.isEmpty ? 620 : 660
+                        }
+                    }
+                    .onChange(of: settings.showingActionSheet) { _ in
+                        if settings.showingActionSheet {
+                            settings.isTabBarHidden = true
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                settings.isTabBarHidden = false
+                            }
+                        }
+                    }
                     .onAppear {
                         settings.isTabBarHidden = false
                         NotificationManager.shared.requestAuthorization { _ in }
                         viewModel.onDashboardAppeared()
                     }
-                }.background(Color.white)
+                }
+                .popup(view: {
+                    BluredBottomSheet(
+                        isBottomSheetOpen: $settings.showingActionSheet,
+                        onSelect: { modal in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                viewModel.selectModal(sheet: modal)
+                            }
+                        }
+                    )
+                })
             }
         }
     }

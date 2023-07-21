@@ -26,7 +26,6 @@ class DashboardViewModel: ObservableObject {
     @Published var selectedSession: Session? = nil
     
     @Published var selectedDay = Date()
-    @Published var showingActionSheet: Bool = false
     @Published var selectedSheet: ModalsSheets? = nil
     
     var currentWeek = Calendar.current.currentWeek

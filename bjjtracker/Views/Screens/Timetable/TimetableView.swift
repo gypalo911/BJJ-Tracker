@@ -157,7 +157,7 @@ struct TimetableView: View {
                     .onAppear {
                         viewModel.onTimetableViewAppeared()
                         changeNavBar()
-                        settings.isTabBarHidden = false
+//                        settings.isTabBarHidden = false
                     }
                 }
             }

@@ -15,6 +15,7 @@ class AppSettings: ObservableObject {
     static let shared = AppSettings()
     
     @Published var isTabBarHidden: Bool = false
+    @Published var showingActionSheet: Bool = false
     @Published var navigateToPage: String?
     @Published var notificationTime: Int = 3600  // 1 hour
 }
