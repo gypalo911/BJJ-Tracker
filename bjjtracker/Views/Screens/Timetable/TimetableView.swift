@@ -128,14 +128,6 @@ struct TimetableView: View {
                         }.padding(.top, -10)
                     }
                     .background(Color("generalBG").ignoresSafeArea())
-                    .sheet(item: $selectedSheet) { selectedSheet in
-                        switch selectedSheet {
-                        case .promotion:
-                            AddPromotionView(viewModel: .init())
-                        case .activity:
-                            NewSessionView(viewModel: .init())
-                        }
-                    }
                     .fullScreenCover(isPresented: $isBottomSheetOpen) {
                         MonthYearBottomSheetView(
                             selectedDate: $selectedDay,
@@ -148,16 +140,6 @@ struct TimetableView: View {
                         settings.isTabBarHidden = false
                     }
                 }
-                .popup(view: {
-                    BluredBottomSheet(
-                        isBottomSheetOpen: $settings.showingActionSheet,
-                        onSelect: { modal in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                selectedSheet = modal
-                            }
-                        }
-                    )
-                })
             }
         }
     }

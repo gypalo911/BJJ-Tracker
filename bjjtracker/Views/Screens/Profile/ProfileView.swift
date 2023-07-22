@@ -24,7 +24,6 @@ struct ProfileView: View {
     var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingGradingActionSheet: Bool = false
-    @State private var selectedSheet: ModalsSheets?
     @State private var gradingSystem: GradingSystem = .adult
     
     var promotions: [Promotion] {
@@ -155,7 +154,7 @@ struct ProfileView: View {
                         )
                     }
                     .padding([.leading, .trailing, .top], 20)
-                    .padding(.bottom, 60)
+                    .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
                 }
             }
             .actionSheet(isPresented: $showingGradingActionSheet) {
@@ -167,34 +166,17 @@ struct ProfileView: View {
                     .cancel()
                 ])
             }
-            .sheet(item: $selectedSheet) { selectedSheet in
-                switch selectedSheet {
-                case .promotion:
-                    AddPromotionView(viewModel: .init())
-                case .activity:
-                    NewSessionView(viewModel: .init())
-                }
-            }
             .onAppear {
                 viewModel.onProfileViewAppeared()
             }
         }
-        .popup(view: {
-            BluredBottomSheet(
-                isBottomSheetOpen: $settings.showingActionSheet,
-                onSelect: { modal in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        selectedSheet = modal
-                    }
-                }
-            )
-        })
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: .init())
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

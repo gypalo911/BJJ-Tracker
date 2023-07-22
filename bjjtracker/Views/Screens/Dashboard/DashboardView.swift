@@ -66,7 +66,6 @@ struct DashboardView: View {
                                         .hAlign(.leading)
                                     
                                     Button {
-                                        settings.isTabBarHidden = true
                                         settings.showingActionSheet = true
                                     } label: {
                                         Image("createButton")
@@ -169,36 +168,16 @@ struct DashboardView: View {
                                                 }
                                             }
                                             .padding(.top, 20)
-                                        }.padding(.bottom, settings.isTabBarHidden ? 50 : 100)
+                                        }.padding(.bottom, settings.isTabBarHidden ? 50 : 120)
                                     }
                                 }
                             }
                         }
                     }
                     .background(Color("generalBG").ignoresSafeArea())
-                    .introspectTabBarController { (UITabBarController) in
-                        UITabBarController.tabBar.isHidden = true
-                    }
-                    .sheet(item: $viewModel.selectedSheet) { selectedSheet in
-                        switch selectedSheet {
-                        case .promotion:
-                            AddPromotionView(viewModel: .init())
-                        case .activity:
-                            NewSessionView(viewModel: .init())
-                        }
-                    }
                     .onChange(of: filteredSessions) { items in
                         withAnimation(.easeInOut(duration: 0.3)) {
                             self.headerHeight = items.isEmpty ? 620 : 660
-                        }
-                    }
-                    .onChange(of: settings.showingActionSheet) { _ in
-                        if settings.showingActionSheet {
-                            settings.isTabBarHidden = true
-                        } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                settings.isTabBarHidden = false
-                            }
                         }
                     }
                     .onAppear {
@@ -207,16 +186,6 @@ struct DashboardView: View {
                         viewModel.onDashboardAppeared()
                     }
                 }
-                .popup(view: {
-                    BluredBottomSheet(
-                        isBottomSheetOpen: $settings.showingActionSheet,
-                        onSelect: { modal in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                viewModel.selectModal(sheet: modal)
-                            }
-                        }
-                    )
-                })
             }
         }
     }

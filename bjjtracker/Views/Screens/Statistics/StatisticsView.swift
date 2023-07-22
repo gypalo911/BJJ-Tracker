@@ -147,7 +147,7 @@ struct StatisticsView: View {
                     }
                 }
                 .padding(.all, 20)
-                .padding(.bottom, 300)
+                .padding(.bottom, 350)
             }
         }
         .vAlign(.top)
