@@ -58,10 +58,15 @@ struct FloatingTabBarView: View {
 }
 
 struct FloatingTabBarView_Previews: PreviewProvider {
-    static var previews: some View {
+    struct Container: View {
         @State var selected: Tab = .dashboard
-        
-        FloatingTabBarView(selectedTab: $selected)
-            .vAlign(.bottom)
+        var body: some View {
+            FloatingTabBarView(selectedTab: $selected)
+                .vAlign(.bottom)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
     }
 }
