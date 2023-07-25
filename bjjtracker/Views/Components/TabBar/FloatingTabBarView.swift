@@ -13,9 +13,9 @@ struct FloatingTabBarView: View {
     var onCreate: (() -> Void)?
     
     var body: some View {
-        HStack(alignment: .center, spacing: 35) {
+        HStack(alignment: .center, spacing: 30) {
             ForEach(Tab.allCases, id: \.rawValue) { tab in
-                tab.image
+                (selectedTab == tab ? tab.selectedImage : tab.image)
                     .resizable()
                     .frame(width: 25, height: 25)
                     .foregroundColor(selectedTab == tab ? Color("Purple") : Color("LightGray"))
@@ -27,7 +27,7 @@ struct FloatingTabBarView: View {
                 if tab == .calendar {
                     ZStack {
                         Circle()
-                            .foregroundColor(Color("Purple"))
+                            .foregroundColor(Color("Blue"))
                         Image("plus")
                             .resizable()
                             .scaledToFit()
@@ -41,8 +41,8 @@ struct FloatingTabBarView: View {
                 }
             }
         }
-        .padding(.vertical, 11)
-        .padding(.horizontal, 35)
+        .padding(.vertical, 5)
+        .padding(.horizontal, 30)
         .background(
             Rectangle()
                 .fill(.white)
@@ -63,6 +63,7 @@ struct FloatingTabBarView_Previews: PreviewProvider {
         var body: some View {
             FloatingTabBarView(selectedTab: $selected)
                 .vAlign(.bottom)
+                .padding(.bottom, 30)
         }
     }
     

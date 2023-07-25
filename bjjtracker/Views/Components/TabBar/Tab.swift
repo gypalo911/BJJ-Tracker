@@ -25,4 +25,17 @@ enum Tab: String, CaseIterable {
             return Image("calendar")
         }
     }
+    
+    var selectedImage: Image {
+        switch self {
+        case .dashboard:
+            return Image("dashboard2")
+        case .profile:
+            return Image("profile2")
+        case .statistics:
+            return Image("stats2")
+        case .calendar:
+            return Image("calendar2")
+        }
+    }
 }
