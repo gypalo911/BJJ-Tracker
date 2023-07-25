@@ -49,7 +49,7 @@ struct BluredBottomSheet: View {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(Color("Blue"))
                             .frame(maxWidth: .infinity)
-                            .frame(height: 70)
+                            .frame(height: 60)
                             .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
                         HStack {
                             Image("kimono")
@@ -75,7 +75,7 @@ struct BluredBottomSheet: View {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 70)
+                            .frame(height: 60)
                             .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
                         HStack {
                             Image("beltIcon")

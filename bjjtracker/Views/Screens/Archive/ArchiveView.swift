@@ -115,14 +115,22 @@ struct ArchiveView: View {
                                                 viewModel.createSessionButtonTapped()
                                             }, label: {
                                                 ZStack {
-                                                    RoundedRectangle(cornerRadius: 10)
+                                                    RoundedRectangle(cornerRadius: 20)
                                                         .foregroundColor(Color("Blue"))
                                                         .frame(maxWidth: .infinity)
-                                                        .frame(height: 50)
-                                                    Text("Create Session")
-                                                        .foregroundColor(.white)
-                                                        .font(.system(size: 18).smallCaps())
-                                                        .fontWeight(.semibold)
+                                                        .frame(height: 60)
+                                                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
+                                                    HStack {
+                                                        Image("kimono")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .foregroundColor(.white)
+                                                            .frame(width: 25, height: 25)
+                                                        Text("Create Session")
+                                                            .foregroundColor(.white)
+                                                            .font(.system(size: 18).smallCaps())
+                                                            .fontWeight(.medium)
+                                                    }
                                                 }
                                             })
                                             Button(action: {
@@ -130,14 +138,22 @@ struct ArchiveView: View {
                                                 viewModel.addPromotionButtonTapped()
                                             }, label: {
                                                 ZStack {
-                                                    RoundedRectangle(cornerRadius: 10)
+                                                    RoundedRectangle(cornerRadius: 20)
                                                         .foregroundColor(.white)
                                                         .frame(maxWidth: .infinity)
-                                                        .frame(height: 50)
-                                                    Text("Add Promotion")
-                                                        .foregroundColor(Color("Blue"))
-                                                        .font(.system(size: 18).smallCaps())
-                                                        .fontWeight(.semibold)
+                                                        .frame(height: 60)
+                                                        .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
+                                                    HStack {
+                                                        Image("beltIcon")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .foregroundColor(.black)
+                                                            .frame(width: 25, height: 25)
+                                                        Text("Add Promotion")
+                                                            .foregroundColor(.black)
+                                                            .font(.system(size: 18).smallCaps())
+                                                            .fontWeight(.medium)
+                                                    }
                                                 }
                                             })
                                         }
