@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
+    @State private var selectedSheet: ModalsSheets? = nil
     
     @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
@@ -32,13 +34,46 @@ struct ContentView: View {
                         .tag(Tab.profile)
                 }
             }
+            .popup(view: {
+                BluredBottomSheet(
+                    isBottomSheetOpen: $settings.showingActionSheet,
+                    onSelect: { modal in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            selectedSheet = modal
+                        }
+                    }
+                )
+            })
             if !settings.isTabBarHidden {
-                CustomTabBarView(selectedTab: $selectedTab)
-                    .vAlign(.bottom)
-                    .disabled(settings.isTabBarHidden)
+                FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
+                    settings.showingActionSheet = true
+                })
+                .vAlign(.bottom)
+                .padding(.bottom, 30)
+                .disabled(settings.isTabBarHidden)
             }
         }
         .ignoresSafeArea()
+        .introspectTabBarController { (UITabBarController) in
+            UITabBarController.tabBar.isHidden = true
+        }
+        .sheet(item: $selectedSheet) { selectedSheet in
+            switch selectedSheet {
+            case .promotion:
+                AddPromotionView(viewModel: .init())
+            case .activity:
+                NewSessionView(viewModel: .init())
+            }
+        }
+        .onChange(of: settings.showingActionSheet) { _ in
+            if settings.showingActionSheet {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
         .onReceive(AppSettings.shared.$navigateToPage) { nav in
             guard let nav = nav else {
                 return
