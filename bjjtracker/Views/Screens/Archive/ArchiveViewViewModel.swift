@@ -48,7 +48,9 @@ class ArchiveViewViewModel: ObservableObject {
     }
     
     func onArchiveViewAppeared() {
-        setup()
+        DispatchQueue.main.async { [weak self] in
+            self?.setup()
+        }
         analyticsEngine.log(AnalyticsEvent(name: "archive_screen_viewed", metadata: [:]))
     }
     

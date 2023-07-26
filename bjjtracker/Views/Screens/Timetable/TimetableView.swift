@@ -37,14 +37,7 @@ struct TimetableView: View {
     
     var body: some View {
         ZStack {
-            if let session = selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        selectedSession = nil
-                    }
-                })
-            } else {
-                NavigationView {
+            NavigationView {
                     VStack(spacing: 0) {
                         HStack {
                             Text("Timetable")
@@ -141,6 +134,14 @@ struct TimetableView: View {
                         settings.isTabBarHidden = false
                     }
                 }
+            
+            if let session = selectedSession {
+                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
+                    withAnimation(AppConstants.mgeAnimation) {
+                        selectedSession = nil
+                        settings.isTabBarHidden = false
+                    }
+                })
             }
         }
     }

@@ -133,7 +133,6 @@ struct SessionDetailsView: View {
     func setupView() {
         changeNavBar(UIColor(activityType.color.opacity(0.8)))
         hideTabbar(true)
-        viewModel.setupNavTitle()
         viewModel.setupLinkPreviews()
     }
     

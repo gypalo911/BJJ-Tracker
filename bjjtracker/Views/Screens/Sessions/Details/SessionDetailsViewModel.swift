@@ -16,20 +16,19 @@ protocol SessionDetailsViewAnalytics {
 class SessionDetailsViewModel: ObservableObject {
     
     @Published var session: Session
-    @Published var navTitle: String = ""
     @Published var notesLinks: [String] = []
     
     @Published var previewModels: [LinkPreviewModel] = []
     
     private let analyticsEngine: AnalyticsEngine
     
+    var navTitle: String {
+        "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
+    }
+    
     init(session: Session, analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
         self.session = session
         self.analyticsEngine = analyticsEngine
-    }
-    
-    func setupNavTitle() {
-        self.navTitle = "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
     }
     
     func setupLinkPreviews() {

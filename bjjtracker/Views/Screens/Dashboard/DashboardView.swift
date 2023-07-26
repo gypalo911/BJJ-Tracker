@@ -41,14 +41,7 @@ struct DashboardView: View {
     
     var body: some View {
         ZStack {
-            if let session = viewModel.selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        viewModel.selectedSession = nil
-                    }
-                })
-            } else {
-                NavigationView {
+            NavigationView {
                     GeometryReader { geometry in
                         ZStack(alignment: .top) {
                             Rectangle()
@@ -187,6 +180,14 @@ struct DashboardView: View {
                         viewModel.onDashboardAppeared()
                     }
                 }
+            
+            if let session = viewModel.selectedSession {
+                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
+                    withAnimation(AppConstants.mgeAnimation) {
+                        viewModel.selectedSession = nil
+                        settings.isTabBarHidden = false
+                    }
+                })
             }
         }
     }
