@@ -3,4 +3,54 @@
    uuid = "12A7A4FB-1409-48B0-896D-F7700F2E8475"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "76E3CC91-E61B-4AB1-98B6-278B5AE10263"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Services/PersistanceManager+Sessions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "fetchSessions(in:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "76E3CC91-E61B-4AB1-98B6-278B5AE10263 - 9f47564ac9cbaa19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.PersistanceManager.fetchSessions(in: Swift.Optional&lt;Foundation.DateInterval&gt;) -&gt; Swift.Array&lt;bjjtracker.Session&gt;"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/PersistanceManager+Sessions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  uuid = "76E3CC91-E61B-4AB1-98B6-278B5AE10263 - 9f47564ac9cbaa19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.PersistanceManager.fetchSessions(in: Swift.Optional&lt;Foundation.DateInterval&gt;) -&gt; Swift.Array&lt;bjjtracker.Session&gt;"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/PersistanceManager+Sessions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "524">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

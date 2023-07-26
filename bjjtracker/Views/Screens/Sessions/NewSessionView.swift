@@ -13,6 +13,8 @@ struct NewSessionView: View {
     
     @State private var isPickerPresented = false
     
+    @EnvironmentObject var persistanceManager: PersistanceManager
+    
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
     
@@ -120,7 +122,7 @@ struct NewSessionView: View {
     }
     
     func save() {
-        PersistanceManager.shared.createSession(from: activity, context: managedObjContext)
+        persistanceManager.createSession(from: activity, context: managedObjContext)
         viewModel.sessionCreated(from: activity)
     }
 }
@@ -134,5 +136,6 @@ struct NewSessionView_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environmentObject(AppSettings())
     }
 }

@@ -19,6 +19,7 @@ struct ContentView: View {
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
 
     var body: some View {
         ZStack {
@@ -78,7 +79,7 @@ struct ContentView: View {
             guard let nav = nav else {
                 return
             }
-            let session = PersistanceManager.shared.session(by: nav as String, context: managedObjContext)
+            let session = persistanceManager.session(by: nav as String, context: managedObjContext)
             guard let session = session else {
                 return
             }

@@ -110,6 +110,7 @@ struct TechniquesListView_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

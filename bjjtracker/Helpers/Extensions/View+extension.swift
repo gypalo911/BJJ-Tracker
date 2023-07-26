@@ -23,6 +23,12 @@ extension View {
     func defaultShadow() -> some View {
         self.shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
     }
+    
+    func changeNavBar(_ color: UIColor = .clear) {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = color
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
 }
 
 struct RoundedCorner: Shape {

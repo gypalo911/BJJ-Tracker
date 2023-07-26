@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BeltPromotionsList: View {
+    @EnvironmentObject var persistanceManager: PersistanceManager
+    
     var promotionModels: [FetchedResults<PromotionModel>.Element]
     
     var promotions: [Promotion] {
@@ -29,7 +31,7 @@ struct BeltPromotionsList: View {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     for index in offsets {
                         let model = promotionModels[index]
-                        PersistanceManager.shared.delete(model: model, context: managedObjContext)
+                        persistanceManager.delete(model: model, context: managedObjContext)
                     }
                 }
             }

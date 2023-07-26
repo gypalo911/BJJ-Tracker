@@ -11,6 +11,7 @@ import Introspect
 struct DashboardView: View {
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
     
     @FetchRequest var sessionsList: FetchedResults<Session>
     
@@ -40,14 +41,7 @@ struct DashboardView: View {
     
     var body: some View {
         ZStack {
-            if let session = viewModel.selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        viewModel.selectedSession = nil
-                    }
-                })
-            } else {
-                NavigationView {
+            NavigationView {
                     GeometryReader { geometry in
                         ZStack(alignment: .top) {
                             Rectangle()
@@ -124,7 +118,7 @@ struct DashboardView: View {
                                         .foregroundColor(Color("Gray"))
                                     
                                     NavigationLink(destination: {
-                                        ArchiveView(viewModel: .init())
+                                        ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
                                     }) {
@@ -154,7 +148,7 @@ struct DashboardView: View {
                                             }
                                             
                                             NavigationLink(destination: {
-                                                ArchiveView(viewModel: .init())
+                                                ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
                                                     .navigationBarTitle("")
                                                     .navigationBarHidden(true)
                                             }) {
@@ -186,6 +180,14 @@ struct DashboardView: View {
                         viewModel.onDashboardAppeared()
                     }
                 }
+            
+            if let session = viewModel.selectedSession {
+                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
+                    withAnimation(AppConstants.mgeAnimation) {
+                        viewModel.selectedSession = nil
+                        settings.isTabBarHidden = false
+                    }
+                })
             }
         }
     }

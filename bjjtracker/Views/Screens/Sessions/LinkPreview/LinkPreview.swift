@@ -24,7 +24,7 @@ struct SafariView: UIViewControllerRepresentable {
 }
 
 struct LinkPreview: View {
-    @ObservedObject var viewModel: LinkPreviewViewModel
+    var previewModel: LinkPreviewModel
     
     @State var isPresentedWebView: Bool = false
     
@@ -32,7 +32,7 @@ struct LinkPreview: View {
     
     var body: some View {
         ZStack {
-            if let image = viewModel.image {
+            if let image = previewModel.image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -86,7 +86,7 @@ struct LinkPreview: View {
                     .vAlign(.bottom)
             }
             VStack(alignment: .leading, spacing: 1, content: {
-                Text(viewModel.title ?? viewModel.previewURL?.relativeString ?? "...")
+                Text(previewModel.title ?? previewModel.previewURL.relativeString)
                     .font(.system(size: 10))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.leading)
@@ -99,25 +99,22 @@ struct LinkPreview: View {
         }
         .frame(maxWidth: 170, maxHeight: 100)
         .fullScreenCover(isPresented: $isPresentedWebView) {
-            if let url = viewModel.previewURL {
-                SafariView(url: url)
-                    .ignoresSafeArea()
-            }
+            SafariView(url: previewModel.previewURL)
+                .ignoresSafeArea()
         }
         .onTapGesture {
             isPresentedWebView = true
-            if let stringURL = viewModel.previewURL?.absoluteString {
-                onTap?(stringURL)
-            }
+            let stringURL = previewModel.previewURL.absoluteString
+            onTap?(stringURL)
         }
     }
 }
 
-struct FileLinkView_Previews: PreviewProvider {
-    static var previews: some View {
-        LinkPreview(
-            viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"),
-            onTap: { _ in }
-        )
-    }
-}
+//struct FileLinkView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LinkPreview(
+//            viewModel: .init("https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"),
+//            onTap: { _ in }
+//        )
+//    }
+//}

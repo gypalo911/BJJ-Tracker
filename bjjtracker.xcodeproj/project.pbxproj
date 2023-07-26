@@ -37,9 +37,13 @@
 		D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */; };
 		D05C9F022A6BF0E1007D5AF0 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */; };
 		D05C9F042A6BFA1A007D5AF0 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F032A6BFA1A007D5AF0 /* Tab.swift */; };
+		D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */; };
+		D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */; };
+		D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */; };
+		D05C9F112A710EC7007D5AF0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C9F102A710EC7007D5AF0 /* Colors.xcassets */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
 		D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7F29DDAD9A00E10562 /* ContentView.swift */; };
-		D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Assets.xcassets */; };
+		D060BA8229DDAD9C00E10562 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Icons.xcassets */; };
 		D060BA8529DDAD9C00E10562 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8429DDAD9C00E10562 /* Preview Assets.xcassets */; };
 		D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */; };
 		D060BA9F29DDAD9C00E10562 /* bjjtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */; };
@@ -171,10 +175,14 @@
 		D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModifier.swift; sourceTree = "<group>"; };
 		D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarView.swift; sourceTree = "<group>"; };
 		D05C9F032A6BFA1A007D5AF0 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Sessions.swift"; sourceTree = "<group>"; };
+		D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Promotions.swift"; sourceTree = "<group>"; };
+		D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Techniques.swift"; sourceTree = "<group>"; };
+		D05C9F102A710EC7007D5AF0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerApp.swift; sourceTree = "<group>"; };
 		D060BA7F29DDAD9A00E10562 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D060BA8129DDAD9C00E10562 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D060BA8129DDAD9C00E10562 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		D060BA8429DDAD9C00E10562 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D060BA8929DDAD9C00E10562 /* bjjtracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bjjtracker.xcdatamodel; sourceTree = "<group>"; };
 		D060BA8B29DDAD9C00E10562 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -405,7 +413,8 @@
 				D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */,
 				D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */,
 				D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */,
-				D060BA8129DDAD9C00E10562 /* Assets.xcassets */,
+				D060BA8129DDAD9C00E10562 /* Icons.xcassets */,
+				D05C9F102A710EC7007D5AF0 /* Colors.xcassets */,
 				D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */,
 				D0A00ED729DDE3B100DCD5BB /* Helpers */,
 				D00109B32A0D2F9A008433CC /* Localizable.strings */,
@@ -468,6 +477,9 @@
 			isa = PBXGroup;
 			children = (
 				D02F3DF929F8051700BED6CD /* PersistanceManager.swift */,
+				D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */,
+				D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */,
+				D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */,
 				D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */,
 			);
 			path = Services;
@@ -802,8 +814,9 @@
 				D060BA8529DDAD9C00E10562 /* Preview Assets.xcassets in Resources */,
 				D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */,
 				D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */,
+				D05C9F112A710EC7007D5AF0 /* Colors.xcassets in Resources */,
 				D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */,
-				D060BA8229DDAD9C00E10562 /* Assets.xcassets in Resources */,
+				D060BA8229DDAD9C00E10562 /* Icons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,7 +945,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
+				D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift in Sources */,
 				D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */,
+				D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */,
 				D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */,
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
@@ -975,6 +990,7 @@
 				D076EFA42A0E313500E74E01 /* CircularBeltView.swift in Sources */,
 				D09BCA432A606AFB004C749E /* LinkPreviewViewModel.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,
+				D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
 				D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */,
 				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,
