@@ -26,7 +26,7 @@ class TechniquesListViewModel: ObservableObject {
     init(
         session: Session,
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
-        persistanceManager: TechniquesStorageManager = PersistanceManager.shared
+        persistanceManager: TechniquesStorageManager
     ) {
         self.session = session
         self.analyticsEngine = analyticsEngine

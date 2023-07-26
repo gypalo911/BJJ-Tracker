@@ -23,14 +23,13 @@ struct ActivityPanelView: View {
                     .foregroundColor(.white)
                     .cornerRadius(20)
                     .defaultShadow()
-                    .matchedGeometryEffect(id: "whiteBG\(sessionId)", in: namespace, properties: .position, anchor: .top)
                 HStack(alignment: .center) {
                     ZStack {
                         Rectangle()
                             .foregroundColor(session.activityType.color)
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .defaultShadow()
-                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .leading)
+                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                             .frame(width: 67)
                         VStack(alignment: .center, spacing: 6) {
                             Text("\((session.startDate ?? Date()).toString("HH:mm"))")
@@ -73,7 +72,6 @@ struct ActivityPanelView: View {
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
-                    .matchedGeometryEffect(id: "status\(sessionId)", in: namespace, properties: .position, anchor: .bottomTrailing)
                     .padding(.all, 10)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }

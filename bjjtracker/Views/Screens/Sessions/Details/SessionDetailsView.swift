@@ -18,6 +18,7 @@ struct SessionDetailsView: View {
     @StateObject var viewModel: SessionDetailsViewModel
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
     
@@ -30,114 +31,78 @@ struct SessionDetailsView: View {
         viewModel.session.activityType
     }
     
-    var sessionStatus: ActivityStatus {
-        viewModel.session.status
-    }
-    
-    var sessionId: String {
-        viewModel.session.id?.uuidString ?? ""
-    }
-    
     var body: some View {
-        
-        NavigationView {
+        ZStack {
             VStack {
                 SessionDetailsHeaderView(
                     session: viewModel.session,
                     namespace: namespace,
                     navTitle: viewModel.navTitle,
-                    activityType: activityType,
-                    sessionStatus: sessionStatus,
-                    sessionId: sessionId
+                    isPresentedEditing: $isPresentedEditing,
+                    dismissCallback: dismissCallback
                 )
                 .modifier(SwipeToDismissModifier(onDismiss: {
                     dismissCallback?()
                 }))
                 
                 ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 20) {
-                            TechniquesListView(
-                                viewModel: .init(session: viewModel.session)
+                    VStack(alignment: .leading, spacing: 20) {
+                        TechniquesListView(
+                            viewModel: .init(
+                                session: viewModel.session,
+                                persistanceManager: persistanceManager
                             )
-                            .fixedSize(horizontal: false, vertical: true)
-                            
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("Notes")
+                        )
+                        .fixedSize(horizontal: false, vertical: true)
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Notes")
+                                .font(.system(size: 18))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.black)
+                            if let notes = viewModel.session.notes, !notes.isEmpty {
+                                Text(LocalizedStringKey(notes))
                                     .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color.black)
-                                if let notes = viewModel.session.notes, !notes.isEmpty {
-                                    Text(LocalizedStringKey(notes))
-                                        .font(.system(size: 18))
-                                        .textSelection(.enabled)
-                                        .multilineTextAlignment(.leading)
-                                } else {
-                                    Text(LocalizedStringKey("Empty"))
-                                        .foregroundColor(Color("LightGray"))
-                                        .font(.system(size: 18))
-                                        .textSelection(.enabled)
-                                        .multilineTextAlignment(.leading)
-                                }
-                            }
-                            .padding(.horizontal, 10)
-
-                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                                ForEach(viewModel.notesLinks, id: \.self) { urlString in
-                                    LinkPreview(
-                                        viewModel: .init(urlString),
-                                        onTap: { link in
-                                            viewModel.linkOpened(link)
-                                        }
-                                    )
-                                }
+                                    .textSelection(.enabled)
+                                    .multilineTextAlignment(.leading)
+                            } else {
+                                Text(LocalizedStringKey("Empty"))
+                                    .foregroundColor(Color("LightGray"))
+                                    .font(.system(size: 18))
+                                    .textSelection(.enabled)
+                                    .multilineTextAlignment(.leading)
                             }
                         }
-                        .hAlign(.leading)
-                        .vAlign(.top)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 10)
+                        
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                            ForEach(viewModel.notesLinks, id: \.self) { urlString in
+                                LinkPreview(
+                                    viewModel: .init(urlString),
+                                    onTap: { link in
+                                        viewModel.linkOpened(link)
+                                    }
+                                )
+                            }
+                        }
                     }
+                    .hAlign(.leading)
+                    .vAlign(.top)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                }
             }
             .ignoresSafeArea(.keyboard)
             .onDisappear {
-                let appearance = UINavigationBarAppearance()
-                appearance.backgroundColor = .clear
-                UINavigationBar.appearance().standardAppearance = appearance
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismissCallback?()
-                    } label: {
-                        Image("close")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.white)
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        isPresentedEditing = true
-                        let appearance = UINavigationBarAppearance()
-                        appearance.backgroundColor = .clear
-                        UINavigationBar.appearance().standardAppearance = appearance
-                    } label: {
-                        Text("Edit")
-                            .fixedSize()
-                            .foregroundColor(.white)
-                    }
-                }
+                changeNavBar(.clear)
             }
             .background {
                 Rectangle()
                     .fill(.white)
                     .ignoresSafeArea()
-                    .matchedGeometryEffect(id: "whiteBG\(sessionId)", in: namespace, properties: .position, anchor: .center)
             }
             .sheet(isPresented: $isPresentedEditing, onDismiss: {
-                let appearance = UINavigationBarAppearance()
-                appearance.backgroundColor = UIColor(activityType.color.opacity(0.8))
-                UINavigationBar.appearance().standardAppearance = appearance
+                changeNavBar(UIColor(activityType.color.opacity(0.8)))
             }) {
                 EditSessionView(
                     viewModel: .init(),
@@ -164,12 +129,6 @@ struct SessionDetailsView: View {
         viewModel.setupLinkPreviews()
     }
     
-    func changeNavBar(_ color: UIColor = .clear) {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = color
-        UINavigationBar.appearance().standardAppearance = appearance
-    }
-    
     func hideTabbar(_ isHidden: Bool) {
         settings.isTabBarHidden = isHidden
     }
@@ -182,9 +141,19 @@ struct SessionDetailsHeaderView: View {
     let namespace: Namespace.ID
     let navTitle: String
     
-    let activityType: ActivityType
-    let sessionStatus: ActivityStatus
-    let sessionId: String
+    @Binding var isPresentedEditing: Bool
+    var dismissCallback: (() -> Void)? = nil
+    
+    var sessionId: String {
+        session.id?.uuidString ?? ""
+    }
+    
+    var activityType: ActivityType {
+        session.activityType
+    }
+    var sessionStatus: ActivityStatus {
+        session.status
+    }
     
     var linearGradient: LinearGradient {
         LinearGradient(
@@ -203,89 +172,109 @@ struct SessionDetailsHeaderView: View {
             Rectangle()
                 .fill(linearGradient)
                 .cornerRadius(30, corners: [.bottomLeft])
-                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace, properties: .position, anchor: .bottom)
-                .ignoresSafeArea()
-                .vAlign(.top)
+                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                 .defaultShadow()
-            
-            Group {
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(sessionStatus.color)
-                        .cornerRadius(5)
-                        .defaultShadow()
-                        .frame(width: 76, height: 23)
-                    Text("\(sessionStatus.rawValue.localizedString)".uppercased())
-                        .font(.system(size: 10))
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-                .matchedGeometryEffect(id: "status\(sessionId)", in: namespace, properties: .position, anchor: .top)
-                .padding(.trailing, 15)
-                .padding(.top, 35)
-            }
-            .hAlign(.trailing)
-            .vAlign(.top)
+                .vAlign(.top)
+                .frame(width: UIScreen.main.bounds.size.width)
+                .ignoresSafeArea()
             
             VStack {
-                Text(navTitle)
-                    .font(.system(size: 28).bold())
-                    .foregroundColor(.white)
-                    .hAlign(.leading)
-                VStack(alignment: .leading, spacing: 20) {
-                    HStack(spacing: 10) {
-                        Image("calendar")
+                HStack {
+                    Button {
+                        dismissCallback?()
+                    } label: {
+                        Image("close")
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.white)
-                        Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
-                            .font(.system(size: 20))
-                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                     }
-                    HStack(spacing: 10) {
-                        Image("watch")
-                            .resizable()
-                            .frame(width: 20, height: 20)
+                    Spacer()
+                    Button {
+                        isPresentedEditing = true
+                        changeNavBar(.clear)
+                    } label: {
+                        Text("Edit")
+                            .fixedSize()
                             .foregroundColor(.white)
-                        HStack {
-                            Text("\((session.startDate ?? Date()).toString("HH:mm"))")
+                    }
+                }
+                .padding(.top, 10)
+                .padding(.bottom, 25)
+                VStack {
+                    HStack {
+                        Text(navTitle)
+                            .font(.system(size: 28).bold())
+                            .foregroundColor(.white)
+                            .hAlign(.leading)
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(sessionStatus.color)
+                                .cornerRadius(5)
+                                .defaultShadow()
+                                .frame(width: 76, height: 23)
+                            Text("\(sessionStatus.rawValue.localizedString)".uppercased())
+                                .font(.system(size: 10))
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                        .padding(.trailing, -15)
+                    }
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack(spacing: 10) {
+                            Image("calendar")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.white)
+                            Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
                                 .font(.system(size: 20))
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
-                            let duration = Int(session.duration)
-                            if session.duration != 0 {
-                                Text(duration.minutesToDuration())
-                                    .font(.system(size: 18))
+                        }
+                        HStack(spacing: 10) {
+                            Image("watch")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.white)
+                            HStack {
+                                Text("\((session.startDate ?? Date()).toString("HH:mm"))")
+                                    .font(.system(size: 20))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
+                                let duration = Int(session.duration)
+                                if session.duration != 0 {
+                                    Text(duration.minutesToDuration())
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                        HStack(spacing: 10) {
+                            Image("location")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.white)
+                            
+                            if let location = session.location, !location.isEmpty {
+                                Text("\(location)")
+                                    .font(.system(size: 20))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            } else {
+                                Text(LocalizedStringKey("Empty"))
+                                    .foregroundColor(Color("LightGray"))
+                                    .fontWeight(.semibold)
+                                    .font(.system(size: 20))
                             }
                         }
                     }
-                    HStack(spacing: 10) {
-                        Image("location")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.white)
-                        
-                        if let location = session.location, !location.isEmpty {
-                            Text("\(location)")
-                                .font(.system(size: 20))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                        } else {
-                            Text(LocalizedStringKey("Empty"))
-                                .foregroundColor(Color("LightGray"))
-                                .fontWeight(.semibold)
-                                .font(.system(size: 20))
-                        }
-                    }
+                    .hAlign(.leading)
                 }
-                .hAlign(.leading)
+                .padding(.horizontal, 15)
             }
             .vAlign(.top)
-            .padding(.vertical, 30)
-            .padding(.leading, 30)
+            .padding(.bottom, 30)
+            .padding(.horizontal, 15)
         }
         .fixedSize(horizontal: false, vertical: true)
     }

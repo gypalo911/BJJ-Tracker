@@ -11,6 +11,7 @@ import Introspect
 struct DashboardView: View {
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
     
     @FetchRequest var sessionsList: FetchedResults<Session>
     
@@ -124,7 +125,7 @@ struct DashboardView: View {
                                         .foregroundColor(Color("Gray"))
                                     
                                     NavigationLink(destination: {
-                                        ArchiveView(viewModel: .init())
+                                        ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
                                     }) {
@@ -154,7 +155,7 @@ struct DashboardView: View {
                                             }
                                             
                                             NavigationLink(destination: {
-                                                ArchiveView(viewModel: .init())
+                                                ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
                                                     .navigationBarTitle("")
                                                     .navigationBarHidden(true)
                                             }) {

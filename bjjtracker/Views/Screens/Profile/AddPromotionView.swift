@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AddPromotionView: View {
+    @EnvironmentObject var persistanceManager: PersistanceManager
+    
     @ObservedObject var viewModel: AddPromotionViewViewModel
     
     @Environment(\.presentationMode) var presentationMode
@@ -81,7 +83,7 @@ struct AddPromotionView: View {
     }
     
     func save() {
-        PersistanceManager.shared.createPromotion(from: viewModel.promotion, context: managedObjContext)
+        persistanceManager.createPromotion(from: viewModel.promotion, context: managedObjContext)
     }
 }
 

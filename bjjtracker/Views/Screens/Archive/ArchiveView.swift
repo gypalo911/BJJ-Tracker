@@ -18,40 +18,13 @@ struct ArchiveView: View {
     
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
-    @Environment (\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
-    var sessions: FetchedResults<Session>
-    
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
-    var promotionModels: FetchedResults<PromotionModel>
-    
-    @State private var selectedSession: Session?
-    @State private var showingActionSheet: Bool = false
-    @State private var selectedSheet: ModalsSheets? = nil
-    
-    private var groupedSessions: [String: [Session]] {
-        Dictionary(grouping: sessions, by: { $0.startDateString })
-    }
-    
-    private var groupedPromotions: [String: [PromotionModel]] {
-        Dictionary(grouping: promotionModels, by: { $0.dateString })
-    }
-    
-    private var sections: [String] {
-        Set(Array(groupedSessions.keys) + Array(groupedPromotions.keys))
-            .map { String($0) }
-            .sorted(by: {
-                $0.toDate(format: "dd MMMM yyyy")! > $1.toDate(format: "dd MMMM yyyy")!
-            })
-    }
     
     var body: some View {
         ZStack {
-            if let session = selectedSession {
+            if let session = viewModel.selectedSession {
                 SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
                     withAnimation(AppConstants.mgeAnimation) {
-                        selectedSession = nil
+                        viewModel.selectedSession = nil
                     }
                 })
             } else {
@@ -59,24 +32,24 @@ struct ArchiveView: View {
                     VStack {
                         ScrollView {
                             ScrollViewReader { proxy in
-                                if !sections.isEmpty {
+                                if !viewModel.sections.isEmpty {
                                     VStack {
-                                        ForEach(sections, id: \.self) { key in
+                                        ForEach(viewModel.sections, id: \.self) { key in
                                             Text("\(key)")
                                                 .hAlign(.leading)
                                                 .padding([.horizontal, .top], 20)
                                                 .padding(.bottom, 10)
-                                            if let sectionPromotions = groupedPromotions[key] {
-                                                ForEach(sectionPromotions) { promotionModel in
-                                                    PromotionPanelView(promotion: Promotion.from(promotionModel))
+                                            if let sectionPromotions = viewModel.groupedPromotions[key] {
+                                                ForEach(sectionPromotions) { promotion in
+                                                    PromotionPanelView(promotion: promotion)
                                                 }
                                             }
-                                            if let sectionSessions = groupedSessions[key] {
+                                            if let sectionSessions = viewModel.groupedSessions[key] {
                                                 ForEach(sectionSessions, id: \.self) { session in
                                                     ActivityPanelView(session: session, namespace: namespace)
                                                         .onTapGesture {
                                                             withAnimation(AppConstants.mgeAnimation) {
-                                                                selectedSession = session
+                                                                viewModel.selectedSession = session
                                                             }
                                                         }
                                                 }
@@ -111,7 +84,7 @@ struct ArchiveView: View {
                                         
                                         VStack(spacing: 22) {
                                             Button(action: {
-                                                selectedSheet = .activity
+                                                viewModel.selectedSheet = .activity
                                                 viewModel.createSessionButtonTapped()
                                             }, label: {
                                                 ZStack {
@@ -134,7 +107,7 @@ struct ArchiveView: View {
                                                 }
                                             })
                                             Button(action: {
-                                                selectedSheet = .promotion
+                                                viewModel.selectedSheet = .promotion
                                                 viewModel.addPromotionButtonTapped()
                                             }, label: {
                                                 ZStack {
@@ -170,12 +143,12 @@ struct ArchiveView: View {
                     .background(Color("generalBG").ignoresSafeArea())
                     .onAppear {
                         settings.isTabBarHidden = true
-                        viewModel.onArchiveViewAppeared()
-                        let appearance = UINavigationBarAppearance()
-                        appearance.backgroundColor = .clear
-                        UINavigationBar.appearance().standardAppearance = appearance
+                        DispatchQueue.main.async {
+                            viewModel.onArchiveViewAppeared()
+                        }
+                        changeNavBar(.clear)
                     }
-                    .sheet(item: $selectedSheet) { selectedSheet in
+                    .sheet(item: $viewModel.selectedSheet) { selectedSheet in
                         switch selectedSheet {
                         case .promotion:
                             AddPromotionView(viewModel: .init())
@@ -207,8 +180,7 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView(viewModel: .init())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+        ArchiveView(viewModel: .init(persistanceManager: PersistanceManager.preview))
             .environmentObject(AppSettings())
     }
 }

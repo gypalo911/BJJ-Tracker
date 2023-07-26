@@ -40,6 +40,10 @@ extension Date {
         return Calendar.current.startOfDay(for: self)
     }
     
+    var startOfDayString: String {
+        return Calendar.current.startOfDay(for: self).toString("dd MMMM yyyy")
+    }
+    
     var endOfDay: Date {
         var components = DateComponents()
         components.day = 1

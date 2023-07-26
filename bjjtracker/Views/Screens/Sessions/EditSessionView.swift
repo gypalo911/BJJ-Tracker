@@ -13,6 +13,8 @@ struct EditSessionView: View {
     
     @State private var isPickerPresented = false
     
+    @EnvironmentObject var persistanceManager: PersistanceManager
+    
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
     
@@ -23,7 +25,7 @@ struct EditSessionView: View {
     var onDismiss: ((Session?) -> Void)?
     
     func update(_ session: Session) {
-        PersistanceManager.shared.edit(
+        persistanceManager.edit(
             session: session,
             activity: activity,
             context: managedObjContext
@@ -95,7 +97,7 @@ struct EditSessionView: View {
                         
                         Button(action: {
                             viewModel.sessionDeleted(activity)
-                            PersistanceManager.shared.delete(session: session, context: managedObjContext)
+                            persistanceManager.delete(session: session, context: managedObjContext)
                             NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
                             presentationMode.wrappedValue.dismiss()
                             onDismiss?(nil)
@@ -160,6 +162,7 @@ struct EditSessionView_Previews: PreviewProvider {
 
     static var previews: some View {
         Container()
+            .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
