@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppConstants {
-    static let mgeAnimation = Animation.spring(response: 0.3, dampingFraction: 0.9)
+    static let mgeAnimation = Animation.easeInOut(duration: 0.3)
 }
 
 class AppSettings: ObservableObject {

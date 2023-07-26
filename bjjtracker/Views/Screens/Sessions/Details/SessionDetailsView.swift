@@ -76,10 +76,9 @@ struct SessionDetailsView: View {
                         .padding(.horizontal, 10)
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                            ForEach(viewModel.notesLinks, id: \.self) { urlString in
+                            ForEach(viewModel.previewModels, id: \.self) { model in
                                 LinkPreview(
-                                    viewModel: .init(urlString),
-                                    onTap: { link in
+                                    previewModel: model, onTap: { link in
                                         viewModel.linkOpened(link)
                                     }
                                 )
