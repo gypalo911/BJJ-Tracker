@@ -33,12 +33,12 @@ class SessionDetailsViewModel: ObservableObject {
     }
     
     func setupLinkPreviews() {
-        if let notes = session.notes {
-            notesLinks = checkForUrls(text: notes)
-            Task {
-                await fetchMetadata(for: notesLinks)
-                print("RESULT: \(previewModels.map { $0.title ?? "no title" })")
-            }
+        guard let notes = session.notes else {
+            return
+        }
+        notesLinks = checkForUrls(text: notes)
+        Task {
+            await fetchMetadata(for: notesLinks)
         }
     }
     
@@ -51,9 +51,7 @@ class SessionDetailsViewModel: ObservableObject {
             let matches = detector.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count))
             
             return matches.compactMap({ $0.url?.absoluteString })
-        } catch {
-//            debugPrint(error.localizedDescription)
-        }
+        } catch {}
         
         return []
     }

@@ -75,13 +75,19 @@ struct SessionDetailsView: View {
                         }
                         .padding(.horizontal, 10)
                         
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                            ForEach(viewModel.previewModels, id: \.self) { model in
-                                LinkPreview(
-                                    previewModel: model, onTap: { link in
-                                        viewModel.linkOpened(link)
-                                    }
-                                )
+                        if !viewModel.notesLinks.isEmpty {
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                                ForEach(viewModel.previewModels, id: \.self) { model in
+                                    LinkPreview(
+                                        previewModel: model, onTap: { link in
+                                            viewModel.linkOpened(link)
+                                        }
+                                    )
+                                }
+                            }
+                            if viewModel.notesLinks.count > viewModel.previewModels.count {
+                                ProgressView()
+                                    .hAlign(.center)
                             }
                         }
                     }
@@ -118,6 +124,9 @@ struct SessionDetailsView: View {
         }
         .onAppear {
             setupView()
+        }
+        .onChange(of: viewModel.session.notes) { _ in
+            viewModel.setupLinkPreviews()
         }
     }
     
