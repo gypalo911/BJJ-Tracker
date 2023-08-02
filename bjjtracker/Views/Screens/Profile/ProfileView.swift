@@ -72,7 +72,7 @@ struct ProfileView: View {
                     Rectangle()
                       .foregroundColor(.white)
                       .frame(height: 230)
-                      .frame(maxWidth: isSmallScreen ? 320 : 360)
+                      .frame(maxWidth: isSmallScreen ? 330 : 360)
                       .cornerRadius(20)
                       .padding(.horizontal, 20)
                       .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
@@ -172,7 +172,7 @@ struct ProfileView: View {
                         .cornerRadius(30)
                         .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
                 )
-                .frame(maxWidth: isSmallScreen ? 320 : 360)
+                .frame(maxWidth: isSmallScreen ? 330 : 360)
                 .padding(20)
                 .hAlign(.center)
                 
