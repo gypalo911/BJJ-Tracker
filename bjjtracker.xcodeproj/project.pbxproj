@@ -14,6 +14,9 @@
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
 		D00139702A67F56B005B0E58 /* SwipeToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */; };
+		D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */; };
+		D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
+		D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */; };
 		D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */; };
 		D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02198872A61730B0080A074 /* PromotionPanelView.swift */; };
 		D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FEF2A5ADEB4006BB617 /* TagView.swift */; };
@@ -152,6 +155,9 @@
 		D00139712A681F89005B0E58 /* bjjtracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtracker.entitlements; sourceTree = "<group>"; };
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
+		D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsView.swift; sourceTree = "<group>"; };
+		D01187CD2A7A97E800A2FCC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTagView.swift; sourceTree = "<group>"; };
 		D02198872A61730B0080A074 /* PromotionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPanelView.swift; sourceTree = "<group>"; };
 		D02D1FEF2A5ADEB4006BB617 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -322,6 +328,14 @@
 			path = DashboardTests;
 			sourceTree = "<group>";
 		};
+		D01187CA2A7A974E00A2FCC7 /* PromotionsView */ = {
+			isa = PBXGroup;
+			children = (
+				D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */,
+			);
+			path = PromotionsView;
+			sourceTree = "<group>";
+		};
 		D02D1FEE2A5ADEB4006BB617 /* Techniques */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +428,7 @@
 				D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */,
 				D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */,
 				D060BA8129DDAD9C00E10562 /* Icons.xcassets */,
+				D01187CD2A7A97E800A2FCC7 /* Images.xcassets */,
 				D05C9F102A710EC7007D5AF0 /* Colors.xcassets */,
 				D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */,
 				D0A00ED729DDE3B100DCD5BB /* Helpers */,
@@ -523,6 +538,7 @@
 		D060BAB329DDAE6C00E10562 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D01187CA2A7A974E00A2FCC7 /* PromotionsView */,
 				D00109AC2A0BABD4008433CC /* Components */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
 				D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */,
@@ -657,6 +673,7 @@
 				D00109B52A0D3294008433CC /* String+extension.swift */,
 				D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */,
 				D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */,
+				D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -813,6 +830,7 @@
 			files = (
 				D060BA8529DDAD9C00E10562 /* Preview Assets.xcassets in Resources */,
 				D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */,
+				D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */,
 				D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */,
 				D05C9F112A710EC7007D5AF0 /* Colors.xcassets in Resources */,
 				D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */,
@@ -952,6 +970,7 @@
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
+				D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */,
 				D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
 				D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */,
@@ -1008,6 +1027,7 @@
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */,
+				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
