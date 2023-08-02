@@ -119,7 +119,7 @@ struct BluredBottomSheet: View {
                     onChange()
                 }
             }).onEnded { value in
-                if value.translation.height > 150 {
+                if value.translation.height > 100 {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         isBottomSheetOpen = false
                     }
