@@ -35,16 +35,26 @@ struct ContentView: View {
                         .tag(Tab.profile)
                 }
             }
-            .popup(view: {
-                BluredBottomSheet(
-                    isBottomSheetOpen: $settings.showingActionSheet,
-                    onSelect: { modal in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            selectedSheet = modal
+            .blurredPopup(
+                view: {
+                    BluredBottomSheet(
+                        isBottomSheetOpen: $settings.showingActionSheet,
+                        onSelect: { modal in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                selectedSheet = modal
+                            }
                         }
-                    }
-                )
-            })
+                    )
+                },
+                showingOverlay: $settings.showingActionSheet
+            )
+            .blurredPopup(
+                view: {
+                    PromotionsView(isViewOpen: $settings.showingPromotionsView)
+                    
+                },
+                showingOverlay: $settings.showingPromotionsView
+            )
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
                     settings.showingActionSheet = true
@@ -66,8 +76,17 @@ struct ContentView: View {
                 NewSessionView(viewModel: .init())
             }
         }
-        .onChange(of: settings.showingActionSheet) { _ in
-            if settings.showingActionSheet {
+        .onChange(of: settings.showingActionSheet) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
+        .onChange(of: settings.showingPromotionsView) { value in
+            if value {
                 settings.isTabBarHidden = true
             } else {
                 withAnimation(.easeInOut(duration: 0.25)) {

@@ -8,40 +8,212 @@
 import SwiftUI
 
 struct PromotionsView: View {
-    var body: some View {
-        VStack {
-//            HStack {
-//                Text("Progress")
-//                    .font(.system(size: 18))
-//                    .fontWeight(.semibold)
-//                Spacer()
-//            }
-//            .padding([.leading, .top, .trailing], 15)
-//            
-//            VStack {
-//                ForEach(Belt.belts(for: gradingSystem).filter { $0 != .none }, id: \.self) { belt in
-//                    BeltProgressCell(
-//                        belt: belt,
-//                        isLocked: isLocked(belt: belt, lastPromotion: lastPromotion),
-//                        promotionModels: promotionModels
-//                    )
-//                }
-//            }
-//            .padding(.horizontal, 5)
-//            .padding(.bottom, 15)
+    @Binding var isViewOpen: Bool
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
+    var promotionModels: FetchedResults<PromotionModel>
+    
+    @State private var showingGradingActionSheet: Bool = false
+    @State private var gradingSystem: GradingSystem = .adult
+    
+    @State private var showSheet = false
+    
+    @State private var offset: CGFloat = 100
+    
+    @State private var scrollViewSize: CGSize = .zero
+    
+    let rowAnimation: Animation = Animation.easeInOut(duration: 0.25)
+    
+    var promotions: [Promotion] {
+        promotionModels.map {
+            Promotion.from($0)
         }
-        .frame(maxWidth: .infinity)
-        .background(
-            Rectangle()
-                .fill(.white)
-                .cornerRadius(10)
-                .defaultShadow()
-        )
+    }
+    
+//    init(isViewOpen: Binding<Bool>, gradingSystem: GradingSystem) {
+//        _isViewOpen = isViewOpen
+//        self.gradingSystem = gradingSystem
+//    }
+    
+    var lastPromotion: Promotion? {
+        let belts = Belt.belts(for: gradingSystem)
+        return promotions
+            .filter {
+                belts.contains($0.belt)
+            }
+            .sorted(by: {
+                $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
+                ($0.belt.rawValue < $1.belt.rawValue)
+            }).last
+    }
+    
+    var beltsArray: [Belt] {
+        Belt.belts(for: gradingSystem).filter { $0 != .none }
+    }
+    
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                Color.primary
+                    .opacity (0.01)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            offset = 100
+                            isViewOpen = false
+                        }
+                    }
+                VStack {
+                    VStack {
+                        HStack {
+                            Text("Progress")
+                                .font(.system(size: 18))
+                                .fontWeight(.semibold)
+                            Spacer()
+                            
+                            Button(action: {
+                                showingGradingActionSheet = true
+                            }, label: {
+                                HStack(spacing: 10) {
+                                    Text(gradingSystem.rawValue.localizedString.capitalized)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(Color.black)
+                                    Image(systemName: "chevron.down")
+                                        .scaledToFit()
+                                        .frame(width: 15)
+                                        .foregroundColor(Color.black)
+                                }
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 15)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(lineWidth: 1)
+                                        .fill(Color("LightGray"))
+                                )
+                            })
+                            .hAlign(.topTrailing)
+                        }
+                        .padding([.leading, .top, .trailing], 15)
+                        ScrollView(showsIndicators: false) {
+                            VStack {
+                                ForEach(Array(beltsArray.enumerated()), id: \.offset) { index, belt in
+                                    BeltProgressCell(
+                                        belt: belt,
+                                        isLocked: isLocked(belt: belt, lastPromotion: lastPromotion),
+                                        promotionModels: promotionModels
+                                    )
+                                    .id(index)
+                                    .opacity(offset != 0 ? 0 : 1)
+                                    .offset(x: 0.0, y: offset)
+                                    .animation(rowAnimation.delay(Double(index) * 0.1), value: offset)
+                                }
+                            }
+                            .getSize { size in
+                                withAnimation(.spring()) {
+                                    scrollViewSize = size
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 5)
+                        .padding(.bottom, 5)
+                    }
+                    .background(
+                        Rectangle()
+                            .fill(.white)
+                            .cornerRadius(10)
+                            .defaultShadow()
+                            .opacity(offset != 0 ? 0 : 1)
+                            .offset(x: 0.0, y: offset)
+                            .animation(rowAnimation, value: offset)
+                    )
+                    .frame(height: scrollViewSize.height < proxy.size.height ? scrollViewSize.height + 60 : .none )
+                    .padding(.bottom, 20)
+                    
+                    ZStack {
+                        Circle()
+                            .foregroundColor(.black)
+                        Image("close")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 22)
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 52, height: 52)
+                    .opacity(isViewOpen ? 1 : 0)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            offset = 100
+                            isViewOpen = false
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 50)
+                .vAlign(.bottom)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        offset = 0
+                    }
+                }
+                .actionSheet(isPresented: $showingGradingActionSheet) {
+                    let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
+                    return ActionSheet(title: Text("Select Grading System"), buttons: [
+                        .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
+                            gradingSystem = gradingSystem == .adult ? .junior : .adult
+                        }),
+                        .cancel()
+                    ])
+                }
+            }
+        }
+    }
+    
+    func isLocked(belt: Belt, lastPromotion: Promotion?) -> Bool {
+        guard let lastPromotion = lastPromotion else {
+            return true
+        }
+        return lastPromotion.belt.rawValue < belt.rawValue
     }
 }
 
 struct PromotionsView_Previews: PreviewProvider {
+    struct Container: View {
+        @EnvironmentObject var settings: AppSettings
+        var gradingSystem: GradingSystem = .adult
+        
+        var body: some View {
+            NavigationView {
+                GeometryReader { proxy in
+                    let frame = proxy.frame(in: .global).size
+                    ZStack {
+                        Image("LogoWithText")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .scaledToFill()
+                            .frame(width: frame.width, height: frame.height)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.25)) {
+                                    settings.showingPromotionsView = true
+                                }
+                            }
+                    }
+                }
+                .ignoresSafeArea()
+                .blurredPopup(
+                    view: {
+//                        PromotionsView(isViewOpen: $settings.showingPromotionsView, gradingSystem: gradingSystem)
+                        PromotionsView(isViewOpen: $settings.showingPromotionsView)
+                        
+                    },
+                    showingOverlay: $settings.showingPromotionsView
+                )
+            }
+        }
+    }
+    
     static var previews: some View {
-        PromotionsView()
+        Container()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

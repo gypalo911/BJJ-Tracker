@@ -35,6 +35,11 @@ struct ArchiveView: View {
                                         if let sectionPromotions = viewModel.groupedPromotions[key] {
                                             ForEach(sectionPromotions) { promotion in
                                                 PromotionPanelView(promotion: promotion)
+                                                    .onTapGesture {
+                                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                                            settings.showingPromotionsView = true
+                                                        }
+                                                    }
                                             }
                                         }
                                         if let sectionSessions = viewModel.groupedSessions[key] {

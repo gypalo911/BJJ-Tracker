@@ -17,6 +17,8 @@
 		D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */; };
 		D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
 		D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */; };
+		D01187D22A7BBB3400A2FCC7 /* ViewSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */; };
+		D01187D42A7BC32F00A2FCC7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187D32A7BC32F00A2FCC7 /* ImagePicker.swift */; };
 		D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */; };
 		D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02198872A61730B0080A074 /* PromotionPanelView.swift */; };
 		D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D1FEF2A5ADEB4006BB617 /* TagView.swift */; };
@@ -37,7 +39,7 @@
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
 		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
-		D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */; };
+		D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */; };
 		D05C9F022A6BF0E1007D5AF0 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */; };
 		D05C9F042A6BFA1A007D5AF0 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F032A6BFA1A007D5AF0 /* Tab.swift */; };
 		D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */; };
@@ -158,6 +160,8 @@
 		D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsView.swift; sourceTree = "<group>"; };
 		D01187CD2A7A97E800A2FCC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
+		D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSizeModifier.swift; sourceTree = "<group>"; };
+		D01187D32A7BC32F00A2FCC7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D019941B2A5E8F3800FF4AD5 /* SuggestionTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTagView.swift; sourceTree = "<group>"; };
 		D02198872A61730B0080A074 /* PromotionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPanelView.swift; sourceTree = "<group>"; };
 		D02D1FEF2A5ADEB4006BB617 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -178,7 +182,7 @@
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
-		D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModifier.swift; sourceTree = "<group>"; };
+		D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBGViewModifier.swift; sourceTree = "<group>"; };
 		D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarView.swift; sourceTree = "<group>"; };
 		D05C9F032A6BFA1A007D5AF0 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Sessions.swift"; sourceTree = "<group>"; };
@@ -315,7 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */,
-				D05C9EFF2A6B087B007D5AF0 /* PopupViewModifier.swift */,
+				D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */,
+				D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				D098BBE929E1A15C00A9A068 /* DurationPicker.swift */,
+				D01187D32A7BC32F00A2FCC7 /* ImagePicker.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -1026,7 +1032,7 @@
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
-				D05C9F002A6B087B007D5AF0 /* PopupViewModifier.swift in Sources */,
+				D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */,
 				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
@@ -1037,8 +1043,10 @@
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
+				D01187D42A7BC32F00A2FCC7 /* ImagePicker.swift in Sources */,
 				D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */,
 				D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */,
+				D01187D22A7BBB3400A2FCC7 /* ViewSizeModifier.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,

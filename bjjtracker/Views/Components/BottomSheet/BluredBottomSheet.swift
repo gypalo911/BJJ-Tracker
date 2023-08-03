@@ -13,8 +13,7 @@ struct BluredBottomSheet: View {
     @State private var popupOffset: CGFloat = 0
     @GestureState private var gestureOffset: CGFloat = 0
     
-    let firstButtonAnimation: Animation = Animation.easeInOut(duration: 0.25)
-    let secondButtonAnimation: Animation = Animation.easeInOut(duration: 0.25)
+    let buttonAnimation: Animation = Animation.easeInOut(duration: 0.25)
     
     var onSelect: ((ModalsSheets) -> ())?
     
@@ -70,7 +69,7 @@ struct BluredBottomSheet: View {
                     }
                     .opacity(offset != 0 ? 0 : 1)
                     .offset(x: 0.0, y: offset)
-                    .animation(firstButtonAnimation, value: offset)
+                    .animation(buttonAnimation, value: offset)
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
@@ -91,7 +90,7 @@ struct BluredBottomSheet: View {
                     }
                     .opacity(offset != 0 ? 0 : 1)
                     .offset(x: 0.0, y: offset)
-                    .animation(secondButtonAnimation.delay(0.25), value: offset)
+                    .animation(buttonAnimation.delay(0.1), value: offset)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.25)) {
                             isBottomSheetOpen = false
@@ -162,13 +161,16 @@ struct BluredBottomSheet_Previews: PreviewProvider {
                     }
                 }
                 .ignoresSafeArea()
-                .popup(view: {
-                    BluredBottomSheet(
-                        isBottomSheetOpen: $settings.showingActionSheet,
-                        onSelect: { modal in
-                        }
-                    )
-                })
+                .blurredPopup(
+                    view: {
+                        BluredBottomSheet(
+                            isBottomSheetOpen: $settings.showingActionSheet,
+                            onSelect: { modal in
+                            }
+                        )
+                    },
+                    showingOverlay: $settings.showingActionSheet
+                )
             }
         }
     }

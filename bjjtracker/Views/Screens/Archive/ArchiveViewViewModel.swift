@@ -19,7 +19,6 @@ class ArchiveViewViewModel: ObservableObject {
     @Published var promotionModels: [PromotionModel] = []
     
     @Published var selectedSession: Session?
-    @Published var showingActionSheet: Bool = false
     @Published var selectedSheet: ModalsSheets? = nil
     
     var groupedSessions: [String: [Session]] {

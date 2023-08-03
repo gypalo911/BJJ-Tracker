@@ -103,6 +103,11 @@ struct ProfileView: View {
                         if let lastPromotion = lastPromotion {
                             VStack(spacing: 5) {
                                 BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                            settings.showingPromotionsView = true
+                                        }
+                                    }
                                 Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
                                     .foregroundColor(.gray)
                                     .font(.system(size: 16))
@@ -178,56 +183,6 @@ struct ProfileView: View {
                 
             }
             .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
-            
-            
-            
-            //                HStack(spacing: 10) {
-            //                    StatsView(text: "Sessions".localizedString, value: "\(sessionsList.count)")
-            //                    StatsView(text: "Total time".localizedString, value: totalTime())
-            //                }.padding(.horizontal, 20)
-            //
-            //                ScrollView(showsIndicators: false) {
-            //                    VStack(spacing: 20) {
-            //                        HStack {
-            //                            if let lastPromotion = lastPromotion {
-            //                                VStack(spacing: 10) {
-            //                                    BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
-            //                                    Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
-            //                                        .foregroundColor(.gray)
-            //                                        .font(.system(size: 16))
-            //                                        .fontWeight(.medium)
-            //                                }
-            //                                .hAlign(.bottomLeading)
-            //                            }
-            //                            VStack {
-            //                                Button(action: {
-            //                                    showingGradingActionSheet = true
-            //                                }, label: {
-            //                                    HStack(spacing: 10) {
-            //                                        Text(gradingSystem.rawValue.localizedString.capitalized)
-            //                                            .font(.system(size: 14))
-            //                                            .foregroundColor(Color.black)
-            //                                        Image(systemName: "chevron.down")
-            //                                            .scaledToFit()
-            //                                            .frame(width: 15)
-            //                                            .foregroundColor(Color.black)
-            //                                    }
-            //                                    .padding(.vertical, 5)
-            //                                    .padding(.horizontal, 15)
-            //                                    .background(
-            //                                        RoundedRectangle(cornerRadius: 5)
-            //                                            .stroke(lineWidth: 1)
-            //                                            .fill(Color("LightGray"))
-            //                                    )
-            //                                })
-            //                                .hAlign(.topTrailing)
-            //                                Spacer()
-            //                            }
-            //                        }
-            //                    }
-            //                    .padding([.leading, .trailing, .top], 20)
-            //                    .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
-            //                }
         }
         .background(Color("generalBG").ignoresSafeArea())
         .actionSheet(isPresented: $showingGradingActionSheet) {
@@ -257,18 +212,6 @@ struct ProfileView: View {
             return true
         }
         return lastPromotion.belt.rawValue < belt.rawValue
-    }
-}
-
-extension ProfileView {
-    
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(viewModel: .init())
-            .environmentObject(AppSettings())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
 
@@ -324,58 +267,10 @@ struct SettigsCell: View {
     }
 }
 
-
-struct ImagePicker: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) private var presentationMode
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var selectedImage: UIImage?
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = context.coordinator
-        
-        return imagePicker
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-        
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        
-        var parent: ImagePicker
-        
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            
-            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.selectedImage = image
-                saveImage(image)
-            }
-            
-            parent.presentationMode.wrappedValue.dismiss()
-        }
-        
-        func saveImage(_ image: UIImage) {
-            do {
-                let furl = try FileManager.default
-                    .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                    .appendingPathComponent("avatar")
-                    .appendingPathExtension("png")
-                try image.pngData()?.write(to: furl)
-            } catch {
-                print("could not create imageFile")
-            }
-        }
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView(viewModel: .init())
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
