@@ -15,11 +15,14 @@ class ArchiveViewViewModel: ObservableObject {
     private let persistanceManager: StorageManager
     private let analyticsEngine: AnalyticsEngine
     
+    @Published var showingPromotionsView: Bool = false
     @Published var sessions: [Session] = []
     @Published var promotionModels: [PromotionModel] = []
     
     @Published var selectedSession: Session?
     @Published var selectedSheet: ModalsSheets? = nil
+    
+    @Published var selectedGradingSystem: GradingSystem = .adult
     
     var groupedSessions: [String: [Session]] {
         Dictionary(grouping: sessions, by: { $0.startDateString })

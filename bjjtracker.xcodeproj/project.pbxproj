@@ -38,6 +38,7 @@
 		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
+		D0569DC42A7C09530019B24F /* PromotionsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */; };
 		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
 		D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */; };
 		D05C9F022A6BF0E1007D5AF0 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */; };
@@ -181,6 +182,7 @@
 		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewViewModel.swift; sourceTree = "<group>"; };
 		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
 		D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBGViewModifier.swift; sourceTree = "<group>"; };
 		D05C9F012A6BF0E1007D5AF0 /* FloatingTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarView.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */,
+				D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */,
 			);
 			path = PromotionsView;
 			sourceTree = "<group>";
@@ -993,6 +996,7 @@
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
 				D019941C2A5E8F3800FF4AD5 /* SuggestionTagView.swift in Sources */,
+				D0569DC42A7C09530019B24F /* PromotionsViewViewModel.swift in Sources */,
 				D02F3DDD29E726E600BED6CD /* InfographicsView.swift in Sources */,
 				D084DE612A60A44F00B63DBF /* TechniqueModel+extension.swift in Sources */,
 				D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */,

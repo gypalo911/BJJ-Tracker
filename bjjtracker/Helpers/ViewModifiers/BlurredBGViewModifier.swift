@@ -17,7 +17,7 @@ struct BlurredBGViewModifier<InnerView: View>: ViewModifier {
         Group {
             content
                 .blur(radius: showingOverlay ? blurRadius : 0, opaque: true)
-                .animation(.easeInOut, value: showingOverlay)
+                .animation(.easeInOut(duration: 0.25), value: showingOverlay)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()

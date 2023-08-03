@@ -20,121 +20,120 @@ struct ArchiveView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        ZStack {
-            NavigationView {
-                VStack {
-                    ScrollView {
-                        ScrollViewReader { proxy in
-                            if !viewModel.sections.isEmpty {
-                                VStack {
-                                    ForEach(viewModel.sections, id: \.self) { key in
-                                        Text("\(key)")
-                                            .hAlign(.leading)
-                                            .padding([.horizontal, .top], 20)
-                                            .padding(.bottom, 10)
-                                        if let sectionPromotions = viewModel.groupedPromotions[key] {
-                                            ForEach(sectionPromotions) { promotion in
-                                                PromotionPanelView(promotion: promotion)
-                                                    .onTapGesture {
-                                                        withAnimation(.easeInOut(duration: 0.25)) {
-                                                            settings.showingPromotionsView = true
-                                                        }
-                                                    }
-                                            }
-                                        }
-                                        if let sectionSessions = viewModel.groupedSessions[key] {
-                                            ForEach(sectionSessions, id: \.self) { session in
-                                                ActivityPanelView(session: session, namespace: namespace)
-                                                    .onTapGesture {
-                                                        withAnimation(AppConstants.mgeAnimation) {
-                                                            viewModel.selectedSession = session
-                                                        }
-                                                    }
-                                            }
-                                        }
-                                    }
-                                }
-                                .padding(.bottom, 20)
-                            } else {
-                                VStack {
-                                    ZStack {
-                                        Image("beltIcon")
-                                            .resizable()
-                                            .frame(maxWidth: screenWidth <= 375 ? 120 : 148, maxHeight: 148)
-                                            .scaledToFit()
-                                            .foregroundColor(.black)
-                                        Image("dotsAroundBelt")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(maxWidth: screenWidth <= 375 ? 250 : 282, maxHeight: 201)
-                                            .offset(x: -10, y: -30)
-                                    }.padding(.top, 30)
-                                    Text("Hey! Add trainig sessions to track your BJJ progress journey!")
-                                        .font(.system(size: 24))
-                                        .fontWeight(.bold)
-                                        .multilineTextAlignment(.center)
-                                        .padding(.top, 10)
+        NavigationView {
+            ZStack {
+                ScrollView {
+                    ScrollViewReader { proxy in
+                        if !viewModel.sections.isEmpty {
+                            VStack {
+                                ForEach(viewModel.sections, id: \.self) { key in
+                                    Text("\(key)")
+                                        .hAlign(.leading)
+                                        .padding([.horizontal, .top], 20)
                                         .padding(.bottom, 10)
-                                    Text("Your records will always be at hand!")
-                                        .font(.system(size: 18))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(Color("Gray"))
-                                    
-                                    VStack(spacing: 22) {
-                                        Button(action: {
-                                            viewModel.selectedSheet = .activity
-                                            viewModel.createSessionButtonTapped()
-                                        }, label: {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .foregroundColor(Color("Blue"))
-                                                    .frame(maxWidth: .infinity)
-                                                    .frame(height: 60)
-                                                    .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
-                                                HStack {
-                                                    Image("kimono")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .foregroundColor(.white)
-                                                        .frame(width: 25, height: 25)
-                                                    Text("Create Session")
-                                                        .foregroundColor(.white)
-                                                        .font(.system(size: 18).smallCaps())
-                                                        .fontWeight(.medium)
+                                    if let sectionPromotions = viewModel.groupedPromotions[key] {
+                                        ForEach(sectionPromotions) { promotion in
+                                            PromotionPanelView(promotion: promotion)
+                                                .onTapGesture {
+                                                    withAnimation(.easeInOut(duration: 0.25)) {
+                                                        viewModel.selectedGradingSystem = promotion.beltType
+                                                        viewModel.showingPromotionsView = true
+                                                    }
                                                 }
-                                            }
-                                        })
-                                        Button(action: {
-                                            viewModel.selectedSheet = .promotion
-                                            viewModel.addPromotionButtonTapped()
-                                        }, label: {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .foregroundColor(.white)
-                                                    .frame(maxWidth: .infinity)
-                                                    .frame(height: 60)
-                                                    .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
-                                                HStack {
-                                                    Image("beltIcon")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .foregroundColor(.black)
-                                                        .frame(width: 25, height: 25)
-                                                    Text("Add Promotion")
-                                                        .foregroundColor(.black)
-                                                        .font(.system(size: 18).smallCaps())
-                                                        .fontWeight(.medium)
-                                                }
-                                            }
-                                        })
+                                        }
                                     }
-                                    .padding(.top, 22)
+                                    if let sectionSessions = viewModel.groupedSessions[key] {
+                                        ForEach(sectionSessions, id: \.self) { session in
+                                            ActivityPanelView(session: session, namespace: namespace)
+                                                .onTapGesture {
+                                                    withAnimation(AppConstants.mgeAnimation) {
+                                                        viewModel.selectedSession = session
+                                                    }
+                                                }
+                                        }
+                                    }
                                 }
-                                .hAlign(.center)
-                                .vAlign(.center)
-                                .padding(.top, 30)
-                                .padding(.horizontal, 30)
                             }
+                            .padding(.bottom, 20)
+                        } else {
+                            VStack {
+                                ZStack {
+                                    Image("beltIcon")
+                                        .resizable()
+                                        .frame(maxWidth: screenWidth <= 375 ? 120 : 148, maxHeight: 148)
+                                        .scaledToFit()
+                                        .foregroundColor(.black)
+                                    Image("dotsAroundBelt")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(maxWidth: screenWidth <= 375 ? 250 : 282, maxHeight: 201)
+                                        .offset(x: -10, y: -30)
+                                }.padding(.top, 30)
+                                Text("Hey! Add trainig sessions to track your BJJ progress journey!")
+                                    .font(.system(size: 24))
+                                    .fontWeight(.bold)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.top, 10)
+                                    .padding(.bottom, 10)
+                                Text("Your records will always be at hand!")
+                                    .font(.system(size: 18))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(Color("Gray"))
+                                
+                                VStack(spacing: 22) {
+                                    Button(action: {
+                                        viewModel.selectedSheet = .activity
+                                        viewModel.createSessionButtonTapped()
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .foregroundColor(Color("Blue"))
+                                                .frame(maxWidth: .infinity)
+                                                .frame(height: 60)
+                                                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
+                                            HStack {
+                                                Image("kimono")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .foregroundColor(.white)
+                                                    .frame(width: 25, height: 25)
+                                                Text("Create Session")
+                                                    .foregroundColor(.white)
+                                                    .font(.system(size: 18).smallCaps())
+                                                    .fontWeight(.medium)
+                                            }
+                                        }
+                                    })
+                                    Button(action: {
+                                        viewModel.selectedSheet = .promotion
+                                        viewModel.addPromotionButtonTapped()
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .foregroundColor(.white)
+                                                .frame(maxWidth: .infinity)
+                                                .frame(height: 60)
+                                                .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
+                                            HStack {
+                                                Image("beltIcon")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .foregroundColor(.black)
+                                                    .frame(width: 25, height: 25)
+                                                Text("Add Promotion")
+                                                    .foregroundColor(.black)
+                                                    .font(.system(size: 18).smallCaps())
+                                                    .fontWeight(.medium)
+                                            }
+                                        }
+                                    })
+                                }
+                                .padding(.top, 22)
+                            }
+                            .hAlign(.center)
+                            .vAlign(.center)
+                            .padding(.top, 30)
+                            .padding(.horizontal, 30)
                         }
                     }
                 }
@@ -168,16 +167,28 @@ struct ArchiveView: View {
                         }
                     }
                 }
-            }
-            
-            if let session = viewModel.selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        viewModel.selectedSession = nil
-                    }
-                })
+                .onChange(of: viewModel.selectedSession) { _ in
+                    changeNavBar(.clear)
+                }
+                
+                if let session = viewModel.selectedSession {
+                    SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
+                        withAnimation(AppConstants.mgeAnimation) {
+                            viewModel.selectedSession = nil
+                        }
+                    })
+                }
             }
         }
+        .blurredPopup(
+            view: {
+                PromotionsView(
+                    isViewOpen: $viewModel.showingPromotionsView,
+                    gradingSystem: viewModel.selectedGradingSystem
+                )
+            },
+            showingOverlay: $viewModel.showingPromotionsView
+        )
     }
 }
 

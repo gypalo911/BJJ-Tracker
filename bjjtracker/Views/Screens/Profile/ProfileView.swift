@@ -28,6 +28,8 @@ struct ProfileView: View {
     
     @State private var showSheet = false
     
+    @State private var showingPromotionsView: Bool = false
+    
     private let isSmallScreen: Bool = UIScreen.main.bounds.size.width < 400
     
     var promotions: [Promotion] {
@@ -55,150 +57,170 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .center, spacing: 0) {
-                HStack {
-                    Text("Profile")
-                        .font(.system(size: 28))
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .hAlign(.leading)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                .padding(.bottom, 60)
-                
-                ZStack {
-                    Rectangle()
-                      .foregroundColor(.white)
-                      .frame(height: 230)
-                      .frame(maxWidth: isSmallScreen ? 330 : 360)
-                      .cornerRadius(20)
-                      .padding(.horizontal, 20)
-                      .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
-                    
-                    VStack(spacing: 20) {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 100, height: 100)
-                            .background(
-                                Image(uiImage: profileAvatar)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .clipped()
-                            )
-                            .background(Color(red: 0.85, green: 0.85, blue: 0.85))
-                            .cornerRadius(20)
-                            .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .inset(by: 3)
-                                    .stroke(.white, lineWidth: 6)
-                            )
-                            .onTapGesture {
-                                showSheet = true
-                            }
-                        
-                        if let lastPromotion = lastPromotion {
-                            VStack(spacing: 5) {
-                                BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
-                                    .onTapGesture {
-                                        withAnimation(.easeInOut(duration: 0.25)) {
-                                            settings.showingPromotionsView = true
-                                        }
-                                    }
-                                Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 16))
-                                    .fontWeight(.medium)
-                            }
-                            .hAlign(.center)
+        ZStack {
+            NavigationView {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .center, spacing: 0) {
+                        HStack {
+                            Text("Profile")
+                                .font(.system(size: 28))
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .hAlign(.leading)
                         }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 10)
+                        .padding(.bottom, 60)
                         
-                        HStack(alignment: .top, spacing: 74) {
-                            VStack(alignment: .center, spacing: 5) {
-                                Text("\(sessionsList.count)")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.medium)
-                                Text("Sessions".localizedString)
-                                    .font(.system(size: 14))
-                                    .fontWeight(.regular)
-                            }
-                            VStack(alignment: .center, spacing: 5) {
-                                Text("\(totalTime())")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.medium)
-                                Text("Total time".localizedString)
-                                    .font(.system(size: 14))
-                                    .fontWeight(.regular)
-                            }
-                        }
-                    }
-                    .offset(x: 0, y: -40)
-                }
-                
-                VStack(alignment: .center, spacing: 12) {
-                    SettigsCell(
-                        icon: Image("language"),
-                        text: "Language",
-                        valueText: "English",
-                        onTap: {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .frame(height: 230)
+                                .frame(maxWidth: isSmallScreen ? 330 : 360)
+                                .cornerRadius(20)
+                                .padding(.horizontal, 20)
+                                .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
                             
+                            VStack(spacing: 20) {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 100, height: 100)
+                                    .background(
+                                        Image(uiImage: profileAvatar)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 100, height: 100)
+                                            .clipped()
+                                    )
+                                    .background(Color(red: 0.85, green: 0.85, blue: 0.85))
+                                    .cornerRadius(20)
+                                    .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .inset(by: 3)
+                                            .stroke(.white, lineWidth: 6)
+                                    )
+                                    .onTapGesture {
+                                        showSheet = true
+                                    }
+                                
+                                if let lastPromotion = lastPromotion {
+                                    VStack(spacing: 5) {
+                                        BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
+                                            .onTapGesture {
+                                                withAnimation(.easeInOut(duration: 0.25)) {
+                                                    showingPromotionsView = true
+                                                }
+                                            }
+                                        Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 16))
+                                            .fontWeight(.medium)
+                                    }
+                                    .hAlign(.center)
+                                }
+                                
+                                HStack(alignment: .top, spacing: 74) {
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Text("\(sessionsList.count)")
+                                            .font(.system(size: 18))
+                                            .fontWeight(.medium)
+                                        Text("Sessions".localizedString)
+                                            .font(.system(size: 14))
+                                            .fontWeight(.regular)
+                                    }
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Text("\(totalTime())")
+                                            .font(.system(size: 18))
+                                            .fontWeight(.medium)
+                                        Text("Total time".localizedString)
+                                            .font(.system(size: 14))
+                                            .fontWeight(.regular)
+                                    }
+                                }
+                            }
+                            .offset(x: 0, y: -40)
                         }
-                    )
-                    .padding(.top, 20)
-                    SettigsCell(
-                        icon: Image("notification"),
-                        text: "Notifications",
-                        onTap: {}
-                    )
-                    SettigsCell(
-                        icon: Image("issue"),
-                        text: "Report an issue",
-                        onTap: {}
-                    )
-                    SettigsCell(
-                        icon: Image("rate"),
-                        text: "Rate the app",
-                        onTap: {}
-                    )
-                    SettigsCell(
-                        icon: Image("share"),
-                        text: "Share the app link",
-                        onTap: {}
-                    )
-                    .padding(.bottom, 20)
+                        
+                        VStack(alignment: .center, spacing: 12) {
+                            SettigsCell(
+                                icon: Image("language"),
+                                text: "Language",
+                                valueText: "English",
+                                onTap: {
+                                    
+                                }
+                            )
+                            .padding(.top, 20)
+                            SettigsCell(
+                                icon: Image("notification"),
+                                text: "Notifications",
+                                onTap: {}
+                            )
+                            SettigsCell(
+                                icon: Image("issue"),
+                                text: "Report an issue",
+                                onTap: {}
+                            )
+                            SettigsCell(
+                                icon: Image("rate"),
+                                text: "Rate the app",
+                                onTap: {}
+                            )
+                            SettigsCell(
+                                icon: Image("share"),
+                                text: "Share the app link",
+                                onTap: {}
+                            )
+                            .padding(.bottom, 20)
+                        }
+                        .vAlign(.top)
+                        .background(
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .cornerRadius(30)
+                                .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
+                        )
+                        .frame(maxWidth: isSmallScreen ? 330 : 360)
+                        .padding(20)
+                        .hAlign(.center)
+                        
+                    }
+                    .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
                 }
-                .vAlign(.top)
-                .background(
-                    Rectangle()
-                        .foregroundColor(.white)
-                        .cornerRadius(30)
-                        .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
-                )
-                .frame(maxWidth: isSmallScreen ? 330 : 360)
-                .padding(20)
-                .hAlign(.center)
-                
+                .background(Color("generalBG").ignoresSafeArea())
+                .actionSheet(isPresented: $showingGradingActionSheet) {
+                    let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
+                    return ActionSheet(title: Text("Select Grading System"), buttons: [
+                        .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
+                            gradingSystem = gradingSystem == .adult ? .junior : .adult
+                        }),
+                        .cancel()
+                    ])
+                }
+                .sheet(isPresented: $showSheet) {
+                    ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
+                }
+                .onAppear {
+                    viewModel.onProfileViewAppeared()
+                }
             }
-            .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
         }
-        .background(Color("generalBG").ignoresSafeArea())
-        .actionSheet(isPresented: $showingGradingActionSheet) {
-            let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
-            return ActionSheet(title: Text("Select Grading System"), buttons: [
-                .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
-                    gradingSystem = gradingSystem == .adult ? .junior : .adult
-                }),
-                .cancel()
-            ])
-        }
-        .sheet(isPresented: $showSheet) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
-        }
-        .onAppear {
-            viewModel.onProfileViewAppeared()
+        .blurredPopup(
+            view: {
+                PromotionsView(isViewOpen: $showingPromotionsView, gradingSystem: gradingSystem)
+
+            },
+            showingOverlay: $showingPromotionsView
+        )
+        .onChange(of: showingPromotionsView) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
         }
     }
     

@@ -122,6 +122,7 @@ struct SessionDetailsView: View {
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
+        .navigationBarHidden(true)
         .onAppear {
             setupView()
         }

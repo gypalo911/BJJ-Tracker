@@ -48,13 +48,6 @@ struct ContentView: View {
                 },
                 showingOverlay: $settings.showingActionSheet
             )
-            .blurredPopup(
-                view: {
-                    PromotionsView(isViewOpen: $settings.showingPromotionsView)
-                    
-                },
-                showingOverlay: $settings.showingPromotionsView
-            )
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
                     settings.showingActionSheet = true
@@ -77,15 +70,6 @@ struct ContentView: View {
             }
         }
         .onChange(of: settings.showingActionSheet) { value in
-            if value {
-                settings.isTabBarHidden = true
-            } else {
-                withAnimation(.easeInOut(duration: 0.25)) {
-                    settings.isTabBarHidden = false
-                }
-            }
-        }
-        .onChange(of: settings.showingPromotionsView) { value in
             if value {
                 settings.isTabBarHidden = true
             } else {

@@ -9,31 +9,22 @@ import SwiftUI
 
 struct PromotionsView: View {
     @Binding var isViewOpen: Bool
+    @State var gradingSystem: GradingSystem
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
     var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingGradingActionSheet: Bool = false
-    @State private var gradingSystem: GradingSystem = .adult
-    
-    @State private var showSheet = false
-    
     @State private var offset: CGFloat = 100
-    
     @State private var scrollViewSize: CGSize = .zero
     
-    let rowAnimation: Animation = Animation.easeInOut(duration: 0.25)
+    private let defaultAnimation: Animation = Animation.easeInOut(duration: 0.25)
     
     var promotions: [Promotion] {
         promotionModels.map {
             Promotion.from($0)
         }
     }
-    
-//    init(isViewOpen: Binding<Bool>, gradingSystem: GradingSystem) {
-//        _isViewOpen = isViewOpen
-//        self.gradingSystem = gradingSystem
-//    }
     
     var lastPromotion: Promotion? {
         let belts = Belt.belts(for: gradingSystem)
@@ -58,7 +49,7 @@ struct PromotionsView: View {
                     .opacity (0.01)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.25)) {
+                        withAnimation(defaultAnimation) {
                             offset = 100
                             isViewOpen = false
                         }
@@ -93,19 +84,19 @@ struct PromotionsView: View {
                             })
                             .hAlign(.topTrailing)
                         }
-                        .padding([.leading, .top, .trailing], 15)
+                        .padding([.leading, .top, .trailing], 20)
                         ScrollView(showsIndicators: false) {
                             VStack {
                                 ForEach(Array(beltsArray.enumerated()), id: \.offset) { index, belt in
                                     BeltProgressCell(
                                         belt: belt,
                                         isLocked: isLocked(belt: belt, lastPromotion: lastPromotion),
-                                        promotionModels: promotionModels
+                                        promotionModels: promotionModels.map { $0 }
                                     )
                                     .id(index)
                                     .opacity(offset != 0 ? 0 : 1)
                                     .offset(x: 0.0, y: offset)
-                                    .animation(rowAnimation.delay(Double(index) * 0.1), value: offset)
+                                    .animation(defaultAnimation.delay(Double(index) * 0.1), value: offset)
                                 }
                             }
                             .getSize { size in
@@ -120,11 +111,11 @@ struct PromotionsView: View {
                     .background(
                         Rectangle()
                             .fill(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(20)
                             .defaultShadow()
                             .opacity(offset != 0 ? 0 : 1)
                             .offset(x: 0.0, y: offset)
-                            .animation(rowAnimation, value: offset)
+                            .animation(defaultAnimation, value: offset)
                     )
                     .frame(height: scrollViewSize.height < proxy.size.height ? scrollViewSize.height + 60 : .none )
                     .padding(.bottom, 20)
@@ -141,7 +132,7 @@ struct PromotionsView: View {
                     .frame(width: 52, height: 52)
                     .opacity(isViewOpen ? 1 : 0)
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.25)) {
+                        withAnimation(defaultAnimation) {
                             offset = 100
                             isViewOpen = false
                         }
@@ -151,7 +142,7 @@ struct PromotionsView: View {
                 .padding(.vertical, 50)
                 .vAlign(.bottom)
                 .onAppear {
-                    withAnimation(.easeInOut(duration: 0.25)) {
+                    withAnimation(defaultAnimation) {
                         offset = 0
                     }
                 }
@@ -179,7 +170,8 @@ struct PromotionsView: View {
 struct PromotionsView_Previews: PreviewProvider {
     struct Container: View {
         @EnvironmentObject var settings: AppSettings
-        var gradingSystem: GradingSystem = .adult
+        @State var gradingSystem: GradingSystem = .adult
+        @State var showingPromotionsView: Bool = false
         
         var body: some View {
             NavigationView {
@@ -193,7 +185,7 @@ struct PromotionsView_Previews: PreviewProvider {
                             .frame(width: frame.width, height: frame.height)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.25)) {
-                                    settings.showingPromotionsView = true
+                                    showingPromotionsView = true
                                 }
                             }
                     }
@@ -201,11 +193,10 @@ struct PromotionsView_Previews: PreviewProvider {
                 .ignoresSafeArea()
                 .blurredPopup(
                     view: {
-//                        PromotionsView(isViewOpen: $settings.showingPromotionsView, gradingSystem: gradingSystem)
-                        PromotionsView(isViewOpen: $settings.showingPromotionsView)
+                        PromotionsView(isViewOpen: $showingPromotionsView, gradingSystem: gradingSystem)
                         
                     },
-                    showingOverlay: $settings.showingPromotionsView
+                    showingOverlay: $showingPromotionsView
                 )
             }
         }
