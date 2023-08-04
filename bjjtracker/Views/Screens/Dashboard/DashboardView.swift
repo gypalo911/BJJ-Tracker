@@ -172,7 +172,6 @@ struct DashboardView: View {
                     }
                     .onAppear {
                         settings.isTabBarHidden = false
-                        NotificationManager.shared.requestAuthorization { _ in }
                         viewModel.onDashboardAppeared()
                     }
                 }

@@ -162,15 +162,13 @@ struct BluredBottomSheet_Previews: PreviewProvider {
                 }
                 .ignoresSafeArea()
                 .blurredPopup(
-                    view: {
+                    isPresented: $settings.showingActionSheet) {
                         BluredBottomSheet(
                             isBottomSheetOpen: $settings.showingActionSheet,
                             onSelect: { modal in
                             }
                         )
-                    },
-                    showingOverlay: $settings.showingActionSheet
-                )
+                    }
             }
         }
     }

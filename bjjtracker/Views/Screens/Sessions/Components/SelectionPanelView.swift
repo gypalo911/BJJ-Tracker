@@ -97,6 +97,8 @@ struct RectangleOption: View {
     let type: String
     @Binding var selectedType: String
     
+    var horizontalPadding: CGFloat = 15
+    
     var body: some View {
         let isSelected = type == selectedType
         
@@ -108,7 +110,7 @@ struct RectangleOption: View {
             Text(type.localizedString)
                 .fontWeight(.regular)
                 .foregroundColor(.black)
-                .padding(.horizontal, 15)
+                .padding(.horizontal, horizontalPadding)
                 .padding(.vertical, 6)
                 .background(
                     ZStack(alignment: .center) {

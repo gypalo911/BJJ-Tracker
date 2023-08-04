@@ -34,19 +34,16 @@ struct ContentView: View {
                         .tag(Tab.profile)
                 }
             }
-            .blurredPopup(
-                view: {
-                    BluredBottomSheet(
-                        isBottomSheetOpen: $settings.showingActionSheet,
-                        onSelect: { modal in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                settings.selectedSheet = modal
-                            }
+            .blurredPopup(isPresented: $settings.showingActionSheet) {
+                BluredBottomSheet(
+                    isBottomSheetOpen: $settings.showingActionSheet,
+                    onSelect: { modal in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            settings.selectedSheet = modal
                         }
-                    )
-                },
-                showingOverlay: $settings.showingActionSheet
-            )
+                    }
+                )
+            }
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
                     settings.showingActionSheet = true

@@ -9,20 +9,20 @@ import SwiftUI
 
 struct BlurredBGViewModifier<InnerView: View>: ViewModifier {
     
+    @Binding var isPresented: Bool
     @ViewBuilder let view: InnerView
     @State private var blurRadius: CGFloat = 50
-    @Binding var showingOverlay: Bool
     
     func body(content: Content) -> some View {
         Group {
             content
-                .blur(radius: showingOverlay ? blurRadius : 0, opaque: true)
-                .animation(.easeInOut(duration: 0.25), value: showingOverlay)
+                .blur(radius: isPresented ? blurRadius : 0, opaque: true)
+                .animation(.easeInOut(duration: 0.25), value: isPresented)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .overlay(alignment: .bottom) {
-            if showingOverlay {
+            if isPresented {
                 view
             }
         }
@@ -30,7 +30,7 @@ struct BlurredBGViewModifier<InnerView: View>: ViewModifier {
 }
 
 extension View {
-    func blurredPopup(@ViewBuilder view: (() -> some View), showingOverlay: Binding<Bool>) -> some View {
-        return modifier(BlurredBGViewModifier(view: view, showingOverlay: showingOverlay))
+    func blurredPopup(isPresented: Binding<Bool>, @ViewBuilder view: @escaping () -> some View) -> some View {
+        return modifier(BlurredBGViewModifier(isPresented: isPresented, view: view))
     }
 }

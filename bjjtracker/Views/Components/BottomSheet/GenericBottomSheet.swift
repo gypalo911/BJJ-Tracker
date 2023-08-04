@@ -1,0 +1,140 @@
+//
+//  GenericBottomSheet.swift
+//  bjjtracker
+//
+//  Created by Petro Hupalo on 04.08.2023.
+//
+
+import SwiftUI
+
+struct GenericBottomSheet<Content: View>: View {
+    let view: Content
+    
+    @Binding var isBottomSheetOpen: Bool
+    @State private var offset: CGFloat = 100
+    @State private var popupOffset: CGFloat = 0
+    @GestureState private var gestureOffset: CGFloat = 0
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(.clear)
+                .background(Color(red: 0.55, green: 0.55, blue: 0.55).opacity(0.9))
+                .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 0)
+                .opacity(offset != 0 ? 0 : 1)
+            
+            ZStack {
+                Color.primary
+                    .opacity (0.01)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            offset = 100
+                            isBottomSheetOpen = false
+                        }
+                    }
+                VStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 60, height: 4)
+                        .background(.white)
+                        .cornerRadius(20)
+                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .inset(by: 0.01)
+                                .stroke(.black, lineWidth: 0.01)
+                        )
+                        .vAlign(.bottom)
+                        .padding(.bottom, 5)
+                        .opacity(offset != 0 ? 0 : 1)
+                        .offset(x: 0.0, y: offset)
+                        .animation(.easeInOut(duration: 0.25), value: offset)
+                    
+                    VStack {
+                        view
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Rectangle()
+                            .fill(.white)
+                            .cornerRadius(30, corners: [.topLeft, .topRight])
+                            .offset(x: 0.0, y: offset)
+                            .animation(.easeInOut(duration: 0.25), value: offset)
+                            .opacity(offset != 0 ? 0 : 1)
+                            .ignoresSafeArea()
+                    )
+                    .opacity(offset != 0 ? 0 : 1)
+                    .offset(x: 0.0, y: offset)
+                    .animation(.easeInOut(duration: 0.25), value: offset)
+                    .vAlign(.bottom)
+                }
+                .offset(x: 0.0, y: popupOffset + 100)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        self.offset = 0
+                    }
+                }
+                .gesture(DragGesture().updating($gestureOffset, body: { value, out, _ in
+                    if value.translation.height > -100 {
+                        out = value.translation.height
+                        onChange()
+                    }
+                }).onEnded { value in
+                    if value.translation.height > 100 {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            offset = 100
+                            isBottomSheetOpen = false
+                        }
+                    }
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
+                        popupOffset = 0
+                    }
+                })
+            }
+        }
+    }
+    
+    private func onChange() {
+        DispatchQueue.main.async {
+            print(gestureOffset)
+            self.popupOffset = gestureOffset
+        }
+    }
+}
+
+struct GenericBottomSheet_Previews: PreviewProvider {
+    struct Container: View {
+        @State private var isShowingOverlay: Bool = true
+        
+        var body: some View {
+            NavigationView {
+                GeometryReader { proxy in
+                    let frame = proxy.frame(in: .global).size
+                    ZStack {
+                        Image("LogoWithText")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .scaledToFill()
+                            .frame(width: frame.width, height: frame.height)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    isShowingOverlay = true
+                                }
+                            }
+                    }
+                }
+                .ignoresSafeArea()
+                .bottomSheet(
+                    isPresented: $isShowingOverlay) {
+                        LanguageSettingsView()
+                    }
+            }
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+            .environmentObject(AppSettings())
+    }
+}

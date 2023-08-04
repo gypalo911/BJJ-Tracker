@@ -12,6 +12,11 @@ struct AppConstants {
 }
 
 class AppSettings: ObservableObject {
+    enum AppLanguage: String {
+        case uk = "Ukrainian"
+        case en = "English"
+    }
+    
     static let shared = AppSettings()
     
     @Published var isTabBarHidden: Bool = false
@@ -19,6 +24,7 @@ class AppSettings: ObservableObject {
     @Published var selectedSheet: ModalsSheets? = nil
     @Published var navigateToPage: String?
     @Published var notificationTime: Int = 3600  // 1 hour
+    @Published var appLanguage: AppLanguage = .en
 }
 
 @main

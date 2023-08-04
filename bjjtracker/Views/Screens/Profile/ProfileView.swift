@@ -14,6 +14,11 @@ struct ProfileView: View {
         case modalSheets
     }
     
+    enum Settings {
+        case language
+        case notifications
+    }
+    
     @EnvironmentObject var settings: AppSettings
     
     @ObservedObject var viewModel: ProfileViewViewModel
@@ -28,6 +33,12 @@ struct ProfileView: View {
     @State private var showSheet = false
     
     @State private var showingPromotionsView: Bool = false
+    @State private var showingBottomSheet: Bool = false
+    @State private var selectedSettingsView: Settings? = nil {
+        didSet {
+            showingBottomSheet.toggle()
+        }
+    }
     
     private let isSmallScreen: Bool = UIScreen.main.bounds.size.width < 400
     
@@ -184,16 +195,18 @@ struct ProfileView: View {
                             SettigsCell(
                                 icon: Image("language"),
                                 text: "Language",
-                                valueText: "English",
+                                valueText: settings.appLanguage.rawValue,
                                 onTap: {
-                                    
+                                    selectedSettingsView = .language
                                 }
                             )
                             .padding(.top, 20)
                             SettigsCell(
                                 icon: Image("notification"),
                                 text: "Notifications",
-                                onTap: {}
+                                onTap: {
+                                    selectedSettingsView = .notifications
+                                }
                             )
                             SettigsCell(
                                 icon: Image("issue"),
@@ -232,19 +245,33 @@ struct ProfileView: View {
                 }
                 .onAppear {
                     viewModel.onProfileViewAppeared()
+                    NotificationManager.shared.requestAuthorization { _ in }
                 }
             }
         }
-        .blurredPopup(
-            view: {
+        .blurredPopup(isPresented: $showingPromotionsView) {
                 PromotionsView(
                     isViewOpen: $showingPromotionsView,
                     gradingSystem: lastPromotion?.beltType ?? .adult
                 )
-            },
-            showingOverlay: $showingPromotionsView
-        )
+            }
+        .bottomSheet(isPresented: $showingBottomSheet) {
+            if selectedSettingsView == .language {
+                LanguageSettingsView()
+            } else if selectedSettingsView == .notifications {
+                NotificationSettingsView()
+            }
+        }
         .onChange(of: showingPromotionsView) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
+        .onChange(of: showingBottomSheet) { value in
             if value {
                 settings.isTabBarHidden = true
             } else {
@@ -314,6 +341,7 @@ struct SettigsCell: View {
                 .foregroundColor(.black)
         }
         .padding(.horizontal, 20)
+        .contentShape(Rectangle())
         .onTapGesture {
             onTap?()
         }

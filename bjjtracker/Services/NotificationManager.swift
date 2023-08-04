@@ -13,8 +13,26 @@ struct NotificationManager {
     
     private let notificationCenter = UNUserNotificationCenter.current()
     
+    private let statuses: [UNAuthorizationStatus] = [.denied, .notDetermined]
+    
+    var isAuthorized: Bool {
+        var result = false
+        notificationCenter.getNotificationSettings { settings in
+            result = !statuses.contains(settings.authorizationStatus)
+        }
+        return result
+    }
+    
+    var authrorizationStatus: UNAuthorizationStatus {
+        var result: UNAuthorizationStatus = .notDetermined
+        notificationCenter.getNotificationSettings { settings in
+            result = settings.authorizationStatus
+        }
+        return result
+    }
+    
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
-        UNUserNotificationCenter.current().requestAuthorization(
+        notificationCenter.requestAuthorization(
             options: [.alert, .sound, .badge]
         ) { granted, _  in
             completion(granted)

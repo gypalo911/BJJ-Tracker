@@ -38,6 +38,9 @@
 		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
+		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
+		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
+		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
 		D0569DC42A7C09530019B24F /* PromotionsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */; };
 		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
 		D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */; };
@@ -91,6 +94,7 @@
 		D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */; };
 		D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */; };
 		D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2E29E5850000E10979 /* StatisticsView.swift */; };
+		D0B6CACE2A7D574C00ED2F3B /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */; };
 		D0B8B7202A3C9B9100A2418F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D0B8B71F2A3C9B9100A2418F /* FirebaseAnalytics */; };
 		D0B8B7212A3C9CAF00A2418F /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */; };
 		D0B8B7222A3C9CBA00A2418F /* MockAnalyticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */; };
@@ -182,6 +186,9 @@
 		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
+		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
+		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
 		D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewViewModel.swift; sourceTree = "<group>"; };
 		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
 		D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBGViewModifier.swift; sourceTree = "<group>"; };
@@ -240,6 +247,7 @@
 		D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsView.swift; sourceTree = "<group>"; };
 		D0B01F2E29E5850000E10979 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtrackerRelease.entitlements; sourceTree = "<group>"; };
+		D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0DAA8FF2A6186A200074EBE /* Techniques List.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Techniques List.md"; sourceTree = "<group>"; };
@@ -322,6 +330,7 @@
 			children = (
 				D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */,
 				D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */,
+				D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */,
 				D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */,
 			);
 			path = ViewModifiers;
@@ -393,9 +402,19 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
+		D03C02892A7D0DDC0004E5BF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */,
+				D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		D05C9EFC2A6AB7BF007D5AF0 /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
+				D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */,
 				D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */,
 			);
 			path = BottomSheet;
@@ -546,6 +565,7 @@
 		D060BAB329DDAE6C00E10562 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D03C02892A7D0DDC0004E5BF /* Settings */,
 				D01187CA2A7A974E00A2FCC7 /* PromotionsView */,
 				D00109AC2A0BABD4008433CC /* Components */,
 				D098BBED29E2C16600A9A068 /* AddPromotionView.swift */,
@@ -981,6 +1001,8 @@
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */,
 				D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */,
+				D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */,
+				D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
 				D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */,
 				D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */,
@@ -1025,6 +1047,7 @@
 				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,
 				D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */,
 				D05C9F022A6BF0E1007D5AF0 /* FloatingTabBarView.swift in Sources */,
+				D0B6CACE2A7D574C00ED2F3B /* NotificationSettingsView.swift in Sources */,
 				D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */,
 				D02F3DED29EFFB3C00BED6CD /* MonthYearPicker.swift in Sources */,
 				D09BCA3E2A604ADE004C749E /* LinkPreview.swift in Sources */,
@@ -1042,6 +1065,7 @@
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
+				D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
 				D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */,
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,

@@ -181,15 +181,12 @@ struct ArchiveView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .blurredPopup(
-            view: {
-                PromotionsView(
-                    isViewOpen: $viewModel.showingPromotionsView,
-                    gradingSystem: viewModel.selectedGradingSystem
-                )
-            },
-            showingOverlay: $viewModel.showingPromotionsView
-        )
+        .blurredPopup(isPresented: $viewModel.showingPromotionsView) {
+            PromotionsView(
+                isViewOpen: $viewModel.showingPromotionsView,
+                gradingSystem: viewModel.selectedGradingSystem
+            )
+        }
     }
 }
 

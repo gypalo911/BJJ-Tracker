@@ -195,13 +195,9 @@ struct PromotionsView_Previews: PreviewProvider {
                     }
                 }
                 .ignoresSafeArea()
-                .blurredPopup(
-                    view: {
-                        PromotionsView(isViewOpen: $showingPromotionsView, gradingSystem: gradingSystem)
-                        
-                    },
-                    showingOverlay: $showingPromotionsView
-                )
+                .blurredPopup(isPresented: $showingPromotionsView) {
+                    PromotionsView(isViewOpen: $showingPromotionsView, gradingSystem: gradingSystem)
+                }
             }
         }
     }
