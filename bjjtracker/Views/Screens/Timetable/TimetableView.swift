@@ -73,8 +73,6 @@ struct TimetableView: View {
                                     .foregroundColor(Color("Gray"))
                                 NavigationLink(destination: {
                                     ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
                                 }) {
                                     HStack {
                                         Text("View History")
@@ -101,8 +99,6 @@ struct TimetableView: View {
                                         }
                                         NavigationLink(destination: {
                                             ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                                .navigationBarTitle("")
-                                                .navigationBarHidden(true)
                                         }) {
                                             HStack {
                                                 Text("View History")

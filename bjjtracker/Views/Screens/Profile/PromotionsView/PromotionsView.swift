@@ -50,8 +50,7 @@ struct PromotionsView: View {
                     .ignoresSafeArea()
                     .onTapGesture {
                         withAnimation(defaultAnimation) {
-                            offset = 100
-                            isViewOpen = false
+                            resetStates()
                         }
                     }
                 VStack {
@@ -132,10 +131,7 @@ struct PromotionsView: View {
                     .frame(width: 52, height: 52)
                     .opacity(isViewOpen ? 1 : 0)
                     .onTapGesture {
-                        withAnimation(defaultAnimation) {
-                            offset = 100
-                            isViewOpen = false
-                        }
+                        resetStates()
                     }
                 }
                 .padding(.horizontal, 20)
@@ -156,6 +152,14 @@ struct PromotionsView: View {
                     ])
                 }
             }
+        }
+    }
+    
+    func resetStates() {
+        withAnimation(defaultAnimation) {
+            offset = 100
+            isViewOpen = false
+            scrollViewSize = .zero
         }
     }
     

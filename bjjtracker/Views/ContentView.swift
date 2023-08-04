@@ -10,7 +10,6 @@ import Introspect
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
-    @State private var selectedSheet: ModalsSheets? = nil
     
     @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
@@ -41,7 +40,7 @@ struct ContentView: View {
                         isBottomSheetOpen: $settings.showingActionSheet,
                         onSelect: { modal in
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                selectedSheet = modal
+                                settings.selectedSheet = modal
                             }
                         }
                     )
@@ -61,7 +60,7 @@ struct ContentView: View {
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
-        .sheet(item: $selectedSheet) { selectedSheet in
+        .sheet(item: $settings.selectedSheet) { selectedSheet in
             switch selectedSheet {
             case .promotion:
                 AddPromotionView(viewModel: .init())

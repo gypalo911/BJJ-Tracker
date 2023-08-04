@@ -30,7 +30,7 @@ class PersistanceManager: ObservableObject {
             technique.addToSessions(session)
         }
         
-        for i in 0..<10 {
+        for i in 0..<1 {
             let model = PromotionModel(context: viewContext)
             model.id = UUID()
             model.belt = Int16(i)

@@ -16,6 +16,7 @@ class AppSettings: ObservableObject {
     
     @Published var isTabBarHidden: Bool = false
     @Published var showingActionSheet: Bool = false
+    @Published var selectedSheet: ModalsSheets? = nil
     @Published var navigateToPage: String?
     @Published var notificationTime: Int = 3600  // 1 hour
 }

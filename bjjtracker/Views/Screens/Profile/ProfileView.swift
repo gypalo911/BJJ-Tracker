@@ -24,7 +24,6 @@ struct ProfileView: View {
     var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingGradingActionSheet: Bool = false
-    @State private var gradingSystem: GradingSystem = .adult
     
     @State private var showSheet = false
     
@@ -39,15 +38,30 @@ struct ProfileView: View {
     }
     
     var lastPromotion: Promotion? {
-        let belts = Belt.belts(for: gradingSystem)
-        return promotions
+        let adultBelts = Belt.belts(for: .adult)
+        let adult = promotions
             .filter {
-                belts.contains($0.belt)
+                adultBelts.contains($0.belt)
             }
             .sorted(by: {
                 $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
                 ($0.belt.rawValue < $1.belt.rawValue)
             }).last
+        if adult != nil {
+            return adult
+        } else {
+            let juniorBelts = Belt.belts(for: .junior)
+            let junior = promotions
+                .filter {
+                    juniorBelts.contains($0.belt)
+                }
+                .sorted(by: {
+                    $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
+                    ($0.belt.rawValue < $1.belt.rawValue)
+                }).last
+            
+            return junior
+        }
     }
     
     @State private var selectedImage: UIImage?
@@ -118,6 +132,30 @@ struct ProfileView: View {
                                             .fontWeight(.medium)
                                     }
                                     .hAlign(.center)
+                                } else {
+                                    VStack {
+                                        BeltView(beltColor: Belt.black.color, stripesCount: 2)
+                                            .overlay {
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(Color("LightGray"))
+                                                        .opacity(0.8)
+                                                    Text("Yet no promotions".localizedString)
+                                                        .foregroundColor(.white)
+                                                        .font(.system(size: 12))
+                                                        .fontWeight(.regular)
+                                                }
+                                            }
+                                        Button(action: {
+                                            withAnimation(.easeInOut(duration: 0.3)) {
+                                                settings.selectedSheet = .promotion
+                                            }
+                                        }, label: {
+                                            Text("Add Promotion".localizedString)
+                                                .font(.system(size: 16))
+                                                .fontWeight(.regular)
+                                        }).padding(5)
+                                    }
                                 }
                                 
                                 HStack(alignment: .top, spacing: 74) {
@@ -189,15 +227,6 @@ struct ProfileView: View {
                     .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
                 }
                 .background(Color("generalBG").ignoresSafeArea())
-                .actionSheet(isPresented: $showingGradingActionSheet) {
-                    let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
-                    return ActionSheet(title: Text("Select Grading System"), buttons: [
-                        .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
-                            gradingSystem = gradingSystem == .adult ? .junior : .adult
-                        }),
-                        .cancel()
-                    ])
-                }
                 .sheet(isPresented: $showSheet) {
                     ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                 }
@@ -208,8 +237,10 @@ struct ProfileView: View {
         }
         .blurredPopup(
             view: {
-                PromotionsView(isViewOpen: $showingPromotionsView, gradingSystem: gradingSystem)
-
+                PromotionsView(
+                    isViewOpen: $showingPromotionsView,
+                    gradingSystem: lastPromotion?.beltType ?? .adult
+                )
             },
             showingOverlay: $showingPromotionsView
         )

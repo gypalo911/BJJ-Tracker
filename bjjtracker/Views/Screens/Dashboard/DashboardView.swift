@@ -119,8 +119,6 @@ struct DashboardView: View {
                                     
                                     NavigationLink(destination: {
                                         ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                            .navigationBarTitle("")
-                                            .navigationBarHidden(true)
                                     }) {
                                         HStack {
                                             Text("View History")
@@ -149,8 +147,6 @@ struct DashboardView: View {
                                             
                                             NavigationLink(destination: {
                                                 ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                                    .navigationBarTitle("")
-                                                    .navigationBarHidden(true)
                                             }) {
                                                 HStack {
                                                     Text("View History")

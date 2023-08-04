@@ -180,6 +180,7 @@ struct ArchiveView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .blurredPopup(
             view: {
                 PromotionsView(
