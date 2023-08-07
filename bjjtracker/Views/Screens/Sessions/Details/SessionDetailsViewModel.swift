@@ -36,9 +36,9 @@ class SessionDetailsViewModel: ObservableObject {
             return
         }
         notesLinks = checkForUrls(text: notes)
-        Task {
-            await fetchMetadata(for: notesLinks)
-        }
+//        Task {
+//            await fetchMetadata(for: notesLinks)
+//        }
     }
     
     func checkForUrls(text: String) -> [String] {

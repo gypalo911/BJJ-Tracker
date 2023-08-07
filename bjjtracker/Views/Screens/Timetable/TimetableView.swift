@@ -117,6 +117,7 @@ struct TimetableView: View {
                             }
                         }.padding(.top, -10)
                     }
+                    .backport.hiddenToolbar(true)
                     .background(Color("generalBG").ignoresSafeArea())
                     .fullScreenCover(isPresented: $isBottomSheetOpen) {
                         MonthYearBottomSheetView(

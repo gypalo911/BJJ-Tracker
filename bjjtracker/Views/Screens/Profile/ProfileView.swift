@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct ProfileView: View {
     enum ActionSheetState {
@@ -247,6 +248,7 @@ struct ProfileView: View {
                     viewModel.onProfileViewAppeared()
                     NotificationManager.shared.requestAuthorization { _ in }
                 }
+                .backport.hiddenToolbar(true)
             }
         }
         .blurredPopup(isPresented: $showingPromotionsView) {

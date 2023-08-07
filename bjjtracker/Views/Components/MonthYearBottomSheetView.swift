@@ -84,3 +84,20 @@ struct BackgroundClearView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIView, context: Context) {}
 }
+
+struct MonthYearBottomSheetView_Previews: PreviewProvider {
+    struct Container: View {
+        @State var selectedDate: Date = Date()
+        @State var isBottomSheetOpen: Bool = true
+        
+        var body: some View {
+            MonthYearBottomSheetView(selectedDate: $selectedDate, isBottomSheetOpen: $isBottomSheetOpen)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+    }
+}

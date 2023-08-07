@@ -164,6 +164,7 @@ struct DashboardView: View {
                             }
                         }
                     }
+                    .backport.hiddenToolbar(true)
                     .background(Color("generalBG").ignoresSafeArea())
                     .onChange(of: filteredSessions) { items in
                         withAnimation(.easeInOut(duration: 0.3)) {

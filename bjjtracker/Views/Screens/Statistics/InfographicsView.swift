@@ -16,7 +16,7 @@ struct InfographicsView: View {
             ZStack {
                 Circle()
                     .fill(Color("Green"))
-                    .frame(width: 130)
+                    .frame(width: 130, height: 130)
                 VStack {
                     Text("\(statsInfo[.training] ?? 0)")
                         .font(.system(size: 24))
@@ -32,11 +32,11 @@ struct InfographicsView: View {
             ZStack {
                 Circle()
                     .fill(Color("Competition"))
-                    .frame(width: 120)
+                    .frame(width: 120, height: 120)
                 Circle()
                     .stroke(lineWidth: 8)
                     .fill(strokeColor)
-                    .frame(width: 128)
+                    .frame(width: 128, height: 128)
                 VStack {
                     Text("\(statsInfo[.competition] ?? 0)")
                         .font(.system(size: 18))
@@ -52,11 +52,11 @@ struct InfographicsView: View {
             ZStack {
                 Circle()
                     .fill(Color("Seminar"))
-                    .frame(width: 95)
+                    .frame(width: 95, height: 95)
                 Circle()
                     .stroke(lineWidth: 8)
                     .fill(strokeColor)
-                    .frame(width: 103)
+                    .frame(width: 103, height: 103)
                 VStack {
                     Text("\(statsInfo[.seminar] ?? 0)")
                         .font(.system(size: 18))
@@ -68,7 +68,7 @@ struct InfographicsView: View {
                 .foregroundColor(.white)
             }
             .offset(x: 85, y: 50)
-                .zIndex(1)
+            .zIndex(1)
         }
     }
 }
@@ -77,7 +77,7 @@ struct InfographicsView_Previews: PreviewProvider {
     static var previews: some View {
         InfographicsView(
             strokeColor: Color("generalBG"),
-            statsInfo: [.training: 12, .competition: 5, .seminar: 3]
+            statsInfo: [.training: 12, .competition: 0, .seminar: 0]
         ).padding(.bottom, 70)
     }
 }

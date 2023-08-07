@@ -10,6 +10,7 @@ import SwiftUI
 struct GenericBottomSheet<Content: View>: View {
     let view: Content
     
+    private let deafultOffset: CGFloat = 100
     @Binding var isBottomSheetOpen: Bool
     @State private var offset: CGFloat = 100
     @State private var popupOffset: CGFloat = 0
@@ -29,7 +30,7 @@ struct GenericBottomSheet<Content: View>: View {
                     .ignoresSafeArea()
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.25)) {
-                            offset = 100
+                            offset = deafultOffset
                             isBottomSheetOpen = false
                         }
                     }
@@ -65,25 +66,26 @@ struct GenericBottomSheet<Content: View>: View {
                             .ignoresSafeArea()
                     )
                     .opacity(offset != 0 ? 0 : 1)
+                    .padding(.bottom, -deafultOffset)
                     .offset(x: 0.0, y: offset)
                     .animation(.easeInOut(duration: 0.25), value: offset)
                     .vAlign(.bottom)
                 }
-                .offset(x: 0.0, y: popupOffset + 100)
+                .offset(x: 0.0, y: popupOffset)
                 .onAppear {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         self.offset = 0
                     }
                 }
                 .gesture(DragGesture().updating($gestureOffset, body: { value, out, _ in
-                    if value.translation.height > -100 {
+                    if value.translation.height > -deafultOffset {
                         out = value.translation.height
                         onChange()
                     }
                 }).onEnded { value in
-                    if value.translation.height > 100 {
+                    if value.translation.height > deafultOffset {
                         withAnimation(.easeInOut(duration: 0.25)) {
-                            offset = 100
+                            offset = deafultOffset
                             isBottomSheetOpen = false
                         }
                     }
@@ -97,7 +99,6 @@ struct GenericBottomSheet<Content: View>: View {
     
     private func onChange() {
         DispatchQueue.main.async {
-            print(gestureOffset)
             self.popupOffset = gestureOffset
         }
     }
@@ -125,10 +126,9 @@ struct GenericBottomSheet_Previews: PreviewProvider {
                     }
                 }
                 .ignoresSafeArea()
-                .bottomSheet(
-                    isPresented: $isShowingOverlay) {
-                        LanguageSettingsView()
-                    }
+                .bottomSheet(isPresented: $isShowingOverlay) {
+                    LanguageSettingsView()
+                }
             }
         }
     }
@@ -136,5 +136,13 @@ struct GenericBottomSheet_Previews: PreviewProvider {
     static var previews: some View {
         Container()
             .environmentObject(AppSettings())
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        Container()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
+            .previewDisplayName("iphone 7 ios 15")
     }
 }

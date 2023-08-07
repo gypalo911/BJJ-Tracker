@@ -126,6 +126,7 @@
 		D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */; };
 		D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BE29DF006A0023E6C0 /* Date+extension.swift */; };
 		D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */; };
+		D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */; };
 		E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +266,7 @@
 		D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		D0E824BE29DF006A0023E6C0 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
+		D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierBackport.swift; sourceTree = "<group>"; };
 		D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-bjjtrackerTests/Pods-bjjtrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F79CDC833804077FA05FEBD0 /* Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */,
 				D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */,
 				D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */,
+				D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -1076,6 +1079,7 @@
 				D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */,
 				D01187D22A7BBB3400A2FCC7 /* ViewSizeModifier.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
+				D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,

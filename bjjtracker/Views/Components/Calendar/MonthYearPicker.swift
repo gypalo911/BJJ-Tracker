@@ -11,82 +11,127 @@ struct MonthYearPicker: View {
     @Binding var selectedDate: Date
     @Binding var isBottomSheetOpen: Bool
 
-    @State private var selectedMonth: String = Calendar.current.date(
-        from: Calendar.current.dateComponents(
-            [.month], from: Date()
-        )
-    )!.toString("MMMM")
-    @State private var selectedYear: Int = Calendar.current.component(.year, from: Date())
+//    @State private var selectedMonth: String = Calendar.current.date(
+//        from: Calendar.current.dateComponents(
+//            [.month], from: Date()
+//        )
+//    )!.toString("MMMM")
+//    @State private var selectedYear: Int = Calendar.current.component(.year, from: Date())
+//
+//    private let yearsRange = (Calendar.current.component(.year, from: Date()) - 30)...(Calendar.current.component(.year, from: Date()) + 5)
+//
+//    private var months: [String] {
+//        let formatter = DateFormatter()
+//        return formatter.monthSymbols
+//    }
+//
+//    private var years: [Int] {
+//        return Array(yearsRange)
+//    }
+//
+//    private var dateFormatter: DateFormatter {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMMM yyyy"
+//
+//        return dateFormatter
+//    }
+//
+//    init(selectedDate: Binding<Date>, isBottomSheetOpen: Binding<Bool>) {
+//        _selectedDate = selectedDate
+//        _isBottomSheetOpen = isBottomSheetOpen
+//    }
+//
+//    var body: some View {
+//        VStack {
+//            HStack(alignment: .center) {
+//                Picker(selection: $selectedMonth, label: Text("")) {
+//                    ForEach(months, id: \.self) { month in
+//                        Text(month).tag(month)
+//                    }
+//                }
+//                .pickerStyle(WheelPickerStyle())
+//                .clipped()
+//
+//                Picker(selection: $selectedYear, label: Text("")) {
+//                    ForEach(years, id: \.self) { year in
+//                        Text(String(year)).tag(year)
+//                    }
+//                }
+//                .pickerStyle(WheelPickerStyle())
+//                .clipped()
+//            }
+//            .padding(.horizontal, 20)
+//
+//            Button(action: {
+//                let newDate = dateFormatter.date(from: "\(selectedMonth) \(selectedYear)") ?? Date()
+//                if !selectedDate.isSame(as: newDate, by: [.month, .year]) {
+//                    selectedDate = newDate
+//                }
+//                isBottomSheetOpen = false
+//            }) {
+//                Text("Select")
+//                    .font(.system(size: 18))
+//                    .fontWeight(.semibold)
+//                    .frame(maxWidth: 400)
+//                    .padding()
+//                    .foregroundColor(.white)
+//            }
+//            .background(Color("Blue"))
+//            .cornerRadius(10)
+//        }
+//        .padding()
+//        .onAppear {
+//            self.selectedYear = Calendar.current.component(.year, from: selectedDate)
+//            self.selectedMonth = Calendar.current.date(
+//                from: Calendar.current.dateComponents(
+//                    [.month], from: selectedDate
+//                )
+//            )!.toString("MMMM")
+//        }
+//    }
     
-    private let yearsRange = (Calendar.current.component(.year, from: Date()) - 30)...(Calendar.current.component(.year, from: Date()) + 5)
+    @State private var date = Date()
     
-    private var months: [String] {
-        let formatter = DateFormatter()
-        return formatter.monthSymbols
-    }
+    @State private var showingPopover: Bool = false
     
-    private var years: [Int] {
-        return Array(yearsRange)
-    }
-    
-    private var dateFormatter: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
-
-        return dateFormatter
-    }
-    
-    init(selectedDate: Binding<Date>, isBottomSheetOpen: Binding<Bool>) {
-        _selectedDate = selectedDate
-        _isBottomSheetOpen = isBottomSheetOpen
-    }
+    @Namespace var animation
 
     var body: some View {
-        VStack {
-            HStack {
-                Picker(selection: $selectedMonth, label: Text("")) {
-                    ForEach(months, id: \.self) { month in
-                        Text(month).tag(month)
+        NavigationView {
+            ZStack {
+                VStack {
+                    Spacer()
+                    Text("Open datepicker")
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        showingPopover.toggle()
                     }
                 }
-                .pickerStyle(WheelPickerStyle())
-                .frame(maxWidth: .infinity)
-                
-                Picker(selection: $selectedYear, label: Text("")) {
-                    ForEach(years, id: \.self) { year in
-                        Text(String(year)).tag(year)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-                .frame(maxWidth: .infinity)
+                .padding(20)
+                .background(Color.red)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
             }
-            
-            Button(action: {
-                let newDate = dateFormatter.date(from: "\(selectedMonth) \(selectedYear)") ?? Date()
-                if !selectedDate.isSame(as: newDate, by: [.month, .year]) {
-                    selectedDate = newDate
-                }
-                isBottomSheetOpen = false
-            }) {
-                Text("Select")
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
-                    .padding()
-                    .foregroundColor(.white)
-                    .frame(maxWidth: 400)
-            }
-            .background(Color("Blue"))
-            .cornerRadius(10)
         }
-        .padding()
-        .onAppear {
-            self.selectedYear = Calendar.current.component(.year, from: selectedDate)
-            self.selectedMonth = Calendar.current.date(
-                from: Calendar.current.dateComponents(
-                    [.month], from: selectedDate
-                )
-            )!.toString("MMMM")
+        .bottomSheet(isPresented: $showingPopover) {
+            DatePicker(
+                "Start Date",
+                selection: $date,
+                displayedComponents: [.date]
+            )
+            .labelsHidden()
+            .datePickerStyle(.graphical)
+            .background(Color.white)
+            .padding(20)
         }
+        
+//        .popover(isPresented: $showingPopover, attachmentAnchor: .point(.bottomTrailing), arrowEdge: .trailing) {
+//
+//        }
+        
     }
 }
 

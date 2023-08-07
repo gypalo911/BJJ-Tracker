@@ -94,5 +94,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        ContentView()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
+            .previewDisplayName("iphone 7 ios 15")
     }
 }

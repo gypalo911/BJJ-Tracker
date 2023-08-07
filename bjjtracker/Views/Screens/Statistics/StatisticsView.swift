@@ -154,9 +154,6 @@ struct StatisticsView: View {
         .background(bgColor.ignoresSafeArea())
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .introspectTabBarController { (UITabBarController) in
-            UITabBarController.tabBar.isHidden = true
-        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.title)
