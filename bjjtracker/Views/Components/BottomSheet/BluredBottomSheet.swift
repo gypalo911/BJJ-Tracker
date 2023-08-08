@@ -58,7 +58,7 @@ struct BluredBottomSheet: View {
                                 .frame(width: 25, height: 25)
                             Text("Create Session")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18).smallCaps())
+                                .font(.body.smallCaps())
                                 .fontWeight(.medium)
                         }
                     }.onTapGesture {
@@ -84,7 +84,7 @@ struct BluredBottomSheet: View {
                                 .frame(width: 25, height: 25)
                             Text("Add Promotion")
                                 .foregroundColor(.black)
-                                .font(.system(size: 18).smallCaps())
+                                .font(.body.smallCaps())
                                 .fontWeight(.medium)
                         }
                     }

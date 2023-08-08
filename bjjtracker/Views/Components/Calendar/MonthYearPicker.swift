@@ -70,7 +70,7 @@ struct MonthYearPicker: View {
 //                isBottomSheetOpen = false
 //            }) {
 //                Text("Select")
-//                    .font(.system(size: 18))
+//                    .font(.body)
 //                    .fontWeight(.semibold)
 //                    .frame(maxWidth: 400)
 //                    .padding()

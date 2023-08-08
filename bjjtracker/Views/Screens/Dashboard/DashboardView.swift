@@ -54,7 +54,7 @@ struct DashboardView: View {
                             VStack(spacing: 0) {
                                 HStack {
                                     Text("Dashboard")
-                                        .font(.system(size: 28))
+                                        .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .hAlign(.leading)
@@ -92,7 +92,7 @@ struct DashboardView: View {
                                 
                                 HStack {
                                     Text("\(viewModel.selectedDay.toString("LLLL yyyy").capitalized)")
-                                        .font(.system(size: 22))
+                                        .font(.title2)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .hAlign(.leading)
@@ -114,7 +114,7 @@ struct DashboardView: View {
                                 if filteredSessions.isEmpty {
                                     Spacer()
                                     Text("No sessions for this day")
-                                        .font(.system(size: 18))
+                                        .font(.body)
                                         .foregroundColor(Color("Gray"))
                                     
                                     NavigationLink(destination: {
@@ -122,7 +122,7 @@ struct DashboardView: View {
                                     }) {
                                         HStack {
                                             Text("View History")
-                                                .font(.system(size: 16))
+                                                .font(.callout)
                                                 .foregroundColor(.blue)
                                             Image("archive")
                                                 .resizable()
@@ -150,7 +150,7 @@ struct DashboardView: View {
                                             }) {
                                                 HStack {
                                                     Text("View History")
-                                                        .font(.system(size: 16))
+                                                        .font(.callout)
                                                         .foregroundColor(.blue)
                                                     Image("archive")
                                                         .resizable()

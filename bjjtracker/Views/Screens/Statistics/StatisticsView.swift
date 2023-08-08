@@ -44,7 +44,7 @@ struct StatisticsView: View {
     var body: some View {
         VStack {
             Text("Statistics")
-                .font(.system(size: 28))
+                .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 .padding(.horizontal, 20)
@@ -75,7 +75,7 @@ struct StatisticsView: View {
                         .foregroundColor(Color("Blue"))
                 })
                 Text(viewModel.title)
-                    .font(.system(size: 16))
+                    .font(.callout)
                     .fontWeight(.regular)
                     .foregroundColor(Color.black)
                 Button(action: {
@@ -99,7 +99,7 @@ struct StatisticsView: View {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Types of sessions")
-                            .font(.system(size: 16))
+                            .font(.callout)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                     }
@@ -125,7 +125,7 @@ struct StatisticsView: View {
                     {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Sessions by grapling style")
-                                .font(.system(size: 16))
+                                .font(.callout)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                         }
@@ -157,7 +157,7 @@ struct StatisticsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.title)
-                    .font(.system(size: 20))
+                    .font(.title3)
                     .fontWeight(.medium)
             }
             ToolbarItem(placement: .navigationBarLeading) {

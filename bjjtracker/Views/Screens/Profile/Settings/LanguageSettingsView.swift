@@ -28,7 +28,7 @@ struct LanguageSettingsView: View {
                         .frame(width: 20, height: 20)
                 }
                 Text("Language".localizedString)
-                    .font(.system(size: 18))
+                    .font(.body)
                     .fontWeight(.bold)
             }
             .hAlign(.leading)
@@ -78,7 +78,7 @@ struct RadioButton: View {
                         .frame(width: 10, height: 10)
                 }
                 Text("\(text)".localizedString)
-                    .font(.system(size: 16))
+                    .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(isSelected ? .white : .black)
             }

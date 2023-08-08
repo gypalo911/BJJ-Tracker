@@ -57,7 +57,7 @@ struct PromotionsView: View {
                     VStack {
                         HStack {
                             Text("Progress")
-                                .font(.system(size: 18))
+                                .font(.body)
                                 .fontWeight(.semibold)
                             Spacer()
                             
@@ -66,7 +66,7 @@ struct PromotionsView: View {
                             }, label: {
                                 HStack(spacing: 10) {
                                     Text(gradingSystem.rawValue.localizedString.capitalized)
-                                        .font(.system(size: 14))
+                                        .font(.footnote)
                                         .foregroundColor(Color.black)
                                     Image(systemName: "chevron.down")
                                         .scaledToFit()

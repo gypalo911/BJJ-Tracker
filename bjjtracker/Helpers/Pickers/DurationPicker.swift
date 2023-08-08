@@ -24,9 +24,9 @@ struct DurationPicker: View {
                 ForEach(0..<24) { hour in
                     HStack(alignment: .bottom, spacing: 3) {
                         Text("\(hour)")
-                            .font(.system(size: 20))
+                            .font(.title3)
                         Text("hours")
-                            .font(.system(size: 16))
+                            .font(.callout)
                             .fontWeight(.semibold)
                     }
                 }
@@ -35,15 +35,15 @@ struct DurationPicker: View {
                 duration = totalDurationInMinutes
             }
             .pickerStyle(WheelPickerStyle())
-            .frame(width: 100)
+//            .frame(width: 100)
 
             Picker("Minutes", selection: $minutes) {
                 ForEach(0..<60) { minute in
                     HStack(alignment: .bottom, spacing: 3) {
                         Text("\(minute)")
-                            .font(.system(size: 20))
+                            .font(.title3)
                         Text("min")
-                            .font(.system(size: 16))
+                            .font(.callout)
                             .fontWeight(.semibold)
                     }
                 }
@@ -51,7 +51,7 @@ struct DurationPicker: View {
                 duration = totalDurationInMinutes
             }
             .pickerStyle(WheelPickerStyle())
-            .frame(width: 100)
+//            .frame(width: 100)
         }.frame(height: 150)
     }
 }

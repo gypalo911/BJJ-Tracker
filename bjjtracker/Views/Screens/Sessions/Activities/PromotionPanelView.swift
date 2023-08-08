@@ -22,9 +22,9 @@ struct PromotionPanelView: View {
                     CircularBeltView(primaryColor: promotion.belt.color.0, secondaryColor: promotion.belt.color.1)
                     HStack(spacing: 4) {
                         Text("You’ve reached")
-                            .font(.system(size: 14))
+                            .font(.footnote)
                         Text(promotion.stripes > 0 ? "%@ belt %@ stripes!".localized(with: ["\(promotion.belt.title)", "\(promotion.stripes)"]) : "%@ belt!".localized(with: ["\(promotion.belt.title)"]))
-                            .font(.system(size: 14))
+                            .font(.footnote)
                             .fontWeight(.bold)
                     }
                 }

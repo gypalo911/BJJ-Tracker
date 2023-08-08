@@ -57,18 +57,18 @@ struct SessionDetailsView: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Notes")
-                                .font(.system(size: 18))
+                                .font(.body)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.black)
                             if let notes = viewModel.session.notes, !notes.isEmpty {
                                 Text(LocalizedStringKey(notes))
-                                    .font(.system(size: 18))
+                                    .font(.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
                                     .foregroundColor(Color("LightGray"))
-                                    .font(.system(size: 18))
+                                    .font(.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             }
@@ -211,7 +211,7 @@ struct SessionDetailsHeaderView: View {
                 VStack {
                     HStack {
                         Text(navTitle)
-                            .font(.system(size: 28).bold())
+                            .font(.title.bold())
                             .foregroundColor(.white)
                             .hAlign(.leading)
                         ZStack {
@@ -221,7 +221,7 @@ struct SessionDetailsHeaderView: View {
                                 .defaultShadow()
                                 .frame(width: 76, height: 23)
                             Text("\(sessionStatus.rawValue.localizedString)".uppercased())
-                                .font(.system(size: 10))
+                                .font(.caption2)
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                         }
@@ -234,7 +234,7 @@ struct SessionDetailsHeaderView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
-                                .font(.system(size: 20))
+                                .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
@@ -245,13 +245,13 @@ struct SessionDetailsHeaderView: View {
                                 .foregroundColor(.white)
                             HStack {
                                 Text("\((session.startDate ?? Date()).toString("HH:mm"))")
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                 let duration = Int(session.duration)
                                 if session.duration != 0 {
                                     Text(duration.minutesToDuration())
-                                        .font(.system(size: 18))
+                                        .font(.body)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
                                 }
@@ -265,14 +265,14 @@ struct SessionDetailsHeaderView: View {
                             
                             if let location = session.location, !location.isEmpty {
                                 Text("\(location)")
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
                                     .foregroundColor(Color("LightGray"))
                                     .fontWeight(.semibold)
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                             }
                         }
                     }

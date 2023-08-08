@@ -55,17 +55,17 @@ struct NotificationSettingsView: View {
                             .frame(width: 20, height: 20)
                     }
                     Text("Notification".localizedString)
-                        .font(.system(size: 18))
+                        .font(.body)
                         .fontWeight(.bold)
                 }
                 .hAlign(.leading)
                 if !NotificationManager.shared.isAuthorized {
                     VStack(alignment: .center, spacing: 15) {
                         Text("Allow push notifications")
-                            .font(.system(size: 16))
+                            .font(.callout)
                             .fontWeight(.bold)
                         Text("Be notified about nearest events and\nachivements. You can change it anytime.")
-                            .font(.system(size: 14))
+                            .font(.footnote)
                             .fontWeight(.regular)
                             .multilineTextAlignment(.center)
                         Button(action: {
@@ -76,7 +76,7 @@ struct NotificationSettingsView: View {
                             }
                         }, label: {
                             Text("Allow notifications")
-                                .font(.system(size: 16))
+                                .font(.callout)
                         })
                     }
                     .padding(.vertical, 40)
@@ -85,7 +85,7 @@ struct NotificationSettingsView: View {
                         VStack {
                             Toggle(isOn: $notificationPrefferences.sessionRemindersOn, label: {
                                 Text("Session reminders")
-                                    .font(.system(size: 14))
+                                    .font(.footnote)
                                     .fontWeight(.regular)
                             })
                             VStack {
@@ -96,7 +96,7 @@ struct NotificationSettingsView: View {
                                         .foregroundColor(.black)
                                         .frame(width: 15, height: 15)
                                     Text("Notification".localizedString)
-                                        .font(.system(size: 12))
+                                        .font(.caption)
                                         .fontWeight(.regular)
                                 }
                                 .hAlign(.leading)
@@ -112,12 +112,12 @@ struct NotificationSettingsView: View {
                         }
                         Toggle(isOn: $notificationPrefferences.achivementRemindersOn, label: {
                             Text("Achivement notifications")
-                                .font(.system(size: 14))
+                                .font(.footnote)
                                 .fontWeight(.regular)
                         })
                         Toggle(isOn: $notificationPrefferences.statisticsNotificationsOn, label: {
                             Text("Statistics")
-                                .font(.system(size: 14))
+                                .font(.footnote)
                                 .fontWeight(.regular)
                         })
                     }

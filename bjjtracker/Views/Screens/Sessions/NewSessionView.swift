@@ -20,6 +20,8 @@ struct NewSessionView: View {
     
     @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
     
+    private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
+    
     init(viewModel: NewSessionViewViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         UITextView.appearance().backgroundColor = .clear
@@ -27,25 +29,22 @@ struct NewSessionView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         Group {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "1. Select type:".localizedString)
 
                                 SelectionPanelView(
-                                    g: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
                                     selectedType: $activity.type,
                                     selectedTypeValue: activity.type.rawValue
                                 )
                             }.padding(.top, 10)
-                            
+
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "2. Select grappling style:".localizedString)
                                 SelectionPanelView(
-                                    g: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
                                     selectedType: $activity.style,
                                     selectedTypeValue: activity.style.rawValue
@@ -88,8 +87,8 @@ struct NewSessionView: View {
                             }
                         }
                     }
-                    .hAlign(.leading)
                     .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
                     .navigationTitle("Create Session".localizedString)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -115,9 +114,7 @@ struct NewSessionView: View {
                             }
                         }
                     }
-                    .vAlign(.top)
                 }
-            }
         }
     }
     
@@ -135,7 +132,11 @@ struct NewSessionView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        Container()
-            .environmentObject(AppSettings())
+        ForEach(["iPhone 14", "iphone 7 ios 15"], id: \.self) { (device) in
+            Container()
+                .environmentObject(AppSettings())
+                .previewDevice(PreviewDevice(rawValue: device))
+                .previewDisplayName(device)
+        }
     }
 }

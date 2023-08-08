@@ -70,13 +70,13 @@ struct ArchiveView: View {
                                         .offset(x: -10, y: -30)
                                 }.padding(.top, 30)
                                 Text("Hey! Add trainig sessions to track your BJJ progress journey!")
-                                    .font(.system(size: 24))
+                                    .font(.title2)
                                     .fontWeight(.bold)
                                     .multilineTextAlignment(.center)
                                     .padding(.top, 10)
                                     .padding(.bottom, 10)
                                 Text("Your records will always be at hand!")
-                                    .font(.system(size: 18))
+                                    .font(.body)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(Color("Gray"))
                                 
@@ -99,7 +99,7 @@ struct ArchiveView: View {
                                                     .frame(width: 25, height: 25)
                                                 Text("Create Session")
                                                     .foregroundColor(.white)
-                                                    .font(.system(size: 18).smallCaps())
+                                                    .font(.body.smallCaps())
                                                     .fontWeight(.medium)
                                             }
                                         }
@@ -122,7 +122,7 @@ struct ArchiveView: View {
                                                     .frame(width: 25, height: 25)
                                                 Text("Add Promotion")
                                                     .foregroundColor(.black)
-                                                    .font(.system(size: 18).smallCaps())
+                                                    .font(.body.smallCaps())
                                                     .fontWeight(.medium)
                                             }
                                         }

@@ -25,7 +25,6 @@ struct AddPromotionView: View {
                                 TitleTextView(text: "1. Grading system:".localizedString)
                                 
                                 SelectionPanelView<GradingSystem>(
-                                    g: geometry,
                                     valuesList: GradingSystem.allCases.map { $0.rawValue },
                                     selectedType: $viewModel.promotion.gradingSystem,
                                     selectedTypeValue: viewModel.promotion.gradingSystem.rawValue

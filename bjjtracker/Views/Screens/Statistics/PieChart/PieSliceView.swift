@@ -36,7 +36,7 @@ struct PieSliceView: View {
                 .fill(pieSliceData.color)
                 
                 Text(pieSliceData.text)
-                    .font(.system(size: 14))
+                    .font(.footnote)
                     .position(
                         x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.75 * cos(self.midRadians)),
                         y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.75 * sin(self.midRadians))

@@ -89,7 +89,7 @@ struct ProfileView: View {
                     VStack(alignment: .center, spacing: 0) {
                         HStack {
                             Text("Profile")
-                                .font(.system(size: 28))
+                                .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                                 .hAlign(.leading)
@@ -140,7 +140,7 @@ struct ProfileView: View {
                                             }
                                         Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
                                             .foregroundColor(.gray)
-                                            .font(.system(size: 16))
+                                            .font(.callout)
                                             .fontWeight(.medium)
                                     }
                                     .hAlign(.center)
@@ -154,7 +154,7 @@ struct ProfileView: View {
                                                         .opacity(0.8)
                                                     Text("Yet no promotions".localizedString)
                                                         .foregroundColor(.white)
-                                                        .font(.system(size: 12))
+                                                        .font(.caption)
                                                         .fontWeight(.regular)
                                                 }
                                             }
@@ -164,7 +164,7 @@ struct ProfileView: View {
                                             }
                                         }, label: {
                                             Text("Add Promotion".localizedString)
-                                                .font(.system(size: 16))
+                                                .font(.callout)
                                                 .fontWeight(.regular)
                                         }).padding(5)
                                     }
@@ -173,18 +173,18 @@ struct ProfileView: View {
                                 HStack(alignment: .top, spacing: 74) {
                                     VStack(alignment: .center, spacing: 5) {
                                         Text("\(sessionsList.count)")
-                                            .font(.system(size: 18))
+                                            .font(.body)
                                             .fontWeight(.medium)
                                         Text("Sessions".localizedString)
-                                            .font(.system(size: 14))
+                                            .font(.footnote)
                                             .fontWeight(.regular)
                                     }
                                     VStack(alignment: .center, spacing: 5) {
                                         Text("\(totalTime())")
-                                            .font(.system(size: 18))
+                                            .font(.body)
                                             .fontWeight(.medium)
                                         Text("Total time".localizedString)
-                                            .font(.system(size: 14))
+                                            .font(.footnote)
                                             .fontWeight(.regular)
                                     }
                                 }
@@ -327,12 +327,12 @@ struct SettigsCell: View {
                     .frame(width: 20, height: 20)
             }
             Text("\(text)".localizedString)
-                .font(.system(size: 14))
+                .font(.footnote)
                 .fontWeight(.medium)
             Spacer()
             if let valueText = valueText {
                 Text("\(valueText)".localizedString)
-                    .font(.system(size: 14))
+                    .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(.gray)
             }

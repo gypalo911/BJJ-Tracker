@@ -28,7 +28,7 @@ struct CustomTabBarView: View {
                                 .foregroundColor(Color("Purple"))
                             Text(tab.rawValue.localizedString)
                                 .foregroundColor(Color("Purple"))
-                                .font(.system(size: 16))
+                                .font(.callout)
                                 .fontWeight(.semibold)
                                 .matchedGeometryEffect(id: "title", in: namespace)
                             

@@ -19,10 +19,10 @@ struct InfographicsView: View {
                     .frame(width: 130, height: 130)
                 VStack {
                     Text("\(statsInfo[.training] ?? 0)")
-                        .font(.system(size: 24))
+                        .font(.title2)
                         .fontWeight(.bold)
                     Text("Classes")
-                        .font(.system(size: 14))
+                        .font(.footnote)
                         .fontWeight(.medium)
                 }
                 .foregroundColor(.white)
@@ -39,10 +39,10 @@ struct InfographicsView: View {
                     .frame(width: 128, height: 128)
                 VStack {
                     Text("\(statsInfo[.competition] ?? 0)")
-                        .font(.system(size: 18))
+                        .font(.body)
                         .fontWeight(.bold)
                     Text("Competitions")
-                        .font(.system(size: 12))
+                        .font(.caption)
                         .fontWeight(.medium)
                 }
                 .foregroundColor(.white)
@@ -59,10 +59,10 @@ struct InfographicsView: View {
                     .frame(width: 103, height: 103)
                 VStack {
                     Text("\(statsInfo[.seminar] ?? 0)")
-                        .font(.system(size: 18))
+                        .font(.body)
                         .fontWeight(.bold)
                     Text("Seminars")
-                        .font(.system(size: 12))
+                        .font(.caption)
                         .fontWeight(.medium)
                 }
                 .foregroundColor(.white)
