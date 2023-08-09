@@ -45,7 +45,7 @@ struct TimetableView: View {
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-                        .padding(.top, 60)
+                        .padding(.top, 30)
                         .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
                     
@@ -147,15 +147,16 @@ struct TimetableView: View {
                     changeNavBar(.clear)
                     settings.isTabBarHidden = false
                 }
-                
-                if let session = selectedSession {
-                    SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                        withAnimation(AppConstants.mgeAnimation) {
-                            selectedSession = nil
-                            settings.isTabBarHidden = false
-                        }
-                    })
-                }
+            }
+            .zIndex(0)
+            
+            if let session = selectedSession {
+                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
+                    withAnimation(AppConstants.mgeAnimation) {
+                        selectedSession = nil
+                        settings.isTabBarHidden = false
+                    }
+                }).zIndex(1)
             }
         }
     }

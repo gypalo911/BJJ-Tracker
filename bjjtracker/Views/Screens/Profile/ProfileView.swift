@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Introspect
+import StoreKit
 
 struct ProfileView: View {
     enum ActionSheetState {
@@ -19,6 +20,8 @@ struct ProfileView: View {
         case language
         case notifications
     }
+    
+//    @Environment(\.requestReview) var requestReview
     
     @EnvironmentObject var settings: AppSettings
     
@@ -35,6 +38,7 @@ struct ProfileView: View {
     
     @State private var showingPromotionsView: Bool = false
     @State private var showingBottomSheet: Bool = false
+    @State private var showShareSheet: Bool = false
     @State private var selectedSettingsView: Settings? = nil {
         didSet {
             showingBottomSheet.toggle()
@@ -212,17 +216,28 @@ struct ProfileView: View {
                             SettigsCell(
                                 icon: Image("issue"),
                                 text: "Report an issue",
-                                onTap: {}
+                                onTap: {
+                                    EmailController.shared.sendEmail(subject: "Hello", body: "Hello From ishtiz.com", to: "recipient@example.com")
+                                }
                             )
                             SettigsCell(
                                 icon: Image("rate"),
                                 text: "Rate the app",
-                                onTap: {}
+                                onTap: {
+                                    if let scene = UIApplication.shared.connectedScenes
+                                            .first(where: { $0.activationState == .foregroundActive })
+                                            as? UIWindowScene {
+                                        SKStoreReviewController.requestReview(in: scene)
+                                    }
+
+                                }
                             )
                             SettigsCell(
                                 icon: Image("share"),
                                 text: "Share the app link",
-                                onTap: {}
+                                onTap: {
+                                    showShareSheet = true
+                                }
                             )
                             .padding(.bottom, 20)
                         }
@@ -243,6 +258,9 @@ struct ProfileView: View {
                 .background(Color("generalBG").ignoresSafeArea())
                 .sheet(isPresented: $showSheet) {
                     ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
+                }
+                .sheet(isPresented: $showShareSheet) {
+                    ActivityViewController(activityItems: ["text test"])
                 }
                 .onAppear {
                     viewModel.onProfileViewAppeared()
@@ -356,4 +374,23 @@ struct ProfileView_Previews: PreviewProvider {
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
+}
+
+
+
+struct ActivityViewController: UIViewControllerRepresentable {
+
+    var activityItems: [Any]
+    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems,
+                                                  applicationActivities: nil)
+        
+        controller.excludedActivityTypes = excludedActivityTypes
+        
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }

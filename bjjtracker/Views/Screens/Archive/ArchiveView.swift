@@ -137,6 +137,7 @@ struct ArchiveView: View {
                         }
                     }
                 }
+                .zIndex(0)
                 .background(Color("generalBG").ignoresSafeArea())
                 .onAppear {
                     settings.isTabBarHidden = true
@@ -176,7 +177,7 @@ struct ArchiveView: View {
                         withAnimation(AppConstants.mgeAnimation) {
                             viewModel.selectedSession = nil
                         }
-                    })
+                    }).zIndex(1)
                 }
             }
         }

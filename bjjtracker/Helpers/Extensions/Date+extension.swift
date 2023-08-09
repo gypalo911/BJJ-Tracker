@@ -16,6 +16,7 @@ extension Date {
     
     func allDatesInMonth() -> [Date] {
         let calendar = Calendar.current
+        print("first weekday:\(calendar.firstWeekday)")
         
         let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
         let range = calendar.range(of: .day, in: .month, for: startDate)!

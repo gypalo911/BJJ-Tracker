@@ -176,6 +176,7 @@ struct DashboardView: View {
                         viewModel.onDashboardAppeared()
                     }
                 }
+            .zIndex(0)
             
             if let session = viewModel.selectedSession {
                 SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
@@ -183,7 +184,7 @@ struct DashboardView: View {
                         viewModel.selectedSession = nil
                         settings.isTabBarHidden = false
                     }
-                })
+                }).zIndex(1)
             }
         }
     }
