@@ -94,6 +94,19 @@
 // Profile
 "Profile" = "Профіль";
 
+"Language" = "Мова";
+"English" = "Англійська";
+"Ukrainian" = "Українська";
+"Notifications" = "Сповіщення";
+"Allow push notifications" = "Дозволити сповіщення";
+"Allow notifications" = "Дозволити сповіщення";
+"Be notified about nearest events and\nachivements. You can change it anytime." = "Отримуй сповіщення про найближчі тренування\nта досягнення";
+"Report an issue" = "Повідомити про помилки";
+"Rate the app" = "Оцінити додаток";
+"Share the app" = "Поширити додаток";
+
+"Found an issue in JiuTrack app" = "Знайдено помилки у роботі додатку JiuTrack";
+
 "Progress" = "Прогрес";
 "Stripe" = "Смужка";
 "Stripes" = "Смужки";

@@ -13,8 +13,17 @@ struct AppConstants {
 
 class AppSettings: ObservableObject {
     enum AppLanguage: String {
-        case uk = "Ukrainian"
-        case en = "English"
+        case english = "en"
+        case ukrainian = "uk"
+        
+        var stringValue: String {
+            switch self {
+            case .english:
+                return "English"
+            case .ukrainian:
+                return "Ukrainian"
+            }
+        }
     }
     
     static let shared = AppSettings()
@@ -24,7 +33,7 @@ class AppSettings: ObservableObject {
     @Published var selectedSheet: ModalsSheets? = nil
     @Published var navigateToPage: String?
     @Published var notificationTime: Int = 3600  // 1 hour
-    @Published var appLanguage: AppLanguage = .en
+    @Published var appLanguage: AppLanguage = .english
 }
 
 @main

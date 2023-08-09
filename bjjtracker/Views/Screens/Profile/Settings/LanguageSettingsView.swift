@@ -10,7 +10,7 @@ import SwiftUI
 struct LanguageSettingsView: View {
     
     @EnvironmentObject var settings: AppSettings
-    @State private var appLanguage: AppSettings.AppLanguage = .en
+    @State private var appLanguage: AppSettings.AppLanguage = .english
     
     var body: some View {
         VStack {
@@ -33,11 +33,11 @@ struct LanguageSettingsView: View {
             }
             .hAlign(.leading)
             
-            RadioButton(isSelected: appLanguage == .uk, text: "Ukrainian") {
-                appLanguage = .uk
+            RadioButton(isSelected: appLanguage == .ukrainian, text: AppSettings.AppLanguage.ukrainian.stringValue) {
+                appLanguage = .ukrainian
             }
-            RadioButton(isSelected: appLanguage == .en, text: "English") {
-                appLanguage = .en
+            RadioButton(isSelected: appLanguage == .english, text: AppSettings.AppLanguage.english.stringValue) {
+                appLanguage = .english
             }
         }
         .padding(20)

@@ -32,6 +32,7 @@ class DashboardViewModel: ObservableObject {
     
     var requestDateRange: DateInterval {
         let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
+//        print("lastWeekDate:\(lastWeekDate.map { $0.date })")
         let rangeStart = lastWeekDate.first?.date ?? Date()
         let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
         let rangeEnd = Calendar.current.date(byAdding: .day, value: 7, to: sunday) ?? Date()
@@ -65,16 +66,19 @@ class DashboardViewModel: ObservableObject {
     }
     
     func lastTwoWeeksSessions(_ sessions: [FetchedResults<Session>.Element]) -> ([Session], [Session]) {
+        print("sessionsList:")
+        print(sessions.map { $0.startDate })
         return (currentWeekSessions(sessions), lastWeekSessions(sessions))
     }
 }
 
 private extension DashboardViewModel {
     func currentWeekSessions(_ sessions: [FetchedResults<Session>.Element]) -> [Session] {
+        let currentWeek = Calendar.current.week(for: Date().startOfDay)
         let start = currentWeek.first?.date ?? Date()
         let end = currentWeek.last?.date ?? Date()
         return sessions.filter {
-            (start...end).contains($0.startDate ?? Date())
+            (start...end).contains(($0.startDate ?? Date()).startOfDay)
         }
     }
     
@@ -83,7 +87,7 @@ private extension DashboardViewModel {
         let start = lastWeekDate.first?.date ?? Date()
         let end = lastWeekDate.last?.date ?? Date()
         return sessions.filter {
-            (start...end).contains($0.startDate ?? Date())
+            (start...end).contains(($0.startDate ?? Date()).startOfDay)
         }
     }
 }

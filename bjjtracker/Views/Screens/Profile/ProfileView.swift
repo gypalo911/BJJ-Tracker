@@ -197,15 +197,14 @@ struct ProfileView: View {
                         }
                         
                         VStack(alignment: .center, spacing: 12) {
-                            SettigsCell(
-                                icon: Image("language"),
-                                text: "Language",
-                                valueText: settings.appLanguage.rawValue,
-                                onTap: {
-                                    selectedSettingsView = .language
-                                }
-                            )
-                            .padding(.top, 20)
+//                            SettigsCell(
+//                                icon: Image("language"),
+//                                text: "Language",
+//                                valueText: settings.appLanguage.stringValue,
+//                                onTap: {
+//                                    selectedSettingsView = .language
+//                                }
+//                            )
                             SettigsCell(
                                 icon: Image("notification"),
                                 text: "Notifications",
@@ -213,11 +212,16 @@ struct ProfileView: View {
                                     selectedSettingsView = .notifications
                                 }
                             )
+                            .padding(.top, 20)
                             SettigsCell(
                                 icon: Image("issue"),
                                 text: "Report an issue",
                                 onTap: {
-                                    EmailController.shared.sendEmail(subject: "Hello", body: "Hello From ishtiz.com", to: "recipient@example.com")
+                                    EmailController.shared.sendEmail(
+                                        subject: "Found an issue in JiuTrack app".localizedString,
+                                        body: "".localizedString,
+                                        to: "wthotcode@gmail.com"
+                                    )
                                 }
                             )
                             SettigsCell(
@@ -234,7 +238,7 @@ struct ProfileView: View {
                             )
                             SettigsCell(
                                 icon: Image("share"),
-                                text: "Share the app link",
+                                text: "Share the app",
                                 onTap: {
                                     showShareSheet = true
                                 }
@@ -260,7 +264,7 @@ struct ProfileView: View {
                     ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                 }
                 .sheet(isPresented: $showShareSheet) {
-                    ActivityViewController(activityItems: ["text test"])
+                    ActivityViewController(activityItems: [Locale.current.languageCode == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])
                 }
                 .onAppear {
                     viewModel.onProfileViewAppeared()

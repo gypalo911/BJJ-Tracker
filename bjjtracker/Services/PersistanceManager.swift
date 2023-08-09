@@ -17,7 +17,12 @@ class PersistanceManager: ObservableObject {
         for i in 0..<10 {
             let session = Session(context: viewContext)
             session.id = UUID()
-            session.startDate = Calendar.current.date(byAdding: .hour, value: i * 8, to: Date())
+            if i <= 5 {
+//                session.startDate = Calendar.current.date(byAdding: .hour, value: i * 8, to: Date())
+                session.startDate = Calendar.current.date(byAdding: .day, value: -i, to: Date())
+            } else {
+                session.startDate = Calendar.current.date(byAdding: .day, value: i-(i - Int(i/2)), to: Date())
+            }
             session.duration = Int16(120 - i)
             session.type = ActivityType.allCases.randomElement()?.rawValue
             session.style = GraplingStyle.gi.rawValue
@@ -30,11 +35,15 @@ class PersistanceManager: ObservableObject {
             technique.addToSessions(session)
         }
         
-        for i in 0..<1 {
+        for i in 0..<10 {
             let model = PromotionModel(context: viewContext)
             model.id = UUID()
             model.belt = Int16(i)
-            model.date = Calendar.current.date(byAdding: .hour, value: i * 16, to: Date())
+            if i <= 5 {
+                model.date = Calendar.current.date(byAdding: .day, value: -i, to: Date())
+            } else {
+                model.date = Calendar.current.date(byAdding: .day, value: i-(i-1), to: Date())
+            }
             model.stripes = Int16.random(in: 0..<4)
         }
         

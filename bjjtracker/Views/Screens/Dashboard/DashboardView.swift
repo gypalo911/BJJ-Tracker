@@ -29,6 +29,10 @@ struct DashboardView: View {
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
+        print("\n\n-----Dates:\n")
+        print(viewModel.requestDateRange.start)
+        print(viewModel.requestDateRange.end)
+        print("\n----------\n\n")
         _sessionsList = FetchRequest<Session>(
             sortDescriptors: [],
             predicate: NSPredicate(

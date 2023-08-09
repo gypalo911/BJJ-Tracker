@@ -25,7 +25,7 @@ class EmailController: NSObject, MFMailComposeViewControllerDelegate {
     public static let shared = EmailController()
     private override init() { }
     
-    func sendEmail(subject:String, body:String, to:String){
+    func sendEmail(subject: String, body: String, to: String){
         // Check if the device is able to send emails
         if !MFMailComposeViewController.canSendMail() {
            print("This device cannot send emails.")

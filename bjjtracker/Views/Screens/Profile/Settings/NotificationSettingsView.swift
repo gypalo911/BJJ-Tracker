@@ -34,7 +34,7 @@ extension Int: StringComparable {
 
 struct NotificationSettingsView: View {
     @EnvironmentObject var settings: AppSettings
-    @State private var appLanguage: AppSettings.AppLanguage = .en
+    @State private var appLanguage: AppSettings.AppLanguage = .english
     
     @ObservedObject var notificationPrefferences = NotificationPrefferences()
     
@@ -54,7 +54,7 @@ struct NotificationSettingsView: View {
                             .foregroundColor(.black)
                             .frame(width: 20, height: 20)
                     }
-                    Text("Notification".localizedString)
+                    Text("Notifications".localizedString)
                         .font(.body)
                         .fontWeight(.bold)
                 }
@@ -95,7 +95,7 @@ struct NotificationSettingsView: View {
                                         .scaledToFit()
                                         .foregroundColor(.black)
                                         .frame(width: 15, height: 15)
-                                    Text("Notification".localizedString)
+                                    Text("Notifications".localizedString)
                                         .font(.caption)
                                         .fontWeight(.regular)
                                 }

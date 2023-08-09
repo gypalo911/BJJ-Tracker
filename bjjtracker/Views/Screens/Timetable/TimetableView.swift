@@ -45,7 +45,7 @@ struct TimetableView: View {
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-                        .padding(.top, 30)
+                        .padding(.top, UIScreen.main.bounds.size.width < 375 ? 30 : 60)
                         .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
                     
