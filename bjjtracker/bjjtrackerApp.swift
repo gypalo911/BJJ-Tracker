@@ -9,6 +9,11 @@ import SwiftUI
 
 struct AppConstants {
     static let mgeAnimation = Animation.easeInOut(duration: 0.3)
+    
+    enum Links: String {
+        case patreon = "https://www.patreon.com/gypalo911"
+        case buymeacoffee = "https://www.buymeacoffee.com/gypalo911"
+    }
 }
 
 class AppSettings: ObservableObject {

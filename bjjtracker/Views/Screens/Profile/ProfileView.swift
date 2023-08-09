@@ -22,6 +22,7 @@ struct ProfileView: View {
     }
     
 //    @Environment(\.requestReview) var requestReview
+    @Environment(\.openURL) var openURL
     
     @EnvironmentObject var settings: AppSettings
     
@@ -197,22 +198,21 @@ struct ProfileView: View {
                         }
                         
                         VStack(alignment: .center, spacing: 12) {
-//                            SettigsCell(
-//                                icon: Image("language"),
-//                                text: "Language",
-//                                valueText: settings.appLanguage.stringValue,
-//                                onTap: {
-//                                    selectedSettingsView = .language
-//                                }
-//                            )
                             SettigsCell(
-                                icon: Image("notification"),
-                                text: "Notifications",
+                                icon: Image("language"),
+                                text: "Language",
                                 onTap: {
-                                    selectedSettingsView = .notifications
+                                    openSettings()
                                 }
                             )
                             .padding(.top, 20)
+//                            SettigsCell(
+//                                icon: Image("notification"),
+//                                text: "Notifications",
+//                                onTap: {
+//                                    selectedSettingsView = .notifications
+//                                }
+//                            )
                             SettigsCell(
                                 icon: Image("issue"),
                                 text: "Report an issue",
@@ -243,6 +243,55 @@ struct ProfileView: View {
                                     showShareSheet = true
                                 }
                             )
+                            
+                            VStack {
+                                Text("Support the project")
+                                    .font(.caption2)
+                                    .fontWeight(.regular)
+                                    .foregroundColor(Color("Gray"))
+                                
+                                Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(.clear)
+                                            .frame(width: 275, height: 40)
+                                            .background(Color("LightLightGray"))
+                                            .cornerRadius(10)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .inset(by: 0.5)
+                                                    .stroke(.black, lineWidth: 1)
+                                            )
+                                        
+                                        Image("patreon")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundColor(.white)
+                                            .frame(height: 20)
+                                    }
+                                }
+                                
+                                Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(.clear)
+                                            .frame(width: 275, height: 40)
+                                            .background(Color("Yellow"))
+                                            .cornerRadius(10)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .inset(by: 0.5)
+                                                    .stroke(.black, lineWidth: 1)
+                                            )
+                                        
+                                        Image("buymeacoffee")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundColor(.white)
+                                            .frame(height: 20)
+                                    }
+                                }
+                            }
                             .padding(.bottom, 20)
                         }
                         .vAlign(.top)
@@ -316,6 +365,12 @@ struct ProfileView: View {
             return true
         }
         return lastPromotion.belt.rawValue < belt.rawValue
+    }
+    
+    private func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            openURL(url)
+        }
     }
 }
 
