@@ -31,6 +31,8 @@ struct SessionDetailsView: View {
         viewModel.session.activityType
     }
     
+    private let screenSize: CGSize = UIScreen.main.bounds.size
+    
     var body: some View {
         ZStack {
             VStack {
@@ -57,44 +59,47 @@ struct SessionDetailsView: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Notes")
-                                .font(.system(size: 18))
+                                .font(.body)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.black)
                             if let notes = viewModel.session.notes, !notes.isEmpty {
                                 Text(LocalizedStringKey(notes))
-                                    .font(.system(size: 18))
+                                    .font(.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
                                     .foregroundColor(Color("LightGray"))
-                                    .font(.system(size: 18))
+                                    .font(.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             }
                         }
                         .padding(.horizontal, 10)
                         
-                        if !viewModel.notesLinks.isEmpty {
-                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                                ForEach(viewModel.previewModels, id: \.self) { model in
-                                    LinkPreview(
-                                        previewModel: model, onTap: { link in
-                                            viewModel.linkOpened(link)
-                                        }
-                                    )
+                        Group {
+                            if !viewModel.notesLinks.isEmpty {
+                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                                    ForEach(viewModel.previewModels, id: \.self) { model in
+                                        LinkPreview(
+                                            previewModel: model, onTap: { link in
+                                                viewModel.linkOpened(link)
+                                            }
+                                        )
+                                    }
                                 }
-                            }
-                            if viewModel.notesLinks.count > viewModel.previewModels.count {
-                                ProgressView()
-                                    .hAlign(.center)
+                                if viewModel.notesLinks.count > viewModel.previewModels.count {
+                                    ProgressView()
+                                        .hAlign(.center)
+                                }
                             }
                         }
                     }
+                    .padding(.bottom, screenSize.width <= 375 ? 30 : 10)
+                    .padding(.top, 10)
+                    .padding(.horizontal, 20)
                     .hAlign(.leading)
                     .vAlign(.top)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 20)
                 }
             }
             .ignoresSafeArea(.keyboard)
@@ -122,6 +127,7 @@ struct SessionDetailsView: View {
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
+        .navigationBarHidden(true)
         .onAppear {
             setupView()
         }
@@ -173,6 +179,8 @@ struct SessionDetailsHeaderView: View {
             endPoint: .bottomTrailing
         )
     }
+    
+    private let screenSize: CGSize = UIScreen.main.bounds.size
 
     var body: some View {
         ZStack {
@@ -182,7 +190,7 @@ struct SessionDetailsHeaderView: View {
                 .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                 .defaultShadow()
                 .vAlign(.top)
-                .frame(width: UIScreen.main.bounds.size.width)
+                .frame(width: screenSize.width)
                 .ignoresSafeArea()
             
             VStack {
@@ -210,7 +218,7 @@ struct SessionDetailsHeaderView: View {
                 VStack {
                     HStack {
                         Text(navTitle)
-                            .font(.system(size: 28).bold())
+                            .font(.title.bold())
                             .foregroundColor(.white)
                             .hAlign(.leading)
                         ZStack {
@@ -220,7 +228,7 @@ struct SessionDetailsHeaderView: View {
                                 .defaultShadow()
                                 .frame(width: 76, height: 23)
                             Text("\(sessionStatus.rawValue.localizedString)".uppercased())
-                                .font(.system(size: 10))
+                                .font(.caption2)
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                         }
@@ -233,7 +241,7 @@ struct SessionDetailsHeaderView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
-                                .font(.system(size: 20))
+                                .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
@@ -244,13 +252,13 @@ struct SessionDetailsHeaderView: View {
                                 .foregroundColor(.white)
                             HStack {
                                 Text("\((session.startDate ?? Date()).toString("HH:mm"))")
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                 let duration = Int(session.duration)
                                 if session.duration != 0 {
                                     Text(duration.minutesToDuration())
-                                        .font(.system(size: 18))
+                                        .font(.body)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
                                 }
@@ -264,14 +272,14 @@ struct SessionDetailsHeaderView: View {
                             
                             if let location = session.location, !location.isEmpty {
                                 Text("\(location)")
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
                                     .foregroundColor(Color("LightGray"))
                                     .fontWeight(.semibold)
-                                    .font(.system(size: 20))
+                                    .font(.title3)
                             }
                         }
                     }

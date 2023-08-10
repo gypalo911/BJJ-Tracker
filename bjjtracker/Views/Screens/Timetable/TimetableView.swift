@@ -38,102 +38,119 @@ struct TimetableView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                    VStack(spacing: 0) {
-                        HStack {
-                            Text("Timetable")
-                                .font(.system(size: 28))
-                                .fontWeight(.bold)
-                                .foregroundColor(.black)
-                                .hAlign(.leading)
-                            Button {
-                                settings.showingActionSheet = true
-                            } label: {
-                                Image("createButton")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color("Blue"))
-                            }
-                            .hAlign(.trailing)
-                        }
+                VStack(spacing: 0) {
+                    Text("Timetable")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-                        .padding(.top, 10)
+                        .padding(.top, UIScreen.main.bounds.size.width <= 375 ? 30 : 60)
+                        .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
-                        
-                        VStack(spacing: 0) {
-                            DraggableCalendarView(
-                                selectedDay: $selectedDay,
-                                isBottomSheetOpen: $isBottomSheetOpen,
-                                sessions: sessionsList
-                            )
-                            if filteredSessions.isEmpty {
-                                Spacer()
-                                Text("No sessions for this day")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color("Gray"))
-                                NavigationLink(destination: {
-                                    ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                }) {
-                                    HStack {
-                                        Text("View History")
-                                            .font(.system(size: 16))
-                                            .foregroundColor(.blue)
-                                        Image("archive")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                    }
-                                }
-                                .padding(.top, 20)
-                                Spacer()
-                                Spacer()
-                            } else {
-                                ScrollView(showsIndicators: false) {
-                                    VStack(spacing: 16) {
-                                        ForEach(filteredSessions) { session in
-                                            ActivityPanelView(session: session, namespace: namespace)
-                                                .onTapGesture {
-                                                    withAnimation(AppConstants.mgeAnimation) {
-                                                        selectedSession = session
-                                                    }
-                                                }
-                                        }
-                                        NavigationLink(destination: {
-                                            ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                                .navigationBarTitle("")
-                                                .navigationBarHidden(true)
-                                        }) {
-                                            HStack {
-                                                Text("View History")
-                                                    .font(.system(size: 16))
-                                                    .foregroundColor(.blue)
-                                                Image("archive")
-                                                    .resizable()
-                                                    .frame(width: 20, height: 20)
-                                            }
-                                        }
-                                        .padding(.top, 20)
-                                    }
-                                    .padding(.bottom, 50)
-                                    .padding(.top, 20)
+                    
+                    VStack(spacing: 0) {
+                        DraggableCalendarView(
+                            selectedDay: $selectedDay,
+                            isBottomSheetOpen: $isBottomSheetOpen,
+                            sessions: sessionsList
+                        )
+                        if filteredSessions.isEmpty {
+                            Spacer()
+                            Text("No sessions for this day")
+                                .font(.body)
+                                .foregroundColor(Color("Gray"))
+                            NavigationLink(destination: {
+                                ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                            }) {
+                                HStack {
+                                    Text("View History")
+                                        .font(.callout)
+                                        .foregroundColor(.blue)
+                                    Image("archive")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
                                 }
                             }
-                        }.padding(.top, -10)
+                            .padding(.top, 20)
+                            Spacer()
+                            Spacer()
+                        } else {
+                            ScrollView(showsIndicators: false) {
+                                VStack(spacing: 16) {
+                                    ForEach(filteredSessions) { session in
+                                        ActivityPanelView(session: session, namespace: namespace)
+                                            .onTapGesture {
+                                                withAnimation(AppConstants.mgeAnimation) {
+                                                    selectedSession = session
+                                                }
+                                            }
+                                    }
+                                    NavigationLink(destination: {
+                                        ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                                    }) {
+                                        HStack {
+                                            Text("View History")
+                                                .font(.callout)
+                                                .foregroundColor(.blue)
+                                            Image("archive")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                        }
+                                    }
+                                    .padding(.top, 20)
+                                }
+                                .padding(.bottom, 150)
+                                .padding(.top, 20)
+                            }
+                        }
                     }
-                    .background(Color("generalBG").ignoresSafeArea())
-                    .fullScreenCover(isPresented: $isBottomSheetOpen) {
-                        MonthYearBottomSheetView(
-                            selectedDate: $selectedDay,
-                            isBottomSheetOpen: $isBottomSheetOpen
-                        )
+                    .padding(.top, -10)
+                }
+                .vAlign(.top)
+                .background(Color("generalBG").ignoresSafeArea())
+                .backport.hiddenToolbar(true)
+                //                    .fullScreenCover(isPresented: $isBottomSheetOpen) {
+                //                        MonthYearBottomSheetView(
+                //                            selectedDate: $selectedDay,
+                //                            isBottomSheetOpen: $isBottomSheetOpen
+                //                        )
+                //                    }
+                .bottomSheet(isPresented: $isBottomSheetOpen) {
+                    DatePicker(
+                        "Start Date",
+                        selection: $selectedDay,
+                        displayedComponents: [.date]
+                    )
+                    .labelsHidden()
+                    .datePickerStyle(.graphical)
+                    .background(Color.white)
+                    .padding([.horizontal, .top], 20)
+                    .padding(.bottom, 100)
+                }
+                .onChange(of: selectedDay, perform: { value in
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        isBottomSheetOpen = false
                     }
-                    .onAppear {
-                        viewModel.onTimetableViewAppeared()
-                        changeNavBar(.clear)
-                        settings.isTabBarHidden = false
+                    settings.selectedCalendarDate = value.setCurrentTime()
+                })
+                .onChange(of: isBottomSheetOpen) { value in
+                    if value {
+                        settings.isTabBarHidden = true
+                    } else {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            settings.isTabBarHidden = false
+                        }
                     }
                 }
+                .onAppear {
+                    viewModel.onTimetableViewAppeared()
+                    changeNavBar(.clear)
+                    settings.isTabBarHidden = false
+                    settings.selectedCalendarDate = selectedDay.setCurrentTime()
+                }
+            }
+            .zIndex(0)
             
             if let session = selectedSession {
                 SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
@@ -141,7 +158,7 @@ struct TimetableView: View {
                         selectedSession = nil
                         settings.isTabBarHidden = false
                     }
-                })
+                }).zIndex(1)
             }
         }
     }

@@ -42,7 +42,7 @@ struct EditSessionView: View {
                                 TitleTextView(text: "1. Select type:".localizedString)
 
                                 SelectionPanelView(
-                                    g: geometry,
+//                                    geometry: geometry,
                                     valuesList: ActivityType.allCases.map { $0.rawValue },
                                     selectedType: $activity.type,
                                     selectedTypeValue: activity.type.rawValue
@@ -52,7 +52,7 @@ struct EditSessionView: View {
                             VStack(alignment: .leading) {
                                 TitleTextView(text: "2. Select grappling style:".localizedString)
                                 SelectionPanelView(
-                                    g: geometry,
+//                                    geometry: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
                                     selectedType: $activity.style,
                                     selectedTypeValue: activity.style.rawValue

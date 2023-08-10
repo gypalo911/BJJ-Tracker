@@ -18,7 +18,7 @@ struct TechniquesListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Learned techniques")
-                .font(.system(size: 18))
+                .font(.body)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.black)
                 .padding(.horizontal, 10)
@@ -66,7 +66,7 @@ struct TechniquesListView: View {
             if !viewModel.suggestionTags.isEmpty && isTyping {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Suggestions")
-                        .font(.system(size: 14))
+                        .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundColor(Color("GrayTextColor"))
                     ScrollView(.horizontal, showsIndicators: false) {

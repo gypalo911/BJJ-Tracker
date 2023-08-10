@@ -71,10 +71,11 @@ class DashboardViewModel: ObservableObject {
 
 private extension DashboardViewModel {
     func currentWeekSessions(_ sessions: [FetchedResults<Session>.Element]) -> [Session] {
+        let currentWeek = Calendar.current.week(for: Date().startOfDay)
         let start = currentWeek.first?.date ?? Date()
         let end = currentWeek.last?.date ?? Date()
         return sessions.filter {
-            (start...end).contains($0.startDate ?? Date())
+            (start...end).contains(($0.startDate ?? Date()).startOfDay)
         }
     }
     
@@ -83,7 +84,7 @@ private extension DashboardViewModel {
         let start = lastWeekDate.first?.date ?? Date()
         let end = lastWeekDate.last?.date ?? Date()
         return sessions.filter {
-            (start...end).contains($0.startDate ?? Date())
+            (start...end).contains(($0.startDate ?? Date()).startOfDay)
         }
     }
 }

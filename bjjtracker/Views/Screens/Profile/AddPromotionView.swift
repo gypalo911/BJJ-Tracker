@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddPromotionView: View {
+    @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
     
     @ObservedObject var viewModel: AddPromotionViewViewModel
@@ -25,7 +26,6 @@ struct AddPromotionView: View {
                                 TitleTextView(text: "1. Grading system:".localizedString)
                                 
                                 SelectionPanelView<GradingSystem>(
-                                    g: geometry,
                                     valuesList: GradingSystem.allCases.map { $0.rawValue },
                                     selectedType: $viewModel.promotion.gradingSystem,
                                     selectedTypeValue: viewModel.promotion.gradingSystem.rawValue
@@ -80,6 +80,9 @@ struct AddPromotionView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.promotion.date = settings.selectedCalendarDate
+        }
     }
     
     func save() {
@@ -111,5 +114,7 @@ struct AddPromotionView_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

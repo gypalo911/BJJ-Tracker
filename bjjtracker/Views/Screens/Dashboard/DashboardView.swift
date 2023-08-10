@@ -54,7 +54,7 @@ struct DashboardView: View {
                             VStack(spacing: 0) {
                                 HStack {
                                     Text("Dashboard")
-                                        .font(.system(size: 28))
+                                        .font(.title)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .hAlign(.leading)
@@ -92,7 +92,7 @@ struct DashboardView: View {
                                 
                                 HStack {
                                     Text("\(viewModel.selectedDay.toString("LLLL yyyy").capitalized)")
-                                        .font(.system(size: 22))
+                                        .font(.title2)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .hAlign(.leading)
@@ -114,17 +114,15 @@ struct DashboardView: View {
                                 if filteredSessions.isEmpty {
                                     Spacer()
                                     Text("No sessions for this day")
-                                        .font(.system(size: 18))
+                                        .font(.body)
                                         .foregroundColor(Color("Gray"))
                                     
                                     NavigationLink(destination: {
                                         ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                            .navigationBarTitle("")
-                                            .navigationBarHidden(true)
                                     }) {
                                         HStack {
                                             Text("View History")
-                                                .font(.system(size: 16))
+                                                .font(.callout)
                                                 .foregroundColor(.blue)
                                             Image("archive")
                                                 .resizable()
@@ -149,12 +147,10 @@ struct DashboardView: View {
                                             
                                             NavigationLink(destination: {
                                                 ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
-                                                    .navigationBarTitle("")
-                                                    .navigationBarHidden(true)
                                             }) {
                                                 HStack {
                                                     Text("View History")
-                                                        .font(.system(size: 16))
+                                                        .font(.callout)
                                                         .foregroundColor(.blue)
                                                     Image("archive")
                                                         .resizable()
@@ -168,7 +164,11 @@ struct DashboardView: View {
                             }
                         }
                     }
+                    .backport.hiddenToolbar(true)
                     .background(Color("generalBG").ignoresSafeArea())
+                    .onChange(of: viewModel.selectedDay, perform: { value in
+                        settings.selectedCalendarDate = value.setCurrentTime()
+                    })
                     .onChange(of: filteredSessions) { items in
                         withAnimation(.easeInOut(duration: 0.3)) {
                             self.headerHeight = items.isEmpty ? 620 : 660
@@ -176,10 +176,10 @@ struct DashboardView: View {
                     }
                     .onAppear {
                         settings.isTabBarHidden = false
-                        NotificationManager.shared.requestAuthorization { _ in }
                         viewModel.onDashboardAppeared()
                     }
                 }
+            .zIndex(0)
             
             if let session = viewModel.selectedSession {
                 SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
@@ -187,7 +187,7 @@ struct DashboardView: View {
                         viewModel.selectedSession = nil
                         settings.isTabBarHidden = false
                     }
-                })
+                }).zIndex(1)
             }
         }
     }

@@ -18,7 +18,7 @@ class StatisticsViewViewModel: ObservableObject {
     
     @Published var title: String = ""
     
-    @Published var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, end: Date())
+    @Published var dateInterval: DateInterval = DateInterval(start: Calendar.current.date(byAdding: .day, value: -7, to: Date())!.startOfDay, end: Date().endOfDay)
     @Published var selectedSegment: Int = CalendarSegment.week.rawValue
     
     var isConcreteDates: Bool = false

@@ -78,13 +78,13 @@ struct PieChartRows: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(self.names[i])
                             .foregroundColor(Color("Gray"))
-                            .font(.system(size: 14))
+                            .font(.footnote)
                             .fontWeight(.semibold)
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(self.values[i])
                                     .foregroundColor(Color.black)
-                                    .font(.system(size: 14))
+                                    .font(.footnote)
                                     .fontWeight(.semibold)
                             }
                         }

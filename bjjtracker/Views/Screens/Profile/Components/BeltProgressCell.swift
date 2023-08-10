@@ -19,7 +19,7 @@ struct BeltProgressCell: View {
     
     private let isLocked: Bool
     
-    init(belt: Belt, isLocked: Bool, promotionModels: FetchedResults<PromotionModel>) {
+    init(belt: Belt, isLocked: Bool, promotionModels: [PromotionModel]) {
         self.belt = belt
         self.isLocked = isLocked
         self.promotionModels = promotionModels.filter {
@@ -93,7 +93,7 @@ struct BeltProgressCell_Previews: PreviewProvider {
             BeltProgressCell(
                 belt: .blue,
                 isLocked: false,
-                promotionModels: promotionModels
+                promotionModels: promotionModels.map { $0 }
             )
         }
     }

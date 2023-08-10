@@ -18,11 +18,11 @@ struct BeltPromotionsListCell: View {
                     .foregroundColor(.black)
                     .frame(width: 10)
                 Text("Stripes: %@".localized(with: ["\(stripes)"]))
-                    .font(.system(size: 14))
+                    .font(.footnote)
                     .fontWeight(.bold)
             }
             Text(date.toString("dd MMMM yyyy"))
-                .font(.system(size: 14))
+                .font(.footnote)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.gray)
                 .padding(.leading, 20)

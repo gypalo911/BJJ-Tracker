@@ -19,40 +19,50 @@ struct DurationPicker: View {
     }
 
     var body: some View {
-        HStack {
-            Picker("Hours", selection: $hours) {
-                ForEach(0..<24) { hour in
-                    HStack(alignment: .bottom, spacing: 3) {
-                        Text("\(hour)")
-                            .font(.system(size: 20))
-                        Text("hours")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                Picker("Hours", selection: $hours) {
+                    ForEach(0..<24) { hour in
+                        HStack(alignment: .bottom, spacing: 3) {
+                            Text("\(hour)")
+                                .font(.title3)
+                            Text("hours")
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                        }
                     }
                 }
-            }
-            .onChange(of: hours) { _ in
-                duration = totalDurationInMinutes
-            }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 100)
-
-            Picker("Minutes", selection: $minutes) {
-                ForEach(0..<60) { minute in
-                    HStack(alignment: .bottom, spacing: 3) {
-                        Text("\(minute)")
-                            .font(.system(size: 20))
-                        Text("min")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
+                .pickerStyle(WheelPickerStyle())
+                .frame(maxWidth: geometry.size.width / 2)
+                .clipped()
+                .onChange(of: hours) { _ in
+                    duration = totalDurationInMinutes
+                }
+                
+                Picker("Minutes", selection: $minutes) {
+                    ForEach(0..<60) { minute in
+                        HStack(alignment: .bottom, spacing: 3) {
+                            Text("\(minute)")
+                                .font(.title3)
+                            Text("min")
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                        }
                     }
                 }
-            }.onChange(of: minutes) { _ in
-                duration = totalDurationInMinutes
+                .pickerStyle(WheelPickerStyle())
+                .frame(maxWidth: geometry.size.width / 2)
+                .clipped()
+                .onChange(of: minutes) { _ in
+                    duration = totalDurationInMinutes
+                }
             }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 100)
-        }.frame(height: 150)
+        }
+        .frame(height: 150)
+        .onAppear {
+            hours = Int(duration / 60)
+            minutes = Int(duration % 60)
+        }
     }
 }
 

@@ -20,10 +20,10 @@ struct StatsView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(text)
-                        .font(.system(size: 14))
+                        .font(.footnote)
                         .fontWeight(.semibold)
                     Text(value)
-                        .font(.system(size: 22))
+                        .font(.title3)
                         .fontWeight(.semibold)
                 }
                 Spacer()
@@ -41,12 +41,12 @@ struct StatsView: View {
                                     .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
                                 Text(tendecyValue)
                                     .fixedSize()
-                                    .font(.system(size: 12))
+                                    .font(.caption2)
                                     .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
                             } else {
                                 Text(tendecyValue)
                                     .fixedSize()
-                                    .font(.system(size: 12))
+                                    .font(.caption)
                                     .foregroundColor(Color("darkenGreen"))
                             }
                         }

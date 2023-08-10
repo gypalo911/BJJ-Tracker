@@ -48,7 +48,6 @@ struct SelectionPanelStringView: View {
 }
 
 struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawValue == String {
-    let g: GeometryProxy
     let valuesList: [String]
     
     @Binding var selectedType: T
@@ -59,35 +58,21 @@ struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawV
     }
 
     var body: some View {
-        var width = CGFloat.zero
-        var height = CGFloat.zero
-
-        ZStack(alignment: .topLeading) {
-            ForEach(valuesList, id: \.self) { type in
-                RectangleOption(type: type, selectedType: $selectedTypeValue)
-                    .alignmentGuide(.leading, computeValue: { d in
-                        if (abs(width - d.width) > g.size.width)
-                        {
-                            width = 0
-                            height -= d.height
-                        }
-                        let result = width
-                        if type == valuesList.last! {
-                            width = 0 //last item
-                        } else {
-                            width -= d.width
-                        }
-                        return result
-                    })
-                    .alignmentGuide(.top, computeValue: { d in
-                        let result = height
-                        if type == valuesList.last! {
-                            height = 0 // last item
-                        }
-                        return result
-                    })
+        ScrollViewReader { scrollValue in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(valuesList, id: \.self) { type in
+                        RectangleOption(type: type, selectedType: $selectedTypeValue)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    scrollValue.scrollTo(type)
+                                }
+                            }
+                    }
+                }
             }
-        }.onChange(of: selectedTypeValue, perform: { val in
+        }
+        .onChange(of: selectedTypeValue, perform: { val in
             selectedType = T(rawValue: val)!
         })
     }
@@ -96,6 +81,8 @@ struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawV
 struct RectangleOption: View {
     let type: String
     @Binding var selectedType: String
+    
+    var horizontalPadding: CGFloat = 15
     
     var body: some View {
         let isSelected = type == selectedType
@@ -107,8 +94,9 @@ struct RectangleOption: View {
         }, label: {
             Text(type.localizedString)
                 .fontWeight(.regular)
+                .font(.body)
                 .foregroundColor(.black)
-                .padding(.horizontal, 15)
+                .padding(.horizontal, horizontalPadding)
                 .padding(.vertical, 6)
                 .background(
                     ZStack(alignment: .center) {
@@ -133,7 +121,7 @@ struct DurationSelectorView: View {
         }, label: {
             let duration = duration.minutesToDuration()
             Text("\(duration)")
-                .font(.system(size: 18))
+                .font(.body)
                 .fontWeight(.regular)
                 .foregroundColor(.black)
                 .padding(.horizontal, 20)
@@ -153,28 +141,28 @@ struct TitleTextView: View {
     let text: String
     var body: some View {
         Text(text)
-            .font(.system(size: 18))
+            .font(.headline)
             .fontWeight(.medium)
     }
 }
 
-//struct SelectionPanelView_Previews: PreviewProvider {
-//    struct Container: View {
-//        @StateObject var promotion: Promotion = .init(belt: .blue, stripes: 2, date: Date(), location: "", notes: "")
-//
-//        var body: some View {
-//            GeometryReader {geometry in
-//                SelectionPanelView(
-//                    g: geometry,
-//                    valuesList: Belt.belts(for: .adult).map { $0.rawValue },
-//                    selectedType: $promotion.belt,
-//                    selectedTypeValue: Belt.white.rawValue
-//                )
-//            }
-//        }
-//    }
-//
-//    static var previews: some View {
-//        Container()
-//    }
-//}
+struct SelectionPanelView_Previews: PreviewProvider {
+    struct Container: View {
+        @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+
+        var body: some View {
+            GeometryReader {geometry in
+                SelectionPanelView(
+//                    geometry: geometry,
+                    valuesList: ActivityType.allCases.map { $0.rawValue },
+                    selectedType: $activity.type,
+                    selectedTypeValue: activity.type.rawValue
+                )
+            }
+        }
+    }
+
+    static var previews: some View {
+        Container()
+    }
+}

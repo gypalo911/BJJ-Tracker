@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Introspect
+import StoreKit
 
 struct ProfileView: View {
     enum ActionSheetState {
@@ -13,6 +15,14 @@ struct ProfileView: View {
         case gradingSystem
         case modalSheets
     }
+    
+    enum Settings {
+        case language
+        case notifications
+    }
+    
+//    @Environment(\.requestReview) var requestReview
+    @Environment(\.openURL) var openURL
     
     @EnvironmentObject var settings: AppSettings
     
@@ -24,7 +34,19 @@ struct ProfileView: View {
     var promotionModels: FetchedResults<PromotionModel>
     
     @State private var showingGradingActionSheet: Bool = false
-    @State private var gradingSystem: GradingSystem = .adult
+    
+    @State private var showSheet = false
+    
+    @State private var showingPromotionsView: Bool = false
+    @State private var showingBottomSheet: Bool = false
+    @State private var showShareSheet: Bool = false
+    @State private var selectedSettingsView: Settings? = nil {
+        didSet {
+            showingBottomSheet.toggle()
+        }
+    }
+    
+    private let isSmallScreen: Bool = UIScreen.main.bounds.size.width < 400
     
     var promotions: [Promotion] {
         promotionModels.map {
@@ -33,16 +55,312 @@ struct ProfileView: View {
     }
     
     var lastPromotion: Promotion? {
-        let belts = Belt.belts(for: gradingSystem)
-        return promotions
+        let adultBelts = Belt.belts(for: .adult)
+        let adult = promotions
             .filter {
-                belts.contains($0.belt)
+                adultBelts.contains($0.belt)
             }
             .sorted(by: {
                 $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
                 ($0.belt.rawValue < $1.belt.rawValue)
             }).last
+        if adult != nil {
+            return adult
+        } else {
+            let juniorBelts = Belt.belts(for: .junior)
+            let junior = promotions
+                .filter {
+                    juniorBelts.contains($0.belt)
+                }
+                .sorted(by: {
+                    $0.belt.rawValue == $1.belt.rawValue ? ($0.stripes < $1.stripes) :
+                    ($0.belt.rawValue < $1.belt.rawValue)
+                }).last
+            
+            return junior
+        }
     }
+    
+    @State private var selectedImage: UIImage?
+    
+    var profileAvatar: UIImage {
+        selectedImage ?? UIImage().loadImageFromDiskWith(fileName: "avatar.png") ?? UIImage(named: "default-avatar")!
+    }
+    
+    var body: some View {
+        ZStack {
+            NavigationView {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .center, spacing: 0) {
+                        HStack {
+                            Text("Profile")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .hAlign(.leading)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 10)
+                        .padding(.bottom, 60)
+                        
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .frame(height: 230)
+                                .frame(maxWidth: isSmallScreen ? 330 : 360)
+                                .cornerRadius(20)
+                                .padding(.horizontal, 20)
+                                .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
+                            
+                            VStack(spacing: 20) {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 100, height: 100)
+                                    .background(
+                                        Image(uiImage: profileAvatar)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 100, height: 100)
+                                            .clipped()
+                                    )
+                                    .background(Color(red: 0.85, green: 0.85, blue: 0.85))
+                                    .cornerRadius(20)
+                                    .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .inset(by: 3)
+                                            .stroke(.white, lineWidth: 6)
+                                    )
+                                    .onTapGesture {
+                                        showSheet = true
+                                    }
+                                
+                                if let lastPromotion = lastPromotion {
+                                    VStack(spacing: 5) {
+                                        BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
+                                            .onTapGesture {
+                                                withAnimation(.easeInOut(duration: 0.25)) {
+                                                    showingPromotionsView = true
+                                                }
+                                            }
+                                        Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
+                                            .foregroundColor(.gray)
+                                            .font(.callout)
+                                            .fontWeight(.medium)
+                                    }
+                                    .hAlign(.center)
+                                } else {
+                                    VStack {
+                                        BeltView(beltColor: Belt.black.color, stripesCount: 2)
+                                            .overlay {
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(Color("LightGray"))
+                                                        .opacity(0.8)
+                                                    Text("Yet no promotions".localizedString)
+                                                        .foregroundColor(.white)
+                                                        .font(.caption)
+                                                        .fontWeight(.regular)
+                                                }
+                                            }
+                                        Button(action: {
+                                            withAnimation(.easeInOut(duration: 0.3)) {
+                                                settings.selectedSheet = .promotion
+                                            }
+                                        }, label: {
+                                            Text("Add Promotion".localizedString)
+                                                .font(.callout)
+                                                .fontWeight(.regular)
+                                        }).padding(5)
+                                    }
+                                }
+                                
+                                HStack(alignment: .top, spacing: 74) {
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Text("\(sessionsList.count)")
+                                            .font(.body)
+                                            .fontWeight(.semibold)
+                                        Text("Sessions".localizedString)
+                                            .font(.footnote)
+                                            .fontWeight(.medium)
+                                    }
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Text("\(totalTime())")
+                                            .font(.body)
+                                            .fontWeight(.semibold)
+                                        Text("Total time".localizedString)
+                                            .font(.footnote)
+                                            .fontWeight(.medium)
+                                    }
+                                }
+                            }
+                            .offset(x: 0, y: -40)
+                        }
+                        
+                        VStack(alignment: .center, spacing: 12) {
+                            SettigsCell(
+                                icon: Image("language"),
+                                text: "Language",
+                                onTap: {
+                                    openSettings()
+                                }
+                            )
+                            .padding(.top, 20)
+//                            SettigsCell(
+//                                icon: Image("notification"),
+//                                text: "Notifications",
+//                                onTap: {
+//                                    selectedSettingsView = .notifications
+//                                }
+//                            )
+                            SettigsCell(
+                                icon: Image("issue"),
+                                text: "Report an issue",
+                                onTap: {
+                                    EmailController.shared.sendEmail(
+                                        subject: "Found an issue in JiuTrack app".localizedString,
+                                        body: "".localizedString,
+                                        to: "wthotcode@gmail.com"
+                                    )
+                                }
+                            )
+                            SettigsCell(
+                                icon: Image("rate"),
+                                text: "Rate the app",
+                                onTap: {
+                                    if let scene = UIApplication.shared.connectedScenes
+                                            .first(where: { $0.activationState == .foregroundActive })
+                                            as? UIWindowScene {
+                                        SKStoreReviewController.requestReview(in: scene)
+                                    }
+
+                                }
+                            )
+                            SettigsCell(
+                                icon: Image("share"),
+                                text: "Share the app",
+                                onTap: {
+                                    showShareSheet = true
+                                }
+                            )
+                            
+                            VStack {
+                                Text("Support the project")
+                                    .font(.caption)
+                                    .fontWeight(.regular)
+                                    .foregroundColor(Color("Gray"))
+                                
+                                HStack {
+                                    Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(height: 40)
+                                                .background(Color("LightLightGray"))
+                                                .cornerRadius(10)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .inset(by: 0.5)
+                                                        .stroke(.black, lineWidth: 1)
+                                                )
+                                            
+                                            Image("patreon")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(.white)
+                                                .frame(maxHeight: 20)
+                                        }
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    
+                                    Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(height: 40)
+                                                .background(Color("Yellow"))
+                                                .cornerRadius(10)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .inset(by: 0.5)
+                                                        .stroke(.black, lineWidth: 1)
+                                                )
+
+                                            Image("buymeacoffee")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(.white)
+                                                .frame(maxHeight: 20)
+                                        }
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                }
+                                .padding(.horizontal, 20)
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .padding(.bottom, 20)
+                        }
+                        .vAlign(.top)
+                        .background(
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .cornerRadius(30)
+                                .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
+                        )
+                        .frame(maxWidth: isSmallScreen ? 330 : 360)
+                        .padding(20)
+                        .hAlign(.center)
+                        
+                    }
+                    .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
+                }
+                .background(Color("generalBG").ignoresSafeArea())
+                .sheet(isPresented: $showSheet) {
+                    ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
+                }
+                .sheet(isPresented: $showShareSheet) {
+                    ActivityViewController(activityItems: [Locale.current.languageCode == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])
+                }
+                .onAppear {
+                    viewModel.onProfileViewAppeared()
+                    NotificationManager.shared.requestAuthorization { _ in }
+                }
+                .backport.hiddenToolbar(true)
+            }
+        }
+        .blurredPopup(isPresented: $showingPromotionsView) {
+                PromotionsView(
+                    isViewOpen: $showingPromotionsView,
+                    gradingSystem: lastPromotion?.beltType ?? .adult
+                )
+            }
+        .bottomSheet(isPresented: $showingBottomSheet) {
+            if selectedSettingsView == .language {
+                LanguageSettingsView()
+            } else if selectedSettingsView == .notifications {
+                NotificationSettingsView()
+            }
+        }
+        .onChange(of: showingPromotionsView) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
+        .onChange(of: showingBottomSheet) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
+    }
+    
     
     func totalTime() -> String {
         return sessionsList.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
@@ -55,120 +373,62 @@ struct ProfileView: View {
         return lastPromotion.belt.rawValue < belt.rawValue
     }
     
+    private func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            openURL(url)
+        }
+    }
+}
+
+struct SettigsCell: View {
+    
+    let icon: Image
+    let text: String
+    let valueText: String?
+    
+    var onTap: (() -> Void)?
+    
+    init(icon: Image, text: String, valueText: String? = nil, onTap: (() -> Void)? = nil) {
+        self.icon = icon
+        self.text = text
+        self.valueText = valueText
+        self.onTap = onTap
+    }
+    
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text("Profile")
-                        .font(.system(size: 28))
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .hAlign(.leading)
-                        .background(Color.white.ignoresSafeArea())
-                    
-                    Button {
-                        settings.showingActionSheet = true
-                    } label: {
-                        Image("createButton")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color("Blue"))
-                    }
-                    .hAlign(.trailing)
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 30)
-                .padding(.top, 10)
-                
-                HStack(spacing: 10) {
-                    StatsView(text: "Sessions".localizedString, value: "\(sessionsList.count)")
-                    StatsView(text: "Total time".localizedString, value: totalTime())
-                }.padding(.horizontal, 20)
-                
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        HStack {
-                            if let lastPromotion = lastPromotion {
-                                VStack(spacing: 10) {
-                                    BeltView(beltColor: lastPromotion.belt.color, stripesCount: lastPromotion.stripes)
-                                    Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 16))
-                                        .fontWeight(.medium)
-                                }
-                                .hAlign(.bottomLeading)
-                            }
-                            VStack {
-                                Button(action: {
-                                    showingGradingActionSheet = true
-                                }, label: {
-                                    HStack(spacing: 10) {
-                                        Text(gradingSystem.rawValue.localizedString.capitalized)
-                                            .font(.system(size: 14))
-                                            .foregroundColor(Color.black)
-                                        Image(systemName: "chevron.down")
-                                            .scaledToFit()
-                                            .frame(width: 15)
-                                            .foregroundColor(Color.black)
-                                    }
-                                    .padding(.vertical, 5)
-                                    .padding(.horizontal, 15)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(lineWidth: 1)
-                                            .fill(Color("LightGray"))
-                                    )
-                                })
-                                .hAlign(.topTrailing)
-                                Spacer()
-                            }
-                        }
-                        
-                        VStack {
-                            HStack {
-                                Text("Progress")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                Spacer()
-                            }
-                            .padding([.leading, .top, .trailing], 15)
-                            
-                            VStack {
-                                ForEach(Belt.belts(for: gradingSystem).filter { $0 != .none }, id: \.self) { belt in
-                                    BeltProgressCell(
-                                        belt: belt,
-                                        isLocked: isLocked(belt: belt, lastPromotion: lastPromotion),
-                                        promotionModels: promotionModels
-                                    )
-                                }
-                            }
-                            .padding(.horizontal, 5)
-                            .padding(.bottom, 15)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .background(
-                            Rectangle()
-                                .fill(.white)
-                                .cornerRadius(10)
-                                .defaultShadow()
-                        )
-                    }
-                    .padding([.leading, .trailing, .top], 20)
-                    .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
-                }
+        HStack(spacing: 14) {
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 40, height: 40)
+                    .background(Color(red: 0.96, green: 0.97, blue: 1))
+                    .cornerRadius(10)
+                icon
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.black)
+                    .frame(width: 20, height: 20)
             }
-            .actionSheet(isPresented: $showingGradingActionSheet) {
-                let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
-                return ActionSheet(title: Text("Select Grading System"), buttons: [
-                    .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
-                        gradingSystem = gradingSystem == .adult ? .junior : .adult
-                    }),
-                    .cancel()
-                ])
+            Text("\(text)".localizedString)
+                .font(.footnote)
+                .fontWeight(.semibold)
+            Spacer()
+            if let valueText = valueText {
+                Text("\(valueText)".localizedString)
+                    .font(.footnote)
+                    .fontWeight(.regular)
+                    .foregroundColor(.gray)
             }
-            .onAppear {
-                viewModel.onProfileViewAppeared()
-            }
+            Image.init(systemName: "chevron.right")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 15)
+                .foregroundColor(.black)
+        }
+        .padding(.horizontal, 20)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap?()
         }
     }
 }
@@ -179,4 +439,23 @@ struct ProfileView_Previews: PreviewProvider {
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
+}
+
+
+
+struct ActivityViewController: UIViewControllerRepresentable {
+
+    var activityItems: [Any]
+    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems,
+                                                  applicationActivities: nil)
+        
+        controller.excludedActivityTypes = excludedActivityTypes
+        
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }

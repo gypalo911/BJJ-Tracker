@@ -10,7 +10,6 @@ import Introspect
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
-    @State private var selectedSheet: ModalsSheets? = nil
     
     @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
@@ -35,16 +34,16 @@ struct ContentView: View {
                         .tag(Tab.profile)
                 }
             }
-            .popup(view: {
+            .blurredPopup(isPresented: $settings.showingActionSheet) {
                 BluredBottomSheet(
                     isBottomSheetOpen: $settings.showingActionSheet,
                     onSelect: { modal in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            selectedSheet = modal
+                            settings.selectedSheet = modal
                         }
                     }
                 )
-            })
+            }
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
                     settings.showingActionSheet = true
@@ -58,7 +57,7 @@ struct ContentView: View {
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
-        .sheet(item: $selectedSheet) { selectedSheet in
+        .sheet(item: $settings.selectedSheet) { selectedSheet in
             switch selectedSheet {
             case .promotion:
                 AddPromotionView(viewModel: .init())
@@ -66,8 +65,8 @@ struct ContentView: View {
                 NewSessionView(viewModel: .init())
             }
         }
-        .onChange(of: settings.showingActionSheet) { _ in
-            if settings.showingActionSheet {
+        .onChange(of: settings.showingActionSheet) { value in
+            if value {
                 settings.isTabBarHidden = true
             } else {
                 withAnimation(.easeInOut(duration: 0.25)) {
@@ -95,5 +94,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        ContentView()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
+            .previewDisplayName("iphone 7 ios 15")
     }
 }

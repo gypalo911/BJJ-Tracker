@@ -16,6 +16,7 @@ extension Date {
     
     func allDatesInMonth() -> [Date] {
         let calendar = Calendar.current
+        print("first weekday:\(calendar.firstWeekday)")
         
         let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
         let range = calendar.range(of: .day, in: .month, for: startDate)!
@@ -61,6 +62,16 @@ extension Date {
     
     func isInInterval(dateInterval: DateInterval) -> Bool {
         dateInterval.contains(self)
+    }
+    
+    func setCurrentTime() -> Date {
+        let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+        
+        components.hour = todayComponents.hour
+        components.minute = todayComponents.minute
+        
+        return Calendar.current.date(from: components) ?? self
     }
 }
 

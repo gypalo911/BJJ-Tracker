@@ -36,14 +36,15 @@ struct LinkPreview: View {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 170, maxHeight: 101)
+                    .frame(maxWidth: 170)
+                    .frame(height: 101)
                     .clipped()
                     .cornerRadius(16)
                     .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                 
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 170, height: 45)
+                    .frame(maxWidth: 170, maxHeight: 45)
                     .background(
                         LinearGradient(
                             stops: [
@@ -59,7 +60,8 @@ struct LinkPreview: View {
             } else {
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 170, height: 101)
+                    .frame(maxWidth: 170)
+                    .frame(height: 101)
                     .background(Color("LightBlue"))
                     .cornerRadius(10)
                     .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
@@ -71,7 +73,7 @@ struct LinkPreview: View {
                     .padding(.top, 15)
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 170, height: 45)
+                    .frame(maxWidth: 170, maxHeight: 45)
                     .background(
                         LinearGradient(
                             stops: [
@@ -87,7 +89,7 @@ struct LinkPreview: View {
             }
             VStack(alignment: .leading, spacing: 1, content: {
                 Text(previewModel.title ?? previewModel.previewURL.relativeString)
-                    .font(.system(size: 10))
+                    .font(.caption2)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
