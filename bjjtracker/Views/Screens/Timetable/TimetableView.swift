@@ -45,7 +45,7 @@ struct TimetableView: View {
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-                        .padding(.top, UIScreen.main.bounds.size.width < 375 ? 30 : 60)
+                        .padding(.top, UIScreen.main.bounds.size.width <= 375 ? 30 : 60)
                         .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
                     
@@ -127,12 +127,13 @@ struct TimetableView: View {
                     .background(Color.white)
                     .padding([.horizontal, .top], 20)
                     .padding(.bottom, 100)
-                    .onChange(of: selectedDay, perform: { value in
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            isBottomSheetOpen = false
-                        }
-                    })
                 }
+                .onChange(of: selectedDay, perform: { value in
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        isBottomSheetOpen = false
+                    }
+                    settings.selectedCalendarDate = value.setCurrentTime()
+                })
                 .onChange(of: isBottomSheetOpen) { value in
                     if value {
                         settings.isTabBarHidden = true
@@ -146,6 +147,7 @@ struct TimetableView: View {
                     viewModel.onTimetableViewAppeared()
                     changeNavBar(.clear)
                     settings.isTabBarHidden = false
+                    settings.selectedCalendarDate = selectedDay.setCurrentTime()
                 }
             }
             .zIndex(0)

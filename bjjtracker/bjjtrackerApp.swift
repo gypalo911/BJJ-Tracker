@@ -39,6 +39,8 @@ class AppSettings: ObservableObject {
     @Published var navigateToPage: String?
     @Published var notificationTime: Int = 3600  // 1 hour
     @Published var appLanguage: AppLanguage = .english
+    // Used on Dashboard and Timetable screens when user wants to create a Session or Promotion it automatically uses this variable
+    @Published var selectedCalendarDate: Date = Date()
 }
 
 @main

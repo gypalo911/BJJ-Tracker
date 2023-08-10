@@ -31,6 +31,8 @@ struct SessionDetailsView: View {
         viewModel.session.activityType
     }
     
+    private let screenSize: CGSize = UIScreen.main.bounds.size
+    
     var body: some View {
         ZStack {
             VStack {
@@ -75,26 +77,29 @@ struct SessionDetailsView: View {
                         }
                         .padding(.horizontal, 10)
                         
-                        if !viewModel.notesLinks.isEmpty {
-                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                                ForEach(viewModel.previewModels, id: \.self) { model in
-                                    LinkPreview(
-                                        previewModel: model, onTap: { link in
-                                            viewModel.linkOpened(link)
-                                        }
-                                    )
+                        Group {
+                            if !viewModel.notesLinks.isEmpty {
+                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                                    ForEach(viewModel.previewModels, id: \.self) { model in
+                                        LinkPreview(
+                                            previewModel: model, onTap: { link in
+                                                viewModel.linkOpened(link)
+                                            }
+                                        )
+                                    }
                                 }
-                            }
-                            if viewModel.notesLinks.count > viewModel.previewModels.count {
-                                ProgressView()
-                                    .hAlign(.center)
+                                if viewModel.notesLinks.count > viewModel.previewModels.count {
+                                    ProgressView()
+                                        .hAlign(.center)
+                                }
                             }
                         }
                     }
+                    .padding(.bottom, screenSize.width <= 375 ? 30 : 10)
+                    .padding(.top, 10)
+                    .padding(.horizontal, 20)
                     .hAlign(.leading)
                     .vAlign(.top)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 20)
                 }
             }
             .ignoresSafeArea(.keyboard)
@@ -174,6 +179,8 @@ struct SessionDetailsHeaderView: View {
             endPoint: .bottomTrailing
         )
     }
+    
+    private let screenSize: CGSize = UIScreen.main.bounds.size
 
     var body: some View {
         ZStack {
@@ -183,7 +190,7 @@ struct SessionDetailsHeaderView: View {
                 .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                 .defaultShadow()
                 .vAlign(.top)
-                .frame(width: UIScreen.main.bounds.size.width)
+                .frame(width: screenSize.width)
                 .ignoresSafeArea()
             
             VStack {

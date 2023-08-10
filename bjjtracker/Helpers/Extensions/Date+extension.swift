@@ -63,6 +63,16 @@ extension Date {
     func isInInterval(dateInterval: DateInterval) -> Bool {
         dateInterval.contains(self)
     }
+    
+    func setCurrentTime() -> Date {
+        let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+        
+        components.hour = todayComponents.hour
+        components.minute = todayComponents.minute
+        
+        return Calendar.current.date(from: components) ?? self
+    }
 }
 
 struct DateValue: Identifiable {

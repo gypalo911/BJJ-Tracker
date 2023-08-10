@@ -29,10 +29,6 @@ struct DashboardView: View {
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
-        print("\n\n-----Dates:\n")
-        print(viewModel.requestDateRange.start)
-        print(viewModel.requestDateRange.end)
-        print("\n----------\n\n")
         _sessionsList = FetchRequest<Session>(
             sortDescriptors: [],
             predicate: NSPredicate(
@@ -170,6 +166,9 @@ struct DashboardView: View {
                     }
                     .backport.hiddenToolbar(true)
                     .background(Color("generalBG").ignoresSafeArea())
+                    .onChange(of: viewModel.selectedDay, perform: { value in
+                        settings.selectedCalendarDate = value.setCurrentTime()
+                    })
                     .onChange(of: filteredSessions) { items in
                         withAnimation(.easeInOut(duration: 0.3)) {
                             self.headerHeight = items.isEmpty ? 620 : 660

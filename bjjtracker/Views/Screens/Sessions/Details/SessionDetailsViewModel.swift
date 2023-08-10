@@ -36,9 +36,9 @@ class SessionDetailsViewModel: ObservableObject {
             return
         }
         notesLinks = checkForUrls(text: notes)
-//        Task {
-//            await fetchMetadata(for: notesLinks)
-//        }
+        Task {
+            await fetchMetadata(for: notesLinks)
+        }
     }
     
     func checkForUrls(text: String) -> [String] {
@@ -84,50 +84,54 @@ extension SessionDetailsViewModel {
         }
     }
     
+    @MainActor
     private func fetchMetadata(for previewURLString: String) async throws -> LinkPreviewModel? {
         guard let previewURL = URL(string: previewURLString) else { return nil }
         let provider = LPMetadataProvider()
         var linkPreviewModel = LinkPreviewModel(previewURL: previewURL)
         
         let metadata = try await provider.startFetchingMetadata(for: previewURL)
-        let convertedImage = try await convertToImage(metadata.imageProvider)
+        if let image = try await loadImage(from: metadata) {
+            linkPreviewModel.image = image
+        }
         
-        linkPreviewModel.image = convertedImage
         linkPreviewModel.title = metadata.title
         linkPreviewModel.url = metadata.url?.host
         
         return linkPreviewModel
     }
     
-    private func convertToImage(_ imageProvider: NSItemProvider?) async throws -> UIImage? {
+    private func loadImage(from metadata: LPLinkMetadata) async throws -> UIImage? {
+        guard let imageProvider = metadata.imageProvider else {
+            return nil
+        }
+        let type = String(describing: UTType.image)
+        let item = try await imageProvider.loadItem(forTypeIdentifier: type)
+        let convertedImage = try await convertToImage(item)
+        return convertedImage
+    }
+    
+    private func convertToImage(_ item: NSSecureCoding) async throws -> UIImage? {
         var image: UIImage?
         
-        if let imageProvider {
-            let type = String(describing: UTType.image)
-            
-            if imageProvider.hasItemConformingToTypeIdentifier(type) {
-                let item = try await imageProvider.loadItem(forTypeIdentifier: type)
-                
-                if item is UIImage {
-                    image = item as? UIImage
-                }
-                
-                if item is URL {
-                    guard let url = item as? URL,
-                          let data = try? Data(contentsOf: url)
-                    else {
-                        return nil
-                    }
-                    
-                    image = UIImage(data: data)
-                }
-                
-                if item is Data {
-                    guard let data = item as? Data else { return nil }
-                    
-                    image = UIImage(data: data)
-                }
+        if item is UIImage {
+            image = item as? UIImage
+        }
+        
+        if item is URL {
+            guard let url = item as? URL,
+                  let data = try? Data(contentsOf: url)
+            else {
+                return nil
             }
+            
+            image = UIImage(data: data)
+        }
+        
+        if item is Data {
+            guard let data = item as? Data else { return nil }
+            
+            image = UIImage(data: data)
         }
         
         return image

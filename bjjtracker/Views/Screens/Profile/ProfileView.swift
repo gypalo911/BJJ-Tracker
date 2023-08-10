@@ -179,18 +179,18 @@ struct ProfileView: View {
                                     VStack(alignment: .center, spacing: 5) {
                                         Text("\(sessionsList.count)")
                                             .font(.body)
-                                            .fontWeight(.medium)
+                                            .fontWeight(.semibold)
                                         Text("Sessions".localizedString)
                                             .font(.footnote)
-                                            .fontWeight(.regular)
+                                            .fontWeight(.medium)
                                     }
                                     VStack(alignment: .center, spacing: 5) {
                                         Text("\(totalTime())")
                                             .font(.body)
-                                            .fontWeight(.medium)
+                                            .fontWeight(.semibold)
                                         Text("Total time".localizedString)
                                             .font(.footnote)
-                                            .fontWeight(.regular)
+                                            .fontWeight(.medium)
                                     }
                                 }
                             }
@@ -246,51 +246,57 @@ struct ProfileView: View {
                             
                             VStack {
                                 Text("Support the project")
-                                    .font(.caption2)
+                                    .font(.caption)
                                     .fontWeight(.regular)
                                     .foregroundColor(Color("Gray"))
                                 
-                                Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
-                                    ZStack {
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: 275, height: 40)
-                                            .background(Color("LightLightGray"))
-                                            .cornerRadius(10)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .inset(by: 0.5)
-                                                    .stroke(.black, lineWidth: 1)
-                                            )
-                                        
-                                        Image("patreon")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .foregroundColor(.white)
-                                            .frame(height: 20)
+                                HStack {
+                                    Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(height: 40)
+                                                .background(Color("LightLightGray"))
+                                                .cornerRadius(10)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .inset(by: 0.5)
+                                                        .stroke(.black, lineWidth: 1)
+                                                )
+                                            
+                                            Image("patreon")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(.white)
+                                                .frame(maxHeight: 20)
+                                        }
                                     }
-                                }
-                                
-                                Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
-                                    ZStack {
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: 275, height: 40)
-                                            .background(Color("Yellow"))
-                                            .cornerRadius(10)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .inset(by: 0.5)
-                                                    .stroke(.black, lineWidth: 1)
-                                            )
-                                        
-                                        Image("buymeacoffee")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .foregroundColor(.white)
-                                            .frame(height: 20)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    
+                                    Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(height: 40)
+                                                .background(Color("Yellow"))
+                                                .cornerRadius(10)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .inset(by: 0.5)
+                                                        .stroke(.black, lineWidth: 1)
+                                                )
+
+                                            Image("buymeacoffee")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(.white)
+                                                .frame(maxHeight: 20)
+                                        }
                                     }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
                                 }
+                                .padding(.horizontal, 20)
+                                .frame(minWidth: 0, maxWidth: .infinity)
                             }
                             .padding(.bottom, 20)
                         }
@@ -405,7 +411,7 @@ struct SettigsCell: View {
             }
             Text("\(text)".localizedString)
                 .font(.footnote)
-                .fontWeight(.medium)
+                .fontWeight(.semibold)
             Spacer()
             if let valueText = valueText {
                 Text("\(valueText)".localizedString)

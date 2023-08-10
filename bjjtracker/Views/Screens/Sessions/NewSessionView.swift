@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewSessionView: View {
     
+    @EnvironmentObject var settings: AppSettings
+    
     @StateObject var viewModel: NewSessionViewViewModel
     
     @State private var isPickerPresented = false
@@ -64,7 +66,7 @@ struct NewSessionView: View {
                                 if isPickerPresented {
                                     DurationPicker(duration: $activity.duration)
                                         .frame(height: 150)
-                                        .frame(maxWidth: .infinity)
+                                        .frame(maxWidth: screenWidth)
                                 }
                             }
                         }
@@ -115,6 +117,9 @@ struct NewSessionView: View {
                         }
                     }
                 }
+        }
+        .onAppear {
+            activity.startDate = settings.selectedCalendarDate
         }
     }
     

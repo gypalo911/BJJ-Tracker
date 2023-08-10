@@ -32,7 +32,6 @@ class DashboardViewModel: ObservableObject {
     
     var requestDateRange: DateInterval {
         let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
-//        print("lastWeekDate:\(lastWeekDate.map { $0.date })")
         let rangeStart = lastWeekDate.first?.date ?? Date()
         let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
         let rangeEnd = Calendar.current.date(byAdding: .day, value: 7, to: sunday) ?? Date()
@@ -66,8 +65,6 @@ class DashboardViewModel: ObservableObject {
     }
     
     func lastTwoWeeksSessions(_ sessions: [FetchedResults<Session>.Element]) -> ([Session], [Session]) {
-        print("sessionsList:")
-        print(sessions.map { $0.startDate })
         return (currentWeekSessions(sessions), lastWeekSessions(sessions))
     }
 }

@@ -23,7 +23,7 @@ struct StatsView: View {
                         .font(.footnote)
                         .fontWeight(.semibold)
                     Text(value)
-                        .font(.title2)
+                        .font(.title3)
                         .fontWeight(.semibold)
                 }
                 Spacer()
@@ -41,7 +41,7 @@ struct StatsView: View {
                                     .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
                                 Text(tendecyValue)
                                     .fixedSize()
-                                    .font(.caption)
+                                    .font(.caption2)
                                     .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
                             } else {
                                 Text(tendecyValue)

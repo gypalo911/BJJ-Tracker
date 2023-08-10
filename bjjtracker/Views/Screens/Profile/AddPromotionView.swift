@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddPromotionView: View {
+    @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
     
     @ObservedObject var viewModel: AddPromotionViewViewModel
@@ -79,6 +80,9 @@ struct AddPromotionView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.promotion.date = settings.selectedCalendarDate
+        }
     }
     
     func save() {
@@ -110,5 +114,7 @@ struct AddPromotionView_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
+            .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
