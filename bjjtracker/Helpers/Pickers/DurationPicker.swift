@@ -59,6 +59,10 @@ struct DurationPicker: View {
             }
         }
         .frame(height: 150)
+        .onAppear {
+            hours = Int(duration / 60)
+            minutes = Int(duration % 60)
+        }
     }
 }
 
