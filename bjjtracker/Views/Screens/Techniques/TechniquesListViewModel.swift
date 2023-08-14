@@ -59,7 +59,7 @@ class TechniquesListViewModel: ObservableObject {
             persistanceManager.createTechnique(for: session, text: tag.text, details: nil)
             
             analyticsEngine.log(AnalyticsEvent(
-                name: "tag_added",
+                name: FirebaseAnalyticsEvent.tagAdded.rawValue,
                 metadata: [
                     "tag_text":"\(tag.text)",
                     "tag_type":"\(tag.type.rawValue)"

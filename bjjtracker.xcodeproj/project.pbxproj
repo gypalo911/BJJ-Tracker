@@ -1286,7 +1286,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
@@ -1326,7 +1326,7 @@
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtrackerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
