@@ -42,6 +42,7 @@
 		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
 		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
 		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
+		D04AD1332A8B7624002A1050 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04AD1322A8B7624002A1050 /* HealthKitService.swift */; };
 		D050EAB02A8508EB008222BE /* UIPickerView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050EAAF2A8508EB008222BE /* UIPickerView+extension.swift */; };
 		D0569DC42A7C09530019B24F /* PromotionsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */; };
 		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
@@ -193,6 +194,7 @@
 		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
 		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
 		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
+		D04AD1322A8B7624002A1050 /* HealthKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		D050EAAF2A8508EB008222BE /* UIPickerView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPickerView+extension.swift"; sourceTree = "<group>"; };
 		D0569DC32A7C09530019B24F /* PromotionsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewViewModel.swift; sourceTree = "<group>"; };
 		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 		D060BAAF29DDAE3C00E10562 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D04AD1322A8B7624002A1050 /* HealthKitService.swift */,
 				D02F3DF929F8051700BED6CD /* PersistanceManager.swift */,
 				D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */,
 				D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */,
@@ -1040,6 +1043,7 @@
 				D084DE612A60A44F00B63DBF /* TechniqueModel+extension.swift in Sources */,
 				D02D1FF72A5AE2C0006BB617 /* DesignSystem+Color.swift in Sources */,
 				D09BCA402A606A24004C749E /* SessionDetailsViewModel.swift in Sources */,
+				D04AD1332A8B7624002A1050 /* HealthKitService.swift in Sources */,
 				D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */,
 				D05C9F042A6BFA1A007D5AF0 /* Tab.swift in Sources */,
 				D02D1FFB2A5AE2DC006BB617 /* DesignSystem+Spacer.swift in Sources */,
