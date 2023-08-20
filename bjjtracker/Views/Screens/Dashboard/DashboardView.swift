@@ -96,6 +96,16 @@ struct DashboardView: View {
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .hAlign(.leading)
+                                    
+                                    
+                                    NavigationLink(destination: {
+                                        ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                                    }) {
+                                        Image("archive")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.white)
+                                    }
                                 }
                                 .padding(.horizontal, 30)
                                 .padding(.top, 10)
@@ -134,6 +144,10 @@ struct DashboardView: View {
                                 } else {
                                     ScrollView(showsIndicators: false) {
                                         VStack(spacing: 16) {
+                                            AppleHealthCardView {
+                                                print("apple health")
+                                            }
+                                            
                                             ForEach(filteredSessions) { session in
                                                 if session.id != nil {
                                                     ActivityPanelView(session: session, namespace: namespace)

@@ -21,7 +21,7 @@ extension View {
     }
     
     func defaultShadow() -> some View {
-        self.shadow(color: .black.opacity(0.11), radius: 4, x: 1, y: 2)
+        self.shadow(color: .black.opacity(0.15), radius: 1, x: 0, y: 1)
     }
     
     func changeNavBar(_ color: UIColor = .clear) {

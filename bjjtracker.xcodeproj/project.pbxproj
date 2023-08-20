@@ -60,6 +60,7 @@
 		D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */; };
 		D060BA9F29DDAD9C00E10562 /* bjjtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */; };
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
+		D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E48842A92597E0041F370 /* AppleHealthCardView.swift */; };
 		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
 		D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */; };
 		D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */; };
@@ -217,6 +218,7 @@
 		D060BA9A29DDAD9C00E10562 /* bjjtrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bjjtrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITests.swift; sourceTree = "<group>"; };
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D06E48842A92597E0041F370 /* AppleHealthCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthCardView.swift; sourceTree = "<group>"; };
 		D06F86192A1F93C800270558 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
 		D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsEngine.swift; sourceTree = "<group>"; };
@@ -595,6 +597,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		D06E48832A9259700041F370 /* AppleHealth */ = {
+			isa = PBXGroup;
+			children = (
+				D06E48842A92597E0041F370 /* AppleHealthCardView.swift */,
+			);
+			path = AppleHealth;
+			sourceTree = "<group>";
+		};
 		D070C9512A3C592B00DCEED5 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +645,7 @@
 		D098BBEB29E2C09D00A9A068 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D06E48832A9259700041F370 /* AppleHealth */,
 				D02D1FEE2A5ADEB4006BB617 /* Techniques */,
 				D02F3DE929EEE7F200BED6CD /* Archive */,
 				D0B01F2D29E5844B00E10979 /* Statistics */,
@@ -1084,6 +1095,7 @@
 				D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */,
 				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
+				D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
