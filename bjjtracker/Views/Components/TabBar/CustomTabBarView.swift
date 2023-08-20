@@ -66,9 +66,15 @@ struct CustomTabBarView: View {
 }
 
 struct CustomTabBarView_Previews: PreviewProvider {
-    static var previews: some View {
+    struct Container: View {
         @State var selected: Tab = .calendar
         
-        CustomTabBarView(selectedTab: $selected)
+        var body: some View {
+            CustomTabBarView(selectedTab: $selected)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
     }
 }
