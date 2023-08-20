@@ -14,6 +14,7 @@
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
 		D00139702A67F56B005B0E58 /* SwipeToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */; };
+		D00FD65B2A926A2C00CFD274 /* ScrollDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */; };
 		D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */; };
 		D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
 		D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */; };
@@ -60,6 +61,7 @@
 		D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */; };
 		D060BA9F29DDAD9C00E10562 /* bjjtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */; };
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
+		D068F7FC2A92783800A2BA10 /* TestDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068F7FB2A92783800A2BA10 /* TestDashboardView.swift */; };
 		D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E48842A92597E0041F370 /* AppleHealthCardView.swift */; };
 		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
 		D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */; };
@@ -165,6 +167,7 @@
 		D00109B52A0D3294008433CC /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissModifier.swift; sourceTree = "<group>"; };
 		D00139712A681F89005B0E58 /* bjjtracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtracker.entitlements; sourceTree = "<group>"; };
+		D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDetector.swift; sourceTree = "<group>"; };
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
 		D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsView.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 		D060BA9A29DDAD9C00E10562 /* bjjtrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bjjtrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA9E29DDAD9C00E10562 /* bjjtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITests.swift; sourceTree = "<group>"; };
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D068F7FB2A92783800A2BA10 /* TestDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDashboardView.swift; sourceTree = "<group>"; };
 		D06E48842A92597E0041F370 /* AppleHealthCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthCardView.swift; sourceTree = "<group>"; };
 		D06F86192A1F93C800270558 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
 		D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E824AF29DE03D80023E6C0 /* DashboardView.swift */,
+				D068F7FB2A92783800A2BA10 /* TestDashboardView.swift */,
 				D0AD47A62A14E1BD004AAA6A /* DashboardViewModel.swift */,
 				D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */,
 			);
@@ -695,6 +700,7 @@
 				D098BBE829E1A15000A9A068 /* Pickers */,
 				D0B01F2629E43DBE00E10979 /* Extensions */,
 				D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */,
+				D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1030,7 +1036,9 @@
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
+				D00FD65B2A926A2C00CFD274 /* ScrollDetector.swift in Sources */,
 				D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */,
+				D068F7FC2A92783800A2BA10 /* TestDashboardView.swift in Sources */,
 				D076EFA82A0E31AE00E74E01 /* BeltProgressCell.swift in Sources */,
 				D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */,
 				D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */,

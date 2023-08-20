@@ -7,10 +7,20 @@
 
 import SwiftUI
 
+struct ScrollViewPreferenceKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+}
+
 struct ViewSizePreferenceKey: PreferenceKey {
+    typealias Value = CGSize
     static var defaultValue: CGSize = .zero
 
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+    static func reduce(value: inout Value, nextValue: () -> Value) {
         value = nextValue()
     }
 }
