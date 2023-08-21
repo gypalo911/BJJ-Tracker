@@ -199,6 +199,9 @@ struct ProfileView: View {
                         }
                         
                         VStack {
+                            TechniquesCardView(view: {
+                                TechniquesCardEmptyState() // TechniquesCardFullState()
+                            })
                             if !settings.healthKitService.isDataAuthorized {
                                 AppleHealthCardView {
                                     isConnectAHPresented = true

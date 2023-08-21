@@ -41,6 +41,7 @@
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
 		D031094D2A935C3F00C24B17 /* ConnectAppleHealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */; };
+		D03109512A939B2B00C24B17 /* TechniquesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03109502A939B2B00C24B17 /* TechniquesCardView.swift */; };
 		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
 		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
 		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
@@ -197,6 +198,7 @@
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAppleHealthView.swift; sourceTree = "<group>"; };
+		D03109502A939B2B00C24B17 /* TechniquesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesCardView.swift; sourceTree = "<group>"; };
 		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
 		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
 		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				D0AA702C2A5AFC20001FB3FA /* Components */,
 				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
+				D03109502A939B2B00C24B17 /* TechniquesCardView.swift */,
 				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
 				D0DAA8FF2A6186A200074EBE /* Techniques List.md */,
 			);
@@ -1115,6 +1118,7 @@
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
 				D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */,
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
+				D03109512A939B2B00C24B17 /* TechniquesCardView.swift in Sources */,
 				D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */,
 				D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */,
 				D01187D42A7BC32F00A2FCC7 /* ImagePicker.swift in Sources */,
