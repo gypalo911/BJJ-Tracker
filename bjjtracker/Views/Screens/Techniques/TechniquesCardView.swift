@@ -13,8 +13,8 @@ struct TechniquesCardEmptyState: View {
             Image("triangle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 30, height: 30)
-            VStack(alignment: .center, spacing: 4) {
+                .frame(width: 50, height: 50)
+            VStack(alignment: .center, spacing: 10) {
                 Text("No techniques yet")
                     .font(.footnote)
                     .fontWeight(.semibold)
