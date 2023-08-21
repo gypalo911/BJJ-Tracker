@@ -17,12 +17,14 @@ struct BottomSheetModifier<InnerView: View>: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
+            .blur(radius: isPresented ? blurRadius : 0, opaque: true)
             .overlay(alignment: .bottom) {
                 if isPresented {
                     GenericBottomSheet(view: view, isBottomSheetOpen: $isPresented)
                 }
             }
+            .ignoresSafeArea()
+//            .edgesIgnoringSafeArea([.top, .bottom])
     }
 }
 

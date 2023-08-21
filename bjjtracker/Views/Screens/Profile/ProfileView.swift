@@ -45,6 +45,7 @@ struct ProfileView: View {
             showingBottomSheet.toggle()
         }
     }
+    @State private var isConnectAHPresented: Bool = false
     
     private let isSmallScreen: Bool = UIScreen.main.bounds.size.width < 400
     
@@ -197,6 +198,20 @@ struct ProfileView: View {
                             .offset(x: 0, y: -40)
                         }
                         
+                        VStack {
+                            AppleHealthCardView {
+                                isConnectAHPresented = true
+                            }
+                            Text("Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**")
+                                .font(.footnote)
+                                .fontWeight(.regular)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color("Gray"))
+                                .padding(.horizontal, 20)
+                                .padding(.top, 5)
+                        }
+                        .padding(.top, 20)
+                        
                         VStack(alignment: .center, spacing: 12) {
                             SettigsCell(
                                 icon: Image("language"),
@@ -308,7 +323,7 @@ struct ProfileView: View {
                                 .shadow(color: .black.opacity(0.15), radius: 0.5, x: 0, y: 1)
                         )
                         .frame(maxWidth: isSmallScreen ? 330 : 360)
-                        .padding(20)
+                        .padding([.top, .bottom], 20)
                         .hAlign(.center)
                         
                     }
@@ -340,6 +355,12 @@ struct ProfileView: View {
             } else if selectedSettingsView == .notifications {
                 NotificationSettingsView()
             }
+        }
+        .bottomSheet(isPresented: $isConnectAHPresented, view: {
+            ConnectAppleHealthView()
+        })
+        .onChange(of: isConnectAHPresented) { value in
+            settings.isTabBarHidden = value
         }
         .onChange(of: showingPromotionsView) { value in
             if value {

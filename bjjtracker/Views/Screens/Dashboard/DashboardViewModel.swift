@@ -22,6 +22,7 @@ enum ModalsSheets: Int, Identifiable {
 @MainActor
 class DashboardViewModel: ObservableObject {
     private let analyticsEngine: AnalyticsEngine
+    private let healthKitService: HealthKitService
     
     @Published var selectedSession: Session? = nil
     
@@ -38,8 +39,16 @@ class DashboardViewModel: ObservableObject {
         return DateInterval(start: rangeStart, end: rangeEnd)
     }
     
-    init(analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
+    var isHealthKitAuthorized: Bool {
+        return false
+    }
+    
+    init(
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
+        healthKitService: HealthKitService = DefaultHealthKitService()
+    ) {
         self.analyticsEngine = analyticsEngine
+        self.healthKitService = healthKitService
     }
     
     func selectModal(sheet: ModalsSheets) {

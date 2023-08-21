@@ -20,7 +20,7 @@ struct GenericBottomSheet<Content: View>: View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
-                .background(Color(red: 0.55, green: 0.55, blue: 0.55).opacity(0.9))
+                .background(Color(red: 0.74, green: 0.74, blue: 0.74).opacity(0.38))
                 .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 0)
                 .opacity(offset != 0 ? 0 : 1)
             

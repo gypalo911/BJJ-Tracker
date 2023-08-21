@@ -43,8 +43,63 @@ struct AppleHealthCardView: View {
     }
 }
 
+struct CommonCardView<CustomImage: View, CustomText: View>: View {
+    @ViewBuilder let image: CustomImage
+    @ViewBuilder let text: CustomText
+    var onTap: (() -> Void)?
+    
+    var body: some View {
+        HStack {
+            image
+            text
+            Spacer()
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 15)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white)
+                .defaultShadow()
+        )
+        .padding(.horizontal, 20)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap?()
+        }
+    }
+}
+
 struct AppleHealthCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AppleHealthCardView()
+        VStack {
+            AppleHealthCardView()
+            CommonCardView(
+                image: {
+                    Image(systemName: "flame.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.red)
+                }, text: {
+                    Text("**1200 kcal** burned today")
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                }
+            )
+            CommonCardView(
+                image: {
+                    Image("activities")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.black)
+                },
+                text: {
+                    Text("**4** activities beside BJJ")
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                }
+            )
+        }
     }
 }

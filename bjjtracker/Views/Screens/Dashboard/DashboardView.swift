@@ -20,6 +20,7 @@ struct DashboardView: View {
     @State private var headerHeight: CGFloat = 680
     @State private var offsetY: CGFloat = .zero
     @State private var shouldCollapseHeader: Bool = false
+    @State private var isConnectAHPresented: Bool = false
     
     @Namespace var namespace
     
@@ -126,7 +127,7 @@ struct DashboardView: View {
                 })
                 .onChange(of: filteredSessions) { items in
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        self.headerHeight = items.isEmpty ? 640 : 680
+                        self.headerHeight = items.isEmpty ? 620 : 680
                     }
                 }
                 .onAppear {
@@ -134,6 +135,12 @@ struct DashboardView: View {
                     viewModel.onDashboardAppeared()
                 }
             }
+            .onChange(of: isConnectAHPresented) { value in
+                settings.isTabBarHidden = value
+            }
+            .bottomSheet(isPresented: $isConnectAHPresented, view: {
+                ConnectAppleHealthView()
+            })
             .zIndex(0)
             
             if let session = viewModel.selectedSession {
@@ -209,19 +216,46 @@ struct DashboardView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
                 AppleHealthCardView {
-                    print("apple health")
+                    isConnectAHPresented = true
+                    settings.isTabBarHidden = true
                 }
                 
+                CommonCardView(
+                    image: {
+                        Image(systemName: "flame.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.red)
+                    }, text: {
+                        Text("**1200 kcal** burned today")
+                            .font(.footnote)
+                            .foregroundColor(.black)
+                    }
+                )
+                CommonCardView(
+                    image: {
+                        Image("activities")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.black)
+                    },
+                    text: {
+                        Text("**4** activities beside BJJ")
+                            .font(.footnote)
+                            .foregroundColor(.black)
+                    }
+                )
+                
                 ForEach(filteredSessions) { session in
-                    ForEach(filteredSessions) { session in
-                        if session.id != nil {
-                            ActivityPanelView(session: session, namespace: namespace)
-                                .onTapGesture {
-                                    withAnimation(AppConstants.mgeAnimation) {
-                                        viewModel.select(session: session)
-                                    }
+                    if session.id != nil {
+                        ActivityPanelView(session: session, namespace: namespace)
+                            .onTapGesture {
+                                withAnimation(AppConstants.mgeAnimation) {
+                                    viewModel.select(session: session)
                                 }
-                        }
+                            }
                     }
                 }
                 

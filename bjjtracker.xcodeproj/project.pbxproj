@@ -40,6 +40,7 @@
 		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
 		D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF629F149E900BED6CD /* NewSessionView.swift */; };
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
+		D031094D2A935C3F00C24B17 /* ConnectAppleHealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */; };
 		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
 		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
 		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
@@ -195,6 +196,7 @@
 		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
 		D02F3DF629F149E900BED6CD /* NewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionView.swift; sourceTree = "<group>"; };
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAppleHealthView.swift; sourceTree = "<group>"; };
 		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
 		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
 		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				D06E48842A92597E0041F370 /* AppleHealthCardView.swift */,
+				D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */,
 			);
 			path = AppleHealth;
 			sourceTree = "<group>";
@@ -1076,6 +1079,7 @@
 				D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
 				D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */,
+				D031094D2A935C3F00C24B17 /* ConnectAppleHealthView.swift in Sources */,
 				D0E824BB29DED00A0023E6C0 /* CustomTabBarView.swift in Sources */,
 				D00139702A67F56B005B0E58 /* SwipeToDismissModifier.swift in Sources */,
 				D0839D832A5D6D5B00D315C8 /* Notification+extension.swift in Sources */,

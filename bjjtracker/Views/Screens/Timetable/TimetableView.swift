@@ -110,24 +110,6 @@ struct TimetableView: View {
                 .vAlign(.top)
                 .background(Color("generalBG").ignoresSafeArea())
                 .backport.hiddenToolbar(true)
-                //                    .fullScreenCover(isPresented: $isBottomSheetOpen) {
-                //                        MonthYearBottomSheetView(
-                //                            selectedDate: $selectedDay,
-                //                            isBottomSheetOpen: $isBottomSheetOpen
-                //                        )
-                //                    }
-                .bottomSheet(isPresented: $isBottomSheetOpen) {
-                    DatePicker(
-                        "Start Date",
-                        selection: $selectedDay,
-                        displayedComponents: [.date]
-                    )
-                    .labelsHidden()
-                    .datePickerStyle(.graphical)
-                    .background(Color.white)
-                    .padding([.horizontal, .top], 20)
-                    .padding(.bottom, 100)
-                }
                 .onChange(of: selectedDay, perform: { value in
                     withAnimation(.easeInOut(duration: 0.25)) {
                         isBottomSheetOpen = false
@@ -149,6 +131,18 @@ struct TimetableView: View {
                     settings.isTabBarHidden = false
                     settings.selectedCalendarDate = selectedDay.setCurrentTime()
                 }
+            }
+            .bottomSheet(isPresented: $isBottomSheetOpen) {
+                DatePicker(
+                    "Start Date",
+                    selection: $selectedDay,
+                    displayedComponents: [.date]
+                )
+                .labelsHidden()
+                .datePickerStyle(.graphical)
+                .background(Color.white)
+                .padding([.horizontal, .top], 20)
+                .padding(.bottom, 100)
             }
             .zIndex(0)
             
