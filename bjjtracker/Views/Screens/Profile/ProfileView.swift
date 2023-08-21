@@ -169,7 +169,7 @@ struct ProfileView: View {
                                                 settings.selectedSheet = .promotion
                                             }
                                         }, label: {
-                                            Text("Add Promotion".localizedString)
+                                            Text("New Promotion".localizedString)
                                                 .font(.callout)
                                                 .fontWeight(.regular)
                                         }).padding(5)
@@ -200,7 +200,8 @@ struct ProfileView: View {
                         
                         VStack {
                             TechniquesCardView(view: {
-                                TechniquesCardEmptyState() // TechniquesCardFullState()
+                                TechniquesCardEmptyState()
+                                // TechniquesCardFullState()
                             })
                             if !settings.healthKitService.isDataAuthorized {
                                 AppleHealthCardView {
@@ -356,6 +357,7 @@ struct ProfileView: View {
                     ActivityViewController(activityItems: [Locale.current.languageCode == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])
                 }
                 .onAppear {
+                    settings.isTabBarHidden = false
                     viewModel.onProfileViewAppeared()
                     NotificationManager.shared.requestAuthorization { _ in }
                 }

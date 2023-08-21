@@ -91,7 +91,7 @@ struct NewSessionView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 30)
-                    .navigationTitle("Create Session".localizedString)
+                    .navigationTitle("New Session".localizedString)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {

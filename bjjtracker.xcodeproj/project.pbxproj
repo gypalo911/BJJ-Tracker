@@ -42,6 +42,7 @@
 		D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
 		D031094D2A935C3F00C24B17 /* ConnectAppleHealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */; };
 		D03109512A939B2B00C24B17 /* TechniquesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03109502A939B2B00C24B17 /* TechniquesCardView.swift */; };
+		D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03109522A93D2B700C24B17 /* TechniquesView.swift */; };
 		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
 		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
 		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
@@ -199,6 +200,7 @@
 		D02F3DF929F8051700BED6CD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAppleHealthView.swift; sourceTree = "<group>"; };
 		D03109502A939B2B00C24B17 /* TechniquesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesCardView.swift; sourceTree = "<group>"; };
+		D03109522A93D2B700C24B17 /* TechniquesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesView.swift; sourceTree = "<group>"; };
 		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
 		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
 		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				D0AA702C2A5AFC20001FB3FA /* Components */,
 				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
+				D03109522A93D2B700C24B17 /* TechniquesView.swift */,
 				D03109502A939B2B00C24B17 /* TechniquesCardView.swift */,
 				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
 				D0DAA8FF2A6186A200074EBE /* Techniques List.md */,
@@ -1129,6 +1132,7 @@
 				D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */,
 				D02598692A82DAB6001BD859 /* SendEmail.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
+				D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
 				D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */,

@@ -14,10 +14,9 @@
 "No sessions for this day" = "Немає записів за поточний день";
 
 "Select Action" = "Обери дію";
-"Add Promotion" = "Додати досягнення";
+"New Promotion" = "Нове досягнення";
 "Yet no promotions" = "Поки без досягнень";
-"Add Session" = "Додати заняття";
-"Create Session" = "Створити заняття";
+"New Session" = "Нове заняття";
 
 "1. Grading system:" = "1. Система поясів:";
 "2. Belt: %@" = "2. Пояс: %@";

@@ -24,14 +24,14 @@ struct TechniquesCardEmptyState: View {
                     .foregroundColor(Color("Gray"))
             }
             Spacer()
-            Button(action: {
-                
-            }, label: {
+            NavigationLink(destination: {
+                TechniquesView()
+            }) {
                 Text("Add New")
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .foregroundColor(Color("Blue"))
-            })
+            }
         }
     }
 }

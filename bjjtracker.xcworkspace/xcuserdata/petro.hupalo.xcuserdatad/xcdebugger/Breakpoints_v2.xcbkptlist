@@ -3,4 +3,259 @@
    uuid = "12A7A4FB-1409-48B0-896D-F7700F2E8475"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "42F28290-34FC-44DF-A01A-0B7CA7ED4E1F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Views/Screens/Sessions/Activities/ActivityPanelView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FFF1A83-A478-4D72-9E5F-CAE67EB6302C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Services/HealthKitService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "delete(session:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9FFF1A83-A478-4D72-9E5F-CAE67EB6302C - 6b15b87edd111d0a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.statisticsValue&lt;&#x3c4;_0_0 where &#x3c4;_0_0: __C.HKQuantityType&gt;(quantityType: &#x3c4;_0_0, dateInterval: Foundation.DateInterval, calculation: bjjtracker.HealthKitServiceCalculationType, unit: __C.HKUnit, completion: (Swift.Result&lt;Swift.Optional&lt;Swift.Double&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "251"
+                  endingLineNumber = "251"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  uuid = "9FFF1A83-A478-4D72-9E5F-CAE67EB6302C - 7b1e38be84f9f7fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "9FFF1A83-A478-4D72-9E5F-CAE67EB6302C - d7ea5d9f46af2950"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.HKWorkout, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "9FFF1A83-A478-4D72-9E5F-CAE67EB6302C - 7b1e38be84f9f7fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "192">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6DC577D8-0DF3-4345-9C66-7879481956C4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Services/HealthKitService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "delete(session:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6DC577D8-0DF3-4345-9C66-7879481956C4 - 7b1e38be84f9f676"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "249"
+                  endingLineNumber = "249"
+                  offsetFromSymbolStart = "640">
+               </Location>
+               <Location
+                  uuid = "6DC577D8-0DF3-4345-9C66-7879481956C4 - 7b1e38be84f9f676"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "249"
+                  endingLineNumber = "249"
+                  offsetFromSymbolStart = "700">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74250DB0-BCE8-4123-89DF-9175DEE900B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Services/HealthKitService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "delete(session:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "74250DB0-BCE8-4123-89DF-9175DEE900B1 - d7ea5d9f46af289e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.HKWorkout, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "74250DB0-BCE8-4123-89DF-9175DEE900B1 - 2ab0b4854cc26a97"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Stack Promoted from Box&gt; of closure #1 (__C.HKWorkout, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C699EB8-9896-4908-AE63-E6F41B5DD7B3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bjjtracker/Services/HealthKitService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "delete(session:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8C699EB8-9896-4908-AE63-E6F41B5DD7B3 - 7b1e38be84f9f697"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "250"
+                  endingLineNumber = "250"
+                  offsetFromSymbolStart = "724">
+               </Location>
+               <Location
+                  uuid = "8C699EB8-9896-4908-AE63-E6F41B5DD7B3 - 9a031a85b606e581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "250"
+                  endingLineNumber = "250"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "8C699EB8-9896-4908-AE63-E6F41B5DD7B3 - 7b1e38be84f9f697"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bjjtracker.DefaultHealthKitService.delete(session: bjjtracker.Session) -&gt; ()"
+                  moduleName = "bjjtracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petro.hupalo/MyProjects/bjjtracker/bjjtracker/Services/HealthKitService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "250"
+                  endingLineNumber = "250"
+                  offsetFromSymbolStart = "704">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

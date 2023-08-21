@@ -56,20 +56,21 @@ struct BluredBottomSheet: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 25)
-                            Text("Create Session")
+                            Text("New Session")
                                 .foregroundColor(.white)
                                 .font(.body.smallCaps())
                                 .fontWeight(.medium)
-                        }
-                    }.onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            isBottomSheetOpen = false
-                            onSelect?(.activity)
                         }
                     }
                     .opacity(offset != 0 ? 0 : 1)
                     .offset(x: 0.0, y: offset)
                     .animation(buttonAnimation, value: offset)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            isBottomSheetOpen = false
+                            onSelect?(.activity)
+                        }
+                    }
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.white)
@@ -82,7 +83,7 @@ struct BluredBottomSheet: View {
                                 .scaledToFit()
                                 .foregroundColor(.black)
                                 .frame(width: 25, height: 25)
-                            Text("Add Promotion")
+                            Text("New Promotion")
                                 .foregroundColor(.black)
                                 .font(.body.smallCaps())
                                 .fontWeight(.medium)
@@ -95,6 +96,34 @@ struct BluredBottomSheet: View {
                         withAnimation(.easeInOut(duration: 0.25)) {
                             isBottomSheetOpen = false
                             onSelect?(.promotion)
+                        }
+                    }
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Green"))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 60)
+                            .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
+                        HStack {
+                            Image("triangle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.white)
+                                .frame(width: 25, height: 25)
+                            Text("New Technique")
+                                .foregroundColor(.white)
+                                .font(.body.smallCaps())
+                                .fontWeight(.medium)
+                        }
+                    }
+                    .opacity(offset != 0 ? 0 : 1)
+                    .offset(x: 0.0, y: offset)
+                    .animation(buttonAnimation.delay(0.2), value: offset)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            isBottomSheetOpen = false
+//                            onSelect?(.technique)
                         }
                     }
                 }

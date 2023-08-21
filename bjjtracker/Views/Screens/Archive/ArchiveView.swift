@@ -97,7 +97,7 @@ struct ArchiveView: View {
                                                     .scaledToFit()
                                                     .foregroundColor(.white)
                                                     .frame(width: 25, height: 25)
-                                                Text("Create Session")
+                                                Text("New Session")
                                                     .foregroundColor(.white)
                                                     .font(.body.smallCaps())
                                                     .fontWeight(.medium)
@@ -120,7 +120,7 @@ struct ArchiveView: View {
                                                     .scaledToFit()
                                                     .foregroundColor(.black)
                                                     .frame(width: 25, height: 25)
-                                                Text("Add Promotion")
+                                                Text("New Promotion")
                                                     .foregroundColor(.black)
                                                     .font(.body.smallCaps())
                                                     .fontWeight(.medium)
@@ -151,9 +151,6 @@ struct ArchiveView: View {
                     case .activity:
                         NewSessionView(viewModel: .init())
                     }
-                }
-                .introspectTabBarController { (UITabBarController) in
-                    UITabBarController.tabBar.isHidden = true
                 }
                 .navigationTitle("Archive")
                 .toolbar {

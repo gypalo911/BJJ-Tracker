@@ -53,7 +53,7 @@ struct AddPromotionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Add Promotion".localizedString)
+                    .navigationTitle("New Promotion".localizedString)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
