@@ -124,6 +124,7 @@ struct DashboardView: View {
                 .background(Color("generalBG").ignoresSafeArea())
                 .onChange(of: viewModel.selectedDay, perform: { value in
                     settings.selectedCalendarDate = value.setCurrentTime()
+                    viewModel.setupHealthData()
                 })
                 .onChange(of: filteredSessions) { items in
                     withAnimation(.easeInOut(duration: 0.3)) {
@@ -139,7 +140,9 @@ struct DashboardView: View {
                 settings.isTabBarHidden = value
             }
             .bottomSheet(isPresented: $isConnectAHPresented, view: {
-                ConnectAppleHealthView()
+                ConnectAppleHealthView(onConnect: {
+                    viewModel.authorizeHealthKitIfNeeded()
+                })
             })
             .zIndex(0)
             
@@ -151,6 +154,13 @@ struct DashboardView: View {
                     }
                 }).zIndex(1)
             }
+        }
+        .task {
+//            let totalEnergy = await settings.healthKitService.energyStatisticsValue(
+//                dateInterval: DateInterval(start: Date().startOfDay, end: Date().endOfDay),
+//                calculation: .sum
+//            )
+//            print("totalEnergy \(totalEnergy)")
         }
     }
     
@@ -215,38 +225,46 @@ struct DashboardView: View {
     func ResultsView() -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
-                AppleHealthCardView {
-                    isConnectAHPresented = true
-                    settings.isTabBarHidden = true
+                if !viewModel.isHealthKitAuthorized {
+                    AppleHealthCardView {
+                        isConnectAHPresented = true
+                        settings.isTabBarHidden = true
+                    }
+                } else {
+                    let totalEnergyBurned = Int(viewModel.healthData.totalEnergyBurned)
+                    let workoutsCount = Int(viewModel.healthData.workoutsCount)
+                    if totalEnergyBurned != 0 {
+                        CommonCardView(
+                            image: {
+                                Image(systemName: "flame.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.red)
+                            }, text: {
+                                Text("**\(totalEnergyBurned) kcal** burned")
+                                    .font(.footnote)
+                                    .foregroundColor(.black)
+                            }
+                        )
+                    }
+                    if workoutsCount != 0 {
+                        CommonCardView(
+                            image: {
+                                Image("activities")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.black)
+                            },
+                            text: {
+                                Text("**\(workoutsCount)** activities beside BJJ")
+                                    .font(.footnote)
+                                    .foregroundColor(.black)
+                            }
+                        )
+                    }
                 }
-                
-                CommonCardView(
-                    image: {
-                        Image(systemName: "flame.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.red)
-                    }, text: {
-                        Text("**1200 kcal** burned today")
-                            .font(.footnote)
-                            .foregroundColor(.black)
-                    }
-                )
-                CommonCardView(
-                    image: {
-                        Image("activities")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.black)
-                    },
-                    text: {
-                        Text("**4** activities beside BJJ")
-                            .font(.footnote)
-                            .foregroundColor(.black)
-                    }
-                )
                 
                 ForEach(filteredSessions) { session in
                     if session.id != nil {

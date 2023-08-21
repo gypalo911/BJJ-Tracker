@@ -41,6 +41,8 @@ class AppSettings: ObservableObject {
     @Published var appLanguage: AppLanguage = .english
     // Used on Dashboard and Timetable screens when user wants to create a Session or Promotion it automatically uses this variable
     @Published var selectedCalendarDate: Date = Date()
+    
+    @Published var healthKitService: HealthKitService = DefaultHealthKitService()
 }
 
 @main

@@ -59,6 +59,7 @@ extension PersistanceManager: SessionsStorageManager {
     func createSession(from activity: Activity, context: NSManagedObjectContext) {
         let session = Session(context: context)
         session.update(with: activity)
+        DefaultHealthKitService().store(session: session)
         
         save(context: context)
     }
@@ -70,6 +71,7 @@ extension PersistanceManager: SessionsStorageManager {
     }
     
     func delete(session: Session, context: NSManagedObjectContext) {
+//        DefaultHealthKitService().delete(session: session)
         context.delete(session)
         
         save(context: context)

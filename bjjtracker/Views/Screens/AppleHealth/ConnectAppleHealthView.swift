@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ConnectAppleHealthView: View {
+    var onConnect: (() -> Void)
+    
     var body: some View {
         VStack(spacing: 25) {
             Image("apple-health-2x")
@@ -31,7 +33,7 @@ struct ConnectAppleHealthView: View {
             
             
             Button(action: {
-                
+                onConnect()
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
@@ -77,7 +79,9 @@ struct ConnectAppleHealthView_Previews: PreviewProvider {
                 }
                 .ignoresSafeArea()
                 .bottomSheet(isPresented: $showingActionSheet) {
-                    ConnectAppleHealthView()
+                    ConnectAppleHealthView(onConnect: {
+                        DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in }
+                    })
                 }
             }
         }

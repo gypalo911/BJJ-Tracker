@@ -199,21 +199,24 @@ struct ProfileView: View {
                         }
                         
                         VStack {
-                            CommonCardView(image: {
-                                Image("apple-health")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30, height: 30)
-                            }, text: {
-                                Text("View all Apple Health data")
-                                    .font(.footnote)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.black)
-                            }) {
-                                openHealthApp()
-                            }
-                            AppleHealthCardView {
-                                isConnectAHPresented = true
+                            if !settings.healthKitService.isDataAuthorized {
+                                AppleHealthCardView {
+                                    isConnectAHPresented = true
+                                }
+                            } else {
+                                CommonCardView(image: {
+                                    Image("apple-health")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                }, text: {
+                                    Text("View all Apple Health data")
+                                        .font(.footnote)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                }) {
+                                    openHealthApp()
+                                }
                             }
                             Text("Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**")
                                 .font(.footnote)
@@ -370,7 +373,9 @@ struct ProfileView: View {
             }
         }
         .bottomSheet(isPresented: $isConnectAHPresented, view: {
-            ConnectAppleHealthView()
+            ConnectAppleHealthView(onConnect: {
+                DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in }
+            })
         })
         .onChange(of: isConnectAHPresented) { value in
             settings.isTabBarHidden = value

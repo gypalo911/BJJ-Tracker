@@ -1322,6 +1322,8 @@
 				INFOPLIST_FILE = bjjtracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JiuTrack;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow JiuTrack app to access your HealthData.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow JiuTrack app to write Health data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1362,6 +1364,8 @@
 				INFOPLIST_FILE = bjjtracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JiuTrack;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow JiuTrack app to access your HealthData.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow JiuTrack app to write Health data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

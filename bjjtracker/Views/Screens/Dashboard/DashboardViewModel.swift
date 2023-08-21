@@ -7,16 +7,16 @@
 //
 import SwiftUI
 
-protocol DashboardViewAnalytics {
-    func onDashboardAppeared()
-    func selectedModal(_ modalName: String)
-}
-
 enum ModalsSheets: Int, Identifiable {
     var id: Int { self.rawValue }
     
     case activity
     case promotion
+}
+
+struct HealthData {
+    var totalEnergyBurned: Double = 0
+    var workoutsCount: Int = 0
 }
 
 @MainActor
@@ -31,16 +31,14 @@ class DashboardViewModel: ObservableObject {
     
     var currentWeek = Calendar.current.currentWeek
     
+    @Published var healthData: HealthData = HealthData()
+    
     var requestDateRange: DateInterval {
         let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
         let rangeStart = lastWeekDate.first?.date ?? Date()
         let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
         let rangeEnd = Calendar.current.date(byAdding: .day, value: 7, to: sunday) ?? Date()
         return DateInterval(start: rangeStart, end: rangeEnd)
-    }
-    
-    var isHealthKitAuthorized: Bool {
-        return false
     }
     
     init(
@@ -98,8 +96,46 @@ private extension DashboardViewModel {
     }
 }
 
-extension DashboardViewModel: DashboardViewAnalytics {
+// MARK: HealthKit
+extension DashboardViewModel {
+    var isHealthKitAuthorized: Bool {
+        return healthKitService.isDataAuthorized
+    }
+    
+    func authorizeHealthKitIfNeeded() {
+        healthKitService.authorizeHealthKitIfNeeded { _ in }
+    }
+    
+    func fetchEnergyForSelectedDay() async {
+        let dateInterval = DateInterval(start: selectedDay.startOfDay, end: selectedDay.endOfDay)
+        let result = await healthKitService.energyStatisticsValue(
+            dateInterval: dateInterval,
+            calculation: .sum
+        )
+        withAnimation(.easeInOut(duration: 0.25)) {
+            healthData.totalEnergyBurned = result
+        }
+    }
+    
+    func fetchWorkoutsCount() async {
+        let dateInterval = DateInterval(start: selectedDay.startOfDay, end: selectedDay.endOfDay)
+        let result = await healthKitService.workoutsCount(dateInterval: dateInterval)
+        withAnimation(.easeInOut(duration: 0.25).delay(0.1)) {
+            healthData.workoutsCount = result
+        }
+    }
+    
+    func setupHealthData() {
+        Task {
+            await fetchEnergyForSelectedDay()
+            await fetchWorkoutsCount()
+        }
+    }
+}
+
+extension DashboardViewModel {
     func onDashboardAppeared() {
+        setupHealthData()
         analyticsEngine.log(AnalyticsEvent(name: "dashboard_screen_viewed", metadata: [:]))
     }
 

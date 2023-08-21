@@ -20,7 +20,7 @@ struct NewSessionView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
     
-    @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+    @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 60, startDate: Date(), location: "", notes: "")
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
