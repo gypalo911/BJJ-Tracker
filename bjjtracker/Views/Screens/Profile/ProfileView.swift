@@ -199,6 +199,19 @@ struct ProfileView: View {
                         }
                         
                         VStack {
+                            CommonCardView(image: {
+                                Image("apple-health")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                            }, text: {
+                                Text("View all Apple Health data")
+                                    .font(.footnote)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                            }) {
+                                openHealthApp()
+                            }
                             AppleHealthCardView {
                                 isConnectAHPresented = true
                             }
@@ -210,7 +223,7 @@ struct ProfileView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.top, 5)
                         }
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                         
                         VStack(alignment: .center, spacing: 12) {
                             SettigsCell(
@@ -396,6 +409,12 @@ struct ProfileView: View {
     
     private func openSettings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
+            openURL(url)
+        }
+    }
+    
+    private func openHealthApp() {
+        if let url = URL(string: "x-apple-health://") {
             openURL(url)
         }
     }
