@@ -12,10 +12,14 @@ struct TechniquesView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var isHeaderHidden = false
-    @State private var isSuggestionViewHidden = true
+    @State private var isEmptySearchStateState = true
     @State private var isEditing = false
     @State private var searchText = ""
     @State private var offsetY: CGFloat = .zero
+    
+    @FocusState private var isTextFieldFocused: Bool
+    
+    private var results: [String] = []
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -30,18 +34,20 @@ struct TechniquesView: View {
                         .offset(y: -offsetY)
                         .zIndex(1)
                     
-                    if !isSuggestionViewHidden {
+                    if !isEmptySearchStateState {
                         SuggestionsView()
                             .offset(y: -offsetY)
-                            .opacity(isSuggestionViewHidden ? 0 : 1)
+                            .opacity(isEmptySearchStateState ? 0 : 1)
                     }
-                    Text("Learned techniques:")
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                        .offset(y: -offsetY)
-                        .hAlign(.leading)
-                        .padding(.top, 10)
+                    if !isEditing && !results.isEmpty {
+                        Text("Learned techniques:")
+                            .font(.body)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .offset(y: -offsetY)
+                            .hAlign(.leading)
+                            .padding(.top, 10)
+                    }
                 }
                 .padding(.top, 40)
                 .padding(.horizontal, 20)
@@ -54,16 +60,21 @@ struct TechniquesView: View {
                 )
                 .zIndex(2)
                 
-                VStack(alignment: .leading) {
-                    ForEach(0..<10) { item in
-                        VStack(spacing: 15) {
-                            TechbiquesListCell()
+                if !isEditing && !results.isEmpty {
+                    VStack(alignment: .leading) {
+                        ForEach(0..<10) { item in
+                            VStack(spacing: 15) {
+                                TechbiquesListCell()
+                            }
                         }
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 20)
+                    .hAlign(.leading)
+                } else {
+                    EmptyStateOfResults()
+                        .padding(.top, isEmptySearchStateState ? 100 : 20)
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 20)
-                .hAlign(.leading)
             }
             .offset(coordinateSpace: .named("scroll")) { offset in
                 offsetY = offset
@@ -76,7 +87,12 @@ struct TechniquesView: View {
         }
         .onChange(of: searchText) { value in
             withAnimation(.easeInOut(duration: 0.3)) {
-                isSuggestionViewHidden = value.isEmpty
+                isEmptySearchStateState = value.isEmpty
+            }
+        }
+        .onChange(of: settings.isTabBarHidden) { value in
+            if value == false {
+                settings.isTabBarHidden = true
             }
         }
     }
@@ -116,7 +132,16 @@ struct TechniquesView: View {
     @ViewBuilder
     func SearchBar() -> some View {
         HStack {
-            TextField("Search by Keyword", text: $searchText)
+            TextField(
+                "Search by Keyword",
+                text: $searchText,
+                onEditingChanged: { (editingChanged) in
+                    if !editingChanged {
+                        self.endEditing()
+                    }
+                }
+            )
+            .focused($isTextFieldFocused)
                 .font(.callout)
                 .padding(.leading, 35)
                 .overlay(
@@ -129,7 +154,7 @@ struct TechniquesView: View {
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 0)
                         
-                        if isEditing {
+                        if isEditing && !isEmptySearchStateState {
                             Button(action: {
                                 self.searchText = ""
                             }) {
@@ -150,9 +175,18 @@ struct TechniquesView: View {
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
                         self.isEditing = true
+                        self.isTextFieldFocused = true
                     }
                     withAnimation(.easeInOut(duration: 0.3)) {
                         self.isHeaderHidden = true
+                    }
+                }
+                .onSubmit {
+                    withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
+                        self.isEditing = false
+                    }
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        self.isHeaderHidden = false
                     }
                 }
                 .padding(.horizontal, 15)
@@ -165,6 +199,7 @@ struct TechniquesView: View {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         self.isEditing = false
                         self.searchText = ""
+                        self.endEditing()
                     }
                     withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
                         self.isHeaderHidden = false
@@ -233,6 +268,62 @@ struct TechniquesView: View {
         .onTapGesture {
 //                        onTap?()
         }
+    }
+    
+    @ViewBuilder
+    func EmptyStateOfResults() -> some View {
+        VStack(spacing: 20) {
+            if !isEditing && results.isEmpty {
+                Text("No techniques added yet.\nYou can create it now!")
+                    .font(.footnote)
+                    .fontWeight(.medium)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                Button(action: {
+                    
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("Green"))
+                            .frame(maxWidth: 270)
+                            .frame(height: 40)
+                            .defaultShadow()
+                        HStack {
+                            Image("triangle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.white)
+                                .frame(width: 20, height: 20)
+                            Text("New Technique")
+                                .font(.caption.smallCaps())
+                                .fontWeight(.medium)
+                                .foregroundColor(.white)
+                        }
+                    }
+                })
+            } else {
+                Image("triangle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                if !searchText.isEmpty {
+                    Text("No results found")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                }
+                Text("You can search sessions by technique name or notes")
+                    .font(.footnote)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color("GrayTextColor"))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, 40)
+    }
+    
+    private func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }
 

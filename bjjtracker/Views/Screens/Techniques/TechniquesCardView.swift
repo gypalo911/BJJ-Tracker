@@ -50,19 +50,36 @@ struct TechniquesCardFullState: View {
                         .fontWeight(.semibold)
                 }
                 Spacer()
-                HStack(spacing: 5) {
-                    Text("See all")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color("Blue"))
-                    Image("eye")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .foregroundColor(Color("Blue"))
+                Button(action: {
+                    
+                }, label: {
+                    HStack(spacing: 5) {
+                        Text("See all")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color("Blue"))
+                        Image("eye")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(Color("Blue"))
+                    }
+                })
+            }
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach([1..<4, 4..<6], id: \.self) { rows in
+                    HStack(spacing: 10) {
+                        ForEach(rows, id: \.self) { tag in
+                            TagView(
+                                tag: Tag(text: "tag-\(tag)"),
+                                onDelete: {
+//                                    viewModel.removeRegularTag(tag)
+                                }
+                            )
+                        }
+                    }.hAlign(.leading)
                 }
             }
-            Text("techniques view here")
         }
     }
 }

@@ -34,7 +34,7 @@ struct BluredBottomSheet: View {
                         .frame(width: 60, height: 4)
                         .background(.white)
                         .cornerRadius(20)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
+                        .defaultShadow()
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
                                 .inset(by: 0.01)
@@ -49,7 +49,7 @@ struct BluredBottomSheet: View {
                             .foregroundColor(Color("Blue"))
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
-                            .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
+                            .defaultShadow()
                         HStack {
                             Image("kimono")
                                 .resizable()
@@ -76,7 +76,7 @@ struct BluredBottomSheet: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
-                            .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
+                            .defaultShadow()
                         HStack {
                             Image("beltIcon")
                                 .resizable()
@@ -104,7 +104,7 @@ struct BluredBottomSheet: View {
                             .foregroundColor(Color("Green"))
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
-                            .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
+                            .defaultShadow()
                         HStack {
                             Image("triangle")
                                 .resizable()
