@@ -126,6 +126,8 @@
 		D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */; };
 		D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */; };
 		D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */; };
+		D0DE62A22A963F49008EEA49 /* CreateEditTechniqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE62A12A963F49008EEA49 /* CreateEditTechniqueView.swift */; };
+		D0DE62A42A9641CA008EEA49 /* Technique.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE62A32A9641CA008EEA49 /* Technique.swift */; };
 		D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824AF29DE03D80023E6C0 /* DashboardView.swift */; };
 		D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */; };
 		D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
@@ -275,6 +277,8 @@
 		D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionViewViewModel.swift; sourceTree = "<group>"; };
 		D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionViewViewModel.swift; sourceTree = "<group>"; };
 		D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D0DE62A12A963F49008EEA49 /* CreateEditTechniqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditTechniqueView.swift; sourceTree = "<group>"; };
+		D0DE62A32A9641CA008EEA49 /* Technique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Technique.swift; sourceTree = "<group>"; };
 		D0E824AF29DE03D80023E6C0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D0E824B129DE0BC50023E6C0 /* WeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarView.swift; sourceTree = "<group>"; };
 		D0E824B329DE0F490023E6C0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 		D02D1FEE2A5ADEB4006BB617 /* Techniques */ = {
 			isa = PBXGroup;
 			children = (
+				D03109542A963ED400C24B17 /* TechniqueBottomSheets */,
 				D0AA702C2A5AFC20001FB3FA /* Components */,
 				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
 				D03109522A93D2B700C24B17 /* TechniquesView.swift */,
@@ -431,6 +436,14 @@
 				D09BCA3F2A606A24004C749E /* SessionDetailsViewModel.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		D03109542A963ED400C24B17 /* TechniqueBottomSheets */ = {
+			isa = PBXGroup;
+			children = (
+				D0DE62A12A963F49008EEA49 /* CreateEditTechniqueView.swift */,
+			);
+			path = TechniqueBottomSheets;
 			sourceTree = "<group>";
 		};
 		D03C02892A7D0DDC0004E5BF /* Settings */ = {
@@ -532,6 +545,7 @@
 				D0A00ECD29DDC9B100DCD5BB /* Activity.swift */,
 				D0A00ECF29DDCE7300DCD5BB /* Profile.swift */,
 				D098BBF229E2C2FA00A9A068 /* Promotion.swift */,
+				D0DE62A32A9641CA008EEA49 /* Technique.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1061,6 +1075,7 @@
 				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
+				D0DE62A42A9641CA008EEA49 /* Technique.swift in Sources */,
 				D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
@@ -1111,6 +1126,7 @@
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */,
+				D0DE62A22A963F49008EEA49 /* CreateEditTechniqueView.swift in Sources */,
 				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */,

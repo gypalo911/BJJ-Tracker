@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-struct Tag: Identifiable, Hashable {
-    enum TagType: String {
-        case regular
-        case suggestion
-    }
-    
-    var technique: TechniqueModel? = nil
-    
-    var id: String =  UUID().uuidString
-    var text: String
-    var size: CGFloat = 0
-    var type: TagType = .regular
-}
-
 struct TagView: View {
     let tag: Tag
     let onDelete: (() -> Void)?

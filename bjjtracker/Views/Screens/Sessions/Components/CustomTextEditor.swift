@@ -14,12 +14,12 @@ struct CustomTextEditor: View {
     var body: some View {
         ZStack(alignment: .leading) {
             TextEditor(text: $text)
-                .colorMultiply(Color("LightBlue"))
                 .frame(minHeight: 150, alignment: .top)
-                .padding(20)
+                .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("LightBlue"))
+                        .inset(by: 0.01)
+                        .stroke(Color("LightGray"), lineWidth: 2)
                 )
                 .padding(.leading, 5)
                 .focused($isFocused)
@@ -28,13 +28,29 @@ struct CustomTextEditor: View {
                     Text("Add some details...".localizedString)
                         .font(.body)
                         .foregroundColor(Color("GrayTextColor"))
-                        .padding(30)
+                        .padding(20)
                     Spacer()
-                }
-                .onTapGesture {
-                    isFocused = true
                 }
             }
         }
+        .onTapGesture {
+            isFocused = true
+        }
+    }
+}
+
+struct CustomTextEditor_Previews: PreviewProvider {
+    struct Container: View {
+        @State var text: String = ""
+        
+        var body: some View {
+            CustomTextEditor(text: $text)
+                .frame(height: 200)
+                .padding(20)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
     }
 }
