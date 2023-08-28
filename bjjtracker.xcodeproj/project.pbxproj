@@ -94,7 +94,7 @@
 		D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */; };
 		D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */; };
 		D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
-		D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* Profile.swift */; };
+		D0A00ED029DDCE7300DCD5BB /* ModalsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
 		D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */; };
 		D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */; };
@@ -258,7 +258,7 @@
 		D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
 		D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewViewModel.swift; sourceTree = "<group>"; };
 		D0A00ECD29DDC9B100DCD5BB /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		D0A00ECF29DDCE7300DCD5BB /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalsEnums.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
 		D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreTagView.swift; sourceTree = "<group>"; };
 		D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesListViewModel.swift; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				D0A00ECD29DDC9B100DCD5BB /* Activity.swift */,
-				D0A00ECF29DDCE7300DCD5BB /* Profile.swift */,
+				D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */,
 				D098BBF229E2C2FA00A9A068 /* Promotion.swift */,
 				D0DE62A32A9641CA008EEA49 /* Technique.swift */,
 			);
@@ -1072,7 +1072,7 @@
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */,
-				D0A00ED029DDCE7300DCD5BB /* Profile.swift in Sources */,
+				D0A00ED029DDCE7300DCD5BB /* ModalsEnums.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
 				D0DE62A42A9641CA008EEA49 /* Technique.swift in Sources */,

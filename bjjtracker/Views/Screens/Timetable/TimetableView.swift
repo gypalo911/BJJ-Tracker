@@ -18,7 +18,7 @@ struct TimetableView: View {
     var sessionsList: FetchedResults<Session>
     
     @State var selectedDay: Date = Date()
-    @State var selectedSheet: ModalsSheets?
+    @State var selectedSheet: ModalSheets?
     @State var isBottomSheetOpen: Bool = false
     
     @State var selectedSession: Session?
@@ -142,7 +142,6 @@ struct TimetableView: View {
                 .datePickerStyle(.graphical)
                 .background(Color.white)
                 .padding([.horizontal, .top], 20)
-                .padding(.bottom, 100)
             }
             .zIndex(0)
             

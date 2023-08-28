@@ -41,7 +41,6 @@ struct LanguageSettingsView: View {
             }
         }
         .padding(20)
-        .vAlign(.top)
         .onAppear {
             appLanguage = settings.appLanguage
         }

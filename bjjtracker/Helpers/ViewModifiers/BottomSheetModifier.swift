@@ -23,8 +23,7 @@ struct BottomSheetModifier<InnerView: View>: ViewModifier {
                     GenericBottomSheet(view: view, isBottomSheetOpen: $isPresented)
                 }
             }
-            .ignoresSafeArea()
-//            .edgesIgnoringSafeArea([.top, .bottom])
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

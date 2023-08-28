@@ -17,44 +17,38 @@ struct GenericBottomSheet<Content: View>: View {
     @GestureState private var gestureOffset: CGFloat = 0
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             Rectangle()
                 .foregroundColor(.clear)
                 .background(Color(red: 0.74, green: 0.74, blue: 0.74).opacity(0.38))
                 .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 0)
                 .opacity(offset != 0 ? 0 : 1)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        offset = deafultOffset
+                        isBottomSheetOpen.toggle()
+                    }
+                }
             
-            ZStack {
-                Color.primary
-                    .opacity (0.01)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            offset = deafultOffset
-                            isBottomSheetOpen = false
-                        }
-                    }
-                VStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 60, height: 4)
-                        .background(.white)
-                        .cornerRadius(20)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .inset(by: 0.01)
-                                .stroke(.black, lineWidth: 0.01)
-                        )
-                        .vAlign(.bottom)
-                        .padding(.bottom, 5)
-                        .opacity(offset != 0 ? 0 : 1)
-                        .offset(x: 0.0, y: offset)
-                        .animation(.easeInOut(duration: 0.25), value: offset)
-                    
-                    VStack {
-                        view
-                    }
+            VStack {
+                Rectangle()
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 4)
+                    .cornerRadius(20)
+                    .defaultShadow()
+                    .padding(.bottom, 5)
+                    .opacity(offset != 0 ? 0 : 1)
+                    .offset(x: 0.0, y: offset)
+                    .animation(.easeInOut(duration: 0.25), value: offset)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .inset(by: 0.01)
+                            .stroke(.black, lineWidth: 0.01)
+                    )
+                
+                view
+                    .padding(.bottom, deafultOffset * 2)
                     .frame(maxWidth: .infinity)
                     .background(
                         Rectangle()
@@ -69,31 +63,29 @@ struct GenericBottomSheet<Content: View>: View {
                     .padding(.bottom, -deafultOffset)
                     .offset(x: 0.0, y: offset)
                     .animation(.easeInOut(duration: 0.25), value: offset)
-                    .vAlign(.bottom)
-                }
-                .offset(x: 0.0, y: popupOffset)
-                .onAppear {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        self.offset = 0
-                    }
-                }
-                .gesture(DragGesture().updating($gestureOffset, body: { value, out, _ in
-                    if value.translation.height > -deafultOffset {
-                        out = value.translation.height
-                        onChange()
-                    }
-                }).onEnded { value in
-                    if value.translation.height > deafultOffset {
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            offset = deafultOffset
-                            isBottomSheetOpen = false
-                        }
-                    }
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
-                        popupOffset = 0
-                    }
-                })
             }
+            .offset(x: 0.0, y: popupOffset)
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    self.offset = 0
+                }
+            }
+            .gesture(DragGesture().updating($gestureOffset, body: { value, out, _ in
+                if value.translation.height > -deafultOffset {
+                    out = value.translation.height
+                    onChange()
+                }
+            }).onEnded { value in
+                if value.translation.height > deafultOffset {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        offset = deafultOffset
+                        isBottomSheetOpen.toggle()
+                    }
+                }
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
+                    popupOffset = 0
+                }
+            })
         }
     }
     
@@ -120,7 +112,7 @@ struct GenericBottomSheet_Previews: PreviewProvider {
                             .frame(width: frame.width, height: frame.height)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.5)) {
-                                    isShowingOverlay = true
+                                    isShowingOverlay.toggle()
                                 }
                             }
                     }

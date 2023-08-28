@@ -21,17 +21,16 @@ struct TechniqueModalView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             switch state {
-            case .editing:
-                CreateEditState()
-            case .creating:
+            case .editing, .creating:
                 CreateEditState()
             case .overview:
                 OverviewState()
             }
         }
+        .vAlign(.top)
         .padding(20)
         .hAlign(.leading)
-        .padding(.bottom, 400)
+        .frame(maxHeight: UIScreen.main.bounds.size.height * 0.5)
     }
     
     @ViewBuilder
@@ -87,7 +86,6 @@ struct TechniqueModalView: View {
             }
             CustomTextEditor(text: $technique.details)
                 .font(.headline.weight(.regular))
-                .font(.headline.weight(.regular))
         }
         .onAppear {
             isFocusedTechniqueName = true
@@ -121,15 +119,15 @@ struct TechniqueModalView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }, label: {
-                    Image("star")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                })
+//                Button(action: {
+//
+//                }, label: {
+//                    Image("star")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 30, height: 30)
+//                        .foregroundColor(.black)
+//                })
             }
             
             Text("Add some description here")
@@ -156,7 +154,7 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
                             .frame(width: frame.width, height: frame.height)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.5)) {
-                                    isShowingOverlay = true
+                                    isShowingOverlay.toggle()
                                 }
                             }
                     }

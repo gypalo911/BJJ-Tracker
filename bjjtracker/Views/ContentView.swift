@@ -38,11 +38,20 @@ struct ContentView: View {
                 BluredBottomSheet(
                     isBottomSheetOpen: $settings.showingActionSheet,
                     onSelect: { modal in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            settings.selectedSheet = modal
+                        if let modal = modal {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                settings.selectedSheet = modal
+                            }
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                settings.showingCreateTechnique = true
+                            }
                         }
                     }
                 )
+            }
+            .bottomSheet(isPresented: $settings.showingCreateTechnique) {
+                TechniqueModalView(state: .creating)
             }
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
@@ -66,6 +75,15 @@ struct ContentView: View {
             }
         }
         .onChange(of: settings.showingActionSheet) { value in
+            if value {
+                settings.isTabBarHidden = true
+            } else {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    settings.isTabBarHidden = false
+                }
+            }
+        }
+        .onChange(of: settings.showingCreateTechnique) { value in
             if value {
                 settings.isTabBarHidden = true
             } else {

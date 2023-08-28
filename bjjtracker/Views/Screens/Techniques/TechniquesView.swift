@@ -54,7 +54,6 @@ struct TechniquesView: View {
                 .background(
                     Rectangle()
                         .fill(.white)
-                        .frame(width: .infinity, height: .infinity)
                         .edgesIgnoringSafeArea(.all)
                         .offset(y: -offsetY)
                 )
@@ -85,16 +84,19 @@ struct TechniquesView: View {
         .onAppear {
             settings.isTabBarHidden = true
         }
+        .onDisappear {
+            settings.isTabBarHidden = false
+        }
         .onChange(of: searchText) { value in
             withAnimation(.easeInOut(duration: 0.3)) {
                 isEmptySearchStateState = value.isEmpty
             }
         }
-        .onChange(of: settings.isTabBarHidden) { value in
-            if value == false {
-                settings.isTabBarHidden = true
-            }
-        }
+//        .onChange(of: settings.isTabBarHidden) { value in
+//            if value == false {
+//                settings.isTabBarHidden = true
+//            }
+//        }
     }
     
     @ViewBuilder
@@ -280,7 +282,7 @@ struct TechniquesView: View {
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 Button(action: {
-                    
+                    settings.showingCreateTechnique.toggle()
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)

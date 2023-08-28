@@ -14,13 +14,13 @@ struct CustomTextEditor: View {
     var body: some View {
         ZStack(alignment: .leading) {
             TextEditor(text: $text)
-                .frame(minHeight: 150, alignment: .top)
                 .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .inset(by: 0.01)
                         .stroke(Color("LightGray"), lineWidth: 2)
                 )
+                .frame(minHeight: 150, alignment: .top)
                 .padding(.leading, 5)
                 .focused($isFocused)
             if text.isEmpty {

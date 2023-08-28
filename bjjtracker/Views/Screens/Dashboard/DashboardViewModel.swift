@@ -7,13 +7,6 @@
 //
 import SwiftUI
 
-enum ModalsSheets: Int, Identifiable {
-    var id: Int { self.rawValue }
-    
-    case activity
-    case promotion
-}
-
 struct HealthData {
     var totalEnergyBurned: Double = 0
     var workoutsCount: Int = 0
@@ -27,7 +20,7 @@ class DashboardViewModel: ObservableObject {
     @Published var selectedSession: Session? = nil
     
     @Published var selectedDay = Date()
-    @Published var selectedSheet: ModalsSheets? = nil
+    @Published var selectedSheet: ModalSheets? = nil
     
     var currentWeek = Calendar.current.currentWeek
     
@@ -49,7 +42,7 @@ class DashboardViewModel: ObservableObject {
         self.healthKitService = healthKitService
     }
     
-    func selectModal(sheet: ModalsSheets) {
+    func selectModal(sheet: ModalSheets) {
         selectedSheet = sheet
         switch sheet {
         case .activity:

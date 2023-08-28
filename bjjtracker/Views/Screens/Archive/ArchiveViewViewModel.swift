@@ -20,7 +20,7 @@ class ArchiveViewViewModel: ObservableObject {
     @Published var promotionModels: [PromotionModel] = []
     
     @Published var selectedSession: Session?
-    @Published var selectedSheet: ModalsSheets? = nil
+    @Published var selectedSheet: ModalSheets? = nil
     
     @Published var selectedGradingSystem: GradingSystem = .adult
     

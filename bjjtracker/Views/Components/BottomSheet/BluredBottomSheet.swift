@@ -15,7 +15,7 @@ struct BluredBottomSheet: View {
     
     let buttonAnimation: Animation = Animation.easeInOut(duration: 0.25)
     
-    var onSelect: ((ModalsSheets) -> ())?
+    var onSelect: ((ModalSheets?) -> ())?
     
     var body: some View {
         ZStack {
@@ -123,7 +123,7 @@ struct BluredBottomSheet: View {
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.25)) {
                             isBottomSheetOpen = false
-//                            onSelect?(.technique)
+                            onSelect?(nil)
                         }
                     }
                 }
