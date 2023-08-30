@@ -32,11 +32,20 @@ struct TechniquesView: View {
                     VStack(spacing: 0) {
                         VStack {
                             if !isHeaderHidden {
-                                HeaderView()
-                                    .offset(y: -offsetY)
-                                    .zIndex(2)
+                                HeaderView(onBack: {
+                                    presentationMode.wrappedValue.dismiss()
+                                }, onCreate: {
+                                    isModifyingTechnique.toggle()
+                                })
+                                .offset(y: -offsetY)
+                                .zIndex(2)
                             }
-                            SearchBar()
+                            SearchBar(
+                                isHeaderHidden: $isHeaderHidden,
+                                isEditing: $isEditing,
+                                searchText: $searchText,
+                                isEmptySearchState: $isEmptySearchStateState
+                            )
                                 .offset(y: -offsetY)
                                 .zIndex(1)
                             
@@ -117,124 +126,6 @@ struct TechniquesView: View {
 //                settings.isTabBarHidden = true
 //            }
 //        }
-    }
-    
-    @ViewBuilder
-    func HeaderView() -> some View {
-        VStack(spacing: 20) {
-            HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image("back")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
-                })
-                Spacer()
-                Button(action: {
-                    isModifyingTechnique = true
-                }, label: {
-                    Image("createButton")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
-                })
-            }
-            Text("Techniques")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-                .hAlign(.leading)
-        }
-    }
-    
-    @ViewBuilder
-    func SearchBar() -> some View {
-        HStack {
-            TextField(
-                "Search by Keyword",
-                text: $searchText,
-                onEditingChanged: { (editingChanged) in
-                    if !editingChanged {
-                        self.endEditing()
-                    }
-                }
-            )
-            .focused($isTextFieldFocused)
-                .font(.callout)
-                .padding(.leading, 35)
-                .overlay(
-                    HStack {
-                        Image("search")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("RedPink"))
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 0)
-                        
-                        if isEditing && !isEmptySearchStateState {
-                            Button(action: {
-                                self.searchText = ""
-                            }) {
-                                ZStack {
-                                    Circle()
-                                        .foregroundColor(.black)
-                                    Image("close")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 7, height: 7)
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 20, height: 20)
-                            }
-                        }
-                    }
-                )
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
-                        self.isEditing = true
-                        self.isTextFieldFocused = true
-                    }
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        self.isHeaderHidden = true
-                    }
-                }
-                .onSubmit {
-                    withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
-                        self.isEditing = false
-                    }
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        self.isHeaderHidden = false
-                    }
-                }
-                .padding(.horizontal, 15)
-                .padding(.vertical, 10)
-                .background(Color("LightLightGray"))
-                .cornerRadius(10)
-            
-            if isEditing {
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        self.isEditing = false
-                        self.searchText = ""
-                        self.endEditing()
-                    }
-                    withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
-                        self.isHeaderHidden = false
-                    }
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(.black)
-                }
-                .padding(.trailing, 10)
-                .transition(.move(edge: .trailing))
-                .opacity(isEditing ? 1 : 0)
-            }
-        }
     }
     
     @ViewBuilder

@@ -121,6 +121,7 @@
 		D0B8B72E2A3C9F6100A2418F /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
 		D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */; };
 		D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */; };
+		D0C1D7F02A9F88E4000FCF37 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1D7EF2A9F88E4000FCF37 /* SearchBar.swift */; };
 		D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */; };
 		D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */; };
 		D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */; };
@@ -271,6 +272,7 @@
 		D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D0C1D7EF2A9F88E4000FCF37 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D0DAA8FF2A6186A200074EBE /* Techniques List.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Techniques List.md"; sourceTree = "<group>"; };
 		D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewViewModel.swift; sourceTree = "<group>"; };
 		D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewViewModel.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 		D098BBEC29E2C0DA00A9A068 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D0C1D7EE2A9F88D7000FCF37 /* NavBar */,
 				D05C9EFC2A6AB7BF007D5AF0 /* BottomSheet */,
 				D098BBE229E0CDFD00A9A068 /* Calendar */,
 				D0E824B929DECFF40023E6C0 /* TabBar */,
@@ -776,6 +779,14 @@
 				D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */,
 			);
 			path = Statistics;
+			sourceTree = "<group>";
+		};
+		D0C1D7EE2A9F88D7000FCF37 /* NavBar */ = {
+			isa = PBXGroup;
+			children = (
+				D0C1D7EF2A9F88E4000FCF37 /* SearchBar.swift */,
+			);
+			path = NavBar;
 			sourceTree = "<group>";
 		};
 		D0E824B929DECFF40023E6C0 /* TabBar */ = {
@@ -1128,6 +1139,7 @@
 				D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */,
 				D0DE62A22A963F49008EEA49 /* TechniqueModalView.swift in Sources */,
 				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
+				D0C1D7F02A9F88E4000FCF37 /* SearchBar.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
