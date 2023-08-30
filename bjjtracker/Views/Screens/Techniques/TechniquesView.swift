@@ -13,84 +13,104 @@ struct TechniquesView: View {
     
     @State private var isHeaderHidden = false
     @State private var isEmptySearchStateState = true
+    @State private var isShowingTechniqueDetails = false
+    @State private var isModifyingTechnique = false
     @State private var isEditing = false
     @State private var searchText = ""
     @State private var offsetY: CGFloat = .zero
     
+//    @State private var selectedTechnique: Technique = 
+    
     @FocusState private var isTextFieldFocused: Bool
     
-    private var results: [String] = []
+    private var results: [String] = (0...13).map{"technique\($0)"}
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                VStack {
-                    if !isHeaderHidden {
-                        HeaderView()
-                            .offset(y: -offsetY)
-                            .zIndex(2)
-                    }
-                    SearchBar()
-                        .offset(y: -offsetY)
-                        .zIndex(1)
-                    
-                    if !isEmptySearchStateState {
-                        SuggestionsView()
-                            .offset(y: -offsetY)
-                            .opacity(isEmptySearchStateState ? 0 : 1)
-                    }
-                    if !isEditing && !results.isEmpty {
-                        Text("Learned techniques:")
-                            .font(.body)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .offset(y: -offsetY)
+        ZStack {
+            NavigationView {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        VStack {
+                            if !isHeaderHidden {
+                                HeaderView()
+                                    .offset(y: -offsetY)
+                                    .zIndex(2)
+                            }
+                            SearchBar()
+                                .offset(y: -offsetY)
+                                .zIndex(1)
+                            
+                            if !isEmptySearchStateState {
+                                SuggestionsView()
+                                    .offset(y: -offsetY)
+                                    .opacity(isEmptySearchStateState ? 0 : 1)
+                            }
+                            if !isEditing && !results.isEmpty {
+                                Text("Learned techniques:")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                    .offset(y: -offsetY)
+                                    .hAlign(.leading)
+                                    .padding(.top, 10)
+                            }
+                        }
+                        .padding(.top, 5)
+                        .padding(.horizontal, 20)
+                        .background(
+                            Rectangle()
+                                .fill(.white)
+                                .edgesIgnoringSafeArea(.all)
+                                .offset(y: -offsetY)
+                        )
+                        .zIndex(2)
+                        
+                        if !isEditing && !results.isEmpty {
+                            VStack(alignment: .leading) {
+                                ForEach(0..<10) { item in
+                                    VStack(spacing: 15) {
+                                        TechbiquesListCell(onTap: {
+                                            isShowingTechniqueDetails.toggle()
+                                        })
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 20)
                             .hAlign(.leading)
-                            .padding(.top, 10)
+                        } else {
+                            EmptyStateOfResults()
+                                .padding(.top, isEmptySearchStateState ? 100 : 20)
+                        }
+                    }
+                    .offset(coordinateSpace: .named("scroll")) { offset in
+                        offsetY = offset
                     }
                 }
-                .padding(.top, 40)
-                .padding(.horizontal, 20)
+                .coordinateSpace(name: "scroll")
                 .background(
                     Rectangle()
                         .fill(.white)
                         .edgesIgnoringSafeArea(.all)
-                        .offset(y: -offsetY)
                 )
-                .zIndex(2)
-                
-                if !isEditing && !results.isEmpty {
-                    VStack(alignment: .leading) {
-                        ForEach(0..<10) { item in
-                            VStack(spacing: 15) {
-                                TechbiquesListCell()
-                            }
-                        }
+                .onAppear {
+                    settings.isTabBarHidden = true
+                }
+                .onDisappear {
+                    settings.isTabBarHidden = false
+                }
+                .onChange(of: searchText) { value in
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        isEmptySearchStateState = value.isEmpty
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 20)
-                    .hAlign(.leading)
-                } else {
-                    EmptyStateOfResults()
-                        .padding(.top, isEmptySearchStateState ? 100 : 20)
                 }
             }
-            .offset(coordinateSpace: .named("scroll")) { offset in
-                offsetY = offset
-            }
         }
-        .coordinateSpace(name: "scroll")
-        .ignoresSafeArea()
-        .onAppear {
-            settings.isTabBarHidden = true
+        .bottomSheet(isPresented: $isShowingTechniqueDetails) {
+            TechniqueModalView(state: .overview)
         }
-        .onDisappear {
-            settings.isTabBarHidden = false
-        }
-        .onChange(of: searchText) { value in
-            withAnimation(.easeInOut(duration: 0.3)) {
-                isEmptySearchStateState = value.isEmpty
-            }
+        .bottomSheet(isPresented: $isModifyingTechnique) {
+            TechniqueModalView(state: .modifying)
         }
 //        .onChange(of: settings.isTabBarHidden) { value in
 //            if value == false {
@@ -114,7 +134,7 @@ struct TechniquesView: View {
                 })
                 Spacer()
                 Button(action: {
-                    
+                    isModifyingTechnique = true
                 }, label: {
                     Image("createButton")
                         .resizable()
@@ -244,7 +264,7 @@ struct TechniquesView: View {
     }
     
     @ViewBuilder
-    func TechbiquesListCell() -> some View {
+    func TechbiquesListCell(onTap: @escaping (() -> Void)) -> some View {
         HStack {
             HStack(alignment: .center, spacing: 4) {
                 Text(.init("Delariva"))
@@ -268,7 +288,7 @@ struct TechniquesView: View {
         )
         .contentShape(Rectangle())
         .onTapGesture {
-//                        onTap?()
+            onTap()
         }
     }
     

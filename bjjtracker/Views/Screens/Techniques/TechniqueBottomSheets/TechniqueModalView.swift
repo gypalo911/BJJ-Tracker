@@ -1,5 +1,5 @@
 //
-//  CreateEditTechniqueView.swift
+//  TechniqueModalView.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 23.08.2023.
@@ -7,30 +7,37 @@
 
 import SwiftUI
 
+enum TechniqueField: Hashable {
+    case name
+    case details
+}
+
 struct TechniqueModalView: View {
     enum ModalState {
-        case editing
-        case creating
+        case modifying
         case overview
     }
     
     @State var state: ModalState = .overview
     @StateObject var technique: Technique = Technique(name: "", details: "")
-    @FocusState private var isFocusedTechniqueName: Bool
+    @FocusState private var focusedField: TechniqueField?
+    
+    @State var textFieldHeight: CGFloat = 100.0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             switch state {
-            case .editing, .creating:
+            case .modifying:
                 CreateEditState()
             case .overview:
                 OverviewState()
             }
         }
         .vAlign(.top)
-        .padding(20)
         .hAlign(.leading)
-        .frame(maxHeight: UIScreen.main.bounds.size.height * 0.5)
+        .padding(20)
+        .frame(maxHeight: UIScreen.main.bounds.size.height * (focusedField == .details ? 0.6 : 0.4))
+        .animation(.easeInOut(duration: 0.25), value: focusedField)
     }
     
     @ViewBuilder
@@ -46,8 +53,12 @@ struct TechniqueModalView: View {
                         }
                     }
                 )
-                .font(.title.weight(.bold))
-                .focused($isFocusedTechniqueName)
+                .font(.title2.weight(.bold))
+                .submitLabel(.next)
+                .focused($focusedField, equals: .name)
+                .onSubmit {
+                    focusedField = .details
+                }
                 
                 HStack(spacing: 10) {
                     Button(action: {
@@ -84,11 +95,39 @@ struct TechniqueModalView: View {
                     })
                 }
             }
-            CustomTextEditor(text: $technique.details)
-                .font(.headline.weight(.regular))
+            ZStack(alignment: .leading) {
+                TextEditor(text: $technique.details)
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .inset(by: 0.01)
+                            .stroke(Color("LightGray"), lineWidth: 2)
+                    )
+                    .padding(.leading, 5)
+                    .focused($focusedField, equals: .details)
+                if technique.details.isEmpty {
+                    VStack {
+                        Text("Add some details...".localizedString)
+                            .font(.body)
+                            .foregroundColor(Color("GrayTextColor"))
+                            .padding(20)
+                        Spacer()
+                    }
+                }
+            }
+            .background(GeometryReader { proxy in
+                Color.clear
+                    .onChange(of: textFieldHeight, perform: { value in
+                        if proxy.size.height > textFieldHeight {
+                            textFieldHeight = proxy.size.height + 17.0
+                        }
+                    })
+                
+            })
+            .frame(height: CGFloat(textFieldHeight), alignment: .top)
         }
         .onAppear {
-            isFocusedTechniqueName = true
+            focusedField = .name
         }
     }
     
@@ -102,7 +141,7 @@ struct TechniqueModalView: View {
                     .foregroundColor(.black)
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.25)) {
-                        state = .editing
+                        state = .modifying
                     }
                 }, label: {
                     ZStack {
@@ -161,7 +200,7 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
                 }
                 .ignoresSafeArea()
                 .bottomSheet(isPresented: $isShowingOverlay) {
-                    TechniqueModalView()
+                    TechniqueModalView(state: .overview)
                 }
             }
         }

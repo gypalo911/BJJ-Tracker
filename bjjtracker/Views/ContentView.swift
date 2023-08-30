@@ -51,7 +51,7 @@ struct ContentView: View {
                 )
             }
             .bottomSheet(isPresented: $settings.showingCreateTechnique) {
-                TechniqueModalView(state: .creating)
+                TechniqueModalView(state: .modifying)
             }
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {

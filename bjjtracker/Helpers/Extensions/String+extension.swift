@@ -13,6 +13,10 @@ extension String {
         String(format: NSLocalizedString(self, comment: ""))
     }
     
+    var numberOfLines: Int {
+        return self.components(separatedBy: "\n").count
+    }
+    
     func toDate(format: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
