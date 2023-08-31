@@ -25,6 +25,7 @@ struct SearchBar: View {
                 onEditingChanged: { (editingChanged) in
                     if !editingChanged {
                         onEndEditing?()
+                        self.isTextFieldFocused = false
                     }
                 }
             )
@@ -59,6 +60,10 @@ struct SearchBar: View {
                     }
                 }
             )
+            .padding(.horizontal, 15)
+            .padding(.vertical, 10)
+            .background(Color("LightLightGray"))
+            .cornerRadius(10)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
                     self.isEditing = true
@@ -76,15 +81,17 @@ struct SearchBar: View {
                     self.isHeaderHidden = false
                 }
             }
-            .padding(.horizontal, 15)
-            .padding(.vertical, 10)
-            .background(Color("LightLightGray"))
-            .cornerRadius(10)
+            .onChange(of: searchText) { value in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    isEmptySearchState = value.isEmpty
+                }
+            }
             
             if isEditing {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         self.isEditing = false
+                        self.isTextFieldFocused = false
                         self.searchText = ""
                         self.onEndEditing?()
                     }

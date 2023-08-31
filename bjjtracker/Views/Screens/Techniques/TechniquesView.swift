@@ -19,9 +19,7 @@ struct TechniquesView: View {
     @State private var searchText = ""
     @State private var offsetY: CGFloat = .zero
     
-//    @State private var selectedTechnique: Technique = 
-    
-    @FocusState private var isTextFieldFocused: Bool
+//    @State private var selectedTechnique: Technique =
     
     private var results: [String] = (0...13).map{"technique\($0)"}
     
@@ -107,11 +105,6 @@ struct TechniquesView: View {
                 }
                 .onDisappear {
                     settings.isTabBarHidden = false
-                }
-                .onChange(of: searchText) { value in
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        isEmptySearchStateState = value.isEmpty
-                    }
                 }
             }
         }
