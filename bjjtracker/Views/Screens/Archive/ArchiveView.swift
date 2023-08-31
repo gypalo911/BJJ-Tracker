@@ -1,5 +1,5 @@
 //
-//  ArchiveView.swift
+//  JournalView.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 18.04.2023.
@@ -8,13 +8,13 @@
 import SwiftUI
 import Introspect
 
-struct ArchiveView: View {
+struct JournalView: View {
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
     @Namespace var namespace
     
-    @StateObject var viewModel: ArchiveViewViewModel
+    @StateObject var viewModel: JournalViewViewModel
     
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
@@ -141,7 +141,7 @@ struct ArchiveView: View {
                 .background(Color("generalBG").ignoresSafeArea())
                 .onAppear {
                     settings.isTabBarHidden = true
-                    viewModel.onArchiveViewAppeared()
+                    viewModel.onJournalViewAppeared()
                     changeNavBar(.clear)
                 }
                 .sheet(item: $viewModel.selectedSheet) { selectedSheet in
@@ -152,7 +152,7 @@ struct ArchiveView: View {
                         NewSessionView(viewModel: .init())
                     }
                 }
-                .navigationTitle("Archive")
+                .navigationTitle("Journal")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
@@ -188,9 +188,9 @@ struct ArchiveView: View {
     }
 }
 
-struct ArchiveView_Previews: PreviewProvider {
+struct JournalView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView(viewModel: .init(persistanceManager: PersistanceManager.preview))
+        JournalView(viewModel: .init(persistanceManager: PersistanceManager.preview))
             .environmentObject(AppSettings())
     }
 }

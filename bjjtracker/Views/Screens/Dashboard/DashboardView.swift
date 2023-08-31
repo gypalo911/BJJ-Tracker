@@ -196,7 +196,7 @@ struct DashboardView: View {
                 
                 
                 NavigationLink(destination: {
-                    ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                    JournalView(viewModel: .init(persistanceManager: persistanceManager))
                 }) {
                     Image("archive")
                         .resizable()
@@ -278,7 +278,7 @@ struct DashboardView: View {
                 }
                 
                 NavigationLink(destination: {
-                    ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                    JournalView(viewModel: .init(persistanceManager: persistanceManager))
                 }) {
                     HStack {
                         Text("View History")
@@ -302,7 +302,7 @@ struct DashboardView: View {
             .foregroundColor(Color("Gray"))
         
         NavigationLink(destination: {
-            ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+            JournalView(viewModel: .init(persistanceManager: persistanceManager))
         }) {
             HStack {
                 Text("View History")

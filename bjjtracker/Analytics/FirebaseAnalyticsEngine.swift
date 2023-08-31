@@ -19,7 +19,7 @@ struct AnalyticsEvent {
 enum FirebaseAnalyticsEvent: String {
     case tagAdded = "tag_added"
     case tagRemoved = "tag_removed"
-    case archiveScreenViewed = "archive_screen_viewed"
+    case journalScreenViewed = "journal_screen_viewed"
     case createSessionButtonTapped = "create_session_button_tapped"
     case addPromotionButtonTapped = "add_promotion_button_tapped"
     case statisticsScreenViewed = "statistics_screen_viewed"

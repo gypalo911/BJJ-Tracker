@@ -1,5 +1,5 @@
 //
-//  ArchiveViewViewModel.swift
+//  JournalViewViewModel.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 14.07.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArchiveViewViewModel: ObservableObject {
+class JournalViewViewModel: ObservableObject {
     
     typealias StorageManager = SessionsStorageManager & PromotionsStorageManager
     
@@ -49,11 +49,11 @@ class ArchiveViewViewModel: ObservableObject {
         self.analyticsEngine = analyticsEngine
     }
     
-    func onArchiveViewAppeared() {
+    func onJournalViewAppeared() {
         DispatchQueue.main.async { [weak self] in
             self?.setup()
         }
-        analyticsEngine.log(AnalyticsEvent(name: "archive_screen_viewed", metadata: [:]))
+        analyticsEngine.log(AnalyticsEvent(name: "journal_screen_viewed", metadata: [:]))
     }
     
     func setup() {
@@ -76,7 +76,7 @@ class ArchiveViewViewModel: ObservableObject {
 
 
 // MARK: Analytics functions
-extension ArchiveViewViewModel {
+extension JournalViewViewModel {
     func createSessionButtonTapped() {
         analyticsEngine.log(AnalyticsEvent(name: "create_session_button_tapped", metadata: [:]))
     }

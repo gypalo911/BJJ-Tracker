@@ -61,7 +61,7 @@ struct TimetableView: View {
                                 .font(.body)
                                 .foregroundColor(Color("Gray"))
                             NavigationLink(destination: {
-                                ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                                JournalView(viewModel: .init(persistanceManager: persistanceManager))
                             }) {
                                 HStack {
                                     Text("View History")
@@ -87,7 +87,7 @@ struct TimetableView: View {
                                             }
                                     }
                                     NavigationLink(destination: {
-                                        ArchiveView(viewModel: .init(persistanceManager: persistanceManager))
+                                        JournalView(viewModel: .init(persistanceManager: persistanceManager))
                                     }) {
                                         HStack {
                                             Text("View History")
