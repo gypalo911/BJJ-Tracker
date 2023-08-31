@@ -34,7 +34,7 @@
 		D02F3DE229E7291F00BED6CD /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE129E7291F00BED6CD /* PieChartView.swift */; };
 		D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */; };
 		D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DE729EEBD9300BED6CD /* ProfileView.swift */; };
-		D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */; };
+		D02F3DEB29EEE80100BED6CD /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEA29EEE80100BED6CD /* JournalView.swift */; };
 		D02F3DED29EFFB3C00BED6CD /* MonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEC29EFFB3C00BED6CD /* MonthYearPicker.swift */; };
 		D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */; };
 		D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */; };
@@ -121,7 +121,7 @@
 		D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */; };
 		D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */; };
 		D0C1D7F02A9F88E4000FCF37 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1D7EF2A9F88E4000FCF37 /* SearchBar.swift */; };
-		D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */; };
+		D0DAA9012A61871D00074EBE /* JournalViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9002A61871D00074EBE /* JournalViewViewModel.swift */; };
 		D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */; };
 		D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */; };
 		D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */; };
@@ -194,7 +194,7 @@
 		D02F3DE129E7291F00BED6CD /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		D02F3DE529E8592000BED6CD /* DraggableCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableCalendarView.swift; sourceTree = "<group>"; };
 		D02F3DE729EEBD9300BED6CD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
+		D02F3DEA29EEE80100BED6CD /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		D02F3DEC29EFFB3C00BED6CD /* MonthYearPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearPicker.swift; sourceTree = "<group>"; };
 		D02F3DEE29F0204200BED6CD /* MonthYearBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearBottomSheetView.swift; sourceTree = "<group>"; };
 		D02F3DF029F0543000BED6CD /* StatisticsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewViewModel.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0C1D7EF2A9F88E4000FCF37 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D0DAA8FF2A6186A200074EBE /* Techniques List.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Techniques List.md"; sourceTree = "<group>"; };
-		D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewViewModel.swift; sourceTree = "<group>"; };
+		D0DAA9002A61871D00074EBE /* JournalViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewViewModel.swift; sourceTree = "<group>"; };
 		D0DAA9022A61887E00074EBE /* NewSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSessionViewViewModel.swift; sourceTree = "<group>"; };
 		D0DAA9042A618B9A00074EBE /* EditSessionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionViewViewModel.swift; sourceTree = "<group>"; };
 		D0DAA9062A618D3E00074EBE /* AddPromotionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionViewViewModel.swift; sourceTree = "<group>"; };
@@ -420,13 +420,13 @@
 			path = PieChart;
 			sourceTree = "<group>";
 		};
-		D02F3DE929EEE7F200BED6CD /* Archive */ = {
+		D02F3DE929EEE7F200BED6CD /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				D02F3DEA29EEE80100BED6CD /* ArchiveView.swift */,
-				D0DAA9002A61871D00074EBE /* ArchiveViewViewModel.swift */,
+				D02F3DEA29EEE80100BED6CD /* JournalView.swift */,
+				D0DAA9002A61871D00074EBE /* JournalViewViewModel.swift */,
 			);
-			path = Archive;
+			path = Journal;
 			sourceTree = "<group>";
 		};
 		D02F3DF829F14BCE00BED6CD /* Details */ = {
@@ -674,7 +674,7 @@
 			children = (
 				D06E48832A9259700041F370 /* AppleHealth */,
 				D02D1FEE2A5ADEB4006BB617 /* Techniques */,
-				D02F3DE929EEE7F200BED6CD /* Archive */,
+				D02F3DE929EEE7F200BED6CD /* Journal */,
 				D0B01F2D29E5844B00E10979 /* Statistics */,
 				D060BAB229DDAE5F00E10562 /* Sessions */,
 				D060BAB329DDAE6C00E10562 /* Profile */,
@@ -1073,9 +1073,9 @@
 				D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */,
 				D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */,
 				D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */,
-				D0DAA9012A61871D00074EBE /* ArchiveViewViewModel.swift in Sources */,
+				D0DAA9012A61871D00074EBE /* JournalViewViewModel.swift in Sources */,
 				D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */,
-				D02F3DEB29EEE80100BED6CD /* ArchiveView.swift in Sources */,
+				D02F3DEB29EEE80100BED6CD /* JournalView.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
 				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
 				D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */,
