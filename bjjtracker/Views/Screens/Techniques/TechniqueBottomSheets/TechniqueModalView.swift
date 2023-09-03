@@ -19,10 +19,9 @@ struct TechniqueModalView: View {
     }
     
     @State var state: ModalState = .overview
-    @StateObject var technique: Technique = Technique(name: "", details: "")
+    @State var shouldHidePlaceholder: Bool = false
+    @ObservedObject var technique: Technique = Technique(name: "", details: "")
     @FocusState private var focusedField: TechniqueField?
-    
-    @State var textFieldHeight: CGFloat = 100.0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -31,12 +30,10 @@ struct TechniqueModalView: View {
                 CreateEditState()
             case .overview:
                 OverviewState()
+                    .padding(.bottom, 100)
             }
         }
-        .vAlign(.top)
-        .hAlign(.leading)
         .padding(20)
-        .frame(maxHeight: UIScreen.main.bounds.size.height * (focusedField == .details ? 0.6 : 0.4))
         .animation(.easeInOut(duration: 0.25), value: focusedField)
     }
     
@@ -115,16 +112,11 @@ struct TechniqueModalView: View {
                     }
                 }
             }
-            .background(GeometryReader { proxy in
-                Color.clear
-                    .onChange(of: textFieldHeight, perform: { value in
-                        if proxy.size.height > textFieldHeight {
-                            textFieldHeight = proxy.size.height + 17.0
-                        }
-                    })
-                
-            })
-            .frame(height: CGFloat(textFieldHeight), alignment: .top)
+            .frame(maxHeight: 200)
+            .keyboardAdaptive()
+        }
+        .onChange(of: technique.details) { value in
+            shouldHidePlaceholder = !value.isEmpty
         }
         .onAppear {
             focusedField = .name

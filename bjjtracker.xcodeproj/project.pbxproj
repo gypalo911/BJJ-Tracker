@@ -137,6 +137,7 @@
 		D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */; };
 		D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BE29DF006A0023E6C0 /* Date+extension.swift */; };
 		D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */; };
+		D0EF31C32AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */; };
 		D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */; };
 		E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */; };
 /* End PBXBuildFile section */
@@ -288,6 +289,7 @@
 		D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		D0E824BE29DF006A0023E6C0 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
+		D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptiveModifier.swift; sourceTree = "<group>"; };
 		D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierBackport.swift; sourceTree = "<group>"; };
 		D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-bjjtrackerTests/Pods-bjjtrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */,
 				D01187D12A7BBB3400A2FCC7 /* ViewSizeModifier.swift */,
 				D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */,
+				D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -1139,6 +1142,7 @@
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,
+				D0EF31C32AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift in Sources */,
 				D0E824B829DEB1C20023E6C0 /* Calendar+extension.swift in Sources */,
 				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
 				D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */,

@@ -48,7 +48,7 @@ struct GenericBottomSheet<Content: View>: View {
                     )
                 
                 view
-                    .padding(.bottom, deafultOffset * 2)
+                    .padding(.bottom, deafultOffset)
                     .frame(maxWidth: .infinity)
                     .background(
                         Rectangle()
