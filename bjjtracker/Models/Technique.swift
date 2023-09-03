@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Technique: Identifiable, ObservableObject {
+class Technique: Identifiable, Hashable, ObservableObject {
     var id = UUID()
     
     var name: String
@@ -16,6 +16,14 @@ class Technique: Identifiable, ObservableObject {
     init(name: String, details: String) {
         self.name = name
         self.details = details
+    }
+    
+    static func == (lhs: Technique, rhs: Technique) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self).hashValue)
     }
 }
 

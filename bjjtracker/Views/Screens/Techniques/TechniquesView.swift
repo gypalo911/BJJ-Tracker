@@ -19,9 +19,9 @@ struct TechniquesView: View {
     @State private var searchText = ""
     @State private var offsetY: CGFloat = .zero
     
-//    @State private var selectedTechnique: Technique =
+    @State private var selectedTechnique: Technique?
     
-    private var results: [String] = (0...13).map{"technique\($0)"}
+    @State var results: [Technique] = (0...13).map { Technique(name: "Technique \($0)", details: "Description \($0)") }
     
     var body: some View {
         ZStack {
@@ -63,22 +63,28 @@ struct TechniquesView: View {
                             }
                         }
                         .padding(.top, 5)
+                        .padding(.bottom, 10)
                         .padding(.horizontal, 20)
                         .background(
                             Rectangle()
                                 .fill(.white)
                                 .edgesIgnoringSafeArea(.all)
                                 .offset(y: -offsetY)
+                                .padding(.top, -50)
                         )
                         .zIndex(2)
                         
                         if !isEditing && !results.isEmpty {
                             VStack(alignment: .leading) {
-                                ForEach(0..<10) { item in
+                                ForEach(results, id: \.self) { item in
                                     VStack(spacing: 15) {
-                                        TechbiquesListCell(onTap: {
-                                            isShowingTechniqueDetails.toggle()
-                                        })
+                                        TechbiquesListCell(
+                                            technique: item,
+                                            onTap: {
+                                                selectedTechnique = item
+                                                isShowingTechniqueDetails.toggle()
+                                            }
+                                        )
                                     }
                                 }
                             }
@@ -109,7 +115,9 @@ struct TechniquesView: View {
             }
         }
         .bottomSheet(isPresented: $isShowingTechniqueDetails) {
-            TechniqueModalView(state: .overview)
+            if let technique = selectedTechnique {
+                TechniqueModalView(state: .overview, technique: technique)
+            }
         }
         .bottomSheet(isPresented: $isModifyingTechnique) {
             TechniqueModalView(state: .modifying)
@@ -148,10 +156,13 @@ struct TechniquesView: View {
     }
     
     @ViewBuilder
-    func TechbiquesListCell(onTap: @escaping (() -> Void)) -> some View {
+    func TechbiquesListCell(
+        technique: Technique,
+        onTap: @escaping (() -> Void)
+    ) -> some View {
         HStack {
             HStack(alignment: .center, spacing: 4) {
-                Text(.init("Delariva"))
+                Text(.init(technique.name))
                     .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(Color("Blue"))

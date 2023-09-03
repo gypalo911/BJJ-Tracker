@@ -135,9 +135,10 @@ struct TechniqueModalView: View {
     func OverviewState() -> some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Text("Technique name")
-                    .font(.title)
+                Text("\(technique.name)")
+                    .font(.title2.weight(.bold))
                     .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.25)) {
@@ -169,7 +170,7 @@ struct TechniqueModalView: View {
 //                })
             }
             
-            Text("Add some description here")
+            Text("\(technique.details)")
                 .font(.body)
                 .fontWeight(.regular)
                 .foregroundColor(Color("Gray"))
