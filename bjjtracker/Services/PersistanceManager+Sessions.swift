@@ -71,7 +71,7 @@ extension PersistanceManager: SessionsStorageManager {
     }
     
     func delete(session: Session, context: NSManagedObjectContext) {
-//        DefaultHealthKitService().delete(session: session)
+        DefaultHealthKitService().delete(session: session)
         context.delete(session)
         
         save(context: context)

@@ -48,7 +48,7 @@ struct GenericBottomSheet<Content: View>: View {
                     )
                 
                 view
-                    .padding(.bottom, deafultOffset)
+                    .padding(.bottom, deafultOffset * 1.5)
                     .frame(maxWidth: .infinity)
                     .background(
                         Rectangle()
@@ -128,13 +128,13 @@ struct GenericBottomSheet_Previews: PreviewProvider {
     static var previews: some View {
         Container()
             .environmentObject(AppSettings())
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-            .previewDisplayName("iPhone 14")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+            .previewDisplayName("iPhone 14 Pro")
         
         Container()
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
-            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
-            .previewDisplayName("iphone 7 ios 15")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 7"))
+            .previewDisplayName("iPhone 7")
     }
 }

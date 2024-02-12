@@ -139,6 +139,10 @@ struct OptionSelector: View {
     let g: GeometryProxy
     let valuesList: [StringComparable]
     
+    var valuesStrings: [String] {
+        return valuesList.map { $0.stringValue }
+    }
+    
     @State var selectedValue: StringComparable
     
     var body: some View {
@@ -146,7 +150,8 @@ struct OptionSelector: View {
         var height = CGFloat.zero
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
-                ForEach(valuesList.map { $0.stringValue }, id: \.self) { type in
+                ForEach(valuesStrings.indices, id: \.self) { i in
+                    let type = valuesStrings[i]
                     RectangleOption(type: "\(type)min", selectedType: $selectedValue.stringValue, horizontalPadding: 15)
                         .alignmentGuide(.leading, computeValue: { d in
                             if (abs(width - d.width) > g.size.width)

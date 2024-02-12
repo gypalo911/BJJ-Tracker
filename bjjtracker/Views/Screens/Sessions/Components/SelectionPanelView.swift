@@ -19,7 +19,8 @@ struct SelectionPanelStringView: View {
         var height = CGFloat.zero
 
         ZStack(alignment: .topLeading) {
-            ForEach(valuesList, id: \.self) { type in
+            ForEach(valuesList.indices, id: \.self) { i in
+                let type = valuesList[i]
                 RectangleOption(type: type, selectedType: $selectedType)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width)
@@ -61,7 +62,8 @@ struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawV
         ScrollViewReader { scrollValue in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(valuesList, id: \.self) { type in
+                    ForEach(valuesList.indices, id: \.self) { i in
+                        let type = valuesList[i]
                         RectangleOption(type: type, selectedType: $selectedTypeValue)
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.3)) {

@@ -10,11 +10,16 @@ import SwiftUI
 struct BeltsListView: View {
     @ObservedObject var promotion: Promotion
     
+    var belts: [Belt] {
+        Belt.belts(for: promotion.gradingSystem).filter { $0 != .none }
+    }
+    
     var body: some View {
         ScrollViewReader { scrollValue in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(Belt.belts(for: promotion.gradingSystem).filter { $0 != .none }, id: \.self) { belt in
+                    ForEach(belts.indices, id: \.self) { i in
+                        let belt = belts[i]
                         let isSelected = promotion.belt == belt
                         CircularBeltView(
                             primaryColor: belt.color.0,

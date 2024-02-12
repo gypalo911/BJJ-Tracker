@@ -181,108 +181,57 @@ final class DefaultHealthKitService: ObservableObject, HealthKitService {
 
 extension DefaultHealthKitService {
     func store(session: Session) {
-        let configuration = HKWorkoutConfiguration()
-        configuration.activityType = HKWorkoutActivityType.martialArts
-        configuration.locationType = .indoor
-        let builder = HKWorkoutBuilder(healthStore: healthStore,
-                                       configuration: configuration,
-                                       device: .local())
-        
         guard let start = session.startDate else {
             return
         }
         let end = start + TimeInterval(session.duration * 60)
         
-        builder.beginCollection(withStart: start) { (success, error) in
-            guard success else {
-                return
+        guard let quantityType = HKQuantityType.quantityType(
+            forIdentifier: .activeEnergyBurned) else {
+            return
+        }
+        
+        let unit = HKUnit.kilocalorie()
+        let totalEnergyBurned = Double(session.duration) / 60 * 600
+        let quantity = HKQuantity(
+            unit: unit,
+            doubleValue: totalEnergyBurned
+        )
+        var sessionId = "unspecified-session-id"
+        if let id = session.id {
+            sessionId = "\(id)"
+        }
+        let sample = HKCumulativeQuantitySample(
+            type: quantityType,
+            quantity: quantity,
+            start: start,
+            end: end,
+            metadata: ["sessionId": sessionId]
+        )
+        
+        healthStore.save(sample) { result, error in
+            if let error = error {
+                print("error: \(error)")
+            } else {
+                print("result: \(result)")
             }
-            
-            guard let quantityType = HKQuantityType.quantityType(
-                forIdentifier: .activeEnergyBurned) else {
-                return
-            }
-            
-            let unit = HKUnit.kilocalorie()
-            let totalEnergyBurned = Double(session.duration) / 60 * 600
-            let quantity = HKQuantity(
-                unit: unit,
-                doubleValue: totalEnergyBurned
-            )
-            let sample = HKCumulativeQuantitySample(
-                type: quantityType,
-                quantity: quantity,
-                start: start,
-                end: end
-            )
-            //1. Add the sample to the workout builder
-            builder.add([sample]) { (success, error) in
-                guard success else {
-                    return
-                }
-                builder.addMetadata(["sessionId": session.id]) { _, _ in }
-                
-                //2. Finish collection workout data and set the workout end date
-                builder.endCollection(withEnd: end) { (success, error) in
-                    guard success else {
-                        print("error durting storing activity")
-                        return
-                    }
-                    
-                    //3. Create the workout with the samples added
-                    builder.finishWorkout { (_, error) in
-                        //                  let success = error == nil
-                        //                  completion(success, error)
-                        print("successfully stored activity")
-                    }
-                }
-            }
-            
         }
     }
     
     func delete(session: Session) {
-        var healthDataSession: HKObject?
-        fetchData(by: session.id!) { data, _ in
-            healthDataSession = data
+        guard let quantityType = HKQuantityType.quantityType(
+            forIdentifier: .activeEnergyBurned), let sessionId = session.id else {
+            return
         }
-        if let healthDataSession = healthDataSession {
-            healthStore.delete(healthDataSession) { _, _ in }
-        }
-    }
-    
-    func fetchData(by sessionId: UUID, completion: @escaping (HKWorkout, Error?) -> Void) {
-        let workoutPredicate = HKQuery.predicateForWorkouts(with: .martialArts)
-//        let sourcePredicate = HKQuery.predicateForObjects(from: .default())
-        let metadataPredicate = HKQuery.predicateForObjects(withMetadataKey: "sessionId")
+        let predicate = HKQuery.predicateForObjects(withMetadataKey: "sessionId", allowedValues: ["\(sessionId)"])
         
-        //3. Combine the predicates into a single predicate.
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
-                                            [])
-        
-        let query = HKSampleQuery(
-            sampleType: .workoutType(),
-            predicate: compound,
-            limit: 0,
-            sortDescriptors: []
-        ) { (query, samples, error) in
-            DispatchQueue.main.async {
-                guard
-                    let samples = samples as? [HKWorkout],
-                    error == nil
-                else {
-//                    completion(nil, error)
-                    return
-                }
-                
-                print(samples)
-                if let sample = samples.first {
-                    completion(sample, nil)
-                }
+        healthStore.deleteObjects(of: quantityType, predicate: predicate) { success, _, error in
+            if success {
+               print("delete health record success")
+            } else {
+               print("delete health record error = \(String(describing: error))")
             }
         }
-        
-        healthStore.execute(query)
     }
     
     func statisticsValue<T: HKQuantityType>(
