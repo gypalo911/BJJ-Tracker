@@ -300,18 +300,22 @@ extension DefaultHealthKitService {
         quantityType: HKQuantityType?,
         dateInterval: DateInterval,
         calculation: HealthKitServiceCalculationType,
-        unit: HKUnit
+        unit: HKUnit,
+        predicate: NSPredicate
     ) async throws -> Double {
         return try await withCheckedThrowingContinuation { continuation in
             guard let quantityType = quantityType else {
                 continuation.resume(throwing: HealthKitServiceError.dataTypeUnavailable(""))
                 return
             }
-            let predicate = HKQuery.predicateForSamples(
+            let datePredicate = HKQuery.predicateForSamples(
                 withStart: dateInterval.start,
                 end: dateInterval.end,
                 options: .strictStartDate
             )
+            
+            let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, predicate])
+            
             var interval = DateComponents()
             interval.day = 1
             
@@ -327,7 +331,7 @@ extension DefaultHealthKitService {
             }
             let query = HKStatisticsCollectionQuery(
                 quantityType: quantityType,
-                quantitySamplePredicate: predicate,
+                quantitySamplePredicate: compound,
                 options: .cumulativeSum,
                 anchorDate: anchorDate,
                 intervalComponents: interval
@@ -387,7 +391,8 @@ extension DefaultHealthKitService {
                             quantityType: energyType,
                             dateInterval: dateInterval,
                             calculation: calculation,
-                            unit: .kilocalorie()
+                            unit: .kilocalorie(),
+                            predicate: HKQuery.predicateForObjects(withMetadataKey: "sessionId")
                         )
                     } catch {
                         return (0)

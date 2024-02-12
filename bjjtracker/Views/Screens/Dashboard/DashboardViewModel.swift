@@ -95,8 +95,10 @@ extension DashboardViewModel {
         return healthKitService.isDataAuthorized
     }
     
-    func authorizeHealthKitIfNeeded() {
-        healthKitService.authorizeHealthKitIfNeeded { _ in }
+    func authorizeHealthKitIfNeeded(completion: (() -> Void)?) {
+        healthKitService.authorizeHealthKitIfNeeded { _ in
+            completion?()
+        }
     }
     
     func fetchEnergyForSelectedDay() async {

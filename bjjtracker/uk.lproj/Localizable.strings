@@ -62,10 +62,24 @@
 "Location" = "Місце";
 "Notes" = "Нотатки";
 "Empty" = "Порожньо";
-"Learned techniques" = "Вивчені техніки";
-"Technique" = "Техніка";
-"Add technique" = "Додати техніку";
 "Suggestions" = "Пропозиції";
+
+// Techniques
+"Learned techniques" = "Вивчені техніки";
+"Learned techniques:" = "Вивчені техніки:";
+"Technique" = "Техніка";
+"Techniques" = "Техніки";
+"Add technique" = "Додати техніку";
+"New Technique" = "Нова техніка";
+"Technique name" = "Назва техніки";
+"You can search techniques by name or notes" = "Шукайте техніки за назвою або нотатками";
+"No techniques yet" = "Не додано жодної техніки";
+"No techniques added yet.\nYou can create it now!" = "Не додано жодної техніки.\nСтворіть її вже зараз!";
+"Start learning today" = "Почни практикуватись вже сьогодні";
+"Add New" = "Створити";
+"Search by Keyword" = "Пошук за фразою";
+"Cancel" = "Відміна";
+"No results found" = "Безрезультатно";
 
 // Timetable
 "Timetable" = "Календар";
@@ -144,3 +158,12 @@
 "Green/White" = "Зелено/Білий";
 "Green" = "Зелений";
 "Green/Black" = "Зелено/Чорний";
+
+// Apple Health
+
+"View all Apple Health data" = "Переглянути дані у Apple Health";
+"**%@ kcal** burned" = "**%@ ккал** спалено";
+"Connect" = "Підключити";
+"Connect with" = "Підключити";
+"Train smarter by connecting your JiuTrack app to Apple Health" = "Тренуйся розумніше підключивши додаток JiuTrack до Apple Health";
+"Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**" = "Інтеграція Apple Health вимагає надання дозволу у **Налаштування -> Приватність -> Здоровʼя -> JiuTrack**";

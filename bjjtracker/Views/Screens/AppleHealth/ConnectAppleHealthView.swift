@@ -79,7 +79,9 @@ struct ConnectAppleHealthView_Previews: PreviewProvider {
                 .ignoresSafeArea()
                 .bottomSheet(isPresented: $showingActionSheet) {
                     ConnectAppleHealthView(onConnect: {
-                        DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in }
+                        DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in
+                            showingActionSheet = false
+                        }
                     })
                 }
             }

@@ -141,7 +141,9 @@ struct DashboardView: View {
             }
             .bottomSheet(isPresented: $isConnectAHPresented, view: {
                 ConnectAppleHealthView(onConnect: {
-                    viewModel.authorizeHealthKitIfNeeded()
+                    viewModel.authorizeHealthKitIfNeeded {
+                        isConnectAHPresented = false
+                    }
                 })
             })
             .zIndex(0)
@@ -232,7 +234,7 @@ struct DashboardView: View {
                     }
                 } else {
                     let totalEnergyBurned = Int(viewModel.healthData.totalEnergyBurned)
-                    let workoutsCount = Int(viewModel.healthData.workoutsCount)
+//                    let workoutsCount = Int(viewModel.healthData.workoutsCount)
                     if totalEnergyBurned != 0 {
                         CommonCardView(
                             image: {
@@ -248,22 +250,22 @@ struct DashboardView: View {
                             }
                         )
                     }
-                    if workoutsCount != 0 {
-                        CommonCardView(
-                            image: {
-                                Image("activities")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.black)
-                            },
-                            text: {
-                                Text("**\(workoutsCount)** activities beside BJJ")
-                                    .font(.footnote)
-                                    .foregroundColor(.black)
-                            }
-                        )
-                    }
+//                    if workoutsCount != 0 {
+//                        CommonCardView(
+//                            image: {
+//                                Image("activities")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 25, height: 25)
+//                                    .foregroundColor(.black)
+//                            },
+//                            text: {
+//                                Text("**\(workoutsCount)** activities beside BJJ")
+//                                    .font(.footnote)
+//                                    .foregroundColor(.black)
+//                            }
+//                        )
+//                    }
                 }
                 
                 ForEach(filteredSessions) { session in

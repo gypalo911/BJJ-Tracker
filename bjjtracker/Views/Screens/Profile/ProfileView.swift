@@ -379,7 +379,9 @@ struct ProfileView: View {
         }
         .bottomSheet(isPresented: $isConnectAHPresented, view: {
             ConnectAppleHealthView(onConnect: {
-                DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in }
+                DefaultHealthKitService().authorizeHealthKitIfNeeded { _ in
+                    isConnectAHPresented = false
+                }
             })
         })
         .onChange(of: isConnectAHPresented) { value in

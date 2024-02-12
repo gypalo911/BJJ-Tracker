@@ -42,12 +42,15 @@ struct TechniquesView: View {
                                 isHeaderHidden: $isHeaderHidden,
                                 isEditing: $isEditing,
                                 searchText: $searchText,
-                                isEmptySearchState: $isEmptySearchStateState
+                                isEmptySearchState: $isEmptySearchStateState,
+                                onEndEditing: {
+                                    
+                                }
                             )
-                                .offset(y: -offsetY)
-                                .zIndex(1)
+                            .offset(y: -offsetY)
+                            .zIndex(1)
                             
-                            if !isEmptySearchStateState {
+                            if !isEmptySearchStateState && results.isEmpty {
                                 SuggestionsView()
                                     .offset(y: -offsetY)
                                     .opacity(isEmptySearchStateState ? 0 : 1)
@@ -142,7 +145,9 @@ struct TechniquesView: View {
                         SuggestionTagView(
                             tag: Tag(text: "tag-\(tag)"),
                             onTap: {
-//                                        viewModel.add(tag: tag)
+                                isEditing = false
+                                searchText = String(tag)
+//                                onEndEditing?()
                             }
                         )
                     }
@@ -229,7 +234,7 @@ struct TechniquesView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
-                Text("You can search sessions by technique name or notes")
+                Text("You can search techniques by name or notes")
                     .font(.footnote)
                     .fontWeight(.medium)
                     .foregroundColor(Color("GrayTextColor"))
