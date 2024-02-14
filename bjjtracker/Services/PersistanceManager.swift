@@ -31,7 +31,8 @@ class PersistanceManager: ObservableObject {
 
             let technique = TechniqueModel(context: viewContext)
             technique.id = UUID()
-            technique.text = "\(i) technique"
+            technique.text = "Template \(i) technique"
+            technique.details = "Details about some specific technique \(i)"
             technique.addToSessions(session)
         }
         

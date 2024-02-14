@@ -8,12 +8,17 @@
 import Foundation
 
 class Technique: Identifiable, Hashable, ObservableObject {
-    var id = UUID()
+    var id: UUID
     
-    var name: String
-    var details: String
+    @Published var name: String
+    @Published var details: String
     
-    init(name: String, details: String) {
+    init(
+        id: UUID = UUID(),
+        name: String = "",
+        details: String = ""
+    ) {
+        self.id = id
         self.name = name
         self.details = details
     }
@@ -35,7 +40,7 @@ struct Tag: Identifiable, Hashable {
     
     var technique: TechniqueModel? = nil
     
-    var id: String =  UUID().uuidString
+    var id: String = UUID().uuidString
     var text: String
     var size: CGFloat = 0
     var type: TagType = .regular

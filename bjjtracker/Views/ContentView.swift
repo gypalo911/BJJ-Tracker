@@ -13,7 +13,6 @@ struct ContentView: View {
     
     @Environment (\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
-    @StateObject var profileVM = ProfileViewViewModel()
     @StateObject var timetableVM = TimetableViewViewModel()
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     
@@ -30,7 +29,7 @@ struct ContentView: View {
                         .tag(Tab.calendar)
                     StatisticsView(viewModel: statsVM)
                         .tag(Tab.statistics)
-                    ProfileView(viewModel: profileVM)
+                    ProfileView(viewModel: ProfileViewViewModel(persistanceManager: persistanceManager))
                         .tag(Tab.profile)
                 }
             }
@@ -51,7 +50,10 @@ struct ContentView: View {
                 )
             }
             .bottomSheet(isPresented: $settings.showingCreateTechnique) {
-                TechniqueModalView(state: .modifying)
+                TechniqueModalView(
+                    showingCreateTechnique: $settings.showingCreateTechnique,
+                    state: .modifying
+                )
             }
             if !settings.isTabBarHidden {
                 FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
@@ -115,10 +117,10 @@ struct ContentView_Previews: PreviewProvider {
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
         
-        ContentView()
-            .environmentObject(AppSettings())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
-            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
-            .previewDisplayName("iphone 7 ios 15")
+//        ContentView()
+//            .environmentObject(AppSettings())
+//            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+//            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
+//            .previewDisplayName("iphone 7 ios 15")
     }
 }

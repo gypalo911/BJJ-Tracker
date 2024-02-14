@@ -8,17 +8,30 @@
 import CoreData
 
 protocol TechniquesStorageManager {
+    func fetchAllTechniques() -> [TechniqueModel]
     func fetchTechniques(for session: Session) -> [TechniqueModel]
     func fetchTechniquesForSuggestion() -> [TechniqueModel]
     func createTechnique(
-        for session: Session,
-        text: String,
-        details: String?
+        for session: Session?,
+        name: String,
+        details: String
     )
     func delete(model: TechniqueModel)
 }
 
 extension PersistanceManager: TechniquesStorageManager {
+    func fetchAllTechniques() -> [TechniqueModel] {
+        let fetchRequest: NSFetchRequest<TechniqueModel> = TechniqueModel.fetchRequest()
+        
+        do {
+            return try container.viewContext.fetch(fetchRequest)
+                .sorted { $0.text ?? "" > $1.text ?? "" }
+        } catch {
+            print("Unable to Fetch techniques, (\(error))")
+            return []
+        }
+    }
+    
     func fetchTechniques(for session: Session) -> [TechniqueModel] {
         let fetchRequest: NSFetchRequest<TechniqueModel> = TechniqueModel.fetchRequest()
         
@@ -49,16 +62,34 @@ extension PersistanceManager: TechniquesStorageManager {
     }
     
     func createTechnique(
-        for session: Session,
-        text: String,
-        details: String? = nil
+        for session: Session? = nil,
+        name: String,
+        details: String
     ) {
         let context = self.container.viewContext
         let model = TechniqueModel(context: context)
-        model.update(with: text, details: details)
-        model.addToSessions(session)
+        model.update(with: name, details: details)
+        if let session = session {
+            model.addToSessions(session)
+        }
         
         save(context: context)
+    }
+    
+    func edit(model: TechniqueModel, name: String, details: String) {
+        let context = self.container.viewContext
+        model.update(with: name, details: details)
+        
+        save(context: context)
+    }
+    
+    func delete(by technique: Technique) {
+        let techniques = fetchAllTechniques()
+        if let model = techniques.first(where: {
+            ($0.id ?? UUID()) == technique.id
+        }) {
+            delete(model: model)
+        }
     }
     
     func delete(model: TechniqueModel) {

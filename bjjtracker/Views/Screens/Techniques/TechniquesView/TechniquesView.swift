@@ -11,17 +11,9 @@ struct TechniquesView: View {
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var isHeaderHidden = false
-    @State private var isEmptySearchStateState = true
-    @State private var isShowingTechniqueDetails = false
-    @State private var isModifyingTechnique = false
-    @State private var isEditing = false
-    @State private var searchText = ""
+    @StateObject var viewModel: TechniquesViewVM
+    
     @State private var offsetY: CGFloat = .zero
-    
-    @State private var selectedTechnique: Technique?
-    
-    @State var results: [Technique] = (0...13).map { Technique(name: "Technique \($0)", details: "Description \($0)") }
     
     var body: some View {
         ZStack {
@@ -29,20 +21,20 @@ struct TechniquesView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
                         VStack {
-                            if !isHeaderHidden {
+                            if !viewModel.isHeaderHidden {
                                 HeaderView(onBack: {
                                     presentationMode.wrappedValue.dismiss()
                                 }, onCreate: {
-                                    isModifyingTechnique.toggle()
+                                    viewModel.isModifyingTechnique.toggle()
                                 })
                                 .offset(y: -offsetY)
                                 .zIndex(2)
                             }
                             SearchBar(
-                                isHeaderHidden: $isHeaderHidden,
-                                isEditing: $isEditing,
-                                searchText: $searchText,
-                                isEmptySearchState: $isEmptySearchStateState,
+                                isHeaderHidden: $viewModel.isHeaderHidden,
+                                isEditing: $viewModel.isEditing,
+                                searchText: $viewModel.searchText,
+                                isEmptySearchState: $viewModel.isEmptySearchStateState,
                                 onEndEditing: {
                                     
                                 }
@@ -50,19 +42,24 @@ struct TechniquesView: View {
                             .offset(y: -offsetY)
                             .zIndex(1)
                             
-                            if !isEmptySearchStateState && results.isEmpty {
+                            if viewModel.isEditing && !viewModel.suggestions.isEmpty {
                                 SuggestionsView()
                                     .offset(y: -offsetY)
-                                    .opacity(isEmptySearchStateState ? 0 : 1)
+                                    .opacity(viewModel.isEmptySearchStateState ? 0 : 1)
                             }
-                            if !isEditing && !results.isEmpty {
-                                Text("Learned techniques:")
-                                    .font(.body)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.black)
+                            if !viewModel.isEditing && !viewModel.results.isEmpty {
+                                let count = viewModel.filteredResults.count
+                                if count > 0 {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text("Learned techniques:")
+                                            .font(.body)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.black)
+                                    }
                                     .offset(y: -offsetY)
-                                    .hAlign(.leading)
                                     .padding(.top, 10)
+                                    .hAlign(.leading)
+                                }
                             }
                         }
                         .padding(.top, 5)
@@ -76,27 +73,31 @@ struct TechniquesView: View {
                                 .padding(.top, -50)
                         )
                         .zIndex(2)
-                        
-                        if !isEditing && !results.isEmpty {
+                    
+                        if viewModel.isEditing && viewModel.searchText.isEmpty {
+                            EmptyStateOfResults()
+                                .padding(.top, viewModel.isEmptySearchStateState ? 100 : 20)
+                        } else if !viewModel.filteredResults.isEmpty {
                             VStack(alignment: .leading) {
-                                ForEach(results, id: \.self) { item in
+                                ForEach(viewModel.filteredResults, id: \.self) { item in
                                     VStack(spacing: 15) {
                                         TechbiquesListCell(
                                             technique: item,
                                             onTap: {
-                                                selectedTechnique = item
-                                                isShowingTechniqueDetails.toggle()
+                                                viewModel.selectedTechnique = item
+                                                viewModel.isShowingTechniqueDetails = true
                                             }
                                         )
                                     }
                                 }
                             }
                             .padding(.horizontal, 20)
-                            .padding(.vertical, 20)
+                            .padding(.top, 10)
+                            .padding(.bottom, 20)
                             .hAlign(.leading)
                         } else {
                             EmptyStateOfResults()
-                                .padding(.top, isEmptySearchStateState ? 100 : 20)
+                                .padding(.top, viewModel.isEmptySearchStateState ? 100 : 20)
                         }
                     }
                     .offset(coordinateSpace: .named("scroll")) { offset in
@@ -111,25 +112,42 @@ struct TechniquesView: View {
                 )
                 .onAppear {
                     settings.isTabBarHidden = true
+                    viewModel.fetchTechniques()
                 }
                 .onDisappear {
                     settings.isTabBarHidden = false
                 }
             }
         }
-        .bottomSheet(isPresented: $isShowingTechniqueDetails) {
-            if let technique = selectedTechnique {
-                TechniqueModalView(state: .overview, technique: technique)
+        .bottomSheet(isPresented: $viewModel.isShowingTechniqueDetails) {
+            if let technique = viewModel.selectedTechnique {
+                TechniqueModalView(
+                    showingCreateTechnique: $viewModel.isShowingTechniqueDetails,
+                    state: .overview,
+                    technique: technique
+                    
+                )
+            } else {
+                TechniqueModalView(
+                    showingCreateTechnique: $viewModel.isShowingTechniqueDetails,
+                    state: .modifying
+                )
             }
         }
-        .bottomSheet(isPresented: $isModifyingTechnique) {
-            TechniqueModalView(state: .modifying)
+        .bottomSheet(isPresented: $viewModel.isModifyingTechnique) {
+            TechniqueModalView(
+                showingCreateTechnique: $viewModel.isModifyingTechnique,
+                state: .modifying
+            )
         }
-//        .onChange(of: settings.isTabBarHidden) { value in
-//            if value == false {
-//                settings.isTabBarHidden = true
-//            }
-//        }
+        .onChange(of: viewModel.isShowingTechniqueDetails) { _ in
+            settings.isTabBarHidden = true
+            viewModel.fetchTechniques()
+        }
+        .onChange(of: viewModel.isModifyingTechnique) { _ in
+            settings.isTabBarHidden = true
+            viewModel.fetchTechniques()
+        }
     }
     
     @ViewBuilder
@@ -141,18 +159,17 @@ struct TechniquesView: View {
                 .foregroundColor(Color("GrayTextColor"))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(1..<5) { tag in
+                    ForEach(viewModel.suggestions.indices, id: \.self) { i in
                         SuggestionTagView(
-                            tag: Tag(text: "tag-\(tag)"),
+                            tag: Tag(text: viewModel.suggestions[i]),
                             onTap: {
-                                isEditing = false
-                                searchText = String(tag)
+                                viewModel.searchText = viewModel.suggestions[i]
 //                                onEndEditing?()
                             }
                         )
                     }
                 }
-                .animation(.easeInOut, value: isEditing)
+                .animation(.easeInOut, value: viewModel.isEditing)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 2)
             }
@@ -162,15 +179,21 @@ struct TechniquesView: View {
     
     @ViewBuilder
     func TechbiquesListCell(
-        technique: Technique,
+        technique: TechniqueModel,
         onTap: @escaping (() -> Void)
     ) -> some View {
         HStack {
-            HStack(alignment: .center, spacing: 4) {
-                Text(.init(technique.name))
-                    .font(.footnote)
+            VStack(alignment: .leading, spacing: 10) {
+                Text(.init(technique.text ?? ""))
+                    .font(.body)
                     .fontWeight(.regular)
-                    .foregroundColor(Color("Blue"))
+                    .foregroundColor(.black)
+                if let details = technique.details {
+                    Text(details)
+                        .font(.footnote)
+                        .lineLimit(1)
+                        .foregroundColor(Color("GrayTextColor"))
+                }
             }
             Spacer()
             Image("chevronRight")
@@ -195,14 +218,15 @@ struct TechniquesView: View {
     @ViewBuilder
     func EmptyStateOfResults() -> some View {
         VStack(spacing: 20) {
-            if !isEditing && results.isEmpty {
+            if !viewModel.isEditing && viewModel.results.isEmpty {
                 Text("No techniques added yet.\nYou can create it now!")
                     .font(.footnote)
                     .fontWeight(.medium)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 Button(action: {
-                    settings.showingCreateTechnique.toggle()
+                    print("sadas ")
+                    viewModel.isShowingTechniqueDetails = true
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -228,7 +252,7 @@ struct TechniquesView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                if !searchText.isEmpty {
+                if !viewModel.searchText.isEmpty {
                     Text("No results found")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -251,7 +275,7 @@ struct TechniquesView: View {
 
 struct TechniquesView_Previews: PreviewProvider {
     static var previews: some View {
-        TechniquesView()
+        TechniquesView(viewModel: .init(persistanceManager: PersistanceManager.preview))
             .environmentObject(AppSettings())
     }
 }

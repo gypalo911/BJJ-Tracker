@@ -18,9 +18,14 @@ struct TechniqueModalView: View {
         case overview
     }
     
+    @Binding var showingCreateTechnique: Bool
+    
+    @EnvironmentObject var persistanceManager: PersistanceManager
+    
     @State var state: ModalState = .overview
-    @State var shouldHidePlaceholder: Bool = false
-    @ObservedObject var technique: Technique = Technique(name: "", details: "")
+    @State var name: String = ""
+    @State var details: String = ""
+    var technique: TechniqueModel?
     @FocusState private var focusedField: TechniqueField?
     
     var body: some View {
@@ -35,6 +40,12 @@ struct TechniqueModalView: View {
         }
         .padding(20)
         .animation(.easeInOut(duration: 0.25), value: focusedField)
+        .onAppear {
+            if let technique = technique {
+                name = technique.text ?? ""
+                details = technique.details ?? ""
+            }
+        }
     }
     
     @ViewBuilder
@@ -43,7 +54,7 @@ struct TechniqueModalView: View {
             HStack {
                 TextField(
                     "Technique name",
-                    text: $technique.name,
+                    text: $name,
                     onEditingChanged: { (editingChanged) in
                         if !editingChanged {
                             
@@ -57,43 +68,53 @@ struct TechniqueModalView: View {
                     focusedField = .details
                 }
                 
-                HStack(spacing: 10) {
+                HStack(spacing: 20) {
                     Button(action: {
+                        if let technique = technique {
+                            persistanceManager.delete(model: technique)
+                        }
+                        name = ""
+                        details = ""
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            showingCreateTechnique = false
+                        }
+                    }, label: {
+                        Image(systemName: "trash")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("RedPink"))
+                    })
+                    .disabled(name.isEmpty)
+                    Button(action: {
+                        if technique == nil {
+                            persistanceManager.createTechnique(
+                                name: name,
+                                details: details
+                            )
+                        } else if let technique = technique {
+                            persistanceManager.edit(
+                                model: technique,
+                                name: name,
+                                details: details
+                            )
+                        }
                         withAnimation(.easeInOut(duration: 0.25)) {
                             state = .overview
                         }
                     }, label: {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color("Green"))
-                            Image("checkmark")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 35, height: 35)
+                        Text("Done".localizedString)
+                            .font(.body)
+                            .fontWeight(.medium)
+                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("Blue"))
                     })
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            state = .overview
-                        }
-                    }, label: {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color("RedPink"))
-                            Image("close")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 35, height: 35)
-                    })
+                    .disabled(name.isEmpty)
                 }
+                .padding(.top, 10)
+                .padding(.trailing, 10)
             }
             ZStack(alignment: .leading) {
-                TextEditor(text: $technique.details)
+                TextEditor(text: $details)
                     .padding(10)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
@@ -102,7 +123,7 @@ struct TechniqueModalView: View {
                     )
                     .padding(.leading, 5)
                     .focused($focusedField, equals: .details)
-                if technique.details.isEmpty {
+                if details.isEmpty {
                     VStack {
                         Text("Add some details...".localizedString)
                             .font(.body)
@@ -115,9 +136,6 @@ struct TechniqueModalView: View {
             .frame(maxHeight: 200)
             .keyboardAdaptive()
         }
-        .onChange(of: technique.details) { value in
-            shouldHidePlaceholder = !value.isEmpty
-        }
         .onAppear {
             focusedField = .name
         }
@@ -126,46 +144,47 @@ struct TechniqueModalView: View {
     @ViewBuilder
     func OverviewState() -> some View {
         VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Text("\(technique.name)")
-                    .font(.title2.weight(.bold))
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.black)
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("Technique")
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color("GrayTextColor"))
+                    Text("\(name)")
+                        .font(.title2.weight(.bold))
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.black)
+                }
+                Spacer()
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         state = .modifying
                     }
                 }, label: {
-                    ZStack {
-                        Circle()
-                            .stroke(Color("RedPink"), lineWidth: 1)
-                        Image("edit")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("RedPink"))
-                    }
-                    .frame(width: 35, height: 35)
+                    Image(systemName: "pencil.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(Color("RedPink"))
                 })
-                
-                Spacer()
-                
-//                Button(action: {
-//
-//                }, label: {
-//                    Image("star")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 30, height: 30)
-//                        .foregroundColor(.black)
-//                })
             }
+            .padding(.top, 10)
+            .padding(.trailing, 10)
             
-            Text("\(technique.details)")
-                .font(.body)
-                .fontWeight(.regular)
-                .foregroundColor(Color("Gray"))
+            VStack(alignment: .leading) {
+                Text("Description")
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color("GrayTextColor"))
+                ScrollView {
+                    Text("\(details)")
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .foregroundColor(Color("Gray"))
+                }
+                .frame(height: 100)
+            }
         }
     }
 }
@@ -193,7 +212,10 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
                 }
                 .ignoresSafeArea()
                 .bottomSheet(isPresented: $isShowingOverlay) {
-                    TechniqueModalView(state: .overview)
+                    TechniqueModalView(
+                        showingCreateTechnique: $isShowingOverlay,
+                        state: .modifying
+                    )
                 }
             }
         }
@@ -202,14 +224,9 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
     static var previews: some View {
         Container()
             .environmentObject(AppSettings())
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
-        
-        Container()
-            .environmentObject(AppSettings())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
-            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
-            .previewDisplayName("iphone 7 ios 15")
     }
 }
 

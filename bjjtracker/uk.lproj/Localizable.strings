@@ -69,6 +69,7 @@
 "Learned techniques:" = "Вивчені техніки:";
 "Technique" = "Техніка";
 "Techniques" = "Техніки";
+"Description" = "Опис";
 "Add technique" = "Додати техніку";
 "New Technique" = "Нова техніка";
 "Technique name" = "Назва техніки";
@@ -80,6 +81,7 @@
 "Search by Keyword" = "Пошук за фразою";
 "Cancel" = "Відміна";
 "No results found" = "Безрезультатно";
+"Found results: %@" = "Знайдено результатів: %@";
 
 // Timetable
 "Timetable" = "Календар";

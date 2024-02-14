@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct TechniquesCardEmptyState: View {
+    let persistanceManager: PersistanceManager
+    
     var body: some View {
         HStack {
             Image("triangle")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50, height: 50)
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("No techniques yet")
                     .font(.footnote)
                     .fontWeight(.semibold)
@@ -25,7 +27,7 @@ struct TechniquesCardEmptyState: View {
             }
             Spacer()
             NavigationLink(destination: {
-                TechniquesView()
+                TechniquesView(viewModel: .init(persistanceManager: persistanceManager))
             }) {
                 Text("Add New")
                     .font(.footnote)
@@ -37,47 +39,38 @@ struct TechniquesCardEmptyState: View {
 }
 
 struct TechniquesCardFullState: View {
+    let techniques: [TechniqueModel]
+    let persistanceManager: PersistanceManager
+    
     var body: some View {
-        VStack {
+        NavigationLink(destination: {
+            TechniquesView(viewModel: .init(persistanceManager: persistanceManager))
+        }) {
             HStack {
-                HStack(spacing: 5) {
+                HStack(spacing: 10) {
                     Image("triangle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 15, height: 15)
-                    Text("Top 5 used techniques")
+                        .foregroundColor(.black)
+                        .frame(width: 30, height: 30)
+                    Text("You have already learned **\(techniques.count) techniques**")
                         .font(.caption)
-                        .fontWeight(.semibold)
+                        .fontWeight(.regular)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
+                        .hAlign(.leading)
                 }
                 Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    HStack(spacing: 5) {
-                        Text("See all")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color("Blue"))
-                        Image("eye")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(Color("Blue"))
-                    }
-                })
-            }
-            VStack(alignment: .leading, spacing: 10) {
-                ForEach([1..<4, 4..<6], id: \.self) { rows in
-                    HStack(spacing: 10) {
-                        ForEach(rows, id: \.self) { tag in
-                            TagView(
-                                tag: Tag(text: "tag-\(tag)"),
-                                onDelete: {
-//                                    viewModel.removeRegularTag(tag)
-                                }
-                            )
-                        }
-                    }.hAlign(.leading)
+                HStack(spacing: 5) {
+                    Text("See All")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("Blue"))
+                    Image("eye")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(Color("Blue"))
                 }
             }
         }
@@ -109,10 +102,12 @@ struct TechniquesCardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             TechniquesCardView(view: {
-                TechniquesCardEmptyState()
+                TechniquesCardEmptyState(persistanceManager: PersistanceManager.preview)
             })
             TechniquesCardView(view: {
-                TechniquesCardFullState()
+                TechniquesCardFullState(
+                    techniques: PersistanceManager.preview.fetchAllTechniques(),
+                    persistanceManager: PersistanceManager.preview)
             })
         }
     }

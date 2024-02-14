@@ -15,7 +15,8 @@ extension TechniqueModel {
         }
     }
     
-    func update(with text: String, details: String?) {
+    func update(id: UUID = UUID(), with text: String, details: String?) {
+        self.id = id
         self.text = text
         self.details = details
     }

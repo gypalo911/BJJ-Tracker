@@ -25,8 +25,9 @@ struct ProfileView: View {
     @Environment(\.openURL) var openURL
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
     
-    @ObservedObject var viewModel: ProfileViewViewModel
+    @StateObject var viewModel: ProfileViewViewModel
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
     var sessionsList: FetchedResults<Session>
@@ -199,10 +200,18 @@ struct ProfileView: View {
                         }
                         
                         VStack {
-                            TechniquesCardView(view: {
-                                TechniquesCardEmptyState()
-                                // TechniquesCardFullState()
-                            })
+                            if viewModel.techniques.isEmpty {
+                                TechniquesCardView(view: {
+                                    TechniquesCardEmptyState(persistanceManager: persistanceManager)
+                                })
+                            } else {
+                                TechniquesCardView(view: {
+                                    TechniquesCardFullState(
+                                        techniques: viewModel.techniques,
+                                        persistanceManager: persistanceManager
+                                    )
+                                })
+                            }
                             if !settings.healthKitService.isDataAuthorized {
                                 AppleHealthCardView {
                                     isConnectAHPresented = true
@@ -358,7 +367,7 @@ struct ProfileView: View {
                 }
                 .onAppear {
                     settings.isTabBarHidden = false
-                    viewModel.onProfileViewAppeared()
+                    viewModel.onAppear()
                     NotificationManager.shared.requestAuthorization { _ in }
                 }
                 .backport.hiddenToolbar(true)
@@ -487,7 +496,7 @@ struct SettigsCell: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: .init())
+        ProfileView(viewModel: .init(persistanceManager: PersistanceManager.preview))
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }

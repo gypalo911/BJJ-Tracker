@@ -43,6 +43,7 @@
 		D031094D2A935C3F00C24B17 /* ConnectAppleHealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */; };
 		D03109512A939B2B00C24B17 /* TechniquesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03109502A939B2B00C24B17 /* TechniquesCardView.swift */; };
 		D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03109522A93D2B700C24B17 /* TechniquesView.swift */; };
+		D03710A72B7BAA83007A2124 /* TechniquesViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03710A62B7BAA83007A2124 /* TechniquesViewVM.swift */; };
 		D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */; };
 		D03C028B2A7D0DEE0004E5BF /* GenericBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */; };
 		D03C028D2A7D34470004E5BF /* LanguageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */; };
@@ -204,6 +205,7 @@
 		D031094C2A935C3F00C24B17 /* ConnectAppleHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAppleHealthView.swift; sourceTree = "<group>"; };
 		D03109502A939B2B00C24B17 /* TechniquesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesCardView.swift; sourceTree = "<group>"; };
 		D03109522A93D2B700C24B17 /* TechniquesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesView.swift; sourceTree = "<group>"; };
+		D03710A62B7BAA83007A2124 /* TechniquesViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniquesViewVM.swift; sourceTree = "<group>"; };
 		D03C02872A7D0D270004E5BF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
 		D03C028A2A7D0DEE0004E5BF /* GenericBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheet.swift; sourceTree = "<group>"; };
 		D03C028C2A7D34470004E5BF /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
@@ -394,10 +396,9 @@
 			children = (
 				D03109542A963ED400C24B17 /* TechniqueBottomSheets */,
 				D0AA702C2A5AFC20001FB3FA /* Components */,
-				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
-				D03109522A93D2B700C24B17 /* TechniquesView.swift */,
+				D03710A42B7BA955007A2124 /* TechniquesListView */,
+				D03710A52B7BA96D007A2124 /* TechniquesView */,
 				D03109502A939B2B00C24B17 /* TechniquesCardView.swift */,
-				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
 				D0DAA8FF2A6186A200074EBE /* Techniques List.md */,
 			);
 			path = Techniques;
@@ -447,6 +448,24 @@
 				D0DE62A12A963F49008EEA49 /* TechniqueModalView.swift */,
 			);
 			path = TechniqueBottomSheets;
+			sourceTree = "<group>";
+		};
+		D03710A42B7BA955007A2124 /* TechniquesListView */ = {
+			isa = PBXGroup;
+			children = (
+				D02D1FF02A5ADEB4006BB617 /* TechniquesListView.swift */,
+				D0AA702F2A5BE7EA001FB3FA /* TechniquesListViewModel.swift */,
+			);
+			path = TechniquesListView;
+			sourceTree = "<group>";
+		};
+		D03710A52B7BA96D007A2124 /* TechniquesView */ = {
+			isa = PBXGroup;
+			children = (
+				D03109522A93D2B700C24B17 /* TechniquesView.swift */,
+				D03710A62B7BAA83007A2124 /* TechniquesViewVM.swift */,
+			);
+			path = TechniquesView;
 			sourceTree = "<group>";
 		};
 		D03C02892A7D0DDC0004E5BF /* Settings */ = {
@@ -1158,6 +1177,7 @@
 				D01187D22A7BBB3400A2FCC7 /* ViewSizeModifier.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */,
+				D03710A72B7BAA83007A2124 /* TechniquesViewVM.swift in Sources */,
 				D02598692A82DAB6001BD859 /* SendEmail.swift in Sources */,
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */,

@@ -14,9 +14,27 @@ protocol ProfileViewViewAnalytics {
 class ProfileViewViewModel: ObservableObject {
     
     private let analyticsEngine: AnalyticsEngine
+    private let persistanceManager: TechniquesStorageManager
     
-    init(analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
+    @Published var techniques: [TechniqueModel] = []
+    
+    init(
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
+        persistanceManager: TechniquesStorageManager
+    ) {
         self.analyticsEngine = analyticsEngine
+        self.persistanceManager = persistanceManager
+    }
+    
+    // MARK: Functions
+    func onAppear() {
+        fetchTechniques()
+        onProfileViewAppeared()
+    }
+    
+    func fetchTechniques() {
+        techniques = persistanceManager.fetchAllTechniques()
+        print("techniques: \(techniques.count)")
     }
 }
 

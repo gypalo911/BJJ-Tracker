@@ -20,7 +20,6 @@ extension Calendar {
                 week.append(.init(dayOfWeek: weekDaySymbol, date: day, isToday: isToday))
             }
         }
-        print("currentWeek:\(week.map { $0.date })")
         return week
     }
     

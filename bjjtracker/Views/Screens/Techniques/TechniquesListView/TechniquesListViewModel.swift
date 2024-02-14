@@ -56,7 +56,7 @@ class TechniquesListViewModel: ObservableObject {
             removeSuggestionTag(tag)
             setupTagRows()
             
-            persistanceManager.createTechnique(for: session, text: tag.text, details: nil)
+            persistanceManager.createTechnique(for: session, name: tag.text, details: "")
             
             analyticsEngine.log(AnalyticsEvent(
                 name: FirebaseAnalyticsEvent.tagAdded.rawValue,
