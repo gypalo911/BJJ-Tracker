@@ -124,7 +124,7 @@ struct NewSessionView: View {
     }
     
     func save() {
-        persistanceManager.createSession(from: activity, context: managedObjContext)
+        persistanceManager.createSession(from: activity)
         viewModel.sessionCreated(from: activity)
     }
 }

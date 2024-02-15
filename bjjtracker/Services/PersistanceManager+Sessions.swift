@@ -9,10 +9,10 @@ import CoreData
 
 protocol SessionsStorageManager {
     func fetchSessions(in interval: DateInterval?) -> [Session]
-    func session(by id: String, context: NSManagedObjectContext) -> Session?
-    func createSession(from activity: Activity, context: NSManagedObjectContext)
-    func edit(session: Session, activity: Activity, context: NSManagedObjectContext)
-    func delete(session: Session, context: NSManagedObjectContext)
+    func session(by id: String) -> Session?
+    func createSession(from activity: Activity)
+    func edit(session: Session, activity: Activity)
+    func delete(session: Session)
 }
 
 extension PersistanceManager: SessionsStorageManager {
@@ -38,7 +38,8 @@ extension PersistanceManager: SessionsStorageManager {
         }
     }
     
-    func session(by id: String, context: NSManagedObjectContext) -> Session? {
+    func session(by id: String) -> Session? {
+        let context = self.container.viewContext
         let requestSessions: NSFetchRequest<Session> = Session.fetchRequest()
         
         requestSessions.fetchLimit = 1
@@ -56,7 +57,8 @@ extension PersistanceManager: SessionsStorageManager {
         return nil
     }
     
-    func createSession(from activity: Activity, context: NSManagedObjectContext) {
+    func createSession(from activity: Activity) {
+        let context = self.container.viewContext
         let session = Session(context: context)
         session.update(with: activity)
         DefaultHealthKitService().store(session: session)
@@ -64,13 +66,15 @@ extension PersistanceManager: SessionsStorageManager {
         save(context: context)
     }
     
-    func edit(session: Session, activity: Activity, context: NSManagedObjectContext) {
+    func edit(session: Session, activity: Activity) {
+        let context = self.container.viewContext
         session.update(with: activity)
         
         save(context: context)
     }
     
-    func delete(session: Session, context: NSManagedObjectContext) {
+    func delete(session: Session) {
+        let context = self.container.viewContext
         DefaultHealthKitService().delete(session: session)
         context.delete(session)
         

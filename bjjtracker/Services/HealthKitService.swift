@@ -41,7 +41,7 @@ extension HealthKitServiceError: LocalizedError {
         case .healthDataUnavalable:
             return ""//L10n.OneApp.AppleHealth.Error.healthUnavailable
             
-        case .dataTypeUnavailable(let type):
+        case .dataTypeUnavailable(_):
             return ""//L10n.OneApp.AppleHealth.Error.dataTypeUnavailable(type)
             
         case .permissionsAlreadyGranted:
@@ -284,7 +284,9 @@ extension DefaultHealthKitService {
                 options: .strictStartDate
             )
             
-            let query = HKSampleQuery(sampleType: HKSampleType.workoutType(), predicate: predicate, limit: 60, sortDescriptors: [])
+            let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [metadataPredicate, predicate])
+            
+            let query = HKSampleQuery(sampleType: HKSampleType.workoutType(), predicate: compound, limit: 60, sortDescriptors: [])
             { query, results, error in
                 if error != nil {
                     continuation.resume(returning: 0)

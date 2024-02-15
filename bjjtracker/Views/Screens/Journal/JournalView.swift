@@ -17,6 +17,7 @@ struct JournalView: View {
     @StateObject var viewModel: JournalViewViewModel
     
     @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var persistanceManager: PersistanceManager
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -170,11 +171,17 @@ struct JournalView: View {
                 }
                 
                 if let session = viewModel.selectedSession {
-                    SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                        withAnimation(AppConstants.mgeAnimation) {
-                            viewModel.selectedSession = nil
+                    SessionDetailsView(
+                        namespace: namespace,
+                        viewModel: SessionDetailsViewModel(
+                            session: session,
+                            persistanceManager: persistanceManager
+                        ), dismissCallback: {
+                            withAnimation(AppConstants.mgeAnimation) {
+                                viewModel.selectedSession = nil
+                            }
                         }
-                    }).zIndex(1)
+                    ).zIndex(1)
                 }
             }
         }

@@ -15,19 +15,27 @@ protocol SessionDetailsViewAnalytics {
 
 class SessionDetailsViewModel: ObservableObject {
     
+    // MARK: Variables
+    
     @Published var session: Session
     @Published var notesLinks: [String] = []
     
     @Published var previewModels: [LinkPreviewModel] = []
     
+    private let persistanceManager: SessionsStorageManager
     private let analyticsEngine: AnalyticsEngine
     
     var navTitle: String {
         "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
     }
     
-    init(session: Session, analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()) {
+    init(
+        session: Session,
+        persistanceManager: SessionsStorageManager,
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()
+    ) {
         self.session = session
+        self.persistanceManager = persistanceManager
         self.analyticsEngine = analyticsEngine
     }
     
@@ -53,6 +61,11 @@ class SessionDetailsViewModel: ObservableObject {
         } catch {}
         
         return []
+    }
+    
+    func deleteSession() {
+        persistanceManager.delete(session: session)
+        NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
     }
 }
 

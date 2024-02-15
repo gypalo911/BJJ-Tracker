@@ -146,12 +146,18 @@ struct TimetableView: View {
             .zIndex(0)
             
             if let session = selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        selectedSession = nil
-                        settings.isTabBarHidden = false
+                SessionDetailsView(
+                    namespace: namespace,
+                    viewModel: SessionDetailsViewModel(
+                        session: session,
+                        persistanceManager: persistanceManager
+                    ), dismissCallback: {
+                        withAnimation(AppConstants.mgeAnimation) {
+                            selectedSession = nil
+                            settings.isTabBarHidden = false
+                        }
                     }
-                }).zIndex(1)
+                ).zIndex(1)
             }
         }
     }

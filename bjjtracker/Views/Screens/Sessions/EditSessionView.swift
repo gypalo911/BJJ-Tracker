@@ -16,7 +16,6 @@ struct EditSessionView: View {
     @EnvironmentObject var persistanceManager: PersistanceManager
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment (\.managedObjectContext) var managedObjContext
     
     var session: Session
     
@@ -27,8 +26,7 @@ struct EditSessionView: View {
     func update(_ session: Session) {
         persistanceManager.edit(
             session: session,
-            activity: activity,
-            context: managedObjContext
+            activity: activity
         )
     }
     
@@ -95,18 +93,18 @@ struct EditSessionView: View {
                             }
                         }
                         
-                        Button(action: {
-                            viewModel.sessionDeleted(activity)
-                            persistanceManager.delete(session: session, context: managedObjContext)
-                            NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
-                            presentationMode.wrappedValue.dismiss()
-                            onDismiss?(nil)
-                        }, label: {
-                            Text("Delete")
-                                .foregroundColor(.red)
-                        })
-                        .padding(.vertical, 20)
-                        .hAlign(.center)
+//                        Button(action: {
+//                            viewModel.sessionDeleted(activity)
+//                            persistanceManager.delete(session: session, context: managedObjContext)
+//                            NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
+//                            presentationMode.wrappedValue.dismiss()
+//                            onDismiss?(nil)
+//                        }, label: {
+//                            Text("Delete")
+//                                .foregroundColor(.red)
+//                        })
+//                        .padding(.vertical, 20)
+//                        .hAlign(.center)
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)

@@ -149,12 +149,20 @@ struct DashboardView: View {
             .zIndex(0)
             
             if let session = viewModel.selectedSession {
-                SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session), dismissCallback: {
-                    withAnimation(AppConstants.mgeAnimation) {
-                        viewModel.selectedSession = nil
-                        settings.isTabBarHidden = false
+                SessionDetailsView(
+                    namespace: namespace,
+                    viewModel: SessionDetailsViewModel(
+                        session: session,
+                        persistanceManager: persistanceManager
+                    ), dismissCallback: {
+                        withAnimation(AppConstants.mgeAnimation) {
+                            DispatchQueue.main.async {
+                                viewModel.selectedSession = nil
+                                settings.isTabBarHidden = false
+                            }
+                        }
                     }
-                }).zIndex(1)
+                ).zIndex(1)
             }
         }
         .task {
@@ -332,7 +340,7 @@ struct Dashboard_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        ContentView()
+        Container()
             .environmentObject(AppSettings())
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }

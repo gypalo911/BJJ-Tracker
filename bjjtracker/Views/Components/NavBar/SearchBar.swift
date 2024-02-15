@@ -156,9 +156,9 @@ struct SearchBar_Previews: PreviewProvider {
         
         var body: some View {
             VStack {
-                HeaderView {
+                HeaderView(onCreate:  {
                     
-                }
+                })
                 SearchBar(
                     isHeaderHidden: $isHeaderHidden,
                     isEditing: $isEditing,

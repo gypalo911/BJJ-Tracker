@@ -41,7 +41,11 @@ struct SessionDetailsView: View {
                     namespace: namespace,
                     navTitle: viewModel.navTitle,
                     isPresentedEditing: $isPresentedEditing,
-                    dismissCallback: dismissCallback
+                    dismissCallback: dismissCallback,
+                    onDelete: {
+                        viewModel.deleteSession()
+                        dismissCallback?()
+                    }
                 )
                 .modifier(SwipeToDismissModifier(onDismiss: {
                     dismissCallback?()
@@ -156,6 +160,7 @@ struct SessionDetailsHeaderView: View {
     
     @Binding var isPresentedEditing: Bool
     var dismissCallback: (() -> Void)? = nil
+    var onDelete: (() -> Void)? = nil
     
     var sessionId: String {
         session.id?.uuidString ?? ""
@@ -181,7 +186,7 @@ struct SessionDetailsHeaderView: View {
     }
     
     private let screenSize: CGSize = UIScreen.main.bounds.size
-
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -200,16 +205,33 @@ struct SessionDetailsHeaderView: View {
                     } label: {
                         Image("close")
                             .resizable()
+                            .scaledToFit()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.white)
                     }
                     Spacer()
-                    Button {
-                        isPresentedEditing = true
-                        changeNavBar(.clear)
+                    Menu {
+                        Button(action: {
+                            
+                        }) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
+                        Button(action: {
+                            isPresentedEditing = true
+                            changeNavBar(.clear)
+                        }) {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        Button(role: .destructive, action: {
+                            onDelete?()
+                        }) {
+                            Label("Delete", systemImage: "trash")
+                        }
                     } label: {
-                        Text("Edit")
-                            .fixedSize()
+                        Image(systemName: "ellipsis.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
                             .foregroundColor(.white)
                     }
                 }
@@ -298,19 +320,21 @@ struct SessionDetailsHeaderView: View {
 // MARK: Preview
 struct SessionDetailsView_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @EnvironmentObject var persistanceManager: PersistanceManager
         
         @Namespace var namespace
         
         var body: some View {
-            let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session))
+            let session: Session = persistanceManager.fetchSessions().first!
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview))
         }
     }
     
     static var previews: some View {
-        ContentView()
+        Container()
             .environmentObject(AppSettings())
+            .environmentObject(PersistanceManager.preview)
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

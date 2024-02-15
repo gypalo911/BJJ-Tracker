@@ -98,7 +98,7 @@ struct ContentView: View {
             guard let nav = nav else {
                 return
             }
-            let session = persistanceManager.session(by: nav as String, context: managedObjContext)
+            let session = persistanceManager.session(by: nav as String)
             guard let session = session else {
                 return
             }
@@ -113,14 +113,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(AppSettings())
+            .environmentObject(PersistanceManager.preview)
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
-        
-//        ContentView()
-//            .environmentObject(AppSettings())
-//            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
-//            .previewDevice(PreviewDevice(rawValue: "iphone 7 ios 15"))
-//            .previewDisplayName("iphone 7 ios 15")
     }
 }

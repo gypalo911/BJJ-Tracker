@@ -46,7 +46,14 @@ class EmailController: NSObject, MFMailComposeViewControllerDelegate {
     
     static func getRootViewController() -> UIViewController? {
         // In SwiftUI 2.0
-        UIApplication.shared.windows.first?.rootViewController
+        if #available(iOS 15, *) {
+            let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let firstWindow = firstScene?.windows.first
+
+            return firstWindow?.rootViewController
+        } else {
+            return UIApplication.shared.windows.first?.rootViewController
+        }
     }
 }
 //
