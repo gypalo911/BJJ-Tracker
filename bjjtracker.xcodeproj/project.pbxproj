@@ -80,6 +80,7 @@
 		D0839D832A5D6D5B00D315C8 /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */; };
 		D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */; };
 		D084DE612A60A44F00B63DBF /* TechniqueModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */; };
+		D09301802B7E4025000CED3D /* ShareSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093017F2B7E4025000CED3D /* ShareSessionView.swift */; };
 		D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */; };
 		D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */; };
 		D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */; };
@@ -247,6 +248,7 @@
 		D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
 		D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TechniqueModel+extension.swift"; sourceTree = "<group>"; };
+		D093017F2B7E4025000CED3D /* ShareSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSessionView.swift; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
 		D098BBE629E0D1DE00A9A068 /* EditSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSessionView.swift; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 		D060BAB229DDAE5F00E10562 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
+				D093017E2B7E4002000CED3D /* ShareSession */,
 				D09BCA412A606AEB004C749E /* LinkPreview */,
 				D098BBE329E0CE1100A9A068 /* Activities */,
 				D02F3DF829F14BCE00BED6CD /* Details */,
@@ -662,6 +665,14 @@
 				D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		D093017E2B7E4002000CED3D /* ShareSession */ = {
+			isa = PBXGroup;
+			children = (
+				D093017F2B7E4025000CED3D /* ShareSessionView.swift */,
+			);
+			path = ShareSession;
 			sourceTree = "<group>";
 		};
 		D098BBE229E0CDFD00A9A068 /* Calendar */ = {
@@ -1155,6 +1166,7 @@
 				D02F3DF729F149E900BED6CD /* NewSessionView.swift in Sources */,
 				D098BBF329E2C2FA00A9A068 /* Promotion.swift in Sources */,
 				D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */,
+				D09301802B7E4025000CED3D /* ShareSessionView.swift in Sources */,
 				D02198882A61730B0080A074 /* PromotionPanelView.swift in Sources */,
 				D02F3DE829EEBD9300BED6CD /* ProfileView.swift in Sources */,
 				D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */,

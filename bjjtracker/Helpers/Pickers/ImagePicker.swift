@@ -11,6 +11,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var selectedImage: UIImage?
+    var fileName: String = "avatar"
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         
@@ -42,17 +43,17 @@ struct ImagePicker: UIViewControllerRepresentable {
             
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.selectedImage = image
-                saveImage(image)
+                saveImage(image, name: parent.fileName)
             }
             
             parent.presentationMode.wrappedValue.dismiss()
         }
         
-        func saveImage(_ image: UIImage) {
+        func saveImage(_ image: UIImage, name: String) {
             do {
                 let furl = try FileManager.default
                     .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                    .appendingPathComponent("avatar")
+                    .appendingPathComponent(name)
                     .appendingPathExtension("png")
                 try image.pngData()?.write(to: furl)
             } catch {
