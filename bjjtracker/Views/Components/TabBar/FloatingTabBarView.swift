@@ -15,29 +15,33 @@ struct FloatingTabBarView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 30) {
             ForEach(Tab.allCases, id: \.rawValue) { tab in
-                (selectedTab == tab ? tab.selectedImage : tab.image)
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .foregroundColor(selectedTab == tab ? Color("Purple") : Color("LightGray"))
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.3, blendDuration: 6)) {
-                            selectedTab = tab
-                        }
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, blendDuration: 6)) {
+                        selectedTab = tab
                     }
+                }, label: {
+                    (selectedTab == tab ? tab.selectedImage : tab.image)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(selectedTab == tab ? Color("Purple") : Color("LightGray"))
+                })
+                .buttonStyle(BouncyButton())
                 if tab == .calendar {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(Color("Blue"))
-                        Image("plus")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 22, height: 22)
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 52, height: 52)
-                    .onTapGesture {
+                    Button(action: {
                         onCreate?()
-                    }
+                    }, label: {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color("Blue"))
+                            Image("plus")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 22, height: 22)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 52, height: 52)
+                    })
+                    .buttonStyle(BouncyButton())
                 }
             }
         }

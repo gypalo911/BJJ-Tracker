@@ -138,6 +138,7 @@
 		D0E824BD29DEF6D50023E6C0 /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */; };
 		D0E824BF29DF006A0023E6C0 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BE29DF006A0023E6C0 /* Date+extension.swift */; };
 		D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */; };
+		D0E928952B7E2828002FA81E /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E928942B7E2828002FA81E /* BouncyButton.swift */; };
 		D0EF31C32AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */; };
 		D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */; };
 		E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */; };
@@ -291,6 +292,7 @@
 		D0E824BC29DEF6D50023E6C0 /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		D0E824BE29DF006A0023E6C0 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		D0E8FE1529E5988B00870501 /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
+		D0E928942B7E2828002FA81E /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
 		D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptiveModifier.swift; sourceTree = "<group>"; };
 		D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierBackport.swift; sourceTree = "<group>"; };
 		D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -746,6 +748,7 @@
 				D0B01F2629E43DBE00E10979 /* Extensions */,
 				D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */,
 				D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */,
+				D0E928942B7E2828002FA81E /* BouncyButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1182,6 +1185,7 @@
 				D02F3DF129F0543000BED6CD /* StatisticsViewViewModel.swift in Sources */,
 				D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
+				D0E928952B7E2828002FA81E /* BouncyButton.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
 				D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */,
 				D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */,
