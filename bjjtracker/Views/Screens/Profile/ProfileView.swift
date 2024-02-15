@@ -21,7 +21,7 @@ struct ProfileView: View {
         case notifications
     }
     
-//    @Environment(\.requestReview) var requestReview
+    //    @Environment(\.requestReview) var requestReview
     @Environment(\.openURL) var openURL
     
     @EnvironmentObject var settings: AppSettings
@@ -250,13 +250,13 @@ struct ProfileView: View {
                                 }
                             )
                             .padding(.top, 20)
-//                            SettigsCell(
-//                                icon: Image("notification"),
-//                                text: "Notifications",
-//                                onTap: {
-//                                    selectedSettingsView = .notifications
-//                                }
-//                            )
+                            //                            SettigsCell(
+                            //                                icon: Image("notification"),
+                            //                                text: "Notifications",
+                            //                                onTap: {
+                            //                                    selectedSettingsView = .notifications
+                            //                                }
+                            //                            )
                             SettigsCell(
                                 icon: Image("issue"),
                                 text: "Report an issue",
@@ -273,11 +273,11 @@ struct ProfileView: View {
                                 text: "Rate the app",
                                 onTap: {
                                     if let scene = UIApplication.shared.connectedScenes
-                                            .first(where: { $0.activationState == .foregroundActive })
-                                            as? UIWindowScene {
+                                        .first(where: { $0.activationState == .foregroundActive })
+                                        as? UIWindowScene {
                                         SKStoreReviewController.requestReview(in: scene)
                                     }
-
+                                    
                                 }
                             )
                             SettigsCell(
@@ -287,62 +287,9 @@ struct ProfileView: View {
                                     showShareSheet = true
                                 }
                             )
-                            
-                            VStack {
-                                Text("Support the project")
-                                    .font(.caption)
-                                    .fontWeight(.regular)
-                                    .foregroundColor(Color("Gray"))
-                                
-                                HStack {
-                                    Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(.clear)
-                                                .frame(height: 40)
-                                                .background(Color("LightLightGray"))
-                                                .cornerRadius(10)
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .inset(by: 0.5)
-                                                        .stroke(.black, lineWidth: 1)
-                                                )
-                                            
-                                            Image("patreon")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .foregroundColor(.white)
-                                                .frame(maxHeight: 20)
-                                        }
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    
-                                    Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(.clear)
-                                                .frame(height: 40)
-                                                .background(Color("Yellow"))
-                                                .cornerRadius(10)
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .inset(by: 0.5)
-                                                        .stroke(.black, lineWidth: 1)
-                                                )
-
-                                            Image("buymeacoffee")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .foregroundColor(.white)
-                                                .frame(maxHeight: 20)
-                                        }
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                }
-                                .padding(.horizontal, 20)
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                            }
                             .padding(.bottom, 20)
+                            
+//                            SupportTheProjectView()
                         }
                         .vAlign(.top)
                         .background(
@@ -374,11 +321,11 @@ struct ProfileView: View {
             }
         }
         .blurredPopup(isPresented: $showingPromotionsView) {
-                PromotionsView(
-                    isViewOpen: $showingPromotionsView,
-                    gradingSystem: lastPromotion?.beltType ?? .adult
-                )
-            }
+            PromotionsView(
+                isViewOpen: $showingPromotionsView,
+                gradingSystem: lastPromotion?.beltType ?? .adult
+            )
+        }
         .bottomSheet(isPresented: $showingBottomSheet) {
             if selectedSettingsView == .language {
                 LanguageSettingsView()
@@ -439,6 +386,65 @@ struct ProfileView: View {
             openURL(url)
         }
     }
+    
+    @ViewBuilder
+    func SupportTheProjectView()  -> some View {
+        VStack {
+            Text("Support the project")
+                .font(.caption)
+                .fontWeight(.regular)
+                .foregroundColor(Color("Gray"))
+            
+            HStack {
+                Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(height: 40)
+                            .background(Color("LightLightGray"))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .inset(by: 0.5)
+                                    .stroke(.black, lineWidth: 1)
+                            )
+                        
+                        Image("patreon")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.white)
+                            .frame(maxHeight: 20)
+                    }
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                
+                Link(destination: URL(string: AppConstants.Links.buymeacoffee.rawValue)!) {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(height: 40)
+                            .background(Color("Yellow"))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .inset(by: 0.5)
+                                    .stroke(.black, lineWidth: 1)
+                            )
+                        
+                        Image("buymeacoffee")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.white)
+                            .frame(maxHeight: 20)
+                    }
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .padding(.horizontal, 20)
+            .frame(minWidth: 0, maxWidth: .infinity)
+        }
+        .padding(.bottom, 20)
+    }
 }
 
 struct SettigsCell: View {
@@ -496,16 +502,20 @@ struct SettigsCell: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: .init(persistanceManager: PersistanceManager.preview))
-            .environmentObject(AppSettings())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+        ProfileView(
+            viewModel: .init(
+                persistanceManager: PersistanceManager.preview
+            )
+        )
+        .environmentObject(AppSettings())
+        .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
 
 
 
 struct ActivityViewController: UIViewControllerRepresentable {
-
+    
     var activityItems: [Any]
     var excludedActivityTypes: [UIActivity.ActivityType]? = nil
     
@@ -517,6 +527,6 @@ struct ActivityViewController: UIViewControllerRepresentable {
         
         return controller
     }
-
+    
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }

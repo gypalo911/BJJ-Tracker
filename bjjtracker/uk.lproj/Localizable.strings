@@ -83,6 +83,15 @@
 "No results found" = "Безрезультатно";
 "Found results: %@" = "Знайдено результатів: %@";
 
+"You have already learned **%@ techniques**!" = "Тобою уже опановано **%@ технік**! Так тримати!";
+"Great start! **%@ techniques** learned!" = "Чудовий старт! **%@ технік** уже вивчено!";
+"Your progress is impressive! It's already **%@ techniques** learned!" = "Твій прогрес вражаючий! Уже понад **%@ технік** опановано!";
+"Keep learning and practicing! It's already **%@ techniques** learned!" = "Продовжуй вчитись та практикуватись! Уже понад **%@ технік** вивчено!";
+"Perseverance is a key! You have already learned **%@ techniques**!" = "Наполегливість це ключ! Тобою уже опановано **%@ технік**!";
+"Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "Завжди передавайте те, чому навчились самі! Уже вивчено понад **%@ технік**!";
+
+"See All" = "Переглянути";
+
 // Timetable
 "Timetable" = "Календар";
 "Select" = "Обрати";

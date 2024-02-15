@@ -42,6 +42,40 @@ struct TechniquesCardFullState: View {
     let techniques: [TechniqueModel]
     let persistanceManager: PersistanceManager
     
+    var technquesText: String {
+        var str: String = ""
+        switch techniques.count {
+        case let n where n < 10:
+            str = "Great start! **%@ techniques** learned!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        case let n where n >= 10:
+            str = "You have already learned **%@ techniques**!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        case let n where n >= 20:
+            str = "Your progress is impressive! It's already **%@ techniques** learned!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        case let n where n >= 30:
+            str = "Keep learning and practicing! It's already **%@ techniques** learned!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        case let n where n >= 40:
+            str = "Perseverance is a key! You have already learned **%@ techniques**!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        case let n where n >= 50:
+            str = "Always pass on what you have learned! You have already learned **%@ techniques**!"
+                .localized(with: ["\(techniques.count)"])
+            break
+        default:
+            str = ""
+            break
+        }
+        return str
+    }
+    
     var body: some View {
         NavigationLink(destination: {
             TechniquesView(viewModel: .init(persistanceManager: persistanceManager))
@@ -53,9 +87,9 @@ struct TechniquesCardFullState: View {
                         .scaledToFit()
                         .foregroundColor(.black)
                         .frame(width: 30, height: 30)
-                    Text("You have already learned **\(techniques.count) techniques**")
+                    Text(LocalizedStringKey(technquesText))
                         .font(.caption)
-                        .fontWeight(.regular)
+                        .fontWeight(.semibold)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .hAlign(.leading)
