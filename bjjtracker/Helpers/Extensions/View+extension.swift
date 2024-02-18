@@ -21,7 +21,7 @@ struct RoundedCorner: Shape {
 struct OffsetPreferenceKey: PreferenceKey {
     typealias Value = CGFloat
     static var defaultValue: Value = .zero
-
+    
     static func reduce(value: inout Value, nextValue: () -> Value) {
         value = nextValue()
     }
@@ -45,10 +45,23 @@ extension View {
                 }
             )
     }
-}
-
-
-extension View {
+    
+    // for iOS <= 15
+    func snapshot() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+        
+        let targetSize = controller.view.intrinsicContentSize
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+        
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
+    }
+    
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }

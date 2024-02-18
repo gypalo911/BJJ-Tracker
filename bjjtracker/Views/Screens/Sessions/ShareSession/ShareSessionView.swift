@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 enum LayoutType {
     case one
@@ -13,53 +14,139 @@ enum LayoutType {
     case three
 }
 
+@available(iOS 16.0, *)
+struct Photo: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.image)
+    }
+    
+    public var image: Image
+    public var caption: String
+}
+
+@available(iOS 16.0, *)
 struct ShareSessionView: View {
-    @State var layoutType: LayoutType = .two
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var layoutType: LayoutType = .one
+    @State var selectedImage: UIImage?
+    @State var showSheet: Bool = false
+    
+    @State var selectImageState: Bool = true
+    
+    let session: Session
+    
+    var activity: Activity {
+        Activity.from(session: session)!
+    }
     
     var body: some View {
-        let trophyAndDate = createAwardView()
+        let trophyAndDate = createAwardView(type: layoutType)
+            .frame(width: 450, height: 500)
         
         NavigationView {
             VStack {
-                trophyAndDate
-                //            Button("Save image") {
-                //                
-                //                if #available(iOS 16.0, *) {
-                //                    let renderer = ImageRenderer(content: trophyAndDate)
-                //                    if let image = renderer.cgImage {
-                //                        //                    uploadAchievementImage(image)
-                //                    }
-                //                } else {
-                //                    // Fallback on earlier versions
-                //                }
-                //            }
-                HStack {
-                    Button("layout 1") {
-                        layoutType = .one
+                if selectImageState {
+                    Button {
+                        showSheet = true
+                    } label: {
+                        VStack {
+                            Image(systemName: "photo.on.rectangle")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 70, height: 70)
+                                .foregroundColor(Color("Blue"))
+                            Text("Select Image")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                        }
                     }
-                    Button("layout 2") {
-                        layoutType = .two
+                } else {
+                    let renderer = ImageRenderer(
+                        content: trophyAndDate
+                    )
+                    if let image = renderer.uiImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
                     }
-                    Button("layout 3") {
-                        layoutType = .three
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            LayoutTypeButtonView(type: .one)
+                            LayoutTypeButtonView(type: .two)
+                            LayoutTypeButtonView(type: .three)
+                        }
+                        .padding(10)
                     }
                 }
-                .padding(.bottom, 30)
             }
-            //        .ignoresSafeArea()
-            //        .frame(width: 200, height: 400)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(colorScheme == .dark ? .black : Color("generalBG"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+//                        if selectImageState {
+                        presentationMode.wrappedValue.dismiss()
+//                        } else {
+//                            selectImageState = true
+//                        }
+                    } label: {
+                        Image("close")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(Color("Blue"))
+                    }
+                }
+                if !selectImageState {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        let renderer = ImageRenderer(
+                            content: trophyAndDate
+                        )
+                        if let image = renderer.uiImage {
+                            let photo = Photo(image: Image(uiImage: image), caption: "")
+                            ShareLink(
+                                item: photo,
+                                preview: SharePreview(
+                                    "JiuTrack",
+                                    image: photo.image)
+                            )
+                            .simultaneousGesture(TapGesture().onEnded() {
+                                print("clicked")
+                            })
+                        }
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showSheet) {
+            ImagePicker(
+                sourceType: .photoLibrary,
+                selectedImage: $selectedImage,
+                fileName: "avatar",
+                callback: {
+                    selectImageState = false
+                }
+            )
         }
     }
     
-    private func createAwardView() -> some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .center) {
-                Image("bjj")
+    private func createAwardView(type: LayoutType) -> some View {
+        var image = Image("bjj")
+        if let img = selectedImage {
+            image = Image(uiImage: img)
+        }
+        
+        return ZStack(alignment: .center) {
+            GeometryReader { geometry in
+                let size = geometry.frame(in: .global).size
+                image
                     .resizable()
                     .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    
-                layout(type: layoutType, geometry: geometry)
+                    .frame(width: size.width, height: size.height, alignment: .center)
+                
+                layout(type: type, geometry: geometry)
             }
         }
     }
@@ -80,43 +167,41 @@ struct ShareSessionView: View {
             }
             .padding(.horizontal, 5)
             .background(Color("LogoColor"))
-            .rotationEffect(.degrees(90))
-            .position(x: geometry.size.width-20, y: geometry.size.height/5)
+            .position(x: 80, y: 30)
             
-            VStack(alignment: .leading) {
-                Text("No-Ji Class")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                Text(Date().formatted())
-                    .foregroundColor(.white)
-                    .fontWeight(.semibold)
-            }
-            .position(x: 100, y: 40)
-            
-            VStack(alignment: .trailing, spacing: 20) {
-                VStack(alignment: .trailing) {
-                    Text(100.minutesToDuration())
-                        .font(.title)
-                        .fontWeight(.semibold)
+            ZStack {
+                VStack(alignment: .center) {
+                    Text("\(activity.style.rawValue) Class")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
-                    Text("Duration")
-                        .font(.title3)
-                        .foregroundColor(.white)
-                        .fontWeight(.medium)
                 }
-                VStack(alignment: .trailing) {
-                    Text("**1200 kcal**")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                    Text("Calories")
-                        .font(.title3)
-                        .foregroundColor(.white)
-                        .fontWeight(.medium)
+                .position(x: geometry.size.width/2, y: geometry.size.height - 110)
+                
+                HStack(alignment: .center, spacing: 20) {
+                    VStack(alignment: .center) {
+                        Text(activity.duration.minutesToDuration())
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Duration")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.medium)
+                    }
+                    VStack(alignment: .center) {
+                        Text("**\(activity.totalEnergy) kcal**")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Calories")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.medium)
+                    }
                 }
+                .position(x: geometry.size.width/2, y: geometry.size.height - 50)
             }
-            .position(x: geometry.size.width-80, y: geometry.size.height-120)
             .background(
                 LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.6)]), startPoint: .center, endPoint: .bottom)
             )
@@ -133,41 +218,43 @@ struct ShareSessionView: View {
             }
             .padding(.horizontal, 5)
             .background(Color("LogoColor"))
-            .position(x: 80, y: 30)
+            .rotationEffect(.degrees(90))
+            .position(x: geometry.size.width-20, y: geometry.size.height/5)
             
-            ZStack {
-                VStack(alignment: .center) {
-                    Text("No-Ji Class")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                .position(x: geometry.size.width/2, y: geometry.size.height - 110)
-                
-                HStack(alignment: .center, spacing: 20) {
-                    VStack(alignment: .center) {
-                        Text(100.minutesToDuration())
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Duration")
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
-                    VStack(alignment: .center) {
-                        Text("**1200 kcal**")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Calories")
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
-                }
-                .position(x: geometry.size.width/2, y: geometry.size.height - 50)
+            VStack(alignment: .leading) {
+                Text("\(activity.style.rawValue) Class")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                Text(activity.startDate.formatted())
+                    .foregroundColor(.white)
+                    .fontWeight(.semibold)
             }
+            .position(x: 100, y: 40)
+            
+            VStack(alignment: .trailing, spacing: 20) {
+                VStack(alignment: .trailing) {
+                    Text(activity.duration.minutesToDuration())
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                    Text("Duration")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .fontWeight(.medium)
+                }
+                VStack(alignment: .trailing) {
+                    Text("**\(activity.totalEnergy) kcal**")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                    Text("Calories")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .fontWeight(.medium)
+                }
+            }
+            .position(x: geometry.size.width-80, y: geometry.size.height-120)
             .background(
                 LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.6)]), startPoint: .center, endPoint: .bottom)
             )
@@ -188,19 +275,52 @@ struct ShareSessionView: View {
             .position(x: geometry.size.width-20, y: geometry.size.height/5)
             
             VStack(alignment: .leading) {
-                Text("No-Ji Class")
+                Text("\(activity.style.rawValue) Class")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                Text(Date().formatted())
+                Text(activity.startDate.formatted())
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
             }
             .position(x: 100, y: 40)
         }
     }
+    
+    @MainActor
+    @ViewBuilder
+    func LayoutTypeButtonView(type: LayoutType) -> some View {
+        Button(action: {
+            layoutType = type
+        }, label: {
+            let view = createAwardView(type: type)
+                .frame(width: 450, height: 500)
+            let renderer = ImageRenderer(content: view)
+            if let image = renderer.cgImage {
+                Image(image, scale: 1.0, label: Text(""))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+            }
+        })
+        .background(
+            Rectangle()
+                .foregroundColor(.black)
+        )
+        .overlay(
+            Rectangle()
+                .inset(by: 0.01)
+                .stroke(type == layoutType ? .blue : .clear, lineWidth: 3)
+        )
+    }
+    
 }
 
+@available(iOS 16.0, *)
 #Preview {
-    ShareSessionView()
+    if let session = PersistanceManager.preview.fetchSessions().first {
+        ShareSessionView(session: session)
+    } else {
+        Text("No session")
+    }
 }

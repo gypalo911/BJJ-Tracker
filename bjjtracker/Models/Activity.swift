@@ -69,6 +69,10 @@ class Activity: ObservableObject, Identifiable, Equatable {
         }
     }
     
+    var totalEnergy: Int {
+        Int(Double(duration) / 60 * 600)
+    }
+    
     init(id: UUID = UUID(), type: ActivityType, style: GraplingStyle, duration: Int, startDate: Date, location: String, notes: String) {
         self.id = id
         self.type = type

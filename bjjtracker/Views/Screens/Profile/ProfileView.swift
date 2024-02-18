@@ -307,7 +307,7 @@ struct ProfileView: View {
                 }
                 .background(Color("generalBG").ignoresSafeArea())
                 .sheet(isPresented: $showSheet) {
-                    ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage, fileName: "avatar")
+                    ProfileImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage, fileName: "avatar")
                 }
                 .sheet(isPresented: $showShareSheet) {
                     ActivityViewController(activityItems: [Locale.current.languageCode == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])

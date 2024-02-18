@@ -23,6 +23,7 @@ struct SessionDetailsView: View {
     @Environment (\.managedObjectContext) var managedObjContext
     
     @State private var isPresentedEditing: Bool = false
+    @State private var showShareSheet: Bool = false
     @State private var urlToPresent: String?
     
     var dismissCallback: (() -> Void)? = nil
@@ -40,7 +41,7 @@ struct SessionDetailsView: View {
                     session: viewModel.session,
                     namespace: namespace,
                     navTitle: viewModel.navTitle,
-                    isPresentedEditing: $isPresentedEditing,
+                    isPresentedEditing: $isPresentedEditing, showShareSheet: $showShareSheet,
                     dismissCallback: dismissCallback,
                     onDelete: {
                         viewModel.deleteSession()
@@ -127,6 +128,13 @@ struct SessionDetailsView: View {
                     }
                 )
             }
+            .fullScreenCover(isPresented: $showShareSheet, onDismiss: {
+                
+            }, content: {
+                if #available(iOS 16.0, *) {
+                    ShareSessionView(session: viewModel.session)
+                }
+            })
         }
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
@@ -159,6 +167,8 @@ struct SessionDetailsHeaderView: View {
     let navTitle: String
     
     @Binding var isPresentedEditing: Bool
+    @Binding var showShareSheet: Bool
+    
     var dismissCallback: (() -> Void)? = nil
     var onDelete: (() -> Void)? = nil
     
@@ -211,10 +221,12 @@ struct SessionDetailsHeaderView: View {
                     }
                     Spacer()
                     Menu {
-                        Button(action: {
-                            
-                        }) {
-                            Label("Share", systemImage: "square.and.arrow.up")
+                        if #available(iOS 16.0, *) {
+                            Button(action: {
+                                showShareSheet = true
+                            }) {
+                                Label("Share", systemImage: "square.and.arrow.up")
+                            }
                         }
                         Button(action: {
                             isPresentedEditing = true
