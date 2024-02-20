@@ -26,7 +26,7 @@ struct Photo: Transferable {
 
 @available(iOS 16.0, *)
 struct ShareSessionView: View {
-    @Environment(\.colorScheme) var colorScheme
+//    @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
     @State var layoutType: LayoutType = .one
@@ -53,7 +53,8 @@ struct ShareSessionView: View {
                         Text("Select image to share with training stats")
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
-                                colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
+                                Color("GrayTextColor")
+//                                colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -71,7 +72,8 @@ struct ShareSessionView: View {
                         Text("Share your training results with others!")
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
-                                colorScheme == .dark ? .white : Color("Blue")
+                                .white
+                                //colorScheme == .dark ? .white : Color("Blue")
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -99,9 +101,9 @@ struct ShareSessionView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
-                colorScheme == .dark ?
+//                colorScheme == .dark ?
                 LinearGradient(gradient: Gradient(colors: [Color("LinearBG1"), Color("LinearBG2")]), startPoint: .top, endPoint: .bottom)
-                : LinearGradient(gradient: Gradient(colors: [Color("generalBG"), Color("lightGreen")]), startPoint: .top, endPoint: .bottom)
+//                : LinearGradient(gradient: Gradient(colors: [Color("generalBG"), Color("lightGreen")]), startPoint: .top, endPoint: .bottom)
             )
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -111,7 +113,10 @@ struct ShareSessionView: View {
                         Image("close")
                             .resizable()
                             .frame(width: 25, height: 25)
-                            .foregroundColor(colorScheme == .dark ? .white : Color("Blue"))
+                            .foregroundColor(
+                                .white
+//                                colorScheme == .dark ? .white : Color("Blue")
+                            )
                     }
                 }
                 if !selectImageState {
@@ -132,7 +137,8 @@ struct ShareSessionView: View {
                                     .scaledToFit()
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(
-                                        colorScheme == .dark ? .white : Color("Blue")
+                                        .white
+//                                        colorScheme == .dark ? .white : Color("Blue")
                                     )
                             }
                             .simultaneousGesture(TapGesture().onEnded() {
