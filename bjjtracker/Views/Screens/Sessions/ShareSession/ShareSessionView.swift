@@ -144,7 +144,6 @@ struct ShareSessionView: View {
                                     )
                             }
                             .simultaneousGesture(TapGesture().onEnded() {
-                                print("clicked")
                             })
                         }
                     }

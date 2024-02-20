@@ -124,11 +124,17 @@ extension Session {
     }
     
     var activityType: ActivityType {
-        ActivityType(rawValue: type ?? "Class")!
+        if ActivityType.allCases.contains(where: { $0.rawValue == type }) {
+            return ActivityType(rawValue: type ?? "Class")!
+        }
+        return ActivityType(rawValue: "Class")!
     }
 
     var activityStyle: GraplingStyle {
-        GraplingStyle(rawValue: style ?? "Gi")!
+        if GraplingStyle.allCases.contains(where: { $0.rawValue == type }) {
+            return GraplingStyle(rawValue: type ?? "Gi")!
+        }
+        return GraplingStyle(rawValue: "Gi")!
     }
     
     static func == (lhs: Session, rhs: Session) -> Bool {

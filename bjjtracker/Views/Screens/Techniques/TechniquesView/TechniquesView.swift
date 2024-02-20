@@ -224,7 +224,6 @@ struct TechniquesView: View {
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 Button(action: {
-                    print("sadas ")
                     viewModel.isShowingTechniqueDetails = true
                 }, label: {
                     ZStack {

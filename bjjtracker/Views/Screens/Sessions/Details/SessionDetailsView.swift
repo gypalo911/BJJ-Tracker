@@ -227,11 +227,11 @@ struct SessionDetailsHeaderView: View {
             Rectangle()
                 .fill(linearGradient)
                 .cornerRadius(30, corners: [.bottomLeft])
-                .matchedGeometryEffect(id: "shape\(session.activityType.rawValue)", in: namespace)
                 .defaultShadow()
                 .vAlign(.top)
                 .frame(width: screenSize.width)
                 .ignoresSafeArea()
+                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
             
             VStack {
                 HStack(alignment: .bottom) {

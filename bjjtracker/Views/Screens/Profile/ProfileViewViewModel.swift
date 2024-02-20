@@ -34,7 +34,6 @@ class ProfileViewViewModel: ObservableObject {
     
     func fetchTechniques() {
         techniques = persistanceManager.fetchAllTechniques()
-        print("techniques: \(techniques.count)")
     }
 }
 

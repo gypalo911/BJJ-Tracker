@@ -29,8 +29,8 @@ struct ActivityPanelView: View {
                             .foregroundColor(session.activityType.color)
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .defaultShadow()
-                            .matchedGeometryEffect(id: "shape\(session.activityType.rawValue)", in: namespace, isSource: true)
                             .frame(width: 67)
+                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                         VStack(alignment: .center, spacing: 6) {
                             Text("\((session.startDate ?? Date()).toString("HH:mm"))")
                                 .font(.footnote)

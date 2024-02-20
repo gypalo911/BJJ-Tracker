@@ -277,7 +277,7 @@ struct DashboardView: View {
                 }
                 
                 ForEach(filteredSessions) { session in
-                    if session.id != nil {
+                    if session.id != nil && viewModel.selectedSession == nil {
                         ActivityPanelView(session: session, namespace: namespace)
                             .onTapGesture {
                                 withAnimation(AppConstants.mgeAnimation) {

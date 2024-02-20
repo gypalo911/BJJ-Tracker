@@ -43,7 +43,7 @@ struct JournalView: View {
                                                 }
                                         }
                                     }
-                                    if let sectionSessions = viewModel.groupedSessions[key] {
+                                    if let sectionSessions = viewModel.groupedSessions[key], viewModel.selectedSession == nil {
                                         ForEach(sectionSessions, id: \.self) { session in
                                             ActivityPanelView(session: session, namespace: namespace)
                                                 .onTapGesture {
