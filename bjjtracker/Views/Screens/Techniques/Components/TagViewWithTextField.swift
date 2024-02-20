@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TagViewWithTextField: View {
     @State private var defaultViewWidth: CGFloat = 70
-    @State var tag: Tag = .init(text: "")
+    @Binding var tag: Tag
     @State var viewWidth: CGFloat = 70
     @Binding var isEditing: Bool
     @FocusState private var focusedField: Bool
@@ -75,8 +75,10 @@ struct TagViewWithTextField: View {
 struct TagViewWithTextField_Previews: PreviewProvider {
     struct Container: View {
         @State var isEditing = false
+        @State var tag: Tag = .init(text: "")
         var body: some View {
             TagViewWithTextField(
+                tag: $tag, 
                 isEditing: $isEditing,
                 onSubmit: { tag in },
                 maxViewWidth: UIScreen.main.bounds.size.width - 80

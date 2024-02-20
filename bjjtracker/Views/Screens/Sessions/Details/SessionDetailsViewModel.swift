@@ -22,6 +22,9 @@ class SessionDetailsViewModel: ObservableObject {
     
     @Published var previewModels: [LinkPreviewModel] = []
     
+    @Published var isShowingTechniqueDetails: Bool = false
+    @Published var selectedTechnique: TechniqueModel?
+    
     private let persistanceManager: SessionsStorageManager
     private let analyticsEngine: AnalyticsEngine
     

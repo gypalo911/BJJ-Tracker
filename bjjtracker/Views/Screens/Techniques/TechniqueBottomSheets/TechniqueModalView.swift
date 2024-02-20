@@ -28,6 +28,8 @@ struct TechniqueModalView: View {
     var technique: TechniqueModel?
     @FocusState private var focusedField: TechniqueField?
     
+    var onUpdate: ((TechniqueModel?) -> Void)?
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             switch state {
@@ -72,6 +74,7 @@ struct TechniqueModalView: View {
                     Button(action: {
                         if let technique = technique {
                             persistanceManager.delete(model: technique)
+                            onUpdate?(nil)
                         }
                         name = ""
                         details = ""
@@ -98,6 +101,7 @@ struct TechniqueModalView: View {
                                 name: name,
                                 details: details
                             )
+                            onUpdate?(technique)
                         }
                         withAnimation(.easeInOut(duration: 0.25)) {
                             state = .overview
@@ -214,7 +218,10 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
                 .bottomSheet(isPresented: $isShowingOverlay) {
                     TechniqueModalView(
                         showingCreateTechnique: $isShowingOverlay,
-                        state: .modifying
+                        state: .modifying,
+                        onUpdate: { _ in
+                            
+                        }
                     )
                 }
             }

@@ -10,6 +10,7 @@ import SwiftUI
 struct TagView: View {
     let tag: Tag
     let onDelete: (() -> Void)?
+    let onDetails: (() -> Void)?
     
     @Namespace var animation
     
@@ -30,6 +31,9 @@ struct TagView: View {
             )
             .contentShape(.contextMenuPreview, Capsule())
             .contextMenu {
+                Button("Details", action: {
+                    onDetails?()
+                })
                 Button("Delete", action: {
                     onDelete?()
                 })
@@ -44,7 +48,8 @@ struct TagView_Previews: PreviewProvider {
         var body: some View {
             TagView(
                 tag: .init(text: "Delariva"),
-                onDelete: {}
+                onDelete: {},
+                onDetails: {}
             ).padding(30)
         }
     }

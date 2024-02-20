@@ -50,8 +50,8 @@
 "FINISHED" = "Завершено";
 "ONGOING" = "Триває";
 
-"Gi" = "Гі";
-"No-gi" = "Ноу-Гі";
+"Gi" = "Gi";
+"No-Gi" = "No-Gi";
 
 "Class" = "Тренування";
 "Classes" = "Тренування";
@@ -92,6 +92,8 @@
 "Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "Завжди передавайте те, чому навчились самі! Уже вивчено понад **%@ технік**!";
 
 "See All" = "Переглянути";
+"Details" = "Деталі";
+"Done" = "Готово";
 
 // Timetable
 "Timetable" = "Календар";
@@ -115,6 +117,10 @@
 "Sessions by grapling style"= "Типи занять за стилем греплінгу";
 "Gi sessions" = "Гі заняття";
 "No Gi sessions" = "Ноу Гі заняття";
+
+// share image
+"Select image to share with training stats" = "Виберіть фотографію для поширення разом зі статистикою";
+"Share your training results with others!" = "Діліться результатами тренувань з іншими!";
 
 // Profile
 "Profile" = "Профіль";
@@ -175,6 +181,8 @@
 
 "View all Apple Health data" = "Переглянути дані у Apple Health";
 "**%@ kcal** burned" = "**%@ ккал** спалено";
+"Duration" = "Тривалість";
+"Calories" = "Калорії";
 "Connect" = "Підключити";
 "Connect with" = "Підключити";
 "Train smarter by connecting your JiuTrack app to Apple Health" = "Тренуйся розумніше підключивши додаток JiuTrack до Apple Health";

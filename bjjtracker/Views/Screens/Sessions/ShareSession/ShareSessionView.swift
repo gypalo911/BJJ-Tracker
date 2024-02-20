@@ -8,10 +8,12 @@
 import SwiftUI
 import Charts
 
-enum LayoutType {
+enum LayoutType: Int, CaseIterable {
     case one
     case two
     case three
+    case four
+    case five
 }
 
 @available(iOS 16.0, *)
@@ -91,9 +93,9 @@ struct ShareSessionView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            LayoutTypeButtonView(type: .one)
-                            LayoutTypeButtonView(type: .two)
-                            LayoutTypeButtonView(type: .three)
+                            ForEach(LayoutType.allCases, id: \.rawValue) { type in
+                                LayoutTypeButtonView(type: type)
+                            }
                         }
                         .padding(10)
                     }
@@ -183,30 +185,17 @@ struct ShareSessionView: View {
     
     @ViewBuilder
     private func layout(type: LayoutType, geometry: GeometryProxy) -> some View {
+        let frame = geometry.frame(in: .global)
         switch type {
         case .one:
-            HStack {
-                Image("Logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                Text("JiuTrack")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-            }
-            .padding(.horizontal, 5)
-            .background(Color("LogoColor"))
-            .position(x: 80, y: 30)
-            
             ZStack {
                 VStack(alignment: .center) {
-                    Text("\(activity.style.rawValue) Class")
+                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                 }
-                .position(x: geometry.size.width/2, y: geometry.size.height - 110)
+                .position(x: frame.width/2, y: frame.height - 110)
                 
                 HStack(alignment: .center, spacing: 20) {
                     VStack(alignment: .center) {
@@ -214,110 +203,140 @@ struct ShareSessionView: View {
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
-                        Text("Duration")
+                        Text("Duration".localizedString)
                             .font(.subheadline)
                             .foregroundColor(.white)
                             .fontWeight(.medium)
                     }
-                    if session.status == .finished {
-                        VStack(alignment: .center) {
-                            Text("**\(activity.totalEnergy) kcal**")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                            Text("Calories")
-                                .font(.subheadline)
-                                .foregroundColor(.white)
-                                .fontWeight(.medium)
-                        }
+                    VStack(alignment: .center) {
+                        Text("\(activity.totalEnergy)")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Calories".localizedString)
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.medium)
                     }
                 }
-                .position(x: geometry.size.width/2, y: geometry.size.height - 50)
+                .position(x: frame.width/2, y: frame.maxY-50)
             }
             .background(
-                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.6)]), startPoint: .center, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .bottom)
             )
+            
+            logoView()
+            .padding(10)
+            .hAlign(.topLeading)
         case .two:
-            HStack {
-                Image("Logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                Text("JiuTrack")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+            ZStack {
+                VStack(alignment: .center) {
+                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                .position(x: frame.width/2, y: frame.height - 110)
+                
+                HStack(alignment: .center, spacing: 20) {
+                    VStack(alignment: .center) {
+                        Text(activity.duration.minutesToDuration())
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Duration".localizedString)
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.medium)
+                    }
+                }
+                .position(x: frame.width/2, y: frame.maxY-50)
             }
-            .padding(.horizontal, 5)
-            .background(Color("LogoColor"))
-            .rotationEffect(.degrees(90))
-            .position(x: geometry.size.width-20, y: geometry.size.height/5)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .bottom)
+            )
             
-            VStack(alignment: .leading) {
-                Text("\(activity.style.rawValue) Class")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                Text(activity.startDate.formatted())
-                    .foregroundColor(.white)
-                    .fontWeight(.semibold)
+            logoView()
+            .padding(10)
+            .hAlign(.topLeading)
+        case .three:
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    Text(activity.startDate.formatted())
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                }
+                .padding(15)
             }
-            .position(x: 100, y: 40)
+            .vAlign(.top)
+            .hAlign(.leading)
+            .frame(maxHeight: 200)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .top)
+            )
             
-            VStack(alignment: .trailing, spacing: 20) {
+            VStack(alignment: .trailing, spacing: 10) {
                 VStack(alignment: .trailing) {
                     Text(activity.duration.minutesToDuration())
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                    Text("Duration")
+                    Text("Duration".localizedString)
                         .font(.title3)
                         .foregroundColor(.white)
                         .fontWeight(.medium)
                 }
-                if session.status == .finished {
-                    VStack(alignment: .trailing) {
-                        Text("**\(activity.totalEnergy) kcal**")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Calories")
-                            .font(.title3)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
+                VStack(alignment: .trailing) {
+                    Text("\(activity.totalEnergy)")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                    Text("Calories".localizedString)
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .fontWeight(.medium)
                 }
             }
-            .position(x: geometry.size.width-80, y: geometry.size.height-120)
+            .frame(maxWidth: 200)
+            .position(x: frame.maxX-80, y: frame.maxY-120)
             .background(
-                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.6)]), startPoint: .center, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .bottom)
             )
-        case .three:
-            HStack {
-                Image("Logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                Text("JiuTrack")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-            }
-            .padding(.horizontal, 5)
-            .background(Color("LogoColor"))
-            .rotationEffect(.degrees(90))
-            .position(x: geometry.size.width-20, y: geometry.size.height/5)
             
-            VStack(alignment: .leading) {
-                Text("\(activity.style.rawValue) Class")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                Text(activity.startDate.formatted())
-                    .foregroundColor(.white)
-                    .fontWeight(.semibold)
+            logoView()
+            .rotationEffect(.degrees(90))
+            .position(x: frame.width-20, y: frame.height/5)
+        case .four:
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    Text(activity.startDate.formatted())
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                }
+                .padding(15)
             }
-            .position(x: 100, y: 40)
+            .vAlign(.top)
+            .hAlign(.leading)
+            .frame(maxHeight: 200)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .top)
+            )
+            
+            logoView()
+            .rotationEffect(.degrees(90))
+            .position(x: frame.width-20, y: frame.height/5)
+        default:
+            logoView()
+            .rotationEffect(.degrees(90))
+            .position(x: frame.width-20, y: frame.height/5)
         }
     }
     
@@ -346,6 +365,22 @@ struct ShareSessionView: View {
                 .inset(by: 0.01)
                 .stroke(type == layoutType ? .blue : .clear, lineWidth: 3)
         )
+    }
+    
+    @ViewBuilder
+    func logoView() -> some View {
+        HStack {
+            Image("Logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            Text("JiuTrack")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+        }
+        .padding(.horizontal, 5)
+        .background(Color("LogoColor"))
     }
     
 }

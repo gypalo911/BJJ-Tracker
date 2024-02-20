@@ -16,6 +16,7 @@ protocol TechniquesStorageManager {
         name: String,
         details: String
     )
+    func addToSession(technique: TechniqueModel, _ session: Session)
     func delete(model: TechniqueModel)
 }
 
@@ -59,6 +60,13 @@ extension PersistanceManager: TechniquesStorageManager {
             print("Unable to Fetch techniques, (\(error))")
             return []
         }
+    }
+    
+    func addToSession(technique: TechniqueModel, _ session: Session) {
+        let context = self.container.viewContext
+        technique.addToSessions(session)
+        
+        save(context: context)
     }
     
     func createTechnique(

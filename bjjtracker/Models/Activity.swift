@@ -27,7 +27,7 @@ enum ActivityType: String, CaseIterable, Hashable {
 
 enum GraplingStyle: String, CaseIterable, Hashable {
     case gi = "Gi"
-    case noGi = "No-gi"
+    case noGi = "No-Gi"
 }
 
 enum ActivityStatus: String {

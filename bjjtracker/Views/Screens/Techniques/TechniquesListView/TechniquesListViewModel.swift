@@ -15,57 +15,87 @@ class TechniquesListViewModel: ObservableObject {
     private let session: Session
     
     // MARK: @Published variables
+    @Published var allTechniques: [TechniqueModel] = []
     @Published var rows: [[Tag]] = []
     @Published var tags: [Tag] = []
-    @Published var suggestionTags: [Tag] = []
-    @Published var tagText = ""
+    
+    var suggestionTags: [Tag] {
+        return allTechniques
+            .filter { tec in
+                !tags.map { $0.text }.contains(where: { $0 == tec.text })
+            }
+            .filter {
+                $0.text != nil &&
+                $0.text!.lowercased().contains(creationalTag.text.lowercased())
+            }
+            .prefix(5)
+            .map {
+                Tag(text: $0.text ?? "")
+            }
+    }
+    @Published var creationalTag: Tag = .init(text: "")
     
     // MARK: Regular variables
     var maxRowWidth: CGFloat = 0
+    var onTechniqueDetails: ((TechniqueModel?) -> Void)?
     
     init(
         session: Session,
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
-        persistanceManager: TechniquesStorageManager
+        persistanceManager: TechniquesStorageManager,
+        onTechniqueDetails: ((TechniqueModel?) -> Void)?
     ) {
         self.session = session
         self.analyticsEngine = analyticsEngine
         self.persistanceManager = persistanceManager
+        self.onTechniqueDetails = onTechniqueDetails
     }
     
     // MARK: Functions
     func fetchTags() {
+        tags = []
+        
+        allTechniques = persistanceManager.fetchAllTechniques()
         let techniques = persistanceManager.fetchTechniques(for: session)
         techniques.forEach {
             tags.append(Tag(technique: $0, text: $0.text ?? ""))
-        }
-        let suggestions = persistanceManager.fetchTechniquesForSuggestion()
-        suggestions.forEach { suggestion in
-            if !techniques.map({ $0.text }).contains(suggestion.text) {
-                suggestionTags.append(Tag(technique: suggestion, text: suggestion.text ?? ""))
-            }
         }
         setupTagRows()
     }
     
     func add(tag: Tag) {
-        if !tag.text.trimmingCharacters(in: .whitespaces).isEmpty {
-            var newTag = tag
-            newTag.type = .regular
-            tags.append(newTag)
-            removeSuggestionTag(tag)
-            setupTagRows()
-            
-            persistanceManager.createTechnique(for: session, name: tag.text, details: "")
-            
-            analyticsEngine.log(AnalyticsEvent(
-                name: FirebaseAnalyticsEvent.tagAdded.rawValue,
-                metadata: [
-                    "tag_text":"\(tag.text)",
-                    "tag_type":"\(tag.type.rawValue)"
-                ]
-            ))
+        guard !tag.text.trimmingCharacters(in: .whitespaces).isEmpty &&
+                !tags.contains(where: {
+                    $0.text.lowercased() == tag.text.lowercased()
+                }) else {
+            return
         }
+        
+        var newTag = tag
+        newTag.type = .regular
+        tags.append(newTag)
+        removeSuggestionTag(tag)
+        
+        creationalTag = .init(text: "")
+        
+        if let technique = allTechniques.first(where: {
+            $0.text?.lowercased() == newTag.text.lowercased()
+        }) {
+            persistanceManager.addToSession(technique: technique, session)
+            fetchTags()
+            return
+        }
+        
+        persistanceManager.createTechnique(for: session, name: tag.text, details: "")
+        fetchTags()
+        
+        analyticsEngine.log(AnalyticsEvent(
+            name: FirebaseAnalyticsEvent.tagAdded.rawValue,
+            metadata: [
+                "tag_text":"\(tag.text)",
+                "tag_type":"\(tag.type.rawValue)"
+            ]
+        ))
         analyticsEngine.log(AnalyticsEvent(name: "Tag wasn't added because it was empty", metadata: [:]))
     }
     
@@ -87,7 +117,7 @@ class TechniquesListViewModel: ObservableObject {
     }
     
     func removeSuggestionTag(_ tag: Tag) {
-        suggestionTags = suggestionTags.filter{ $0.id != tag.id }
+//        suggestionTags = suggestionTags.filter{ $0.id != tag.id }
     }
     
     func getIndex(tag: Tag) -> Int {

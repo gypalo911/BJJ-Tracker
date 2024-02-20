@@ -155,8 +155,8 @@ struct DashboardView: View {
                         session: session,
                         persistanceManager: persistanceManager
                     ), dismissCallback: {
-                        withAnimation(AppConstants.mgeAnimation) {
-                            DispatchQueue.main.async {
+                        DispatchQueue.main.async {
+                            withAnimation(AppConstants.mgeAnimation) {
                                 viewModel.selectedSession = nil
                                 settings.isTabBarHidden = false
                             }

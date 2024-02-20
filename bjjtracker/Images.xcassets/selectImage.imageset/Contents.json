@@ -3,6 +3,16 @@
     {
       "filename" : "selectImage.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "selectImage 1.png",
+      "idiom" : "universal",
+      "locale" : "en"
+    },
+    {
+      "filename" : "Group 1468.png",
+      "idiom" : "universal",
+      "locale" : "uk"
     }
   ],
   "info" : {
@@ -10,6 +20,7 @@
     "version" : 1
   },
   "properties" : {
+    "localizable" : true,
     "template-rendering-intent" : "original"
   }
 }

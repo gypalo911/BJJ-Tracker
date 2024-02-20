@@ -32,6 +32,10 @@ struct SessionDetailsView: View {
         viewModel.session.activityType
     }
     
+    var activityColor: Color {
+        activityType.color
+    }
+    
     private let screenSize: CGSize = UIScreen.main.bounds.size
     
     var body: some View {
@@ -41,7 +45,7 @@ struct SessionDetailsView: View {
                     session: viewModel.session,
                     namespace: namespace,
                     navTitle: viewModel.navTitle,
-                    isPresentedEditing: $isPresentedEditing, 
+                    isPresentedEditing: $isPresentedEditing,
                     showShareSheet: $showShareSheet,
                     dismissCallback: dismissCallback,
                     onDelete: {
@@ -55,10 +59,15 @@ struct SessionDetailsView: View {
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
+                        
                         TechniquesListView(
                             viewModel: .init(
                                 session: viewModel.session,
-                                persistanceManager: persistanceManager
+                                persistanceManager: persistanceManager,
+                                onTechniqueDetails: { technique in
+                                    viewModel.isShowingTechniqueDetails = true
+                                    viewModel.selectedTechnique = technique
+                                }
                             )
                         )
                         .fixedSize(horizontal: false, vertical: true)
@@ -118,7 +127,7 @@ struct SessionDetailsView: View {
                     .ignoresSafeArea()
             }
             .sheet(isPresented: $isPresentedEditing, onDismiss: {
-                changeNavBar(UIColor(activityType.color.opacity(0.8)))
+                changeNavBar(UIColor(activityColor.opacity(0.8)))
             }) {
                 EditSessionView(
                     viewModel: .init(),
@@ -132,6 +141,18 @@ struct SessionDetailsView: View {
             .fullScreenCover(isPresented: $showShareSheet) {
                 if #available(iOS 16.0, *) {
                     ShareSessionView(session: viewModel.session)
+                }
+            }
+            .bottomSheet(isPresented: $viewModel.isShowingTechniqueDetails) {
+                if let technique = viewModel.selectedTechnique {
+                    TechniqueModalView(
+                        showingCreateTechnique: $viewModel.isShowingTechniqueDetails,
+                        state: .overview,
+                        technique: technique,
+                        onUpdate: { value in
+                            
+                        }
+                    )
                 }
             }
         }
@@ -148,7 +169,7 @@ struct SessionDetailsView: View {
     }
     
     func setupView() {
-        changeNavBar(UIColor(activityType.color.opacity(0.8)))
+        changeNavBar(UIColor(activityColor.opacity(0.8)))
         hideTabbar(true)
         viewModel.setupLinkPreviews()
     }
@@ -178,6 +199,11 @@ struct SessionDetailsHeaderView: View {
     var activityType: ActivityType {
         session.activityType
     }
+    
+    var activityColor: Color {
+        activityType.color
+    }
+    
     var sessionStatus: ActivityStatus {
         session.status
     }
@@ -185,9 +211,9 @@ struct SessionDetailsHeaderView: View {
     var linearGradient: LinearGradient {
         LinearGradient(
             gradient: Gradient(stops: [
-                .init(color: activityType.color.opacity(0.8), location: 0.4),
-                .init(color: activityType.color.opacity(0.35), location: 0.8),
-                .init(color: activityType.color.opacity(0.28), location: 1)
+                .init(color: activityColor.opacity(0.8), location: 0.4),
+                .init(color: activityColor.opacity(0.35), location: 0.8),
+                .init(color: activityColor.opacity(0.28), location: 1)
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -201,14 +227,14 @@ struct SessionDetailsHeaderView: View {
             Rectangle()
                 .fill(linearGradient)
                 .cornerRadius(30, corners: [.bottomLeft])
-                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
+                .matchedGeometryEffect(id: "shape\(session.activityType.rawValue)", in: namespace)
                 .defaultShadow()
                 .vAlign(.top)
                 .frame(width: screenSize.width)
                 .ignoresSafeArea()
             
             VStack {
-                HStack {
+                HStack(alignment: .bottom) {
                     Button {
                         dismissCallback?()
                     } label: {

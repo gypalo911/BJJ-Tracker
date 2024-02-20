@@ -164,7 +164,6 @@ struct TechniquesView: View {
                             tag: Tag(text: viewModel.suggestions[i]),
                             onTap: {
                                 viewModel.searchText = viewModel.suggestions[i]
-//                                onEndEditing?()
                             }
                         )
                     }

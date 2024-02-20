@@ -17,7 +17,7 @@ struct BottomSheetModifier<InnerView: View>: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .blur(radius: isPresented ? blurRadius : 0, opaque: true)
+            .blur(radius: isPresented ? blurRadius : 0, opaque: false)
             .overlay(alignment: .bottom) {
                 if isPresented {
                     GenericBottomSheet(view: view, isBottomSheetOpen: $isPresented)
@@ -30,5 +30,26 @@ struct BottomSheetModifier<InnerView: View>: ViewModifier {
 extension View {
     func bottomSheet(isPresented: Binding<Bool>, @ViewBuilder view: @escaping () -> some View) -> some View {
         return modifier(BottomSheetModifier(isPresented: isPresented, view: view))
+    }
+}
+
+struct SessionDetailsView_Previews2: PreviewProvider {
+    struct Container: View {
+        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @EnvironmentObject var persistanceManager: PersistanceManager
+        
+        @Namespace var namespace
+        
+        var body: some View {
+            let session: Session = persistanceManager.fetchSessions().first!
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview))
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+            .environmentObject(AppSettings())
+            .environmentObject(PersistanceManager.preview)
+            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

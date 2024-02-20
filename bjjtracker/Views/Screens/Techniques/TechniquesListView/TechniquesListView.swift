@@ -31,6 +31,8 @@ struct TechniquesListView: View {
                                     tag: tag,
                                     onDelete: {
                                         viewModel.removeRegularTag(tag)
+                                    }, onDetails: {
+                                        viewModel.onTechniqueDetails?(tag.technique)
                                     }
                                 )
                             }
@@ -40,6 +42,7 @@ struct TechniquesListView: View {
                     VStack {
                         if isTyping {
                             TagViewWithTextField(
+                                tag: $viewModel.creationalTag,
                                 isEditing: $isTyping,
                                 onSubmit: { tag in
                                     viewModel.add(tag: tag)

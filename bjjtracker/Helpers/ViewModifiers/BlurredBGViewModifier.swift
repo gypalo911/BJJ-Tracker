@@ -16,7 +16,7 @@ struct BlurredBGViewModifier<InnerView: View>: ViewModifier {
     func body(content: Content) -> some View {
         Group {
             content
-                .blur(radius: isPresented ? blurRadius : 0, opaque: true)
+                .blur(radius: isPresented ? blurRadius : 0, opaque: false)
                 .animation(.easeInOut(duration: 0.25), value: isPresented)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
