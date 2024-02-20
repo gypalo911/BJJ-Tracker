@@ -48,31 +48,34 @@ struct ShareSessionView: View {
         NavigationView {
             VStack {
                 if selectImageState {
-                    Button {
-                        showSheet = true
-                    } label: {
-                        VStack {
-                            Spacer()
-                            Text("Select image to share with training stats")
-                                .font(.system(size: 18, weight: .regular))
-                                .foregroundColor(
-                                    colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
-                                )
-                                .frame(maxWidth: 220)
-                            Spacer()
+                    VStack {
+                        Spacer()
+                        Text("Select image to share with training stats")
+                            .font(.system(size: 18, weight: .regular))
+                            .foregroundColor(
+                                colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
+                            )
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: 220)
+                        Spacer()
+                        Button {
+                            showSheet = true
+                        } label: {
                             Image("selectImage")
                                 .resizable()
                                 .scaledToFit()
                                 .padding(30)
-                            Spacer()
-                            Text("Share your training results with others!")
-                                .font(.system(size: 18, weight: .regular))
-                                .foregroundColor(
-                                    colorScheme == .dark ? .white : Color("Blue")
-                                )
-                                .frame(maxWidth: 220)
-                            Spacer()
                         }
+                        .buttonStyle(BouncyButton())
+                        Spacer()
+                        Text("Share your training results with others!")
+                            .font(.system(size: 18, weight: .regular))
+                            .foregroundColor(
+                                colorScheme == .dark ? .white : Color("Blue")
+                            )
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: 220)
+                        Spacer()
                     }
                 } else {
                     let renderer = ImageRenderer(
