@@ -52,14 +52,26 @@ struct ShareSessionView: View {
                         showSheet = true
                     } label: {
                         VStack {
-                            Image(systemName: "photo.on.rectangle")
+                            Spacer()
+                            Text("Select image to share with training stats")
+                                .font(.system(size: 18, weight: .regular))
+                                .foregroundColor(
+                                    colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
+                                )
+                                .frame(maxWidth: 220)
+                            Spacer()
+                            Image("selectImage")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 70, height: 70)
-                                .foregroundColor(Color("Blue"))
-                            Text("Select Image")
-                                .font(.title)
-                                .fontWeight(.semibold)
+                                .padding(30)
+                            Spacer()
+                            Text("Share your training results with others!")
+                                .font(.system(size: 18, weight: .regular))
+                                .foregroundColor(
+                                    colorScheme == .dark ? .white : Color("Blue")
+                                )
+                                .frame(maxWidth: 220)
+                            Spacer()
                         }
                     }
                 } else {
@@ -83,20 +95,20 @@ struct ShareSessionView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(colorScheme == .dark ? .black : Color("generalBG"))
+            .background(
+                colorScheme == .dark ?
+                LinearGradient(gradient: Gradient(colors: [Color("LinearBG1"), Color("LinearBG2")]), startPoint: .top, endPoint: .bottom)
+                : LinearGradient(gradient: Gradient(colors: [Color("generalBG"), Color("lightGreen")]), startPoint: .top, endPoint: .bottom)
+            )
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-//                        if selectImageState {
                         presentationMode.wrappedValue.dismiss()
-//                        } else {
-//                            selectImageState = true
-//                        }
                     } label: {
                         Image("close")
                             .resizable()
                             .frame(width: 25, height: 25)
-                            .foregroundColor(Color("Blue"))
+                            .foregroundColor(colorScheme == .dark ? .white : Color("Blue"))
                     }
                 }
                 if !selectImageState {
@@ -111,7 +123,15 @@ struct ShareSessionView: View {
                                 preview: SharePreview(
                                     "JiuTrack",
                                     image: photo.image)
-                            )
+                            ) {
+                                Image(systemName: "square.and.arrow.up")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(
+                                        colorScheme == .dark ? .white : Color("Blue")
+                                    )
+                            }
                             .simultaneousGesture(TapGesture().onEnded() {
                                 print("clicked")
                             })
@@ -120,7 +140,7 @@ struct ShareSessionView: View {
                 }
             }
         }
-        .sheet(isPresented: $showSheet) {
+        .fullScreenCover(isPresented: $showSheet) {
             ImagePicker(
                 sourceType: .photoLibrary,
                 selectedImage: $selectedImage,
@@ -129,6 +149,7 @@ struct ShareSessionView: View {
                     selectImageState = false
                 }
             )
+            .ignoresSafeArea()
         }
     }
     
@@ -189,15 +210,17 @@ struct ShareSessionView: View {
                             .foregroundColor(.white)
                             .fontWeight(.medium)
                     }
-                    VStack(alignment: .center) {
-                        Text("**\(activity.totalEnergy) kcal**")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Calories")
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
+                    if session.status == .finished {
+                        VStack(alignment: .center) {
+                            Text("**\(activity.totalEnergy) kcal**")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                            Text("Calories")
+                                .font(.subheadline)
+                                .foregroundColor(.white)
+                                .fontWeight(.medium)
+                        }
                     }
                 }
                 .position(x: geometry.size.width/2, y: geometry.size.height - 50)
@@ -243,15 +266,17 @@ struct ShareSessionView: View {
                         .foregroundColor(.white)
                         .fontWeight(.medium)
                 }
-                VStack(alignment: .trailing) {
-                    Text("**\(activity.totalEnergy) kcal**")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                    Text("Calories")
-                        .font(.title3)
-                        .foregroundColor(.white)
-                        .fontWeight(.medium)
+                if session.status == .finished {
+                    VStack(alignment: .trailing) {
+                        Text("**\(activity.totalEnergy) kcal**")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Calories")
+                            .font(.title3)
+                            .foregroundColor(.white)
+                            .fontWeight(.medium)
+                    }
                 }
             }
             .position(x: geometry.size.width-80, y: geometry.size.height-120)

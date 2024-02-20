@@ -41,7 +41,8 @@ struct SessionDetailsView: View {
                     session: viewModel.session,
                     namespace: namespace,
                     navTitle: viewModel.navTitle,
-                    isPresentedEditing: $isPresentedEditing, showShareSheet: $showShareSheet,
+                    isPresentedEditing: $isPresentedEditing, 
+                    showShareSheet: $showShareSheet,
                     dismissCallback: dismissCallback,
                     onDelete: {
                         viewModel.deleteSession()
@@ -128,13 +129,11 @@ struct SessionDetailsView: View {
                     }
                 )
             }
-            .fullScreenCover(isPresented: $showShareSheet, onDismiss: {
-                
-            }, content: {
+            .fullScreenCover(isPresented: $showShareSheet) {
                 if #available(iOS 16.0, *) {
                     ShareSessionView(session: viewModel.session)
                 }
-            })
+            }
         }
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
