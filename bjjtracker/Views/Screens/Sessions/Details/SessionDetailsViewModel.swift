@@ -42,6 +42,8 @@ class SessionDetailsViewModel: ObservableObject {
         self.session = session
         self.persistanceManager = persistanceManager
         self.analyticsEngine = analyticsEngine
+        
+        setupLinkPreviews()
     }
     
     func setupLinkPreviews() {

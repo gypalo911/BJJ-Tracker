@@ -81,8 +81,9 @@ struct AppleHealthCardView_Previews: PreviewProvider {
                         .frame(width: 25, height: 25)
                         .foregroundColor(.red)
                 }, text: {
-                    Text("**1200 kcal** burned")
+                    Text("%@ calories burned".localized(with: ["1200"]))
                         .font(.footnote)
+                        .fontWeight(.semibold)
                         .foregroundColor(.black)
                 }
             )

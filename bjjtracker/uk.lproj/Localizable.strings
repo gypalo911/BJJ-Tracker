@@ -147,13 +147,13 @@
 "Found an issue in JiuTrack app" = "Знайдено помилки у роботі додатку JiuTrack";
 
 "Progress" = "Прогрес";
-"Stripe" = "Смужка";
-"Stripes" = "Смужки";
+"Stripe" = "Страйп";
+"Stripes" = "Страйпи";
 "Select Grading System" = "Обери Систему Поясів";
 
-"%@ belt %@ stripes" = "%@ пояс %@ смужки";
-"%@ belt %@ stripes!" = "%@ пояс %@ смужки!";
-"Stripes: %@" = "Смужки: %@";
+"%@ belt %@ stripes" = "%@ пояс %@ страйпи";
+"%@ belt %@ stripes!" = "%@ пояс %@ страйпи!";
+"Stripes: %@" = "Страйпи: %@";
 "%@ belt" = "%@ пояс";
 "%@ belt!" = "%@ пояс!";
 
@@ -186,7 +186,7 @@
 // Apple Health
 
 "View all Apple Health data" = "Переглянути дані у Apple Health";
-"**%@ kcal** burned" = "**%@ ккал** спалено";
+"%@ calories burned" = "%@ калорій спалено";
 "Duration" = "Тривалість";
 "Calories" = "Калорії";
 "Connect" = "Підключити";

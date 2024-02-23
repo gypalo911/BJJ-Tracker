@@ -47,12 +47,11 @@ class JournalViewViewModel: ObservableObject {
     ) {
         self.persistanceManager = persistanceManager
         self.analyticsEngine = analyticsEngine
+        
+        setup()
     }
     
     func onJournalViewAppeared() {
-        DispatchQueue.main.async { [weak self] in
-            self?.setup()
-        }
         analyticsEngine.log(AnalyticsEvent(name: "journal_screen_viewed", metadata: [:]))
     }
     

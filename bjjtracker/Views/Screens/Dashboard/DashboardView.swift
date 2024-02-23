@@ -252,8 +252,9 @@ struct DashboardView: View {
                                     .frame(width: 25, height: 25)
                                     .foregroundColor(.red)
                             }, text: {
-                                Text("**\(totalEnergyBurned) kcal** burned")
+                                Text("%@ calories burned".localized(with: ["\(totalEnergyBurned)"]))
                                     .font(.footnote)
+                                    .fontWeight(.semibold)
                                     .foregroundColor(.black)
                             }
                         )
