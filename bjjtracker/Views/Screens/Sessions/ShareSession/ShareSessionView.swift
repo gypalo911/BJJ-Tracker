@@ -114,7 +114,7 @@ struct ShareSessionView: View {
                     } label: {
                         Image("close")
                             .resizable()
-                            .frame(width: 25, height: 25)
+                            .frame(width: 20, height: 20)
                             .foregroundColor(
                                 .white
 //                                colorScheme == .dark ? .white : Color("Blue")
@@ -137,7 +137,7 @@ struct ShareSessionView: View {
                                 Image(systemName: "square.and.arrow.up")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 25, height: 25)
                                     .foregroundColor(
                                         .white
 //                                        colorScheme == .dark ? .white : Color("Blue")

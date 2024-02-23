@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TechniquesListView: View {
     
+    @Binding var updateTags: Bool
+    
     @StateObject var viewModel: TechniquesListViewModel
     
     @State private var isEditing: Bool = false
@@ -49,12 +51,13 @@ struct TechniquesListView: View {
                                 },
                                 maxViewWidth: maxViewWidth
                             )
-                            .padding (.horizontal, 15)
+                            .opacity(isTyping ? 1 : 0)
                             .padding (.bottom, 5)
                         } else {
                             AddMoreTagView()
                                 .padding (.horizontal, 1)
                                 .padding (.bottom, 5)
+                                .opacity(isTyping ? 0 : 1)
                                 .onTapGesture {
                                     withAnimation(.easeInOut) {
                                         isTyping = true
@@ -94,6 +97,9 @@ struct TechniquesListView: View {
         .onAppear {
             maxViewWidth = UIScreen.main.bounds.size.width - 80
             viewModel.maxRowWidth = maxViewWidth
+            viewModel.fetchTags()
+        }
+        .onChange(of: updateTags) { _ in
             viewModel.fetchTags()
         }
     }

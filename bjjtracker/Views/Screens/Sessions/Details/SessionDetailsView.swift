@@ -61,6 +61,7 @@ struct SessionDetailsView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         
                         TechniquesListView(
+                            updateTags: $viewModel.updateTags,
                             viewModel: .init(
                                 session: viewModel.session,
                                 persistanceManager: persistanceManager,
@@ -150,7 +151,7 @@ struct SessionDetailsView: View {
                         state: .overview,
                         technique: technique,
                         onUpdate: { value in
-                            
+                            viewModel.updateTags.toggle()
                         }
                     )
                 }
@@ -272,8 +273,8 @@ struct SessionDetailsHeaderView: View {
                             .foregroundColor(.white)
                     }
                 }
-                .padding(.top, 10)
-                .padding(.bottom, 25)
+                .padding(.top, 30)
+                .padding(.bottom, 10)
                 VStack {
                     HStack {
                         Text(navTitle)

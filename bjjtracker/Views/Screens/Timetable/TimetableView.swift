@@ -19,7 +19,7 @@ struct TimetableView: View {
     
     @State var selectedDay: Date = Date()
     @State var selectedSheet: ModalSheets?
-    @State var isBottomSheetOpen: Bool = false
+    @State var isCalendarBottomSheetOpen: Bool = false
     
     @State var selectedSession: Session?
     
@@ -45,14 +45,14 @@ struct TimetableView: View {
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-                        .padding(.top, UIScreen.main.bounds.size.width <= 375 ? 30 : 60)
+                        .padding(.top, 10)
                         .hAlign(.leading)
                         .background(Color.white.ignoresSafeArea())
                     
                     VStack(spacing: 0) {
                         DraggableCalendarView(
                             selectedDay: $selectedDay,
-                            isBottomSheetOpen: $isBottomSheetOpen,
+                            isBottomSheetOpen: $isCalendarBottomSheetOpen,
                             sessions: sessionsList
                         )
                         if filteredSessions.isEmpty {
@@ -79,12 +79,18 @@ struct TimetableView: View {
                             ScrollView(showsIndicators: false) {
                                 VStack(spacing: 16) {
                                     ForEach(filteredSessions) { session in
-                                        ActivityPanelView(session: session, namespace: namespace)
-                                            .onTapGesture {
-                                                withAnimation(AppConstants.mgeAnimation) {
-                                                    selectedSession = session
+                                        let sessionId = session.id?.uuidString ?? ""
+                                        if selectedSession == nil {
+                                            ActivityPanelView(session: session)
+                                                .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
+                                                .onTapGesture {
+                                                    withAnimation(AppConstants.mgeAnimation) {
+                                                        selectedSession = session
+                                                    }
                                                 }
-                                            }
+                                        } else {
+                                            ActivityPanelView(session: session)
+                                        }
                                     }
                                     NavigationLink(destination: {
                                         JournalView(viewModel: .init(persistanceManager: persistanceManager))
@@ -112,11 +118,11 @@ struct TimetableView: View {
                 .backport.hiddenToolbar(true)
                 .onChange(of: selectedDay, perform: { value in
                     withAnimation(.easeInOut(duration: 0.25)) {
-                        isBottomSheetOpen = false
+                        isCalendarBottomSheetOpen = false
                     }
                     settings.selectedCalendarDate = value.setCurrentTime()
                 })
-                .onChange(of: isBottomSheetOpen) { value in
+                .onChange(of: isCalendarBottomSheetOpen) { value in
                     if value {
                         settings.isTabBarHidden = true
                     } else {
@@ -132,7 +138,7 @@ struct TimetableView: View {
                     settings.selectedCalendarDate = selectedDay.setCurrentTime()
                 }
             }
-            .bottomSheet(isPresented: $isBottomSheetOpen) {
+            .bottomSheet(isPresented: $isCalendarBottomSheetOpen) {
                 DatePicker(
                     "Start Date",
                     selection: $selectedDay,

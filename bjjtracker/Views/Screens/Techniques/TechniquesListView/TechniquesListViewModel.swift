@@ -41,11 +41,13 @@ class TechniquesListViewModel: ObservableObject {
     
     init(
         session: Session,
+        allTechniques: [TechniqueModel] = [],
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
         persistanceManager: TechniquesStorageManager,
         onTechniqueDetails: ((TechniqueModel?) -> Void)?
     ) {
         self.session = session
+        self.allTechniques = allTechniques
         self.analyticsEngine = analyticsEngine
         self.persistanceManager = persistanceManager
         self.onTechniqueDetails = onTechniqueDetails

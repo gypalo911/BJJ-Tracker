@@ -25,6 +25,8 @@ class SessionDetailsViewModel: ObservableObject {
     @Published var isShowingTechniqueDetails: Bool = false
     @Published var selectedTechnique: TechniqueModel?
     
+    @Published var updateTags: Bool = false
+    
     private let persistanceManager: SessionsStorageManager
     private let analyticsEngine: AnalyticsEngine
     

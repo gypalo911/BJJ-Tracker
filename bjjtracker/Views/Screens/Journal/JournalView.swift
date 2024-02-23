@@ -43,14 +43,20 @@ struct JournalView: View {
                                                 }
                                         }
                                     }
-                                    if let sectionSessions = viewModel.groupedSessions[key], viewModel.selectedSession == nil {
+                                    if let sectionSessions = viewModel.groupedSessions[key] {
                                         ForEach(sectionSessions, id: \.self) { session in
-                                            ActivityPanelView(session: session, namespace: namespace)
-                                                .onTapGesture {
-                                                    withAnimation(AppConstants.mgeAnimation) {
-                                                        viewModel.selectedSession = session
+                                            let sessionId = session.id?.uuidString ?? ""
+                                            if viewModel.selectedSession == nil {
+                                                ActivityPanelView(session: session)
+                                                    .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
+                                                    .onTapGesture {
+                                                        withAnimation(AppConstants.mgeAnimation) {
+                                                            viewModel.selectedSession = session
+                                                        }
                                                     }
-                                                }
+                                            } else {
+                                                ActivityPanelView(session: session)
+                                            }
                                         }
                                     }
                                 }

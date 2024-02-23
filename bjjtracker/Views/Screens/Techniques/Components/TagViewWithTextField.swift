@@ -35,7 +35,8 @@ struct TagViewWithTextField: View {
             .foregroundColor(.white)
             .accentColor(.white)
             .font(Font.custom("Rubik", size: 14))
-            .frame(width: viewWidth)
+//            .frame(width: viewWidth)
+            .fixedSize()
             .padding (.horizontal, 15)
             .padding (.vertical, 8)
             .onAppear {
@@ -65,10 +66,11 @@ struct TagViewWithTextField: View {
             }
         }
         .onAppear {
-            defaultViewWidth = Locale.current.languageCode == "uk" ?  "Техніка".textSize().width : "Technique".textSize().width
+            defaultViewWidth = "Technique".localizedString.textSize().width
             viewWidth = defaultViewWidth
         }
-        .frame(width: viewWidth, height: 30)
+        .frame(height: 30)
+        .fixedSize()
     }
 }
 

@@ -277,13 +277,17 @@ struct DashboardView: View {
                 }
                 
                 ForEach(filteredSessions) { session in
-                    if session.id != nil && viewModel.selectedSession == nil {
-                        ActivityPanelView(session: session, namespace: namespace)
+                    let sessionId = session.id?.uuidString ?? ""
+                    if viewModel.selectedSession == nil {
+                        ActivityPanelView(session: session)
+                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                             .onTapGesture {
                                 withAnimation(AppConstants.mgeAnimation) {
                                     viewModel.select(session: session)
                                 }
                             }
+                    } else {
+                        ActivityPanelView(session: session)
                     }
                 }
                 

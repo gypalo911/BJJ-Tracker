@@ -10,8 +10,6 @@ import SwiftUI
 struct ActivityPanelView: View {
     @ObservedObject var session: Session
     
-    let namespace: Namespace.ID
-    
     var sessionId: String {
         session.id?.uuidString ?? ""
     }
@@ -30,7 +28,6 @@ struct ActivityPanelView: View {
                             .cornerRadius(20, corners: [.topLeft, .bottomLeft])
                             .defaultShadow()
                             .frame(width: 67)
-                            .matchedGeometryEffect(id: "shape\(sessionId)", in: namespace)
                         VStack(alignment: .center, spacing: 6) {
                             Text("\((session.startDate ?? Date()).toString("HH:mm"))")
                                 .font(.footnote)
@@ -84,12 +81,10 @@ struct ActivityPanelView: View {
 struct ActivityPanelView_Previews: PreviewProvider {
     struct Container: View {
         @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
-        
-        @Namespace var namespace
 
         var body: some View {
             let session: Session = sessionsList.map { $0 }.first!
-            ActivityPanelView(session: session, namespace: namespace)
+            ActivityPanelView(session: session)
         }
     }
 

@@ -48,10 +48,10 @@ struct CalendarDayView: View {
                     .cornerRadius(10)
             } else {
                 HStack(spacing: 1) {
-                    ForEach(activitiesColors.prefix(3), id: \.self) { activityColor in
+                    ForEach(activitiesColors.prefix(3).indices, id: \.self) { index in
                         Circle()
                             .frame(height: 10)
-                            .foregroundColor(activityColor)
+                            .foregroundColor(activitiesColors[index])
                             .cornerRadius(10)
                     }
                 }
