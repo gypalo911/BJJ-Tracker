@@ -41,7 +41,7 @@ struct NotificationManager {
     
     func scheduleNotification(activity: Activity) {
         let content = UNMutableNotificationContent()
-        content.title = "\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)"
+        content.title = "\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)"
         content.body = "Starts at %@".localized(with: ["\((activity.startDate).toString("HH:mm"))"])
         
         let notificationDate = activity.startDate.addingTimeInterval(TimeInterval(-AppSettings.shared.notificationTime))

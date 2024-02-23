@@ -34,7 +34,8 @@ struct TagView: View {
                 Button("Details", action: {
                     onDetails?()
                 })
-                Button("Delete", action: {
+                Divider()
+                Button("Delete", role: .destructive, action: {
                     onDelete?()
                 })
             }

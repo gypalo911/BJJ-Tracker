@@ -260,6 +260,7 @@ struct SessionDetailsHeaderView: View {
                         }) {
                             Label("Edit", systemImage: "pencil")
                         }
+                        Divider()
                         Button(role: .destructive, action: {
                             onDelete?()
                         }) {

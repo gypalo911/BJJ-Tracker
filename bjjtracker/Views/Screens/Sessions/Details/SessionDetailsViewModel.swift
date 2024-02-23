@@ -31,7 +31,7 @@ class SessionDetailsViewModel: ObservableObject {
     private let analyticsEngine: AnalyticsEngine
     
     var navTitle: String {
-        "\(session.activityStyle.rawValue.localizedString) \(session.activityType.rawValue.localizedString)"
+        "\(session.activityType.rawValue.localizedString) \(session.activityStyle.rawValue.localizedString)"
     }
     
     init(

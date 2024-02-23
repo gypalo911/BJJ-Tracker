@@ -85,6 +85,11 @@
 "No results found" = "Безрезультатно";
 "Found results: %@" = "Знайдено результатів: %@";
 
+
+"Name" = "Назва";
+"Newest" = "Нові додані";
+"Updated recently" = "Останні оновлені";
+
 "You have already learned **%@ techniques**!" = "Тобою уже опановано **%@ технік**! Так тримати!";
 "Great start! **%@ techniques** learned!" = "Чудовий старт! **%@ технік** уже вивчено!";
 "Your progress is impressive! It's already **%@ techniques** learned!" = "Твій прогрес вражаючий! Уже понад **%@ технік** опановано!";

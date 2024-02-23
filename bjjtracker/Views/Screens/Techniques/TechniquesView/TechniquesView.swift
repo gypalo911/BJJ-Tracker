@@ -48,18 +48,37 @@ struct TechniquesView: View {
                                     .opacity(viewModel.isEmptySearchStateState ? 0 : 1)
                             }
                             if !viewModel.isEditing && !viewModel.results.isEmpty {
-                                let count = viewModel.filteredResults.count
-                                if count > 0 {
-                                    VStack(alignment: .leading, spacing: 5) {
-                                        Text("Learned techniques:")
-                                            .font(.body)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.black)
+                                HStack(alignment: .center) {
+                                    let count = viewModel.filteredResults.count
+                                    if count > 0 {
+                                        VStack(alignment: .leading, spacing: 5) {
+                                            Text("Learned techniques:")
+                                                .font(.body)
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(.black)
+                                        }
+                                        .hAlign(.leading)
+                                        
+                                        Menu {
+                                            Section("Sort...") {
+                                                Picker("Sort", selection: $viewModel.sortingType) {
+                                                    ForEach(SortingType.allCases) {
+                                                        Text($0.title)
+                                                            .tag($0)
+                                                    }
+                                                }
+                                            }
+                                        } label: {
+                                            Image(systemName: "arrow.up.arrow.down")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
-                                    .offset(y: -offsetY)
-                                    .padding(.top, 10)
-                                    .hAlign(.leading)
                                 }
+                                .offset(y: -offsetY)
+                                .padding(.top, 10)
                             }
                         }
                         .padding(.top, 5)

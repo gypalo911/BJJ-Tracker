@@ -27,7 +27,7 @@ enum ActivityType: String, CaseIterable, Hashable {
 
 enum GraplingStyle: String, CaseIterable, Hashable {
     case gi = "Gi"
-    case noGi = "No-Gi"
+    case noGi = "No-gi"
 }
 
 enum ActivityStatus: String {
@@ -88,11 +88,14 @@ extension Activity {
     static func from(session: Session) -> Activity? {
         guard let id = session.id,
               let type = session.type,
-              let style = session.style,
+              var style = session.style,
               let startDate = session.startDate,
               let notes = session.notes
         else {
             return nil
+        }
+        if style == "No-Gi" {
+            style = "No-gi"
         }
         return Activity(
             id: id,
@@ -131,8 +134,8 @@ extension Session {
     }
 
     var activityStyle: GraplingStyle {
-        if GraplingStyle.allCases.contains(where: { $0.rawValue == type }) {
-            return GraplingStyle(rawValue: type ?? "Gi")!
+        if GraplingStyle.allCases.contains(where: { $0.rawValue == style }) {
+            return GraplingStyle(rawValue: style ?? "Gi")!
         }
         return GraplingStyle(rawValue: "Gi")!
     }

@@ -28,14 +28,19 @@ struct Photo: Transferable {
 
 @available(iOS 16.0, *)
 struct ShareSessionView: View {
+    
+    private enum ShareViewState {
+        case selectImage
+        case shareImage
+    }
 //    @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
-    @State var layoutType: LayoutType = .one
-    @State var selectedImage: UIImage?
-    @State var showSheet: Bool = false
+    @State private var layoutType: LayoutType = .one
+    @State private var selectedImage: UIImage?
+    @State private var showSheet: Bool = false
     
-    @State var selectImageState: Bool = true
+    @State private var selectImageState: ShareViewState = .selectImage
     
     let session: Session
     
@@ -44,12 +49,12 @@ struct ShareSessionView: View {
     }
     
     var body: some View {
-        let trophyAndDate = createAwardView(type: layoutType)
+        let trophyAndDate = imageWithStatisticView(type: layoutType)
             .frame(width: 450, height: 500)
         
         NavigationView {
             VStack {
-                if selectImageState {
+                if selectImageState == .selectImage {
                     VStack {
                         Spacer()
                         Text("Select image to share with training stats")
@@ -82,9 +87,7 @@ struct ShareSessionView: View {
                         Spacer()
                     }
                 } else {
-                    let renderer = ImageRenderer(
-                        content: trophyAndDate
-                    )
+                    let renderer = createRenderer(view: trophyAndDate)
                     if let image = renderer.uiImage {
                         Image(uiImage: image)
                             .resizable()
@@ -98,6 +101,7 @@ struct ShareSessionView: View {
                             }
                         }
                         .padding(10)
+                        .fixedSize()
                     }
                 }
             }
@@ -121,11 +125,9 @@ struct ShareSessionView: View {
                             )
                     }
                 }
-                if !selectImageState {
+                if selectImageState == .shareImage {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        let renderer = ImageRenderer(
-                            content: trophyAndDate
-                        )
+                        let renderer = createRenderer(view: trophyAndDate)
                         if let image = renderer.uiImage {
                             let photo = Photo(image: Image(uiImage: image), caption: "")
                             ShareLink(
@@ -156,14 +158,14 @@ struct ShareSessionView: View {
                 selectedImage: $selectedImage,
                 fileName: "avatar",
                 callback: {
-                    selectImageState = false
+                    selectImageState = .shareImage
                 }
             )
             .ignoresSafeArea()
         }
     }
     
-    private func createAwardView(type: LayoutType) -> some View {
+    private func imageWithStatisticView(type: LayoutType) -> some View {
         var image = Image("bjj")
         if let img = selectedImage {
             image = Image(uiImage: img)
@@ -189,34 +191,13 @@ struct ShareSessionView: View {
         case .one:
             ZStack {
                 VStack(alignment: .center) {
-                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                    titleTextView()
                 }
-                .position(x: frame.width/2, y: frame.height - 110)
+                .position(x: frame.width/2, y: frame.height - 90)
                 
                 HStack(alignment: .center, spacing: 20) {
-                    VStack(alignment: .center) {
-                        Text(activity.duration.minutesToDuration())
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Duration".localizedString)
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
-                    VStack(alignment: .center) {
-                        Text("\(activity.totalEnergy)")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Calories".localizedString)
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
+                    durationTextView()
+                    caloriesTextView()
                 }
                 .position(x: frame.width/2, y: frame.maxY-50)
             }
@@ -230,25 +211,11 @@ struct ShareSessionView: View {
         case .two:
             ZStack {
                 VStack(alignment: .center) {
-                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                    titleTextView()
                 }
-                .position(x: frame.width/2, y: frame.height - 110)
+                .position(x: frame.width/2, y: frame.height - 90)
                 
-                HStack(alignment: .center, spacing: 20) {
-                    VStack(alignment: .center) {
-                        Text(activity.duration.minutesToDuration())
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                        Text("Duration".localizedString)
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .fontWeight(.medium)
-                    }
-                }
+                durationTextView()
                 .position(x: frame.width/2, y: frame.maxY-50)
             }
             .background(
@@ -261,13 +228,8 @@ struct ShareSessionView: View {
         case .three:
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    Text(activity.startDate.formatted())
-                        .foregroundColor(.white)
-                        .fontWeight(.semibold)
+                    titleTextView()
+                    dateTimeTextView()
                 }
                 .padding(15)
             }
@@ -279,46 +241,23 @@ struct ShareSessionView: View {
             )
             
             VStack(alignment: .trailing, spacing: 10) {
-                VStack(alignment: .trailing) {
-                    Text(activity.duration.minutesToDuration())
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                    Text("Duration".localizedString)
-                        .font(.title3)
-                        .foregroundColor(.white)
-                        .fontWeight(.medium)
-                }
-                VStack(alignment: .trailing) {
-                    Text("\(activity.totalEnergy)")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                    Text("Calories".localizedString)
-                        .font(.title3)
-                        .foregroundColor(.white)
-                        .fontWeight(.medium)
-                }
+                durationTextView(alignment: .trailing)
+                caloriesTextView(alignment: .trailing)
             }
             .frame(maxWidth: 200)
-            .position(x: frame.maxX-80, y: frame.maxY-120)
+            .position(x: frame.maxX-60, y: frame.maxY-100)
             .background(
                 LinearGradient(gradient: Gradient(colors: [.white.opacity(0), .black.opacity(0.3)]), startPoint: .center, endPoint: .bottom)
             )
             
             logoView()
             .rotationEffect(.degrees(90))
-            .position(x: frame.width-20, y: frame.height/5)
+            .position(x: frame.width-15, y: frame.height/5)
         case .four:
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text("\(activity.style.rawValue.localizedString) \(activity.type.rawValue.localizedString)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    Text(activity.startDate.formatted())
-                        .foregroundColor(.white)
-                        .fontWeight(.semibold)
+                    titleTextView()
+                    dateTimeTextView()
                 }
                 .padding(15)
             }
@@ -331,28 +270,28 @@ struct ShareSessionView: View {
             
             logoView()
             .rotationEffect(.degrees(90))
-            .position(x: frame.width-20, y: frame.height/5)
+            .position(x: frame.width-15, y: frame.height/5)
         default:
             logoView()
             .rotationEffect(.degrees(90))
-            .position(x: frame.width-20, y: frame.height/5)
+            .position(x: frame.width-15, y: frame.height/5)
         }
     }
     
     @MainActor
     @ViewBuilder
-    func LayoutTypeButtonView(type: LayoutType) -> some View {
+    private func LayoutTypeButtonView(type: LayoutType) -> some View {
         Button(action: {
             layoutType = type
         }, label: {
-            let view = createAwardView(type: type)
+            let view = imageWithStatisticView(type: type)
                 .frame(width: 450, height: 500)
-            let renderer = ImageRenderer(content: view)
+            let renderer = createRenderer(view: view)
             if let image = renderer.cgImage {
                 Image(image, scale: 1.0, label: Text(""))
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 100, height: 100)
             }
         })
         .background(
@@ -367,19 +306,78 @@ struct ShareSessionView: View {
     }
     
     @ViewBuilder
-    func logoView() -> some View {
-        HStack {
+    private func logoView() -> some View {
+        HStack(spacing: 2) {
             Image("Logo")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40, height: 40)
+                .frame(width: 30, height: 30)
             Text("JiuTrack")
-                .font(.title2)
+                .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
         }
         .padding(.horizontal, 5)
         .background(Color("LogoColor"))
+    }
+    
+    @ViewBuilder
+    private func titleTextView() -> some View {
+        Text("\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)")
+            .font(.title)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+    }
+    
+    @ViewBuilder
+    private func dateTimeTextView() -> some View {
+        Text(activity.startDate.toString("dd MMM yyyy HH:mm"))
+            .foregroundColor(.white)
+            .fontWeight(.semibold)
+    }
+    
+    
+    @ViewBuilder
+    private func durationTextView(
+        alignment: HorizontalAlignment = .center,
+        spacing: CGFloat? = nil
+    ) -> some View {
+        VStack(alignment: alignment, spacing: spacing) {
+            Text(activity.duration.minutesToDuration())
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            Text("Duration".localizedString)
+                .font(.footnote)
+                .foregroundColor(.white)
+                .fontWeight(.medium)
+        }
+    }
+    
+    @ViewBuilder
+    private func caloriesTextView(
+        alignment: HorizontalAlignment = .center,
+        spacing: CGFloat? = nil
+    ) -> some View {
+        VStack(alignment: alignment, spacing: spacing) {
+            Text("\(activity.totalEnergy)")
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            Text("Calories".localizedString)
+                .font(.footnote)
+                .foregroundColor(.white)
+                .fontWeight(.medium)
+        }
+    }
+    
+    @MainActor
+    private func createRenderer(view: some View) -> ImageRenderer<some View> {
+        let renderer = ImageRenderer(
+            content: view
+        )
+        renderer.scale = 4.0
+        return renderer
     }
     
 }
