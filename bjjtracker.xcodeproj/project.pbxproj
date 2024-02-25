@@ -14,6 +14,38 @@
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
 		D00109B62A0D3294008433CC /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
 		D00139702A67F56B005B0E58 /* SwipeToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */; };
+		D008C6542B8B905700E68098 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D008C6532B8B905700E68098 /* WidgetKit.framework */; };
+		D008C6562B8B905700E68098 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D008C6552B8B905700E68098 /* SwiftUI.framework */; };
+		D008C6592B8B905700E68098 /* JiuTrackWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */; };
+		D008C65B2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */; };
+		D008C65D2B8B905700E68098 /* JiuTrackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */; };
+		D008C65F2B8B905700E68098 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65E2B8B905700E68098 /* AppIntent.swift */; };
+		D008C6612B8B905D00E68098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D008C6602B8B905D00E68098 /* Assets.xcassets */; };
+		D008C6652B8B905D00E68098 /* JiuTrackWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D008C6522B8B905700E68098 /* JiuTrackWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D008C66A2B8B91E900E68098 /* Technique.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE62A32A9641CA008EEA49 /* Technique.swift */; };
+		D008C66B2B8B91EC00E68098 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
+		D008C66C2B8B91F300E68098 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
+		D008C66D2B8B91FA00E68098 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Icons.xcassets */; };
+		D008C66E2B8B91FA00E68098 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
+		D008C66F2B8B91FA00E68098 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C9F102A710EC7007D5AF0 /* Colors.xcassets */; };
+		D008C6702B8B933A00E68098 /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
+		D008C6712B8B934B00E68098 /* bjjtracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */; };
+		D008C6772B8B94F000E68098 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
+		D008C6782B8B94F000E68098 /* PersistanceManager+Promotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */; };
+		D008C6792B8B94F000E68098 /* PersistanceManager+Techniques.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */; };
+		D008C67A2B8B94F000E68098 /* PersistanceManager+Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */; };
+		D008C67B2B8B976E00E68098 /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
+		D008C67C2B8B977A00E68098 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04AD1322A8B7624002A1050 /* HealthKitService.swift */; };
+		D008C67D2B8B978100E68098 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824BE29DF006A0023E6C0 /* Date+extension.swift */; };
+		D008C67E2B8B978900E68098 /* TechniqueModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */; };
+		D008C67F2B8B979100E68098 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
+		D008C6802B8B979800E68098 /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */; };
+		D008C6812B8B979800E68098 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
+		D008C6822B8B979800E68098 /* Calendar+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */; };
+		D008C6832B8B979800E68098 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CF2A7ABB5600A2FCC7 /* UIImage+extension.swift */; };
+		D008C6842B8B979800E68098 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
+		D008C6852B8B979800E68098 /* Publishers+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839D802A5D6D4200D315C8 /* Publishers+extension.swift */; };
+		D008C6862B8B979800E68098 /* UIPickerView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050EAAF2A8508EB008222BE /* UIPickerView+extension.swift */; };
 		D00FD65B2A926A2C00CFD274 /* ScrollDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */; };
 		D01187CC2A7A975E00A2FCC7 /* PromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01187CB2A7A975E00A2FCC7 /* PromotionsView.swift */; };
 		D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
@@ -146,6 +178,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D008C6632B8B905D00E68098 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D060BA7229DDAD9A00E10562 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D008C6512B8B905700E68098;
+			remoteInfo = JiuTrackWidgetExtension;
+		};
 		D060BA9129DDAD9C00E10562 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D060BA7229DDAD9A00E10562 /* Project object */;
@@ -162,6 +201,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D008C6692B8B905E00E68098 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D008C6652B8B905D00E68098 /* JiuTrackWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtrackerTests.release.xcconfig"; path = "Target Support Files/Pods-bjjtrackerTests/Pods-bjjtrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B1775FFCBAA02031E30517E /* Pods-bjjtracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker.debug.xcconfig"; path = "Target Support Files/Pods-bjjtracker/Pods-bjjtracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +229,16 @@
 		D00109B52A0D3294008433CC /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		D001396F2A67F56B005B0E58 /* SwipeToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissModifier.swift; sourceTree = "<group>"; };
 		D00139712A681F89005B0E58 /* bjjtracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtracker.entitlements; sourceTree = "<group>"; };
+		D008C6522B8B905700E68098 /* JiuTrackWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JiuTrackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D008C6532B8B905700E68098 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		D008C6552B8B905700E68098 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidgetBundle.swift; sourceTree = "<group>"; };
+		D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidget.swift; sourceTree = "<group>"; };
+		D008C65E2B8B905700E68098 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		D008C6602B8B905D00E68098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D008C6622B8B905D00E68098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D008C6722B8B93ED00E68098 /* JiuTrackWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiuTrackWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D00FD65A2A926A2C00CFD274 /* ScrollDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDetector.swift; sourceTree = "<group>"; };
 		D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsEngine.swift; sourceTree = "<group>"; };
@@ -303,6 +366,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D008C64F2B8B905700E68098 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D008C6562B8B905700E68098 /* SwiftUI.framework in Frameworks */,
+				D008C6542B8B905700E68098 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D060BA7729DDAD9A00E10562 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,6 +440,19 @@
 				D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		D008C6572B8B905700E68098 /* JiuTrackWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */,
+				D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */,
+				D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */,
+				D008C65E2B8B905700E68098 /* AppIntent.swift */,
+				D008C6602B8B905D00E68098 /* Assets.xcassets */,
+				D008C6622B8B905D00E68098 /* Info.plist */,
+			);
+			path = JiuTrackWidget;
 			sourceTree = "<group>";
 		};
 		D01044A22A3C6700004383FF /* DashboardTests */ = {
@@ -493,9 +578,11 @@
 		D060BA7129DDAD9A00E10562 = {
 			isa = PBXGroup;
 			children = (
+				D008C6722B8B93ED00E68098 /* JiuTrackWidgetExtension.entitlements */,
 				D060BA7C29DDAD9A00E10562 /* bjjtracker */,
 				D060BA9329DDAD9C00E10562 /* bjjtrackerTests */,
 				D060BA9D29DDAD9C00E10562 /* bjjtrackerUITests */,
+				D008C6572B8B905700E68098 /* JiuTrackWidget */,
 				D060BA7B29DDAD9A00E10562 /* Products */,
 				01EDE3061F28FC1990F06196 /* Pods */,
 				E246021A6FE0F135649590AD /* Frameworks */,
@@ -508,6 +595,7 @@
 				D060BA7A29DDAD9A00E10562 /* bjjtracker.app */,
 				D060BA9029DDAD9C00E10562 /* bjjtrackerTests.xctest */,
 				D060BA9A29DDAD9C00E10562 /* bjjtrackerUITests.xctest */,
+				D008C6522B8B905700E68098 /* JiuTrackWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -838,6 +926,8 @@
 				D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */,
 				AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */,
 				9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */,
+				D008C6532B8B905700E68098 /* WidgetKit.framework */,
+				D008C6552B8B905700E68098 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -845,6 +935,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D008C6512B8B905700E68098 /* JiuTrackWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D008C6662B8B905E00E68098 /* Build configuration list for PBXNativeTarget "JiuTrackWidgetExtension" */;
+			buildPhases = (
+				D008C64E2B8B905700E68098 /* Sources */,
+				D008C64F2B8B905700E68098 /* Frameworks */,
+				D008C6502B8B905700E68098 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JiuTrackWidgetExtension;
+			productName = JiuTrackWidgetExtension;
+			productReference = D008C6522B8B905700E68098 /* JiuTrackWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D060BA7929DDAD9A00E10562 /* bjjtracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D060BAA429DDAD9C00E10562 /* Build configuration list for PBXNativeTarget "bjjtracker" */;
@@ -854,10 +961,12 @@
 				D060BA7729DDAD9A00E10562 /* Frameworks */,
 				D060BA7829DDAD9A00E10562 /* Resources */,
 				CAEE1876F8DD8F8F5CE9A876 /* [CP] Embed Pods Frameworks */,
+				D008C6692B8B905E00E68098 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D008C6642B8B905D00E68098 /* PBXTargetDependency */,
 			);
 			name = bjjtracker;
 			packageProductDependencies = (
@@ -916,9 +1025,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					D008C6512B8B905700E68098 = {
+						CreatedOnToolsVersion = 15.2;
+					};
 					D060BA7929DDAD9A00E10562 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -952,11 +1064,23 @@
 				D060BA7929DDAD9A00E10562 /* bjjtracker */,
 				D060BA8F29DDAD9C00E10562 /* bjjtrackerTests */,
 				D060BA9929DDAD9C00E10562 /* bjjtrackerUITests */,
+				D008C6512B8B905700E68098 /* JiuTrackWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D008C6502B8B905700E68098 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D008C66E2B8B91FA00E68098 /* Images.xcassets in Resources */,
+				D008C66F2B8B91FA00E68098 /* Colors.xcassets in Resources */,
+				D008C66D2B8B91FA00E68098 /* Icons.xcassets in Resources */,
+				D008C6612B8B905D00E68098 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D060BA7829DDAD9A00E10562 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1091,6 +1215,38 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D008C64E2B8B905700E68098 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D008C6862B8B979800E68098 /* UIPickerView+extension.swift in Sources */,
+				D008C6712B8B934B00E68098 /* bjjtracker.xcdatamodeld in Sources */,
+				D008C66A2B8B91E900E68098 /* Technique.swift in Sources */,
+				D008C65D2B8B905700E68098 /* JiuTrackWidget.swift in Sources */,
+				D008C6832B8B979800E68098 /* UIImage+extension.swift in Sources */,
+				D008C67B2B8B976E00E68098 /* PromotionModel+extension.swift in Sources */,
+				D008C6782B8B94F000E68098 /* PersistanceManager+Promotions.swift in Sources */,
+				D008C67E2B8B978900E68098 /* TechniqueModel+extension.swift in Sources */,
+				D008C67D2B8B978100E68098 /* Date+extension.swift in Sources */,
+				D008C6822B8B979800E68098 /* Calendar+extension.swift in Sources */,
+				D008C6842B8B979800E68098 /* View+extension.swift in Sources */,
+				D008C66C2B8B91F300E68098 /* Activity.swift in Sources */,
+				D008C67F2B8B979100E68098 /* String+extension.swift in Sources */,
+				D008C65F2B8B905700E68098 /* AppIntent.swift in Sources */,
+				D008C6792B8B94F000E68098 /* PersistanceManager+Techniques.swift in Sources */,
+				D008C6852B8B979800E68098 /* Publishers+extension.swift in Sources */,
+				D008C67C2B8B977A00E68098 /* HealthKitService.swift in Sources */,
+				D008C6772B8B94F000E68098 /* PersistanceManager.swift in Sources */,
+				D008C65B2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift in Sources */,
+				D008C67A2B8B94F000E68098 /* PersistanceManager+Sessions.swift in Sources */,
+				D008C6592B8B905700E68098 /* JiuTrackWidgetBundle.swift in Sources */,
+				D008C6702B8B933A00E68098 /* Session+extension.swift in Sources */,
+				D008C6812B8B979800E68098 /* Int+extension.swift in Sources */,
+				D008C66B2B8B91EC00E68098 /* Promotion.swift in Sources */,
+				D008C6802B8B979800E68098 /* Notification+extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D060BA7629DDAD9A00E10562 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1239,6 +1395,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D008C6642B8B905D00E68098 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D008C6512B8B905700E68098 /* JiuTrackWidgetExtension */;
+			targetProxy = D008C6632B8B905D00E68098 /* PBXContainerItemProxy */;
+		};
 		D060BA9229DDAD9C00E10562 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D060BA7929DDAD9A00E10562 /* bjjtracker */;
@@ -1264,6 +1425,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D008C6672B8B905E00E68098 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = JiuTrackWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FSBT8CDC5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JiuTrackWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JiuTrackWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack.JiuTrackWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D008C6682B8B905E00E68098 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = JiuTrackWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FSBT8CDC5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JiuTrackWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JiuTrackWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack.JiuTrackWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D060BAA229DDAD9C00E10562 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1386,11 +1615,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4B1775FFCBAA02031E30517E /* Pods-bjjtracker.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
@@ -1411,7 +1641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1427,12 +1657,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtrackerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
@@ -1453,7 +1684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1569,6 +1800,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D008C6662B8B905E00E68098 /* Build configuration list for PBXNativeTarget "JiuTrackWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D008C6672B8B905E00E68098 /* Debug */,
+				D008C6682B8B905E00E68098 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D060BA7529DDAD9A00E10562 /* Build configuration list for PBXProject "bjjtracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

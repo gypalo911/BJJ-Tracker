@@ -53,11 +53,11 @@ struct bjjtrackerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let settings = AppSettings.shared
-#if DEBUG
-    let persistanceManager = PersistanceManager.preview
-#else
+//#if DEBUG
+//    let persistanceManager = PersistanceManager.preview
+//#else
     let persistanceManager = PersistanceManager.shared
-#endif
+//#endif
 
     var body: some Scene {
         WindowGroup {
@@ -65,7 +65,7 @@ struct bjjtrackerApp: App {
             ContentView()
                 .environmentObject(settings)
                 .environmentObject(persistanceManager)
-                .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
+                .environment(\.managedObjectContext, persistanceManager.container.viewContext)
 #else
             ContentView()
                 .environmentObject(settings)
