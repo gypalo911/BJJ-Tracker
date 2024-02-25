@@ -25,7 +25,7 @@ struct TechniqueModalView: View {
     @State var state: ModalState = .overview
     @State var name: String = ""
     @State var details: String = ""
-    var technique: TechniqueModel?
+    @State var technique: TechniqueModel?
     @FocusState private var focusedField: TechniqueField?
     
     var onUpdate: ((TechniqueModel?) -> Void)?
@@ -91,7 +91,7 @@ struct TechniqueModalView: View {
                     .disabled(name.isEmpty)
                     Button(action: {
                         if technique == nil {
-                            persistanceManager.createTechnique(
+                            technique = persistanceManager.createTechnique(
                                 name: name,
                                 details: details
                             )

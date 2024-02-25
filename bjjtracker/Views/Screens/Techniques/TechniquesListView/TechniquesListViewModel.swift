@@ -88,7 +88,7 @@ class TechniquesListViewModel: ObservableObject {
             return
         }
         
-        persistanceManager.createTechnique(for: session, name: tag.text, details: "")
+        _ = persistanceManager.createTechnique(for: session, name: tag.text, details: "")
         fetchTags()
         
         analyticsEngine.log(AnalyticsEvent(

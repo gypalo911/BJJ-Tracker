@@ -15,7 +15,7 @@ protocol TechniquesStorageManager {
         for session: Session?,
         name: String,
         details: String
-    )
+    ) -> TechniqueModel?
     func addToSession(technique: TechniqueModel, _ session: Session)
     func delete(model: TechniqueModel)
 }
@@ -73,7 +73,7 @@ extension PersistanceManager: TechniquesStorageManager {
         for session: Session? = nil,
         name: String,
         details: String
-    ) {
+    ) -> TechniqueModel? {
         let context = self.container.viewContext
         let model = TechniqueModel(context: context)
         model.update(with: name, details: details)
@@ -82,6 +82,8 @@ extension PersistanceManager: TechniquesStorageManager {
         }
         
         save(context: context)
+        
+        return model
     }
     
     func edit(model: TechniqueModel, name: String, details: String) {

@@ -57,7 +57,7 @@ class TechniquesViewVM: ObservableObject {
         
         switch(sortingType) {
         case .name:
-            result = result.sorted(by: { $0.text! < $1.text! })
+            result = result.filter { $0.text != nil }.sorted(by: { $0.text! < $1.text! })
             break
 //        case .createdAt:
 //            result = result.sorted(by: {
