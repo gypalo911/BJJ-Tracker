@@ -41,7 +41,7 @@ struct DraggableCalendarView: View {
                     Image("calendar")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 })
             }
             .padding(.horizontal, 30)
@@ -68,7 +68,7 @@ struct DraggableCalendarView: View {
                             textColor: .black,
                             strokeColor: .blue,
                             selectedTextColor: .white,
-                            selectedBGColor: Color("Blue")
+                            selectedBGColor: Color("DefaultBlue")
                         )
                     )
                     .blur(radius: blurCalendar ? 5 : 0, opaque: false)
@@ -76,7 +76,7 @@ struct DraggableCalendarView: View {
                 }
             }
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color("LightGray"))
+                .fill(Color("DefaultLightGray"))
                 .frame(width: 50, height: 6)
                 .padding(.bottom, 20)
         }

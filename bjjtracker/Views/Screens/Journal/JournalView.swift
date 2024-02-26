@@ -85,7 +85,7 @@ struct JournalView: View {
                                 Text("Your records will always be at hand!")
                                     .font(.body)
                                     .multilineTextAlignment(.center)
-                                    .foregroundColor(Color("Gray"))
+                                    .foregroundColor(Color("DefaultGray"))
                                 
                                 VStack(spacing: 22) {
                                     Button(action: {
@@ -94,7 +94,7 @@ struct JournalView: View {
                                     }, label: {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 20)
-                                                .foregroundColor(Color("Blue"))
+                                                .foregroundColor(Color("DefaultBlue"))
                                                 .frame(maxWidth: .infinity)
                                                 .frame(height: 60)
                                                 .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
@@ -168,7 +168,7 @@ struct JournalView: View {
                             Image("back")
                                 .resizable()
                                 .frame(width: 25, height: 25)
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(Color("DefaultBlue"))
                         }
                     }
                 }

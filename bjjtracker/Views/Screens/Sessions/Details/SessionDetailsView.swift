@@ -85,7 +85,7 @@ struct SessionDetailsView: View {
                                     .multilineTextAlignment(.leading)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
-                                    .foregroundColor(Color("LightGray"))
+                                    .foregroundColor(Color("DefaultLightGray"))
                                     .font(.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
@@ -133,7 +133,7 @@ struct SessionDetailsView: View {
                 EditSessionView(
                     viewModel: .init(),
                     session: viewModel.session,
-                    activity: Activity.from(session: viewModel.session)!,
+                    activity: ActivityModel.from(session: viewModel.session)!,
                     onDismiss: { editedActivity in
                         dismissCallback?()
                     }
@@ -337,7 +337,7 @@ struct SessionDetailsHeaderView: View {
                                     .foregroundColor(.white)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
-                                    .foregroundColor(Color("LightGray"))
+                                    .foregroundColor(Color("DefaultLightGray"))
                                     .fontWeight(.semibold)
                                     .font(.title3)
                             }

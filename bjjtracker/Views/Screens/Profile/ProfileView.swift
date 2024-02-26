@@ -157,7 +157,7 @@ struct ProfileView: View {
                                             .overlay {
                                                 ZStack {
                                                     RoundedRectangle(cornerRadius: 10)
-                                                        .fill(Color("LightGray"))
+                                                        .fill(Color("DefaultLightGray"))
                                                         .opacity(0.8)
                                                     Text("Yet no promotions".localizedString)
                                                         .foregroundColor(.white)
@@ -235,7 +235,7 @@ struct ProfileView: View {
                                 .font(.footnote)
                                 .fontWeight(.regular)
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(Color("Gray"))
+                                .foregroundColor(Color("DefaultGray"))
                                 .padding(.horizontal, 20)
                                 .padding(.top, 5)
                         }
@@ -393,7 +393,7 @@ struct ProfileView: View {
             Text("Support the project")
                 .font(.caption)
                 .fontWeight(.regular)
-                .foregroundColor(Color("Gray"))
+                .foregroundColor(Color("DefaultGray"))
             
             HStack {
                 Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
@@ -423,7 +423,7 @@ struct ProfileView: View {
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(height: 40)
-                            .background(Color("Yellow"))
+                            .background(Color("DefaultYellow"))
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)

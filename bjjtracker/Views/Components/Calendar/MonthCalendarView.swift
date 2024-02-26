@@ -26,7 +26,7 @@ struct MonthCalendarView: View {
         textColor: .black,
         strokeColor: .blue,
         selectedTextColor: .white,
-        selectedBGColor: Color("Blue")
+        selectedBGColor: Color("DefaultBlue")
     )
     
     var extractedMonthDates: [DateValue] {

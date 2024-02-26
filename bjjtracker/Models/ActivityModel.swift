@@ -16,7 +16,7 @@ enum ActivityType: String, CaseIterable, Hashable {
     var color: Color {
         switch self {
         case .training:
-            return Color("Green")
+            return Color("DefaultGreen")
         case .competition:
             return Color("Competition")
         case .seminar:
@@ -38,17 +38,17 @@ enum ActivityStatus: String {
     var color: Color {
         switch self {
         case .upcoming:
-            return Color("Purple")
+            return Color("DefaultPurple")
         case .ongoing:
-            return Color("Blue")
+            return Color("DefaultBlue")
         case .finished:
-            return Color("Green")
+            return Color("DefaultGreen")
         }
     }
     
 }
 
-class Activity: ObservableObject, Identifiable, Equatable {
+class ActivityModel: ObservableObject, Identifiable, Equatable {
     
     @Published var id = UUID()
     @Published var type: ActivityType
@@ -84,8 +84,8 @@ class Activity: ObservableObject, Identifiable, Equatable {
     }
 }
 
-extension Activity {
-    static func from(session: Session) -> Activity? {
+extension ActivityModel {
+    static func from(session: Session) -> ActivityModel? {
         guard let id = session.id,
               let type = session.type,
               var style = session.style,
@@ -97,7 +97,7 @@ extension Activity {
         if style == "No-Gi" {
             style = "No-gi"
         }
-        return Activity(
+        return ActivityModel(
             id: id,
             type: ActivityType(rawValue: type)!,
             style: GraplingStyle(rawValue: style)!,
@@ -108,7 +108,7 @@ extension Activity {
         )
     }
 
-    static func == (lhs: Activity, rhs: Activity) -> Bool {
+    static func == (lhs: ActivityModel, rhs: ActivityModel) -> Bool {
         lhs.id == rhs.id
     }
 }

@@ -77,7 +77,7 @@ struct PieChartRows: View {
                         .frame(width: 20, height: 20)
                     VStack(alignment: .leading, spacing: 0) {
                         Text(self.names[i])
-                            .foregroundColor(Color("Gray"))
+                            .foregroundColor(Color("DefaultGray"))
                             .font(.footnote)
                             .fontWeight(.semibold)
                         VStack(alignment: .leading) {
@@ -99,7 +99,7 @@ struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
         PieChartView(
             values: [12, 3],
-            colors: [Color("Blue"), Color("LightBlue"), Color.orange],
+            colors: [Color("DefaultBlue"), Color("LightBlue"), Color.orange],
             textColors: [.white, .black],
             names: ["Gi session", "No Gi session"],
             backgroundColor: Color.white, innerRadiusFraction: 0.3

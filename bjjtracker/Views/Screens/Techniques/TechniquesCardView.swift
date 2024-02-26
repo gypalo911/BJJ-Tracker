@@ -23,7 +23,7 @@ struct TechniquesCardEmptyState: View {
                 Text("Start learning today")
                     .font(.caption)
                     .fontWeight(.regular)
-                    .foregroundColor(Color("Gray"))
+                    .foregroundColor(Color("DefaultGray"))
             }
             Spacer()
             NavigationLink(destination: {
@@ -32,7 +32,7 @@ struct TechniquesCardEmptyState: View {
                 Text("Add New")
                     .font(.footnote)
                     .fontWeight(.semibold)
-                    .foregroundColor(Color("Blue"))
+                    .foregroundColor(Color("DefaultBlue"))
             }
         }
     }
@@ -99,12 +99,12 @@ struct TechniquesCardFullState: View {
                     Text("See All")
                         .font(.footnote)
                         .fontWeight(.semibold)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                     Image("eye")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 15, height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 }
             }
         }

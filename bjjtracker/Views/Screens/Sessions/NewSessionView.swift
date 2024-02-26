@@ -20,7 +20,7 @@ struct NewSessionView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment (\.managedObjectContext) var managedObjContext
     
-    @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 60, startDate: Date(), location: "", notes: "")
+    @StateObject var activity: ActivityModel = .init(type: .training, style: .gi, duration: 60, startDate: Date(), location: "", notes: "")
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
@@ -101,7 +101,7 @@ struct NewSessionView: View {
                                 Image("back")
                                     .resizable()
                                     .frame(width: 25, height: 25)
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(Color("DefaultBlue"))
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -112,7 +112,7 @@ struct NewSessionView: View {
                             } label: {
                                 Text("Save")
                                     .fixedSize()
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(Color("DefaultBlue"))
                             }
                         }
                     }

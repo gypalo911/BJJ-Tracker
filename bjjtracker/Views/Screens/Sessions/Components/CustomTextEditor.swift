@@ -18,7 +18,7 @@ struct CustomTextEditor: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .inset(by: 0.01)
-                        .stroke(Color("LightGray"), lineWidth: 2)
+                        .stroke(Color("DefaultLightGray"), lineWidth: 2)
                 )
                 .frame(minHeight: 150, alignment: .top)
                 .padding(.leading, 5)

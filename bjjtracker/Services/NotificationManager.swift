@@ -39,7 +39,7 @@ struct NotificationManager {
         }
     }
     
-    func scheduleNotification(activity: Activity) {
+    func scheduleNotification(activity: ActivityModel) {
         let content = UNMutableNotificationContent()
         content.title = "\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)"
         content.body = "Starts at %@".localized(with: ["\((activity.startDate).toString("HH:mm"))"])

@@ -76,7 +76,7 @@ struct MonthYearPicker: View {
 //                    .padding()
 //                    .foregroundColor(.white)
 //            }
-//            .background(Color("Blue"))
+//            .background(Color("DefaultBlue"))
 //            .cornerRadius(10)
 //        }
 //        .padding()

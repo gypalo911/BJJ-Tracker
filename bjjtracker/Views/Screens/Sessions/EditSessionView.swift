@@ -19,7 +19,7 @@ struct EditSessionView: View {
     
     var session: Session
     
-    @StateObject var activity: Activity
+    @StateObject var activity: ActivityModel
     
     var onDismiss: ((Session?) -> Void)?
     
@@ -121,7 +121,7 @@ struct EditSessionView: View {
                                 Image("back")
                                     .resizable()
                                     .frame(width: 25, height: 25)
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(Color("DefaultBlue"))
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -132,7 +132,7 @@ struct EditSessionView: View {
                             } label: {
                                 Text("Save")
                                     .fixedSize()
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(Color("DefaultBlue"))
                             }
                         }
                     }
@@ -152,7 +152,7 @@ struct EditSessionView_Previews: PreviewProvider {
             EditSessionView(
                 viewModel: .init(),
                 session: session,
-                activity: Activity.from(session: session)!,
+                activity: ActivityModel.from(session: session)!,
                 onDismiss: { _ in }
             )
         }

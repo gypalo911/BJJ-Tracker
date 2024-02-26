@@ -25,9 +25,9 @@ struct CustomTabBarView: View {
                             tab.image
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                                .foregroundColor(Color("Purple"))
+                                .foregroundColor(Color("DefaultPurple"))
                             Text(tab.rawValue.localizedString)
-                                .foregroundColor(Color("Purple"))
+                                .foregroundColor(Color("DefaultPurple"))
                                 .font(.callout)
                                 .fontWeight(.semibold)
                                 .matchedGeometryEffect(id: "title", in: namespace)
@@ -44,7 +44,7 @@ struct CustomTabBarView: View {
                         tab.image
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(Color("Purple"))
+                            .foregroundColor(Color("DefaultPurple"))
                             .padding(.all, 20)
                     }
                 })

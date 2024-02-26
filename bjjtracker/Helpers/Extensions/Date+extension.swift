@@ -79,3 +79,13 @@ struct DateValue: Identifiable {
     var day: Int
     var date: Date
 }
+
+extension TimeInterval {
+    func stringFormatted() -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .brief
+
+        return formatter.string(from: self * 60)!
+    }
+}

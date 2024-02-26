@@ -23,7 +23,7 @@ struct FloatingTabBarView: View {
                     (selectedTab == tab ? tab.selectedImage : tab.image)
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(selectedTab == tab ? Color("Purple") : Color("LightGray"))
+                        .foregroundColor(selectedTab == tab ? Color("DefaultPurple") : Color("DefaultLightGray"))
                 })
                 .buttonStyle(BouncyButton())
                 if tab == .calendar {
@@ -32,7 +32,7 @@ struct FloatingTabBarView: View {
                     }, label: {
                         ZStack {
                             Circle()
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(Color("DefaultBlue"))
                             Image("plus")
                                 .resizable()
                                 .scaledToFit()

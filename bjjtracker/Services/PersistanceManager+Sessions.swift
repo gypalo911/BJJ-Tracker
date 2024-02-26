@@ -10,8 +10,8 @@ import CoreData
 protocol SessionsStorageManager {
     func fetchSessions(in interval: DateInterval?) -> [Session]
     func session(by id: String) -> Session?
-    func createSession(from activity: Activity)
-    func edit(session: Session, activity: Activity)
+    func createSession(from activity: ActivityModel)
+    func edit(session: Session, activity: ActivityModel)
     func delete(session: Session)
 }
 
@@ -57,7 +57,7 @@ extension PersistanceManager: SessionsStorageManager {
         return nil
     }
     
-    func createSession(from activity: Activity) {
+    func createSession(from activity: ActivityModel) {
         let context = self.container.viewContext
         let session = Session(context: context)
         session.update(with: activity)
@@ -66,7 +66,7 @@ extension PersistanceManager: SessionsStorageManager {
         save(context: context)
     }
     
-    func edit(session: Session, activity: Activity) {
+    func edit(session: Session, activity: ActivityModel) {
         let context = self.container.viewContext
         session.update(with: activity)
         

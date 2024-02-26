@@ -13,7 +13,7 @@ extension Session {
         return Calendar.current.startOfDay(for: startDate ?? Date()).toString("dd MMMM yyyy")
     }
     
-    func update(with activity: Activity) {
+    func update(with activity: ActivityModel) {
         id = activity.id
         type = activity.type.rawValue
         style = activity.style.rawValue

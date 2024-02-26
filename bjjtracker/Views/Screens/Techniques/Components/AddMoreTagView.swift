@@ -13,10 +13,10 @@ struct AddMoreTagView: View {
             Image("addIcon")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(Color("DefaultBlue"))
             Text("Add technique")
                 .font(Font.custom("Rubik", size: 14))
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(Color("DefaultBlue"))
         }
         .padding(.vertical, 6)
         .padding(.leading, 8)
@@ -28,7 +28,7 @@ struct AddMoreTagView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .fill(Color("Blue"))
+                        .fill(Color("DefaultBlue"))
                 )
         )
     }

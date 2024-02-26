@@ -46,7 +46,7 @@ struct BluredBottomSheet: View {
                         .animation(.easeInOut(duration: 0.2), value: offset)
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color("Blue"))
+                            .foregroundColor(Color("DefaultBlue"))
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
                             .defaultShadow()
@@ -101,7 +101,7 @@ struct BluredBottomSheet: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color("Green"))
+                            .foregroundColor(Color("DefaultGreen"))
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
                             .defaultShadow()

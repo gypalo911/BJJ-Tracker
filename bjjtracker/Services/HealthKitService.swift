@@ -102,7 +102,11 @@ final class DefaultHealthKitService: ObservableObject, HealthKitService {
     }
     
     var isMetricSystem: Bool {
-        return Locale.current.usesMetricSystem
+        if #available(iOS 16.0, *) {
+            Locale.current.measurementSystem == .metric
+        } else {
+            Locale.current.usesMetricSystem
+        }
     }
     
     private let writeTypes: Set<HKSampleType> = Set(

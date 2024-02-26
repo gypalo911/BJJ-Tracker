@@ -72,7 +72,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 })
                 Text(viewModel.title)
                     .font(.callout)
@@ -87,7 +87,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 })
             }
             ScrollView(showsIndicators: false) {
@@ -116,7 +116,7 @@ struct StatisticsView: View {
                     ).padding(.bottom, 70)
                     
                     Rectangle()
-                        .fill(Color("LightGray"))
+                        .fill(Color("DefaultLightGray"))
                         .padding(.horizontal, 20)
                         .frame(height: 1)
                     
@@ -137,7 +137,7 @@ struct StatisticsView: View {
                                 Double(viewModel.sessions(by: .gi, filteredSessions).count),
                                 Double(viewModel.sessions(by: .noGi, filteredSessions).count)
                             ],
-                            colors: [Color("Blue"), Color("LightBlue")],
+                            colors: [Color("DefaultBlue"), Color("LightBlue")],
                             textColors: [.white, .black],
                             names: ["Gi sessions".localizedString, "No Gi sessions".localizedString],
                             backgroundColor: bgColor, innerRadiusFraction: 0.4
@@ -169,7 +169,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 }
             }
         }

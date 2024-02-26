@@ -78,7 +78,7 @@ struct PromotionsView: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 5)
                                         .stroke(lineWidth: 1)
-                                        .fill(Color("LightGray"))
+                                        .fill(Color("DefaultLightGray"))
                                 )
                             })
                             .hAlign(.topTrailing)

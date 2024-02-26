@@ -218,7 +218,7 @@ struct TechniquesView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25, height: 25)
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(Color("DefaultBlue"))
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 15)
@@ -247,7 +247,7 @@ struct TechniquesView: View {
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("Green"))
+                            .foregroundColor(Color("DefaultGreen"))
                             .frame(maxWidth: 270)
                             .frame(height: 40)
                             .defaultShadow()

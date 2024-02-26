@@ -19,12 +19,11 @@
 		D008C6592B8B905700E68098 /* JiuTrackWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */; };
 		D008C65B2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */; };
 		D008C65D2B8B905700E68098 /* JiuTrackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */; };
-		D008C65F2B8B905700E68098 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65E2B8B905700E68098 /* AppIntent.swift */; };
 		D008C6612B8B905D00E68098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D008C6602B8B905D00E68098 /* Assets.xcassets */; };
 		D008C6652B8B905D00E68098 /* JiuTrackWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D008C6522B8B905700E68098 /* JiuTrackWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D008C66A2B8B91E900E68098 /* Technique.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE62A32A9641CA008EEA49 /* Technique.swift */; };
 		D008C66B2B8B91EC00E68098 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
-		D008C66C2B8B91F300E68098 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
+		D008C66C2B8B91F300E68098 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* ActivityModel.swift */; };
 		D008C66D2B8B91FA00E68098 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D060BA8129DDAD9C00E10562 /* Icons.xcassets */; };
 		D008C66E2B8B91FA00E68098 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01187CD2A7A97E800A2FCC7 /* Images.xcassets */; };
 		D008C66F2B8B91FA00E68098 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C9F102A710EC7007D5AF0 /* Colors.xcassets */; };
@@ -126,7 +125,14 @@
 		D09BCA432A606AFB004C749E /* LinkPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */; };
 		D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */; };
 		D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */; };
-		D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
+		D09CE3A92B8CAE07005A6B0F /* LiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2017E2B8CA7B400C2EF5E /* LiveActivityView.swift */; };
+		D09CE3AB2B8CB647005A6B0F /* SessionsListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CE3AA2B8CB647005A6B0F /* SessionsListWidgetView.swift */; };
+		D09CE3AD2B8CBA86005A6B0F /* StatsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CE3AC2B8CBA86005A6B0F /* StatsWidgetView.swift */; };
+		D09CE3AE2B8CEC80005A6B0F /* LiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2017E2B8CA7B400C2EF5E /* LiveActivityView.swift */; };
+		D09CE3AF2B8CEC86005A6B0F /* SessionsListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CE3AA2B8CB647005A6B0F /* SessionsListWidgetView.swift */; };
+		D09CE3B02B8CEC88005A6B0F /* StatsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CE3AC2B8CBA86005A6B0F /* StatsWidgetView.swift */; };
+		D09CE3B32B8D00B0005A6B0F /* JiuTrackWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */; };
+		D0A00ECE29DDC9B100DCD5BB /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* ActivityModel.swift */; };
 		D0A00ED029DDCE7300DCD5BB /* ModalsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */; };
 		D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */; };
 		D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */; };
@@ -150,7 +156,7 @@
 		D0B8B72A2A3C9F3000A2418F /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E824B329DE0F490023E6C0 /* View+extension.swift */; };
 		D0B8B72B2A3C9F3600A2418F /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
 		D0B8B72C2A3C9F3800A2418F /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109B52A0D3294008433CC /* String+extension.swift */; };
-		D0B8B72D2A3C9F4A00A2418F /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* Activity.swift */; };
+		D0B8B72D2A3C9F4A00A2418F /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A00ECD29DDC9B100DCD5BB /* ActivityModel.swift */; };
 		D0B8B72E2A3C9F6100A2418F /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BBF229E2C2FA00A9A068 /* Promotion.swift */; };
 		D0B8B7302A3CAF2100A2418F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */; };
 		D0B8B7322A3CC2FD00A2418F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B8B7312A3CC2FD00A2418F /* AppDelegate.swift */; };
@@ -235,7 +241,6 @@
 		D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidgetBundle.swift; sourceTree = "<group>"; };
 		D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiuTrackWidget.swift; sourceTree = "<group>"; };
-		D008C65E2B8B905700E68098 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		D008C6602B8B905D00E68098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D008C6622B8B905D00E68098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D008C6722B8B93ED00E68098 /* JiuTrackWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiuTrackWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -325,7 +330,9 @@
 		D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewViewModel.swift; sourceTree = "<group>"; };
 		D09BCA442A608A09004C749E /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
 		D09BCA462A608B67004C749E /* TimetableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewViewModel.swift; sourceTree = "<group>"; };
-		D0A00ECD29DDC9B100DCD5BB /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		D09CE3AA2B8CB647005A6B0F /* SessionsListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListWidgetView.swift; sourceTree = "<group>"; };
+		D09CE3AC2B8CBA86005A6B0F /* StatsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidgetView.swift; sourceTree = "<group>"; };
+		D0A00ECD29DDC9B100DCD5BB /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalsEnums.swift; sourceTree = "<group>"; };
 		D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+extension.swift"; sourceTree = "<group>"; };
 		D0AA702D2A5AFC30001FB3FA /* AddMoreTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreTagView.swift; sourceTree = "<group>"; };
@@ -335,6 +342,7 @@
 		D0B01F2929E44E5600E10979 /* MonthCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarView.swift; sourceTree = "<group>"; };
 		D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsView.swift; sourceTree = "<group>"; };
 		D0B01F2E29E5850000E10979 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		D0B2017E2B8CA7B400C2EF5E /* LiveActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityView.swift; sourceTree = "<group>"; };
 		D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bjjtrackerRelease.entitlements; sourceTree = "<group>"; };
 		D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -446,9 +454,8 @@
 			isa = PBXGroup;
 			children = (
 				D008C6582B8B905700E68098 /* JiuTrackWidgetBundle.swift */,
-				D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */,
-				D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */,
-				D008C65E2B8B905700E68098 /* AppIntent.swift */,
+				D09CE3B22B8CF961005A6B0F /* LiveActivity */,
+				D09CE3B12B8CF958005A6B0F /* Widgets */,
 				D008C6602B8B905D00E68098 /* Assets.xcassets */,
 				D008C6622B8B905D00E68098 /* Info.plist */,
 			);
@@ -656,7 +663,7 @@
 		D060BAAD29DDAE1700E10562 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D0A00ECD29DDC9B100DCD5BB /* Activity.swift */,
+				D0A00ECD29DDC9B100DCD5BB /* ActivityModel.swift */,
 				D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */,
 				D098BBF229E2C2FA00A9A068 /* Promotion.swift */,
 				D0DE62A32A9641CA008EEA49 /* Technique.swift */,
@@ -837,6 +844,25 @@
 				D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */,
 			);
 			path = LinkPreview;
+			sourceTree = "<group>";
+		};
+		D09CE3B12B8CF958005A6B0F /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				D09CE3AA2B8CB647005A6B0F /* SessionsListWidgetView.swift */,
+				D09CE3AC2B8CBA86005A6B0F /* StatsWidgetView.swift */,
+				D008C65C2B8B905700E68098 /* JiuTrackWidget.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		D09CE3B22B8CF961005A6B0F /* LiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				D008C65A2B8B905700E68098 /* JiuTrackWidgetLiveActivity.swift */,
+				D0B2017E2B8CA7B400C2EF5E /* LiveActivityView.swift */,
+			);
+			path = LiveActivity;
 			sourceTree = "<group>";
 		};
 		D0A00ED729DDE3B100DCD5BB /* Helpers */ = {
@@ -1220,6 +1246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D008C6862B8B979800E68098 /* UIPickerView+extension.swift in Sources */,
+				D09CE3AF2B8CEC86005A6B0F /* SessionsListWidgetView.swift in Sources */,
+				D09CE3B02B8CEC88005A6B0F /* StatsWidgetView.swift in Sources */,
+				D09CE3AE2B8CEC80005A6B0F /* LiveActivityView.swift in Sources */,
 				D008C6712B8B934B00E68098 /* bjjtracker.xcdatamodeld in Sources */,
 				D008C66A2B8B91E900E68098 /* Technique.swift in Sources */,
 				D008C65D2B8B905700E68098 /* JiuTrackWidget.swift in Sources */,
@@ -1230,9 +1259,8 @@
 				D008C67D2B8B978100E68098 /* Date+extension.swift in Sources */,
 				D008C6822B8B979800E68098 /* Calendar+extension.swift in Sources */,
 				D008C6842B8B979800E68098 /* View+extension.swift in Sources */,
-				D008C66C2B8B91F300E68098 /* Activity.swift in Sources */,
+				D008C66C2B8B91F300E68098 /* ActivityModel.swift in Sources */,
 				D008C67F2B8B979100E68098 /* String+extension.swift in Sources */,
-				D008C65F2B8B905700E68098 /* AppIntent.swift in Sources */,
 				D008C6792B8B94F000E68098 /* PersistanceManager+Techniques.swift in Sources */,
 				D008C6852B8B979800E68098 /* Publishers+extension.swift in Sources */,
 				D008C67C2B8B977A00E68098 /* HealthKitService.swift in Sources */,
@@ -1257,6 +1285,7 @@
 				D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */,
 				D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */,
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
+				D09CE3AB2B8CB647005A6B0F /* SessionsListWidgetView.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
 				D0B01F2829E43E4E00E10979 /* Color.swift in Sources */,
 				D00FD65B2A926A2C00CFD274 /* ScrollDetector.swift in Sources */,
@@ -1269,7 +1298,7 @@
 				D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */,
 				D02F3DEB29EEE80100BED6CD /* JournalView.swift in Sources */,
 				D098BBE129E0947B00A9A068 /* CalendarDayViews.swift in Sources */,
-				D0A00ECE29DDC9B100DCD5BB /* Activity.swift in Sources */,
+				D0A00ECE29DDC9B100DCD5BB /* ActivityModel.swift in Sources */,
 				D0AA70302A5BE7EA001FB3FA /* TechniquesListViewModel.swift in Sources */,
 				D0A00ED029DDCE7300DCD5BB /* ModalsEnums.swift in Sources */,
 				D0E824B629DE14060023E6C0 /* ActivityPanelView.swift in Sources */,
@@ -1295,6 +1324,7 @@
 				D02D1FF12A5ADEB4006BB617 /* TagView.swift in Sources */,
 				D070C9532A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift in Sources */,
 				D050EAB02A8508EB008222BE /* UIPickerView+extension.swift in Sources */,
+				D09CE3A92B8CAE07005A6B0F /* LiveActivityView.swift in Sources */,
 				D02F3DE629E8592000BED6CD /* DraggableCalendarView.swift in Sources */,
 				D098BBE729E0D1DE00A9A068 /* EditSessionView.swift in Sources */,
 				D0E824B029DE03D80023E6C0 /* DashboardView.swift in Sources */,
@@ -1315,6 +1345,8 @@
 				D0B6CACE2A7D574C00ED2F3B /* NotificationSettingsView.swift in Sources */,
 				D0B01F2A29E44E5600E10979 /* MonthCalendarView.swift in Sources */,
 				D02F3DED29EFFB3C00BED6CD /* MonthYearPicker.swift in Sources */,
+				D09CE3B32B8D00B0005A6B0F /* JiuTrackWidgetLiveActivity.swift in Sources */,
+				D09CE3AD2B8CBA86005A6B0F /* StatsWidgetView.swift in Sources */,
 				D09BCA3E2A604ADE004C749E /* LinkPreview.swift in Sources */,
 				D098BBF129E2C1AF00A9A068 /* SelectionPanelView.swift in Sources */,
 				D098BBE529E0CE3300A9A068 /* StatsPanelsView.swift in Sources */,
@@ -1378,7 +1410,7 @@
 				D0B8B72C2A3C9F3800A2418F /* String+extension.swift in Sources */,
 				D0B8B7282A3C9F2C00A2418F /* Session+extension.swift in Sources */,
 				D0B8B7272A3C9F2100A2418F /* Date+extension.swift in Sources */,
-				D0B8B72D2A3C9F4A00A2418F /* Activity.swift in Sources */,
+				D0B8B72D2A3C9F4A00A2418F /* ActivityModel.swift in Sources */,
 				D0B8B72B2A3C9F3600A2418F /* Int+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1630,6 +1662,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow JiuTrack app to access your HealthData.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow JiuTrack app to write Health data.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1673,6 +1706,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Allow JiuTrack app to access your HealthData.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Allow JiuTrack app to write Health data.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

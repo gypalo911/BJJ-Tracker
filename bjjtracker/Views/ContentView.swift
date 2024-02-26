@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Introspect
+import WidgetKit
+import ActivityKit
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
@@ -65,6 +67,11 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
+        .onAppear {
+//            if #available(iOS 16.1, *) {
+//                addLiveActivity()
+//            }
+        }
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
         }
@@ -105,6 +112,20 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 dashboardVM.selectedSession = session
             }
+        }
+    }
+    
+    @available(iOS 16.1, *)
+    func addLiveActivity() {
+        let sessionAttributes = SessionAttributes()
+        
+        let contentState = SessionAttributes.ContentState()
+        
+        do {
+            let activity = try Activity<SessionAttributes>.request(attributes: sessionAttributes, contentState: contentState, pushType: nil)
+            print("Activity added! \(activity.id)")
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

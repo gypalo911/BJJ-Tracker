@@ -44,8 +44,8 @@ struct ShareSessionView: View {
     
     let session: Session
     
-    var activity: Activity {
-        Activity.from(session: session)!
+    var activity: ActivityModel {
+        ActivityModel.from(session: session)!
     }
     
     var body: some View {
@@ -61,7 +61,7 @@ struct ShareSessionView: View {
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
                                 Color("GrayTextColor")
-//                                colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
+//                                colorScheme == .dark ? Color("GrayTextColor") : Color("DefaultBlue")
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -80,7 +80,7 @@ struct ShareSessionView: View {
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
                                 .white
-                                //colorScheme == .dark ? .white : Color("Blue")
+                                //colorScheme == .dark ? .white : Color("DefaultBlue")
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -121,7 +121,7 @@ struct ShareSessionView: View {
                             .frame(width: 20, height: 20)
                             .foregroundColor(
                                 .white
-//                                colorScheme == .dark ? .white : Color("Blue")
+//                                colorScheme == .dark ? .white : Color("DefaultBlue")
                             )
                     }
                 }
@@ -142,7 +142,7 @@ struct ShareSessionView: View {
                                     .frame(width: 25, height: 25)
                                     .foregroundColor(
                                         .white
-//                                        colorScheme == .dark ? .white : Color("Blue")
+//                                        colorScheme == .dark ? .white : Color("DefaultBlue")
                                     )
                             }
                             .simultaneousGesture(TapGesture().onEnded() {

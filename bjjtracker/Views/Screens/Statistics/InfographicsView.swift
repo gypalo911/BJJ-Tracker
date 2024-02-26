@@ -15,7 +15,7 @@ struct InfographicsView: View {
         ZStack(alignment: .center) {
             ZStack {
                 Circle()
-                    .fill(Color("Green"))
+                    .fill(Color("DefaultGreen"))
                     .frame(width: 130, height: 130)
                 VStack {
                     Text("\(statsInfo[.training] ?? 0)")

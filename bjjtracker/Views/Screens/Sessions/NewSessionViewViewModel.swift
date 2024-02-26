@@ -9,7 +9,7 @@ import Foundation
 
 protocol NewSessionViewAnalytics {
     func onScreenAppeared()
-    func sessionCreated(from activity: Activity)
+    func sessionCreated(from activity: ActivityModel)
     func popupDismissed()
 }
 
@@ -27,7 +27,7 @@ extension NewSessionViewViewModel: NewSessionViewAnalytics {
         analyticsEngine.log(AnalyticsEvent(name: "new_session_screen_viewed", metadata: [:]))
     }
     
-    func sessionCreated(from activity: Activity) {
+    func sessionCreated(from activity: ActivityModel) {
         analyticsEngine.log(AnalyticsEvent(
             name: "session_created",
             metadata: [

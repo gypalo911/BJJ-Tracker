@@ -12,6 +12,9 @@ import SwiftUI
 struct JiuTrackWidgetBundle: WidgetBundle {
     var body: some Widget {
         JiuTrackWidget()
-//        JiuTrackWidgetLiveActivity()
+        
+        if #available(iOS 16.1, *) {
+            JiuTrackWidgetLiveActivity()
+        }
     }
 }

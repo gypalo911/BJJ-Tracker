@@ -25,7 +25,7 @@ class PersistanceManager: ObservableObject {
             }
             session.duration = Int16(120 - i)
             session.type = ActivityType.allCases.randomElement()?.rawValue
-            session.style = GraplingStyle.gi.rawValue
+            session.style =  ((i % 2) != 0) ? GraplingStyle.gi.rawValue : GraplingStyle.noGi.rawValue
             session.location = "Kyiv"
 //            session.notes = ((i % 2) != 0) ? "Useful links: https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/, https://bjj-world.com/best-martial-arts-for-self-defense/, https://bjj-world.com/caio-terra-ankle-lock-de-la-riva/, https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/" : "https://blackbeltwiki.com/brazilian-jiu-jitsu. \n\n https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/\n \n https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"
 
@@ -59,10 +59,37 @@ class PersistanceManager: ObservableObject {
     
     let container: NSPersistentCloudKitContainer
     
+    var containerURL: URL {
+       return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.hotcode.jiutrack")!
+    }
+    
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "bjjtracker")
+        let fileManager = FileManager.default
+        
+        let newStoreLocation = URL.storeURL(
+            for: "group.com.hotcode.jiutrack",
+            databaseName: "PersistanceManager"
+        )
+        guard let currentStoreLocation = container.persistentStoreDescriptions.first?.url else {
+            fatalError("expected to exist")
+        }
+        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            if fileManager.fileExists(atPath: currentStoreLocation.path) && !fileManager.fileExists(atPath: newStoreLocation.path) {
+                let coordinator = container.persistentStoreCoordinator
+                do {
+                    try coordinator.replacePersistentStore(at: newStoreLocation, destinationOptions: nil, withPersistentStoreFrom: currentStoreLocation, sourceOptions: nil, type: .sqlite)
+                    try? coordinator.destroyPersistentStore(at: newStoreLocation, type: .sqlite, options: nil)
+                } catch {
+                    print("\(error.localizedDescription)")
+                }
+            } else {
+                let description = NSPersistentStoreDescription(url: newStoreLocation)
+                container.persistentStoreDescriptions = [description]
+            }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -84,5 +111,14 @@ class PersistanceManager: ObservableObject {
         } catch let error {
             print("\(error) while saving")
         }
+    }
+}
+
+public extension URL {
+    static func storeURL(for appGroup: String, databaseName: String) -> URL {
+        guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            fatalError("Unable to create URL")
+        }
+        return fileContainer.appendingPathComponent("\(databaseName).sqlite")
     }
 }

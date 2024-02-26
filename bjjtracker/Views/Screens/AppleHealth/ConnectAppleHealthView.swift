@@ -29,7 +29,7 @@ struct ConnectAppleHealthView: View {
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundColor(Color("Gray"))
+                .foregroundColor(Color("DefaultGray"))
             
             
             Button(action: {

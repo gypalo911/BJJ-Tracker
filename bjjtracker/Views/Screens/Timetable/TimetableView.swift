@@ -59,7 +59,7 @@ struct TimetableView: View {
                             Spacer()
                             Text("No sessions for this day")
                                 .font(.body)
-                                .foregroundColor(Color("Gray"))
+                                .foregroundColor(Color("DefaultGray"))
                             NavigationLink(destination: {
                                 JournalView(viewModel: .init(persistanceManager: persistanceManager))
                             }) {

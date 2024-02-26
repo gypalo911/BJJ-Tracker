@@ -21,14 +21,14 @@ struct TagViewWithTextField: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(Color("DefaultBlue"))
                 .cornerRadius(30)
             TextField(
                 "",
                 text: $tag.text,
                 prompt:
                     Text("Technique")
-                    .foregroundColor(Color("LightGray"))
+                    .foregroundColor(Color("DefaultLightGray"))
             )
             .focused($focusedField)
             .autocorrectionDisabled(true)

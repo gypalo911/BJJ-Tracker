@@ -16,7 +16,7 @@ struct SuggestionTagView: View {
     var body: some View {
         Text(tag.text)
             .font(Font.custom("Rubik", size: 14))
-            .foregroundColor(Color("Blue"))
+            .foregroundColor(Color("DefaultBlue"))
             .padding(.vertical, 8)
             .padding(.leading, 20)
             .padding(.trailing, 20)
@@ -27,7 +27,7 @@ struct SuggestionTagView: View {
                     Capsule()
                         .fill(Color.white)
                     Capsule()
-                        .stroke(Color("Blue"), lineWidth: 1)
+                        .stroke(Color("DefaultBlue"), lineWidth: 1)
                 }
             )
             .matchedGeometryEffect(id: tag.id, in: animation)

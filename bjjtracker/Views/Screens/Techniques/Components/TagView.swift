@@ -17,7 +17,7 @@ struct TagView: View {
     var body: some View {
         Text(tag.text)
             .font(Font.custom("Rubik", size: 14))
-            .foregroundColor(Color("Blue"))
+            .foregroundColor(Color("DefaultBlue"))
             .padding(.vertical, 8)
             .padding(.leading, 20)
             .padding(.trailing, 20)

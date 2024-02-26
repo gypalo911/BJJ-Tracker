@@ -9,8 +9,8 @@ import Foundation
 
 protocol EditSessionViewAnalytics {
     func onScreenAppeared()
-    func sessionEdited(_ activity: Activity)
-    func sessionDeleted(_ activity: Activity)
+    func sessionEdited(_ activity: ActivityModel)
+    func sessionDeleted(_ activity: ActivityModel)
     func popupDismissed()
 }
 
@@ -28,7 +28,7 @@ extension EditSessionViewViewModel: EditSessionViewAnalytics {
         analyticsEngine.log(AnalyticsEvent(name: "edit_session_screen_viewed", metadata: [:]))
     }
     
-    func sessionEdited(_ activity: Activity) {
+    func sessionEdited(_ activity: ActivityModel) {
         analyticsEngine.log(AnalyticsEvent(
             name: "session_edited",
             metadata: [
@@ -44,7 +44,7 @@ extension EditSessionViewViewModel: EditSessionViewAnalytics {
         ))
     }
     
-    func sessionDeleted(_ activity: Activity) {
+    func sessionDeleted(_ activity: ActivityModel) {
         analyticsEngine.log(AnalyticsEvent(
             name: "session_deleted",
             metadata: [

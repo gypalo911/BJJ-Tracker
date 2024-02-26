@@ -103,7 +103,7 @@ struct RectangleOption: View {
                 .background(
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(isSelected ? Color("Blue") : Color("LightGray"), lineWidth: isSelected ? 2 : 1)
+                            .stroke(isSelected ? Color("DefaultBlue") : Color("DefaultLightGray"), lineWidth: isSelected ? 2 : 1)
                             .foregroundColor(.white)
                     }
                 )
@@ -131,7 +131,7 @@ struct DurationSelectorView: View {
                 .background(
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("LightGray").opacity(0.5))
+                            .foregroundColor(Color("DefaultLightGray").opacity(0.5))
                     }
                 )
         })
@@ -150,7 +150,7 @@ struct TitleTextView: View {
 
 struct SelectionPanelView_Previews: PreviewProvider {
     struct Container: View {
-        @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
+        @StateObject var activity: ActivityModel = .init(type: .training, style: .gi, duration: 0, startDate: Date(), location: "", notes: "")
 
         var body: some View {
             GeometryReader {geometry in

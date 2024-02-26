@@ -50,7 +50,7 @@ struct DashboardView: View {
                 ScrollView(showsIndicators: false) {
                     ZStack(alignment: .top) {
                         Rectangle()
-                            .foregroundColor(Color("Blue"))
+                            .foregroundColor(Color("DefaultBlue"))
                             .edgesIgnoringSafeArea(.all)
                             .cornerRadius(30)
                             .frame(height: shouldCollapseHeader ? headerHeight / 2 + 80 : headerHeight)
@@ -87,7 +87,7 @@ struct DashboardView: View {
                                 .offset(y: shouldCollapseHeader ? -offsetY : 0)
                                 .background(
                                     Rectangle()
-                                        .foregroundColor(Color("Blue"))
+                                        .foregroundColor(Color("DefaultBlue"))
                                         .edgesIgnoringSafeArea(.all)
                                         .cornerRadius(30)
                                         .frame(height: headerHeight/2)
@@ -224,7 +224,7 @@ struct DashboardView: View {
                 colors: .init(
                     textColor: .white,
                     strokeColor: .white,
-                    selectedTextColor: Color("Blue"),
+                    selectedTextColor: Color("DefaultBlue"),
                     selectedBGColor: .white
                 )
             )
@@ -314,7 +314,7 @@ struct DashboardView: View {
         Spacer()
         Text("No sessions for this day")
             .font(.body)
-            .foregroundColor(Color("Gray"))
+            .foregroundColor(Color("DefaultGray"))
         
         NavigationLink(destination: {
             JournalView(viewModel: .init(persistanceManager: persistanceManager))

@@ -86,7 +86,7 @@ struct TechniqueModalView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("RedPink"))
+                            .foregroundColor(name.isEmpty ? Color("DefaultGray") : Color("RedPink"))
                     })
                     .disabled(name.isEmpty)
                     Button(action: {
@@ -110,7 +110,7 @@ struct TechniqueModalView: View {
                         Text("Done".localizedString)
                             .font(.body)
                             .fontWeight(.medium)
-                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("Blue"))
+                            .foregroundColor(name.isEmpty ? Color("DefaultGray") : Color("DefaultBlue"))
                     })
                     .disabled(name.isEmpty)
                 }
@@ -123,7 +123,7 @@ struct TechniqueModalView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .inset(by: 0.01)
-                            .stroke(Color("LightGray"), lineWidth: 2)
+                            .stroke(Color("DefaultLightGray"), lineWidth: 2)
                     )
                     .padding(.leading, 5)
                     .focused($focusedField, equals: .details)
@@ -185,7 +185,7 @@ struct TechniqueModalView: View {
                     Text("\(details)")
                         .font(.body)
                         .fontWeight(.regular)
-                        .foregroundColor(Color("Gray"))
+                        .foregroundColor(Color("DefaultGray"))
                 }
                 .frame(height: 100)
             }

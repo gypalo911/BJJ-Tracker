@@ -124,7 +124,7 @@ struct HeaderView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 })
                 Spacer()
                 Button(action: {
@@ -134,7 +134,7 @@ struct HeaderView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(Color("DefaultBlue"))
                 })
             }
             Text("Techniques")
