@@ -156,7 +156,7 @@ struct ShareSessionView: View {
             ImagePicker(
                 sourceType: .photoLibrary,
                 selectedImage: $selectedImage,
-                fileName: "avatar",
+                fileName: "temp_image",
                 callback: {
                     selectImageState = .shareImage
                 }
