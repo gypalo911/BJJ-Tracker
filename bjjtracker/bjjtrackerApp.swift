@@ -53,11 +53,11 @@ struct bjjtrackerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let settings = AppSettings.shared
-//#if DEBUG
-//    let persistanceManager = PersistanceManager.preview
-//#else
+#if DEBUG
+    let persistanceManager = PersistanceManager.preview
+#else
     let persistanceManager = PersistanceManager.shared
-//#endif
+#endif
 
     var body: some Scene {
         WindowGroup {

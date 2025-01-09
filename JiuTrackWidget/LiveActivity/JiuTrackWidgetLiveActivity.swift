@@ -24,10 +24,8 @@ struct JiuTrackWidgetLiveActivity: Widget {
         ActivityConfiguration(for: SessionAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                if let session = PersistanceManager.preview.fetchSessions().first {
+                if let session = PersistanceManager.shared.fetchSessions().first {
                     LiveActivityView(session: session)
-                } else {
-                    Text("sda")
                 }
             }
             //            .activityBackgroundTint(Color.red)

@@ -20,7 +20,6 @@ struct SessionDetailsView: View {
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
     @Environment(\.presentationMode) var presentationMode
-    @Environment (\.managedObjectContext) var managedObjContext
     
     @State private var isPresentedEditing: Bool = false
     @State private var showShareSheet: Bool = false
@@ -348,6 +347,7 @@ struct SessionDetailsHeaderView: View {
                 .padding(.horizontal, 15)
             }
             .vAlign(.top)
+            .padding(.top, 30)
             .padding(.bottom, 30)
             .padding(.horizontal, 15)
         }

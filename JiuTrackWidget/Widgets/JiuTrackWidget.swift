@@ -24,8 +24,8 @@ struct SessionEntry: TimelineEntry {
         techniques: [TechniqueModel] = []
     ) {
         self.date = date
-        self.sessions = sessions.count > 0 ? sessions : PersistanceManager.preview.fetchSessions()
-        self.techniques = techniques.count > 0 ? techniques : PersistanceManager.preview.fetchAllTechniques()
+        self.sessions = sessions.count > 0 ? sessions : PersistanceManager.shared.fetchSessions()
+        self.techniques = techniques.count > 0 ? techniques : PersistanceManager.shared.fetchAllTechniques()
     }
 }
 
