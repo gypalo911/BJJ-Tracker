@@ -285,7 +285,7 @@ struct SessionDetailsHeaderView: View {
                                 .foregroundColor(sessionStatus.color)
                                 .cornerRadius(5)
                                 .defaultShadow()
-                                .frame(width: 76, height: 23)
+                                .frame(width: 86, height: 23)
                             Text("\(sessionStatus.rawValue.localizedString)".uppercased())
                                 .font(.caption2)
                                 .foregroundColor(.white)

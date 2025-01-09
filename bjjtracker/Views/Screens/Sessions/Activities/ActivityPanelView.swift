@@ -63,7 +63,7 @@ struct ActivityPanelView: View {
                             .foregroundColor(session.status.color)
                             .cornerRadius(5)
                             .defaultShadow()
-                            .frame(width: 76, height: 23)
+                            .frame(width: 86, height: 23)
                         Text("\(session.status.rawValue.localizedString)".uppercased())
                             .font(.caption2)
                             .foregroundColor(.white)
