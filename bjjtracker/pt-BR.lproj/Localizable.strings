@@ -1,0 +1,183 @@
+//
+//  Localizable.strings
+//  bjjtracker
+//
+//  Created by Petro Hupalo on 11.05.2023.
+//
+
+"Dashboard" = "Painel";
+"Calendar" = "Calendário";
+"Sessions" = "Sessões";
+"Total time" = "Tempo total";
+"View History" = "Ver histórico";
+"No sessions for this day" = "Nenhuma sessão para este dia";
+
+"Select Action" = "Selecionar ação";
+"New Promotion" = "Nova promoção";
+"Yet no promotions" = "Ainda sem promoções";
+"New Session" = "Nova sessão";
+
+"1. Grading system:" = "1. Sistema de graduação:";
+"2. Belt: %@" = "2. Faixa: %@";
+"3. Number of stripes:" = "3. Número de listras:";
+"4. Select date:" = "4. Selecionar data:";
+
+"1. Select type:" = "1. Selecionar tipo:";
+"2. Select grappling style:" = "2. Selecionar estilo de grappling:";
+"3. Select date and time:" = "3. Selecionar data e hora:";
+"4. Duration:" = "4. Duração:";
+"Location:" = "Localização:";
+"Location..." = "Localização...";
+"Add some details..." = "Adicione alguns detalhes...";
+"Save" = "Salvar";
+"Delete" = "Excluir";
+"Share" = "Compartilhar";
+
+"Edit Session" = "Editar sessão";
+"Edit" = "Editar";
+
+"%@h" = "%@h";
+"%@h %@m" = "%@h %@m";
+"%@min" = "%@min";
+"hours" = "horas";
+"min" = "min";
+
+"Starts at %@" = "Começa às %@";
+"Start Date" = "Data de início";
+
+"UPCOMING" = "PRÓXIMOS";
+"FINISHED" = "FINALIZADOS";
+"ONGOING" = "EM ANDAMENTO";
+
+"Gi" = "Gi";
+"No-Gi" = "No-Gi";
+
+"Class" = "Aula";
+"Classes" = "Aulas";
+"Competition" = "Competição";
+"Competitions" = "Competições";
+"Seminar" = "Seminário";
+"Seminars" = "Seminários";
+
+"Location" = "Localização";
+"Notes" = "Notas";
+"Empty" = "Vazio";
+"Suggestions" = "Sugestões";
+
+"Learned techniques" = "Técnicas aprendidas";
+"Learned techniques:" = "Técnicas aprendidas:";
+"Technique" = "Técnica";
+"Techniques" = "Técnicas";
+"Description" = "Descrição";
+"Add technique" = "Adicionar técnica";
+"New Technique" = "Nova técnica";
+"Technique name" = "Nome da técnica";
+"You can search techniques by name or notes" = "Você pode buscar técnicas por nome ou notas";
+"No techniques yet" = "Ainda não há técnicas";
+"No techniques added yet.\nYou can create it now!" = "Nenhuma técnica adicionada ainda.\nVocê pode criar agora!";
+"Start learning today" = "Comece a aprender hoje";
+"Add New" = "Adicionar novo";
+"Search by Keyword" = "Pesquisar por palavra-chave";
+"Cancel" = "Cancelar";
+"No results found" = "Nenhum resultado encontrado";
+"Found results: %@" = "Resultados encontrados: %@";
+
+"Name" = "Nome";
+"Newest" = "Mais recente";
+"Updated recently" = "Atualizado recentemente";
+
+"You have already learned **%@ techniques**!" = "Você já aprendeu **%@ técnicas**!";
+"Great start! **%@ techniques** learned!" = "Ótimo começo! **%@ técnicas** aprendidas!";
+"Your progress is impressive! It's already **%@ techniques** learned!" = "Seu progresso é impressionante! Já são **%@ técnicas** aprendidas!";
+"Keep learning and practicing! It's already **%@ techniques** learned!" = "Continue aprendendo e praticando! Já são **%@ técnicas** aprendidas!";
+"Perseverance is a key! You have already learned **%@ techniques**!" = "A perseverança é a chave! Você já aprendeu **%@ técnicas**!";
+"Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "Sempre transmita o que você aprendeu! Você já aprendeu **%@ técnicas**!";
+
+"See All" = "Ver tudo";
+"Details" = "Detalhes";
+"Done" = "Concluído";
+
+"Timetable" = "Horário";
+"Select" = "Selecionar";
+
+"Journal" = "Diário";
+"Congratulations!" = "Parabéns!";
+"You’ve reached" = "Você alcançou";
+"Hey! Add trainig sessions to track your BJJ progress journey!" = "Ei! Adicione sessões de treinamento para acompanhar seu progresso no BJJ.";
+"Your records will always be at hand!" = "Seus registros sempre estarão à mão!";
+
+"Statistics" = "Estatísticas";
+
+"Week" = "Semana";
+"Month" = "Mês";
+"Year" = "Ano";
+
+"Types of sessions" = "Tipos de sessões";
+"Sessions by grapling style" = "Sessões por estilo de grappling";
+"Gi sessions" = "Sessões Gi";
+"No Gi sessions" = "Sessões No Gi";
+
+"Select image to share with training stats" = "Selecione uma imagem para compartilhar com as estatísticas de treinamento";
+"Share your training results with others!" = "Compartilhe seus resultados de treinamento com outros!";
+
+"Profile" = "Perfil";
+
+"Language" = "Idioma";
+"English" = "Inglês";
+"Ukrainian" = "Ucraniano";
+"Notifications" = "Notificações";
+"Allow push notifications" = "Permitir notificações push";
+"Allow notifications" = "Permitir notificações";
+"Be notified about nearest events and\nachivements. You can change it anytime." = "Seja notificado sobre os eventos mais próximos e\nconquistas. Você pode alterar isso a qualquer momento.";
+"Report an issue" = "Relatar um problema";
+"Rate the app" = "Avaliar o app";
+"Share the app" = "Compartilhar o app";
+
+"Support the project" = "Apoiar o projeto";
+
+"Found an issue in JiuTrack app" = "Encontrou um problema no aplicativo JiuTrack";
+
+"Progress" = "Progresso";
+"Stripe" = "Lista";
+"Stripes" = "Listas";
+"Select Grading System" = "Selecionar sistema de graduação";
+
+"%@ belt %@ stripes" = "%@ faixa %@ listas";
+"%@ belt %@ stripes!" = "%@ faixa %@ listas!";
+"Stripes: %@" = "Listas: %@";
+"%@ belt" = "%@ faixa";
+"%@ belt!" = "%@ faixa!";
+
+"Belt" = "Faixa";
+"belt" = "faixa";
+"Adult" = "Adulto";
+"Junior" = "Júnior";
+"adult" = "adulto";
+"junior" = "júnior";
+
+"White" = "Branco";
+"Blue" = "Azul";
+"Purple" = "Roxo";
+"Brown" = "Marrom";
+"Black" = "Preto";
+"Grey/White" = "Cinza/Branco";
+"Grey" = "Cinza";
+"Grey/Black" = "Cinza/Preto";
+"Yellow/White" = "Amarelo/Branco";
+"Yellow" = "Amarelo";
+"Yellow/Black" = "Amarelo/Preto";
+"Orange/White" = "Laranja/Branco";
+"Orange" = "Laranja";
+"Orange/Black" = "Laranja/Preto";
+"Green/White" = "Verde/Branco";
+"Green" = "Verde";
+"Green/Black" = "Verde/Preto";
+
+"View all Apple Health data" = "Ver todos os dados do Apple Health";
+"%@ calories burned" = "%@ calorias queimadas";
+"Duration" = "Duração";
+"Calories" = "Calorias";
+"Connect" = "Conectar";
+"Connect with" = "Conectar com";
+"Train smarter by connecting your JiuTrack app to Apple Health" = "Treine de forma mais inteligente conectando seu aplicativo JiuTrack ao Apple Health";
+"Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**" = "A integração com o Apple Health requer permissões em **Configurações -> Privacidade -> Saúde -> JiuTrack**";

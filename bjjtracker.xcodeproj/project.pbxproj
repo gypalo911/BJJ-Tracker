@@ -248,6 +248,9 @@
 		D0839D822A5D6D5B00D315C8 /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
 		D0839D842A5D720B00D315C8 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TechniqueModel+extension.swift"; sourceTree = "<group>"; };
+		D08F8FCE2D301ABA002317D7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D08F8FCF2D301B21002317D7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D08F8FD02D301B2A002317D7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D093017F2B7E4025000CED3D /* ShareSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSessionView.swift; sourceTree = "<group>"; };
 		D098BBE029E0947B00A9A068 /* CalendarDayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayViews.swift; sourceTree = "<group>"; };
 		D098BBE429E0CE3300A9A068 /* StatsPanelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelsView.swift; sourceTree = "<group>"; };
@@ -940,6 +943,9 @@
 				en,
 				Base,
 				uk,
+				fr,
+				es,
+				"pt-BR",
 			);
 			mainGroup = D060BA7129DDAD9A00E10562;
 			packageReferences = (
@@ -1257,6 +1263,9 @@
 			children = (
 				D00109B22A0D2F9A008433CC /* en */,
 				D00109B42A0D2F9C008433CC /* uk */,
+				D08F8FCE2D301ABA002317D7 /* fr */,
+				D08F8FCF2D301B21002317D7 /* es */,
+				D08F8FD02D301B2A002317D7 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1390,7 +1399,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
@@ -1411,7 +1420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1432,7 +1441,7 @@
 				CODE_SIGN_ENTITLEMENTS = bjjtracker/bjjtrackerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 7FSBT8CDC5;
 				ENABLE_PREVIEWS = YES;
@@ -1453,7 +1462,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
