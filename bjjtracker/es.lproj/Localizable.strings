@@ -22,10 +22,10 @@
 "3. Number of stripes:" = "3. Número de franjas:";
 "4. Select date:" = "4. Seleccionar fecha:";
 
-"1. Select type:" = "1. Seleccionar tipo:";
-"2. Select grappling style:" = "2. Seleccionar estilo de grappling:";
-"3. Select date and time:" = "3. Seleccionar fecha y hora:";
-"4. Duration:" = "4. Duración:";
+"Select type:" = "Seleccionar tipo:";
+"Select grappling style:" = "Seleccionar estilo de grappling:";
+"Select date and time:" = "Seleccionar fecha y hora:";
+"Duration:" = "4. Duración:";
 "Location:" = "Ubicación:";
 "Location..." = "Ubicación...";
 "Add some details..." = "Agregar algunos detalles...";

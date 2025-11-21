@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */; };
 		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
+		B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */; };
+		B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */; };
 		D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */; };
 		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
@@ -68,7 +70,6 @@
 		D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E48842A92597E0041F370 /* AppleHealthCardView.swift */; };
 		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
 		D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */; };
-		D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */; };
 		D070C9532A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */; };
 		D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */; };
 		D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */; };
@@ -168,6 +169,8 @@
 		7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker/Pods-bjjtracker.release.xcconfig"; sourceTree = "<group>"; };
 		9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker_bjjtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysPicker.swift; sourceTree = "<group>"; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
@@ -236,7 +239,6 @@
 		D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D06E48842A92597E0041F370 /* AppleHealthCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthCardView.swift; sourceTree = "<group>"; };
 		D06F86192A1F93C800270558 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
-		D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsEngine.swift; sourceTree = "<group>"; };
 		D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsList.swift; sourceTree = "<group>"; };
 		D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltPromotionsListCell.swift; sourceTree = "<group>"; };
@@ -346,6 +348,14 @@
 				04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B85B34E52ED0BD3A0027D77B /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */,
+			);
+			path = Pickers;
 			sourceTree = "<group>";
 		};
 		D00109AC2A0BABD4008433CC /* Components */ = {
@@ -522,7 +532,7 @@
 				D02D1FF32A5AE261006BB617 /* DesignSystem */,
 				D070C9512A3C592B00DCEED5 /* Analytics */,
 				D0B236AF2A0E5012003B8449 /* bjjtrackerRelease.entitlements */,
-				D070C94F2A3C53A100DCEED5 /* GoogleService-Info.plist */,
+				B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */,
 				D060BA8B29DDAD9C00E10562 /* Info.plist */,
 				D0DE5AFB2A264B1400E0B7DF /* LaunchScreen.storyboard */,
 				D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */,
@@ -725,6 +735,7 @@
 		D098BBEC29E2C0DA00A9A068 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B85B34E52ED0BD3A0027D77B /* Pickers */,
 				D0C1D7EE2A9F88D7000FCF37 /* NavBar */,
 				D05C9EFC2A6AB7BF007D5AF0 /* BottomSheet */,
 				D098BBE229E0CDFD00A9A068 /* Calendar */,
@@ -970,10 +981,10 @@
 				D060BA8529DDAD9C00E10562 /* Preview Assets.xcassets in Resources */,
 				D0DE5AFC2A264B1400E0B7DF /* LaunchScreen.storyboard in Resources */,
 				D01187CE2A7A97E800A2FCC7 /* Images.xcassets in Resources */,
-				D070C9502A3C53A100DCEED5 /* GoogleService-Info.plist in Resources */,
 				D05C9F112A710EC7007D5AF0 /* Colors.xcassets in Resources */,
 				D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */,
 				D060BA8229DDAD9C00E10562 /* Icons.xcassets in Resources */,
+				B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,9 +1057,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1063,9 +1078,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker/Pods-bjjtracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker/Pods-bjjtracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1196,6 +1215,7 @@
 				D0839D7D2A5C7D4300D315C8 /* TagViewWithTextField.swift in Sources */,
 				D0839D812A5D6D4200D315C8 /* Publishers+extension.swift in Sources */,
 				D01187D22A7BBB3400A2FCC7 /* ViewSizeModifier.swift in Sources */,
+				B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */,
 				D02D1FF92A5AE2C5006BB617 /* DesignSystem+Font.swift in Sources */,
 				D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */,
 				D03710A72B7BAA83007A2124 /* TechniquesViewVM.swift in Sources */,
@@ -1325,7 +1345,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1381,7 +1401,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1401,7 +1421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 7FSBT8CDC5;
+				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bjjtracker/Info.plist;
@@ -1415,7 +1435,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1426,6 +1446,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1443,7 +1464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 7FSBT8CDC5;
+				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bjjtracker/Info.plist;
@@ -1457,7 +1478,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1469,6 +1490,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

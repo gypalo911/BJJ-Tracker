@@ -83,4 +83,23 @@ extension View {
         appearance.backgroundColor = color
         UINavigationBar.appearance().standardAppearance = appearance
     }
+    
+    @ViewBuilder
+    func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
+            }
+        } else {
+            self
+        }
+    }
+    
+    func defaultPicker() -> some View {
+        self
+            .pickerStyle(.automatic)
+            .padding(.horizontal, 16)
+            .accentColor(.black)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
+    }
 }

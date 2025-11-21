@@ -37,7 +37,7 @@ struct EditSessionView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "1. Select type:".localizedString)
+                                TitleTextView(text: "Select type:".localizedString)
 
                                 SelectionPanelView(
 //                                    geometry: geometry,
@@ -48,7 +48,7 @@ struct EditSessionView: View {
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "2. Select grappling style:".localizedString)
+                                TitleTextView(text: "Select grappling style:".localizedString)
                                 SelectionPanelView(
 //                                    geometry: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
@@ -57,14 +57,14 @@ struct EditSessionView: View {
                                 )
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "3. Select date and time:".localizedString)
+                                TitleTextView(text: "Select date and time:".localizedString)
                                 DatePicker("", selection: $activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "4. Duration:".localizedString)
+                                TitleTextView(text: "Duration:".localizedString)
 
                                 DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
                                 if isPickerPresented {

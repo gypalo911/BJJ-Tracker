@@ -72,6 +72,10 @@ extension Date {
         
         return Calendar.current.date(from: components) ?? self
     }
+    
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
 }
 
 struct DateValue: Identifiable {
