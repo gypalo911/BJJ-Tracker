@@ -37,8 +37,8 @@ struct DaysPicker: View {
                     Text(String(day.title))
                         .font(.body.bold())
                         .foregroundColor(.white)
-                        .frame(width: 45, height: 45)
-                        .background(Circle().fill(
+                        .frame(width: 60, height: 32)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(
                             selectedDays.contains(day) ? Color("Blue") : Color("LightGray")
                         ))
                         .onTapGesture {

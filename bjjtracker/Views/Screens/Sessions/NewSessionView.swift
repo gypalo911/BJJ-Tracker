@@ -194,13 +194,17 @@ struct NewSessionView: View {
 
     private var durationSection: some View {
         VStack(alignment: .leading) {
-            TitleTextView(text: Localisation.step3Duration)
-
-            DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
+            HStack {
+                TitleTextView(text: Localisation.step3Duration)
+                
+                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
+            }
             if isPickerPresented {
                 DurationPicker(duration: $activity.duration)
                     .frame(height: 150)
                     .frame(maxWidth: screenWidth)
+                    .frame(maxWidth: .infinity)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
             }
         }
     }
@@ -220,9 +224,23 @@ struct NewSessionView: View {
                 }
                 
                 // Summary of selection
-                Text(recurringSettings.summaryDescription)
-                    .font(.callout)
-                    .foregroundColor(Color("Blue"))
+                VStack(alignment: .leading, spacing: 5) {
+                    HStack(alignment: .top, spacing: 8) {
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 16, height: 16)
+                            .foregroundStyle(Color("Blue"))
+                            .padding(.top, 2)
+                        Text(recurringSettings.summaryDescription)
+                            .font(.callout)
+                            .foregroundStyle(Color("Blue"))
+                        Spacer()
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
 
                 if recurringSettings.isRepeatable {
                     Divider()
