@@ -73,7 +73,7 @@ struct ContentView: View {
             case .promotion:
                 AddPromotionView(viewModel: .init())
             case .activity:
-                NewSessionView(viewModel: .init())
+                NewSessionView(viewModel: .init(persistanceManager: persistanceManager))
             }
         }
         .onChange(of: settings.showingActionSheet) { value in

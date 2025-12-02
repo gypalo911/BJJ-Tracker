@@ -156,7 +156,7 @@ struct JournalView: View {
                     case .promotion:
                         AddPromotionView(viewModel: .init())
                     case .activity:
-                        NewSessionView(viewModel: .init())
+                        NewSessionView(viewModel: .init(persistanceManager: persistanceManager))
                     }
                 }
                 .navigationTitle("Journal")

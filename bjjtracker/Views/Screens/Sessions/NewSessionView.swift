@@ -7,105 +7,14 @@
 
 import SwiftUI
 
-enum RepeatType: String, CaseIterable, Identifiable {
-    case weekly = "Weekly"
-    case monthly = "Monthly"
-    
-    var id: String { self.rawValue }
-    
-    var title: String {
-        self.rawValue.localizedString
-    }
-}
-
-enum RepeatCondition: String, CaseIterable, Identifiable {
-    case every1Week = "Every Week"
-    case every2Weeks = "Every 2 Weeks"
-    
-    var id: String { self.rawValue }
-    
-    var title: String {
-        self.rawValue.localizedString
-    }
-}
-
-enum EndCondition: String, CaseIterable, Identifiable {
-    case never = "Never"
-    case onDate = "On date"
-    
-    var id: String { self.rawValue }
-    
-    var title: String {
-        self.rawValue.localizedString
-    }
-}
-
-
-class RecurringSettings: ObservableObject {
-    @Published var isRepeatable: Bool = true
-    @Published var repeatType: RepeatType = .weekly
-    @Published var repeatCondition: RepeatCondition = .every1Week
-    @Published var selectedDays: [DaysPicker.Day] = []
-    @Published var endCondition: EndCondition = .never
-    @Published var endDate: Date = Date()
-    
-    var summaryDescription: String {
-        guard isRepeatable else { return "Does not repeat".localizedString }
-
-        switch repeatType {
-        case .weekly:
-            let interval: String = repeatCondition.title
-
-            let dayTitles = selectedDays
-                .sorted { $0.rawValue < $1.rawValue }
-                .map { $0.localizedTitle }
-                .joined(separator: ", ")
-
-            let base = dayTitles.isEmpty ? interval : interval + " on " + dayTitles
-
-            switch endCondition {
-            case .never:
-                return base
-            case .onDate:
-                let formattedDate = endDate.formatted(.dateTime.year().month(.wide).day())
-                return base + " until " + formattedDate
-            }
-
-        case .monthly:
-            let base = "Every month".localizedString
-            switch endCondition {
-            case .never:
-                return base
-            case .onDate:
-                let formattedDate = endDate.formatted(.dateTime.year().month(.wide).day())
-                return base + " until " + formattedDate
-            }
-        }
-    }
-
-    // Placeholder: without business rules for generating occurrences, we expose a string hook.
-    // Replace the implementation once occurrence generation is available.
-    var sessionsCountDescription: String {
-        // TODO: compute actual number of sessions based on rules and a range
-        return "" // Return empty when unknown
-    }
-}
-
 struct NewSessionView: View {
     
+    typealias Localisation = NewSessionViewViewModel.Localisation
+    
     @EnvironmentObject var settings: AppSettings
-    
+    @Environment(\.dismiss) private var dismiss
+
     @StateObject var viewModel: NewSessionViewViewModel
-    
-    @State private var isPickerPresented = false
-    @ObservedObject private var recurringSettings: RecurringSettings = .init()
-    
-    @EnvironmentObject var persistanceManager: PersistanceManager
-    
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.managedObjectContext) var managedObjContext
-    
-    @StateObject var activity: Activity = .init(type: .training, style: .gi, duration: 60, startDate: Date(), location: "", notes: "")
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
@@ -137,7 +46,7 @@ struct NewSessionView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                             viewModel.popupDismissed()
                         } label: {
                             Image("back")
@@ -148,9 +57,8 @@ struct NewSessionView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            save()
-                            NotificationManager.shared.scheduleNotification(activity: activity)
-                            presentationMode.wrappedValue.dismiss()
+                            viewModel.saveActivity()
+                            dismiss()
                         } label: {
                             Text(Localisation.save)
                                 .fixedSize()
@@ -161,11 +69,7 @@ struct NewSessionView: View {
             }
         }
         .onAppear {
-            activity.startDate = settings.selectedCalendarDate
-
-            if let selectedDay = DaysPicker.Day(rawValue: Date().dayNumberOfWeek() ?? 0), recurringSettings.selectedDays.isEmpty {
-              recurringSettings.selectedDays = [selectedDay]
-            }
+            viewModel.onAppear()
         }
     }
     
@@ -175,8 +79,8 @@ struct NewSessionView: View {
             
             SelectionPanelView(
                 valuesList: ActivityType.allCases.map { $0.rawValue },
-                selectedType: $activity.type,
-                selectedTypeValue: activity.type.rawValue
+                selectedType: $viewModel.activity.type,
+                selectedTypeValue: viewModel.activity.type.rawValue
             )
         }.padding(.top, 10)
     }
@@ -186,8 +90,8 @@ struct NewSessionView: View {
             TitleTextView(text: Localisation.step2SelectGrapplingStyle)
             SelectionPanelView(
                 valuesList: GraplingStyle.allCases.map { $0.rawValue },
-                selectedType: $activity.style,
-                selectedTypeValue: activity.style.rawValue
+                selectedType: $viewModel.activity.style,
+                selectedTypeValue: viewModel.activity.style.rawValue
             )
         }
     }
@@ -197,10 +101,10 @@ struct NewSessionView: View {
             HStack {
                 TitleTextView(text: Localisation.step3Duration)
                 
-                DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
+                DurationSelectorView(isPickerPresented: $viewModel.isPickerPresented, duration: $viewModel.activity.duration)
             }
-            if isPickerPresented {
-                DurationPicker(duration: $activity.duration)
+            if viewModel.isPickerPresented {
+                DurationPicker(duration: $viewModel.activity.duration)
                     .frame(height: 150)
                     .frame(maxWidth: screenWidth)
                     .frame(maxWidth: .infinity)
@@ -212,7 +116,7 @@ struct NewSessionView: View {
     private var dateAndRepeat: some View {
         VStack(alignment: .leading) {
             TitleTextView(text: Localisation.step4SelectDateAndTime)
-            DatePicker("", selection: $activity.startDate)
+            DatePicker("", selection: $viewModel.activity.startDate)
                 .datePickerStyle(.compact)
                 .fixedSize()
                 .offset(x: -2)
@@ -220,7 +124,7 @@ struct NewSessionView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Text(Localisation.repeatSession)
-                    Toggle("", isOn: $recurringSettings.isRepeatable.animation(.easeInOut))
+                    Toggle("", isOn: $viewModel.recurringSettings.isRepeatable.animation(.easeInOut))
                 }
                 
                 // Summary of selection
@@ -232,9 +136,17 @@ struct NewSessionView: View {
                             .frame(width: 16, height: 16)
                             .foregroundStyle(Color("Blue"))
                             .padding(.top, 2)
-                        Text(recurringSettings.summaryDescription)
-                            .font(.callout)
-                            .foregroundStyle(Color("Blue"))
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(viewModel.recurringSettings.summaryDescription)
+                                .font(.callout)
+                                .foregroundStyle(Color("DarkBlue"))
+                            let sessionsCountDescription = viewModel.recurringSettings.sessionsCountDescription(from: viewModel.activity.startDate)
+                            if !sessionsCountDescription.isEmpty && viewModel.recurringSettings.isRepeatable {
+                                Text(sessionsCountDescription)
+                                    .font(.callout)
+                                    .foregroundStyle(Color("Blue"))
+                            }
+                        }
                         Spacer()
                     }
                 }
@@ -242,20 +154,20 @@ struct NewSessionView: View {
                 .frame(maxWidth: .infinity)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
 
-                if recurringSettings.isRepeatable {
+                if viewModel.recurringSettings.isRepeatable {
                     Divider()
                     
                     Text(Localisation.recurringSectionTitle)
                     HStack {
-                        Picker("Recurring", selection: $recurringSettings.repeatType) {
+                        Picker("Recurring", selection: $viewModel.recurringSettings.repeatType) {
                             ForEach(RepeatType.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }
                         }
                         .defaultPicker()
                         
-                        if recurringSettings.repeatType == .weekly {
-                            Picker("RepeatCondition", selection: $recurringSettings.repeatCondition) {
+                        if viewModel.recurringSettings.repeatType == .weekly {
+                            Picker("RepeatCondition", selection: $viewModel.recurringSettings.repeatCondition) {
                                 ForEach(RepeatCondition.allCases, id: \.self) {
                                     Text($0.title).tag($0)
                                 }
@@ -264,31 +176,25 @@ struct NewSessionView: View {
                         }
                     }
                     
-                    if recurringSettings.repeatType == .weekly {
+                    if viewModel.recurringSettings.repeatType == .weekly {
                         VStack(alignment: .leading, spacing: 20) {
                             Text(Localisation.repeatsEvery)
-                            DaysPicker(selectedDays: $recurringSettings.selectedDays)
+                            DaysPicker(selectedDays: $viewModel.recurringSettings.selectedDays)
                         }
-                    }
-
-                    if !recurringSettings.sessionsCountDescription.isEmpty {
-                        Text(recurringSettings.sessionsCountDescription)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
                     }
                     
                     Text(Localisation.endCondition)
                         .defaultShadow()
                     HStack {
-                        Picker("End condition", selection: $recurringSettings.endCondition) {
+                        Picker("End condition", selection: $viewModel.recurringSettings.endCondition) {
                             ForEach(EndCondition.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }
                         }
                         .defaultPicker()
 
-                        if recurringSettings.endCondition == .onDate {
-                            DatePicker("", selection: $recurringSettings.endDate, displayedComponents: [.date])
+                        if viewModel.recurringSettings.endCondition == .onDate {
+                            DatePicker("", selection: $viewModel.recurringSettings.endDate, displayedComponents: [.date])
                                 .datePickerStyle(.automatic)
                         }
                     }
@@ -308,7 +214,7 @@ struct NewSessionView: View {
     private var locationSection: some View {
         VStack(alignment: .leading) {
             TitleTextView(text: Localisation.locationTitle)
-            TextField(Localisation.locationPlaceholder, text: $activity.location)
+            TextField(Localisation.locationPlaceholder, text: $viewModel.activity.location)
                 .padding(20)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
@@ -321,51 +227,21 @@ struct NewSessionView: View {
     private var notesSection: some View {
         VStack(alignment: .leading) {
             TitleTextView(text: Localisation.notesTitle)
-            CustomTextEditor(text: $activity.notes)
+            CustomTextEditor(text: $viewModel.activity.notes)
         }
-    }
-
-    func save() {
-        persistanceManager.createSession(from: activity)
-        viewModel.sessionCreated(from: activity)
-    }
-}
-
-extension NewSessionView {
-    enum Localisation {
-        static var newSession: String { "New Session".localizedString }
-
-        // Step titles
-        static var step1SelectType: String { "1. " + "Select type:".localizedString }
-        static var step2SelectGrapplingStyle: String { "2. " + "Select grappling style:".localizedString }
-        static var step3Duration: String { "3. " + "Duration:".localizedString }
-        static var step4SelectDateAndTime: String { "4. " + "Select date and time:".localizedString }
-
-        // Recurring/Repeat section
-        static var repeatSession: String { "Repeat session".localizedString }
-        static var recurringSectionTitle: String { "Recurring".localizedString }
-        static var repeatsEvery: String { "Repeats every:".localizedString }
-        static var endCondition: String { "End condition".localizedString }
-
-        // Duration and controls
-        static var save: String { "Save".localizedString }
-
-        // Form fields
-        static var locationTitle: String { "Location:".localizedString }
-        static var locationPlaceholder: String { "Location...".localizedString }
-        static var notesTitle: String { "Notes".localizedString }
     }
 }
 
 struct NewSessionView_Previews: PreviewProvider {
     struct Container: View {
         var body: some View {
-            NewSessionView(viewModel: .init())
+            NewSessionView(viewModel: .init(persistanceManager: PersistanceManager(inMemory: true)))
         }
     }
     
     static var previews: some View {
             Container()
                 .environmentObject(AppSettings())
+                .environmentObject(PersistanceManager(inMemory: true))
     }
 }

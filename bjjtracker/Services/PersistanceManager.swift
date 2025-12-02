@@ -61,16 +61,24 @@ class PersistanceManager: ObservableObject {
     
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "bjjtracker")
+
+        // 🔥 Enable lightweight migration
+        container.persistentStoreDescriptions.first!.shouldMigrateStoreAutomatically = true
+        container.persistentStoreDescriptions.first!.shouldInferMappingModelAutomatically = true
+
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
-                fatalError("Unresolved \(error), \(error.userInfo)")
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
+
+        // Context options
         container.viewContext.automaticallyMergesChangesFromParent = true
+
         #if !DEBUG
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         #endif

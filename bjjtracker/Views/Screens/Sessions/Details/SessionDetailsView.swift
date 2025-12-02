@@ -47,8 +47,8 @@ struct SessionDetailsView: View {
                     isPresentedEditing: $isPresentedEditing,
                     showShareSheet: $showShareSheet,
                     dismissCallback: dismissCallback,
-                    onDelete: {
-                        viewModel.deleteSession()
+                    onDelete: { deleteFutureSessions in
+                        viewModel.deleteSession(shouldDeleteRepeatableSessions: deleteFutureSessions)
                         dismissCallback?()
                     }
                 )
@@ -189,7 +189,7 @@ struct SessionDetailsHeaderView: View {
     @Binding var showShareSheet: Bool
     
     var dismissCallback: (() -> Void)? = nil
-    var onDelete: (() -> Void)? = nil
+    var onDelete: ((Bool) -> Void)? = nil
     
     var sessionId: String {
         session.id?.uuidString ?? ""
@@ -260,9 +260,16 @@ struct SessionDetailsHeaderView: View {
                         }
                         Divider()
                         Button(role: .destructive, action: {
-                            onDelete?()
+                            onDelete?(false)
                         }) {
                             Label("Delete", systemImage: "trash")
+                        }
+                        if session.repeatableId != nil {
+                            Button(role: .destructive, action: {
+                                onDelete?(true)
+                            }) {
+                                Label("Delete all repeatable sessions", systemImage: "trash")
+                            }
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -336,9 +343,23 @@ struct SessionDetailsHeaderView: View {
                                     .foregroundColor(.white)
                             } else {
                                 Text(LocalizedStringKey("Empty"))
-                                    .foregroundColor(Color("LightGray"))
+                                    .foregroundColor(.white)
                                     .fontWeight(.semibold)
                                     .font(.title3)
+                            }
+                        }
+                        
+                        if session.repeatableId != nil {
+                            HStack(spacing: 10) {
+                                Image(systemName: "repeat.circle")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.white)
+                                Text("Repeatable session")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                Spacer()
                             }
                         }
                     }

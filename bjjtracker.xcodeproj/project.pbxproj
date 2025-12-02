@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */; };
+		B821571F2EDF17D600572265 /* SessionRepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */; };
+		B82157202EDF17D600572265 /* SessionRepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */; };
 		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
 		B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */; };
 		B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */; };
@@ -169,6 +171,8 @@
 		7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker/Pods-bjjtracker.release.xcconfig"; sourceTree = "<group>"; };
 		9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker_bjjtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepeatSettings.swift; sourceTree = "<group>"; };
+		B82157502EDF24EB00572265 /* bjjtracker_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bjjtracker_v2.xcdatamodel; sourceTree = "<group>"; };
 		B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysPicker.swift; sourceTree = "<group>"; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -348,6 +352,14 @@
 				04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B82157212EDF236600572265 /* CoreDataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */,
+			);
+			path = CoreDataRepository;
 			sourceTree = "<group>";
 		};
 		B85B34E52ED0BD3A0027D77B /* Pickers */ = {
@@ -540,7 +552,7 @@
 				D060BA8129DDAD9C00E10562 /* Icons.xcassets */,
 				D01187CD2A7A97E800A2FCC7 /* Images.xcassets */,
 				D05C9F102A710EC7007D5AF0 /* Colors.xcassets */,
-				D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */,
+				B82157212EDF236600572265 /* CoreDataRepository */,
 				D0A00ED729DDE3B100DCD5BB /* Helpers */,
 				D00109B32A0D2F9A008433CC /* Localizable.strings */,
 				D060BAAD29DDAE1700E10562 /* Models */,
@@ -581,6 +593,7 @@
 		D060BAAD29DDAE1700E10562 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */,
 				D0A00ECD29DDC9B100DCD5BB /* Activity.swift */,
 				D0A00ECF29DDCE7300DCD5BB /* ModalsEnums.swift */,
 				D098BBF229E2C2FA00A9A068 /* Promotion.swift */,
@@ -1206,6 +1219,7 @@
 				D0AD47A72A14E1BD004AAA6A /* DashboardViewModel.swift in Sources */,
 				D03C02882A7D0D270004E5BF /* BottomSheetModifier.swift in Sources */,
 				D0A00ED929DDE3C600DCD5BB /* Session+extension.swift in Sources */,
+				B82157202EDF17D600572265 /* SessionRepeatSettings.swift in Sources */,
 				D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */,
 				D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */,
 				D03109512A939B2B00C24B17 /* TechniquesCardView.swift in Sources */,
@@ -1247,6 +1261,7 @@
 				D0B8B7242A3C9DDE00A2418F /* DashboardViewModel.swift in Sources */,
 				D0B8B72C2A3C9F3800A2418F /* String+extension.swift in Sources */,
 				D0B8B7282A3C9F2C00A2418F /* Session+extension.swift in Sources */,
+				B821571F2EDF17D600572265 /* SessionRepeatSettings.swift in Sources */,
 				D0B8B7272A3C9F2100A2418F /* Date+extension.swift in Sources */,
 				D0B8B72D2A3C9F4A00A2418F /* Activity.swift in Sources */,
 				D0B8B72B2A3C9F3600A2418F /* Int+extension.swift in Sources */,
@@ -1666,9 +1681,10 @@
 		D060BA8829DDAD9C00E10562 /* bjjtracker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B82157502EDF24EB00572265 /* bjjtracker_v2.xcdatamodel */,
 				D060BA8929DDAD9C00E10562 /* bjjtracker.xcdatamodel */,
 			);
-			currentVersion = D060BA8929DDAD9C00E10562 /* bjjtracker.xcdatamodel */;
+			currentVersion = B82157502EDF24EB00572265 /* bjjtracker_v2.xcdatamodel */;
 			path = bjjtracker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

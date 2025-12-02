@@ -10,9 +10,11 @@ import CoreData
 protocol SessionsStorageManager {
     func fetchSessions(in interval: DateInterval?) -> [Session]
     func session(by id: String) -> Session?
+    func sessions(with repeatableId: String) -> [Session]
     func createSession(from activity: Activity)
     func edit(session: Session, activity: Activity)
     func delete(session: Session)
+    func deleteRepeatableSessions(with repeatableId: String)
 }
 
 extension PersistanceManager: SessionsStorageManager {
@@ -57,11 +59,29 @@ extension PersistanceManager: SessionsStorageManager {
         return nil
     }
     
+    func sessions(with repeatableId: String) -> [Session] {
+        let context = self.container.viewContext
+        let requestSessions: NSFetchRequest<Session> = Session.fetchRequest()
+        
+        let query = NSPredicate(format: "%K == %@", "repeatableId", repeatableId as CVarArg)
+        requestSessions.predicate = query
+        
+        do {
+            let foundEntities: [Session] = try context.fetch(requestSessions)
+            return foundEntities
+        } catch {
+            let fetchError = error as NSError
+            debugPrint(fetchError)
+        }
+        
+        return []
+    }
+    
     func createSession(from activity: Activity) {
         let context = self.container.viewContext
         let session = Session(context: context)
         session.update(with: activity)
-        DefaultHealthKitService().store(session: session)
+//        DefaultHealthKitService().store(session: session)
         
         save(context: context)
     }
@@ -75,8 +95,18 @@ extension PersistanceManager: SessionsStorageManager {
     
     func delete(session: Session) {
         let context = self.container.viewContext
-        DefaultHealthKitService().delete(session: session)
+//        DefaultHealthKitService().delete(session: session)
         context.delete(session)
+        
+        save(context: context)
+    }
+    
+    func deleteRepeatableSessions(with repeatableId: String) {
+        let context = self.container.viewContext
+        let sessions = sessions(with: repeatableId)
+        sessions.forEach {
+            context.delete($0)
+        }
         
         save(context: context)
     }

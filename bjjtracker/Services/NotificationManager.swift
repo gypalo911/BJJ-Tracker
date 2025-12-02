@@ -7,7 +7,15 @@
 
 import NotificationCenter
 
-struct NotificationManager {
+protocol NotificationManagerProtocol {
+    var isAuthorized: Bool { get }
+    var authrorizationStatus: UNAuthorizationStatus { get }
+    func requestAuthorization(completion: @escaping  (Bool) -> Void)
+    func scheduleNotification(activity: Activity)
+    func removePendingNotificationRequests(with ids: [String])
+}
+
+struct NotificationManager: NotificationManagerProtocol {
     
     static let shared = NotificationManager()
     

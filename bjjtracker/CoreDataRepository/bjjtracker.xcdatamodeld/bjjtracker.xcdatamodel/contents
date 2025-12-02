@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24411" systemVersion="25B78" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="PromotionModel" representedClassName="PromotionModel" syncable="YES" codeGenerationType="class">
         <attribute name="belt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="704982720" usesScalarValueType="NO"/>

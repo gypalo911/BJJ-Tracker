@@ -51,6 +51,7 @@ enum ActivityStatus: String {
 class Activity: ObservableObject, Identifiable, Equatable {
     
     @Published var id = UUID()
+    @Published var repeatableId: String?
     @Published var type: ActivityType
     @Published var style: GraplingStyle
     @Published var duration: Int
@@ -73,8 +74,9 @@ class Activity: ObservableObject, Identifiable, Equatable {
         Int(Double(duration) / 60 * 600)
     }
     
-    init(id: UUID = UUID(), type: ActivityType, style: GraplingStyle, duration: Int, startDate: Date, location: String, notes: String) {
+    init(id: UUID = UUID(), repeatableId: String? = nil, type: ActivityType, style: GraplingStyle, duration: Int, startDate: Date, location: String, notes: String) {
         self.id = id
+        self.repeatableId = repeatableId
         self.type = type
         self.style = style
         self.duration = duration

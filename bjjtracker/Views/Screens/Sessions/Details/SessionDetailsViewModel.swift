@@ -70,8 +70,12 @@ class SessionDetailsViewModel: ObservableObject {
         return []
     }
     
-    func deleteSession() {
-        persistanceManager.delete(session: session)
+    func deleteSession(shouldDeleteRepeatableSessions: Bool = false) {
+        if let repeatableId = session.repeatableId, shouldDeleteRepeatableSessions {
+            persistanceManager.deleteRepeatableSessions(with: repeatableId)
+        } else {
+            persistanceManager.delete(session: session)
+        }
         NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
     }
 }
