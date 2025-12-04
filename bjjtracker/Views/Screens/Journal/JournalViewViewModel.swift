@@ -61,7 +61,9 @@ class JournalViewViewModel: ObservableObject {
     }
     
     // MARK: Functions
-    func fetchSessions(in interval: DateInterval? = nil) {
+    func fetchSessions() {
+        let endOfToday = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date()) ?? Date()
+        let interval = DateInterval(start: .distantPast, end: endOfToday)
         let fetchedSessions = persistanceManager.fetchSessions(in: interval)
         sessions = fetchedSessions
     }

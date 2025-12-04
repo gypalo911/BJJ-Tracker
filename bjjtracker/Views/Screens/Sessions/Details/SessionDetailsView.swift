@@ -10,6 +10,12 @@ import Combine
 import LinkPresentation
 import Introspect
 
+enum DeleteSessionType: Equatable {
+    case current
+    case all
+    case future(after: Date?)
+}
+
 // MARK: SessionDetailsView
 struct SessionDetailsView: View {
     
@@ -23,6 +29,7 @@ struct SessionDetailsView: View {
     
     @State private var isPresentedEditing: Bool = false
     @State private var showShareSheet: Bool = false
+    @State private var showDeleteItemsDialog: Bool = false
     @State private var urlToPresent: String?
     
     var dismissCallback: (() -> Void)? = nil
@@ -46,9 +53,10 @@ struct SessionDetailsView: View {
                     navTitle: viewModel.navTitle,
                     isPresentedEditing: $isPresentedEditing,
                     showShareSheet: $showShareSheet,
+                    showDeleteItemsDialog: $showDeleteItemsDialog,
                     dismissCallback: dismissCallback,
-                    onDelete: { deleteFutureSessions in
-                        viewModel.deleteSession(shouldDeleteRepeatableSessions: deleteFutureSessions)
+                    onDelete: { type in
+                        viewModel.deleteSession(type: type)
                         dismissCallback?()
                     }
                 )
@@ -155,6 +163,20 @@ struct SessionDetailsView: View {
                     )
                 }
             }
+            .confirmationDialog("Delete sessions", isPresented: $showDeleteItemsDialog.animation(.easeInOut)) {
+                Button("Delete only this session", role: .destructive) {
+                    onSessionDelete(.current)
+                }
+                Button("Delete all sessions", role: .destructive) {
+                    onSessionDelete(.all)
+                }
+                Button("Delete all future sessions", role: .destructive) {
+                    onSessionDelete(.future(after: viewModel.session.startDate))
+                }
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Delete sessions")
+            }
         }
         .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = true
@@ -176,6 +198,11 @@ struct SessionDetailsView: View {
     func hideTabbar(_ isHidden: Bool) {
         settings.isTabBarHidden = isHidden
     }
+    
+    private func onSessionDelete(_ type: DeleteSessionType) {
+        viewModel.deleteSession(type: type)
+        dismissCallback?()
+    }
 }
 
 // MARK: SessionDetailsHeaderView
@@ -187,9 +214,10 @@ struct SessionDetailsHeaderView: View {
     
     @Binding var isPresentedEditing: Bool
     @Binding var showShareSheet: Bool
+    @Binding var showDeleteItemsDialog: Bool
     
     var dismissCallback: (() -> Void)? = nil
-    var onDelete: ((Bool) -> Void)? = nil
+    var onDelete: ((DeleteSessionType) -> Void)? = nil
     
     var sessionId: String {
         session.id?.uuidString ?? ""
@@ -260,16 +288,13 @@ struct SessionDetailsHeaderView: View {
                         }
                         Divider()
                         Button(role: .destructive, action: {
-                            onDelete?(false)
+                            if session.repeatableId != nil {
+                                showDeleteItemsDialog = true
+                            } else {
+                                onDelete?(.current)
+                            }
                         }) {
                             Label("Delete", systemImage: "trash")
-                        }
-                        if session.repeatableId != nil {
-                            Button(role: .destructive, action: {
-                                onDelete?(true)
-                            }) {
-                                Label("Delete all repeatable sessions", systemImage: "trash")
-                            }
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")

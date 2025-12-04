@@ -70,9 +70,9 @@ class SessionDetailsViewModel: ObservableObject {
         return []
     }
     
-    func deleteSession(shouldDeleteRepeatableSessions: Bool = false) {
-        if let repeatableId = session.repeatableId, shouldDeleteRepeatableSessions {
-            persistanceManager.deleteRepeatableSessions(with: repeatableId)
+    func deleteSession(type: DeleteSessionType) {
+        if let repeatableId = session.repeatableId, type != .current {
+            persistanceManager.deleteRepeatableSessions(with: repeatableId, type: type)
         } else {
             persistanceManager.delete(session: session)
         }
@@ -88,6 +88,7 @@ extension SessionDetailsViewModel {
 
 extension SessionDetailsViewModel {
     func fetchMetadata(for urlStrings: [String]) async {
+        guard !urlStrings.isEmpty else { return }
         for link in notesLinks {
             var metadata: LinkPreviewModel?
             do {

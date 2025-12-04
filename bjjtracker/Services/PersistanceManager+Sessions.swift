@@ -14,7 +14,7 @@ protocol SessionsStorageManager {
     func createSession(from activity: Activity)
     func edit(session: Session, activity: Activity)
     func delete(session: Session)
-    func deleteRepeatableSessions(with repeatableId: String)
+    func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType)
 }
 
 extension PersistanceManager: SessionsStorageManager {
@@ -101,9 +101,17 @@ extension PersistanceManager: SessionsStorageManager {
         save(context: context)
     }
     
-    func deleteRepeatableSessions(with repeatableId: String) {
+    func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType) {
         let context = self.container.viewContext
-        let sessions = sessions(with: repeatableId)
+        var sessions = sessions(with: repeatableId)
+
+        if case .future(let afterDate) = type, let afterDate {
+            sessions = sessions.filter({
+                guard let startDate = $0.startDate else { return false }
+                return startDate > afterDate
+            })
+        }
+
         sessions.forEach {
             context.delete($0)
         }
