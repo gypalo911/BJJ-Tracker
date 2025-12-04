@@ -20,7 +20,7 @@ struct BeltPromotionsList: View {
         })
     }
     
-    @Environment (\.managedObjectContext) var managedObjContext
+    @Environment(\.managedObjectContext) var managedObjContext
     
     var body: some View {
         List {
@@ -39,7 +39,8 @@ struct BeltPromotionsList: View {
             .listRowSeparator(.hidden)
             .listRowInsets(EdgeInsets(.zero))
         }
-        .listStyle(.plain)
+        .listStyle(.inset)
+        .scrollDisabled(true)
         .frame(minHeight: 50 * CGFloat(promotions.prefix(5).count))
     }
 }

@@ -116,7 +116,7 @@ struct PromotionsView: View {
                             .offset(x: 0.0, y: offset)
                             .animation(defaultAnimation, value: offset)
                     )
-                    .frame(height: scrollViewSize.height < proxy.size.height ? scrollViewSize.height + 60 : .none )
+                    .frame(height: scrollViewSize.height < proxy.size.height - 200 ? scrollViewSize.height + 60 : proxy.size.height - 200)
                     .padding(.bottom, 20)
                     
                     ZStack {
