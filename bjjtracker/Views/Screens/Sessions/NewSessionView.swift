@@ -124,7 +124,7 @@ struct NewSessionView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Text(Localisation.repeatSession)
-                    Toggle("", isOn: $viewModel.recurringSettings.isRepeatable.animation(.easeInOut))
+                    Toggle("", isOn: $viewModel.repeatableSessionSettings.isRepeatable.animation(.easeInOut))
                 }
                 
                 // Summary of selection
@@ -137,11 +137,11 @@ struct NewSessionView: View {
                             .foregroundStyle(Color("Blue"))
                             .padding(.top, 2)
                         VStack(alignment: .leading, spacing: 5) {
-                            Text(viewModel.recurringSettings.summaryDescription)
+                            Text(viewModel.repeatableSessionSettings.summaryDescription)
                                 .font(.callout)
                                 .foregroundStyle(Color("DarkBlue"))
-                            let sessionsCountDescription = viewModel.recurringSettings.sessionsCountDescription(from: viewModel.activity.startDate)
-                            if !sessionsCountDescription.isEmpty && viewModel.recurringSettings.isRepeatable {
+                            let sessionsCountDescription = viewModel.repeatableSessionSettings.sessionsCountDescription(from: viewModel.activity.startDate)
+                            if !sessionsCountDescription.isEmpty && viewModel.repeatableSessionSettings.isRepeatable {
                                 Text(sessionsCountDescription)
                                     .font(.callout)
                                     .foregroundStyle(Color("Blue"))
@@ -154,20 +154,20 @@ struct NewSessionView: View {
                 .frame(maxWidth: .infinity)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
 
-                if viewModel.recurringSettings.isRepeatable {
+                if viewModel.repeatableSessionSettings.isRepeatable {
                     Divider()
                     
                     Text(Localisation.recurringSectionTitle)
                     HStack {
-                        Picker("Recurring", selection: $viewModel.recurringSettings.repeatType) {
+                        Picker("Recurring", selection: $viewModel.repeatableSessionSettings.repeatType) {
                             ForEach(RepeatType.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }
                         }
                         .defaultPicker()
                         
-                        if viewModel.recurringSettings.repeatType == .weekly {
-                            Picker("RepeatCondition", selection: $viewModel.recurringSettings.repeatCondition) {
+                        if viewModel.repeatableSessionSettings.repeatType == .weekly {
+                            Picker("RepeatCondition", selection: $viewModel.repeatableSessionSettings.repeatCondition) {
                                 ForEach(RepeatCondition.allCases, id: \.self) {
                                     Text($0.title).tag($0)
                                 }
@@ -176,25 +176,25 @@ struct NewSessionView: View {
                         }
                     }
                     
-                    if viewModel.recurringSettings.repeatType == .weekly {
+                    if viewModel.repeatableSessionSettings.repeatType == .weekly {
                         VStack(alignment: .leading, spacing: 20) {
                             Text(Localisation.repeatsEvery)
-                            DaysPicker(selectedDays: $viewModel.recurringSettings.selectedDays)
+                            DaysPicker(selectedDays: $viewModel.repeatableSessionSettings.selectedDays)
                         }
                     }
                     
                     Text(Localisation.endCondition)
                         .defaultShadow()
                     HStack {
-                        Picker("End condition", selection: $viewModel.recurringSettings.endCondition) {
+                        Picker("End condition", selection: $viewModel.repeatableSessionSettings.endCondition) {
                             ForEach(EndCondition.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }
                         }
                         .defaultPicker()
 
-                        if viewModel.recurringSettings.endCondition == .onDate {
-                            DatePicker("", selection: $viewModel.recurringSettings.endDate, displayedComponents: [.date])
+                        if viewModel.repeatableSessionSettings.endCondition == .onDate {
+                            DatePicker("", selection: $viewModel.repeatableSessionSettings.endDate, displayedComponents: [.date])
                                 .datePickerStyle(.automatic)
                         }
                     }

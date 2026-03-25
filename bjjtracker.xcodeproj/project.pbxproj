@@ -13,6 +13,9 @@
 		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
 		B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */; };
 		B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */; };
+		B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */; };
+		B8DC844E2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */; };
+		B8DC844F2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */; };
 		D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */; };
 		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
@@ -175,6 +178,8 @@
 		B82157502EDF24EB00572265 /* bjjtracker_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bjjtracker_v2.xcdatamodel; sourceTree = "<group>"; };
 		B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysPicker.swift; sourceTree = "<group>"; };
+		B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+RepeatableEvent.swift"; sourceTree = "<group>"; };
+		B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepeatableEvent+extension.swift"; sourceTree = "<group>"; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
@@ -368,6 +373,17 @@
 				B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */,
 			);
 			path = Pickers;
+			sourceTree = "<group>";
+		};
+		B8DC84502EE240E7002440EC /* CoreDataModelsExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
+				B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */,
+				D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */,
+				D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */,
+			);
+			path = CoreDataModelsExtensions;
 			sourceTree = "<group>";
 		};
 		D00109AC2A0BABD4008433CC /* Components */ = {
@@ -618,6 +634,7 @@
 				D04AD1322A8B7624002A1050 /* HealthKitService.swift */,
 				D02F3DF929F8051700BED6CD /* PersistanceManager.swift */,
 				D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */,
+				B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */,
 				D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */,
 				D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */,
 				D0B8B72F2A3CAF2100A2418F /* NotificationManager.swift */,
@@ -814,9 +831,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B01F2529E43DAF00E10979 /* Color */,
-				D0A00ED829DDE3C600DCD5BB /* Session+extension.swift */,
-				D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */,
-				D084DE602A60A44F00B63DBF /* TechniqueModel+extension.swift */,
+				B8DC84502EE240E7002440EC /* CoreDataModelsExtensions */,
 				D0E824B329DE0F490023E6C0 /* View+extension.swift */,
 				D0E824B729DEB1C20023E6C0 /* Calendar+extension.swift */,
 				D050EAAF2A8508EB008222BE /* UIPickerView+extension.swift */,
@@ -1158,6 +1173,7 @@
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
 				D0DE62A42A9641CA008EEA49 /* Technique.swift in Sources */,
 				D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */,
+				B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
@@ -1238,6 +1254,7 @@
 				D03109532A93D2B700C24B17 /* TechniquesView.swift in Sources */,
 				D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */,
 				D0E928952B7E2828002FA81E /* BouncyButton.swift in Sources */,
+				B8DC844E2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */,
 				D0AA702E2A5AFC30001FB3FA /* AddMoreTagView.swift in Sources */,
 				D0DAA9052A618B9A00074EBE /* EditSessionViewViewModel.swift in Sources */,
 				D09BCA452A608A09004C749E /* ProfileViewViewModel.swift in Sources */,
@@ -1259,6 +1276,7 @@
 				D0B8B7232A3C9CD600A2418F /* FirebaseAnalyticsEngine.swift in Sources */,
 				D0B8B7212A3C9CAF00A2418F /* DashboardViewModelTests.swift in Sources */,
 				D0B8B7242A3C9DDE00A2418F /* DashboardViewModel.swift in Sources */,
+				B8DC844F2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */,
 				D0B8B72C2A3C9F3800A2418F /* String+extension.swift in Sources */,
 				D0B8B7282A3C9F2C00A2418F /* Session+extension.swift in Sources */,
 				B821571F2EDF17D600572265 /* SessionRepeatSettings.swift in Sources */,

@@ -24,7 +24,7 @@ struct EditSessionView: View {
     var onDismiss: ((Session?) -> Void)?
     
     func update(_ session: Session) {
-        persistanceManager.edit(
+        persistanceManager.update(
             session: session,
             activity: activity
         )

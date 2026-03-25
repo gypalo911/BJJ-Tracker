@@ -7,25 +7,35 @@
 
 import Foundation
 
-enum RepeatType: String, CaseIterable, Identifiable {
-    case weekly = "Weekly"
-    case monthly = "Monthly"
+enum RepeatType: Int, CaseIterable, Identifiable {
+    case weekly
+    case monthly
     
-    var id: String { self.rawValue }
+    var id: Int { self.rawValue }
     
     var title: String {
-        self.rawValue.localizedString
+        switch self {
+        case .weekly:
+            "Weekly".localizedString
+        case .monthly:
+            "Monthly".localizedString
+        }
     }
 }
 
-enum RepeatCondition: String, CaseIterable, Identifiable {
-    case every1Week = "Every Week"
-    case every2Weeks = "Every 2 Weeks"
+enum RepeatCondition: Int, CaseIterable, Identifiable {
+    case every1Week
+    case every2Weeks
     
-    var id: String { self.rawValue }
+    var id: Int { self.rawValue }
     
     var title: String {
-        self.rawValue.localizedString
+        switch self {
+        case .every1Week:
+            "Every Week".localizedString
+        case .every2Weeks:
+            "Every 2 Weeks".localizedString
+        }
     }
     
     var weekIntValue: Int {
@@ -33,19 +43,24 @@ enum RepeatCondition: String, CaseIterable, Identifiable {
     }
 }
 
-enum EndCondition: String, CaseIterable, Identifiable {
-    case never = "Never"
-    case onDate = "On date"
+enum EndCondition: Int, CaseIterable, Identifiable {
+    case never
+    case onDate
     
-    var id: String { self.rawValue }
+    var id: Int { self.rawValue }
     
     var title: String {
-        self.rawValue.localizedString
+        switch self {
+        case .never:
+            "Never".localizedString
+        case .onDate:
+            "On date".localizedString
+        }
     }
 }
 
 
-class RecurringSettings: ObservableObject {
+class RepeatableSessionSettings: ObservableObject {
     @Published var isRepeatable: Bool = false
     @Published var repeatType: RepeatType = .weekly
     @Published var repeatCondition: RepeatCondition = .every1Week
@@ -109,7 +124,7 @@ class RecurringSettings: ObservableObject {
     }
 }
 
-extension RecurringSettings {
+extension RepeatableSessionSettings {
     /// Generate all occurrences for given start date.
     /// - Parameters:
     ///   - firstSessionDate: date/time of the first session created by user.

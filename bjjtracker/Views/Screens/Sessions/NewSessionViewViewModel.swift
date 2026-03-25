@@ -15,7 +15,7 @@ protocol NewSessionViewViewModelProtocol {
 
 class NewSessionViewViewModel: ObservableObject {
     
-    @Published var recurringSettings: RecurringSettings = .init()
+    @Published var repeatableSessionSettings: RepeatableSessionSettings = .init()
     @Published var isPickerPresented = false
     
     @Published var activity: Activity = .init(
@@ -27,12 +27,12 @@ class NewSessionViewViewModel: ObservableObject {
         notes: ""
     )
     
-    private let persistanceManager: PersistanceManager
+    private let persistanceManager: SessionsStorageManager
     private let notificationManager: NotificationManagerProtocol
     private let analyticsEngine: AnalyticsEngine
     
     init(
-        persistanceManager: PersistanceManager,
+        persistanceManager: SessionsStorageManager,
         notificationManager: NotificationManagerProtocol = NotificationManager.shared,
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()
     ) {
@@ -42,9 +42,9 @@ class NewSessionViewViewModel: ObservableObject {
     }
     
     func saveActivity() {
-        if recurringSettings.isRepeatable {
+        if repeatableSessionSettings.isRepeatable {
             activity.repeatableId = UUID().uuidString
-            save(activity)
+            save(activity, repeatableSettings: repeatableSessionSettings)
             createRepeatedSessions()
         } else {
             save(activity)
@@ -53,14 +53,14 @@ class NewSessionViewViewModel: ObservableObject {
         sendSessionCreatedAnalytics(from: activity)
     }
     
-    private func save(_ activity: Activity) {
-        persistanceManager.createSession(from: activity)
+    private func save(_ activity: Activity, repeatableSettings: RepeatableSessionSettings? = nil) {
+        persistanceManager.createSession(from: activity, repeatableSettings: repeatableSettings)
 
         notificationManager.scheduleNotification(activity: activity)
     }
     
     private func createRepeatedSessions() {
-        recurringSettings.generateOccurrences(from: activity.startDate).forEach { date in
+        repeatableSessionSettings.generateOccurrences(from: activity.startDate).forEach { date in
             let tempActivity = activity
             tempActivity.startDate = date
             
@@ -73,8 +73,8 @@ extension NewSessionViewViewModel: NewSessionViewViewModelProtocol {
     func onAppear() {
         activity.startDate = AppSettings.shared.selectedCalendarDate
 
-        if let selectedDay = DaysPicker.Day(rawValue: Date().dayNumberOfWeek() ?? 0), recurringSettings.selectedDays.isEmpty {
-            recurringSettings.selectedDays = [selectedDay]
+        if let selectedDay = DaysPicker.Day(rawValue: Date().dayNumberOfWeek() ?? 0), repeatableSessionSettings.selectedDays.isEmpty {
+            repeatableSessionSettings.selectedDays = [selectedDay]
         }
         analyticsEngine.log(AnalyticsEvent(name: "new_session_screen_viewed", metadata: [:]))
     }
@@ -95,9 +95,9 @@ extension NewSessionViewViewModel: NewSessionViewViewModelProtocol {
                 "status": activity.status.rawValue,
                 "location": activity.location,
                 "notes": activity.notes,
-                "isRepeaTable": String(recurringSettings.isRepeatable),
-                "repeatEndDate": recurringSettings.endDate.toString("dd MMM YYYY"),
-                "numberOfRepeateSessions": recurringSettings.generateOccurrences(from: activity.startDate).count.stringValue
+                "isRepeaTable": String(repeatableSessionSettings.isRepeatable),
+                "repeatEndDate": repeatableSessionSettings.endDate.toString("dd MMM YYYY"),
+                "numberOfRepeateSessions": repeatableSessionSettings.generateOccurrences(from: activity.startDate).count.stringValue
             ]
         ))
     }

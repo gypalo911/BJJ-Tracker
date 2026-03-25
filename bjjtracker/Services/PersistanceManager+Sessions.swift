@@ -8,16 +8,34 @@
 import CoreData
 
 protocol SessionsStorageManager {
+    func createSession(from activity: Activity, repeatableSettings: RepeatableSessionSettings?)
     func fetchSessions(in interval: DateInterval?) -> [Session]
     func session(by id: String) -> Session?
     func sessions(with repeatableId: String) -> [Session]
-    func createSession(from activity: Activity)
-    func edit(session: Session, activity: Activity)
+    func update(session: Session, activity: Activity)
     func delete(session: Session)
     func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType)
 }
 
 extension PersistanceManager: SessionsStorageManager {
+    
+    // MARK: - Create
+    
+    func createSession(from activity: Activity, repeatableSettings: RepeatableSessionSettings? = nil) {
+        let context = self.container.viewContext
+        let session = Session(context: context)
+        session.update(with: activity)
+        
+        save(context: context)
+        
+        if let repeatableId = activity.repeatableId, let repeatableSettings {
+            createRepeatableEvent(id: repeatableId, from: repeatableSettings)
+//            let repeatableEvent = RepeatableEvent(context: context)
+//            repeatableEvent.update(id: repeatableId, settings: repeatableSettings)
+        }
+    }
+    
+    // MARK: - Read
     
     func fetchSessions(in interval: DateInterval? = nil) -> [Session] {
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
@@ -77,32 +95,26 @@ extension PersistanceManager: SessionsStorageManager {
         return []
     }
     
-    func createSession(from activity: Activity) {
+    // MARK: - Update
+    
+    func update(session: Session, activity: Activity) {
         let context = self.container.viewContext
-        let session = Session(context: context)
         session.update(with: activity)
-//        DefaultHealthKitService().store(session: session)
-        
+                
         save(context: context)
     }
     
-    func edit(session: Session, activity: Activity) {
-        let context = self.container.viewContext
-        session.update(with: activity)
-        
-        save(context: context)
-    }
+    // MARK: - Delete
     
     func delete(session: Session) {
         let context = self.container.viewContext
-//        DefaultHealthKitService().delete(session: session)
+
         context.delete(session)
         
         save(context: context)
     }
     
     func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType) {
-        let context = self.container.viewContext
         var sessions = sessions(with: repeatableId)
 
         if case .future(let afterDate) = type, let afterDate {
@@ -110,12 +122,10 @@ extension PersistanceManager: SessionsStorageManager {
                 guard let startDate = $0.startDate else { return false }
                 return startDate > afterDate
             })
+        } else {
+            sessions.forEach {
+                delete(session: $0)
+            }
         }
-
-        sessions.forEach {
-            context.delete($0)
-        }
-        
-        save(context: context)
     }
 }

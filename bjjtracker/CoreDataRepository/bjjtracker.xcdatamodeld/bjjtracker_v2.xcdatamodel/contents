@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24411" systemVersion="25B78" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="PromotionModel" representedClassName="PromotionModel" syncable="YES" codeGenerationType="class">
+    <entity name="PromotionModel" representedClassName=".PromotionModel" syncable="YES" codeGenerationType="class">
         <attribute name="belt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="704982720" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -8,7 +8,20 @@
         <attribute name="notes" attributeType="String" defaultValueString=""/>
         <attribute name="stripes" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
+    <entity name="RepeatableEvent" representedClassName=".RepeatableEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="endCondition" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="repeatCondition" optional="YES" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repeatType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="repeatableEvent" inverseEntity="Session"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Session" representedClassName=".Session" syncable="YES" codeGenerationType="class">
         <attribute name="duration" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="location" attributeType="String" defaultValueString=""/>
@@ -17,9 +30,16 @@
         <attribute name="startDate" attributeType="Date" defaultDateTimeInterval="704122200" usesScalarValueType="NO"/>
         <attribute name="style" attributeType="String" defaultValueString="gi"/>
         <attribute name="type" attributeType="String" defaultValueString="session"/>
+        <relationship name="repeatableEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RepeatableEvent" inverseName="sessions" inverseEntity="RepeatableEvent"/>
         <relationship name="techniques" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TechniqueModel" inverseName="sessions" inverseEntity="TechniqueModel"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+                <constraint value="startDate"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
-    <entity name="TechniqueModel" representedClassName="TechniqueModel" syncable="YES" codeGenerationType="class">
+    <entity name="TechniqueModel" representedClassName=".TechniqueModel" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="details" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
