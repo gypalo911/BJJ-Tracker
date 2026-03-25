@@ -180,6 +180,7 @@
 		B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysPicker.swift; sourceTree = "<group>"; };
 		B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+RepeatableEvent.swift"; sourceTree = "<group>"; };
 		B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepeatableEvent+extension.swift"; sourceTree = "<group>"; };
+		B8E0FE2E2F73F533006B35B3 /* SKILL.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SKILL.md; sourceTree = "<group>"; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
@@ -386,6 +387,22 @@
 			path = CoreDataModelsExtensions;
 			sourceTree = "<group>";
 		};
+		B8E0FE2C2F73F4B7006B35B3 /* skills */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE2D2F73F50B006B35B3 /* localisation-creator */,
+			);
+			path = skills;
+			sourceTree = "<group>";
+		};
+		B8E0FE2D2F73F50B006B35B3 /* localisation-creator */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE2E2F73F533006B35B3 /* SKILL.md */,
+			);
+			path = "localisation-creator";
+			sourceTree = "<group>";
+		};
 		D00109AC2A0BABD4008433CC /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +551,7 @@
 		D060BA7129DDAD9A00E10562 = {
 			isa = PBXGroup;
 			children = (
+				B8E0FE2C2F73F4B7006B35B3 /* skills */,
 				D060BA7C29DDAD9A00E10562 /* bjjtracker */,
 				D060BA9329DDAD9C00E10562 /* bjjtrackerTests */,
 				D060BA9D29DDAD9C00E10562 /* bjjtrackerUITests */,

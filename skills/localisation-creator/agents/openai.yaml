@@ -1,0 +1,4 @@
+interface:
+  display_name: "Localisation Creator"
+  short_description: "Create and audit BJJ Tracker app localisations"
+  default_prompt: "Use $localisation-creator to add or update BJJ Tracker translations and verify locale coverage."
