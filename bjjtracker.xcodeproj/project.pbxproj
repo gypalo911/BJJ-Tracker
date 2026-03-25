@@ -16,6 +16,15 @@
 		B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */; };
 		B8DC844E2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */; };
 		B8DC844F2EE240E0002440EC /* RepeatableEvent+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC844D2EE240E0002440EC /* RepeatableEvent+extension.swift */; };
+		B8E0FE772F741222006B35B3 /* DynamicTextDisablerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE682F741222006B35B3 /* DynamicTextDisablerModifier.swift */; };
+		B8E0FE782F741222006B35B3 /* Fill + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE6C2F741222006B35B3 /* Fill + View.swift */; };
+		B8E0FE7A2F741222006B35B3 /* Font + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE662F741222006B35B3 /* Font + View.swift */; };
+		B8E0FE7B2F741222006B35B3 /* DesignSystem + Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE6F2F741222006B35B3 /* DesignSystem + Colors.swift */; };
+		B8E0FE7C2F741222006B35B3 /* Background + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE6B2F741222006B35B3 /* Background + View.swift */; };
+		B8E0FE7D2F741222006B35B3 /* Font + Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE672F741222006B35B3 /* Font + Text.swift */; };
+		B8E0FE7E2F741222006B35B3 /* DesignSystem + Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE732F741222006B35B3 /* DesignSystem + Typography.swift */; };
+		B8E0FE7F2F741222006B35B3 /* FontFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE742F741222006B35B3 /* FontFamily.swift */; };
+		B8E0FE802F741222006B35B3 /* ForegroundColor + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0FE6A2F741222006B35B3 /* ForegroundColor + View.swift */; };
 		D00109AB2A0A4E57008433CC /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */; };
 		D00109AE2A0BC925008433CC /* PromotionModel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */; };
 		D00109B12A0D2F9A008433CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00109B32A0D2F9A008433CC /* Localizable.strings */; };
@@ -186,6 +195,15 @@
 		B8E0FE342F740679006B35B3 /* openai.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openai.yaml; sourceTree = "<group>"; };
 		B8E0FE362F740679006B35B3 /* project-localisation.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "project-localisation.md"; sourceTree = "<group>"; };
 		B8E0FE382F740679006B35B3 /* audit_localizable_strings.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = audit_localizable_strings.py; sourceTree = "<group>"; };
+		B8E0FE662F741222006B35B3 /* Font + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font + View.swift"; sourceTree = "<group>"; };
+		B8E0FE672F741222006B35B3 /* Font + Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font + Text.swift"; sourceTree = "<group>"; };
+		B8E0FE682F741222006B35B3 /* DynamicTextDisablerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTextDisablerModifier.swift; sourceTree = "<group>"; };
+		B8E0FE6A2F741222006B35B3 /* ForegroundColor + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ForegroundColor + View.swift"; sourceTree = "<group>"; };
+		B8E0FE6B2F741222006B35B3 /* Background + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Background + View.swift"; sourceTree = "<group>"; };
+		B8E0FE6C2F741222006B35B3 /* Fill + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fill + View.swift"; sourceTree = "<group>"; };
+		B8E0FE6F2F741222006B35B3 /* DesignSystem + Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem + Colors.swift"; sourceTree = "<group>"; };
+		B8E0FE732F741222006B35B3 /* DesignSystem + Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem + Typography.swift"; sourceTree = "<group>"; };
+		B8E0FE742F741222006B35B3 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
 		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
@@ -461,6 +479,52 @@
 			path = scripts;
 			sourceTree = "<group>";
 		};
+		B8E0FE692F741222006B35B3 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE662F741222006B35B3 /* Font + View.swift */,
+				B8E0FE672F741222006B35B3 /* Font + Text.swift */,
+				B8E0FE682F741222006B35B3 /* DynamicTextDisablerModifier.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		B8E0FE6D2F741222006B35B3 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE6A2F741222006B35B3 /* ForegroundColor + View.swift */,
+				B8E0FE6B2F741222006B35B3 /* Background + View.swift */,
+				B8E0FE6C2F741222006B35B3 /* Fill + View.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		B8E0FE6E2F741222006B35B3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE692F741222006B35B3 /* Font */,
+				B8E0FE6D2F741222006B35B3 /* Color */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B8E0FE712F741222006B35B3 /* Colours + Gradients */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE6F2F741222006B35B3 /* DesignSystem + Colors.swift */,
+			);
+			path = "Colours + Gradients";
+			sourceTree = "<group>";
+		};
+		B8E0FE752F741222006B35B3 /* Typography */ = {
+			isa = PBXGroup;
+			children = (
+				B8E0FE732F741222006B35B3 /* DesignSystem + Typography.swift */,
+				B8E0FE742F741222006B35B3 /* FontFamily.swift */,
+			);
+			path = Typography;
+			sourceTree = "<group>";
+		};
 		D00109AC2A0BABD4008433CC /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +591,9 @@
 		D02D1FF32A5AE261006BB617 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				B8E0FE6E2F741222006B35B3 /* Extensions */,
+				B8E0FE712F741222006B35B3 /* Colours + Gradients */,
+				B8E0FE752F741222006B35B3 /* Typography */,
 				D02D1FF42A5AE273006BB617 /* DesignSystem.swift */,
 				D02D1FF62A5AE2C0006BB617 /* DesignSystem+Color.swift */,
 				D02D1FF82A5AE2C5006BB617 /* DesignSystem+Font.swift */,
@@ -1303,6 +1370,15 @@
 				D0DE62A22A963F49008EEA49 /* TechniqueModalView.swift in Sources */,
 				D01187D02A7ABB5600A2FCC7 /* UIImage+extension.swift in Sources */,
 				D0C1D7F02A9F88E4000FCF37 /* SearchBar.swift in Sources */,
+				B8E0FE772F741222006B35B3 /* DynamicTextDisablerModifier.swift in Sources */,
+				B8E0FE782F741222006B35B3 /* Fill + View.swift in Sources */,
+				B8E0FE7A2F741222006B35B3 /* Font + View.swift in Sources */,
+				B8E0FE7B2F741222006B35B3 /* DesignSystem + Colors.swift in Sources */,
+				B8E0FE7C2F741222006B35B3 /* Background + View.swift in Sources */,
+				B8E0FE7D2F741222006B35B3 /* Font + Text.swift in Sources */,
+				B8E0FE7E2F741222006B35B3 /* DesignSystem + Typography.swift in Sources */,
+				B8E0FE7F2F741222006B35B3 /* FontFamily.swift in Sources */,
+				B8E0FE802F741222006B35B3 /* ForegroundColor + View.swift in Sources */,
 				D02F3DDF29E7276700BED6CD /* PieSliceView.swift in Sources */,
 				D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */,
 				D0DAA9032A61887E00074EBE /* NewSessionViewViewModel.swift in Sources */,

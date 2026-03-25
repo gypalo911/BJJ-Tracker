@@ -25,24 +25,23 @@ struct TagViewWithTextField: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(DesignSystem.shared.colors.brand.primary)
                 .cornerRadius(30)
             TextField(
                 "",
                 text: $tag.text,
                 prompt:
                     Text(Localisation.technique)
-                    .foregroundColor(Color("LightGray"))
+                        .foregroundColor(DesignSystem.shared.colors.text.placeholder)
             )
             .focused($focusedField)
             .autocorrectionDisabled(true)
-            .foregroundColor(.white)
-            .accentColor(.white)
-            .font(Font.custom("Rubik", size: 14))
-//            .frame(width: viewWidth)
+            .foregroundColor(DesignSystem.shared.colors.text.inverse)
+            .accentColor(DesignSystem.shared.colors.text.inverse)
+            .font(DesignSystem.shared.fonts.chip.swiftUI)
             .fixedSize()
-            .padding (.horizontal, 15)
-            .padding (.vertical, 8)
+            .padding(.horizontal, DesignSystem.shared.spacing.chipInputHorizontal)
+            .padding(.vertical, DesignSystem.shared.spacing.chipVertical)
             .onAppear {
                 focusedField = true
             }
@@ -55,7 +54,7 @@ struct TagViewWithTextField: View {
                 tag = .init(text: "")
             }
             .onChange(of: tag.text) { newValue in
-                let font = UIFont.systemFont(ofSize: 14)
+                let font = DesignSystem.shared.fonts.chip.uiKit
                 let size = newValue.textSize(font)
                 
                 tag.text = String(newValue.prefix(40))

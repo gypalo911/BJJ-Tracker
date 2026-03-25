@@ -17,14 +17,14 @@ struct AddMoreTagView: View {
             Image("addIcon")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(DesignSystem.shared.colors.brand.primary)
             Text(Localisation.addTechnique)
-                .font(Font.custom("Rubik", size: 14))
-                .foregroundColor(Color("Blue"))
+                .font(DesignSystem.shared.fonts.chip.swiftUI)
+                .foregroundColor(DesignSystem.shared.colors.text.primary)
         }
         .padding(.vertical, 6)
-        .padding(.leading, 8)
-        .padding(.trailing, 10)
+        .padding(.leading, DesignSystem.shared.spacing.small)
+        .padding(.trailing, DesignSystem.shared.spacing.buttonHorizontal)
         .background(
             Rectangle()
                 .foregroundColor(.white)
@@ -32,7 +32,7 @@ struct AddMoreTagView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .fill(Color("Blue"))
+                        .fill(DesignSystem.shared.colors.border.primary)
                 )
         )
     }

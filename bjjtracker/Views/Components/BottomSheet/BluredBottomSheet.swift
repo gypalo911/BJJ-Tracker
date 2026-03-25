@@ -52,7 +52,7 @@ struct BluredBottomSheet: View {
                         .animation(.easeInOut(duration: 0.2), value: offset)
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color("Blue"))
+                            .fill(ui: .fill)
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
                             .defaultShadow()
@@ -60,11 +60,11 @@ struct BluredBottomSheet: View {
                             Image("kimono")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.white)
+                                .foregroundStyle(text: .onColor)
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newSession.localizedString)
-                                .foregroundColor(.white)
-                                .font(.body.smallCaps())
+                                .foregroundStyle(text: .onColor)
+                                .font(buttons: .regular)
                                 .fontWeight(.medium)
                         }
                     }
@@ -90,8 +90,8 @@ struct BluredBottomSheet: View {
                                 .foregroundColor(.black)
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newPromotion.localizedString)
-                                .foregroundColor(.black)
-                                .font(.body.smallCaps())
+                                .foregroundStyle(text: .text)
+                                .font(buttons: .regular)
                                 .fontWeight(.medium)
                         }
                     }
@@ -107,7 +107,7 @@ struct BluredBottomSheet: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color("Green"))
+                            .fill(status: .successStrong)
                             .frame(maxWidth: .infinity)
                             .frame(height: 60)
                             .defaultShadow()
@@ -118,8 +118,8 @@ struct BluredBottomSheet: View {
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newTechnique.localizedString)
-                                .foregroundColor(.white)
-                                .font(.body.smallCaps())
+                                .foregroundStyle(text: .onColor)
+                                .font(buttons: .regular)
                                 .fontWeight(.medium)
                         }
                     }

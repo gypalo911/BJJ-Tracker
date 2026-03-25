@@ -15,11 +15,10 @@ struct SuggestionTagView: View {
     
     var body: some View {
         Text(tag.text)
-            .font(Font.custom("Rubik", size: 14))
-            .foregroundColor(Color("Blue"))
-            .padding(.vertical, 8)
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
+            .font(DesignSystem.shared.fonts.chip.swiftUI)
+            .foregroundColor(DesignSystem.shared.colors.text.primary)
+            .padding(.vertical, DesignSystem.shared.spacing.chipVertical)
+            .padding(.horizontal, DesignSystem.shared.spacing.chipHorizontal)
             .lineLimit(1)
             .truncationMode(.tail)
             .background(
@@ -27,7 +26,7 @@ struct SuggestionTagView: View {
                     Capsule()
                         .fill(Color.white)
                     Capsule()
-                        .stroke(Color("Blue"), lineWidth: 1)
+                        .stroke(DesignSystem.shared.colors.border.primary, lineWidth: 1)
                 }
             )
             .matchedGeometryEffect(id: tag.id, in: animation)

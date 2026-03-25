@@ -16,17 +16,16 @@ struct TagView: View {
     
     var body: some View {
         Text(tag.text)
-            .font(Font.custom("Rubik", size: 14))
-            .foregroundColor(Color("Blue"))
-            .padding(.vertical, 8)
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
+            .font(DesignSystem.shared.fonts.chip.swiftUI)
+            .foregroundColor(DesignSystem.shared.colors.text.primary)
+            .padding(.vertical, DesignSystem.shared.spacing.chipVertical)
+            .padding(.horizontal, DesignSystem.shared.spacing.chipHorizontal)
             .lineLimit(1)
             .truncationMode(.tail)
             .background(
                 ZStack(alignment: .trailing) {
                     Capsule()
-                        .fill(Color("LightBlue1"))
+                        .fill(DesignSystem.shared.colors.surface.brandStrong)
                 }
             )
             .contentShape(.contextMenuPreview, Capsule())

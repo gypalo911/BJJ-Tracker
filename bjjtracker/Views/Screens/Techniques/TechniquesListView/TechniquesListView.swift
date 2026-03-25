@@ -24,9 +24,8 @@ struct TechniquesListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(Localisation.learnedTechniques)
-                .font(.body)
-                .fontWeight(.semibold)
-                .foregroundColor(Color.black)
+                .font(body: .b1(weight: .bold))
+                .foregroundStyle(text: .text)
                 .padding(.horizontal, 10)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
@@ -76,9 +75,8 @@ struct TechniquesListView: View {
             if !viewModel.suggestionTags.isEmpty && isTyping {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(Localisation.suggestions)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color("GrayTextColor"))
+                        .font(subtext: .bold)
+                        .foregroundStyle(text: .quaternary)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(viewModel.suggestionTags, id: \.self) { tag in

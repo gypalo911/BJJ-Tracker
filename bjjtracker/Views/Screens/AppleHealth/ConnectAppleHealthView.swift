@@ -24,18 +24,16 @@ struct ConnectAppleHealthView: View {
                 .frame(width: 60, height: 60)
             
             Text(Localisation.trainSmarter.localizedString)
-                .font(.title3)
-                .fontWeight(.medium)
+                .font(heading: .h5)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundColor(.black)
+                .foregroundStyle(text: .text)
             
             Text(Localisation.permissions.localizedString)
-                .font(.footnote)
-                .fontWeight(.regular)
+                .font(subtext: .light)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundColor(Color("Gray"))
+                .foregroundStyle(text: .tertiary)
             
             
             Button(action: {
@@ -43,15 +41,15 @@ struct ConnectAppleHealthView: View {
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("RedPink"))
+                        .fill(promotional: .deals)
                         .frame(maxWidth: 270)
                         .frame(height: 40)
                         .defaultShadow()
                     HStack {
                         Text(Localisation.connect.localizedString)
-                            .font(.body.smallCaps())
+                            .font(buttons: .regular)
                             .fontWeight(.medium)
-                            .foregroundColor(.white)
+                            .foregroundStyle(text: .onColor)
                     }
                 }
             })

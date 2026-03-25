@@ -5,89 +5,93 @@
 //  Created by Petro Hupalo on 09.07.2023.
 //
 
-import Foundation
+import SwiftUI
 import UIKit
 
 extension DesignSystem {
-    /// Defines font styles used throughout the application. Includes kerning value and line spacing.
-    public enum FontStyle {
-        case heading(CGFloat)
-        case heading1
-        case heading2
-        case subtitle1
-        case subtitle2
-        case subtitle3
-        case subtitle4
-        case text1Medium
-        case text1
-        case text2Medium
-        case text2
-        case text3Medium
-        case text3
-        case text4Medium
-        case text4
-        case text5Medium
-        case text5
-        case tabBarItems
+    public enum Typography {}
 
-//        public var font: UIFont {
-//            switch self {
-//            case .heading(let size): return DesignSystem.shared.font.heading(size)
-//            case .heading1:          return DesignSystem.shared.font.heading1
-//            case .heading2:          return DesignSystem.shared.font.heading2
-//            case .subtitle1:         return DesignSystem.shared.font.subtitle1
-//            case .subtitle2:         return DesignSystem.shared.font.subtitle2
-//            case .subtitle3:         return DesignSystem.shared.font.subtitle3
-//            case .subtitle4:         return DesignSystem.shared.font.subtitle4
-//            case .text1Medium:       return DesignSystem.shared.font.text1Medium
-//            case .text1:             return DesignSystem.shared.font.text1
-//            case .text2Medium:       return DesignSystem.shared.font.text2Medium
-//            case .text2:             return DesignSystem.shared.font.text2
-//            case .text3Medium:       return DesignSystem.shared.font.text3Medium
-//            case .text3:             return DesignSystem.shared.font.text3
-//            case .text4Medium:       return DesignSystem.shared.font.text4Medium
-//            case .text4:             return DesignSystem.shared.font.text4
-//            case .text5Medium:       return DesignSystem.shared.font.text5Medium
-//            case .text5:             return DesignSystem.shared.font.text5
-//            case .tabBarItems:       return DesignSystem.shared.font.tabBarItems
-//            }
-//        }
+    /// Defines shared typography tokens used throughout the application.
+    public struct Fonts {
+        public let largeTitle = FontToken(size: 34, weight: .bold)
+        public let title = FontToken(size: 28, weight: .bold)
+        public let title2 = FontToken(size: 22, weight: .bold)
+        public let title3 = FontToken(size: 20, weight: .semibold)
+        public let headline = FontToken(size: 17, weight: .semibold)
+        public let body = FontToken(size: 17, weight: .regular)
+        public let bodyBold = FontToken(size: 17, weight: .bold)
+        public let footnote = FontToken(size: 13, weight: .regular)
+        public let caption = FontToken(size: 12, weight: .regular)
+        public let caption2 = FontToken(size: 11, weight: .regular)
+        public let chip = FontToken(family: "Rubik", size: 14, fallbackWeight: .regular)
 
-        var kerningValue: CGFloat? {
-            switch self {
-            case .heading, .heading1, .heading2:
-                return 0.0
-            default:
-                return nil
-            }
-        }
-
-        var lineSpacing: CGFloat? {
-            switch self {
-            case .heading, .heading1, .heading2, .tabBarItems:
-                return 0.0
-            case .subtitle1, .text1Medium, .text1:
-                return 8.0
-            case .text2Medium, .text2:
-                return 8.0
-            case .subtitle2, .text3Medium, .text3:
-                return 8.0
-            case .subtitle3, .text4Medium, .text4:
-                return 8.0
-            case .text5Medium, .text5:
-                return 8.0
-            case .subtitle4:
-                return 8.0
-            }
-        }
+        public init() {}
     }
-    
-    public struct Font {
-//        /// Defaults to `AkzidenzGroteskStd.boldCondensed`
-//        public var heading: (CGFloat) -> UIFont = { size in
-//            return FontFamily.AkzidenzGroteskStd.boldCondensed.font(size: size * scaleFactor)
-//        }
-//        /// Defaults to `AkzidenzGroteskStd.boldCondensed.font(size: 32)`
-//        public let heading1 = FontFamily.AkzidenzGroteskStd.boldCondensed.font(size: 32 * scaleFactor)
+
+    public struct FontToken {
+        public let family: String?
+        public let size: CGFloat
+        public let fallbackWeight: UIFont.Weight
+
+        public init(
+            family: String? = nil,
+            size: CGFloat,
+            weight: UIFont.Weight
+        ) {
+            self.family = family
+            self.size = size
+            self.fallbackWeight = weight
+        }
+
+        public init(
+            family: String? = nil,
+            size: CGFloat,
+            fallbackWeight: UIFont.Weight
+        ) {
+            self.family = family
+            self.size = size
+            self.fallbackWeight = fallbackWeight
+        }
+
+        public var swiftUI: SwiftUI.Font {
+            if let family, UIFont(name: family, size: scaledSize) != nil {
+                return .custom(family, size: scaledSize)
+            }
+            return .system(size: scaledSize, weight: swiftUIWeight)
+        }
+
+        public var uiKit: UIFont {
+            if let family, let font = UIFont(name: family, size: scaledSize) {
+                return font
+            }
+            return .systemFont(ofSize: scaledSize, weight: fallbackWeight)
+        }
+
+        private var scaledSize: CGFloat {
+            size * DesignSystem.scaleFactor
+        }
+
+        private var swiftUIWeight: SwiftUI.Font.Weight {
+            switch fallbackWeight {
+            case .ultraLight:
+                return .ultraLight
+            case .thin:
+                return .thin
+            case .light:
+                return .light
+            case .medium:
+                return .medium
+            case .semibold:
+                return .semibold
+            case .bold:
+                return .bold
+            case .heavy:
+                return .heavy
+            case .black:
+                return .black
+            default:
+                return .regular
+            }
+        }
     }
 }
