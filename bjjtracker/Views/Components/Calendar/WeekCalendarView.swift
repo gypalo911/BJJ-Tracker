@@ -80,7 +80,7 @@ struct WeekCalendarView_Previews: PreviewProvider {
                 colors: .init(
                     textColor: .white,
                     strokeColor: .white,
-                    selectedTextColor: Color("Blue"),
+                    selectedTextColor: DesignSystem.shared.colors.blue,
                     selectedBGColor: .white
                 )
             )

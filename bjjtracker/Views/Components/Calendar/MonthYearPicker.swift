@@ -74,13 +74,13 @@ struct MonthYearPicker: View {
 //                isBottomSheetOpen = false
 //            }) {
 //                Text("Select")
-//                    .font(.body)
+//                    .font(token: DesignSystem.shared.fonts.body)
 //                    .fontWeight(.semibold)
 //                    .frame(maxWidth: 400)
 //                    .padding()
 //                    .foregroundColor(.white)
 //            }
-//            .background(Color("Blue"))
+//            .background(DesignSystem.shared.colors.blue)
 //            .cornerRadius(10)
 //        }
 //        .padding()

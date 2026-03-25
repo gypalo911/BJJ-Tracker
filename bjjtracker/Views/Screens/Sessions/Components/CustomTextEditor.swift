@@ -22,7 +22,7 @@ struct CustomTextEditor: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .inset(by: 0.01)
-                        .stroke(Color("LightGray"), lineWidth: 2)
+                        .stroke(DesignSystem.shared.colors.lightGray, lineWidth: 2)
                 )
                 .frame(minHeight: 150, alignment: .top)
                 .padding(.leading, 5)
@@ -30,8 +30,8 @@ struct CustomTextEditor: View {
             if text.isEmpty {
                 VStack {
                     Text(Localisation.placeholder)
-                        .font(.body)
-                        .foregroundColor(Color("GrayTextColor"))
+                        .font(token: DesignSystem.shared.fonts.body)
+                        .foregroundColor(DesignSystem.shared.colors.grayText)
                         .padding(20)
                     Spacer()
                 }

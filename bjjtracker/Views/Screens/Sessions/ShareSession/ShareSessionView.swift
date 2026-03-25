@@ -67,10 +67,10 @@ struct ShareSessionView: View {
                     VStack {
                         Spacer()
                         Text(Localisation.selectImageToShare)
-                            .font(.system(size: 18, weight: .regular))
+                            .font(token: DesignSystem.shared.fonts.body)
                             .foregroundColor(
-                                Color("GrayTextColor")
-//                                colorScheme == .dark ? Color("GrayTextColor") : Color("Blue")
+                                DesignSystem.shared.colors.grayText
+//                                colorScheme == .dark ? DesignSystem.shared.colors.grayText : DesignSystem.shared.colors.blue
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -86,10 +86,10 @@ struct ShareSessionView: View {
                         .buttonStyle(BouncyButton())
                         Spacer()
                         Text(Localisation.shareResults)
-                            .font(.system(size: 18, weight: .regular))
+                            .font(token: DesignSystem.shared.fonts.body)
                             .foregroundColor(
                                 .white
-                                //colorScheme == .dark ? .white : Color("Blue")
+                                //colorScheme == .dark ? .white : DesignSystem.shared.colors.blue
                             )
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 220)
@@ -117,8 +117,8 @@ struct ShareSessionView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
 //                colorScheme == .dark ?
-                LinearGradient(gradient: Gradient(colors: [Color("LinearBG1"), Color("LinearBG2")]), startPoint: .top, endPoint: .bottom)
-//                : LinearGradient(gradient: Gradient(colors: [Color("generalBG"), Color("lightGreen")]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [DesignSystem.shared.colors.linearBG1, DesignSystem.shared.colors.linearBG2]), startPoint: .top, endPoint: .bottom)
+//                : LinearGradient(gradient: Gradient(colors: [DesignSystem.shared.colors.generalBackground, DesignSystem.shared.colors.lightGreen]), startPoint: .top, endPoint: .bottom)
             )
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -130,7 +130,7 @@ struct ShareSessionView: View {
                             .frame(width: 20, height: 20)
                             .foregroundColor(
                                 .white
-//                                colorScheme == .dark ? .white : Color("Blue")
+//                                colorScheme == .dark ? .white : DesignSystem.shared.colors.blue
                             )
                     }
                 }
@@ -151,7 +151,7 @@ struct ShareSessionView: View {
                                     .frame(width: 25, height: 25)
                                     .foregroundColor(
                                         .white
-//                                        colorScheme == .dark ? .white : Color("Blue")
+//                                        colorScheme == .dark ? .white : DesignSystem.shared.colors.blue
                                     )
                             }
                             .simultaneousGesture(TapGesture().onEnded() {
@@ -322,19 +322,17 @@ struct ShareSessionView: View {
                 .scaledToFit()
                 .frame(width: 30, height: 30)
             Text(Localisation.appName)
-                .font(.headline)
-                .fontWeight(.bold)
+                .font(token: DesignSystem.shared.fonts.headline, weight: .bold)
                 .foregroundColor(.white)
         }
         .padding(.horizontal, 5)
-        .background(Color("LogoColor"))
+        .background(DesignSystem.shared.colors.logoColor)
     }
     
     @ViewBuilder
     private func titleTextView() -> some View {
         Text(verbatim: "\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)")
-            .font(.title)
-            .fontWeight(.bold)
+            .font(token: DesignSystem.shared.fonts.title, weight: .bold)
             .foregroundColor(.white)
     }
     
@@ -353,11 +351,10 @@ struct ShareSessionView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: spacing) {
             Text(activity.duration.minutesToDuration())
-                .font(.headline)
-                .fontWeight(.bold)
+                .font(token: DesignSystem.shared.fonts.headline, weight: .bold)
                 .foregroundColor(.white)
             Text(Localisation.duration)
-                .font(.footnote)
+                .font(token: DesignSystem.shared.fonts.footnote)
                 .foregroundColor(.white)
                 .fontWeight(.medium)
         }
@@ -370,11 +367,10 @@ struct ShareSessionView: View {
     ) -> some View {
         VStack(alignment: alignment, spacing: spacing) {
             Text(verbatim: "\(activity.totalEnergy)")
-                .font(.headline)
-                .fontWeight(.bold)
+                .font(token: DesignSystem.shared.fonts.headline, weight: .bold)
                 .foregroundColor(.white)
             Text(Localisation.calories)
-                .font(.footnote)
+                .font(token: DesignSystem.shared.fonts.footnote)
                 .foregroundColor(.white)
                 .fontWeight(.medium)
         }

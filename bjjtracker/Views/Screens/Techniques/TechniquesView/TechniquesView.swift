@@ -64,8 +64,7 @@ struct TechniquesView: View {
                                     if count > 0 {
                                         VStack(alignment: .leading, spacing: 5) {
                                             Text(Localisation.learnedTechniques)
-                                                .font(.body)
-                                                .fontWeight(.semibold)
+                                                .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                                 .foregroundColor(.black)
                                         }
                                         .hAlign(.leading)
@@ -184,9 +183,8 @@ struct TechniquesView: View {
     func SuggestionsView() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(Localisation.suggestions)
-                .font(.footnote)
-                .fontWeight(.semibold)
-                .foregroundColor(Color("GrayTextColor"))
+                .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
+                .foregroundColor(DesignSystem.shared.colors.grayText)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(viewModel.suggestions.indices, id: \.self) { i in
@@ -214,14 +212,13 @@ struct TechniquesView: View {
         HStack {
             VStack(alignment: .leading, spacing: 10) {
                 Text(.init(technique.text ?? ""))
-                    .font(.body)
-                    .fontWeight(.regular)
+                    .font(token: DesignSystem.shared.fonts.body, weight: .regular)
                     .foregroundColor(.black)
                 if let details = technique.details {
                     Text(details)
-                        .font(.footnote)
+                        .font(token: DesignSystem.shared.fonts.footnote)
                         .lineLimit(1)
-                        .foregroundColor(Color("GrayTextColor"))
+                        .foregroundColor(DesignSystem.shared.colors.grayText)
                 }
             }
             Spacer()
@@ -229,7 +226,7 @@ struct TechniquesView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25, height: 25)
-                .foregroundColor(Color("Blue"))
+                .foregroundColor(DesignSystem.shared.colors.blue)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 15)
@@ -249,8 +246,7 @@ struct TechniquesView: View {
         VStack(spacing: 20) {
             if !viewModel.isEditing && viewModel.results.isEmpty {
                 Text(Localisation.noTechniquesAddedYet)
-                    .font(.footnote)
-                    .fontWeight(.medium)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .medium)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 Button(action: {
@@ -258,7 +254,7 @@ struct TechniquesView: View {
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("Green"))
+                            .foregroundColor(DesignSystem.shared.colors.green)
                             .frame(maxWidth: 270)
                             .frame(height: 40)
                             .defaultShadow()
@@ -269,8 +265,7 @@ struct TechniquesView: View {
                                 .foregroundColor(.white)
                                 .frame(width: 20, height: 20)
                             Text(Localisation.newTechnique)
-                                .font(.caption.smallCaps())
-                                .fontWeight(.medium)
+                                .font(buttons: .small, weight: .medium)
                                 .foregroundColor(.white)
                         }
                     }
@@ -282,14 +277,12 @@ struct TechniquesView: View {
                     .frame(width: 100, height: 100)
                 if !viewModel.searchText.isEmpty {
                     Text(Localisation.noResultsFound)
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.title2, weight: .bold)
                         .foregroundColor(.black)
                 }
                 Text(Localisation.searchHelp)
-                    .font(.footnote)
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("GrayTextColor"))
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .medium)
+                    .foregroundColor(DesignSystem.shared.colors.grayText)
                     .multilineTextAlignment(.center)
             }
         }

@@ -83,15 +83,14 @@ struct JournalView: View {
                                         .offset(x: -10, y: -30)
                                 }.padding(.top, 30)
                                 Text(Localisation.emptyStateTitle.localizedString)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
+                                    .font(token: DesignSystem.shared.fonts.title2, weight: .bold)
                                     .multilineTextAlignment(.center)
                                     .padding(.top, 10)
                                     .padding(.bottom, 10)
                                 Text(Localisation.emptyStateSubtitle.localizedString)
-                                    .font(.body)
+                                    .font(token: DesignSystem.shared.fonts.body)
                                     .multilineTextAlignment(.center)
-                                    .foregroundColor(Color("Gray"))
+                                    .foregroundColor(DesignSystem.shared.colors.gray)
                                 
                                 VStack(spacing: 22) {
                                     Button(action: {
@@ -100,7 +99,7 @@ struct JournalView: View {
                                     }, label: {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 20)
-                                                .foregroundColor(Color("Blue"))
+                                                .foregroundColor(DesignSystem.shared.colors.blue)
                                                 .frame(maxWidth: .infinity)
                                                 .frame(height: 60)
                                                 .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 2)
@@ -112,8 +111,7 @@ struct JournalView: View {
                                                     .frame(width: 25, height: 25)
                                                 Text(Localisation.newSession.localizedString)
                                                     .foregroundColor(.white)
-                                                    .font(.body.smallCaps())
-                                                    .fontWeight(.medium)
+                                                    .font(buttons: .regular, weight: .medium)
                                             }
                                         }
                                     })
@@ -135,8 +133,7 @@ struct JournalView: View {
                                                     .frame(width: 25, height: 25)
                                                 Text(Localisation.newPromotion.localizedString)
                                                     .foregroundColor(.black)
-                                                    .font(.body.smallCaps())
-                                                    .fontWeight(.medium)
+                                                    .font(buttons: .regular, weight: .medium)
                                             }
                                         }
                                     })
@@ -151,7 +148,7 @@ struct JournalView: View {
                     }
                 }
                 .zIndex(0)
-                .background(Color("generalBG").ignoresSafeArea())
+                .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .onAppear {
                     settings.isTabBarHidden = true
                     viewModel.onJournalViewAppeared()
@@ -174,7 +171,7 @@ struct JournalView: View {
                             Image("back")
                                 .resizable()
                                 .frame(width: 25, height: 25)
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(DesignSystem.shared.colors.blue)
                         }
                     }
                 }

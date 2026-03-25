@@ -29,8 +29,7 @@ struct DraggableCalendarView: View {
         VStack(spacing: 10) {
             HStack(spacing: 15) {
                 Text(verbatim: selectedDay.toString("LLLL yyyy").capitalized)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(token: DesignSystem.shared.fonts.title2, weight: .bold)
                     .foregroundColor(.black)
                 
                 Button(action: {
@@ -41,7 +40,7 @@ struct DraggableCalendarView: View {
                     Image("calendar")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 })
             }
             .padding(.horizontal, 30)
@@ -68,7 +67,7 @@ struct DraggableCalendarView: View {
                             textColor: .black,
                             strokeColor: .blue,
                             selectedTextColor: .white,
-                            selectedBGColor: Color("Blue")
+                            selectedBGColor: DesignSystem.shared.colors.blue
                         )
                     )
                     .blur(radius: blurCalendar ? 5 : 0, opaque: false)
@@ -76,7 +75,7 @@ struct DraggableCalendarView: View {
                 }
             }
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color("LightGray"))
+                .fill(DesignSystem.shared.colors.lightGray)
                 .frame(width: 50, height: 6)
                 .padding(.bottom, 20)
         }

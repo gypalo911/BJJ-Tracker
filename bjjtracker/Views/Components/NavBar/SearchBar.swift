@@ -43,7 +43,7 @@ struct SearchBar: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color("RedPink"))
+                        .foregroundColor(DesignSystem.shared.colors.redPink)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, 0)
                     
@@ -67,7 +67,7 @@ struct SearchBar: View {
             )
             .padding(.horizontal, 15)
             .padding(.vertical, 10)
-            .background(Color("LightLightGray"))
+            .background(DesignSystem.shared.colors.lightLightGray)
             .cornerRadius(10)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.3).delay(0.1)) {
@@ -129,7 +129,7 @@ struct HeaderView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 })
                 Spacer()
                 Button(action: {
@@ -139,12 +139,11 @@ struct HeaderView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 })
             }
             Text(SearchBarLocalisation.techniques.localizedString)
-                .font(.title)
-                .fontWeight(.bold)
+                .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                 .foregroundColor(.black)
                 .hAlign(.leading)
         }

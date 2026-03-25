@@ -62,7 +62,7 @@ struct LinkPreview: View {
                     .foregroundColor(.clear)
                     .frame(maxWidth: 170)
                     .frame(height: 101)
-                    .background(Color("LightBlue"))
+                    .background(DesignSystem.shared.colors.lightBlue)
                     .cornerRadius(10)
                     .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
                 Image("link")
@@ -89,7 +89,7 @@ struct LinkPreview: View {
             }
             VStack(alignment: .leading, spacing: 1, content: {
                 Text(previewModel.title ?? previewModel.previewURL.relativeString)
-                    .font(.caption2)
+                    .font(token: DesignSystem.shared.fonts.caption2)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)

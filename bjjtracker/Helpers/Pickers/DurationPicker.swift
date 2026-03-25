@@ -29,7 +29,7 @@ struct DurationPicker: View {
                     ForEach(0..<24) { hour in
                         HStack(alignment: .bottom, spacing: 3) {
                             Text(verbatim: "\(hour)")
-                                .font(.title3)
+                                .font(token: DesignSystem.shared.fonts.title3)
                             Text(Localisation.hours.localizedString)
                                 .font(.callout)
                                 .fontWeight(.semibold)
@@ -47,7 +47,7 @@ struct DurationPicker: View {
                     ForEach(0..<60) { minute in
                         HStack(alignment: .bottom, spacing: 3) {
                             Text(verbatim: "\(minute)")
-                                .font(.title3)
+                                .font(token: DesignSystem.shared.fonts.title3)
                             Text(Localisation.minutes.localizedString)
                                 .font(.callout)
                                 .fontWeight(.semibold)

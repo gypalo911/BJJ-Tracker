@@ -64,8 +64,7 @@ struct BluredBottomSheet: View {
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newSession.localizedString)
                                 .foregroundStyle(text: .onColor)
-                                .font(buttons: .regular)
-                                .fontWeight(.medium)
+                                .font(buttons: .regular, weight: .medium)
                         }
                     }
                     .opacity(offset != 0 ? 0 : 1)
@@ -90,9 +89,8 @@ struct BluredBottomSheet: View {
                                 .foregroundColor(.black)
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newPromotion.localizedString)
-                                .foregroundStyle(text: .text)
-                                .font(buttons: .regular)
-                                .fontWeight(.medium)
+                                .foregroundStyle(.black)
+                                .font(buttons: .regular, weight: .medium)
                         }
                     }
                     .opacity(offset != 0 ? 0 : 1)
@@ -119,8 +117,7 @@ struct BluredBottomSheet: View {
                                 .frame(width: 25, height: 25)
                             Text(Localisation.newTechnique.localizedString)
                                 .foregroundStyle(text: .onColor)
-                                .font(buttons: .regular)
-                                .fontWeight(.medium)
+                                .font(buttons: .regular, weight: .medium)
                         }
                     }
                     .opacity(offset != 0 ? 0 : 1)

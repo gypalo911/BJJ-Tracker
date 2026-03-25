@@ -77,15 +77,13 @@ struct PieChartRows: View {
                         .frame(width: 20, height: 20)
                     VStack(alignment: .leading, spacing: 0) {
                         Text(self.names[i])
-                            .foregroundColor(Color("Gray"))
-                            .font(.footnote)
-                            .fontWeight(.semibold)
+                            .foregroundColor(DesignSystem.shared.colors.gray)
+                            .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(self.values[i])
                                     .foregroundColor(Color.black)
-                                    .font(.footnote)
-                                    .fontWeight(.semibold)
+                                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                             }
                         }
                     }
@@ -99,7 +97,7 @@ struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
         PieChartView(
             values: [12, 3],
-            colors: [Color("Blue"), Color("LightBlue"), Color.orange],
+            colors: [DesignSystem.shared.colors.blue, DesignSystem.shared.colors.lightBlue, Color.orange],
             textColors: [.white, .black],
             names: ["Gi session", "No Gi session"],
             backgroundColor: Color.white, innerRadiusFraction: 0.3

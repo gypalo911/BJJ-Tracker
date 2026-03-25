@@ -67,7 +67,7 @@ struct AddPromotionView: View {
                                 Image("back")
                                     .resizable()
                                     .frame(width: 25, height: 25)
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(DesignSystem.shared.colors.blue)
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -77,7 +77,7 @@ struct AddPromotionView: View {
                             } label: {
                                 Text(AddPromotionLocalisation.save.localizedString)
                                     .fixedSize()
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(DesignSystem.shared.colors.blue)
                             }
                         }
                     }

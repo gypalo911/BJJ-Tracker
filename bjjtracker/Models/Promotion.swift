@@ -40,7 +40,7 @@ enum Belt: Int, CaseIterable {
         case .white:
             return (Color.white, nil)
         case .blue:
-            return (Color("Blue"), nil)
+            return (DesignSystem.shared.colors.blue, nil)
         case .purple:
             return (Color.purple, nil)
         case .brown:

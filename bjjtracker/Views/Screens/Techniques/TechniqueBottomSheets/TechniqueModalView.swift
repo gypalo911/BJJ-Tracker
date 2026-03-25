@@ -71,7 +71,7 @@ struct TechniqueModalView: View {
                         }
                     }
                 )
-                .font(.title2.weight(.bold))
+                .font(token: DesignSystem.shared.fonts.title2)
                 .submitLabel(.next)
                 .focused($focusedField, equals: .name)
                 .onSubmit {
@@ -94,7 +94,7 @@ struct TechniqueModalView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("RedPink"))
+                            .foregroundColor(name.isEmpty ? DesignSystem.shared.colors.gray : DesignSystem.shared.colors.redPink)
                     })
                     .disabled(name.isEmpty)
                     Button(action: {
@@ -116,9 +116,8 @@ struct TechniqueModalView: View {
                         }
                     }, label: {
                         Text(Localisation.done)
-                            .font(.body)
-                            .fontWeight(.medium)
-                            .foregroundColor(name.isEmpty ? Color("Gray") : Color("Blue"))
+                            .font(token: DesignSystem.shared.fonts.body, weight: .medium)
+                            .foregroundColor(name.isEmpty ? DesignSystem.shared.colors.gray : DesignSystem.shared.colors.blue)
                     })
                     .disabled(name.isEmpty)
                 }
@@ -131,15 +130,15 @@ struct TechniqueModalView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .inset(by: 0.01)
-                            .stroke(Color("LightGray"), lineWidth: 2)
+                            .stroke(DesignSystem.shared.colors.lightGray, lineWidth: 2)
                     )
                     .padding(.leading, 5)
                     .focused($focusedField, equals: .details)
                 if details.isEmpty {
                     VStack {
                         Text(Localisation.addSomeDetails)
-                            .font(.body)
-                            .foregroundColor(Color("GrayTextColor"))
+                            .font(token: DesignSystem.shared.fonts.body)
+                            .foregroundColor(DesignSystem.shared.colors.grayText)
                             .padding(20)
                         Spacer()
                     }
@@ -159,12 +158,11 @@ struct TechniqueModalView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(Localisation.technique)
-                        .font(.body)
+                        .font(token: DesignSystem.shared.fonts.body)
                         .multilineTextAlignment(.leading)
-                        .foregroundColor(Color("GrayTextColor"))
+                        .foregroundColor(DesignSystem.shared.colors.grayText)
                     Text(verbatim: name)
-                        .font(.title2.weight(.bold))
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.title2)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.black)
                 }
@@ -178,7 +176,7 @@ struct TechniqueModalView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(Color("RedPink"))
+                        .foregroundColor(DesignSystem.shared.colors.redPink)
                 })
             }
             .padding(.top, 10)
@@ -186,14 +184,13 @@ struct TechniqueModalView: View {
             
             VStack(alignment: .leading) {
                 Text(Localisation.description)
-                    .font(.body)
+                    .font(token: DesignSystem.shared.fonts.body)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color("GrayTextColor"))
+                    .foregroundColor(DesignSystem.shared.colors.grayText)
                 ScrollView {
                     Text(verbatim: details)
-                        .font(.body)
-                        .fontWeight(.regular)
-                        .foregroundColor(Color("Gray"))
+                        .font(token: DesignSystem.shared.fonts.body, weight: .regular)
+                        .foregroundColor(DesignSystem.shared.colors.gray)
                 }
                 .frame(height: 100)
             }

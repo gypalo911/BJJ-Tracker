@@ -84,7 +84,7 @@ struct BeltProgressCell: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(showListBG ? Color("listBG") : Color.white)
+                .fill(showListBG ? DesignSystem.shared.colors.listBackground : Color.white)
         )
     }
 }

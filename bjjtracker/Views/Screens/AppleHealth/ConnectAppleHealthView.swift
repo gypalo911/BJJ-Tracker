@@ -47,8 +47,7 @@ struct ConnectAppleHealthView: View {
                         .defaultShadow()
                     HStack {
                         Text(Localisation.connect.localizedString)
-                            .font(buttons: .regular)
-                            .fontWeight(.medium)
+                            .font(buttons: .regular, weight: .medium)
                             .foregroundStyle(text: .onColor)
                     }
                 }

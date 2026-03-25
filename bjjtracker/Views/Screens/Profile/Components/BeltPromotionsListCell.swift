@@ -22,12 +22,10 @@ struct BeltPromotionsListCell: View {
                     .foregroundColor(.black)
                     .frame(width: 10)
                 Text(Localisation.stripes.localized(with: ["\(stripes)"]))
-                    .font(.footnote)
-                    .fontWeight(.bold)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .bold)
             }
             Text(date.toString("dd MMMM yyyy"))
-                .font(.footnote)
-                .fontWeight(.semibold)
+                .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                 .foregroundColor(Color.gray)
                 .padding(.leading, 20)
         }

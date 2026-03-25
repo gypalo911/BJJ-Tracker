@@ -45,8 +45,7 @@ struct TimetableView: View {
             NavigationView {
                 VStack(spacing: 0) {
                     Text(Localisation.timetable.localizedString)
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
@@ -63,8 +62,8 @@ struct TimetableView: View {
                         if filteredSessions.isEmpty {
                             Spacer()
                             Text(Localisation.emptyDay.localizedString)
-                                .font(.body)
-                                .foregroundColor(Color("Gray"))
+                                .font(token: DesignSystem.shared.fonts.body)
+                                .foregroundColor(DesignSystem.shared.colors.gray)
                             NavigationLink(destination: {
                                 JournalView(viewModel: .init(persistanceManager: persistanceManager))
                             }) {
@@ -119,7 +118,7 @@ struct TimetableView: View {
                     .padding(.top, -10)
                 }
                 .vAlign(.top)
-                .background(Color("generalBG").ignoresSafeArea())
+                .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .backport.hiddenToolbar(true)
                 .onChange(of: selectedDay, perform: { value in
                     withAnimation(.easeInOut(duration: 0.25)) {

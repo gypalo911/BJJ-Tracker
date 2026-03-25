@@ -54,10 +54,14 @@ extension DesignSystem {
         }
 
         public var swiftUI: SwiftUI.Font {
+            swiftUI(weight: nil)
+        }
+
+        public func swiftUI(weight override: SwiftUI.Font.Weight?) -> SwiftUI.Font {
             if let family, UIFont(name: family, size: scaledSize) != nil {
                 return .custom(family, size: scaledSize)
             }
-            return .system(size: scaledSize, weight: swiftUIWeight)
+            return .system(size: scaledSize, weight: override ?? swiftUIWeight)
         }
 
         public var uiKit: UIFont {

@@ -34,14 +34,23 @@ extension DesignSystem {
         public var purpleBackground: SwiftUI.Color { accent.surface }
         public var redPink: SwiftUI.Color { accent.destructive }
         public var green: SwiftUI.Color { status.success }
+        public var competition: SwiftUI.Color { activity.competition }
+        public var seminar: SwiftUI.Color { activity.seminar }
         public var gray: SwiftUI.Color { text.secondary }
         public var grayText: SwiftUI.Color { text.tertiary }
         public var lightGray: SwiftUI.Color { border.subtle }
         public var lightLightGray: SwiftUI.Color { surface.muted }
         public var lightBlue: SwiftUI.Color { surface.brand }
         public var lightBlueStrong: SwiftUI.Color { surface.brandStrong }
+        public var lightGreen: SwiftUI.Color { status.successSoft }
+        public var darkenGreen: SwiftUI.Color { status.successStrong }
+        public var lightRed: SwiftUI.Color { status.errorSoft }
+        public var darkenRed: SwiftUI.Color { status.errorStrong }
         public var generalBackground: SwiftUI.Color { background.primary }
         public var listBackground: SwiftUI.Color { background.list }
+        public var logoColor: SwiftUI.Color { background.logo }
+        public var linearBG1: SwiftUI.Color { share.gradientStart }
+        public var linearBG2: SwiftUI.Color { share.gradientEnd }
         public var yellow: SwiftUI.Color { highlight.primary }
 
         public init() {}

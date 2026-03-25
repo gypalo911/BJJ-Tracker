@@ -83,7 +83,7 @@ struct EditSessionView: View {
                                     .padding(20)
                                     .background {
                                         RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color("LightBlue"))
+                                            .fill(DesignSystem.shared.colors.lightBlue)
                                     }
                                     .padding(.leading, 5)
                             }
@@ -122,7 +122,7 @@ struct EditSessionView: View {
                                 Image("back")
                                     .resizable()
                                     .frame(width: 25, height: 25)
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(DesignSystem.shared.colors.blue)
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -133,7 +133,7 @@ struct EditSessionView: View {
                             } label: {
                                 Text(Localisation.save)
                                     .fixedSize()
-                                    .foregroundColor(Color("Blue"))
+                                    .foregroundColor(DesignSystem.shared.colors.blue)
                             }
                         }
                     }

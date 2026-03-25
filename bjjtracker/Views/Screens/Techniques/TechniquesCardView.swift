@@ -24,21 +24,18 @@ struct TechniquesCardEmptyState: View {
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading, spacing: 10) {
                 Text(Localisation.noTechniquesYet)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                 Text(Localisation.startLearningToday)
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .foregroundColor(Color("Gray"))
+                    .font(token: DesignSystem.shared.fonts.caption, weight: .regular)
+                    .foregroundColor(DesignSystem.shared.colors.gray)
             }
             Spacer()
             NavigationLink(destination: {
                 TechniquesView(viewModel: .init(persistanceManager: persistanceManager))
             }) {
                 Text(Localisation.addNew)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("Blue"))
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
+                    .foregroundColor(DesignSystem.shared.colors.blue)
             }
         }
     }
@@ -98,8 +95,7 @@ struct TechniquesCardFullState: View {
                         .foregroundColor(.black)
                         .frame(width: 30, height: 30)
                     Text(LocalizedStringKey(technquesText))
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                        .font(token: DesignSystem.shared.fonts.caption, weight: .semibold)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .hAlign(.leading)
@@ -107,14 +103,13 @@ struct TechniquesCardFullState: View {
                 Spacer()
                 HStack(spacing: 5) {
                     Text(Localisation.seeAll)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color("Blue"))
+                        .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                     Image("eye")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 15, height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 }
             }
         }

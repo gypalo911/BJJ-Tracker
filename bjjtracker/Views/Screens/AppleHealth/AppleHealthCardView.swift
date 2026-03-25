@@ -25,12 +25,10 @@ struct AppleHealthCardView: View {
                 .frame(width: 30, height: 30)
             HStack(alignment: .center, spacing: 4) {
                 Text(Localisation.connectWith.localizedString)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                     .foregroundColor(.red)
                 Text(Localisation.appleHealth.localizedString)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                     .foregroundColor(.black)
             }
             Spacer()
@@ -89,8 +87,7 @@ struct AppleHealthCardView_Previews: PreviewProvider {
                         .foregroundColor(.red)
                 }, text: {
                     Text(AppleHealthCardView.Localisation.caloriesBurned.localized(with: ["1200"]))
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                        .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                         .foregroundColor(.black)
                 }
             )
@@ -104,7 +101,7 @@ struct AppleHealthCardView_Previews: PreviewProvider {
                 },
                 text: {
                     Text(.init(AppleHealthCardView.Localisation.activitiesBesideBJJ.localizedString))
-                        .font(.footnote)
+                        .font(token: DesignSystem.shared.fonts.footnote)
                         .foregroundColor(.black)
                 }
             )

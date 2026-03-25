@@ -19,7 +19,7 @@ struct BeltView: View {
                 .fill(beltColor.0)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Gray"), lineWidth: 1)
+                        .stroke(DesignSystem.shared.colors.gray, lineWidth: 1)
                 )
                 .frame(width: beltWidth, height: beltHeight)
             ZStack(alignment: .leading) {

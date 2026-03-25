@@ -62,8 +62,7 @@ struct PromotionsView: View {
                     VStack {
                         HStack {
                             Text(Localisation.progress.localizedString)
-                                .font(.body)
-                                .fontWeight(.semibold)
+                                .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                             Spacer()
                             
                             Button(action: {
@@ -71,7 +70,7 @@ struct PromotionsView: View {
                             }, label: {
                                 HStack(spacing: 10) {
                                     Text(gradingSystem.rawValue.localizedString.capitalized)
-                                        .font(.footnote)
+                                        .font(token: DesignSystem.shared.fonts.footnote)
                                         .foregroundColor(Color.black)
                                     Image(systemName: "chevron.down")
                                         .scaledToFit()
@@ -83,7 +82,7 @@ struct PromotionsView: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 5)
                                         .stroke(lineWidth: 1)
-                                        .fill(Color("LightGray"))
+                                        .fill(DesignSystem.shared.colors.lightGray)
                                 )
                             })
                             .hAlign(.topTrailing)

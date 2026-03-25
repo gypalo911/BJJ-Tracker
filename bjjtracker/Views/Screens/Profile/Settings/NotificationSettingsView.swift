@@ -65,8 +65,7 @@ struct NotificationSettingsView: View {
                             .frame(width: 20, height: 20)
                     }
                     Text(Localisation.notifications.localizedString)
-                        .font(.body)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.body, weight: .bold)
                 }
                 .hAlign(.leading)
                 if !NotificationManager.shared.isAuthorized {
@@ -75,8 +74,7 @@ struct NotificationSettingsView: View {
                             .font(.callout)
                             .fontWeight(.bold)
                         Text(Localisation.notificationDescription.localizedString)
-                            .font(.footnote)
-                            .fontWeight(.regular)
+                            .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                             .multilineTextAlignment(.center)
                         Button(action: {
                             if NotificationManager.shared.authrorizationStatus == .denied {
@@ -95,8 +93,7 @@ struct NotificationSettingsView: View {
                         VStack {
                             Toggle(isOn: $notificationPrefferences.sessionRemindersOn, label: {
                                 Text(Localisation.sessionReminders.localizedString)
-                                    .font(.footnote)
-                                    .fontWeight(.regular)
+                                    .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                             })
                             VStack {
                                 HStack {
@@ -106,8 +103,7 @@ struct NotificationSettingsView: View {
                                         .foregroundColor(.black)
                                         .frame(width: 15, height: 15)
                                     Text(Localisation.notifications.localizedString)
-                                        .font(.caption)
-                                        .fontWeight(.regular)
+                                        .font(token: DesignSystem.shared.fonts.caption, weight: .regular)
                                 }
                                 .hAlign(.leading)
                                 
@@ -116,19 +112,17 @@ struct NotificationSettingsView: View {
                             .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color("LightLightGray"))
+                                    .fill(DesignSystem.shared.colors.lightLightGray)
                             )
                             .frame(maxWidth: .infinity)
                         }
                         Toggle(isOn: $notificationPrefferences.achivementRemindersOn, label: {
                             Text(Localisation.achievementNotifications.localizedString)
-                                .font(.footnote)
-                                .fontWeight(.regular)
+                                .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                         })
                         Toggle(isOn: $notificationPrefferences.statisticsNotificationsOn, label: {
                             Text(Localisation.statistics.localizedString)
-                                .font(.footnote)
-                                .fontWeight(.regular)
+                                .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                         })
                     }
                 }

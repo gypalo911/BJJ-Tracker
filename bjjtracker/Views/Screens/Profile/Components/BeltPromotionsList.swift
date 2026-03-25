@@ -35,7 +35,7 @@ struct BeltPromotionsList: View {
                     }
                 }
             }
-            .background(Color("listBG"))
+            .background(DesignSystem.shared.colors.listBackground)
             .listRowSeparator(.hidden)
             .listRowInsets(EdgeInsets(.zero))
         }

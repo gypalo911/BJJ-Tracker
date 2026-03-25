@@ -21,15 +21,13 @@ struct InfographicsView: View {
         ZStack(alignment: .center) {
             ZStack {
                 Circle()
-                    .fill(Color("Green"))
+                    .fill(DesignSystem.shared.colors.green)
                     .frame(width: 130, height: 130)
                 VStack {
                     Text(verbatim: "\(statsInfo[.training] ?? 0)")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.title2, weight: .bold)
                     Text(Localisation.classes.localizedString)
-                        .font(.footnote)
-                        .fontWeight(.medium)
+                        .font(token: DesignSystem.shared.fonts.footnote, weight: .medium)
                 }
                 .foregroundColor(.white)
             }
@@ -37,7 +35,7 @@ struct InfographicsView: View {
             .zIndex(0)
             ZStack {
                 Circle()
-                    .fill(Color("Competition"))
+                    .fill(DesignSystem.shared.colors.competition)
                     .frame(width: 120, height: 120)
                 Circle()
                     .stroke(lineWidth: 8)
@@ -45,11 +43,9 @@ struct InfographicsView: View {
                     .frame(width: 128, height: 128)
                 VStack {
                     Text(verbatim: "\(statsInfo[.competition] ?? 0)")
-                        .font(.body)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.body, weight: .bold)
                     Text(Localisation.competitions.localizedString)
-                        .font(.caption)
-                        .fontWeight(.medium)
+                        .font(token: DesignSystem.shared.fonts.caption, weight: .medium)
                 }
                 .foregroundColor(.white)
             }
@@ -57,7 +53,7 @@ struct InfographicsView: View {
             .zIndex(2)
             ZStack {
                 Circle()
-                    .fill(Color("Seminar"))
+                    .fill(DesignSystem.shared.colors.seminar)
                     .frame(width: 95, height: 95)
                 Circle()
                     .stroke(lineWidth: 8)
@@ -65,11 +61,9 @@ struct InfographicsView: View {
                     .frame(width: 103, height: 103)
                 VStack {
                     Text(verbatim: "\(statsInfo[.seminar] ?? 0)")
-                        .font(.body)
-                        .fontWeight(.bold)
+                        .font(token: DesignSystem.shared.fonts.body, weight: .bold)
                     Text(Localisation.seminars.localizedString)
-                        .font(.caption)
-                        .fontWeight(.medium)
+                        .font(token: DesignSystem.shared.fonts.caption, weight: .medium)
                 }
                 .foregroundColor(.white)
             }
@@ -82,7 +76,7 @@ struct InfographicsView: View {
 struct InfographicsView_Previews: PreviewProvider {
     static var previews: some View {
         InfographicsView(
-            strokeColor: Color("generalBG"),
+            strokeColor: DesignSystem.shared.colors.generalBackground,
             statsInfo: [.training: 12, .competition: 0, .seminar: 0]
         ).padding(.bottom, 70)
     }

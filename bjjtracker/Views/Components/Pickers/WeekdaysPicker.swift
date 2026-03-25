@@ -35,11 +35,11 @@ struct DaysPicker: View {
             HStack {
                 ForEach(Day.allCases, id: \.self) { day in
                     Text(String(day.title))
-                        .font(.body.bold())
+                        .font(token: DesignSystem.shared.fonts.bodyBold)
                         .foregroundColor(.white)
                         .frame(width: 60, height: 32)
                         .background(RoundedRectangle(cornerRadius: 10).fill(
-                            selectedDays.contains(day) ? Color("Blue") : Color("LightGray")
+                            selectedDays.contains(day) ? DesignSystem.shared.colors.blue : DesignSystem.shared.colors.lightGray
                         ))
                         .onTapGesture {
                             if selectedDays.contains(day) {

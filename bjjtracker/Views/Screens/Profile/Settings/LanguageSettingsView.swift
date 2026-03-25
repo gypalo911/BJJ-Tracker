@@ -32,8 +32,7 @@ struct LanguageSettingsView: View {
                         .frame(width: 20, height: 20)
                 }
                 Text(LanguageSettingsLocalisation.language.localizedString)
-                    .font(.body)
-                    .fontWeight(.bold)
+                    .font(token: DesignSystem.shared.fonts.body, weight: .bold)
             }
             .hAlign(.leading)
             

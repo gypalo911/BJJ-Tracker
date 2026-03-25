@@ -52,7 +52,7 @@ struct NewSessionView: View {
                             Image("back")
                                 .resizable()
                                 .frame(width: 25, height: 25)
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(DesignSystem.shared.colors.blue)
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,7 +62,7 @@ struct NewSessionView: View {
                         } label: {
                             Text(Localisation.save)
                                 .fixedSize()
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(DesignSystem.shared.colors.blue)
                         }
                     }
                 }
@@ -108,7 +108,7 @@ struct NewSessionView: View {
                     .frame(height: 150)
                     .frame(maxWidth: screenWidth)
                     .frame(maxWidth: .infinity)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(DesignSystem.shared.colors.blue, lineWidth: 1))
             }
         }
     }
@@ -134,17 +134,17 @@ struct NewSessionView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 16, height: 16)
-                            .foregroundStyle(Color("Blue"))
+                            .foregroundStyle(DesignSystem.shared.colors.blue)
                             .padding(.top, 2)
                         VStack(alignment: .leading, spacing: 5) {
                             Text(viewModel.repeatableSessionSettings.summaryDescription)
                                 .font(.callout)
-                                .foregroundStyle(Color("DarkBlue"))
+                                .foregroundStyle(DesignSystem.shared.colors.darkBlue)
                             let sessionsCountDescription = viewModel.repeatableSessionSettings.sessionsCountDescription(from: viewModel.activity.startDate)
                             if !sessionsCountDescription.isEmpty && viewModel.repeatableSessionSettings.isRepeatable {
                                 Text(sessionsCountDescription)
                                     .font(.callout)
-                                    .foregroundStyle(Color("Blue"))
+                                    .foregroundStyle(DesignSystem.shared.colors.blue)
                             }
                         }
                         Spacer()
@@ -152,7 +152,7 @@ struct NewSessionView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(DesignSystem.shared.colors.blue, lineWidth: 1))
 
                 if viewModel.repeatableSessionSettings.isRepeatable {
                     Divider()
@@ -205,7 +205,7 @@ struct NewSessionView: View {
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 0.5)
-                    .fill(Color("Blue"))
+                    .fill(DesignSystem.shared.colors.blue)
             )
             .padding(.vertical, 20)
         }
@@ -218,7 +218,7 @@ struct NewSessionView: View {
                 .padding(20)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("LightBlue"))
+                        .fill(DesignSystem.shared.colors.lightBlue)
                 }
                 .padding(.leading, 5)
         }

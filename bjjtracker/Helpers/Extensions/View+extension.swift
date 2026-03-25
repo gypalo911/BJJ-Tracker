@@ -100,6 +100,6 @@ extension View {
             .pickerStyle(.automatic)
             .padding(.horizontal, 16)
             .accentColor(.black)
-            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Blue"), lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(DesignSystem.shared.colors.blue, lineWidth: 1))
     }
 }

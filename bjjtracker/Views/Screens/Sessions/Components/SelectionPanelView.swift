@@ -96,14 +96,14 @@ struct RectangleOption: View {
         }, label: {
             Text(type.localizedString)
                 .fontWeight(.regular)
-                .font(.body)
+                .font(token: DesignSystem.shared.fonts.body)
                 .foregroundColor(.black)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.vertical, 6)
                 .background(
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(isSelected ? Color("Blue") : Color("LightGray"), lineWidth: isSelected ? 2 : 1)
+                            .stroke(isSelected ? DesignSystem.shared.colors.blue : DesignSystem.shared.colors.lightGray, lineWidth: isSelected ? 2 : 1)
                             .foregroundColor(.white)
                     }
                 )
@@ -123,15 +123,14 @@ struct DurationSelectorView: View {
         }, label: {
             let duration = duration.minutesToDuration()
             Text(verbatim: duration)
-                .font(.body)
-                .fontWeight(.regular)
+                .font(token: DesignSystem.shared.fonts.body, weight: .regular)
                 .foregroundColor(.black)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 6)
                 .background(
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("LightGray").opacity(0.5))
+                            .foregroundColor(DesignSystem.shared.colors.lightGray.opacity(0.5))
                     }
                 )
         })
@@ -143,8 +142,7 @@ struct TitleTextView: View {
     let text: String
     var body: some View {
         Text(text)
-            .font(.headline)
-            .fontWeight(.medium)
+            .font(token: DesignSystem.shared.fonts.headline, weight: .medium)
     }
 }
 

@@ -16,11 +16,11 @@ enum ActivityType: String, CaseIterable, Hashable {
     var color: Color {
         switch self {
         case .training:
-            return Color("Green")
+            return DesignSystem.shared.colors.green
         case .competition:
-            return Color("Competition")
+            return DesignSystem.shared.colors.competition
         case .seminar:
-            return Color("Seminar")
+            return DesignSystem.shared.colors.seminar
         }
     }
 }
@@ -38,11 +38,11 @@ enum ActivityStatus: String {
     var color: Color {
         switch self {
         case .upcoming:
-            return Color("Purple")
+            return DesignSystem.shared.colors.purple
         case .ongoing:
-            return Color("Blue")
+            return DesignSystem.shared.colors.blue
         case .finished:
-            return Color("Green")
+            return DesignSystem.shared.colors.green
         }
     }
     

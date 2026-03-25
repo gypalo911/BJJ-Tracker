@@ -34,14 +34,13 @@ struct PromotionPanelView: View {
                     CircularBeltView(primaryColor: promotion.belt.color.0, secondaryColor: promotion.belt.color.1)
                     HStack(spacing: 4) {
                         Text(Localisation.reached)
-                            .font(.footnote)
+                            .font(token: DesignSystem.shared.fonts.footnote)
                         Text(
                             promotion.stripes > 0
                             ? Localisation.beltWithStripes("\(promotion.belt.title)", stripes: "\(promotion.stripes)")
                             : Localisation.belt("\(promotion.belt.title)")
                         )
-                            .font(.footnote)
-                            .fontWeight(.bold)
+                            .font(token: DesignSystem.shared.fonts.footnote, weight: .bold)
                     }
                 }
                 .hAlign(.leading)

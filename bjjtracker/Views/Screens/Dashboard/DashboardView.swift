@@ -56,7 +56,7 @@ struct DashboardView: View {
                 ScrollView(showsIndicators: false) {
                     ZStack(alignment: .top) {
                         Rectangle()
-                            .foregroundColor(Color("Blue"))
+                            .foregroundColor(DesignSystem.shared.colors.blue)
                             .edgesIgnoringSafeArea(.all)
                             .cornerRadius(30)
                             .frame(height: shouldCollapseHeader ? headerHeight / 2 + 80 : headerHeight)
@@ -66,8 +66,7 @@ struct DashboardView: View {
                         VStack(spacing: 0) {
                             HStack {
                                 Text(Localisation.dashboard.localizedString)
-                                    .font(.title)
-                                    .fontWeight(.bold)
+                                    .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                                     .foregroundColor(.white)
                                     .hAlign(.leading)
                                 
@@ -93,7 +92,7 @@ struct DashboardView: View {
                                 .offset(y: shouldCollapseHeader ? -offsetY : 0)
                                 .background(
                                     Rectangle()
-                                        .foregroundColor(Color("Blue"))
+                                        .foregroundColor(DesignSystem.shared.colors.blue)
                                         .edgesIgnoringSafeArea(.all)
                                         .cornerRadius(30)
                                         .frame(height: headerHeight/2)
@@ -127,7 +126,7 @@ struct DashboardView: View {
                 }
                 .coordinateSpace(name: "scroll")
                 .backport.hiddenToolbar(true)
-                .background(Color("generalBG").ignoresSafeArea())
+                .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .onChange(of: viewModel.selectedDay, perform: { value in
                     settings.selectedCalendarDate = value.setCurrentTime()
                     viewModel.setupHealthData()
@@ -205,8 +204,7 @@ struct DashboardView: View {
         VStack(spacing: 0) {
             HStack {
                 Text(verbatim: viewModel.selectedDay.toString("LLLL yyyy").capitalized)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(token: DesignSystem.shared.fonts.title2, weight: .bold)
                     .foregroundColor(.white)
                     .hAlign(.leading)
                 
@@ -230,7 +228,7 @@ struct DashboardView: View {
                 colors: .init(
                     textColor: .white,
                     strokeColor: .white,
-                    selectedTextColor: Color("Blue"),
+                    selectedTextColor: DesignSystem.shared.colors.blue,
                     selectedBGColor: .white
                 )
             )
@@ -259,8 +257,7 @@ struct DashboardView: View {
                                     .foregroundColor(.red)
                             }, text: {
                                 Text(Localisation.caloriesBurned.localized(with: ["\(totalEnergyBurned)"]))
-                                    .font(.footnote)
-                                    .fontWeight(.semibold)
+                                    .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                                     .foregroundColor(.black)
                             }
                         )
@@ -276,7 +273,7 @@ struct DashboardView: View {
 //                            },
 //                            text: {
 //                                Text("**\(workoutsCount)** activities beside BJJ")
-//                                    .font(.footnote)
+//                                    .font(token: DesignSystem.shared.fonts.footnote)
 //                                    .foregroundColor(.black)
 //                            }
 //                        )
@@ -319,8 +316,8 @@ struct DashboardView: View {
     func EmptyResultsView() -> some View {
         Spacer()
         Text(Localisation.emptyDay.localizedString)
-            .font(.body)
-            .foregroundColor(Color("Gray"))
+            .font(token: DesignSystem.shared.fonts.body)
+            .foregroundColor(DesignSystem.shared.colors.gray)
         
         NavigationLink(destination: {
             JournalView(viewModel: .init(persistanceManager: persistanceManager))

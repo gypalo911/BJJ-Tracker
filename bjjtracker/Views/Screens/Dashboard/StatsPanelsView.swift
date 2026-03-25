@@ -20,11 +20,9 @@ struct StatsView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(text)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                        .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                     Text(value)
-                        .font(.title3)
-                        .fontWeight(.semibold)
+                        .font(token: DesignSystem.shared.fonts.title3, weight: .semibold)
                 }
                 Spacer()
             }
@@ -38,23 +36,23 @@ struct StatsView: View {
                                 Image(tendecyGrows ? "arrowUp" : "arrowDown")
                                     .resizable()
                                     .frame(width: 15, height: 15)
-                                    .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
+                                    .foregroundColor(tendecyGrows ? DesignSystem.shared.colors.darkenGreen : DesignSystem.shared.colors.darkenRed)
                                 Text(tendecyValue)
                                     .fixedSize()
-                                    .font(.caption2)
-                                    .foregroundColor(tendecyGrows ? Color("darkenGreen") : Color("darkenRed"))
+                                    .font(token: DesignSystem.shared.fonts.caption2)
+                                    .foregroundColor(tendecyGrows ? DesignSystem.shared.colors.darkenGreen : DesignSystem.shared.colors.darkenRed)
                             } else {
                                 Text(tendecyValue)
                                     .fixedSize()
-                                    .font(.caption)
-                                    .foregroundColor(Color("darkenGreen"))
+                                    .font(token: DesignSystem.shared.fonts.caption)
+                                    .foregroundColor(DesignSystem.shared.colors.darkenGreen)
                             }
                         }
                     }
                     .padding(.all, 5)
                     .background(
                         Rectangle()
-                            .fill(tendecyGrows != nil ? (tendecyGrows! ? Color("lightGreen") : Color("lightRed")) : Color("lightGreen"))
+                            .fill(tendecyGrows != nil ? (tendecyGrows! ? DesignSystem.shared.colors.lightGreen : DesignSystem.shared.colors.lightRed) : DesignSystem.shared.colors.lightGreen)
                             .cornerRadius(10)
                     )
                     .vAlign(.topTrailing)

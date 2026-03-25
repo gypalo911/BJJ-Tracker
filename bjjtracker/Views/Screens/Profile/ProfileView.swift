@@ -108,8 +108,7 @@ struct ProfileView: View {
                     VStack(alignment: .center, spacing: 0) {
                         HStack {
                             Text(Localisation.profile.localizedString)
-                                .font(.title)
-                                .fontWeight(.bold)
+                                .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                                 .foregroundColor(.black)
                                 .hAlign(.leading)
                         }
@@ -169,12 +168,11 @@ struct ProfileView: View {
                                             .overlay {
                                                 ZStack {
                                                     RoundedRectangle(cornerRadius: 10)
-                                                        .fill(Color("LightGray"))
+                                                        .fill(DesignSystem.shared.colors.lightGray)
                                                         .opacity(0.8)
                                                     Text(Localisation.yetNoPromotions.localizedString)
                                                         .foregroundColor(.white)
-                                                        .font(.caption)
-                                                        .fontWeight(.regular)
+                                                        .font(token: DesignSystem.shared.fonts.caption, weight: .regular)
                                                 }
                                             }
                                         Button(action: {
@@ -192,19 +190,15 @@ struct ProfileView: View {
                                 HStack(alignment: .top, spacing: 74) {
                                     VStack(alignment: .center, spacing: 5) {
                                         Text(verbatim: "\(sessionsList.count)")
-                                            .font(.body)
-                                            .fontWeight(.semibold)
+                                            .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                         Text(Localisation.sessions.localizedString)
-                                            .font(.footnote)
-                                            .fontWeight(.medium)
+                                            .font(token: DesignSystem.shared.fonts.footnote, weight: .medium)
                                     }
                                     VStack(alignment: .center, spacing: 5) {
                                         Text(verbatim: totalTime())
-                                            .font(.body)
-                                            .fontWeight(.semibold)
+                                            .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                         Text(Localisation.totalTime.localizedString)
-                                            .font(.footnote)
-                                            .fontWeight(.medium)
+                                            .font(token: DesignSystem.shared.fonts.footnote, weight: .medium)
                                     }
                                 }
                             }
@@ -236,18 +230,16 @@ struct ProfileView: View {
                                         .frame(width: 30, height: 30)
                                 }, text: {
                                     Text(Localisation.viewAllAppleHealthData.localizedString)
-                                        .font(.footnote)
-                                        .fontWeight(.semibold)
+                                        .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
                                         .foregroundColor(.black)
                                 }) {
                                     openHealthApp()
                                 }
                             }
                             Text(Localisation.appleHealthPermissions.localizedString)
-                                .font(.footnote)
-                                .fontWeight(.regular)
+                                .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(Color("Gray"))
+                                .foregroundColor(DesignSystem.shared.colors.gray)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 5)
                         }
@@ -317,7 +309,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, settings.isTabBarHidden ? 50 : 120)
                 }
-                .background(Color("generalBG").ignoresSafeArea())
+                .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .sheet(isPresented: $showSheet) {
                     ProfileImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage, fileName: "avatar")
                 }
@@ -403,9 +395,8 @@ struct ProfileView: View {
     func SupportTheProjectView()  -> some View {
         VStack {
             Text(Localisation.supportTheProject.localizedString)
-                .font(.caption)
-                .fontWeight(.regular)
-                .foregroundColor(Color("Gray"))
+                .font(token: DesignSystem.shared.fonts.caption, weight: .regular)
+                .foregroundColor(DesignSystem.shared.colors.gray)
             
             HStack {
                 Link(destination: URL(string: AppConstants.Links.patreon.rawValue)!) {
@@ -413,7 +404,7 @@ struct ProfileView: View {
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(height: 40)
-                            .background(Color("LightLightGray"))
+                            .background(DesignSystem.shared.colors.lightLightGray)
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -435,7 +426,7 @@ struct ProfileView: View {
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(height: 40)
-                            .background(Color("Yellow"))
+                            .background(DesignSystem.shared.colors.yellow)
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -489,13 +480,11 @@ struct SettigsCell: View {
                     .frame(width: 20, height: 20)
             }
             Text(text.localizedString)
-                .font(.footnote)
-                .fontWeight(.semibold)
+                .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
             Spacer()
             if let valueText = valueText {
                 Text(valueText.localizedString)
-                    .font(.footnote)
-                    .fontWeight(.regular)
+                    .font(token: DesignSystem.shared.fonts.footnote, weight: .regular)
                     .foregroundColor(.gray)
             }
             Image.init(systemName: "chevron.right")

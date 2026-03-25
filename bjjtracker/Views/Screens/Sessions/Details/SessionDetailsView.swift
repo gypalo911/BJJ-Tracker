@@ -91,18 +91,17 @@ struct SessionDetailsView: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             Text(Localisation.notes)
-                                .font(.body)
-                                .fontWeight(.semibold)
+                                .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                 .foregroundColor(Color.black)
                             if let notes = viewModel.session.notes, !notes.isEmpty {
                                 Text(LocalizedStringKey(notes))
-                                    .font(.body)
+                                    .font(token: DesignSystem.shared.fonts.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             } else {
                                 Text(Localisation.empty)
-                                    .foregroundColor(Color("LightGray"))
-                                    .font(.body)
+                                    .foregroundColor(DesignSystem.shared.colors.lightGray)
+                                    .font(token: DesignSystem.shared.fonts.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             }
@@ -338,7 +337,7 @@ struct SessionDetailsHeaderView: View {
                 VStack {
                     HStack {
                         Text(navTitle)
-                            .font(.title.bold())
+                            .font(token: DesignSystem.shared.fonts.title)
                             .foregroundColor(.white)
                             .hAlign(.leading)
                         ZStack {
@@ -348,7 +347,7 @@ struct SessionDetailsHeaderView: View {
                                 .defaultShadow()
                                 .frame(width: 86, height: 23)
                             Text(sessionStatus.rawValue.localizedString.uppercased())
-                                .font(.caption2)
+                                .font(token: DesignSystem.shared.fonts.caption2)
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                         }
@@ -361,8 +360,7 @@ struct SessionDetailsHeaderView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             Text(verbatim: (session.startDate ?? Date()).toString("dd MMMM yyyy"))
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                                .font(token: DesignSystem.shared.fonts.title3, weight: .semibold)
                                 .foregroundColor(.white)
                         }
                         HStack(spacing: 10) {
@@ -372,14 +370,12 @@ struct SessionDetailsHeaderView: View {
                                 .foregroundColor(.white)
                             HStack {
                                 Text(verbatim: (session.startDate ?? Date()).toString("HH:mm"))
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
+                                    .font(token: DesignSystem.shared.fonts.title3, weight: .semibold)
                                     .foregroundColor(.white)
                                 let duration = Int(session.duration)
                                 if session.duration != 0 {
                                     Text(duration.minutesToDuration())
-                                        .font(.body)
-                                        .fontWeight(.semibold)
+                                        .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                         .foregroundColor(.white)
                                 }
                             }
@@ -392,14 +388,13 @@ struct SessionDetailsHeaderView: View {
                             
                             if let location = session.location, !location.isEmpty {
                                 Text(verbatim: location)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
+                                    .font(token: DesignSystem.shared.fonts.title3, weight: .semibold)
                                     .foregroundColor(.white)
                             } else {
                                 Text(Localisation.empty)
                                     .foregroundColor(.white)
                                     .fontWeight(.semibold)
-                                    .font(.title3)
+                                    .font(token: DesignSystem.shared.fonts.title3)
                             }
                         }
                         
@@ -410,8 +405,7 @@ struct SessionDetailsHeaderView: View {
                                     .frame(width: 20, height: 20)
                                     .foregroundColor(.white)
                                 Text(Localisation.repeatableSession)
-                                    .font(.body)
-                                    .fontWeight(.semibold)
+                                    .font(token: DesignSystem.shared.fonts.body, weight: .semibold)
                                     .foregroundColor(.white)
                                 Spacer()
                             }

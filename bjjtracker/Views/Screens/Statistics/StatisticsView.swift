@@ -24,7 +24,7 @@ struct StatisticsView: View {
         static let year = "Year"
     }
     
-    let bgColor: Color = Color("generalBG")
+    let bgColor: Color = DesignSystem.shared.colors.generalBackground
     
     private var segments = [
         Localisation.week.localizedString,
@@ -52,8 +52,7 @@ struct StatisticsView: View {
     var body: some View {
         VStack {
             Text(Localisation.statistics.localizedString)
-                .font(.title)
-                .fontWeight(.bold)
+                .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                 .foregroundColor(.black)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 10)
@@ -80,7 +79,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 })
                 Text(viewModel.title)
                     .font(.callout)
@@ -95,7 +94,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 15)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 })
             }
             ScrollView(showsIndicators: false) {
@@ -124,7 +123,7 @@ struct StatisticsView: View {
                     ).padding(.bottom, 70)
                     
                     Rectangle()
-                        .fill(Color("LightGray"))
+                        .fill(DesignSystem.shared.colors.lightGray)
                         .padding(.horizontal, 20)
                         .frame(height: 1)
                     
@@ -145,7 +144,7 @@ struct StatisticsView: View {
                                 Double(viewModel.sessions(by: .gi, filteredSessions).count),
                                 Double(viewModel.sessions(by: .noGi, filteredSessions).count)
                             ],
-                            colors: [Color("Blue"), Color("LightBlue")],
+                            colors: [DesignSystem.shared.colors.blue, DesignSystem.shared.colors.lightBlue],
                             textColors: [.white, .black],
                             names: ["Gi sessions".localizedString, "No Gi sessions".localizedString],
                             backgroundColor: bgColor, innerRadiusFraction: 0.4
@@ -165,8 +164,7 @@ struct StatisticsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.title)
-                    .font(.title3)
-                    .fontWeight(.medium)
+                    .font(token: DesignSystem.shared.fonts.title3, weight: .medium)
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -177,7 +175,7 @@ struct StatisticsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25, height: 25)
-                        .foregroundColor(Color("Blue"))
+                        .foregroundColor(DesignSystem.shared.colors.blue)
                 }
             }
         }
