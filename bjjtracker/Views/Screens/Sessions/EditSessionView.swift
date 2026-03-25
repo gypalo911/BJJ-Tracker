@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EditSessionView: View {
+    typealias Localisation = EditSessionViewViewModel.Localisation
     
     @StateObject var viewModel: EditSessionViewViewModel
     
@@ -37,7 +38,7 @@ struct EditSessionView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Select type:".localizedString)
+                                TitleTextView(text: Localisation.selectType)
 
                                 SelectionPanelView(
 //                                    geometry: geometry,
@@ -48,7 +49,7 @@ struct EditSessionView: View {
                             }.padding(.top, 10)
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Select grappling style:".localizedString)
+                                TitleTextView(text: Localisation.selectGrapplingStyle)
                                 SelectionPanelView(
 //                                    geometry: geometry,
                                     valuesList: GraplingStyle.allCases.map { $0.rawValue },
@@ -57,14 +58,14 @@ struct EditSessionView: View {
                                 )
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Select date and time:".localizedString)
+                                TitleTextView(text: Localisation.selectDateAndTime)
                                 DatePicker("", selection: $activity.startDate)
                                     .datePickerStyle(.compact)
                                     .fixedSize()
                                     .offset(x: -2)
                             }
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Duration:".localizedString)
+                                TitleTextView(text: Localisation.duration)
 
                                 DurationSelectorView(isPickerPresented: $isPickerPresented, duration: $activity.duration)
                                 if isPickerPresented {
@@ -77,8 +78,8 @@ struct EditSessionView: View {
                         
                         Group {
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Location:".localizedString)
-                                TextField("Location...".localizedString, text: $activity.location)
+                                TitleTextView(text: Localisation.locationTitle)
+                                TextField(Localisation.locationPlaceholder, text: $activity.location)
                                     .padding(20)
                                     .background {
                                         RoundedRectangle(cornerRadius: 10)
@@ -88,7 +89,7 @@ struct EditSessionView: View {
                             }
                             
                             VStack(alignment: .leading) {
-                                TitleTextView(text: "Notes".localizedString)
+                                TitleTextView(text: Localisation.notes)
                                 CustomTextEditor(text: $activity.notes)
                             }
                         }
@@ -108,7 +109,7 @@ struct EditSessionView: View {
                     }
                     .hAlign(.leading)
                     .padding(.horizontal, 20)
-                    .navigationTitle("Edit Session".localizedString)
+                    .navigationTitle(Localisation.editSession)
                     .onAppear {
                         viewModel.onScreenAppeared()
                     }
@@ -130,7 +131,7 @@ struct EditSessionView: View {
                                 update(session)
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Text("Save")
+                                Text(Localisation.save)
                                     .fixedSize()
                                     .foregroundColor(Color("Blue"))
                             }

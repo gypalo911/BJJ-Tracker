@@ -28,6 +28,15 @@ struct Photo: Transferable {
 
 @available(iOS 16.0, *)
 struct ShareSessionView: View {
+    enum Localisation {
+        static var selectImageToShare: String { "Select image to share with training stats".localizedString }
+        static var shareResults: String { "Share your training results with others!".localizedString }
+        static var appName: String { "JiuTrack".localizedString }
+        static var duration: String { "Duration".localizedString }
+        static var calories: String { "Calories".localizedString }
+        static var noSession: String { "No session".localizedString }
+    }
+
     
     private enum ShareViewState {
         case selectImage
@@ -57,7 +66,7 @@ struct ShareSessionView: View {
                 if selectImageState == .selectImage {
                     VStack {
                         Spacer()
-                        Text("Select image to share with training stats")
+                        Text(Localisation.selectImageToShare)
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
                                 Color("GrayTextColor")
@@ -76,7 +85,7 @@ struct ShareSessionView: View {
                         }
                         .buttonStyle(BouncyButton())
                         Spacer()
-                        Text("Share your training results with others!")
+                        Text(Localisation.shareResults)
                             .font(.system(size: 18, weight: .regular))
                             .foregroundColor(
                                 .white
@@ -133,7 +142,7 @@ struct ShareSessionView: View {
                             ShareLink(
                                 item: photo,
                                 preview: SharePreview(
-                                    "JiuTrack",
+                                    Localisation.appName,
                                     image: photo.image)
                             ) {
                                 Image(systemName: "square.and.arrow.up")
@@ -288,7 +297,7 @@ struct ShareSessionView: View {
                 .frame(width: 450, height: 500)
             let renderer = createRenderer(view: view)
             if let image = renderer.cgImage {
-                Image(image, scale: 1.0, label: Text(""))
+                Image(image, scale: 1.0, label: Text(verbatim: ""))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -312,7 +321,7 @@ struct ShareSessionView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)
-            Text("JiuTrack")
+            Text(Localisation.appName)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
@@ -323,7 +332,7 @@ struct ShareSessionView: View {
     
     @ViewBuilder
     private func titleTextView() -> some View {
-        Text("\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)")
+        Text(verbatim: "\(activity.type.rawValue.localizedString) \(activity.style.rawValue.localizedString)")
             .font(.title)
             .fontWeight(.bold)
             .foregroundColor(.white)
@@ -347,7 +356,7 @@ struct ShareSessionView: View {
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            Text("Duration".localizedString)
+            Text(Localisation.duration)
                 .font(.footnote)
                 .foregroundColor(.white)
                 .fontWeight(.medium)
@@ -360,11 +369,11 @@ struct ShareSessionView: View {
         spacing: CGFloat? = nil
     ) -> some View {
         VStack(alignment: alignment, spacing: spacing) {
-            Text("\(activity.totalEnergy)")
+            Text(verbatim: "\(activity.totalEnergy)")
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            Text("Calories".localizedString)
+            Text(Localisation.calories)
                 .font(.footnote)
                 .foregroundColor(.white)
                 .fontWeight(.medium)
@@ -387,6 +396,6 @@ struct ShareSessionView: View {
     if let session = PersistanceManager.preview.fetchSessions().first {
         ShareSessionView(session: session)
     } else {
-        Text("No session")
+        Text(ShareSessionView.Localisation.noSession)
     }
 }

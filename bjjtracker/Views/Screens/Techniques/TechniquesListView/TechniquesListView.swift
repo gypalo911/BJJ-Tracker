@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct TechniquesListView: View {
+    private enum Localisation {
+        static var learnedTechniques: String { "Learned techniques".localizedString }
+        static var suggestions: String { "Suggestions".localizedString }
+    }
     
     @Binding var updateTags: Bool
     
@@ -19,7 +23,7 @@ struct TechniquesListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Learned techniques")
+            Text(Localisation.learnedTechniques)
                 .font(.body)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.black)
@@ -71,7 +75,7 @@ struct TechniquesListView: View {
             }
             if !viewModel.suggestionTags.isEmpty && isTyping {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Suggestions")
+                    Text(Localisation.suggestions)
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundColor(Color("GrayTextColor"))

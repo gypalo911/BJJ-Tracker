@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct AppleHealthCardView: View {
+    enum Localisation {
+        static let connectWith = "Connect with"
+        static let appleHealth = "Apple Health"
+        static let caloriesBurned = "%@ calories burned"
+        static let activitiesBesideBJJ = "**4** activities beside BJJ"
+    }
+
     var onTap: (() -> Void)?
     
     var body: some View {
@@ -17,11 +24,11 @@ struct AppleHealthCardView: View {
                 .scaledToFit()
                 .frame(width: 30, height: 30)
             HStack(alignment: .center, spacing: 4) {
-                Text("Connect with")
+                Text(Localisation.connectWith.localizedString)
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .foregroundColor(.red)
-                Text("Apple Health")
+                Text(Localisation.appleHealth.localizedString)
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
@@ -81,7 +88,7 @@ struct AppleHealthCardView_Previews: PreviewProvider {
                         .frame(width: 25, height: 25)
                         .foregroundColor(.red)
                 }, text: {
-                    Text("%@ calories burned".localized(with: ["1200"]))
+                    Text(AppleHealthCardView.Localisation.caloriesBurned.localized(with: ["1200"]))
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
@@ -96,7 +103,7 @@ struct AppleHealthCardView_Previews: PreviewProvider {
                         .foregroundColor(.black)
                 },
                 text: {
-                    Text("**4** activities beside BJJ")
+                    Text(.init(AppleHealthCardView.Localisation.activitiesBesideBJJ.localizedString))
                         .font(.footnote)
                         .foregroundColor(.black)
                 }

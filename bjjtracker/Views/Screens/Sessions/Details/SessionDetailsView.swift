@@ -18,6 +18,15 @@ enum DeleteSessionType: Equatable {
 
 // MARK: SessionDetailsView
 struct SessionDetailsView: View {
+    private enum Localisation {
+        static var notes: String { "Notes".localizedString }
+        static var empty: String { "Empty".localizedString }
+        static var deleteSessionsTitle: String { "Delete sessions".localizedString }
+        static var deleteOnlyThisSession: String { "Delete only this session".localizedString }
+        static var deleteAllSessions: String { "Delete all sessions".localizedString }
+        static var deleteAllFutureSessions: String { "Delete all future sessions".localizedString }
+        static var cancel: String { "Cancel".localizedString }
+    }
     
     let namespace: Namespace.ID
     
@@ -81,7 +90,7 @@ struct SessionDetailsView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("Notes")
+                            Text(Localisation.notes)
                                 .font(.body)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.black)
@@ -91,7 +100,7 @@ struct SessionDetailsView: View {
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
                             } else {
-                                Text(LocalizedStringKey("Empty"))
+                                Text(Localisation.empty)
                                     .foregroundColor(Color("LightGray"))
                                     .font(.body)
                                     .textSelection(.enabled)
@@ -163,19 +172,19 @@ struct SessionDetailsView: View {
                     )
                 }
             }
-            .confirmationDialog("Delete sessions", isPresented: $showDeleteItemsDialog.animation(.easeInOut)) {
-                Button("Delete only this session", role: .destructive) {
+            .confirmationDialog(Localisation.deleteSessionsTitle, isPresented: $showDeleteItemsDialog.animation(.easeInOut)) {
+                Button(Localisation.deleteOnlyThisSession, role: .destructive) {
                     onSessionDelete(.current)
                 }
-                Button("Delete all sessions", role: .destructive) {
+                Button(Localisation.deleteAllSessions, role: .destructive) {
                     onSessionDelete(.all)
                 }
-                Button("Delete all future sessions", role: .destructive) {
+                Button(Localisation.deleteAllFutureSessions, role: .destructive) {
                     onSessionDelete(.future(after: viewModel.session.startDate))
                 }
-                Button("Cancel", role: .cancel) { }
+                Button(Localisation.cancel, role: .cancel) { }
             } message: {
-                Text("Delete sessions")
+                Text(Localisation.deleteSessionsTitle)
             }
         }
         .introspectTabBarController { (UITabBarController) in
@@ -207,6 +216,14 @@ struct SessionDetailsView: View {
 
 // MARK: SessionDetailsHeaderView
 struct SessionDetailsHeaderView: View {
+    private enum Localisation {
+        static var share: String { "Share".localizedString }
+        static var edit: String { "Edit".localizedString }
+        static var delete: String { "Delete".localizedString }
+        static var empty: String { "Empty".localizedString }
+        static var repeatableSession: String { "Repeatable session".localizedString }
+    }
+
     let session: Session
     
     let namespace: Namespace.ID
@@ -277,14 +294,22 @@ struct SessionDetailsHeaderView: View {
                             Button(action: {
                                 showShareSheet = true
                             }) {
-                                Label("Share", systemImage: "square.and.arrow.up")
+                                Label {
+                                    Text(Localisation.share)
+                                } icon: {
+                                    Image(systemName: "square.and.arrow.up")
+                                }
                             }
                         }
                         Button(action: {
                             isPresentedEditing = true
                             changeNavBar(.clear)
                         }) {
-                            Label("Edit", systemImage: "pencil")
+                            Label {
+                                Text(Localisation.edit)
+                            } icon: {
+                                Image(systemName: "pencil")
+                            }
                         }
                         Divider()
                         Button(role: .destructive, action: {
@@ -294,7 +319,11 @@ struct SessionDetailsHeaderView: View {
                                 onDelete?(.current)
                             }
                         }) {
-                            Label("Delete", systemImage: "trash")
+                            Label {
+                                Text(Localisation.delete)
+                            } icon: {
+                                Image(systemName: "trash")
+                            }
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -318,7 +347,7 @@ struct SessionDetailsHeaderView: View {
                                 .cornerRadius(5)
                                 .defaultShadow()
                                 .frame(width: 86, height: 23)
-                            Text("\(sessionStatus.rawValue.localizedString)".uppercased())
+                            Text(sessionStatus.rawValue.localizedString.uppercased())
                                 .font(.caption2)
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
@@ -331,7 +360,7 @@ struct SessionDetailsHeaderView: View {
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
-                            Text("\((session.startDate ?? Date()).toString("dd MMMM yyyy"))")
+                            Text(verbatim: (session.startDate ?? Date()).toString("dd MMMM yyyy"))
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
@@ -342,7 +371,7 @@ struct SessionDetailsHeaderView: View {
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
                             HStack {
-                                Text("\((session.startDate ?? Date()).toString("HH:mm"))")
+                                Text(verbatim: (session.startDate ?? Date()).toString("HH:mm"))
                                     .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
@@ -362,12 +391,12 @@ struct SessionDetailsHeaderView: View {
                                 .foregroundColor(.white)
                             
                             if let location = session.location, !location.isEmpty {
-                                Text("\(location)")
+                                Text(verbatim: location)
                                     .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             } else {
-                                Text(LocalizedStringKey("Empty"))
+                                Text(Localisation.empty)
                                     .foregroundColor(.white)
                                     .fontWeight(.semibold)
                                     .font(.title3)
@@ -380,7 +409,7 @@ struct SessionDetailsHeaderView: View {
                                     .resizable()
                                     .frame(width: 20, height: 20)
                                     .foregroundColor(.white)
-                                Text("Repeatable session")
+                                Text(Localisation.repeatableSession)
                                     .font(.body)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)

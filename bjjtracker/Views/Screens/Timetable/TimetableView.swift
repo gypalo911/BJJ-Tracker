@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct TimetableView: View {
+    enum Localisation {
+        static let timetable = "Timetable"
+        static let emptyDay = "No sessions for this day"
+        static let viewHistory = "View History"
+    }
     
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
@@ -39,7 +44,7 @@ struct TimetableView: View {
         ZStack {
             NavigationView {
                 VStack(spacing: 0) {
-                    Text("Timetable")
+                    Text(Localisation.timetable.localizedString)
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
@@ -57,14 +62,14 @@ struct TimetableView: View {
                         )
                         if filteredSessions.isEmpty {
                             Spacer()
-                            Text("No sessions for this day")
+                            Text(Localisation.emptyDay.localizedString)
                                 .font(.body)
                                 .foregroundColor(Color("Gray"))
                             NavigationLink(destination: {
                                 JournalView(viewModel: .init(persistanceManager: persistanceManager))
                             }) {
                                 HStack {
-                                    Text("View History")
+                                    Text(Localisation.viewHistory.localizedString)
                                         .font(.callout)
                                         .foregroundColor(.blue)
                                     Image("archive")
@@ -96,7 +101,7 @@ struct TimetableView: View {
                                         JournalView(viewModel: .init(persistanceManager: persistanceManager))
                                     }) {
                                         HStack {
-                                            Text("View History")
+                                            Text(Localisation.viewHistory.localizedString)
                                                 .font(.callout)
                                                 .foregroundColor(.blue)
                                             Image("archive")

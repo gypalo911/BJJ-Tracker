@@ -91,7 +91,7 @@
 "Your progress is impressive! It's already **%@ techniques** learned!" = "¡Tu progreso es impresionante! Ya son **%@ técnicas** aprendidas!";
 "Keep learning and practicing! It's already **%@ techniques** learned!" = "¡Sigue aprendiendo y practicando! Ya son **%@ técnicas** aprendidas!";
 "Perseverance is a key! You have already learned **%@ techniques**!" = "¡La perseverancia es clave! Ya has aprendido **%@ técnicas**!";
-"Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "¡Siempre transmite lo que has aprendido! Ya has aprendido **%@ técnicas**!";
+"Always pass on what you have learned! You have already learned **%@ techniques**!" = "¡Siempre transmite lo que has aprendido! Ya has aprendido **%@ técnicas**!";
 
 "See All" = "Ver todo";
 "Details" = "Detalles";
@@ -138,6 +138,9 @@
 "Found an issue in JiuTrack app" = "Se encontró un problema en la aplicación JiuTrack";
 
 "Progress" = "Progreso";
+"Select a number" = "Selecciona un número";
+"Session reminders" = "Recordatorios de sesiones";
+"Achivement notifications" = "Notificaciones de logros";
 "Stripe" = "Franja";
 "Stripes" = "Franjas";
 "Select Grading System" = "Seleccionar sistema de clasificación";
@@ -174,10 +177,39 @@
 "Green/Black" = "Verde/Negro";
 
 "View all Apple Health data" = "Ver todos los datos de Apple Health";
+"Apple Health" = "Apple Health";
 "%@ calories burned" = "%@ calorías quemadas";
+"**4** activities beside BJJ" = "**4** actividades además de BJJ";
 "Duration" = "Duración";
 "Calories" = "Calorías";
 "Connect" = "Conectar";
 "Connect with" = "Conectar con";
+"Open datepicker" = "Abrir selector de fecha";
 "Train smarter by connecting your JiuTrack app to Apple Health" = "Entrena de forma más inteligente conectando tu aplicación JiuTrack a Apple Health";
 "Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**" = "La integración con Apple Health requiere permisos en **Configuración -> Privacidad -> Salud -> JiuTrack**";
+"Repeat session" = "Repetir sesión";
+"Recurring" = "Repetición";
+"Recurring options" = "Opciones de repetición";
+"Repeat condition" = "Condición de repetición";
+"Repeats every:" = "Se repite:";
+"End condition" = "Condición de finalización";
+"End condition options" = "Opciones de finalización";
+"Delete sessions" = "Eliminar sesiones";
+"Delete only this session" = "Eliminar solo esta sesión";
+"Delete all sessions" = "Eliminar todas las sesiones";
+"Delete all future sessions" = "Eliminar todas las sesiones futuras";
+"Repeatable session" = "Sesión repetible";
+"Weekly" = "Semanal";
+"Monthly" = "Mensual";
+"Every Week" = "Cada semana";
+"Every 2 Weeks" = "Cada 2 semanas";
+"Never" = "Nunca";
+"On date" = "En la fecha";
+"Does not repeat" = "No se repite";
+"on" = "el";
+"until" = "hasta";
+"Every month" = "Cada mes";
+"1 session will be created" = "Se creará 1 sesión";
+"%@ sessions will be created" = "Se crearán %@ sesiones";
+"JiuTrack" = "JiuTrack";
+"No session" = "Sin sesión";

@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct PromotionPanelView: View {
+    private enum Localisation {
+        static var reached: String { "You’ve reached".localizedString }
+
+        static func beltWithStripes(_ belt: String, stripes: String) -> String {
+            "%@ belt %@ stripes!".localized(with: [belt, stripes])
+        }
+
+        static func belt(_ belt: String) -> String {
+            "%@ belt!".localized(with: [belt])
+        }
+    }
+
     @ObservedObject var promotion: Promotion
     
     var body: some View {
@@ -21,9 +33,13 @@ struct PromotionPanelView: View {
                 HStack {
                     CircularBeltView(primaryColor: promotion.belt.color.0, secondaryColor: promotion.belt.color.1)
                     HStack(spacing: 4) {
-                        Text("You’ve reached")
+                        Text(Localisation.reached)
                             .font(.footnote)
-                        Text(promotion.stripes > 0 ? "%@ belt %@ stripes!".localized(with: ["\(promotion.belt.title)", "\(promotion.stripes)"]) : "%@ belt!".localized(with: ["\(promotion.belt.title)"]))
+                        Text(
+                            promotion.stripes > 0
+                            ? Localisation.beltWithStripes("\(promotion.belt.title)", stripes: "\(promotion.stripes)")
+                            : Localisation.belt("\(promotion.belt.title)")
+                        )
                             .font(.footnote)
                             .fontWeight(.bold)
                     }
@@ -55,4 +71,3 @@ struct PromotionPanelView_Previews: PreviewProvider {
             .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }
-

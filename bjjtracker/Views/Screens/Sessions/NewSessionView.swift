@@ -159,7 +159,7 @@ struct NewSessionView: View {
                     
                     Text(Localisation.recurringSectionTitle)
                     HStack {
-                        Picker("Recurring", selection: $viewModel.repeatableSessionSettings.repeatType) {
+                        Picker(Localisation.recurringPickerTitle, selection: $viewModel.repeatableSessionSettings.repeatType) {
                             ForEach(RepeatType.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }
@@ -167,7 +167,7 @@ struct NewSessionView: View {
                         .defaultPicker()
                         
                         if viewModel.repeatableSessionSettings.repeatType == .weekly {
-                            Picker("RepeatCondition", selection: $viewModel.repeatableSessionSettings.repeatCondition) {
+                            Picker(Localisation.repeatConditionPickerTitle, selection: $viewModel.repeatableSessionSettings.repeatCondition) {
                                 ForEach(RepeatCondition.allCases, id: \.self) {
                                     Text($0.title).tag($0)
                                 }
@@ -186,7 +186,7 @@ struct NewSessionView: View {
                     Text(Localisation.endCondition)
                         .defaultShadow()
                     HStack {
-                        Picker("End condition", selection: $viewModel.repeatableSessionSettings.endCondition) {
+                        Picker(Localisation.endConditionPickerTitle, selection: $viewModel.repeatableSessionSettings.endCondition) {
                             ForEach(EndCondition.allCases, id: \.self) {
                                 Text($0.title).tag($0)
                             }

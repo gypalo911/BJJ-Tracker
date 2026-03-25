@@ -15,13 +15,21 @@ enum CalendarSegment: Int {
 }
 
 struct StatisticsView: View {
+    enum Localisation {
+        static let statistics = "Statistics"
+        static let typesOfSessions = "Types of sessions"
+        static let sessionsByGrapplingStyle = "Sessions by grapling style"
+        static let week = "Week"
+        static let month = "Month"
+        static let year = "Year"
+    }
     
     let bgColor: Color = Color("generalBG")
     
     private var segments = [
-        "Week".localizedString,
-        "Month".localizedString,
-        "Year".localizedString
+        Localisation.week.localizedString,
+        Localisation.month.localizedString,
+        Localisation.year.localizedString
     ]
     
     @Environment(\.presentationMode) var presentationMode
@@ -43,7 +51,7 @@ struct StatisticsView: View {
     
     var body: some View {
         VStack {
-            Text("Statistics")
+            Text(Localisation.statistics.localizedString)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)
@@ -98,7 +106,7 @@ struct StatisticsView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Types of sessions")
+                        Text(Localisation.typesOfSessions.localizedString)
                             .font(.callout)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
@@ -124,7 +132,7 @@ struct StatisticsView: View {
                         viewModel.sessions(by: .noGi, filteredSessions).count > 0
                     {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("Sessions by grapling style")
+                            Text(Localisation.sessionsByGrapplingStyle.localizedString)
                                 .font(.callout)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)

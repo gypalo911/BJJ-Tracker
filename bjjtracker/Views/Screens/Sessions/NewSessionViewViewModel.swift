@@ -116,8 +116,11 @@ extension NewSessionViewViewModel {
         // Recurring/Repeat section
         static var repeatSession: String { "Repeat session".localizedString }
         static var recurringSectionTitle: String { "Recurring".localizedString }
+        static var recurringPickerTitle: String { "Recurring options".localizedString }
+        static var repeatConditionPickerTitle: String { "Repeat condition".localizedString }
         static var repeatsEvery: String { "Repeats every:".localizedString }
         static var endCondition: String { "End condition".localizedString }
+        static var endConditionPickerTitle: String { "End condition options".localizedString }
 
         // Duration and controls
         static var save: String { "Save".localizedString }

@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ConnectAppleHealthView: View {
+    enum Localisation {
+        static let trainSmarter = "Train smarter by connecting your JiuTrack app to Apple Health"
+        static let permissions = "Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**"
+        static let connect = "Connect"
+    }
+
     var onConnect: (() -> Void)
     
     var body: some View {
@@ -17,14 +23,14 @@ struct ConnectAppleHealthView: View {
                 .scaledToFit()
                 .frame(width: 60, height: 60)
             
-            Text("Train smarter by connecting your JiuTrack app to Apple Health")
+            Text(Localisation.trainSmarter.localizedString)
                 .font(.title3)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(.black)
             
-            Text("Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**")
+            Text(Localisation.permissions.localizedString)
                 .font(.footnote)
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
@@ -42,7 +48,7 @@ struct ConnectAppleHealthView: View {
                         .frame(height: 40)
                         .defaultShadow()
                     HStack {
-                        Text("Connect")
+                        Text(Localisation.connect.localizedString)
                             .font(.body.smallCaps())
                             .fontWeight(.medium)
                             .foregroundColor(.white)

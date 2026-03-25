@@ -9,6 +9,12 @@ import SwiftUI
 import Introspect
 
 struct JournalView: View {
+    enum Localisation {
+        static let emptyStateTitle = "Hey! Add trainig sessions to track your BJJ progress journey!"
+        static let emptyStateSubtitle = "Your records will always be at hand!"
+        static let newSession = "New Session"
+        static let newPromotion = "New Promotion"
+    }
     
     private let screenWidth: CGFloat = UIScreen.main.bounds.size.width
     
@@ -28,7 +34,7 @@ struct JournalView: View {
                         if !viewModel.sections.isEmpty {
                             VStack {
                                 ForEach(viewModel.sections, id: \.self) { key in
-                                    Text("\(key)")
+                                    Text(verbatim: key)
                                         .hAlign(.leading)
                                         .padding([.horizontal, .top], 20)
                                         .padding(.bottom, 10)
@@ -76,13 +82,13 @@ struct JournalView: View {
                                         .frame(maxWidth: screenWidth <= 375 ? 250 : 282, maxHeight: 201)
                                         .offset(x: -10, y: -30)
                                 }.padding(.top, 30)
-                                Text("Hey! Add trainig sessions to track your BJJ progress journey!")
+                                Text(Localisation.emptyStateTitle.localizedString)
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .multilineTextAlignment(.center)
                                     .padding(.top, 10)
                                     .padding(.bottom, 10)
-                                Text("Your records will always be at hand!")
+                                Text(Localisation.emptyStateSubtitle.localizedString)
                                     .font(.body)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(Color("Gray"))
@@ -104,7 +110,7 @@ struct JournalView: View {
                                                     .scaledToFit()
                                                     .foregroundColor(.white)
                                                     .frame(width: 25, height: 25)
-                                                Text("New Session")
+                                                Text(Localisation.newSession.localizedString)
                                                     .foregroundColor(.white)
                                                     .font(.body.smallCaps())
                                                     .fontWeight(.medium)
@@ -127,7 +133,7 @@ struct JournalView: View {
                                                     .scaledToFit()
                                                     .foregroundColor(.black)
                                                     .frame(width: 25, height: 25)
-                                                Text("New Promotion")
+                                                Text(Localisation.newPromotion.localizedString)
                                                     .foregroundColor(.black)
                                                     .font(.body.smallCaps())
                                                     .fontWeight(.medium)

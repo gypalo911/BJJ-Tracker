@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MonthYearPicker: View {
+    enum Localisation {
+        static let openDatepicker = "Open datepicker"
+    }
+
     @Binding var selectedDate: Date
     @Binding var isBottomSheetOpen: Bool
 
@@ -101,7 +105,7 @@ struct MonthYearPicker: View {
             ZStack {
                 VStack {
                     Spacer()
-                    Text("Open datepicker")
+                    Text(Localisation.openDatepicker.localizedString)
                     Spacer()
                 }
                 .contentShape(Rectangle())

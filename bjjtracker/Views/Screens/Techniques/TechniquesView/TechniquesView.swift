@@ -8,6 +8,17 @@
 import SwiftUI
 
 struct TechniquesView: View {
+    private enum Localisation {
+        static var learnedTechniques: String { "Learned techniques:".localizedString }
+        static var sortSection: String { "Sort...".localizedString }
+        static var sort: String { "Sort".localizedString }
+        static var suggestions: String { "Suggestions".localizedString }
+        static var noTechniquesAddedYet: String { "No techniques added yet.\nYou can create it now!".localizedString }
+        static var newTechnique: String { "New Technique".localizedString }
+        static var noResultsFound: String { "No results found".localizedString }
+        static var searchHelp: String { "You can search techniques by name or notes".localizedString }
+    }
+
     @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var presentationMode
     
@@ -52,7 +63,7 @@ struct TechniquesView: View {
                                     let count = viewModel.filteredResults.count
                                     if count > 0 {
                                         VStack(alignment: .leading, spacing: 5) {
-                                            Text("Learned techniques:")
+                                            Text(Localisation.learnedTechniques)
                                                 .font(.body)
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(.black)
@@ -60,8 +71,8 @@ struct TechniquesView: View {
                                         .hAlign(.leading)
                                         
                                         Menu {
-                                            Section("Sort...") {
-                                                Picker("Sort", selection: $viewModel.sortingType) {
+                                            Section(Localisation.sortSection) {
+                                                Picker(Localisation.sort, selection: $viewModel.sortingType) {
                                                     ForEach(SortingType.allCases) {
                                                         Text($0.title)
                                                             .tag($0)
@@ -172,7 +183,7 @@ struct TechniquesView: View {
     @ViewBuilder
     func SuggestionsView() -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text("Suggestions")
+            Text(Localisation.suggestions)
                 .font(.footnote)
                 .fontWeight(.semibold)
                 .foregroundColor(Color("GrayTextColor"))
@@ -237,7 +248,7 @@ struct TechniquesView: View {
     func EmptyStateOfResults() -> some View {
         VStack(spacing: 20) {
             if !viewModel.isEditing && viewModel.results.isEmpty {
-                Text("No techniques added yet.\nYou can create it now!")
+                Text(Localisation.noTechniquesAddedYet)
                     .font(.footnote)
                     .fontWeight(.medium)
                     .foregroundColor(.black)
@@ -257,7 +268,7 @@ struct TechniquesView: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                                 .frame(width: 20, height: 20)
-                            Text("New Technique")
+                            Text(Localisation.newTechnique)
                                 .font(.caption.smallCaps())
                                 .fontWeight(.medium)
                                 .foregroundColor(.white)
@@ -270,12 +281,12 @@ struct TechniquesView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                 if !viewModel.searchText.isEmpty {
-                    Text("No results found")
+                    Text(Localisation.noResultsFound)
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
-                Text("You can search techniques by name or notes")
+                Text(Localisation.searchHelp)
                     .font(.footnote)
                     .fontWeight(.medium)
                     .foregroundColor(Color("GrayTextColor"))

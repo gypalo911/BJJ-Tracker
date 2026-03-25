@@ -94,7 +94,7 @@
 "Your progress is impressive! It's already **%@ techniques** learned!" = "Votre progrès est impressionnant ! Déjà **%@ techniques** apprises !";
 "Keep learning and practicing! It's already **%@ techniques** learned!" = "Continuez à apprendre et à pratiquer ! Déjà **%@ techniques** apprises !";
 "Perseverance is a key! You have already learned **%@ techniques**!" = "La persévérance est la clé ! Vous avez déjà appris **%@ techniques** !";
-"Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "Transmettez toujours ce que vous avez appris ! Vous avez déjà appris **%@ techniques** !";
+"Always pass on what you have learned! You have already learned **%@ techniques**!" = "Transmettez toujours ce que vous avez appris ! Vous avez déjà appris **%@ techniques** !";
 
 "See All" = "Voir tout";
 "Details" = "Détails";
@@ -146,6 +146,9 @@
 "Found an issue in JiuTrack app" = "Un problème trouvé dans l'application JiuTrack";
 
 "Progress" = "Progrès";
+"Select a number" = "Sélectionner un nombre";
+"Session reminders" = "Rappels de session";
+"Achivement notifications" = "Notifications de réussite";
 "Stripe" = "Bande";
 "Stripes" = "Bandes";
 "Select Grading System" = "Sélectionner le système de ceinture";
@@ -184,10 +187,39 @@
 
 // Apple Health
 "View all Apple Health data" = "Voir toutes les données Apple Health";
+"Apple Health" = "Apple Health";
 "%@ calories burned" = "%@ calories brûlées";
+"**4** activities beside BJJ" = "**4** activités en plus du BJJ";
 "Duration" = "Durée";
 "Calories" = "Calories";
 "Connect" = "Connecter";
 "Connect with" = "Connecter avec";
+"Open datepicker" = "Ouvrir le sélecteur de date";
 "Train smarter by connecting your JiuTrack app to Apple Health" = "Entraînez-vous plus intelligemment en connectant votre application JiuTrack à Apple Health";
 "Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**" = "L'intégration Apple Health nécessite des autorisations dans **Paramètres -> Confidentialité -> Santé -> JiuTrack**";
+"Repeat session" = "Répéter la session";
+"Recurring" = "Récurrence";
+"Recurring options" = "Options de récurrence";
+"Repeat condition" = "Condition de répétition";
+"Repeats every:" = "Se répète :";
+"End condition" = "Condition de fin";
+"End condition options" = "Options de fin";
+"Delete sessions" = "Supprimer les sessions";
+"Delete only this session" = "Supprimer uniquement cette session";
+"Delete all sessions" = "Supprimer toutes les sessions";
+"Delete all future sessions" = "Supprimer toutes les sessions futures";
+"Repeatable session" = "Session récurrente";
+"Weekly" = "Hebdomadaire";
+"Monthly" = "Mensuel";
+"Every Week" = "Chaque semaine";
+"Every 2 Weeks" = "Toutes les 2 semaines";
+"Never" = "Jamais";
+"On date" = "À la date";
+"Does not repeat" = "Ne se répète pas";
+"on" = "le";
+"until" = "jusqu'au";
+"Every month" = "Chaque mois";
+"1 session will be created" = "1 session sera créée";
+"%@ sessions will be created" = "%@ sessions seront créées";
+"JiuTrack" = "JiuTrack";
+"No session" = "Aucune session";

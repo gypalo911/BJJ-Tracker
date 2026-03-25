@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct TechniquesCardEmptyState: View {
+    private enum Localisation {
+        static var noTechniquesYet: String { "No techniques yet".localizedString }
+        static var startLearningToday: String { "Start learning today".localizedString }
+        static var addNew: String { "Add New".localizedString }
+    }
+
     let persistanceManager: PersistanceManager
     
     var body: some View {
@@ -17,10 +23,10 @@ struct TechniquesCardEmptyState: View {
                 .scaledToFit()
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading, spacing: 10) {
-                Text("No techniques yet")
+                Text(Localisation.noTechniquesYet)
                     .font(.footnote)
                     .fontWeight(.semibold)
-                Text("Start learning today")
+                Text(Localisation.startLearningToday)
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(Color("Gray"))
@@ -29,7 +35,7 @@ struct TechniquesCardEmptyState: View {
             NavigationLink(destination: {
                 TechniquesView(viewModel: .init(persistanceManager: persistanceManager))
             }) {
-                Text("Add New")
+                Text(Localisation.addNew)
                     .font(.footnote)
                     .fontWeight(.semibold)
                     .foregroundColor(Color("Blue"))
@@ -39,6 +45,10 @@ struct TechniquesCardEmptyState: View {
 }
 
 struct TechniquesCardFullState: View {
+    private enum Localisation {
+        static var seeAll: String { "See All".localizedString }
+    }
+
     let techniques: [TechniqueModel]
     let persistanceManager: PersistanceManager
     
@@ -96,7 +106,7 @@ struct TechniquesCardFullState: View {
                 }
                 Spacer()
                 HStack(spacing: 5) {
-                    Text("See All")
+                    Text(Localisation.seeAll)
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundColor(Color("Blue"))

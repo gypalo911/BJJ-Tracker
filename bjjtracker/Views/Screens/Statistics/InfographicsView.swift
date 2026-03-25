@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct InfographicsView: View {
+    enum Localisation {
+        static let classes = "Classes"
+        static let competitions = "Competitions"
+        static let seminars = "Seminars"
+    }
+
     let strokeColor: Color
     let statsInfo: [ActivityType: Int]
     
@@ -18,10 +24,10 @@ struct InfographicsView: View {
                     .fill(Color("Green"))
                     .frame(width: 130, height: 130)
                 VStack {
-                    Text("\(statsInfo[.training] ?? 0)")
+                    Text(verbatim: "\(statsInfo[.training] ?? 0)")
                         .font(.title2)
                         .fontWeight(.bold)
-                    Text("Classes")
+                    Text(Localisation.classes.localizedString)
                         .font(.footnote)
                         .fontWeight(.medium)
                 }
@@ -38,10 +44,10 @@ struct InfographicsView: View {
                     .fill(strokeColor)
                     .frame(width: 128, height: 128)
                 VStack {
-                    Text("\(statsInfo[.competition] ?? 0)")
+                    Text(verbatim: "\(statsInfo[.competition] ?? 0)")
                         .font(.body)
                         .fontWeight(.bold)
-                    Text("Competitions")
+                    Text(Localisation.competitions.localizedString)
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -58,10 +64,10 @@ struct InfographicsView: View {
                     .fill(strokeColor)
                     .frame(width: 103, height: 103)
                 VStack {
-                    Text("\(statsInfo[.seminar] ?? 0)")
+                    Text(verbatim: "\(statsInfo[.seminar] ?? 0)")
                         .font(.body)
                         .fontWeight(.bold)
-                    Text("Seminars")
+                    Text(Localisation.seminars.localizedString)
                         .font(.caption)
                         .fontWeight(.medium)
                 }

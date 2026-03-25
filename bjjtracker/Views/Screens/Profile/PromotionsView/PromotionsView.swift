@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct PromotionsView: View {
+    enum Localisation {
+        static let progress = "Progress"
+        static let selectGradingSystem = "Select Grading System"
+    }
+
     @Binding var isViewOpen: Bool
     @State var gradingSystem: GradingSystem
     
@@ -56,7 +61,7 @@ struct PromotionsView: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text("Progress")
+                            Text(Localisation.progress.localizedString)
                                 .font(.body)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -144,7 +149,7 @@ struct PromotionsView: View {
                 }
                 .actionSheet(isPresented: $showingGradingActionSheet) {
                     let newSystem: GradingSystem = gradingSystem == .adult ? .junior : .adult
-                    return ActionSheet(title: Text("Select Grading System"), buttons: [
+                    return ActionSheet(title: Text(Localisation.selectGradingSystem.localizedString), buttons: [
                         .default(Text(newSystem.rawValue.localizedString.capitalized), action: {
                             gradingSystem = gradingSystem == .adult ? .junior : .adult
                         }),

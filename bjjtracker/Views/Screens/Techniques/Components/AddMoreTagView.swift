@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct AddMoreTagView: View {
+    private enum Localisation {
+        static var addTechnique: String { "Add technique".localizedString }
+    }
+
     var body: some View {
         HStack(alignment: .center, spacing: 5) {
             Image("addIcon")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color("Blue"))
-            Text("Add technique")
+            Text(Localisation.addTechnique)
                 .font(Font.custom("Rubik", size: 14))
                 .foregroundColor(Color("Blue"))
         }

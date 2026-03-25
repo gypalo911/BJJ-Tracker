@@ -122,7 +122,7 @@ struct DurationSelectorView: View {
             }
         }, label: {
             let duration = duration.minutesToDuration()
-            Text("\(duration)")
+            Text(verbatim: duration)
                 .font(.body)
                 .fontWeight(.regular)
                 .foregroundColor(.black)

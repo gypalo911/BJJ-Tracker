@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct DurationPicker: View {
+    enum Localisation {
+        static let hours = "hours"
+        static let minutes = "min"
+    }
     
     @Binding var duration: Int
     
@@ -24,9 +28,9 @@ struct DurationPicker: View {
                 Picker("Hours", selection: $hours) {
                     ForEach(0..<24) { hour in
                         HStack(alignment: .bottom, spacing: 3) {
-                            Text("\(hour)")
+                            Text(verbatim: "\(hour)")
                                 .font(.title3)
-                            Text("hours")
+                            Text(Localisation.hours.localizedString)
                                 .font(.callout)
                                 .fontWeight(.semibold)
                         }
@@ -42,9 +46,9 @@ struct DurationPicker: View {
                 Picker("Minutes", selection: $minutes) {
                     ForEach(0..<60) { minute in
                         HStack(alignment: .bottom, spacing: 3) {
-                            Text("\(minute)")
+                            Text(verbatim: "\(minute)")
                                 .font(.title3)
-                            Text("min")
+                            Text(Localisation.minutes.localizedString)
                                 .font(.callout)
                                 .fontWeight(.semibold)
                         }

@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct BluredBottomSheet: View {
+    enum Localisation {
+        static let newSession = "New Session"
+        static let newPromotion = "New Promotion"
+        static let newTechnique = "New Technique"
+    }
+
     @Binding var isBottomSheetOpen: Bool
     @State private var offset: CGFloat = 100
     @State private var popupOffset: CGFloat = 0
@@ -56,7 +62,7 @@ struct BluredBottomSheet: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 25)
-                            Text("New Session")
+                            Text(Localisation.newSession.localizedString)
                                 .foregroundColor(.white)
                                 .font(.body.smallCaps())
                                 .fontWeight(.medium)
@@ -83,7 +89,7 @@ struct BluredBottomSheet: View {
                                 .scaledToFit()
                                 .foregroundColor(.black)
                                 .frame(width: 25, height: 25)
-                            Text("New Promotion")
+                            Text(Localisation.newPromotion.localizedString)
                                 .foregroundColor(.black)
                                 .font(.body.smallCaps())
                                 .fontWeight(.medium)
@@ -111,7 +117,7 @@ struct BluredBottomSheet: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 25)
-                            Text("New Technique")
+                            Text(Localisation.newTechnique.localizedString)
                                 .foregroundColor(.white)
                                 .font(.body.smallCaps())
                                 .fontWeight(.medium)

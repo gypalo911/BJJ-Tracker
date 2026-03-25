@@ -33,6 +33,16 @@ extension Int: StringComparable {
 }
 
 struct NotificationSettingsView: View {
+    enum Localisation {
+        static let notifications = "Notifications"
+        static let allowPushNotifications = "Allow push notifications"
+        static let notificationDescription = "Be notified about nearest events and\\nachivements. You can change it anytime."
+        static let allowNotifications = "Allow notifications"
+        static let sessionReminders = "Session reminders"
+        static let achievementNotifications = "Achivement notifications"
+        static let statistics = "Statistics"
+    }
+
     @EnvironmentObject var settings: AppSettings
     @State private var appLanguage: AppSettings.AppLanguage = .english
     
@@ -54,17 +64,17 @@ struct NotificationSettingsView: View {
                             .foregroundColor(.black)
                             .frame(width: 20, height: 20)
                     }
-                    Text("Notifications".localizedString)
+                    Text(Localisation.notifications.localizedString)
                         .font(.body)
                         .fontWeight(.bold)
                 }
                 .hAlign(.leading)
                 if !NotificationManager.shared.isAuthorized {
                     VStack(alignment: .center, spacing: 15) {
-                        Text("Allow push notifications")
+                        Text(Localisation.allowPushNotifications.localizedString)
                             .font(.callout)
                             .fontWeight(.bold)
-                        Text("Be notified about nearest events and\nachivements. You can change it anytime.")
+                        Text(Localisation.notificationDescription.localizedString)
                             .font(.footnote)
                             .fontWeight(.regular)
                             .multilineTextAlignment(.center)
@@ -75,7 +85,7 @@ struct NotificationSettingsView: View {
                                 NotificationManager.shared.requestAuthorization { _ in }
                             }
                         }, label: {
-                            Text("Allow notifications")
+                            Text(Localisation.allowNotifications.localizedString)
                                 .font(.callout)
                         })
                     }
@@ -84,7 +94,7 @@ struct NotificationSettingsView: View {
                     VStack {
                         VStack {
                             Toggle(isOn: $notificationPrefferences.sessionRemindersOn, label: {
-                                Text("Session reminders")
+                                Text(Localisation.sessionReminders.localizedString)
                                     .font(.footnote)
                                     .fontWeight(.regular)
                             })
@@ -95,7 +105,7 @@ struct NotificationSettingsView: View {
                                         .scaledToFit()
                                         .foregroundColor(.black)
                                         .frame(width: 15, height: 15)
-                                    Text("Notifications".localizedString)
+                                    Text(Localisation.notifications.localizedString)
                                         .font(.caption)
                                         .fontWeight(.regular)
                                 }
@@ -111,12 +121,12 @@ struct NotificationSettingsView: View {
                             .frame(maxWidth: .infinity)
                         }
                         Toggle(isOn: $notificationPrefferences.achivementRemindersOn, label: {
-                            Text("Achivement notifications")
+                            Text(Localisation.achievementNotifications.localizedString)
                                 .font(.footnote)
                                 .fontWeight(.regular)
                         })
                         Toggle(isOn: $notificationPrefferences.statisticsNotificationsOn, label: {
-                            Text("Statistics")
+                            Text(Localisation.statistics.localizedString)
                                 .font(.footnote)
                                 .fontWeight(.regular)
                         })

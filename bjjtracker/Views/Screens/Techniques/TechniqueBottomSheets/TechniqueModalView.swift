@@ -13,6 +13,14 @@ enum TechniqueField: Hashable {
 }
 
 struct TechniqueModalView: View {
+    private enum Localisation {
+        static var done: String { "Done".localizedString }
+        static var addSomeDetails: String { "Add some details...".localizedString }
+        static var techniqueName: String { "Technique name".localizedString }
+        static var technique: String { "Technique".localizedString }
+        static var description: String { "Description".localizedString }
+    }
+
     enum ModalState {
         case modifying
         case overview
@@ -55,7 +63,7 @@ struct TechniqueModalView: View {
         VStack(spacing: 20) {
             HStack {
                 TextField(
-                    "Technique name",
+                    Localisation.techniqueName,
                     text: $name,
                     onEditingChanged: { (editingChanged) in
                         if !editingChanged {
@@ -107,7 +115,7 @@ struct TechniqueModalView: View {
                             state = .overview
                         }
                     }, label: {
-                        Text("Done".localizedString)
+                        Text(Localisation.done)
                             .font(.body)
                             .fontWeight(.medium)
                             .foregroundColor(name.isEmpty ? Color("Gray") : Color("Blue"))
@@ -129,7 +137,7 @@ struct TechniqueModalView: View {
                     .focused($focusedField, equals: .details)
                 if details.isEmpty {
                     VStack {
-                        Text("Add some details...".localizedString)
+                        Text(Localisation.addSomeDetails)
                             .font(.body)
                             .foregroundColor(Color("GrayTextColor"))
                             .padding(20)
@@ -150,11 +158,11 @@ struct TechniqueModalView: View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text("Technique")
+                    Text(Localisation.technique)
                         .font(.body)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color("GrayTextColor"))
-                    Text("\(name)")
+                    Text(verbatim: name)
                         .font(.title2.weight(.bold))
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
@@ -177,12 +185,12 @@ struct TechniqueModalView: View {
             .padding(.trailing, 10)
             
             VStack(alignment: .leading) {
-                Text("Description")
+                Text(Localisation.description)
                     .font(.body)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("GrayTextColor"))
                 ScrollView {
-                    Text("\(details)")
+                    Text(verbatim: details)
                         .font(.body)
                         .fontWeight(.regular)
                         .foregroundColor(Color("Gray"))
@@ -236,4 +244,3 @@ struct CreateEditTechniqueView_Previews: PreviewProvider {
             .previewDisplayName("iPhone 14")
     }
 }
-

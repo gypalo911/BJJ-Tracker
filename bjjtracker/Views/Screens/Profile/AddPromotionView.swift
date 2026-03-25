@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+private enum AddPromotionLocalisation {
+    static let save = "Save"
+    static let selectANumber = "Select a number"
+}
+
 struct AddPromotionView: View {
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
@@ -70,7 +75,7 @@ struct AddPromotionView: View {
                                 save()
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
-                                Text("Save")
+                                Text(AddPromotionLocalisation.save.localizedString)
                                     .fixedSize()
                                     .foregroundColor(Color("Blue"))
                             }
@@ -95,9 +100,9 @@ struct NumberPickerView: View {
     @Binding var selectedNumber: Int
     
     var body: some View {
-        Picker(selection: $selectedNumber, label: Text("Select a number")) {
+        Picker(selection: $selectedNumber, label: Text(AddPromotionLocalisation.selectANumber.localizedString)) {
             ForEach(numbers.indices, id: \.self) { index in
-                Text("\(numbers[index])")
+                Text(verbatim: "\(numbers[index])")
             }
         }
         .pickerStyle(.segmented)

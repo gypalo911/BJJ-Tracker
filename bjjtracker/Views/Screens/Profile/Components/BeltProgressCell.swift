@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct BeltProgressCell: View {
+    enum Localisation {
+        static let belt = "%@ belt"
+    }
+
     @State private var showPromotionsList: Bool = false
     
     private var belt: Belt
@@ -48,7 +52,7 @@ struct BeltProgressCell: View {
                             }
                         }
                         
-                        Text("%@ belt".localized(with: ["\(belt.title)"]))
+                        Text(Localisation.belt.localized(with: ["\(belt.title)"]))
                     }
                     Spacer()
                     if !promotionModels.isEmpty {

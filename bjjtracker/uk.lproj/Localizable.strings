@@ -95,7 +95,7 @@
 "Your progress is impressive! It's already **%@ techniques** learned!" = "Твій прогрес вражаючий! Уже понад **%@ технік** опановано!";
 "Keep learning and practicing! It's already **%@ techniques** learned!" = "Продовжуй вчитись та практикуватись! Уже понад **%@ технік** вивчено!";
 "Perseverance is a key! You have already learned **%@ techniques**!" = "Наполегливість це ключ! Тобою уже опановано **%@ технік**!";
-"Always pass on what you have learned! You have already learned **\(techniques.count) techniques**!" = "Завжди передавайте те, чому навчились самі! Уже вивчено понад **%@ технік**!";
+"Always pass on what you have learned! You have already learned **%@ techniques**!" = "Завжди передавайте те, чому навчились самі! Уже вивчено понад **%@ технік**!";
 
 "See All" = "Переглянути";
 "Details" = "Деталі";
@@ -147,6 +147,9 @@
 "Found an issue in JiuTrack app" = "Знайдено помилки у роботі додатку JiuTrack";
 
 "Progress" = "Прогрес";
+"Select a number" = "Обрати число";
+"Session reminders" = "Нагадування про заняття";
+"Achivement notifications" = "Сповіщення про досягнення";
 "Stripe" = "Страйп";
 "Stripes" = "Страйпи";
 "Select Grading System" = "Обери Систему Поясів";
@@ -186,10 +189,39 @@
 // Apple Health
 
 "View all Apple Health data" = "Переглянути дані у Apple Health";
+"Apple Health" = "Apple Health";
 "%@ calories burned" = "%@ калорій спалено";
+"**4** activities beside BJJ" = "**4** активності окрім BJJ";
 "Duration" = "Тривалість";
 "Calories" = "Калорії";
 "Connect" = "Підключити";
 "Connect with" = "Підключити";
+"Open datepicker" = "Відкрити вибір дати";
 "Train smarter by connecting your JiuTrack app to Apple Health" = "Тренуйся розумніше підключивши додаток JiuTrack до Apple Health";
 "Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**" = "Інтеграція Apple Health вимагає надання дозволу у **Налаштування -> Приватність -> Здоровʼя -> JiuTrack**";
+"Repeat session" = "Повторювати заняття";
+"Recurring" = "Повторення";
+"Recurring options" = "Налаштування повторення";
+"Repeat condition" = "Умова повторення";
+"Repeats every:" = "Повторюється:";
+"End condition" = "Умова завершення";
+"End condition options" = "Налаштування завершення";
+"Delete sessions" = "Видалити заняття";
+"Delete only this session" = "Видалити лише це заняття";
+"Delete all sessions" = "Видалити всі заняття";
+"Delete all future sessions" = "Видалити всі майбутні заняття";
+"Repeatable session" = "Повторюване заняття";
+"Weekly" = "Щотижня";
+"Monthly" = "Щомісяця";
+"Every Week" = "Щотижня";
+"Every 2 Weeks" = "Кожні 2 тижні";
+"Never" = "Ніколи";
+"On date" = "У дату";
+"Does not repeat" = "Не повторюється";
+"on" = "у";
+"until" = "до";
+"Every month" = "Щомісяця";
+"1 session will be created" = "Буде створено 1 заняття";
+"%@ sessions will be created" = "Буде створено %@ занять";
+"JiuTrack" = "JiuTrack";
+"No session" = "Немає заняття";

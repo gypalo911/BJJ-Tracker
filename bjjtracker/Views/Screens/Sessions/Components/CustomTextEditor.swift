@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CustomTextEditor: View {
+    private enum Localisation {
+        static var placeholder: String { "Add some details...".localizedString }
+    }
+
     @Binding var text: String
     @FocusState private var isFocused: Bool
     
@@ -25,7 +29,7 @@ struct CustomTextEditor: View {
                 .focused($isFocused)
             if text.isEmpty {
                 VStack {
-                    Text("Add some details...".localizedString)
+                    Text(Localisation.placeholder)
                         .font(.body)
                         .foregroundColor(Color("GrayTextColor"))
                         .padding(20)

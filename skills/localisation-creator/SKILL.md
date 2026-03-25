@@ -20,6 +20,7 @@ Update localisation work to match the project’s current iOS conventions instea
 
 ## Workflow
 
+0. Find all places which start from `Text("` or just some unlocalised text inside `""`. 
 1. Inspect the relevant SwiftUI or service code to find the current key shape.
 2. If the UI text is new, add it through the owning type’s `Localisation` enum instead of embedding a new raw string at the call site.
 3. Add or update translations in every `Localizable.strings` file under `bjjtracker/*.lproj/`.

@@ -16,9 +16,9 @@ enum RepeatType: Int, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .weekly:
-            "Weekly".localizedString
+            RepeatableSessionSettings.Localisation.weekly
         case .monthly:
-            "Monthly".localizedString
+            RepeatableSessionSettings.Localisation.monthly
         }
     }
 }
@@ -32,9 +32,9 @@ enum RepeatCondition: Int, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .every1Week:
-            "Every Week".localizedString
+            RepeatableSessionSettings.Localisation.everyWeek
         case .every2Weeks:
-            "Every 2 Weeks".localizedString
+            RepeatableSessionSettings.Localisation.every2Weeks
         }
     }
     
@@ -52,15 +52,33 @@ enum EndCondition: Int, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .never:
-            "Never".localizedString
+            RepeatableSessionSettings.Localisation.never
         case .onDate:
-            "On date".localizedString
+            RepeatableSessionSettings.Localisation.onDate
         }
     }
 }
 
 
 class RepeatableSessionSettings: ObservableObject {
+    enum Localisation {
+        static var weekly: String { "Weekly".localizedString }
+        static var monthly: String { "Monthly".localizedString }
+        static var everyWeek: String { "Every Week".localizedString }
+        static var every2Weeks: String { "Every 2 Weeks".localizedString }
+        static var never: String { "Never".localizedString }
+        static var onDate: String { "On date".localizedString }
+        static var doesNotRepeat: String { "Does not repeat".localizedString }
+        static var on: String { "on".localizedString }
+        static var until: String { "until".localizedString }
+        static var everyMonth: String { "Every month".localizedString }
+        static var oneSessionWillBeCreated: String { "1 session will be created".localizedString }
+
+        static func sessionsWillBeCreated(_ count: String) -> String {
+            "%@ sessions will be created".localized(with: [count])
+        }
+    }
+
     @Published var isRepeatable: Bool = false
     @Published var repeatType: RepeatType = .weekly
     @Published var repeatCondition: RepeatCondition = .every1Week
@@ -69,7 +87,7 @@ class RepeatableSessionSettings: ObservableObject {
     @Published var endDate: Date = Date().addingTimeInterval(TimeInterval(3600*24*7))
     
     var summaryDescription: String {
-        guard isRepeatable else { return "Does not repeat".localizedString }
+        guard isRepeatable else { return Localisation.doesNotRepeat }
 
         switch repeatType {
         case .weekly:
@@ -80,24 +98,24 @@ class RepeatableSessionSettings: ObservableObject {
                 .map { $0.localizedTitle }
                 .joined(separator: ", ")
 
-            let base = dayTitles.isEmpty ? interval : interval + " on " + dayTitles
+            let base = dayTitles.isEmpty ? interval : interval + " " + Localisation.on + " " + dayTitles
 
             switch endCondition {
             case .never:
                 return base
             case .onDate:
                 let formattedDate = endDate.formatted(.dateTime.year().month(.wide).day())
-                return base + " until " + formattedDate
+                return base + " " + Localisation.until + " " + formattedDate
             }
 
         case .monthly:
-            let base = "Every month".localizedString
+            let base = Localisation.everyMonth
             switch endCondition {
             case .never:
                 return base
             case .onDate:
                 let formattedDate = endDate.formatted(.dateTime.year().month(.wide).day())
-                return base + " until " + formattedDate
+                return base + " " + Localisation.until + " " + formattedDate
             }
         }
     }
@@ -106,10 +124,9 @@ class RepeatableSessionSettings: ObservableObject {
         let occurrences = generateOccurrences(from: firstSessionDate)
         let count = occurrences.count
         
-        guard count > 1 else { return "1 session will be created" }
-        
-        let base = "\(count) " + (count == 1 ? "session" : "sessions")
-        return "\(base) will be created"
+        guard count > 1 else { return Localisation.oneSessionWillBeCreated }
+
+        return Localisation.sessionsWillBeCreated(count.stringValue)
     }
     
     /// For the "Next sessions:" list in the blue box.

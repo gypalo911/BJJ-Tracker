@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct TagViewWithTextField: View {
+    private enum Localisation {
+        static var technique: String { "Technique".localizedString }
+    }
+
     @State private var defaultViewWidth: CGFloat = 70
     @Binding var tag: Tag
     @State var viewWidth: CGFloat = 70
@@ -27,7 +31,7 @@ struct TagViewWithTextField: View {
                 "",
                 text: $tag.text,
                 prompt:
-                    Text("Technique")
+                    Text(Localisation.technique)
                     .foregroundColor(Color("LightGray"))
             )
             .focused($focusedField)
@@ -66,7 +70,7 @@ struct TagViewWithTextField: View {
             }
         }
         .onAppear {
-            defaultViewWidth = "Technique".localizedString.textSize().width
+            defaultViewWidth = Localisation.technique.textSize().width
             viewWidth = defaultViewWidth
         }
         .frame(height: 30)
@@ -93,4 +97,3 @@ struct TagViewWithTextField_Previews: PreviewProvider {
             .environment(\.locale, .init(identifier: "uk"))
     }
 }
-

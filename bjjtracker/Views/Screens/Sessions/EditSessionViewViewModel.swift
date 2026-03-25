@@ -64,3 +64,17 @@ extension EditSessionViewViewModel: EditSessionViewAnalytics {
         analyticsEngine.log(AnalyticsEvent(name: "dismissed_edit_session_screen", metadata: [:]))
     }
 }
+
+extension EditSessionViewViewModel {
+    enum Localisation {
+        static var selectType: String { "Select type:".localizedString }
+        static var selectGrapplingStyle: String { "Select grappling style:".localizedString }
+        static var selectDateAndTime: String { "Select date and time:".localizedString }
+        static var duration: String { "Duration:".localizedString }
+        static var locationTitle: String { "Location:".localizedString }
+        static var locationPlaceholder: String { "Location...".localizedString }
+        static var notes: String { "Notes".localizedString }
+        static var editSession: String { "Edit Session".localizedString }
+        static var save: String { "Save".localizedString }
+    }
+}

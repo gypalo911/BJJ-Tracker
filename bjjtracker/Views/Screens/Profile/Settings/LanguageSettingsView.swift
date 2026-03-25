@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+private enum LanguageSettingsLocalisation {
+    static let language = "Language"
+}
+
 struct LanguageSettingsView: View {
     
     @EnvironmentObject var settings: AppSettings
@@ -27,7 +31,7 @@ struct LanguageSettingsView: View {
                         .foregroundColor(.black)
                         .frame(width: 20, height: 20)
                 }
-                Text("Language".localizedString)
+                Text(LanguageSettingsLocalisation.language.localizedString)
                     .font(.body)
                     .fontWeight(.bold)
             }
@@ -76,7 +80,7 @@ struct RadioButton: View {
                         .fill(isSelected ? .white : .clear)
                         .frame(width: 10, height: 10)
                 }
-                Text("\(text)".localizedString)
+                Text(text.localizedString)
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(isSelected ? .white : .black)

@@ -4,3 +4,37 @@
 //
 //  Created by Petro Hupalo on 11.05.2023.
 //
+
+// Sessions
+"Repeat session" = "Repeat session";
+"Recurring" = "Recurring";
+"Recurring options" = "Recurring options";
+"Repeat condition" = "Repeat condition";
+"Repeats every:" = "Repeats every:";
+"End condition" = "End condition";
+"End condition options" = "End condition options";
+"Delete sessions" = "Delete sessions";
+"Delete only this session" = "Delete only this session";
+"Delete all sessions" = "Delete all sessions";
+"Delete all future sessions" = "Delete all future sessions";
+"Repeatable session" = "Repeatable session";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
+"Every Week" = "Every Week";
+"Every 2 Weeks" = "Every 2 Weeks";
+"Never" = "Never";
+"On date" = "On date";
+"Does not repeat" = "Does not repeat";
+"on" = "on";
+"until" = "until";
+"Every month" = "Every month";
+"1 session will be created" = "1 session will be created";
+"%@ sessions will be created" = "%@ sessions will be created";
+"JiuTrack" = "JiuTrack";
+"No session" = "No session";
+"Open datepicker" = "Open datepicker";
+"Apple Health" = "Apple Health";
+"Session reminders" = "Session reminders";
+"Achivement notifications" = "Achivement notifications";
+"Select a number" = "Select a number";
+"**4** activities beside BJJ" = "**4** activities beside BJJ";

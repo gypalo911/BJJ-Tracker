@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+private enum SearchBarLocalisation {
+    static let cancel = "Cancel"
+    static let techniques = "Techniques"
+}
+
 struct SearchBar: View {
     @Binding var isHeaderHidden: Bool
     @Binding var isEditing: Bool
@@ -99,7 +104,7 @@ struct SearchBar: View {
                         self.isHeaderHidden = false
                     }
                 }) {
-                    Text("Cancel")
+                    Text(SearchBarLocalisation.cancel.localizedString)
                         .foregroundColor(.black)
                 }
                 .padding(.trailing, 10)
@@ -137,7 +142,7 @@ struct HeaderView: View {
                         .foregroundColor(Color("Blue"))
                 })
             }
-            Text("Techniques")
+            Text(SearchBarLocalisation.techniques.localizedString)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)

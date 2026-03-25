@@ -15,6 +15,18 @@ struct ProfileView: View {
         case gradingSystem
         case modalSheets
     }
+
+    enum Localisation {
+        static let profile = "Profile"
+        static let beltWithStripes = "%@ belt %@ stripes"
+        static let yetNoPromotions = "Yet no promotions"
+        static let newPromotion = "New Promotion"
+        static let sessions = "Sessions"
+        static let totalTime = "Total time"
+        static let viewAllAppleHealthData = "View all Apple Health data"
+        static let appleHealthPermissions = "Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**"
+        static let supportTheProject = "Support the project"
+    }
     
     enum Settings {
         case language
@@ -95,7 +107,7 @@ struct ProfileView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .center, spacing: 0) {
                         HStack {
-                            Text("Profile")
+                            Text(Localisation.profile.localizedString)
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
@@ -145,7 +157,7 @@ struct ProfileView: View {
                                                     showingPromotionsView = true
                                                 }
                                             }
-                                        Text("%@ belt %@ stripes".localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
+                                        Text(Localisation.beltWithStripes.localized(with: ["\(lastPromotion.belt.title)", "\(Int(lastPromotion.stripes))"]))
                                             .foregroundColor(.gray)
                                             .font(.callout)
                                             .fontWeight(.medium)
@@ -159,7 +171,7 @@ struct ProfileView: View {
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .fill(Color("LightGray"))
                                                         .opacity(0.8)
-                                                    Text("Yet no promotions".localizedString)
+                                                    Text(Localisation.yetNoPromotions.localizedString)
                                                         .foregroundColor(.white)
                                                         .font(.caption)
                                                         .fontWeight(.regular)
@@ -170,7 +182,7 @@ struct ProfileView: View {
                                                 settings.selectedSheet = .promotion
                                             }
                                         }, label: {
-                                            Text("New Promotion".localizedString)
+                                            Text(Localisation.newPromotion.localizedString)
                                                 .font(.callout)
                                                 .fontWeight(.regular)
                                         }).padding(5)
@@ -179,18 +191,18 @@ struct ProfileView: View {
                                 
                                 HStack(alignment: .top, spacing: 74) {
                                     VStack(alignment: .center, spacing: 5) {
-                                        Text("\(sessionsList.count)")
+                                        Text(verbatim: "\(sessionsList.count)")
                                             .font(.body)
                                             .fontWeight(.semibold)
-                                        Text("Sessions".localizedString)
+                                        Text(Localisation.sessions.localizedString)
                                             .font(.footnote)
                                             .fontWeight(.medium)
                                     }
                                     VStack(alignment: .center, spacing: 5) {
-                                        Text("\(totalTime())")
+                                        Text(verbatim: totalTime())
                                             .font(.body)
                                             .fontWeight(.semibold)
-                                        Text("Total time".localizedString)
+                                        Text(Localisation.totalTime.localizedString)
                                             .font(.footnote)
                                             .fontWeight(.medium)
                                     }
@@ -223,7 +235,7 @@ struct ProfileView: View {
                                         .scaledToFit()
                                         .frame(width: 30, height: 30)
                                 }, text: {
-                                    Text("View all Apple Health data")
+                                    Text(Localisation.viewAllAppleHealthData.localizedString)
                                         .font(.footnote)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.black)
@@ -231,7 +243,7 @@ struct ProfileView: View {
                                     openHealthApp()
                                 }
                             }
-                            Text("Apple Health integration requires permissions to be granted in **Settings -> Privacy -> Health -> JiuTrack**")
+                            Text(Localisation.appleHealthPermissions.localizedString)
                                 .font(.footnote)
                                 .fontWeight(.regular)
                                 .multilineTextAlignment(.center)
@@ -390,7 +402,7 @@ struct ProfileView: View {
     @ViewBuilder
     func SupportTheProjectView()  -> some View {
         VStack {
-            Text("Support the project")
+            Text(Localisation.supportTheProject.localizedString)
                 .font(.caption)
                 .fontWeight(.regular)
                 .foregroundColor(Color("Gray"))
@@ -476,12 +488,12 @@ struct SettigsCell: View {
                     .foregroundColor(.black)
                     .frame(width: 20, height: 20)
             }
-            Text("\(text)".localizedString)
+            Text(text.localizedString)
                 .font(.footnote)
                 .fontWeight(.semibold)
             Spacer()
             if let valueText = valueText {
-                Text("\(valueText)".localizedString)
+                Text(valueText.localizedString)
                     .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(.gray)

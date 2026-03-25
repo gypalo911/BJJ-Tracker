@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct BeltPromotionsListCell: View {
+    enum Localisation {
+        static let stripes = "Stripes: %@"
+    }
+
     let stripes: Int
     let date: Date
     
@@ -17,7 +21,7 @@ struct BeltPromotionsListCell: View {
                 Circle()
                     .foregroundColor(.black)
                     .frame(width: 10)
-                Text("Stripes: %@".localized(with: ["\(stripes)"]))
+                Text(Localisation.stripes.localized(with: ["\(stripes)"]))
                     .font(.footnote)
                     .fontWeight(.bold)
             }

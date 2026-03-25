@@ -9,6 +9,12 @@ import SwiftUI
 import Introspect
 
 struct DashboardView: View {
+    enum Localisation {
+        static let dashboard = "Dashboard"
+        static let viewHistory = "View History"
+        static let emptyDay = "No sessions for this day"
+        static let caloriesBurned = "%@ calories burned"
+    }
     
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
@@ -59,7 +65,7 @@ struct DashboardView: View {
                             .defaultShadow()
                         VStack(spacing: 0) {
                             HStack {
-                                Text("Dashboard")
+                                Text(Localisation.dashboard.localizedString)
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -198,7 +204,7 @@ struct DashboardView: View {
     func CalendarHeaderView() -> some View {
         VStack(spacing: 0) {
             HStack {
-                Text("\(viewModel.selectedDay.toString("LLLL yyyy").capitalized)")
+                Text(verbatim: viewModel.selectedDay.toString("LLLL yyyy").capitalized)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -252,7 +258,7 @@ struct DashboardView: View {
                                     .frame(width: 25, height: 25)
                                     .foregroundColor(.red)
                             }, text: {
-                                Text("%@ calories burned".localized(with: ["\(totalEnergyBurned)"]))
+                                Text(Localisation.caloriesBurned.localized(with: ["\(totalEnergyBurned)"]))
                                     .font(.footnote)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.black)
@@ -296,7 +302,7 @@ struct DashboardView: View {
                     JournalView(viewModel: .init(persistanceManager: persistanceManager))
                 }) {
                     HStack {
-                        Text("View History")
+                        Text(Localisation.viewHistory.localizedString)
                             .font(.callout)
                             .foregroundColor(.blue)
                         Image("archive")
@@ -312,7 +318,7 @@ struct DashboardView: View {
     @ViewBuilder
     func EmptyResultsView() -> some View {
         Spacer()
-        Text("No sessions for this day")
+        Text(Localisation.emptyDay.localizedString)
             .font(.body)
             .foregroundColor(Color("Gray"))
         
@@ -320,7 +326,7 @@ struct DashboardView: View {
             JournalView(viewModel: .init(persistanceManager: persistanceManager))
         }) {
             HStack {
-                Text("View History")
+                Text(Localisation.viewHistory.localizedString)
                     .font(.callout)
                     .foregroundColor(.blue)
                 Image("archive")

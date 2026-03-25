@@ -35,7 +35,7 @@ struct CalendarDayView: View {
                         .frame(height: 30)
                         .foregroundColor(isSelected ? colors.selectedBGColor : .clear)
                 }
-                Text("\(date.toString("d"))")
+                Text(verbatim: date.toString("d"))
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(isSelected ? colors.selectedTextColor : colors.textColor)
