@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-protocol StringComparable {
-    var stringValue: String { get set }
-}
-
 class NotificationPrefferences: Identifiable, ObservableObject {
     var timeLimits: [Int] = [30, 45, 60, 120]
     
@@ -19,17 +15,6 @@ class NotificationPrefferences: Identifiable, ObservableObject {
     @Published var statisticsNotificationsOn: Bool = true
     
     @Published var selectedTimeLimit: Int = 60
-}
-
-extension Int: StringComparable {
-    var stringValue: String {
-        get {
-            return String(self)
-        }
-        set {}
-    }
-    
-    
 }
 
 struct NotificationSettingsView: View {
@@ -132,7 +117,7 @@ struct NotificationSettingsView: View {
             .onAppear {
                 
             }
-            .onChange(of: NotificationManager.shared.authrorizationStatus) { status in
+            .onChange(of: NotificationManager.shared.authrorizationStatus) { _, status in
                 
             }
         }

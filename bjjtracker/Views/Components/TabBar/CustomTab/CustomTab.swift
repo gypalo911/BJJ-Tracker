@@ -1,17 +1,21 @@
 //
-//  Tab.swift
+//  CustomTab.swift
 //  bjjtracker
 //
-//  Created by Petro Hupalo on 22.07.2023.
+//  Created by Petro Hupalo on 26.03.2026.
 //
 
 import SwiftUI
 
-enum Tab: String, CaseIterable {
+enum CustomTab: String, CaseIterable {
     case dashboard = "Dashboard"
     case calendar = "Calendar"
     case statistics = "Statistics"
     case profile = "Profile"
+    
+    var index: Int {
+        Self.allCases.firstIndex(of: self) ?? 0
+    }
     
     var image: Image {
         switch self {

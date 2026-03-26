@@ -1,5 +1,5 @@
 //
-//  CustomTabBarView.swift
+//  TabBarViewV1.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 06.04.2023.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct CustomTabBarView: View {
-    @Binding var selectedTab: Tab
+struct TabBarViewV1: View {
+    @Binding var selectedTab: CustomTab
     
     @Namespace var namespace
     
     var body: some View {
         HStack(spacing: 15) {
-            ForEach(Tab.allCases, id: \.rawValue) { tab in
+            ForEach(CustomTab.allCases, id: \.rawValue) { tab in
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {
                         selectedTab = tab
@@ -67,10 +67,10 @@ struct CustomTabBarView: View {
 
 struct CustomTabBarView_Previews: PreviewProvider {
     struct Container: View {
-        @State var selected: Tab = .calendar
+        @State var selected: CustomTab = .calendar
         
         var body: some View {
-            CustomTabBarView(selectedTab: $selected)
+            TabBarViewV1(selectedTab: $selected)
         }
     }
     

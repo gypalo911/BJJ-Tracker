@@ -126,11 +126,11 @@ struct DashboardView: View {
                 .coordinateSpace(name: "scroll")
                 .backport.hiddenToolbar(true)
                 .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
-                .onChange(of: viewModel.selectedDay, perform: { value in
+                .onChange(of: viewModel.selectedDay) { _, value in
                     settings.selectedCalendarDate = value.setCurrentTime()
                     viewModel.setupHealthData()
-                })
-                .onChange(of: filteredSessions) { items in
+                }
+                .onChange(of: filteredSessions) { items, _ in
                     withAnimation(.easeInOut(duration: 0.3)) {
                         self.headerHeight = items.isEmpty ? 620 : 680
                     }
@@ -140,7 +140,7 @@ struct DashboardView: View {
                     viewModel.onDashboardAppeared()
                 }
             }
-            .onChange(of: isConnectAHPresented) { value in
+            .onChange(of: isConnectAHPresented) { _, value in
                 settings.isTabBarHidden = value
             }
             .bottomSheet(isPresented: $isConnectAHPresented, view: {

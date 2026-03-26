@@ -101,7 +101,7 @@ struct TechniquesListView: View {
             viewModel.maxRowWidth = maxViewWidth
             viewModel.fetchTags()
         }
-        .onChange(of: updateTags) { _ in
+        .onChange(of: updateTags) {
             viewModel.fetchTags()
         }
     }

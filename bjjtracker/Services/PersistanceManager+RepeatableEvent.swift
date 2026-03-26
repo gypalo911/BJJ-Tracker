@@ -8,15 +8,15 @@
 import CoreData
 
 protocol RepeatableEventStorageManager {
-    func createRepeatableEvent(id: String, from repeatableSettings: RepeatableSessionSettings?)
+    func createRepeatableEvent(id: String, from repeatableSettings: (any RepeatableSessionSettingsProtocol)?)
     func fetchRepeatableEvents() -> [RepeatableEvent]
     func repeatableEvent(by id: String) -> RepeatableEvent?
-    func updateRepeatableEvent(id: String, repeatableSettings: RepeatableSessionSettings)
+    func updateRepeatableEvent(id: String, repeatableSettings: any RepeatableSessionSettingsProtocol)
     func deleteRepeatableEvent(with id: String)
 }
 
 extension PersistanceManager: RepeatableEventStorageManager {
-    func createRepeatableEvent(id: String, from repeatableSettings: RepeatableSessionSettings? = nil) {
+    func createRepeatableEvent(id: String, from repeatableSettings: (any RepeatableSessionSettingsProtocol)? = nil) {
         guard let repeatableSettings else { return }
 
         let context = self.container.viewContext
@@ -59,7 +59,7 @@ extension PersistanceManager: RepeatableEventStorageManager {
         return nil
     }
 
-    func updateRepeatableEvent(id: String, repeatableSettings: RepeatableSessionSettings) {
+    func updateRepeatableEvent(id: String, repeatableSettings: any RepeatableSessionSettingsProtocol) {
         guard let repeatableEvent = repeatableEvent(by: id) else {
             return
         }

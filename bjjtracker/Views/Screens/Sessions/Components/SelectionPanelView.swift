@@ -74,9 +74,9 @@ struct SelectionPanelView<T: RawRepresentable & CaseIterable>: View where T.RawV
                 }
             }
         }
-        .onChange(of: selectedTypeValue, perform: { val in
-            selectedType = T(rawValue: val)!
-        })
+        .onChange(of: selectedTypeValue) { _, value in
+            selectedType = T(rawValue: value)!
+        }
     }
 }
 

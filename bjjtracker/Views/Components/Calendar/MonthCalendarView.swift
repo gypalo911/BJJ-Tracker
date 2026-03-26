@@ -57,7 +57,7 @@ struct MonthCalendarView: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
-        .onChange(of: currentMonthDay) { newValue in
+        .onChange(of: currentMonthDay) { _, newValue in
             selectedDate = getCurrentMonth()
         }
     }

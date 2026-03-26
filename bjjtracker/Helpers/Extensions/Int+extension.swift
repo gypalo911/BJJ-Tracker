@@ -24,3 +24,16 @@ extension Int {
         return str
     }
 }
+
+protocol StringComparable {
+    var stringValue: String { get set }
+}
+
+extension Int: StringComparable {
+    var stringValue: String {
+        get {
+            return String(self)
+        }
+        set {}
+    }
+}

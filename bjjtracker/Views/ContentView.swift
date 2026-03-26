@@ -7,73 +7,152 @@
 
 import SwiftUI
 
+@MainActor
+struct ContentViewFactory {
+    func makeDashboardViewModel() -> DashboardViewModel {
+        DashboardViewModel()
+    }
+
+    func makeTimetableViewModel() -> TimetableViewViewModel {
+        TimetableViewViewModel()
+    }
+
+    func makeStatisticsViewModel() -> StatisticsViewViewModel {
+        StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
+    }
+
+    func makeDashboardView(viewModel: DashboardViewModel) -> some View {
+        DashboardView(viewModel: viewModel)
+    }
+
+    func makeTimetableView(viewModel: TimetableViewViewModel) -> some View {
+        TimetableView(viewModel: viewModel)
+    }
+
+    func makeStatisticsView(viewModel: StatisticsViewViewModel) -> some View {
+        StatisticsView(viewModel: viewModel)
+    }
+
+    func makeProfileView(persistanceManager: PersistanceManager) -> some View {
+        ProfileView(
+            viewModel: ProfileViewViewModel(
+                persistanceManager: persistanceManager,
+                healthKitService: DefaultHealthKitService(),
+                appReview: AppReview()
+            )
+        )
+    }
+
+    func makeBluredBottomSheet(
+        isBottomSheetOpen: Binding<Bool>,
+        onSelect: @escaping (ModalSheets?) -> Void
+    ) -> some View {
+        BluredBottomSheet(
+            isBottomSheetOpen: isBottomSheetOpen,
+            onSelect: onSelect
+        )
+    }
+
+    func makeTechniqueModalView(showingCreateTechnique: Binding<Bool>) -> some View {
+        TechniqueModalView(
+            showingCreateTechnique: showingCreateTechnique,
+            state: .modifying
+        )
+    }
+
+    func makeTabBarView(
+        selectedTab: Binding<CustomTab>,
+        onCreateAction: @escaping () -> Void
+    ) -> some View {
+        if #available(iOS 26.0, *) {
+            return TabBarViewV3(activeTab: selectedTab, onCreateAction: onCreateAction)
+        } else {
+            return TabBarViewV2(selectedTab: selectedTab, onCreateAction: onCreateAction)
+        }
+    }
+
+    func makeAddPromotionView() -> some View {
+        AddPromotionView(viewModel: .init())
+    }
+
+    func makeNewSessionView(persistanceManager: PersistanceManager) -> some View {
+        NewSessionView(viewModel: .init(persistanceManager: persistanceManager))
+    }
+}
+
+@MainActor
 struct ContentView: View {
-    @State private var selectedTab: Tab = .dashboard
+    @State private var selectedTab: CustomTab = .dashboard
     
     @Environment(\.managedObjectContext) var managedObjContext
-    @StateObject var dashboardVM = DashboardViewModel()
-    @StateObject var timetableVM = TimetableViewViewModel()
-    @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
-    
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
-
+    
+    private let factory: ContentViewFactory
+    @StateObject private var dashboardVM: DashboardViewModel
+    @StateObject private var timetableVM: TimetableViewViewModel
+    @StateObject private var statsVM: StatisticsViewViewModel
+    
+    init() {
+        let factory = ContentViewFactory()
+        self.factory = factory
+        _dashboardVM = StateObject(wrappedValue: factory.makeDashboardViewModel())
+        _timetableVM = StateObject(wrappedValue: factory.makeTimetableViewModel())
+        _statsVM = StateObject(wrappedValue: factory.makeStatisticsViewModel())
+        
+        UITabBar.appearance().isHidden = true
+    }
+    
     var body: some View {
-        ZStack {
-            VStack {
-                TabView(selection: $selectedTab) {
-                    DashboardView(viewModel: dashboardVM)
-                        .tag(Tab.dashboard)
-                    TimetableView(viewModel: timetableVM)
-                        .tag(Tab.calendar)
-                    StatisticsView(viewModel: statsVM)
-                        .tag(Tab.statistics)
-                    ProfileView(viewModel: ProfileViewViewModel(persistanceManager: persistanceManager))
-                        .tag(Tab.profile)
-                }
+        TabView(selection: $selectedTab) {
+            Tab.init(value: .dashboard) {
+                factory.makeDashboardView(viewModel: dashboardVM)
             }
-            .blurredPopup(isPresented: $settings.showingActionSheet) {
-                BluredBottomSheet(
-                    isBottomSheetOpen: $settings.showingActionSheet,
-                    onSelect: { modal in
-                        if let modal = modal {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                settings.selectedSheet = modal
-                            }
-                        } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                settings.showingCreateTechnique = true
-                            }
-                        }
-                    }
-                )
+            Tab.init(value: .calendar) {
+                factory.makeTimetableView(viewModel: timetableVM)
             }
-            .bottomSheet(isPresented: $settings.showingCreateTechnique) {
-                TechniqueModalView(
-                    showingCreateTechnique: $settings.showingCreateTechnique,
-                    state: .modifying
-                )
+            Tab.init(value: .statistics) {
+                factory.makeStatisticsView(viewModel: statsVM)
             }
-            if !settings.isTabBarHidden {
-                FloatingTabBarView(selectedTab: $selectedTab, onCreate: {
-                    settings.showingActionSheet = true
-                })
-                .vAlign(.bottom)
-                .padding(.bottom, 30)
-                .disabled(settings.isTabBarHidden)
+            Tab.init(value: .profile) {
+                factory.makeProfileView(persistanceManager: persistanceManager)
             }
         }
+        .blurredPopup(isPresented: $settings.showingActionSheet) {
+            factory.makeBluredBottomSheet(
+                isBottomSheetOpen: $settings.showingActionSheet,
+                onSelect: { modal in
+                    if let modal = modal {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            settings.selectedSheet = modal
+                        }
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            settings.showingCreateTechnique = true
+                        }
+                    }
+                }
+            )
+        }
+        .bottomSheet(isPresented: $settings.showingCreateTechnique) {
+            factory.makeTechniqueModalView(showingCreateTechnique: $settings.showingCreateTechnique)
+        }
         .ignoresSafeArea()
-        .toolbar(.hidden, for: .tabBar)
+        .overlay(alignment: .bottom) {
+            factory.makeTabBarView(selectedTab: $selectedTab) {
+                settings.showingActionSheet = true
+            }
+            .hideTabBar(settings.isTabBarHidden)
+        }
         .sheet(item: $settings.selectedSheet) { selectedSheet in
             switch selectedSheet {
             case .promotion:
-                AddPromotionView(viewModel: .init())
+                factory.makeAddPromotionView()
             case .activity:
-                NewSessionView(viewModel: .init(persistanceManager: persistanceManager))
+                factory.makeNewSessionView(persistanceManager: persistanceManager)
             }
         }
-        .onChange(of: settings.showingActionSheet) { value in
+        .onChange(of: settings.showingActionSheet) { _, value in
             if value {
                 settings.isTabBarHidden = true
             } else {
@@ -82,7 +161,7 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: settings.showingCreateTechnique) { value in
+        .onChange(of: settings.showingCreateTechnique) { _, value in
             if value {
                 settings.isTabBarHidden = true
             } else {

@@ -39,7 +39,7 @@ struct DurationPicker: View {
                 .pickerStyle(WheelPickerStyle())
                 .frame(maxWidth: geometry.size.width / 2)
                 .clipped()
-                .onChange(of: hours) { _ in
+                .onChange(of: hours) {
                     duration = totalDurationInMinutes
                 }
                 
@@ -57,7 +57,7 @@ struct DurationPicker: View {
                 .pickerStyle(WheelPickerStyle())
                 .frame(maxWidth: geometry.size.width / 2)
                 .clipped()
-                .onChange(of: minutes) { _ in
+                .onChange(of: minutes) {
                     duration = totalDurationInMinutes
                 }
             }

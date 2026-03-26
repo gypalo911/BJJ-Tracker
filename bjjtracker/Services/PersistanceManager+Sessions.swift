@@ -7,21 +7,11 @@
 
 import CoreData
 
-protocol SessionsStorageManager {
-    func createSession(from activity: Activity, repeatableSettings: RepeatableSessionSettings?)
-    func fetchSessions(in interval: DateInterval?) -> [Session]
-    func session(by id: String) -> Session?
-    func sessions(with repeatableId: String) -> [Session]
-    func update(session: Session, activity: Activity)
-    func delete(session: Session)
-    func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType)
-}
-
 extension PersistanceManager: SessionsStorageManager {
     
     // MARK: - Create
     
-    func createSession(from activity: Activity, repeatableSettings: RepeatableSessionSettings? = nil) {
+    func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)? = nil) {
         let context = self.container.viewContext
         let session = Session(context: context)
         session.update(with: activity)
@@ -30,8 +20,6 @@ extension PersistanceManager: SessionsStorageManager {
         
         if let repeatableId = activity.repeatableId, let repeatableSettings {
             createRepeatableEvent(id: repeatableId, from: repeatableSettings)
-//            let repeatableEvent = RepeatableEvent(context: context)
-//            repeatableEvent.update(id: repeatableId, settings: repeatableSettings)
         }
     }
     

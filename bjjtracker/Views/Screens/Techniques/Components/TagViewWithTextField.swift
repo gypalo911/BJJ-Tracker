@@ -53,7 +53,7 @@ struct TagViewWithTextField: View {
                 onSubmit?(tag)
                 tag = .init(text: "")
             }
-            .onChange(of: tag.text) { newValue in
+            .onChange(of: tag.text) { _, newValue in
                 let font = DesignSystem.shared.fonts.chip.uiKit
                 let size = newValue.textSize(font)
                 

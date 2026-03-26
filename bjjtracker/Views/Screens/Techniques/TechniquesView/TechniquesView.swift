@@ -170,11 +170,11 @@ struct TechniquesView: View {
                 state: .modifying
             )
         }
-        .onChange(of: viewModel.isShowingTechniqueDetails) { _ in
+        .onChange(of: viewModel.isShowingTechniqueDetails) {
             settings.isTabBarHidden = true
             viewModel.fetchTechniques()
         }
-        .onChange(of: viewModel.isModifyingTechnique) { _ in
+        .onChange(of: viewModel.isModifyingTechnique) {
             settings.isTabBarHidden = true
             viewModel.fetchTechniques()
         }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import StoreKit
 
 struct ProfileView: View {
     enum ActionSheetState {
@@ -217,7 +216,7 @@ struct ProfileView: View {
                                     )
                                 })
                             }
-                            if !settings.healthKitService.isDataAuthorized {
+                            if !viewModel.isHealthKitDataAuthorized {
                                 AppleHealthCardView {
                                     isConnectAHPresented = true
                                 }
@@ -267,21 +266,14 @@ struct ProfileView: View {
                                     EmailController.shared.sendEmail(
                                         subject: "Found an issue in JiuTrack app".localizedString,
                                         body: "".localizedString,
-                                        to: "wthotcode@gmail.com"
+                                        to: AppConstants.Config.supportEmail
                                     )
                                 }
                             )
                             SettigsCell(
                                 icon: Image("rate"),
                                 text: "Rate the app",
-                                onTap: {
-                                    if let scene = UIApplication.shared.connectedScenes
-                                        .first(where: { $0.activationState == .foregroundActive })
-                                        as? UIWindowScene {
-                                        SKStoreReviewController.requestReview(in: scene)
-                                    }
-                                    
-                                }
+                                onTap: viewModel.promptAppReview
                             )
                             SettigsCell(
                                 icon: Image("share"),
@@ -343,10 +335,10 @@ struct ProfileView: View {
                 }
             })
         })
-        .onChange(of: isConnectAHPresented) { value in
+        .onChange(of: isConnectAHPresented) { _, value in
             settings.isTabBarHidden = value
         }
-        .onChange(of: showingPromotionsView) { value in
+        .onChange(of: showingPromotionsView) { _, value in
             if value {
                 settings.isTabBarHidden = true
             } else {
@@ -355,7 +347,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .onChange(of: showingBottomSheet) { value in
+        .onChange(of: showingBottomSheet) { _, value in
             if value {
                 settings.isTabBarHidden = true
             } else {
@@ -504,7 +496,9 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(
             viewModel: .init(
-                persistanceManager: PersistanceManager.preview
+                persistanceManager: PersistanceManager.preview,
+                healthKitService: DefaultHealthKitService(),
+                appReview: AppReview()
             )
         )
         .environmentObject(AppSettings())

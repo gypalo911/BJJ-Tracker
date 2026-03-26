@@ -29,6 +29,7 @@ extension DesignSystem {
         public let activityIndicator = UIColor(hex: "#1D2028") | UIColor(hex: "#FFFFFF")
 
         public var blue: SwiftUI.Color { brand.primary }
+        public var darkText: SwiftUI.Color { text.dark }
         public var darkBlue: SwiftUI.Color { brand.secondary }
         public var purple: SwiftUI.Color { accent.primary }
         public var purpleBackground: SwiftUI.Color { accent.surface }
@@ -84,6 +85,7 @@ extension DesignSystem {
             public let tertiary = SwiftUI.Color("GrayTextColor")
             public let inverse = SwiftUI.Color.white
             public let placeholder = SwiftUI.Color("LightGray")
+            public let dark = SwiftUI.Color("Dark")
 
             public init() {}
         }

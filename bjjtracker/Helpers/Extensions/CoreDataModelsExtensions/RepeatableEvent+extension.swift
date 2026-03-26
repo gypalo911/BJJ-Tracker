@@ -8,7 +8,7 @@
 import CoreData
 
 extension RepeatableEvent {
-    func update(id: String, settings: RepeatableSessionSettings) {
+    func update(id: String, settings: any RepeatableSessionSettingsProtocol) {
         self.id = id
         self.repeatType = Int16(settings.repeatType.rawValue)
         self.repeatCondition = Int16(settings.repeatCondition.rawValue)

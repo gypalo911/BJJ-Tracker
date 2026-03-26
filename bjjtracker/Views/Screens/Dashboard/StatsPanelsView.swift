@@ -21,8 +21,10 @@ struct StatsView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(text)
                         .font(token: DesignSystem.shared.fonts.footnote, weight: .semibold)
+                        .foregroundColor(DesignSystem.shared.colors.darkText)
                     Text(value)
                         .font(token: DesignSystem.shared.fonts.title3, weight: .semibold)
+                        .foregroundColor(DesignSystem.shared.colors.darkText)
                 }
                 Spacer()
             }

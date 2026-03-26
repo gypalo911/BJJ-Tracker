@@ -9,12 +9,6 @@ import SwiftUI
 import Combine
 import LinkPresentation
 
-enum DeleteSessionType: Equatable {
-    case current
-    case all
-    case future(after: Date?)
-}
-
 // MARK: SessionDetailsView
 struct SessionDetailsView: View {
     private enum Localisation {
@@ -190,7 +184,7 @@ struct SessionDetailsView: View {
         .onAppear {
             setupView()
         }
-        .onChange(of: viewModel.session.notes) { _ in
+        .onChange(of: viewModel.session.notes) {
             viewModel.setupLinkPreviews()
         }
     }

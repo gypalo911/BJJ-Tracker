@@ -86,7 +86,7 @@ struct SearchBar: View {
                     self.isHeaderHidden = false
                 }
             }
-            .onChange(of: searchText) { value in
+            .onChange(of: searchText) { _, value in
                 withAnimation(.easeInOut(duration: 0.3)) {
                     isEmptySearchState = value.isEmpty
                 }

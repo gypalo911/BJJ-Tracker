@@ -7,6 +7,23 @@
 
 import Foundation
 
+protocol RepeatableSessionSettingsProtocol: AnyObject {
+    var isRepeatable: Bool { get set }
+    var repeatType: RepeatType { get set }
+    var repeatCondition: RepeatCondition { get set }
+    var selectedDays: [DaysPicker.Day] { get set }
+    var endCondition: EndCondition { get set }
+    var endDate: Date { get set }
+    var summaryDescription: String { get }
+
+    func sessionsCountDescription(from firstSessionDate: Date) -> String
+    func generateOccurrences(
+        from firstSessionDate: Date,
+        calendar: Calendar,
+        maxOccurrencesForNever: Int
+    ) -> [Date]
+}
+
 enum RepeatType: Int, CaseIterable, Identifiable {
     case weekly
     case monthly
@@ -60,7 +77,7 @@ enum EndCondition: Int, CaseIterable, Identifiable {
 }
 
 
-class RepeatableSessionSettings: ObservableObject {
+class RepeatableSessionSettings: ObservableObject, RepeatableSessionSettingsProtocol {
     enum Localisation {
         static var weekly: String { "Weekly".localizedString }
         static var monthly: String { "Monthly".localizedString }

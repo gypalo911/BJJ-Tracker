@@ -174,7 +174,7 @@ struct JournalView: View {
                         }
                     }
                 }
-                .onChange(of: viewModel.selectedSession) { _ in
+                .onChange(of: viewModel.selectedSession) {
                     changeNavBar(.clear)
                 }
                 

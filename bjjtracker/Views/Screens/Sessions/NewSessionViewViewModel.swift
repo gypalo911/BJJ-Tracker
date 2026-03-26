@@ -13,41 +13,55 @@ protocol NewSessionViewViewModelProtocol {
     func popupDismissed()
 }
 
+@MainActor
 class NewSessionViewViewModel: ObservableObject {
     
-    @Published var repeatableSessionSettings: RepeatableSessionSettings = .init()
+    @Published var repeatableSessionSettings: RepeatableSessionSettings
     @Published var isPickerPresented = false
     
-    @Published var activity: Activity = .init(
-        type: .training,
-        style: .gi,
-        duration: 60,
-        startDate: Date(),
-        location: "",
-        notes: ""
-    )
+    @Published var activity: Activity
     
     private let persistanceManager: SessionsStorageManager
-    private let notificationManager: NotificationManagerProtocol
+    private let notificationManager: NotificationManagerProtocol?
     private let analyticsEngine: AnalyticsEngine
+    private let appSettings: AppSettings
+    private let currentDate: () -> Date
+    private let repeatableIDGenerator: () -> String
     
     init(
         persistanceManager: SessionsStorageManager,
-        notificationManager: NotificationManagerProtocol = NotificationManager.shared,
-        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()
+        notificationManager: NotificationManagerProtocol? = nil,
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
+        activity: Activity = .init(
+            type: .training,
+            style: .gi,
+            duration: 60,
+            startDate: Date(),
+            location: "",
+            notes: ""
+        ),
+        repeatableSessionSettings: RepeatableSessionSettings = .init(),
+        appSettings: AppSettings = AppSettings.shared,
+        currentDate: @escaping () -> Date = Date.init,
+        repeatableIDGenerator: @escaping () -> String = { UUID().uuidString }
     ) {
         self.persistanceManager = persistanceManager
         self.notificationManager = notificationManager
         self.analyticsEngine = analyticsEngine
+        self.activity = activity
+        self.repeatableSessionSettings = repeatableSessionSettings
+        self.appSettings = appSettings
+        self.currentDate = currentDate
+        self.repeatableIDGenerator = repeatableIDGenerator
     }
     
     func saveActivity() {
         if repeatableSessionSettings.isRepeatable {
-            activity.repeatableId = UUID().uuidString
-            save(activity, repeatableSettings: repeatableSessionSettings)
+            activity.repeatableId = repeatableIDGenerator()
+            save(activity.copy(), repeatableSettings: repeatableSessionSettings)
             createRepeatedSessions()
         } else {
-            save(activity)
+            save(activity.copy())
         }
         
         sendSessionCreatedAnalytics(from: activity)
@@ -56,24 +70,25 @@ class NewSessionViewViewModel: ObservableObject {
     private func save(_ activity: Activity, repeatableSettings: RepeatableSessionSettings? = nil) {
         persistanceManager.createSession(from: activity, repeatableSettings: repeatableSettings)
 
-        notificationManager.scheduleNotification(activity: activity)
+        notificationManager?.scheduleNotification(activity: activity)
     }
     
     private func createRepeatedSessions() {
-        repeatableSessionSettings.generateOccurrences(from: activity.startDate).forEach { date in
-            let tempActivity = activity
-            tempActivity.startDate = date
-            
-            save(tempActivity)
+        repeatableSessionSettings
+            .generateOccurrences(from: activity.startDate)
+            .dropFirst()
+            .forEach { date in
+                save(activity.copy(startDate: date))
         }
     }
 }
 
-extension NewSessionViewViewModel: NewSessionViewViewModelProtocol {
+extension NewSessionViewViewModel: @MainActor NewSessionViewViewModelProtocol {
     func onAppear() {
-        activity.startDate = AppSettings.shared.selectedCalendarDate
+        activity.startDate = appSettings.selectedCalendarDate
 
-        if let selectedDay = DaysPicker.Day(rawValue: Date().dayNumberOfWeek() ?? 0), repeatableSessionSettings.selectedDays.isEmpty {
+        if let selectedDay = DaysPicker.Day(rawValue: currentDate().dayNumberOfWeek() ?? 0),
+           repeatableSessionSettings.selectedDays.isEmpty {
             repeatableSessionSettings.selectedDays = [selectedDay]
         }
         analyticsEngine.log(AnalyticsEvent(name: "new_session_screen_viewed", metadata: [:]))
@@ -100,6 +115,21 @@ extension NewSessionViewViewModel: NewSessionViewViewModelProtocol {
                 "numberOfRepeateSessions": repeatableSessionSettings.generateOccurrences(from: activity.startDate).count.stringValue
             ]
         ))
+    }
+}
+
+private extension Activity {
+    func copy(startDate targetStartDate: Date? = nil, repeatableID targetRepeatableID: String? = nil) -> Activity {
+        Activity(
+            id: id,
+            repeatableId: targetRepeatableID ?? repeatableId,
+            type: type,
+            style: style,
+            duration: duration,
+            startDate: targetStartDate ?? startDate,
+            location: location,
+            notes: notes
+        )
     }
 }
 

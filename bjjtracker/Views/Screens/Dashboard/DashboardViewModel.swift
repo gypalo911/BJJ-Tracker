@@ -6,6 +6,7 @@
 ////
 //
 import SwiftUI
+import HealthKit
 
 struct HealthData {
     var totalEnergyBurned: Double = 0

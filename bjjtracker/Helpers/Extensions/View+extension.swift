@@ -102,4 +102,23 @@ extension View {
             .accentColor(.black)
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(DesignSystem.shared.colors.blue, lineWidth: 1))
     }
+    
+    // Blur Fade In/Out
+    @ViewBuilder
+    func blurFade(_ status: Bool) -> some View {
+        self
+            .compositingGroup()
+            .blur(radius: status ? 0 : 10)
+            .opacity(status ? 1 : 0)
+    }
+    
+    // Hide/show tabbar
+    @ViewBuilder
+    func hideTabBar(_ isHidden: Bool) -> some View {
+        self
+            .offset(y: isHidden ? 140 : 0)
+            .opacity(isHidden ? 0 : 1)
+            .allowsHitTesting(!isHidden)
+            .animation(.easeInOut(duration: 0.3), value: isHidden)
+    }
 }

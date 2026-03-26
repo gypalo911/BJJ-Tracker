@@ -120,13 +120,13 @@ struct TimetableView: View {
                 .vAlign(.top)
                 .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .backport.hiddenToolbar(true)
-                .onChange(of: selectedDay, perform: { value in
+                .onChange(of: selectedDay) { _, value in
                     withAnimation(.easeInOut(duration: 0.25)) {
                         isCalendarBottomSheetOpen = false
                     }
                     settings.selectedCalendarDate = value.setCurrentTime()
-                })
-                .onChange(of: isCalendarBottomSheetOpen) { value in
+                }
+                .onChange(of: isCalendarBottomSheetOpen) { _, value in
                     if value {
                         settings.isTabBarHidden = true
                     } else {

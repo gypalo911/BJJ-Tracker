@@ -24,7 +24,7 @@ struct BottomSheetModifier<InnerView: View>: ViewModifier {
                 }
             }
             .edgesIgnoringSafeArea(.all)
-            .onChange(of: isPresented) { _ in
+            .onChange(of: isPresented) {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
     }

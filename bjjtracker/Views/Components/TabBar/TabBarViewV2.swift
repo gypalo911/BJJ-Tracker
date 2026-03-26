@@ -1,5 +1,5 @@
 //
-//  FloatingTabBarView.swift
+//  TabBarViewV2.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 22.07.2023.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct FloatingTabBarView: View {
-    @Binding var selectedTab: Tab
+struct TabBarViewV2: View {
+    @Binding var selectedTab: CustomTab
     
-    var onCreate: (() -> Void)?
+    var onCreateAction: (() -> Void)?
     
     var body: some View {
         HStack(alignment: .center, spacing: 30) {
-            ForEach(Tab.allCases, id: \.rawValue) { tab in
+            ForEach(CustomTab.allCases, id: \.rawValue) { tab in
                 Button(action: {
                     withAnimation(.spring(response: 0.3, blendDuration: 6)) {
                         selectedTab = tab
@@ -28,7 +28,7 @@ struct FloatingTabBarView: View {
                 .buttonStyle(BouncyButton())
                 if tab == .calendar {
                     Button(action: {
-                        onCreate?()
+                        onCreateAction?()
                     }, label: {
                         ZStack {
                             Circle()
@@ -63,9 +63,9 @@ struct FloatingTabBarView: View {
 
 struct FloatingTabBarView_Previews: PreviewProvider {
     struct Container: View {
-        @State var selected: Tab = .dashboard
+        @State var selected: CustomTab = .dashboard
         var body: some View {
-            FloatingTabBarView(selectedTab: $selected)
+            TabBarViewV2(selectedTab: $selected)
                 .vAlign(.bottom)
                 .padding(.bottom, 30)
         }
