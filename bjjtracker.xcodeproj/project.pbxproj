@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */; };
 		B821571F2EDF17D600572265 /* SessionRepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */; };
 		B82157202EDF17D600572265 /* SessionRepeatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */; };
-		B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */; };
+		B841D7C32F754F3300652BAA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B841D7C22F754F3300652BAA /* FirebaseAnalytics */; };
+		B841D7C52F754F3300652BAA /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = B841D7C42F754F3300652BAA /* FirebaseAnalyticsCore */; };
+		B841D7C92F754F3300652BAA /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = B841D7C82F754F3300652BAA /* FirebaseCore */; };
 		B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */; };
 		B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */; };
 		B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */; };
@@ -83,7 +84,6 @@
 		D060BAA129DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BAA029DDAD9C00E10562 /* bjjtrackerUITestsLaunchTests.swift */; };
 		D06E48852A92597E0041F370 /* AppleHealthCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E48842A92597E0041F370 /* AppleHealthCardView.swift */; };
 		D06F861A2A1F93C800270558 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06F86192A1F93C800270558 /* Int+extension.swift */; };
-		D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */; };
 		D070C9532A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */; };
 		D076EFA02A0E30EE00E74E01 /* BeltPromotionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EF9F2A0E30EE00E74E01 /* BeltPromotionsList.swift */; };
 		D076EFA22A0E311100E74E01 /* BeltPromotionsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076EFA12A0E311100E74E01 /* BeltPromotionsListCell.swift */; };
@@ -120,7 +120,6 @@
 		D0B01F2C29E485BC00E10979 /* SessionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2B29E485BC00E10979 /* SessionDetailsView.swift */; };
 		D0B01F2F29E5850000E10979 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B01F2E29E5850000E10979 /* StatisticsView.swift */; };
 		D0B6CACE2A7D574C00ED2F3B /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6CACD2A7D574C00ED2F3B /* NotificationSettingsView.swift */; };
-		D0B8B7202A3C9B9100A2418F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D0B8B71F2A3C9B9100A2418F /* FirebaseAnalytics */; };
 		D0B8B7212A3C9CAF00A2418F /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01044A32A3C6722004383FF /* DashboardViewModelTests.swift */; };
 		D0B8B7222A3C9CBA00A2418F /* MockAnalyticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01044A72A3C91D0004383FF /* MockAnalyticsEngine.swift */; };
 		D0B8B7232A3C9CD600A2418F /* FirebaseAnalyticsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070C9522A3C595200DCEED5 /* FirebaseAnalyticsEngine.swift */; };
@@ -157,7 +156,6 @@
 		D0E928952B7E2828002FA81E /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E928942B7E2828002FA81E /* BouncyButton.swift */; };
 		D0EF31C32AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */; };
 		D0F3FE202A80E20A006E721C /* ModifierBackport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */; };
-		E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,11 +176,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtrackerTests.release.xcconfig"; path = "Target Support Files/Pods-bjjtrackerTests/Pods-bjjtrackerTests.release.xcconfig"; sourceTree = "<group>"; };
-		4B1775FFCBAA02031E30517E /* Pods-bjjtracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker.debug.xcconfig"; path = "Target Support Files/Pods-bjjtracker/Pods-bjjtracker.debug.xcconfig"; sourceTree = "<group>"; };
-		7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker/Pods-bjjtracker.release.xcconfig"; sourceTree = "<group>"; };
-		9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker_bjjtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B821571E2EDF17CA00572265 /* SessionRepeatSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepeatSettings.swift; sourceTree = "<group>"; };
 		B82157502EDF24EB00572265 /* bjjtracker_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bjjtracker_v2.xcdatamodel; sourceTree = "<group>"; };
 		B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -204,7 +197,6 @@
 		B8E0FE6F2F741222006B35B3 /* DesignSystem + Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem + Colors.swift"; sourceTree = "<group>"; };
 		B8E0FE732F741222006B35B3 /* DesignSystem + Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DesignSystem + Typography.swift"; sourceTree = "<group>"; };
 		B8E0FE742F741222006B35B3 /* FontFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFamily.swift; sourceTree = "<group>"; };
-		C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D00109AA2A0A4E57008433CC /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D00109AD2A0BC925008433CC /* PromotionModel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromotionModel+extension.swift"; sourceTree = "<group>"; };
 		D00109B22A0D2F9A008433CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -335,9 +327,6 @@
 		D0E928942B7E2828002FA81E /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
 		D0EF31C22AA4DFED00F1374B /* KeyboardAdaptiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptiveModifier.swift; sourceTree = "<group>"; };
 		D0F3FE1F2A80E20A006E721C /* ModifierBackport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierBackport.swift; sourceTree = "<group>"; };
-		D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bjjtracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-bjjtrackerTests/Pods-bjjtrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F79CDC833804077FA05FEBD0 /* Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,8 +334,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D070C94E2A3C537500DCEED5 /* FirebaseAnalytics in Frameworks */,
-				E9F4DB5EACF17AB0B25FE753 /* Pods_bjjtracker.framework in Frameworks */,
+				B841D7C32F754F3300652BAA /* FirebaseAnalytics in Frameworks */,
+				B841D7C92F754F3300652BAA /* FirebaseCore in Frameworks */,
+				B841D7C52F754F3300652BAA /* FirebaseAnalyticsCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,8 +344,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0B8B7202A3C9B9100A2418F /* FirebaseAnalytics in Frameworks */,
-				28284A122750E393258D2C2E /* Pods_bjjtrackerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,26 +351,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B83609C4E70DC8C8C87952CC /* Pods_bjjtracker_bjjtrackerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01EDE3061F28FC1990F06196 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4B1775FFCBAA02031E30517E /* Pods-bjjtracker.debug.xcconfig */,
-				7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */,
-				F79CDC833804077FA05FEBD0 /* Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig */,
-				C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */,
-				DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */,
-				04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B82157212EDF236600572265 /* CoreDataRepository */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,8 +655,6 @@
 				D060BA9329DDAD9C00E10562 /* bjjtrackerTests */,
 				D060BA9D29DDAD9C00E10562 /* bjjtrackerUITests */,
 				D060BA7B29DDAD9A00E10562 /* Products */,
-				01EDE3061F28FC1990F06196 /* Pods */,
-				E246021A6FE0F135649590AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1017,16 +989,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		E246021A6FE0F135649590AD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D5418DDCFB74671A17957352 /* Pods_bjjtracker.framework */,
-				AEC3F419E5ED87566876E444 /* Pods_bjjtracker_bjjtrackerUITests.framework */,
-				9037FD7FEFB2A4EB717067A1 /* Pods_bjjtrackerTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1034,20 +996,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D060BAA429DDAD9C00E10562 /* Build configuration list for PBXNativeTarget "bjjtracker" */;
 			buildPhases = (
-				8DF69214951BFFF86C734168 /* [CP] Check Pods Manifest.lock */,
 				D060BA7629DDAD9A00E10562 /* Sources */,
 				D060BA7729DDAD9A00E10562 /* Frameworks */,
 				D060BA7829DDAD9A00E10562 /* Resources */,
-				CAEE1876F8DD8F8F5CE9A876 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = bjjtracker;
-			packageProductDependencies = (
-				D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */,
-			);
 			productName = bjjtracker;
 			productReference = D060BA7A29DDAD9A00E10562 /* bjjtracker.app */;
 			productType = "com.apple.product-type.application";
@@ -1056,7 +1013,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D060BAA729DDAD9C00E10562 /* Build configuration list for PBXNativeTarget "bjjtrackerTests" */;
 			buildPhases = (
-				D86FD79D51B38ECEB1C8D64C /* [CP] Check Pods Manifest.lock */,
 				D060BA8C29DDAD9C00E10562 /* Sources */,
 				D060BA8D29DDAD9C00E10562 /* Frameworks */,
 				D060BA8E29DDAD9C00E10562 /* Resources */,
@@ -1068,7 +1024,6 @@
 			);
 			name = bjjtrackerTests;
 			packageProductDependencies = (
-				D0B8B71F2A3C9B9100A2418F /* FirebaseAnalytics */,
 			);
 			productName = bjjtrackerTests;
 			productReference = D060BA9029DDAD9C00E10562 /* bjjtrackerTests.xctest */;
@@ -1078,11 +1033,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D060BAAA29DDAD9C00E10562 /* Build configuration list for PBXNativeTarget "bjjtrackerUITests" */;
 			buildPhases = (
-				31B420C7E4018D5C2CC3809A /* [CP] Check Pods Manifest.lock */,
 				D060BA9629DDAD9C00E10562 /* Sources */,
 				D060BA9729DDAD9C00E10562 /* Frameworks */,
 				D060BA9829DDAD9C00E10562 /* Resources */,
-				A0CC8BF6271E52821ACBEDC6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1102,7 +1055,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					D060BA7929DDAD9A00E10562 = {
 						CreatedOnToolsVersion = 14.3;
@@ -1131,7 +1084,7 @@
 			);
 			mainGroup = D060BA7129DDAD9A00E10562;
 			packageReferences = (
-				D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B841D7C12F754F3300652BAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D060BA7B29DDAD9A00E10562 /* Products */;
 			projectDirPath = "";
@@ -1174,117 +1127,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		31B420C7E4018D5C2CC3809A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bjjtracker-bjjtrackerUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DF69214951BFFF86C734168 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bjjtracker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0CC8BF6271E52821ACBEDC6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bjjtracker-bjjtrackerUITests/Pods-bjjtracker-bjjtrackerUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CAEE1876F8DD8F8F5CE9A876 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker/Pods-bjjtracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bjjtracker/Pods-bjjtracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bjjtracker/Pods-bjjtracker-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D86FD79D51B38ECEB1C8D64C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bjjtrackerTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D060BA7629DDAD9A00E10562 /* Sources */ = {
@@ -1513,6 +1355,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1535,6 +1378,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1575,6 +1419,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1590,6 +1435,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1598,7 +1444,6 @@
 		};
 		D060BAA529DDAD9C00E10562 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B1775FFCBAA02031E30517E /* Pods-bjjtracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1606,7 +1451,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bjjtracker/Info.plist;
@@ -1620,7 +1464,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1640,7 +1484,6 @@
 		};
 		D060BAA629DDAD9C00E10562 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7782EFA9389CD31FC9A0DB2E /* Pods-bjjtracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1649,7 +1492,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"bjjtracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bjjtracker/Info.plist;
@@ -1663,7 +1505,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1684,13 +1526,10 @@
 		};
 		D060BAA829DDAD9C00E10562 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD0E87A6E9743D8C876321DC /* Pods-bjjtrackerTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1698,6 +1537,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
+				PODS_PODFILE_DIR_PATH = "$(SRCROOT)";
+				PODS_ROOT = "$(SRCROOT)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrackTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1712,13 +1553,10 @@
 		};
 		D060BAA929DDAD9C00E10562 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04AA8917B1888C800A79C175 /* Pods-bjjtrackerTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1726,6 +1564,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
+				PODS_PODFILE_DIR_PATH = "$(SRCROOT)";
+				PODS_ROOT = "$(SRCROOT)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrackTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1740,14 +1580,14 @@
 		};
 		D060BAAB29DDAD9C00E10562 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F79CDC833804077FA05FEBD0 /* Pods-bjjtracker-bjjtrackerUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
+				PODS_PODFILE_DIR_PATH = "$(SRCROOT)";
+				PODS_ROOT = "$(SRCROOT)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrackUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1762,14 +1602,14 @@
 		};
 		D060BAAC29DDAD9C00E10562 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C734C99E7FC0D22181E7D748 /* Pods-bjjtracker-bjjtrackerUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ATC97KQPU;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
+				PODS_PODFILE_DIR_PATH = "$(SRCROOT)";
+				PODS_ROOT = "$(SRCROOT)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hotcode.jiutrackUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1824,26 +1664,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		B841D7C12F754F3300652BAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
+				minimumVersion = 12.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D070C94D2A3C537500DCEED5 /* FirebaseAnalytics */ = {
+		B841D7C22F754F3300652BAA /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = B841D7C12F754F3300652BAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
-		D0B8B71F2A3C9B9100A2418F /* FirebaseAnalytics */ = {
+		B841D7C42F754F3300652BAA /* FirebaseAnalyticsCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D070C94C2A3C537500DCEED5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
+			package = B841D7C12F754F3300652BAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		B841D7C82F754F3300652BAA /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B841D7C12F754F3300652BAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 

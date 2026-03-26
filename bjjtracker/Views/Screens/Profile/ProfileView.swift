@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 import StoreKit
 
 struct ProfileView: View {
@@ -314,7 +313,7 @@ struct ProfileView: View {
                     ProfileImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage, fileName: "avatar")
                 }
                 .sheet(isPresented: $showShareSheet) {
-                    ActivityViewController(activityItems: [Locale.current.languageCode == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])
+                    ActivityViewController(activityItems: [Locale.current.language.languageCode?.identifier == "uk" ? "https://apps.apple.com/ua/app/jiutrack/id6449996572" : "https://apps.apple.com/ua/app/jiutrack/id6449996572?l=uk"])
                 }
                 .onAppear {
                     settings.isTabBarHidden = false

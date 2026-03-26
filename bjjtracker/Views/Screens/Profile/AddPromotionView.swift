@@ -19,7 +19,7 @@ struct AddPromotionView: View {
     @ObservedObject var viewModel: AddPromotionViewViewModel
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment (\.managedObjectContext) var managedObjContext
+    @Environment(\.managedObjectContext) var managedObjContext
     
     var body: some View {
         NavigationView {

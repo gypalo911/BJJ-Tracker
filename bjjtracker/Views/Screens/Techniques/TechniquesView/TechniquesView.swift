@@ -147,6 +147,7 @@ struct TechniquesView: View {
                     settings.isTabBarHidden = false
                 }
             }
+            .toolbar(.hidden, for: .navigationBar)
         }
         .bottomSheet(isPresented: $viewModel.isShowingTechniqueDetails) {
             if let technique = viewModel.selectedTechnique {

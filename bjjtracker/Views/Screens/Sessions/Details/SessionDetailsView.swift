@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import LinkPresentation
-import Introspect
 
 enum DeleteSessionType: Equatable {
     case current
@@ -186,9 +185,7 @@ struct SessionDetailsView: View {
                 Text(Localisation.deleteSessionsTitle)
             }
         }
-        .introspectTabBarController { (UITabBarController) in
-            UITabBarController.tabBar.isHidden = true
-        }
+        .toolbar(.hidden, for: .tabBar)
         .navigationBarHidden(true)
         .onAppear {
             setupView()

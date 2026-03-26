@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
     
-    @Environment (\.managedObjectContext) var managedObjContext
+    @Environment(\.managedObjectContext) var managedObjContext
     @StateObject var dashboardVM = DashboardViewModel()
     @StateObject var timetableVM = TimetableViewViewModel()
     @StateObject var statsVM = StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
@@ -65,9 +64,7 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
-        .introspectTabBarController { (UITabBarController) in
-            UITabBarController.tabBar.isHidden = true
-        }
+        .toolbar(.hidden, for: .tabBar)
         .sheet(item: $settings.selectedSheet) { selectedSheet in
             switch selectedSheet {
             case .promotion:

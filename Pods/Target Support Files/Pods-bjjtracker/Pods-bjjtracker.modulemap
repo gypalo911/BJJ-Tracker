@@ -1,6 +1,0 @@
-framework module Pods_bjjtracker {
-  umbrella header "Pods-bjjtracker-umbrella.h"
-
-  export *
-  module * { export * }
-}

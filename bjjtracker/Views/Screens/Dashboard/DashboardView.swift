@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct DashboardView: View {
     enum Localisation {

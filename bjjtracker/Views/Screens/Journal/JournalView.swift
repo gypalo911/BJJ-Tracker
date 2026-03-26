@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct JournalView: View {
     enum Localisation {

@@ -131,7 +131,7 @@ extension StatisticsViewViewModel {
     }
 }
 
-extension StatisticsViewViewModel: StatisticsViewViewAnalytics {
+extension StatisticsViewViewModel: @MainActor StatisticsViewViewAnalytics {
     func onStatisticsViewAppeared() {
         analyticsEngine.log(AnalyticsEvent(name: "statistics_screen_viewed", metadata: [:]))
     }

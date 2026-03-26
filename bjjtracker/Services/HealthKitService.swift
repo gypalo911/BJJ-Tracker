@@ -102,7 +102,7 @@ final class DefaultHealthKitService: ObservableObject, HealthKitService {
     }
     
     var isMetricSystem: Bool {
-        return Locale.current.usesMetricSystem
+        return Locale.current.measurementSystem == .metric
     }
     
     private let writeTypes: Set<HKSampleType> = Set(
