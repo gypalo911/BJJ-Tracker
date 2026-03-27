@@ -8,40 +8,38 @@
 import Foundation
 import CoreData
 
-//class MockSessionsStorageManager: SessionsStorageManager {
-//    
-//    var sessions: [Session] = []
-//    var container: NSPersistentCloudKitContainer = NSPersistentCloudKitContainer(name: "testbjjtracker")
-//
-//    func createSession(from activity: Activity, repeatableSettings: RepeatableSessionSettings?) {
-//        let context = self.container.viewContext
-//        let session = Session(context: context)
-//        session.update(with: activity)
-//        
-//        sessions.append(session)
-//    }
-//    
-//    func fetchSessions(in interval: DateInterval?) -> [Session] {
-//        []
-//    }
-//    
-//    func session(by id: String) -> Session? {
-//        nil
-//    }
-//    
-//    func sessions(with repeatableId: String) -> [Session] {
-//        []
-//    }
-//    
-//    func update(session: Session, activity: Activity) {
-//        
-//    }
-//    
-//    func delete(session: Session) {
-//        
-//    }
-//
-//    func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType) {
-//        
-//    }
-//}
+final class MockSessionsStorageManager: SessionsStorageManager {
+    struct CreatedSession {
+        let activity: Activity
+        let hasRepeatableSettings: Bool
+    }
+
+    private(set) var createdSessions: [CreatedSession] = []
+
+    func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)?) {
+        createdSessions.append(
+            CreatedSession(
+                activity: activity,
+                hasRepeatableSettings: repeatableSettings != nil
+            )
+        )
+    }
+
+    func fetchSessions(in interval: DateInterval?) -> [Session] {
+        []
+    }
+
+    func session(by id: String) -> Session? {
+        nil
+    }
+
+    func sessions(with repeatableId: String) -> [Session] {
+        []
+    }
+
+    func update(session: Session, activity: Activity) {}
+
+    func delete(session: Session) {}
+
+    func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType) {}
+}
