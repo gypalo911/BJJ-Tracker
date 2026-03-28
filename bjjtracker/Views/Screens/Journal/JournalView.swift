@@ -184,12 +184,13 @@ struct JournalView: View {
                         viewModel: SessionDetailsViewModel(
                             session: session,
                             persistanceManager: persistanceManager,
-                            notificationManager: NotificationManager()
-                        ), dismissCallback: {
-                            withAnimation(AppConstants.mgeAnimation) {
-                                viewModel.selectedSession = nil
+                            notificationManager: NotificationManager(),
+                            dismissCallback: {
+                                withAnimation(AppConstants.mgeAnimation) {
+                                    viewModel.selectedSession = nil
+                                }
                             }
-                        }
+                        )
                     ).zIndex(1)
                 }
             }

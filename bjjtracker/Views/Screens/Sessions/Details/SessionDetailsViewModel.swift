@@ -8,6 +8,7 @@
 import Foundation
 import LinkPresentation
 import UniformTypeIdentifiers
+import Combine
 
 protocol SessionDetailsViewAnalytics {
     func linkOpened(_ link: String)
@@ -15,11 +16,22 @@ protocol SessionDetailsViewAnalytics {
 
 class SessionDetailsViewModel: ObservableObject {
     
-    // MARK: Variables
+    // MARK: Typealias
+    
+    typealias StorageManager = SessionsStorageManager & TechniquesStorageManager
+    
+    // MARK: Private variables
+    
+    private let persistanceManager: StorageManager
+    private let notificationManager: NotificationManagerProtocol
+    private let appSettings: AppSettings
+    private let analyticsEngine: AnalyticsEngine
+    private let loadsLinkPreviews: Bool
+    
+    // MARK: Public variables
     
     @Published var session: SessionEntity
     @Published var notesLinks: [String] = []
-    
     @Published var previewModels: [LinkPreviewModel] = []
     
     @Published var isShowingTechniqueDetails: Bool = false
@@ -27,28 +39,41 @@ class SessionDetailsViewModel: ObservableObject {
     
     @Published var updateTags: Bool = false
     
-    private let persistanceManager: SessionsStorageManager
-    private let notificationManager: NotificationManagerProtocol
-    private let analyticsEngine: AnalyticsEngine
-    private let loadsLinkPreviews: Bool
+    @Published var isPresentedEditing: Bool = false
+    @Published var showShareSheet: Bool = false
+    @Published var showDeleteItemsDialog: Bool = false
+    
+    var dismissCallback: (() -> Void)?
+    
+    var activityType: ActivityType {
+        session.activityType
+    }
     
     var navTitle: String {
         "\(session.activityType.rawValue.localizedString) \(session.activityStyle.rawValue.localizedString)"
     }
     
+    // MARK: Init
+    
     init(
         session: SessionEntity,
-        persistanceManager: SessionsStorageManager,
+        appSettings: AppSettings = .shared,
+        persistanceManager: StorageManager,
         notificationManager: NotificationManagerProtocol,
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
-        loadsLinkPreviews: Bool = true
+        loadsLinkPreviews: Bool = true,
+        dismissCallback: (() -> Void)? = nil
     ) {
         self.session = session
+        self.appSettings = appSettings
         self.persistanceManager = persistanceManager
         self.notificationManager = notificationManager
         self.analyticsEngine = analyticsEngine
         self.loadsLinkPreviews = loadsLinkPreviews
+        self.dismissCallback = dismissCallback
     }
+    
+    // MARK: Public methods
     
     @MainActor
     func setupLinkPreviews() async {
@@ -76,6 +101,11 @@ class SessionDetailsViewModel: ObservableObject {
         return []
     }
     
+    func onSessionDelete(_ type: DeleteSessionType) {
+        deleteSession(type: type)
+        dismissCallback?()
+    }
+    
     func deleteSession(type: DeleteSessionType) {
         if let repeatableId = session.repeatableId, type != .current {
             persistanceManager.deleteRepeatableSessions(with: repeatableId, type: type)
@@ -84,15 +114,37 @@ class SessionDetailsViewModel: ObservableObject {
         }
         notificationManager.removePendingNotificationRequests(with: [String(describing: session.id)])
     }
-}
-
-extension SessionDetailsViewModel {
-    func linkOpened(_ link: String) {
-        analyticsEngine.log(AnalyticsEvent(name: "opened_link_from_session_details", metadata: ["link": link]))
+    
+    func hideTabbar(_ isHidden: Bool) {
+        appSettings.isTabBarHidden = isHidden
+    }
+    
+    func makeTechniquesListViewModel() -> TechniquesListViewModel {
+        TechniquesListViewModel(
+            session: session,
+            persistanceManager: persistanceManager,
+            updateTags: updateTags,
+            onTechniqueDetails: { [weak self] technique in
+                guard let self else { return }
+                
+                isShowingTechniqueDetails = true
+                selectedTechnique = technique
+            }
+        )
     }
 }
 
-extension SessionDetailsViewModel {
+extension SessionDetailsViewModel: SessionDetailsViewAnalytics {
+    func linkOpened(_ link: String) {
+        analyticsEngine.log(AnalyticsEvent(
+            name: "opened_link_from_session_details",
+            metadata: ["link": link]
+        ))
+    }
+}
+
+private extension SessionDetailsViewModel {
+
     func fetchMetadata(for urlStrings: [String]) async {
         guard !urlStrings.isEmpty else { return }
         for link in notesLinks {
@@ -116,7 +168,7 @@ extension SessionDetailsViewModel {
     }
     
     @MainActor
-    private func fetchMetadata(for previewURLString: String) async throws -> LinkPreviewModel? {
+    func fetchMetadata(for previewURLString: String) async throws -> LinkPreviewModel? {
         guard let previewURL = URL(string: previewURLString) else { return nil }
         let provider = LPMetadataProvider()
         var linkPreviewModel = LinkPreviewModel(previewURL: previewURL)
@@ -132,7 +184,7 @@ extension SessionDetailsViewModel {
         return linkPreviewModel
     }
     
-    private func loadImage(from metadata: LPLinkMetadata) async throws -> UIImage? {
+    func loadImage(from metadata: LPLinkMetadata) async throws -> UIImage? {
         guard let imageProvider = metadata.imageProvider else {
             return nil
         }
@@ -142,7 +194,7 @@ extension SessionDetailsViewModel {
         return convertedImage
     }
     
-    private func convertToImage(_ item: NSSecureCoding) async throws -> UIImage? {
+    func convertToImage(_ item: NSSecureCoding) async throws -> UIImage? {
         var image: UIImage?
         
         if item is UIImage {
@@ -166,5 +218,22 @@ extension SessionDetailsViewModel {
         }
         
         return image
+    }
+}
+
+
+extension SessionDetailsViewModel {
+    enum Localisation {
+        static var notes: String { "Notes".localizedString }
+        static var empty: String { "Empty".localizedString }
+        static var deleteSessionsTitle: String { "Delete sessions".localizedString }
+        static var deleteOnlyThisSession: String { "Delete only this session".localizedString }
+        static var deleteAllSessions: String { "Delete all sessions".localizedString }
+        static var deleteAllFutureSessions: String { "Delete all future sessions".localizedString }
+        static var cancel: String { "Cancel".localizedString }
+        static var share: String { "Share".localizedString }
+        static var edit: String { "Edit".localizedString }
+        static var delete: String { "Delete".localizedString }
+        static var repeatableSession: String { "Repeatable session".localizedString }
     }
 }

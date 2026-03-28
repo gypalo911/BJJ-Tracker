@@ -11,37 +11,14 @@ import LinkPresentation
 
 // MARK: SessionDetailsView
 struct SessionDetailsView: View {
-    private enum Localisation {
-        static var notes: String { "Notes".localizedString }
-        static var empty: String { "Empty".localizedString }
-        static var deleteSessionsTitle: String { "Delete sessions".localizedString }
-        static var deleteOnlyThisSession: String { "Delete only this session".localizedString }
-        static var deleteAllSessions: String { "Delete all sessions".localizedString }
-        static var deleteAllFutureSessions: String { "Delete all future sessions".localizedString }
-        static var cancel: String { "Cancel".localizedString }
-    }
+    
+    typealias Localisation = SessionDetailsViewModel.Localisation
+    
+    @Environment(\.presentationMode) var presentationMode
     
     let namespace: Namespace.ID
     
     @StateObject var viewModel: SessionDetailsViewModel
-    
-    @EnvironmentObject var settings: AppSettings
-    @EnvironmentObject var persistanceManager: PersistanceManager
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var isPresentedEditing: Bool = false
-    @State private var showShareSheet: Bool = false
-    @State private var showDeleteItemsDialog: Bool = false
-    
-    var dismissCallback: (() -> Void)? = nil
-    
-    var activityType: ActivityType {
-        viewModel.session.activityType
-    }
-    
-    var activityColor: Color {
-        activityType.color
-    }
     
     private let screenSize: CGSize = UIScreen.main.bounds.size
     
@@ -49,36 +26,17 @@ struct SessionDetailsView: View {
         ZStack {
             VStack {
                 SessionDetailsHeaderView(
-                    session: viewModel.session,
-                    namespace: namespace,
-                    navTitle: viewModel.navTitle,
-                    isPresentedEditing: $isPresentedEditing,
-                    showShareSheet: $showShareSheet,
-                    showDeleteItemsDialog: $showDeleteItemsDialog,
-                    dismissCallback: dismissCallback,
-                    onDelete: { type in
-                        viewModel.deleteSession(type: type)
-                        dismissCallback?()
-                    }
+                    viewModel: viewModel,
+                    namespace: namespace
                 )
                 .modifier(SwipeToDismissModifier(onDismiss: {
-                    dismissCallback?()
+                    viewModel.dismissCallback?()
                 }))
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         
-                        TechniquesListView(
-                            updateTags: $viewModel.updateTags,
-                            viewModel: .init(
-                                session: viewModel.session,
-                                persistanceManager: persistanceManager,
-                                onTechniqueDetails: { technique in
-                                    viewModel.isShowingTechniqueDetails = true
-                                    viewModel.selectedTechnique = technique
-                                }
-                            )
-                        )
+                        TechniquesListView(viewModel: viewModel.makeTechniquesListViewModel())
                         .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .leading, spacing: 10) {
@@ -134,19 +92,19 @@ struct SessionDetailsView: View {
                     .fill(.white)
                     .ignoresSafeArea()
             }
-            .sheet(isPresented: $isPresentedEditing, onDismiss: {
-                changeNavBar(UIColor(activityColor.opacity(0.8)))
+            .sheet(isPresented: $viewModel.isPresentedEditing, onDismiss: {
+                changeNavBar(UIColor(viewModel.activityType.color.opacity(0.8)))
             }) {
                 EditSessionView(
                     viewModel: .init(),
                     session: viewModel.session,
                     activity: Activity.from(session: viewModel.session)!,
                     onDismiss: { editedActivity in
-                        dismissCallback?()
+                        viewModel.dismissCallback?()
                     }
                 )
             }
-            .fullScreenCover(isPresented: $showShareSheet) {
+            .fullScreenCover(isPresented: $viewModel.showShareSheet) {
                 if #available(iOS 16.0, *) {
                     ShareSessionView(session: viewModel.session)
                 }
@@ -163,15 +121,18 @@ struct SessionDetailsView: View {
                     )
                 }
             }
-            .confirmationDialog(Localisation.deleteSessionsTitle, isPresented: $showDeleteItemsDialog.animation(.easeInOut)) {
+            .confirmationDialog(
+                Localisation.deleteSessionsTitle,
+                isPresented: $viewModel.showDeleteItemsDialog.animation(.easeInOut)
+            ) {
                 Button(Localisation.deleteOnlyThisSession, role: .destructive) {
-                    onSessionDelete(.current)
+                    viewModel.onSessionDelete(.current)
                 }
                 Button(Localisation.deleteAllSessions, role: .destructive) {
-                    onSessionDelete(.all)
+                    viewModel.onSessionDelete(.all)
                 }
                 Button(Localisation.deleteAllFutureSessions, role: .destructive) {
-                    onSessionDelete(.future(after: viewModel.session.startDate))
+                    viewModel.onSessionDelete(.future(after: viewModel.session.startDate))
                 }
                 Button(Localisation.cancel, role: .cancel) { }
             } message: {
@@ -194,56 +155,30 @@ struct SessionDetailsView: View {
     }
     
     func setupView() {
-        changeNavBar(UIColor(activityColor.opacity(0.8)))
-        hideTabbar(true)
-    }
-    
-    func hideTabbar(_ isHidden: Bool) {
-        settings.isTabBarHidden = isHidden
-    }
-    
-    private func onSessionDelete(_ type: DeleteSessionType) {
-        viewModel.deleteSession(type: type)
-        dismissCallback?()
+        changeNavBar(UIColor(viewModel.activityType.color.opacity(0.8)))
+        viewModel.hideTabbar(true)
     }
 }
 
 // MARK: SessionDetailsHeaderView
 struct SessionDetailsHeaderView: View {
-    private enum Localisation {
-        static var share: String { "Share".localizedString }
-        static var edit: String { "Edit".localizedString }
-        static var delete: String { "Delete".localizedString }
-        static var empty: String { "Empty".localizedString }
-        static var repeatableSession: String { "Repeatable session".localizedString }
-    }
-
-    let session: SessionEntity
+    
+    typealias Localisation = SessionDetailsViewModel.Localisation
+    
+    @StateObject var viewModel: SessionDetailsViewModel
     
     let namespace: Namespace.ID
-    let navTitle: String
-    
-    @Binding var isPresentedEditing: Bool
-    @Binding var showShareSheet: Bool
-    @Binding var showDeleteItemsDialog: Bool
-    
-    var dismissCallback: (() -> Void)? = nil
-    var onDelete: ((DeleteSessionType) -> Void)? = nil
-    
-    var sessionId: String {
-        session.id?.uuidString ?? ""
-    }
-    
-    var activityType: ActivityType {
-        session.activityType
-    }
     
     var activityColor: Color {
-        activityType.color
+        viewModel.session.activityType.color
     }
     
-    var sessionStatus: ActivityStatus {
-        session.status
+    var sessionId: String {
+        viewModel.session.id?.uuidString ?? ""
+    }
+    
+    var session: SessionEntity {
+        viewModel.session
     }
     
     var linearGradient: LinearGradient {
@@ -274,7 +209,7 @@ struct SessionDetailsHeaderView: View {
             VStack {
                 HStack(alignment: .bottom) {
                     Button {
-                        dismissCallback?()
+                        viewModel.dismissCallback?()
                     } label: {
                         Image("close")
                             .resizable()
@@ -286,7 +221,7 @@ struct SessionDetailsHeaderView: View {
                     Menu {
                         if #available(iOS 16.0, *) {
                             Button(action: {
-                                showShareSheet = true
+                                viewModel.showShareSheet = true
                             }) {
                                 Label {
                                     Text(Localisation.share)
@@ -296,7 +231,7 @@ struct SessionDetailsHeaderView: View {
                             }
                         }
                         Button(action: {
-                            isPresentedEditing = true
+                            viewModel.isPresentedEditing = true
                             changeNavBar(.clear)
                         }) {
                             Label {
@@ -308,9 +243,9 @@ struct SessionDetailsHeaderView: View {
                         Divider()
                         Button(role: .destructive, action: {
                             if session.repeatableId != nil {
-                                showDeleteItemsDialog = true
+                                viewModel.showDeleteItemsDialog = true
                             } else {
-                                onDelete?(.current)
+                                viewModel.onSessionDelete(.current)
                             }
                         }) {
                             Label {
@@ -331,17 +266,17 @@ struct SessionDetailsHeaderView: View {
                 .padding(.bottom, 10)
                 VStack {
                     HStack {
-                        Text(navTitle)
+                        Text(viewModel.navTitle)
                             .font(token: DesignSystem.shared.fonts.title)
                             .foregroundColor(.white)
                             .hAlign(.leading)
                         ZStack {
                             Rectangle()
-                                .foregroundColor(sessionStatus.color)
+                                .foregroundColor(viewModel.session.status.color)
                                 .cornerRadius(5)
                                 .defaultShadow()
                                 .frame(width: 86, height: 23)
-                            Text(sessionStatus.rawValue.localizedString.uppercased())
+                            Text(viewModel.session.status.rawValue.localizedString.uppercased())
                                 .font(token: DesignSystem.shared.fonts.caption2)
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)

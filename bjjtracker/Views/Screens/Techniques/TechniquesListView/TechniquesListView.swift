@@ -13,8 +13,6 @@ struct TechniquesListView: View {
         static var suggestions: String { "Suggestions".localizedString }
     }
     
-    @Binding var updateTags: Bool
-    
     @StateObject var viewModel: TechniquesListViewModel
     
     @State private var isEditing: Bool = false
@@ -101,7 +99,7 @@ struct TechniquesListView: View {
             viewModel.maxRowWidth = maxViewWidth
             viewModel.fetchTags()
         }
-        .onChange(of: updateTags) {
+        .onChange(of: viewModel.updateTags) {
             viewModel.fetchTags()
         }
     }

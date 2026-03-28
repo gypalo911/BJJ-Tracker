@@ -129,14 +129,16 @@ struct DashboardView: View {
             if let session = viewModel.selectedSession {
                 SessionDetailsView(
                     namespace: namespace,
-                    viewModel: viewModel.makeSessionDetailsViewModel(for: session),
-                    dismissCallback: {
-                        DispatchQueue.main.async {
-                            withAnimation(AppConstants.mgeAnimation) {
-                                viewModel.didDismissSelectedSession()
+                    viewModel: viewModel.makeSessionDetailsViewModel(
+                        for: session,
+                        dismissCallback: {
+                            DispatchQueue.main.async {
+                                withAnimation(AppConstants.mgeAnimation) {
+                                    viewModel.didDismissSelectedSession()
+                                }
                             }
                         }
-                    }
+                    )
                 ).zIndex(1)
             }
         }

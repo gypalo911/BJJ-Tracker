@@ -161,13 +161,14 @@ struct TimetableView: View {
                     viewModel: SessionDetailsViewModel(
                         session: session,
                         persistanceManager: persistanceManager,
-                        notificationManager: NotificationManager()
-                    ), dismissCallback: {
-                        withAnimation(AppConstants.mgeAnimation) {
-                            selectedSession = nil
-                            settings.isTabBarHidden = false
+                        notificationManager: NotificationManager(),
+                        dismissCallback: {
+                            withAnimation(AppConstants.mgeAnimation) {
+                                selectedSession = nil
+                                settings.isTabBarHidden = false
+                            }
                         }
-                    }
+                    )
                 ).zIndex(1)
             }
         }

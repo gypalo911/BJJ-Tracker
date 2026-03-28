@@ -16,7 +16,7 @@ struct HealthData {
 
 @MainActor
 class DashboardViewModel: ObservableObject {
-    typealias StorageManager = SessionsStorageManager & PromotionsStorageManager
+    typealias StorageManager = SessionsStorageManager & PromotionsStorageManager & TechniquesStorageManager
 
     enum Localisation {
         static var dashboard: String { "Dashboard".localizedString }
@@ -129,11 +129,15 @@ class DashboardViewModel: ObservableObject {
         JournalViewViewModel(persistanceManager: persistanceManager)
     }
 
-    func makeSessionDetailsViewModel(for session: SessionEntity) -> SessionDetailsViewModel {
+    func makeSessionDetailsViewModel(
+        for session: SessionEntity,
+        dismissCallback: (() -> Void)? = nil
+    ) -> SessionDetailsViewModel {
         SessionDetailsViewModel(
             session: session,
             persistanceManager: persistanceManager,
-            notificationManager: NotificationManager()
+            notificationManager: NotificationManager(),
+            dismissCallback: dismissCallback
         )
     }
 }

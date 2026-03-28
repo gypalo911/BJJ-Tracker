@@ -18,6 +18,7 @@ class TechniquesListViewModel: ObservableObject {
     @Published var allTechniques: [TechniqueModel] = []
     @Published var rows: [[Tag]] = []
     @Published var tags: [Tag] = []
+    @Published var updateTags: Bool
     
     var suggestionTags: [Tag] {
         return allTechniques
@@ -44,12 +45,14 @@ class TechniquesListViewModel: ObservableObject {
         allTechniques: [TechniqueModel] = [],
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
         persistanceManager: TechniquesStorageManager,
+        updateTags: Bool,
         onTechniqueDetails: ((TechniqueModel?) -> Void)?
     ) {
         self.session = session
         self.allTechniques = allTechniques
         self.analyticsEngine = analyticsEngine
         self.persistanceManager = persistanceManager
+        self.updateTags = updateTags
         self.onTechniqueDetails = onTechniqueDetails
     }
     
