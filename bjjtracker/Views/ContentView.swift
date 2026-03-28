@@ -123,6 +123,7 @@ struct ContentView: View {
                 factory.makeProfileView(persistanceManager: persistanceManager)
             }
         }
+        .toolbar(.hidden, for: .tabBar)
         .blurredPopup(isPresented: $settings.showingActionSheet) {
             factory.makeBluredBottomSheet(
                 isBottomSheetOpen: $settings.showingActionSheet,

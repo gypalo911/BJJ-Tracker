@@ -28,7 +28,6 @@ struct SessionDetailsView: View {
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openURL) var openURL
     
     @State private var isPresentedEditing: Bool = false
     @State private var showShareSheet: Bool = false
@@ -91,15 +90,6 @@ struct SessionDetailsView: View {
                                     .font(token: DesignSystem.shared.fonts.body)
                                     .textSelection(.enabled)
                                     .multilineTextAlignment(.leading)
-                                    .environment(\.openURL, OpenURLAction { url in
-                                        if #available(iOS 26.0, *) {
-                                            openURL(url, prefersInApp: true)
-                                        } else {
-                                            openURL(url)
-                                        }
-                                        viewModel.linkOpened(url.absoluteString)
-                                        return .handled
-                                    })
                             } else {
                                 Text(Localisation.empty)
                                     .foregroundColor(DesignSystem.shared.colors.lightGray)
