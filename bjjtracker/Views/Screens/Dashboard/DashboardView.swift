@@ -8,19 +8,9 @@
 import SwiftUI
 
 struct DashboardView: View {
-    enum Localisation {
-        static let dashboard = "Dashboard"
-        static let viewHistory = "View History"
-        static let emptyDay = "No sessions for this day"
-        static let caloriesBurned = "%@ calories burned"
-    }
-    
-    @EnvironmentObject var settings: AppSettings
-    @EnvironmentObject var persistanceManager: PersistanceManager
-    
-    @FetchRequest var sessionsList: FetchedResults<SessionEntity>
-    
-    @ObservedObject private var viewModel: DashboardViewModel
+    typealias Localisation = DashboardViewModel.Localisation
+
+    @StateObject private var viewModel: DashboardViewModel
     
     @State private var headerHeight: CGFloat = 680
     @State private var offsetY: CGFloat = .zero
@@ -28,25 +18,11 @@ struct DashboardView: View {
     @State private var isConnectAHPresented: Bool = false
     
     @Namespace var namespace
-    
-    private var filteredSessions: [SessionEntity] {
-        sessionsList.filter {
-            viewModel.isDateSelected($0.startDate ?? Date())
-        }
-    }
-    
+
     private let screenSize: CGSize = UIScreen.main.bounds.size
     
     init(viewModel: DashboardViewModel) {
-        self.viewModel = viewModel
-        _sessionsList = FetchRequest<SessionEntity>(
-            sortDescriptors: [],
-            predicate: NSPredicate(
-                format: "startDate >= %@ AND startDate <= %@",
-                viewModel.requestDateRange.start as CVarArg,
-                viewModel.requestDateRange.end as CVarArg
-            )
-        )
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -64,13 +40,13 @@ struct DashboardView: View {
                             .defaultShadow()
                         VStack(spacing: 0) {
                             HStack {
-                                Text(Localisation.dashboard.localizedString)
+                                Text(Localisation.dashboard)
                                     .font(token: DesignSystem.shared.fonts.title, weight: .bold)
                                     .foregroundColor(.white)
                                     .hAlign(.leading)
                                 
                                 Button {
-                                    settings.showingActionSheet = true
+                                    viewModel.createButtonTapped()
                                 } label: {
                                     Image("createButton")
                                         .resizable()
@@ -102,7 +78,7 @@ struct DashboardView: View {
                                 .zIndex(2)
                             
                             Group {
-                                if filteredSessions.isEmpty {
+                                if viewModel.filteredSessions.isEmpty {
                                     EmptyResultsView()
                                 } else {
                                     ResultsView()
@@ -127,21 +103,19 @@ struct DashboardView: View {
                 .backport.hiddenToolbar(true)
                 .background(DesignSystem.shared.colors.generalBackground.ignoresSafeArea())
                 .onChange(of: viewModel.selectedDay) { _, value in
-                    settings.selectedCalendarDate = value.setCurrentTime()
-                    viewModel.setupHealthData()
+                    viewModel.selectedDayChanged(to: value)
                 }
-                .onChange(of: filteredSessions) { items, _ in
+                .onChange(of: viewModel.filteredSessions) { items, _ in
                     withAnimation(.easeInOut(duration: 0.3)) {
                         self.headerHeight = items.isEmpty ? 620 : 680
                     }
                 }
                 .onAppear {
-                    settings.isTabBarHidden = false
                     viewModel.onDashboardAppeared()
                 }
             }
             .onChange(of: isConnectAHPresented) { _, value in
-                settings.isTabBarHidden = value
+                viewModel.connectAppleHealthPresentationChanged(isPresented: value)
             }
             .bottomSheet(isPresented: $isConnectAHPresented, view: {
                 ConnectAppleHealthView(onConnect: {
@@ -155,15 +129,11 @@ struct DashboardView: View {
             if let session = viewModel.selectedSession {
                 SessionDetailsView(
                     namespace: namespace,
-                    viewModel: SessionDetailsViewModel(
-                        session: session,
-                        persistanceManager: persistanceManager,
-                        notificationManager: NotificationManager()
-                    ), dismissCallback: {
+                    viewModel: viewModel.makeSessionDetailsViewModel(for: session),
+                    dismissCallback: {
                         DispatchQueue.main.async {
                             withAnimation(AppConstants.mgeAnimation) {
-                                viewModel.selectedSession = nil
-                                settings.isTabBarHidden = false
+                                viewModel.didDismissSelectedSession()
                             }
                         }
                     }
@@ -182,15 +152,15 @@ struct DashboardView: View {
     @ViewBuilder
     func HeaderView() -> some View {
         HStack(spacing: 10) {
-            let (week1, week2) = viewModel.lastTwoWeeksSessions(sessionsList.map { $0 })
+            let (week1, week2) = viewModel.lastTwoWeeksSessions(viewModel.sessions)
             StatsView(
-                text: "Sessions".localizedString,
+                text: Localisation.sessions,
                 value: "\(week1.count)",
                 tendecyGrows: week1.count > week2.count,
                 tendecyValue: "\(abs(week1.count - week2.count))"
             )
             StatsView(
-                text: "Total time".localizedString,
+                text: Localisation.totalTime,
                 value: viewModel.totalTime(week1).minutesToDuration(),
                 tendecyGrows: viewModel.totalTime(week1) > viewModel.totalTime(week2),
                 tendecyValue: "\(abs(viewModel.totalTime(week1) - viewModel.totalTime(week2)).minutesToDuration())"
@@ -210,7 +180,7 @@ struct DashboardView: View {
                 
                 
                 NavigationLink(destination: {
-                    JournalView(viewModel: .init(persistanceManager: persistanceManager))
+                    JournalView(viewModel: viewModel.makeJournalViewModel())
                 }) {
                     Image("archive")
                         .resizable()
@@ -224,7 +194,7 @@ struct DashboardView: View {
             WeekCalendarView(
                 selectedDay: $viewModel.selectedDay,
                 currentWeek: viewModel.currentWeek,
-                sessions: sessionsList,
+                sessions: viewModel.sessions,
                 colors: .init(
                     textColor: .white,
                     strokeColor: .white,
@@ -242,7 +212,7 @@ struct DashboardView: View {
                 if !viewModel.isHealthKitAuthorized {
                     AppleHealthCardView {
                         isConnectAHPresented = true
-                        settings.isTabBarHidden = true
+                        viewModel.connectAppleHealthTapped()
                     }
                 } else {
                     let totalEnergyBurned = Int(viewModel.healthData.totalEnergyBurned)
@@ -280,7 +250,7 @@ struct DashboardView: View {
 //                    }
                 }
                 
-                ForEach(filteredSessions) { session in
+                ForEach(viewModel.filteredSessions) { session in
                     let sessionId = session.id?.uuidString ?? ""
                     if viewModel.selectedSession == nil {
                         ActivityPanelView(session: session)
@@ -296,10 +266,10 @@ struct DashboardView: View {
                 }
                 
                 NavigationLink(destination: {
-                    JournalView(viewModel: .init(persistanceManager: persistanceManager))
+                    JournalView(viewModel: viewModel.makeJournalViewModel())
                 }) {
                     HStack {
-                        Text(Localisation.viewHistory.localizedString)
+                        Text(Localisation.viewHistory)
                             .font(.callout)
                             .foregroundColor(.blue)
                         Image("archive")
@@ -308,22 +278,22 @@ struct DashboardView: View {
                     }
                 }
                 .padding(.top, 20)
-            }.padding(.bottom, settings.isTabBarHidden ? 50 : 120)
+            }.padding(.bottom, viewModel.isTabBarHidden ? 50 : 120)
         }
     }
     
     @ViewBuilder
     func EmptyResultsView() -> some View {
         Spacer()
-        Text(Localisation.emptyDay.localizedString)
+        Text(Localisation.emptyDay)
             .font(token: DesignSystem.shared.fonts.body)
             .foregroundColor(DesignSystem.shared.colors.gray)
         
         NavigationLink(destination: {
-            JournalView(viewModel: .init(persistanceManager: persistanceManager))
+            JournalView(viewModel: viewModel.makeJournalViewModel())
         }) {
             HStack {
-                Text(Localisation.viewHistory.localizedString)
+                Text(Localisation.viewHistory)
                     .font(.callout)
                     .foregroundColor(.blue)
                 Image("archive")
@@ -341,6 +311,8 @@ struct Dashboard_Previews: PreviewProvider {
         var body: some View {
             DashboardView(
                 viewModel: DashboardViewModel(
+                    persistanceManager: PersistanceManager.preview,
+                    appSettings: AppSettings(),
                     analyticsEngine: FirebaseAnalyticsEngine()
                 )
             )
@@ -349,7 +321,5 @@ struct Dashboard_Previews: PreviewProvider {
     
     static var previews: some View {
         Container()
-            .environmentObject(AppSettings())
-            .environment(\.managedObjectContext, PersistanceManager.preview.container.viewContext)
     }
 }

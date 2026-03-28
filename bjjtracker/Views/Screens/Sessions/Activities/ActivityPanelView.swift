@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActivityPanelView: View {
+    @Environment(\.openURL) var openURL
     @ObservedObject var session: SessionEntity
     
     var sessionId: String {
@@ -55,6 +56,14 @@ struct ActivityPanelView: View {
                             .textSelection(.enabled)
                             .multilineTextAlignment(.leading)
                             .lineLimit(2)
+                            .environment(\.openURL, OpenURLAction { url in
+                                if #available(iOS 26.0, *) {
+                                    openURL(url, prefersInApp: true)
+                                } else {
+                                    openURL(url)
+                                }
+                                return .handled
+                            })
                     }.padding(.horizontal, 10)
                 }.hAlign(.leading)
                 Group {

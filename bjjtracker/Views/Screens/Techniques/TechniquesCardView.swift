@@ -45,6 +45,8 @@ struct TechniquesCardFullState: View {
     private enum Localisation {
         static var seeAll: String { "See All".localizedString }
     }
+    
+    @Environment(\.openURL) var openURL
 
     let techniques: [TechniqueModel]
     let persistanceManager: PersistanceManager
@@ -99,6 +101,14 @@ struct TechniquesCardFullState: View {
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .hAlign(.leading)
+                        .environment(\.openURL, OpenURLAction { url in
+                            if #available(iOS 26.0, *) {
+                                openURL(url, prefersInApp: true)
+                            } else {
+                                openURL(url)
+                            }
+                            return .handled
+                        })
                 }
                 Spacer()
                 HStack(spacing: 5) {

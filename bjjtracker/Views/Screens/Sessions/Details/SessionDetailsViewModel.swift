@@ -50,6 +50,7 @@ class SessionDetailsViewModel: ObservableObject {
         self.loadsLinkPreviews = loadsLinkPreviews
     }
     
+    @MainActor
     func setupLinkPreviews() async {
         guard let notes = session.notes else {
             return

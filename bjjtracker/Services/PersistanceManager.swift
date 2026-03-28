@@ -27,7 +27,7 @@ class PersistanceManager: ObservableObject {
             session.type = ActivityType.allCases.randomElement()?.rawValue
             session.style = GraplingStyle.gi.rawValue
             session.location = "Kyiv"
-            //            session.notes = ((i % 2) != 0) ? "Useful links: https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/, https://bjj-world.com/best-martial-arts-for-self-defense/, https://bjj-world.com/caio-terra-ankle-lock-de-la-riva/, https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/" : "https://blackbeltwiki.com/brazilian-jiu-jitsu. \n\n https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/\n \n https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"
+                        session.notes = ((i % 2) != 0) ? "Useful links: https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/, https://bjj-world.com/best-martial-arts-for-self-defense/, https://bjj-world.com/caio-terra-ankle-lock-de-la-riva/, https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/" : "https://blackbeltwiki.com/brazilian-jiu-jitsu. \n\n https://bjj-world.com/brazilian-jiu-jitsu-and-education-unleashing-the-power-of-mind-and-body/\n \n https://bjj-world.com/tom-hardy-promoted-to-purple-belt-in-jiu-jitsu/"
             
             let technique = TechniqueModel(context: viewContext)
             technique.id = UUID()

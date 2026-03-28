@@ -64,7 +64,7 @@
 		B841D8732F76871E00652BAA /* LinkPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BCA422A606AFB004C749E /* LinkPreviewViewModel.swift */; };
 		B845FF912ECC7F6700A98F14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */; };
 		B85B34E72ED0BD4C0027D77B /* WeekdaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */; };
-		B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */; };
+		B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEventEntity.swift */; };
 		B8DC844E2EE240E0002440EC /* RepeatableEventEntity+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC844D2EE240E0002440EC /* RepeatableEventEntity+extension.swift */; };
 		B8DDD93E2F77F84200F70C39 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F3DF929F8051700BED6CD /* PersistanceManager.swift */; };
 		B8DDD96D2F77FC9F00F70C39 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDD96C2F77FC9F00F70C39 /* Session.swift */; };
@@ -125,9 +125,9 @@
 		D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */; };
 		D05C9F002A6B087B007D5AF0 /* BlurredBGViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */; };
 		D05C9F022A6BF0E1007D5AF0 /* TabBarViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F012A6BF0E1007D5AF0 /* TabBarViewV2.swift */; };
-		D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */; };
-		D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */; };
-		D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */; };
+		D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+SessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+SessionEntity.swift */; };
+		D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+PromotionsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+PromotionsEntity.swift */; };
+		D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+TechniquesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+TechniquesEntity.swift */; };
 		D05C9F112A710EC7007D5AF0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C9F102A710EC7007D5AF0 /* Colors.xcassets */; };
 		D060BA7E29DDAD9A00E10562 /* bjjtrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */; };
 		D060BA8029DDAD9A00E10562 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060BA7F29DDAD9A00E10562 /* ContentView.swift */; };
@@ -241,7 +241,7 @@
 		B841D8702F76859E00652BAA /* SessionDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		B845FF902ECC7F6700A98F14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B85B34E62ED0BD4C0027D77B /* WeekdaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysPicker.swift; sourceTree = "<group>"; };
-		B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+RepeatableEvent.swift"; sourceTree = "<group>"; };
+		B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+RepeatableEventEntity.swift"; sourceTree = "<group>"; };
 		B8DC844D2EE240E0002440EC /* RepeatableEventEntity+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepeatableEventEntity+extension.swift"; sourceTree = "<group>"; };
 		B8DDD9432F77F9ED00F70C39 /* bjjtracker_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bjjtracker_v3.xcdatamodel; sourceTree = "<group>"; };
 		B8DDD96C2F77FC9F00F70C39 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -310,9 +310,9 @@
 		D05C9EFD2A6AB7F0007D5AF0 /* BluredBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluredBottomSheet.swift; sourceTree = "<group>"; };
 		D05C9EFF2A6B087B007D5AF0 /* BlurredBGViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBGViewModifier.swift; sourceTree = "<group>"; };
 		D05C9F012A6BF0E1007D5AF0 /* TabBarViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewV2.swift; sourceTree = "<group>"; };
-		D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Sessions.swift"; sourceTree = "<group>"; };
-		D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Promotions.swift"; sourceTree = "<group>"; };
-		D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+Techniques.swift"; sourceTree = "<group>"; };
+		D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+SessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+SessionEntity.swift"; sourceTree = "<group>"; };
+		D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+PromotionsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+PromotionsEntity.swift"; sourceTree = "<group>"; };
+		D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+TechniquesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistanceManager+TechniquesEntity.swift"; sourceTree = "<group>"; };
 		D05C9F102A710EC7007D5AF0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D060BA7A29DDAD9A00E10562 /* bjjtracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bjjtracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D060BA7D29DDAD9A00E10562 /* bjjtrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bjjtrackerApp.swift; sourceTree = "<group>"; };
@@ -850,10 +850,10 @@
 				B841D7FF2F756DF600652BAA /* SessionsStorageManager.swift */,
 				D04AD1322A8B7624002A1050 /* HealthKitService.swift */,
 				D02F3DF929F8051700BED6CD /* PersistanceManager.swift */,
-				D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift */,
-				B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift */,
-				D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift */,
-				D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift */,
+				D05C9F082A6FDCC5007D5AF0 /* PersistanceManager+SessionEntity.swift */,
+				B8D1F9AA2EEABD12009B0FA2 /* PersistanceManager+RepeatableEventEntity.swift */,
+				D05C9F0A2A6FDCCE007D5AF0 /* PersistanceManager+PromotionsEntity.swift */,
+				D05C9F0C2A6FDCD5007D5AF0 /* PersistanceManager+TechniquesEntity.swift */,
 				B841D8042F756E4A00652BAA /* NotificationManager */,
 			);
 			path = Services;
@@ -1238,9 +1238,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E8FE1629E5988B00870501 /* SegmentedPicker.swift in Sources */,
-				D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+Promotions.swift in Sources */,
+				D05C9F0B2A6FDCCE007D5AF0 /* PersistanceManager+PromotionsEntity.swift in Sources */,
 				D00109AE2A0BC925008433CC /* PromotionModelEntity+extension.swift in Sources */,
-				D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+Sessions.swift in Sources */,
+				D05C9F092A6FDCC5007D5AF0 /* PersistanceManager+SessionEntity.swift in Sources */,
 				D05C9EFE2A6AB7F0007D5AF0 /* BluredBottomSheet.swift in Sources */,
 				D0DAA9072A618D3E00074EBE /* AddPromotionViewViewModel.swift in Sources */,
 				D09BCA472A608B67004C749E /* TimetableViewViewModel.swift in Sources */,
@@ -1262,7 +1262,7 @@
 				D02D1FF22A5ADEB4006BB617 /* TechniquesListView.swift in Sources */,
 				D0DE62A42A9641CA008EEA49 /* Technique.swift in Sources */,
 				D0839D852A5D720B00D315C8 /* KeyboardToolbar.swift in Sources */,
-				B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEvent.swift in Sources */,
+				B8D1F9AB2EEABD12009B0FA2 /* PersistanceManager+RepeatableEventEntity.swift in Sources */,
 				D02F3DEF29F0204200BED6CD /* MonthYearBottomSheetView.swift in Sources */,
 				D0E824B229DE0BC50023E6C0 /* WeekCalendarView.swift in Sources */,
 				D02F3DFA29F8051700BED6CD /* PersistanceManager.swift in Sources */,
@@ -1296,7 +1296,7 @@
 				B8DDD96F2F77FC9F00F70C39 /* Session.swift in Sources */,
 				D09BCA432A606AFB004C749E /* LinkPreviewViewModel.swift in Sources */,
 				D076EFA62A0E316D00E74E01 /* BeltView.swift in Sources */,
-				D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+Techniques.swift in Sources */,
+				D05C9F0D2A6FDCD5007D5AF0 /* PersistanceManager+TechniquesEntity.swift in Sources */,
 				D060BA8A29DDAD9C00E10562 /* bjjtracker.xcdatamodeld in Sources */,
 				D02D1FF52A5AE273006BB617 /* DesignSystem.swift in Sources */,
 				D0E824B429DE0F490023E6C0 /* View+extension.swift in Sources */,

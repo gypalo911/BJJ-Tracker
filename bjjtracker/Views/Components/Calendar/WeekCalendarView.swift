@@ -11,7 +11,7 @@ struct WeekCalendarView: View {
     @Binding var selectedDay: Date
     var currentWeek: [Calendar.WeekDay]
     
-    var sessions: FetchedResults<SessionEntity>
+    var sessions: [SessionEntity]
 
     let colors: CalendarDayColors
     
@@ -76,7 +76,7 @@ struct WeekCalendarView_Previews: PreviewProvider {
             WeekCalendarView(
                 selectedDay: $selectedDay,
                 currentWeek: currentWeek,
-                sessions: sessionsList,
+                sessions: sessionsList.map { $0 },
                 colors: .init(
                     textColor: .white,
                     strokeColor: .white,

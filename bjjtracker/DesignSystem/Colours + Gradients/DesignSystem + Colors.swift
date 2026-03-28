@@ -45,6 +45,7 @@ extension DesignSystem.Color {
 
     enum Text: DesignSystemColorRepresentable {
         case text
+        case darkText
         case secondary
         case secondaryAlternative
         case tertiary
@@ -55,6 +56,8 @@ extension DesignSystem.Color {
             switch self {
             case .text:
                 return DesignSystem.shared.colors.text.primary
+            case .darkText:
+                return DesignSystem.shared.colors.darkText
             case .secondary, .secondaryAlternative:
                 return DesignSystem.shared.colors.brand.primary
             case .tertiary:

@@ -25,7 +25,7 @@ struct TechniquesListView: View {
         VStack(alignment: .leading) {
             Text(Localisation.learnedTechniques)
                 .font(body: .b1(weight: .bold))
-                .foregroundStyle(text: .text)
+                .foregroundStyle(text: .darkText)
                 .padding(.horizontal, 10)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {

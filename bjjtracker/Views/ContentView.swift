@@ -9,10 +9,6 @@ import SwiftUI
 
 @MainActor
 struct ContentViewFactory {
-    func makeDashboardViewModel() -> DashboardViewModel {
-        DashboardViewModel()
-    }
-
     func makeTimetableViewModel() -> TimetableViewViewModel {
         TimetableViewViewModel()
     }
@@ -21,8 +17,16 @@ struct ContentViewFactory {
         StatisticsViewViewModel(dateInterval: DateInterval(start: Date(), end: Date()))
     }
 
-    func makeDashboardView(viewModel: DashboardViewModel) -> some View {
-        DashboardView(viewModel: viewModel)
+    func makeDashboardView(
+        persistanceManager: PersistanceManager,
+        appSettings: AppSettings
+    ) -> some View {
+        DashboardView(
+            viewModel: DashboardViewModel(
+                persistanceManager: persistanceManager,
+                appSettings: appSettings
+            )
+        )
     }
 
     func makeTimetableView(viewModel: TimetableViewViewModel) -> some View {
@@ -89,14 +93,12 @@ struct ContentView: View {
     @EnvironmentObject var persistanceManager: PersistanceManager
     
     private let factory: ContentViewFactory
-    @StateObject private var dashboardVM: DashboardViewModel
     @StateObject private var timetableVM: TimetableViewViewModel
     @StateObject private var statsVM: StatisticsViewViewModel
     
     init() {
         let factory = ContentViewFactory()
         self.factory = factory
-        _dashboardVM = StateObject(wrappedValue: factory.makeDashboardViewModel())
         _timetableVM = StateObject(wrappedValue: factory.makeTimetableViewModel())
         _statsVM = StateObject(wrappedValue: factory.makeStatisticsViewModel())
         
@@ -106,7 +108,10 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             Tab.init(value: .dashboard) {
-                factory.makeDashboardView(viewModel: dashboardVM)
+                factory.makeDashboardView(
+                    persistanceManager: persistanceManager,
+                    appSettings: settings
+                )
             }
             Tab.init(value: .calendar) {
                 factory.makeTimetableView(viewModel: timetableVM)
@@ -171,15 +176,8 @@ struct ContentView: View {
             }
         }
         .onReceive(AppSettings.shared.$navigateToPage) { nav in
-            guard let nav = nav else {
-                return
-            }
-            let session = persistanceManager.session(by: nav as String)
-            guard let session = session else {
-                return
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                dashboardVM.selectedSession = session
+            if nav != nil {
+                selectedTab = .dashboard
             }
         }
     }

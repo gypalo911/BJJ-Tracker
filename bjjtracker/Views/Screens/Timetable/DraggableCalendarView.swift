@@ -62,7 +62,7 @@ struct DraggableCalendarView: View {
                     WeekCalendarView(
                         selectedDay: $selectedDay,
                         currentWeek: currentWeek,
-                        sessions: sessions,
+                        sessions: sessions.map { $0 },
                         colors: .init(
                             textColor: .black,
                             strokeColor: .blue,
