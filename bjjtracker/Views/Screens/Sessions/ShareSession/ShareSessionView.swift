@@ -51,7 +51,7 @@ struct ShareSessionView: View {
     
     @State private var selectImageState: ShareViewState = .selectImage
     
-    let session: Session
+    let session: SessionEntity
     
     var activity: Activity {
         Activity.from(session: session)!

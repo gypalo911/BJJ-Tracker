@@ -16,15 +16,15 @@ class JournalViewViewModel: ObservableObject {
     private let analyticsEngine: AnalyticsEngine
     
     @Published var showingPromotionsView: Bool = false
-    @Published var sessions: [Session] = []
-    @Published var promotionModels: [PromotionModel] = []
+    @Published var sessions: [SessionEntity] = []
+    @Published var promotionModels: [PromotionModelEntity] = []
     
-    @Published var selectedSession: Session?
+    @Published var selectedSession: SessionEntity?
     @Published var selectedSheet: ModalSheets? = nil
     
     @Published var selectedGradingSystem: GradingSystem = .adult
     
-    var groupedSessions: [String: [Session]] {
+    var groupedSessions: [String: [SessionEntity]] {
         Dictionary(grouping: sessions, by: { $0.startDateString })
     }
     

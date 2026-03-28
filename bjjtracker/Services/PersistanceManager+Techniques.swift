@@ -9,14 +9,14 @@ import CoreData
 
 protocol TechniquesStorageManager {
     func fetchAllTechniques() -> [TechniqueModel]
-    func fetchTechniques(for session: Session) -> [TechniqueModel]
+    func fetchTechniques(for session: SessionEntity) -> [TechniqueModel]
     func fetchTechniquesForSuggestion() -> [TechniqueModel]
     func createTechnique(
-        for session: Session?,
+        for session: SessionEntity?,
         name: String,
         details: String
     ) -> TechniqueModel?
-    func addToSession(technique: TechniqueModel, _ session: Session)
+    func addToSession(technique: TechniqueModel, _ session: SessionEntity)
     func delete(model: TechniqueModel)
 }
 
@@ -33,7 +33,7 @@ extension PersistanceManager: TechniquesStorageManager {
         }
     }
     
-    func fetchTechniques(for session: Session) -> [TechniqueModel] {
+    func fetchTechniques(for session: SessionEntity) -> [TechniqueModel] {
         let fetchRequest: NSFetchRequest<TechniqueModel> = TechniqueModel.fetchRequest()
         
         do {
@@ -62,7 +62,7 @@ extension PersistanceManager: TechniquesStorageManager {
         }
     }
     
-    func addToSession(technique: TechniqueModel, _ session: Session) {
+    func addToSession(technique: TechniqueModel, _ session: SessionEntity) {
         let context = self.container.viewContext
         technique.addToSessions(session)
         
@@ -70,7 +70,7 @@ extension PersistanceManager: TechniquesStorageManager {
     }
     
     func createTechnique(
-        for session: Session? = nil,
+        for session: SessionEntity? = nil,
         name: String,
         details: String
     ) -> TechniqueModel? {

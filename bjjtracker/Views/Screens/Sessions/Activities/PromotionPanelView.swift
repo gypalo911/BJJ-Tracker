@@ -57,7 +57,7 @@ struct PromotionPanelView_Previews: PreviewProvider {
     struct Container: View {
         @FetchRequest(
             sortDescriptors: [], animation: .easeInOut
-        ) var promotionsList: FetchedResults<PromotionModel>
+        ) var promotionsList: FetchedResults<PromotionModelEntity>
 
         var body: some View {
             let promotion: Promotion = Promotion.from(promotionsList.map { $0 }.first!)

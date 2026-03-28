@@ -17,7 +17,7 @@ struct PromotionsView: View {
     @State var gradingSystem: GradingSystem
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
-    var promotionModels: FetchedResults<PromotionModel>
+    var promotionModels: FetchedResults<PromotionModelEntity>
     
     @State private var showingGradingActionSheet: Bool = false
     @State private var offset: CGFloat = 100

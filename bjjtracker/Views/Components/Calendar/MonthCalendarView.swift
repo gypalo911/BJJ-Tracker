@@ -18,7 +18,7 @@ struct MonthCalendarView: View {
     @Binding var selectedDate: Date
     @Binding var viewHeight: CGFloat
     
-    var sessions: FetchedResults<Session>
+    var sessions: FetchedResults<SessionEntity>
     
     var maxHeight: CGFloat
     
@@ -125,7 +125,7 @@ struct MonthCalendarView_Previews: PreviewProvider {
         @State var selectedDay = Date()
         @State var viewHeight: CGFloat = 400
         
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
         
         var maxHeight: CGFloat = 400
 

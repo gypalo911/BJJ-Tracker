@@ -18,7 +18,7 @@ struct DashboardView: View {
     @EnvironmentObject var settings: AppSettings
     @EnvironmentObject var persistanceManager: PersistanceManager
     
-    @FetchRequest var sessionsList: FetchedResults<Session>
+    @FetchRequest var sessionsList: FetchedResults<SessionEntity>
     
     @ObservedObject private var viewModel: DashboardViewModel
     
@@ -29,7 +29,7 @@ struct DashboardView: View {
     
     @Namespace var namespace
     
-    private var filteredSessions: [Session] {
+    private var filteredSessions: [SessionEntity] {
         sessionsList.filter {
             viewModel.isDateSelected($0.startDate ?? Date())
         }
@@ -39,7 +39,7 @@ struct DashboardView: View {
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
-        _sessionsList = FetchRequest<Session>(
+        _sessionsList = FetchRequest<SessionEntity>(
             sortDescriptors: [],
             predicate: NSPredicate(
                 format: "startDate >= %@ AND startDate <= %@",
@@ -157,7 +157,8 @@ struct DashboardView: View {
                     namespace: namespace,
                     viewModel: SessionDetailsViewModel(
                         session: session,
-                        persistanceManager: persistanceManager
+                        persistanceManager: persistanceManager,
+                        notificationManager: NotificationManager()
                     ), dismissCallback: {
                         DispatchQueue.main.async {
                             withAnimation(AppConstants.mgeAnimation) {

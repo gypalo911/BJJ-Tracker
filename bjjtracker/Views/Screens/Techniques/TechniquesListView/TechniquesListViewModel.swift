@@ -12,7 +12,7 @@ class TechniquesListViewModel: ObservableObject {
     
     private let analyticsEngine: AnalyticsEngine
     private let persistanceManager: TechniquesStorageManager
-    private let session: Session
+    private let session: SessionEntity
     
     // MARK: @Published variables
     @Published var allTechniques: [TechniqueModel] = []
@@ -40,7 +40,7 @@ class TechniquesListViewModel: ObservableObject {
     var onTechniqueDetails: ((TechniqueModel?) -> Void)?
     
     init(
-        session: Session,
+        session: SessionEntity,
         allTechniques: [TechniqueModel] = [],
         analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
         persistanceManager: TechniquesStorageManager,

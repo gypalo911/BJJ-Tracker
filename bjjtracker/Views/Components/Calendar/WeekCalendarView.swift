@@ -11,7 +11,7 @@ struct WeekCalendarView: View {
     @Binding var selectedDay: Date
     var currentWeek: [Calendar.WeekDay]
     
-    var sessions: FetchedResults<Session>
+    var sessions: FetchedResults<SessionEntity>
 
     let colors: CalendarDayColors
     
@@ -70,7 +70,7 @@ struct WeekCalendarView_Previews: PreviewProvider {
     struct Container: View {
         @State var selectedDay = Date()
         var currentWeek = Calendar.current.currentWeek
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
 
         var body: some View {
             WeekCalendarView(

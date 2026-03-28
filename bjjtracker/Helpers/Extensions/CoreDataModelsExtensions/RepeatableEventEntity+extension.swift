@@ -1,5 +1,5 @@
 //
-//  RepeatableEvent+extension.swift
+//  RepeatableEventEntity+extension.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 05.12.2025.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-extension RepeatableEvent {
+extension RepeatableEventEntity {
     func update(id: String, settings: any RepeatableSessionSettingsProtocol) {
         self.id = id
         self.repeatType = Int16(settings.repeatType.rawValue)

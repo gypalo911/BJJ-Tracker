@@ -184,8 +184,13 @@ struct SessionDetailsView: View {
         .onAppear {
             setupView()
         }
+        .task {
+            await viewModel.setupLinkPreviews()
+        }
         .onChange(of: viewModel.session.notes) {
-            viewModel.setupLinkPreviews()
+            Task {
+                await viewModel.setupLinkPreviews()
+            }
         }
     }
     
@@ -214,7 +219,7 @@ struct SessionDetailsHeaderView: View {
         static var repeatableSession: String { "Repeatable session".localizedString }
     }
 
-    let session: Session
+    let session: SessionEntity
     
     let namespace: Namespace.ID
     let navTitle: String
@@ -418,14 +423,14 @@ struct SessionDetailsHeaderView: View {
 // MARK: Preview
 struct SessionDetailsView_Previews: PreviewProvider {
     struct Container: View {
-        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
         @EnvironmentObject var persistanceManager: PersistanceManager
         
         @Namespace var namespace
         
         var body: some View {
-            let session: Session = persistanceManager.fetchSessions().first!
-            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview))
+            let session: SessionEntity = persistanceManager.fetchSessions().first!
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview, notificationManager: NotificationManager()))
         }
     }
     

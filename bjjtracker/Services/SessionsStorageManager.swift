@@ -15,10 +15,10 @@ enum DeleteSessionType: Equatable {
 
 protocol SessionsStorageManager {
     func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)?)
-    func fetchSessions(in interval: DateInterval?) -> [Session]
-    func session(by id: String) -> Session?
-    func sessions(with repeatableId: String) -> [Session]
-    func update(session: Session, activity: Activity)
-    func delete(session: Session)
+    func fetchSessions(in interval: DateInterval?) -> [SessionEntity]
+    func session(by id: String) -> SessionEntity?
+    func sessions(with repeatableId: String) -> [SessionEntity]
+    func update(session: SessionEntity, activity: Activity)
+    func delete(session: SessionEntity)
     func deleteRepeatableSessions(with repeatableId: String, type: DeleteSessionType)
 }

@@ -1,5 +1,5 @@
 //
-//  PromotionModel+extension.swift
+//  PromotionModelEntity+extension.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 10.05.2023.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-extension PromotionModel {
+extension PromotionModelEntity {
     @objc
     var dateString: String {
         return Calendar.current.startOfDay(for: date ?? Date()).toString("dd MMMM yyyy")

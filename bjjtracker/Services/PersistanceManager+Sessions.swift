@@ -13,7 +13,7 @@ extension PersistanceManager: SessionsStorageManager {
     
     func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)? = nil) {
         let context = self.container.viewContext
-        let session = Session(context: context)
+        let session = SessionEntity(context: context)
         session.update(with: activity)
         
         save(context: context)
@@ -25,8 +25,8 @@ extension PersistanceManager: SessionsStorageManager {
     
     // MARK: - Read
     
-    func fetchSessions(in interval: DateInterval? = nil) -> [Session] {
-        let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
+    func fetchSessions(in interval: DateInterval? = nil) -> [SessionEntity] {
+        let fetchRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
         if let interval = interval {
             fetchRequest.predicate = NSPredicate(
                 format: "startDate >= %@ AND startDate <= %@",
@@ -46,16 +46,16 @@ extension PersistanceManager: SessionsStorageManager {
         }
     }
     
-    func session(by id: String) -> Session? {
+    func session(by id: String) -> SessionEntity? {
         let context = self.container.viewContext
-        let requestSessions: NSFetchRequest<Session> = Session.fetchRequest()
+        let requestSessions: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
         
         requestSessions.fetchLimit = 1
         let query = NSPredicate(format: "%K == %@", "id", id as CVarArg)
         requestSessions.predicate = query
         
         do {
-            let foundEntities: [Session] = try context.fetch(requestSessions)
+            let foundEntities: [SessionEntity] = try context.fetch(requestSessions)
             return foundEntities.first
         } catch {
             let fetchError = error as NSError
@@ -65,15 +65,15 @@ extension PersistanceManager: SessionsStorageManager {
         return nil
     }
     
-    func sessions(with repeatableId: String) -> [Session] {
+    func sessions(with repeatableId: String) -> [SessionEntity] {
         let context = self.container.viewContext
-        let requestSessions: NSFetchRequest<Session> = Session.fetchRequest()
+        let requestSessions: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
         
         let query = NSPredicate(format: "%K == %@", "repeatableId", repeatableId as CVarArg)
         requestSessions.predicate = query
         
         do {
-            let foundEntities: [Session] = try context.fetch(requestSessions)
+            let foundEntities: [SessionEntity] = try context.fetch(requestSessions)
             return foundEntities
         } catch {
             let fetchError = error as NSError
@@ -85,7 +85,7 @@ extension PersistanceManager: SessionsStorageManager {
     
     // MARK: - Update
     
-    func update(session: Session, activity: Activity) {
+    func update(session: SessionEntity, activity: Activity) {
         let context = self.container.viewContext
         session.update(with: activity)
                 
@@ -94,7 +94,7 @@ extension PersistanceManager: SessionsStorageManager {
     
     // MARK: - Delete
     
-    func delete(session: Session) {
+    func delete(session: SessionEntity) {
         let context = self.container.viewContext
 
         context.delete(session)

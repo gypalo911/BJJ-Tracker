@@ -23,7 +23,7 @@ struct NotificationSettingsView: View {
         static let allowPushNotifications = "Allow push notifications"
         static let notificationDescription = "Be notified about nearest events and\\nachivements. You can change it anytime."
         static let allowNotifications = "Allow notifications"
-        static let sessionReminders = "Session reminders"
+        static let sessionReminders = "SessionEntity reminders"
         static let achievementNotifications = "Achivement notifications"
         static let statistics = "Statistics"
     }

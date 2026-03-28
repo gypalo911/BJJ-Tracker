@@ -34,15 +34,15 @@ class StatisticsViewViewModel: ObservableObject {
         self.dateInterval = dateInterval
     }
     
-    func totalTime(_ sessions: [Session]) -> String {
+    func totalTime(_ sessions: [SessionEntity]) -> String {
         return sessions.map { Int($0.duration) }.reduce(0, +).minutesToDuration()
     }
     
-    func sessions(by type: ActivityType, _ sessions: [Session]) -> [Session] {
+    func sessions(by type: ActivityType, _ sessions: [SessionEntity]) -> [SessionEntity] {
         return sessions.filter({ $0.activityType == type })
     }
     
-    func sessions(by style: GraplingStyle, _ sessions: [Session]) -> [Session] {
+    func sessions(by style: GraplingStyle, _ sessions: [SessionEntity]) -> [SessionEntity] {
         return sessions.filter({ $0.activityStyle == style })
     }
     

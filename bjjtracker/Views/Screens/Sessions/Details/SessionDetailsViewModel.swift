@@ -17,7 +17,7 @@ class SessionDetailsViewModel: ObservableObject {
     
     // MARK: Variables
     
-    @Published var session: Session
+    @Published var session: SessionEntity
     @Published var notesLinks: [String] = []
     
     @Published var previewModels: [LinkPreviewModel] = []
@@ -28,32 +28,37 @@ class SessionDetailsViewModel: ObservableObject {
     @Published var updateTags: Bool = false
     
     private let persistanceManager: SessionsStorageManager
+    private let notificationManager: NotificationManagerProtocol
     private let analyticsEngine: AnalyticsEngine
+    private let loadsLinkPreviews: Bool
     
     var navTitle: String {
         "\(session.activityType.rawValue.localizedString) \(session.activityStyle.rawValue.localizedString)"
     }
     
     init(
-        session: Session,
+        session: SessionEntity,
         persistanceManager: SessionsStorageManager,
-        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine()
+        notificationManager: NotificationManagerProtocol,
+        analyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
+        loadsLinkPreviews: Bool = true
     ) {
         self.session = session
         self.persistanceManager = persistanceManager
+        self.notificationManager = notificationManager
         self.analyticsEngine = analyticsEngine
-        
-        setupLinkPreviews()
+        self.loadsLinkPreviews = loadsLinkPreviews
     }
     
-    func setupLinkPreviews() {
+    func setupLinkPreviews() async {
         guard let notes = session.notes else {
             return
         }
         notesLinks = checkForUrls(text: notes)
-        Task {
-            await fetchMetadata(for: notesLinks)
+        guard loadsLinkPreviews else {
+            return
         }
+        await fetchMetadata(for: notesLinks)
     }
     
     func checkForUrls(text: String) -> [String] {
@@ -76,7 +81,7 @@ class SessionDetailsViewModel: ObservableObject {
         } else {
             persistanceManager.delete(session: session)
         }
-        NotificationManager.shared.removePendingNotificationRequests(with: [String(describing: session.id)])
+        notificationManager.removePendingNotificationRequests(with: [String(describing: session.id)])
     }
 }
 
@@ -101,12 +106,12 @@ extension SessionDetailsViewModel {
         }
     }
     
+    @MainActor
     func append(model: LinkPreviewModel?) async {
-        if let model = model {
-            await MainActor.run {
-                self.previewModels.append(model)
-            }
+        guard let model else {
+            return
         }
+        self.previewModels.append(model)
     }
     
     @MainActor

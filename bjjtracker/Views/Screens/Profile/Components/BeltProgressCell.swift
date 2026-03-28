@@ -19,11 +19,11 @@ struct BeltProgressCell: View {
     private var showListBG: Bool {
         showPromotionsList && !promotionModels.isEmpty
     }
-    var promotionModels: [FetchedResults<PromotionModel>.Element]
+    var promotionModels: [FetchedResults<PromotionModelEntity>.Element]
     
     private let isLocked: Bool
     
-    init(belt: Belt, isLocked: Bool, promotionModels: [PromotionModel]) {
+    init(belt: Belt, isLocked: Bool, promotionModels: [PromotionModelEntity]) {
         self.belt = belt
         self.isLocked = isLocked
         self.promotionModels = promotionModels.filter {
@@ -91,7 +91,7 @@ struct BeltProgressCell: View {
 
 struct BeltProgressCell_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModelEntity>
         
         var body: some View {
             BeltProgressCell(

@@ -15,7 +15,7 @@ class PromotionsViewViewModel: ObservableObject {
     private let persistanceManager: StorageManager
     
     @Published var gradingSystem: GradingSystem
-    @Published var promotionModels: [PromotionModel] = []
+    @Published var promotionModels: [PromotionModelEntity] = []
     
     var promotions: [Promotion] {
         promotionModels.map {

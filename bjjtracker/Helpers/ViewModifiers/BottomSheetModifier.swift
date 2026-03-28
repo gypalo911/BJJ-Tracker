@@ -38,14 +38,14 @@ extension View {
 
 struct SessionDetailsView_Previews2: PreviewProvider {
     struct Container: View {
-        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        //        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
         @EnvironmentObject var persistanceManager: PersistanceManager
         
         @Namespace var namespace
         
         var body: some View {
-            let session: Session = persistanceManager.fetchSessions().first!
-            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview))
+            let session: SessionEntity = persistanceManager.fetchSessions().first!
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview, notificationManager: NotificationManager()))
         }
     }
     

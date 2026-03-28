@@ -10,7 +10,7 @@ import SwiftUI
 struct BeltPromotionsList: View {
     @EnvironmentObject var persistanceManager: PersistanceManager
     
-    var promotionModels: [FetchedResults<PromotionModel>.Element]
+    var promotionModels: [FetchedResults<PromotionModelEntity>.Element]
     
     var promotions: [Promotion] {
         promotionModels.map {
@@ -47,7 +47,7 @@ struct BeltPromotionsList: View {
 
 struct BeltPromotionsList_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModel>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut) var promotionModels: FetchedResults<PromotionModelEntity>
         
         var body: some View {
             BeltPromotionsList(promotionModels: promotionModels.map { $0 })

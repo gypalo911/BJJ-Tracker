@@ -1,5 +1,5 @@
 //
-//  PersistanceManager + RepeatableEvent.swift
+//  PersistanceManager + RepeatableEventEntity.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 11.12.2025.
@@ -9,8 +9,8 @@ import CoreData
 
 protocol RepeatableEventStorageManager {
     func createRepeatableEvent(id: String, from repeatableSettings: (any RepeatableSessionSettingsProtocol)?)
-    func fetchRepeatableEvents() -> [RepeatableEvent]
-    func repeatableEvent(by id: String) -> RepeatableEvent?
+    func fetchRepeatableEvents() -> [RepeatableEventEntity]
+    func repeatableEvent(by id: String) -> RepeatableEventEntity?
     func updateRepeatableEvent(id: String, repeatableSettings: any RepeatableSessionSettingsProtocol)
     func deleteRepeatableEvent(with id: String)
 }
@@ -20,14 +20,14 @@ extension PersistanceManager: RepeatableEventStorageManager {
         guard let repeatableSettings else { return }
 
         let context = self.container.viewContext
-        let repeatableEvent = RepeatableEvent(context: context)
+        let repeatableEvent = RepeatableEventEntity(context: context)
         repeatableEvent.update(id: id, settings: repeatableSettings)
 
         save(context: context)
     }
 
-    func fetchRepeatableEvents() -> [RepeatableEvent] {
-        let fetchRequest: NSFetchRequest<RepeatableEvent> = RepeatableEvent.fetchRequest()
+    func fetchRepeatableEvents() -> [RepeatableEventEntity] {
+        let fetchRequest: NSFetchRequest<RepeatableEventEntity> = RepeatableEventEntity.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "endDate", ascending: false)]
         
         do {
@@ -40,16 +40,16 @@ extension PersistanceManager: RepeatableEventStorageManager {
         }
     }
 
-    func repeatableEvent(by id: String) -> RepeatableEvent? {
+    func repeatableEvent(by id: String) -> RepeatableEventEntity? {
         let context = self.container.viewContext
-        let events: NSFetchRequest<RepeatableEvent> = RepeatableEvent.fetchRequest()
+        let events: NSFetchRequest<RepeatableEventEntity> = RepeatableEventEntity.fetchRequest()
         
         events.fetchLimit = 1
         let query = NSPredicate(format: "%K == %@", "id", id as CVarArg)
         events.predicate = query
         
         do {
-            let foundEntities: [RepeatableEvent] = try context.fetch(events)
+            let foundEntities: [RepeatableEventEntity] = try context.fetch(events)
             return foundEntities.first
         } catch {
             let fetchError = error as NSError

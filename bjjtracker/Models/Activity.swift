@@ -87,7 +87,7 @@ class Activity: ObservableObject, Identifiable, Equatable {
 }
 
 extension Activity {
-    static func from(session: Session) -> Activity? {
+    static func from(session: SessionEntity) -> Activity? {
         guard let id = session.id,
               let type = session.type,
               var style = session.style,
@@ -115,7 +115,7 @@ extension Activity {
     }
 }
 
-extension Session {
+extension SessionEntity {
     var status: ActivityStatus {
         let now = Date()
         let startDate = startDate ?? Date()
@@ -142,7 +142,7 @@ extension Session {
         return GraplingStyle(rawValue: "Gi")!
     }
     
-    static func == (lhs: Session, rhs: Session) -> Bool {
+    static func == (lhs: SessionEntity, rhs: SessionEntity) -> Bool {
         lhs.id == rhs.id
     }
 }

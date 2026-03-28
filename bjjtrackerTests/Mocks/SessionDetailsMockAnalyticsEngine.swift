@@ -1,14 +1,14 @@
 //
-//  MockAnalyticsEngine.swift
+//  SessionDetailsMockAnalyticsEngine.swift
 //  bjjtrackerTests
 //
-//  Created by Petro Hupalo on 16.06.2023.
+//  Created by OpenAI on 27.03.2026.
 //
 
 import Foundation
 @testable import bjjtracker
 
-final class MockAnalyticsEngine: AnalyticsEngine {
+final class SessionDetailsMockAnalyticsEngine: AnalyticsEngine {
     private(set) var loggedEvent: AnalyticsEvent?
 
     func log(_ event: AnalyticsEvent) {

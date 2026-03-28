@@ -8,8 +8,8 @@
 import CoreData
 
 extension TechniqueModel {
-    public var sessionsArray: [Session] {
-        let set = sessions as? Set<Session> ?? []
+    public var sessionsArray: [SessionEntity] {
+        let set = sessions as? Set<SessionEntity> ?? []
         return set.sorted {
             $0.startDate! < $1.startDate!
         }

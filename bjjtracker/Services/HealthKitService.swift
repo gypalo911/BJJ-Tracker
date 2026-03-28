@@ -25,7 +25,7 @@ protocol HealthKitService {
         dateInterval: DateInterval,
         calculation: HealthKitServiceCalculationType
     ) async -> Double
-    func store(session: Session)
+    func store(session: SessionEntity)
 }
 
 enum HealthKitServiceError: Error {
@@ -180,7 +180,7 @@ final class DefaultHealthKitService: ObservableObject, HealthKitService {
 // MARK: - Fetching and Storing data
 
 extension DefaultHealthKitService {
-    func store(session: Session) {
+    func store(session: SessionEntity) {
         guard let start = session.startDate else {
             return
         }
@@ -218,7 +218,7 @@ extension DefaultHealthKitService {
         }
     }
     
-    func delete(session: Session) {
+    func delete(session: SessionEntity) {
         guard let quantityType = HKQuantityType.quantityType(
             forIdentifier: .activeEnergyBurned), let sessionId = session.id else {
             return

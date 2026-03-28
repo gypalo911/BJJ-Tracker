@@ -183,7 +183,8 @@ struct JournalView: View {
                         namespace: namespace,
                         viewModel: SessionDetailsViewModel(
                             session: session,
-                            persistanceManager: persistanceManager
+                            persistanceManager: persistanceManager,
+                            notificationManager: NotificationManager()
                         ), dismissCallback: {
                             withAnimation(AppConstants.mgeAnimation) {
                                 viewModel.selectedSession = nil

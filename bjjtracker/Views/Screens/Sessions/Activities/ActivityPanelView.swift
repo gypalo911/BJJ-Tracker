@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityPanelView: View {
-    @ObservedObject var session: Session
+    @ObservedObject var session: SessionEntity
     
     var sessionId: String {
         session.id?.uuidString ?? ""
@@ -80,10 +80,10 @@ struct ActivityPanelView: View {
 
 struct ActivityPanelView_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
 
         var body: some View {
-            let session: Session = sessionsList.map { $0 }.first!
+            let session: SessionEntity = sessionsList.map { $0 }.first!
             ActivityPanelView(session: session)
         }
     }

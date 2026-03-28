@@ -32,13 +32,13 @@ struct StatisticsView: View {
     ]
     
     @Environment(\.presentationMode) var presentationMode
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
     
     @EnvironmentObject var settings: AppSettings
     
     @ObservedObject var viewModel: StatisticsViewViewModel
     
-    private var filteredSessions: [Session] {
+    private var filteredSessions: [SessionEntity] {
         return sessionsList.filter {
             ($0.startDate ?? Date()).isInInterval(dateInterval: viewModel.dateInterval)
         }

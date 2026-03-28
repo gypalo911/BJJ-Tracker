@@ -40,9 +40,9 @@ struct ProfileView: View {
     @StateObject var viewModel: ProfileViewViewModel
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
-    var sessionsList: FetchedResults<Session>
+    var sessionsList: FetchedResults<SessionEntity>
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], animation: .easeInOut)
-    var promotionModels: FetchedResults<PromotionModel>
+    var promotionModels: FetchedResults<PromotionModelEntity>
     
     @State private var showingGradingActionSheet: Bool = false
     

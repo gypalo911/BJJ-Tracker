@@ -18,7 +18,7 @@ class DashboardViewModel: ObservableObject {
     private let analyticsEngine: AnalyticsEngine
     private let healthKitService: HealthKitService
     
-    @Published var selectedSession: Session? = nil
+    @Published var selectedSession: SessionEntity? = nil
     
     @Published var selectedDay = Date()
     @Published var selectedSheet: ModalSheets? = nil
@@ -53,11 +53,11 @@ class DashboardViewModel: ObservableObject {
         }
     }
     
-    func select(session: Session) {
+    func select(session: SessionEntity) {
         selectedSession = session
     }
     
-    func totalTime(_ sessions: [Session]) -> Int {
+    func totalTime(_ sessions: [SessionEntity]) -> Int {
         return sessions.map { Int($0.duration) }.reduce(0, +)
     }
     
@@ -65,13 +65,13 @@ class DashboardViewModel: ObservableObject {
         Calendar.current.isDate(date, inSameDayAs: selectedDay)
     }
     
-    func lastTwoWeeksSessions(_ sessions: [FetchedResults<Session>.Element]) -> ([Session], [Session]) {
+    func lastTwoWeeksSessions(_ sessions: [FetchedResults<SessionEntity>.Element]) -> ([SessionEntity], [SessionEntity]) {
         return (currentWeekSessions(sessions), lastWeekSessions(sessions))
     }
 }
 
 private extension DashboardViewModel {
-    func currentWeekSessions(_ sessions: [FetchedResults<Session>.Element]) -> [Session] {
+    func currentWeekSessions(_ sessions: [FetchedResults<SessionEntity>.Element]) -> [SessionEntity] {
         let currentWeek = Calendar.current.week(for: Date().startOfDay)
         let start = currentWeek.first?.date ?? Date()
         let end = currentWeek.last?.date ?? Date()
@@ -80,7 +80,7 @@ private extension DashboardViewModel {
         }
     }
     
-    func lastWeekSessions(_ sessions: [FetchedResults<Session>.Element]) -> [Session] {
+    func lastWeekSessions(_ sessions: [FetchedResults<SessionEntity>.Element]) -> [SessionEntity] {
         let lastWeekDate = Calendar.current.week(for: Calendar.current.date(byAdding: .day, value: -7, to: Date().startOfDay)!)
         let start = lastWeekDate.first?.date ?? Date()
         let end = lastWeekDate.last?.date ?? Date()

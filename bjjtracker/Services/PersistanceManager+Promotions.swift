@@ -8,15 +8,15 @@
 import CoreData
 
 protocol PromotionsStorageManager {
-    func fetchPromotions(in interval: DateInterval?) -> [PromotionModel]
+    func fetchPromotions(in interval: DateInterval?) -> [PromotionModelEntity]
     func createPromotion(from promotion: Promotion, context: NSManagedObjectContext)
-    func edit(model: PromotionModel, promotion: Promotion, context: NSManagedObjectContext)
-    func delete(model: PromotionModel, context: NSManagedObjectContext)
+    func edit(model: PromotionModelEntity, promotion: Promotion, context: NSManagedObjectContext)
+    func delete(model: PromotionModelEntity, context: NSManagedObjectContext)
 }
 
 extension PersistanceManager: PromotionsStorageManager {
-    func fetchPromotions(in interval: DateInterval? = nil) -> [PromotionModel] {
-        let fetchRequest: NSFetchRequest<PromotionModel> = PromotionModel.fetchRequest()
+    func fetchPromotions(in interval: DateInterval? = nil) -> [PromotionModelEntity] {
+        let fetchRequest: NSFetchRequest<PromotionModelEntity> = PromotionModelEntity.fetchRequest()
         if let interval = interval {
             fetchRequest.predicate = NSPredicate(
                 format: "date >= %@ AND date <= %@",
@@ -37,19 +37,19 @@ extension PersistanceManager: PromotionsStorageManager {
     }
     
     func createPromotion(from promotion: Promotion, context: NSManagedObjectContext) {
-        let model = PromotionModel(context: context)
+        let model = PromotionModelEntity(context: context)
         model.update(with: promotion)
         
         save(context: context)
     }
     
-    func edit(model: PromotionModel, promotion: Promotion, context: NSManagedObjectContext) {
+    func edit(model: PromotionModelEntity, promotion: Promotion, context: NSManagedObjectContext) {
         model.update(with: promotion)
         
         save(context: context)
     }
     
-    func delete(model: PromotionModel, context: NSManagedObjectContext) {
+    func delete(model: PromotionModelEntity, context: NSManagedObjectContext) {
         context.delete(model)
         
         save(context: context)

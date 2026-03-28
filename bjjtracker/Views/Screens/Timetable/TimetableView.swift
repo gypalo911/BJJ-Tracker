@@ -20,17 +20,17 @@ struct TimetableView: View {
     @ObservedObject var viewModel: TimetableViewViewModel
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut)
-    var sessionsList: FetchedResults<Session>
+    var sessionsList: FetchedResults<SessionEntity>
     
     @State var selectedDay: Date = Date()
     @State var selectedSheet: ModalSheets?
     @State var isCalendarBottomSheetOpen: Bool = false
     
-    @State var selectedSession: Session?
+    @State var selectedSession: SessionEntity?
     
     @Namespace var namespace
     
-    private var filteredSessions: [Session] {
+    private var filteredSessions: [SessionEntity] {
         sessionsList.filter {
             Calendar.current.isDate($0.startDate ?? Date(), inSameDayAs: selectedDay)
         }
@@ -160,7 +160,8 @@ struct TimetableView: View {
                     namespace: namespace,
                     viewModel: SessionDetailsViewModel(
                         session: session,
-                        persistanceManager: persistanceManager
+                        persistanceManager: persistanceManager,
+                        notificationManager: NotificationManager()
                     ), dismissCallback: {
                         withAnimation(AppConstants.mgeAnimation) {
                             selectedSession = nil

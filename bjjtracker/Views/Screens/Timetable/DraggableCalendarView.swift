@@ -15,7 +15,7 @@ struct DraggableCalendarView: View {
         Calendar.current.week(for: selectedDay)
     }
     
-    var sessions: FetchedResults<Session>
+    var sessions: FetchedResults<SessionEntity>
     
     @State private var maxHeight: CGFloat = 420
     
@@ -137,7 +137,7 @@ struct DraggableCalendarView_Previews: PreviewProvider {
         @State var selectedDay = Date()
         @State var isBottomSheetOpen = false
         var currentWeek = Calendar.current.currentWeek
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
 
         var body: some View {
             DraggableCalendarView(

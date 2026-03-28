@@ -149,7 +149,7 @@ extension Promotion: Equatable {
 }
 
 extension Promotion {
-    static func from(_ model: PromotionModel) -> Promotion {
+    static func from(_ model: PromotionModelEntity) -> Promotion {
         Promotion(
             id: model.id ?? UUID(),
             belt: Belt(rawValue: Int(model.belt)) ?? .white,

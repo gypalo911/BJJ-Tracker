@@ -1,37 +1,24 @@
 //
-//  MockSessionsStorageManager.swift
+//  SessionDetailsMockSessionsStorageManager.swift
 //  bjjtrackerTests
 //
-//  Created by Petro Hupalo on 26.03.2026.
+//  Created by OpenAI on 27.03.2026.
 //
 
 import Foundation
 import CoreData
 @testable import bjjtracker
 
-final class MockSessionsStorageManager: SessionsStorageManager {
-    struct CreatedSession {
-        let activity: Activity
-        let hasRepeatableSettings: Bool
-    }
-
+final class SessionDetailsMockSessionsStorageManager: SessionsStorageManager {
     struct DeletedRepeatableSessionsCall: Equatable {
         let repeatableId: String
         let type: DeleteSessionType
     }
 
-    private(set) var createdSessions: [CreatedSession] = []
     private(set) var deletedSessions: [Session] = []
     private(set) var deletedRepeatableSessionsCalls: [DeletedRepeatableSessionsCall] = []
 
-    func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)?) {
-        createdSessions.append(
-            CreatedSession(
-                activity: activity,
-                hasRepeatableSettings: repeatableSettings != nil
-            )
-        )
-    }
+    func createSession(from activity: Activity, repeatableSettings: (any RepeatableSessionSettingsProtocol)?) {}
 
     func fetchSessions(in interval: DateInterval?) -> [Session] {
         []

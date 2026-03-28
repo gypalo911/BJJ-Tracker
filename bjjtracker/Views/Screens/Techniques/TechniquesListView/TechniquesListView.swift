@@ -109,13 +109,13 @@ struct TechniquesListView: View {
 
 struct TechniquesListView_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
         
         @Namespace var namespace
         
         var body: some View {
-            let session: Session = sessionsList.map { $0 }.first!
-            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview))
+            let session: SessionEntity = sessionsList.map { $0 }.first!
+            SessionDetailsView(namespace: namespace, viewModel: SessionDetailsViewModel(session: session, persistanceManager: PersistanceManager.preview, notificationManager: NotificationManager()))
         }
     }
     

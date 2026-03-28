@@ -18,13 +18,13 @@ struct EditSessionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    var session: Session
+    var session: SessionEntity
     
     @StateObject var activity: Activity
     
-    var onDismiss: ((Session?) -> Void)?
+    var onDismiss: ((SessionEntity?) -> Void)?
     
-    func update(_ session: Session) {
+    func update(_ session: SessionEntity) {
         persistanceManager.update(
             session: session,
             activity: activity
@@ -146,16 +146,19 @@ struct EditSessionView: View {
 
 struct EditSessionView_Previews: PreviewProvider {
     struct Container: View {
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<Session>
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.startDate)], animation: .easeInOut) var sessionsList: FetchedResults<SessionEntity>
 
         var body: some View {
-            let session: Session = sessionsList.map { $0 }.first!
-            EditSessionView(
-                viewModel: .init(),
-                session: session,
-                activity: Activity.from(session: session)!,
-                onDismiss: { _ in }
-            )
+            if let session: SessionEntity = sessionsList.map({ $0 }).first {
+                EditSessionView(
+                    viewModel: .init(),
+                    session: session,
+                    activity: Activity.from(session: session)!,
+                    onDismiss: { _ in }
+                )
+            } else {
+                EmptyView()
+            }
         }
     }
 

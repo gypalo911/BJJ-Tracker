@@ -1,5 +1,5 @@
 //
-//  Session+Extension.swift
+//  SessionEntity+Extension.swift
 //  bjjtracker
 //
 //  Created by Petro Hupalo on 05.04.2023.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-extension Session {
+extension SessionEntity {
     @objc
     var startDateString: String {
         return Calendar.current.startOfDay(for: startDate ?? Date()).toString("dd MMMM yyyy")
