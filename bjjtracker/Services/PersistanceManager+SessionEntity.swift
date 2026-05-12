@@ -110,10 +110,10 @@ extension PersistanceManager: SessionsStorageManager {
                 guard let startDate = $0.startDate else { return false }
                 return startDate > afterDate
             })
-        } else {
-            sessions.forEach {
-                delete(session: $0)
-            }
+        }
+
+        sessions.forEach {
+            delete(session: $0)
         }
     }
 }
