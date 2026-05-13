@@ -139,7 +139,6 @@ struct SessionDetailsView: View {
                 Text(Localisation.deleteSessionsTitle)
             }
         }
-        .toolbar(.hidden, for: .tabBar)
         .navigationBarHidden(true)
         .onAppear {
             setupView()

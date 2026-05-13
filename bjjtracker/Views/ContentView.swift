@@ -101,8 +101,6 @@ struct ContentView: View {
         self.factory = factory
         _timetableVM = StateObject(wrappedValue: factory.makeTimetableViewModel())
         _statsVM = StateObject(wrappedValue: factory.makeStatisticsViewModel())
-        
-        UITabBar.appearance().isHidden = true
     }
     
     var body: some View {
@@ -180,6 +178,9 @@ struct ContentView: View {
             if nav != nil {
                 selectedTab = .dashboard
             }
+        }
+        .onAppear {
+            UITabBar.appearance().isHidden = true
         }
     }
 }

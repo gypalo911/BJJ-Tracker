@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25B78" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="PromotionModelEntity" representedClassName=".PromotionModelEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="belt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" defaultDateTimeInterval="704982720" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="location" attributeType="String" defaultValueString=""/>
+        <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="stripes" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="RepeatableEventEntity" representedClassName=".RepeatableEventEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="endCondition" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="repeatCondition" optional="YES" transient="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repeatType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SessionEntity" inverseName="repeatableEvent" inverseEntity="SessionEntity"/>
+    </entity>
+    <entity name="SessionEntity" representedClassName=".SessionEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="location" attributeType="String" defaultValueString=""/>
+        <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="repeatableId" optional="YES" attributeType="String"/>
+        <attribute name="startDate" attributeType="Date" defaultDateTimeInterval="704122200" usesScalarValueType="NO"/>
+        <attribute name="style" attributeType="String" defaultValueString="gi"/>
+        <attribute name="type" attributeType="String" defaultValueString="session"/>
+        <relationship name="repeatableEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RepeatableEventEntity" inverseName="sessions" inverseEntity="RepeatableEventEntity"/>
+        <relationship name="techniques" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TechniqueModelEntity" inverseName="sessions" inverseEntity="TechniqueModelEntity"/>
+    </entity>
+    <entity name="TechniqueModelEntity" representedClassName=".TechniqueModel" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="details" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="type" optional="YES" attributeType="String" defaultValueString="regular"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" derived="YES" derivationExpression="now()" usesScalarValueType="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SessionEntity" inverseName="techniques" inverseEntity="SessionEntity"/>
+    </entity>
+</model>
