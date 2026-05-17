@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Introspect
+import SwiftUIIntrospect
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
@@ -65,8 +65,11 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
-        .introspectTabBarController { (UITabBarController) in
-            UITabBarController.tabBar.isHidden = true
+        .onAppear {
+            UITabBar.appearance().isHidden = true
+        }
+        .introspect(.navigationView(style: .stack), on: .iOS(.v16, .v17, .v18, .v26), scope: .ancestor) { navC in
+            navC.navigationBar.isHidden = true
         }
         .sheet(item: $settings.selectedSheet) { selectedSheet in
             switch selectedSheet {

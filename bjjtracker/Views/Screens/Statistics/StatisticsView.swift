@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 
 enum CalendarSegment: Int {
     case week
@@ -200,3 +199,4 @@ struct StatisticsView_Previews: PreviewProvider {
             .environmentObject(AppSettings())
     }
 }
+

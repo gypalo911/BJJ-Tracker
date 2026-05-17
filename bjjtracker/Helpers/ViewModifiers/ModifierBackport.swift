@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Introspect
+import SwiftUIIntrospect
 
 struct Backport<Content> {
     let content: Content
@@ -17,23 +17,23 @@ extension View {
 }
 
 extension Backport where Content: View {
-    @ViewBuilder func hiddenToolbar(_ isHidden: Bool) -> some View {
+    @MainActor @ViewBuilder func hiddenToolbar(_ isHidden: Bool) -> some View {
         if #available(iOS 16, *) {
             content
                 .toolbar(isHidden ? .hidden : .visible, for: .navigationBar)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarTitleDisplayMode(.inline)
-                .introspectNavigationController(customize: { (UINavigationController) in
-                    UINavigationController.navigationBar.isHidden = true
-                })
+                .introspect(.navigationView(style: .stack), on: .iOS(.v16, .v17, .v18, .v26), scope: .ancestor) { navC in
+                    navC.navigationBar.isHidden = true
+                }
         } else {
             content
                 .navigationBarHidden(isHidden)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarTitleDisplayMode(.inline)
-                .introspectNavigationController(customize: { (UINavigationController) in
-                    UINavigationController.navigationBar.isHidden = true
-                })
+                .introspect(.navigationView(style: .stack), on: .iOS(.v14, .v15), scope: .ancestor) { navC in
+                    navC.navigationBar.isHidden = true
+                }
         }
     }
 }
